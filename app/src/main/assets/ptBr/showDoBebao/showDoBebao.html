@@ -10,11 +10,14 @@
 
 <div class="game-container">
     <!-- Menu -->
-    <nav class="menu">
-        <a href="../menuPtBr.html" class="menu-title">
-            <img class="logo-bebedeira" src="../images/logo.png" alt="Logo Bebedeira" />
-        </a>
-    </nav>
+<nav class="menu">
+    <a href="../menuPtBr.html" class="menu-title" style="position: relative;">
+        <div class="voltar-container seta" onclick="window.location.href='../menuPtBr.html'">
+            &#8678; <!-- Isso é ← -->
+        </div>
+        <img class="logo-bebedeira" src="../images/logo.png" alt="Logo Bebedeira" />
+    </a>
+</nav>
 
     <!-- Conteúdo do jogo -->
     <h1>Show do Bebão</h1>
@@ -46,7 +49,7 @@
 
     <div class="card-frase">
         <p id="questionShowDoBebao"></p>
-        <ol id="optionsList" class="options-list"></ul>
+        <ul id="optionsList" class="options-list"></ul>
         <div class="center-container">
             <img class="pergunta-e-resposta" src="../images/pergunta-e-resposta.png"
                  onclick="showAnswerPopup()" style="cursor: pointer;" alt="Mostrar resposta" />

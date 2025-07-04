@@ -12,16 +12,19 @@
 
 <div class="game-container">
     <!-- Menu -->
-    <nav class="menu">
-        <a href="../menuEs.html" class="menu-title">
-            <img class="logo-bebedeira" src="../images/logo.png" alt="Bender Games Logo" />
-        </a>
-    </nav>
+<nav class="menu">
+    <a href="../menuEs.html" class="menu-title" style="position: relative;">
+        <div class="voltar-container seta" onclick="window.location.href='../menuPtBr.html'">
+            &#8678;
+        </div>
+        <img class="logo-bebedeira" src="../images/logo.png" alt="Logo Bebedeira" />
+    </a>
+</nav>
 
-<!-- Contenido del juego -->
+<!-- Conteudo do jogo -->
 <h1>Topzeira</h1>
 <a href="#" onclick="openPopup()">
-    <img class="img-regras" src="../images/regras.png">
+    <img class="img-regras" src="../images/regras.png" alt="Reglas">
 </a>
 <h4>Reglas</h4>
 
@@ -44,11 +47,12 @@
         </ul>
     </div>
 </div>
-
+</div>
 <div class="card-frase">
     <p id="questionTopzeira"></p>
     <div class="center-container">
-        <img class="pergunta-e-resposta" src="../images/pergunta-e-resposta.png" onclick="showAnswerPopup()">
+        <img class="pergunta-e-resposta" src="../images/pergunta-e-resposta.png" onclick="showAnswerPopup()" alt="Respuesta">
+        <h4>Respuesta</h4>
     </div>
 </div>
 
