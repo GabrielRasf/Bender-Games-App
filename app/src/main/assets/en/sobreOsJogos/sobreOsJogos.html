@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="sobreOsJogos.css">
+
+    <title>Which game to choose?</title>
+
+</head>
+
+<body>
+<div class="main-container">
+    <div class="logo-container">
+        <a href="../menuEn.html">
+            <img class="logo-bebedeira" src="../images/logo.png" alt="Bender Games Logo" />
+        </a>
+    </div>
+
+    <div class="title-container">
+        <h1>Qual jogo escolher?</h1>
+        <p class="qual-jogo-escolher">18 games for people 18+.</p>
+        <p class="qual-jogo-escolher">Learn more about each one.</p>
+        <p class="qual-jogo-escolher">Have fun!</p>
+    </div>
+
+
+    <div class="game-box-content">
+        <a href="#" onclick="openPopup('popup-eununca')" class="game-box">
+            <p>Never Have I Ever</p>
+        </a>
+        <a href="#" onclick="openPopup('popup-topzeira')" class="game-box">
+            <p>Topzeira</p>
+        </a>
+        <a href="#" onclick="openPopup('popup-riubebeu')" class="game-box">
+            <p>Laughed, Drank</p>
+        </a>
+        <a href="#" onclick="openPopup('popup-segredos')" class="game-box">
+            <p>Secrets</p>
+        </a>
+        <a href="#" onclick="openPopup('popup-amigodebosta')" class="game-box">
+            <p>Worst Friend</p>
+        </a>
+        <a href="#" onclick="openPopup('popup-mimicas')" class="game-box">
+            <p>Adult Charades</p>
+        </a>
+        <a href="#" onclick="openPopup('popup-verdadeconsequencia')" class="game-box">
+            <p>Truth or Dare</p>
+        </a>
+        <a href="#" onclick="openPopup('popup-quemnogrupo')" class="game-box">
+            <p>Who in the Group</p>
+        </a>
+        <a href="#" onclick="openPopup('popup-paraconversar')" class="game-box">
+            <p>To Talk About</p>
+        </a>
+        <a href="#" onclick="openPopup('popup-oquee')" class="game-box">
+            <p>Riddles</p>
+        </a>
+        <a href="#" onclick="openPopup('popup-perguntassemresposta')" class="game-box">
+            <p>Unanswerad Questions</p>
+        </a>
+        <a href="#" onclick="openPopup('popup-naofez')" class="game-box">
+            <p>Didn't Do It? Drink</p>
+        </a>
+        <a href="#" onclick="openPopup('popup-intimidade')" class="game-box">
+            <p>Intimacy</p>
+        </a>
+        <a href="#" onclick="openPopup('popup-showDoBebao')" class="game-box">
+            <p>Drunk Show</p>
+        </a>
+        <a href="#" onclick="openPopup('popup-tiroAoAlvo')" class="game-box">
+            <p>Target Shooting</p>
+        </a>
+        <a href="#" onclick="openPopup('popup-fatoOuFalso')" class="game-box">
+            <p>True or False</p>
+        </a>
+        <a href="#" onclick="openPopup('popup-azarOuSorte')" class="game-box">
+            <p>Bad Luck or Good Luck</p>
+        </a>
+        <a href="#" onclick="openPopup('popup-antesOuDepois')" class="game-box div-antes-ou-depois">
+            <p>Before or After</p>
+        </a>
+    </div>
+</div>
+
+<!-- Pop-up Never Have I Ever -->
+<div id="popup-eununca" class="overlay" onclick="closePopup('popup-eununca')">
+    <div class="popup" onclick="event.stopPropagation()">
+        <h3>Never Have I Ever</h3>
+        <li>Each player must say "Never have I ever..." followed by something they've never done (or something they have done, if they want to drink).</li>
+        <li>Those who have done the stated action must drink.</li>
+        <li>The goal is to have fun, share funny stories, and get to know the other players better.</li>
+    </div>
+</div>
+
+<!-- Pop-up Topzeira -->
+<div id="popup-topzeira" class="overlay" onclick="closePopup('popup-topzeira')">
+    <div class="popup" onclick="event.stopPropagation()">
+        <h3>Topzeira</h3>
+        <li>One person reads an initial topic, like "Most common food allergies in the world".</li>
+        <li>Each player, clockwise, gives an answer. If someone doubts an answer, they can say "That's not topzeira".</li>
+        <li>When this happens, both check the answer in the "star" (the place where you can verify if the answer is true). If it is topzeira, the doubter drinks; if not, the person who gave the wrong answer drinks.</li>
+    </div>
+</div>
+
+<!-- Pop-up Laugh and Drink -->
+<div id="popup-riubebeu" class="overlay" onclick="closePopup('popup-riubebeu')">
+    <div class="popup" onclick="event.stopPropagation()">
+        <h3>Laugh and Drink</h3>
+        <li>A player must perform an action proposed by the card.</li>
+        <li>The goal is to make someone laugh within 30 seconds.</li>
+        <li>If the person laughs, they drink! If you fail to make anyone laugh, you drink.</li>
+        <li>Get ready for jokes, funny faces, and lots of fun!</li>
+    </div>
+</div>
+
+<!-- Pop-up Secrets -->
+<div id="popup-segredos" class="overlay" onclick="closePopup('popup-segredos')">
+    <div class="popup" onclick="event.stopPropagation()">
+        <h3>Secrets</h3>
+        <li>Confess something and try to fool others. Say one truth and one lie and let others guess which is which.</li>
+        <li>If others guess the truth, you drink a shot.</li>
+        <li>If they guess wrong, the active player chooses who drinks.</li>
+        <li>It's a fun way to get to know friends better and reveal secrets.</li>
+    </div>
+</div>
+
+<!-- Pop-up Worst Friend -->
+<div id="popup-amigodebosta" class="overlay" onclick="closePopup('popup-amigodebosta')">
+    <div class="popup" onclick="event.stopPropagation()">
+        <h3>Worst Friend</h3>
+        <li>Who is the "worst friend" in the group? Pointing fingers at others without accusing them of bad behavior has never been so funny!</li>
+        <li>This game will reveal many funny things about your friends.</li>
+        <li>Important! Don’t take it to heart, it’s just a game.</li>
+    </div>
+</div>
+
+<!-- Pop-up Adult Charades -->
+<div id="popup-mimicas" class="overlay" onclick="closePopup('popup-mimicas')">
+    <div class="popup" onclick="event.stopPropagation()">
+        <h3>Adult Charades</h3>
+        <li>Perform daring and funny charades for others to guess.</li>
+        <li>The game features creative and fun charades, perfect for those who enjoy funny challenges.</li>
+        <li>It's a chance to loosen up and create hilarious moments!</li>
+    </div>
+</div>
+
+<!-- Pop-up Truth or Dare -->
+<div id="popup-verdadeconsequencia" class="overlay" onclick="closePopup('popup-verdadeconsequencia')">
+    <div class="popup" onclick="event.stopPropagation()">
+        <h3>Truth or Dare</h3>
+        <li>Choose: answer honestly or complete a challenge.</li>
+        <li>If you refuse or lie, you must drink.</li>
+    </div>
+</div>
+
+<!-- Pop-up Who in the Group -->
+<div id="popup-quemnogrupo" class="overlay" onclick="closePopup('popup-quemnogrupo')">
+    <div class="popup" onclick="event.stopPropagation()">
+        <h3>Who in the Group</h3>
+        <li>Example: "Who in the group is the cutest?" – everyone points, and whoever gets the most votes drinks!</li>
+        <li>It’s a game that reveals group opinions in a fun and unexpected way.</li>
+    </div>
+</div>
+
+<!-- Pop-up To Talk About -->
+<div id="popup-paraconversar" class="overlay" onclick="closePopup('popup-paraconversar')">
+    <div class="popup" onclick="event.stopPropagation()">
+        <h3>To Talk About</h3>
+        <li>Deep, random, or funny topics to break the ice.</li>
+        <li>Ideal to start conversations, get to know others better, or have fun with curious subjects.</li>
+    </div>
+</div>
+
+<!-- Pop-up Guess or Drink -->
+<div id="popup-acertabebe" class="overlay" onclick="closePopup('popup-acertabebe')">
+    <div class="popup" onclick="event.stopPropagation()">
+        <h3>Guess or Drink</h3>
+        <li>If you’re wrong, you drink. Simple and straightforward!</li>
+        <li>This is a quick and direct game with only one rule: guess right, congrats; guess wrong, drink!</li>
+    </div>
+</div>
+
+<!-- Pop-up What is it? -->
+<div id="popup-oquee" class="overlay" onclick="closePopup('popup-oquee')">
+    <div class="popup" onclick="event.stopPropagation()">
+        <h3>What is it?</h3>
+        <li>Born from fun, lives in the party, makes you laugh, makes you drink, and nobody complains?</li>
+        <li>Drunk Games, what else could it be?</li>
+        <li>If no one guesses the riddle, everyone drinks!</li>
+    </div>
+</div>
+
+<!-- Pop-up Unanswerable Questions -->
+<div id="popup-perguntassemresposta" class="overlay" onclick="closePopup('popup-perguntassemresposta')">
+    <div class="popup" onclick="event.stopPropagation()">
+        <h3>Unanswerable Questions</h3>
+        <li>Examples: "Why is the sky blue?", "If time is money, is the bank a clock?".</li>
+        <li>The goal is to raise funny or philosophical questions that no one can answer for sure.</li>
+        <li>If someone tries to answer and the group finds it weak... drinks!</li>
+    </div>
+</div>
+
+<!-- Pop-up Intimacy -->
+<div id="popup-intimidade" class="overlay" onclick="closePopup('popup-intimidade')">
+    <div class="popup" onclick="event.stopPropagation()">
+        <h3>Intimacy</h3>
+        <li>Deep questions to discover secrets and unusual stories.</li>
+        <li>Ideal for couples to deepen their relationship with more openness and trust.</li>
+    </div>
+</div>
+
+<!-- Pop-up Drunk Show -->
+<div id="popup-showDoBebao" class="overlay" onclick="closePopup('popup-showDoBebao')">
+    <div class="popup" onclick="event.stopPropagation()">
+        <h3>Drunk Show</h3>
+        <li>A crazy quiz with bizarre questions. Whoever gets it wrong drinks!</li>
+        <li>Get ready to laugh and be surprised by the questions.</li>
+    </div>
+</div>
+
+<!-- Pop-up Didn't Do It? Drink -->
+<div id="popup-naofez" class="overlay" onclick="closePopup('popup-naofez')">
+    <div class="popup" onclick="event.stopPropagation()">
+        <h3>Didn't Do It? Drink</h3>
+        <li>Challenges or tasks are proposed.</li>
+        <li>Whoever doesn't do it must drink. Simple as that!</li>
+    </div>
+</div>
+
+<!-- Pop-up Target Shooting -->
+<div id="popup-tiroAoAlvo" class="overlay" onclick="closePopup('popup-tiroAoAlvo')">
+    <div class="popup" onclick="event.stopPropagation()">
+        <h3>Target Shooting</h3>
+        <li>4 questions, one answer for each question.</li>
+        <li>The person with the highest score wins.</li>
+        <li>The person with the lowest score drinks!</li>
+    </div>
+</div>
+
+<!-- Pop-up Fact or False -->
+<div id="popup-fatoOuFalso" class="overlay" onclick="closePopup('popup-fatoOuFalso')">
+    <div class="popup" onclick="event.stopPropagation()">
+        <h3>Fact or False</h3>
+        <li>Can you tell if what you know is a fact or false?</li>
+        <li>In this game, you will be presented with various pieces of knowledge.</li>
+        <li>If you get right what is fact and what is false, congratulations.</li>
+        <li>If you get it wrong, you know what happens!</li>
+    </div>
+</div>
+
+<!-- Pop-up Luck or Bad Luck -->
+<div id="popup-azarOuSorte" class="overlay" onclick="closePopup('popup-azarOuSorte')">
+    <div class="popup" onclick="event.stopPropagation()">
+        <h3>Luck or Bad Luck</h3>
+        <li>Here you choose one, two, or three numbers between 1 and 6</li>
+        <li>Click the button and, if it lands on any chosen number, you know what to do. Drink</li>
+        <li>Take a shot</li>
+        <li>Game of pure luck (or bad luck)... laughter guaranteed!</li>
+
+    </div>
+</div>
+
+<!-- Pop-up Before or After -->
+<div id="popup-antesOuDepois" class="overlay" onclick="closePopup('popup-antesOuDepois')">
+    <div class="popup" onclick="event.stopPropagation()">
+        <h3>Before or After</h3>
+        <li>Two historical facts.</li>
+        <li>One chance.</li>
+        <li>If wrong, drink.</li>
+        <li>If right, congratulations!</li>
+    </div>
+</div>
+
+
+
+<script>
+    // Função para abrir o popup
+    function openPopup(popupId) {
+        // Fecha todos os popups abertos
+        const allPopups = document.querySelectorAll('.overlay');
+        allPopups.forEach(popup => popup.style.display = 'none');
+
+        // Exibe o popup correspondente
+        const popup = document.getElementById(popupId);
+        if (popup) {
+            popup.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+    }
+
+    // Função para fechar o popup
+    function closePopup(popupId) {
+        const popup = document.getElementById(popupId);
+        if (popup) {
+            popup.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+    }
+
+    // Fecha o popup ao pressionar ESC
+    document.addEventListener('keydown', function(event) {
+        if (event.key === 'Escape') {
+            const allPopups = document.querySelectorAll('.overlay');
+            allPopups.forEach(popup => {
+                if (popup.style.display === 'flex') {
+                    popup.style.display = 'none';
+                    document.body.style.overflow = 'auto';
+                }
+            });
+        }
+    });
+</script>
+</body>
+</html>

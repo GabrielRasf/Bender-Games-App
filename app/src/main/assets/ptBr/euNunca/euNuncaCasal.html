@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="../../stylesCards.css">
+    <title>Eu Nunca - Casal</title>
+</head>
+
+<body>
+
+<div class="game-container">
+    <!-- Menu -->
+    <nav class="menu">
+        <a href="../menuPtBr.html" class="menu-title">
+            <img class="logo-bebedeira" src="../images/logo.png" alt="Logo Bebedeira" />
+        </a>
+    </nav>
+
+    <!-- Conteúdo do jogo -->
+    <h1>
+        <a href="euNuncaMenu.html">Eu Nunca</a>
+    </h1>
+    <h3>Casal</h3>
+    <a href="#" onclick="openPopup()"><br>
+        <img class="img-regras" src="../images/regras.png">
+    </a>
+    <h4>Regras</h4>
+
+    <div class="card-frase">
+        <p id="questionCasal"></p>
+    </div>
+
+    <div class="button-container">
+        <button onclick="nextQuestion()">Próxima pergunta</button>
+    </div>
+
+    <div id="result">
+    </div>
+</div>
+
+<!-- Pop-up -->
+<div id="popup" class="popup">
+    <div class="popup-content">
+        <span class="close" onclick="closePopup()">&times;</span>
+        <h3>Regras do Jogo</h3>
+        <h5>Eu Nunca <br> Casal</h5>
+        <ul>
+            <li>Leia a pergunta em voz alta</li>
+            <li>Quem já fez o que foi perguntado, bebe</li>
+            <li>Se ninguém fez, quem perguntou bebe</li>
+            <li>Divirta-se! 🍻</li>
+        </ul>
+    </div>
+</div>
+
+<script>
+
+    let questions = [];
+    let currentQuestion = 0;
+
+    // Função para carregar as perguntas (agora usando dados embutidos)
+    function loadQuestions() {
+        questions = shuffleArray([...embeddedData.questions]); // Usa spread para criar cópia
+        nextQuestion(); // Exibe a primeira pergunta
+    }
+
+    // Fisher-Yates Shuffle (mantido igual)
+    function shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array;
+    }
+
+    // Função para exibir a próxima pergunta (mantida igual)
+    function nextQuestion() {
+        if (questions.length === 0) {
+            document.getElementById("questionCasal").textContent = "Carregando perguntas...";
+            loadQuestions();
+            return;
+        }
+
+        if (currentQuestion < questions.length) {
+            document.getElementById("questionCasal").textContent = questions[currentQuestion];
+            document.getElementById("result").textContent = "";
+            currentQuestion++;
+        } else {
+            document.getElementById("questionCasal").textContent = "Fim do Jogo! Espero que estejam se divertindo! Quer jogar novamente?";
+            document.getElementById("result").textContent = "";
+            currentQuestion = 0;
+            questions = shuffleArray([...embeddedData.questions]); // Reinicia com os dados originais
+        }
+    }
+
+    // Pop-up functions (mantidas iguais)
+    function openPopup() {
+        document.getElementById("popup").style.display = "block";
+    }
+
+    function closePopup() {
+        document.getElementById("popup").style.display = "none";
+    }
+
+    window.onclick = function(event) {
+        let popup = document.getElementById("popup");
+        if (event.target === popup) {
+            popup.style.display = "none";
+        }
+    };
+
+
+
+        // Dados do jogo EMBUTIDOS no HTML
+    const embeddedData = {
+    "questions": [
+        "Eu nunca refiz uma cena pornô com meu parceiro",
+        "Eu nunca transei no chuveiro",
+        "Eu nunca cheirei as roupas íntimas do meu parceiro",
+        "Eu nunca joguei @fazoubebe 👀",
+        "Eu nunca fiz safadeza no cinema",
+        "Eu nunca pensei em ter um passe livre",
+        "Eu nunca transei à luz de velas",
+        "Eu nunca olhei seu celular sem permissão",
+        "Eu nunca deixei de responder um 'eu te amo'",
+        "Eu nunca tive uma amizade colorida",
+        "Eu nunca fiz simpatia para conquistar alguém",
+        "Eu nunca gozei na hora errada",
+        "Eu nunca briguei com meu parceiro em público",
+        "Eu nunca tive meu coração partido",
+        "Eu nunca fiz sexo virtual",
+        "Eu nunca mandei nudes",
+        "Eu nunca segurei vela",
+        "Eu nunca visualizei uma mensagem e esqueci de responder",
+        "Eu nunca comparei meu relacionamento com outros",
+        "Eu nunca fiz um 69",
+        "Eu nunca fui chamado pelo nome errado durante o sexo",
+        "Eu nunca escrevi uma carta de amor",
+        "Eu nunca evitei um almoço em família",
+        "Eu nunca pensei em qual nome daria para os meus filhos",
+        "Eu nunca fingi um orgasmo",
+        "Eu nunca usei uma fantasia ousada",
+        "Eu nunca recebi flores",
+        "Eu nunca pedi pro meu parceiro(a) para trazer um terceiro(a) pro relacionamento",
+        "Eu nunca stalkeei as redes sociais do meu namorada ou namorada",
+        "Eu nunca tive crise de ciúmes",
+        "Eu nunca chamei meu parceiro de outro nome",
+        "Eu nunca transei numa banheira",
+        "Eu nunca usei halls preto naquele momento...",
+        "Eu nunca comi sobras da comida do meu parceiro(a)",
+        "Eu nunca tive vergonha de pedir alguma coisa na cama",
+        "Eu nunca quis mudar algo no meu parceiro(a)",
+        "Eu nunca reclamei do meu parceiro para colegas de trabalho(a)",
+        "Eu nunca fiquei preocupada pensando se teria um filho",
+        "Eu nunca fui algemada(o)",
+        "Eu nunca fui vingativo(a) com meu parceiro(a)",
+        "Eu nunca filmei um momento íntimo",
+        "Eu nunca fiz sexo no carro",
+        "Eu nunca tive medo de estar sendo traído(a)",
+        "Eu nunca saí com alguém em app de relacionamento",
+        "Eu nunca joguei jogos eróticos",
+        "Eu nunca usei camisina de sabor",
+        "Eu nunca quis uma família com meu parceiro",
+        "Eu nunca stalkei um ex nas redes sociais.",
+        "Eu nunca menti no primeiro encontro.",
+        "Eu nunca fiz xixi nas calças sendo adulto.",
+        "Eu nunca menti sobre meu status de relacionamento nas redes sociais.",
+        "Eu nunca criei uma conta falsa nas redes sociais.",
+        "Eu nunca fiz xixi na piscina.",
+        "Eu nunca dei um número de telefone falso.",
+        "Eu nunca vivi com um parceiro romântico.",
+        "Eu nunca comi algo ruim que meu parceiro(a) cozinhou porque não queria ferir seus sentimentos.",
+        "Eu nunca joguei Verdade ou Desafio sujo.",
+        "Eu nunca vasculhei as contas de redes sociais do meu parceiro(a) sem a permissão dele(a).",
+        "Eu nunca estive em uma briga de socos.",
+        "Eu nunca fui a uma praia de nudismo.",
+        "Eu nunca dormi com alguém de um aplicativo de namoro.",
+        "Eu nunca tive uma queda por meu melhor amigo(a).",
+        "Eu nunca enviei uma mensagem suja para a pessoa errada.",
+        "Eu nunca usei o login de Netflix de outra pessoa.",
+        "Eu nunca fiquei muito bêbado(a) no primeiro encontro.",
+        "Eu nunca escrevi uma carta de amor para alguém.",
+        "Eu nunca chamei a pessoa pelo nome errado na cama.",
+        "Eu nunca fiz sexo no primeiro encontro.",
+        "Eu nunca saí com o ex de um amigo(a).",
+        "Eu nunca fui desprezado(a) pelos pais do meu parceiro(a).",
+        "Eu nunca enviei uma mensagem para a pessoa errada por acidente.",
+        "Eu nunca saí correndo de um encontro às cegas.",
+        "Eu nunca peguei meu parceiro(a) fazendo algo embaraçoso.",
+        "Eu nunca estraguei uma noite de encontro só para poder me reunir com minha cama.",
+        "Eu nunca stalkei meu crush nas redes sociais.",
+        "Eu nunca escrevi uma carta de amor de que me arrependi.",
+        "Eu nunca peidei na frente do meu parceiro e culpei outra pessoa.",
+        "Eu nunca tive uma briga com meu melhor amigo(a).",
+        "Eu nunca usei um aplicativo ou site de namoro.",
+        "Eu nunca tive uma queda por alguém no trabalho.",
+        "Eu nunca tive um ménage à trois.",
+        "Eu nunca fui trabalhar bêbado(a) ou com ressaca.",
+        "Eu nunca joguei pôquer pelado.",
+        "Eu nunca encontrei o amor à primeira vista.",
+        "Eu nunca fiz 'Netflix and chill'.",
+        "Eu nunca usei o Tinder.",
+        "Eu nunca dei meu número de telefone para alguém logo depois de conhecê-lo(a).",
+        "Eu nunca dei ou recebi uma dança sensual.",
+        "Eu nunca peidei na frente dos pais do meu parceiro.",
+        "Eu nunca brinquei de role-playing na cama.",
+        "Eu nunca enviei uma bebida para alguém que achei atraente.",
+        "Eu nunca tive um(a) admirador(a) secreto(a).",
+        "Eu nunca tive um amigo com benefícios.",
+        "Eu nunca tive um parceiro(a) com um animal de estimação que eu não gostava.",
+        "Eu nunca menti sobre a minha idade.",
+        "Eu nunca estive em um relacionamento tóxico.",
+        "Eu nunca estive em um relacionamento apenas pelo aspecto físico.",
+        "Eu nunca fiz algo louco e selvagem por amor.",
+        "Eu nunca menti sobre um relacionamento passado para um parceiro(a) atual.",
+        "Eu nunca estive em um encontro desastroso.",
+        "Eu nunca beijei alguém sem sentir aquele 'spark'.",
+        "Eu nunca estive em um relacionamento com alguém que era muito grudento(a).",
+        "Eu nunca estive em um relacionamento só pelo status ou dinheiro.",
+        "Eu nunca me arrependi de um relacionamento.",
+        "Eu nunca estive em um relacionamento onde não tínhamos nada em comum.",
+        "Eu nunca dancei na chuva com um parceiro(a).",
+        "Eu nunca dei um apelido carinhoso para um parceiro(a).",
+        "Eu nunca beijei sob o visco.",
+        "Eu nunca retribuí um presente de um parceiro.",
+        "Eu nunca menti sobre estar solteiro(a).",
+        "Eu nunca saí em um encontro sem escovar os dentes.",
+        "Eu nunca me apaixonei à primeira vista.",
+        "Eu nunca beijei no primeiro encontro.",
+        "Eu nunca estive em um relacionamento por mais de um ano.",
+        "Eu nunca comprei lingerie para um parceiro(a).",
+        "Eu nunca fui serenata ou cantei uma serenata.",
+        "Eu nunca senti ciúmes do ex de um parceiro(a).",
+        "Eu nunca conheci os pais de um parceiro(a) dentro de um mês de namoro.",
+        "Eu nunca dei uma massagem em um parceiro(a).",
+        "Eu nunca recebi uma carta de amor.",
+        "Eu nunca fui chamado(a) por um apelido carinhoso por um parceiro(a).",
+        "Eu nunca saí em um encontro só para fazer alguém ficar com ciúmes.",
+        "Eu nunca menti sobre meu trabalho para impressionar alguém no encontro.",
+        "Eu nunca flertei com alguém mesmo estando em um relacionamento.",
+        "Eu nunca saí sem usar roupa íntima.",
+        "Eu nunca comprei um presente para um parceiro(a) e acabei ficando com ele(a).",
+        "Eu nunca beijei alguém sem saber o nome da pessoa.",
+        "Eu nunca tive uma queda por um(a) professor(a) ou chefe.",
+        "Eu nunca usei meu charme para sair de uma multa por excesso de velocidade.",
+        "Eu nunca fucei no e-mail ou nas mensagens de texto de um parceiro(a).",
+        "Eu nunca menti sobre não estar a fim de algo.",
+        "Eu nunca usei uma cantada cafona.",
+        "Eu nunca sonhei com um parceiro me traindo.",
+        "Eu nunca estive em terapia de casal.",
+        "Eu nunca dei o tratamento silencioso a um parceiro(a).",
+        "Eu nunca apresentei um parceiro(a) como apenas um amigo(a).",
+        "Eu nunca levei um parceiro(a) a um evento de trabalho.",
+        "Eu nunca fiz um parceiro(a) assistir a um filme ou série que eu amo.",
+        "Eu nunca usei um coach de namoro.",
+        "Eu nunca me arrependi de dizer ‘eu te amo’ para alguém.",
+        "Eu nunca tive uma queda pelo irmão(a) de um amigo(a).",
+        "Eu nunca dei o famoso 'ghosting' em alguém.",
+        "Eu nunca fui vítima de 'ghosting'.",
+        "Eu nunca fui em um encontro duplo.",
+        "Eu nunca tive um encontro em um piquenique.",
+        "Eu nunca namorei alguém com mais de 10 anos a mais ou a menos.",
+        "Eu nunca fui terminado(a) por mensagem de texto.",
+        "Eu nunca esqueci o nome de alguém em um encontro.",
+        "Eu nunca menti sobre meus sentimentos para evitar um término.",
+        "Eu nunca fui a um casamento sozinho(a).",
+        "Eu nunca fui o 'rebound' de alguém.",
+        "Eu nunca me senti o terceiro(a) em um relacionamento.",
+        "Eu nunca estive em um relacionamento onde me senti ignorado(a).",
+        "Eu nunca fui terminado(a) em um feriado ou no meu aniversário.",
+        "Eu nunca tive um encontro onde o animal de estimação do(a) parceiro(a) me odiava.",
+        "Eu nunca estive em um relacionamento por mais de 5 anos.",
+        "Eu nunca fui a um encontro e não ofereci pagar a conta.",
+        "Eu nunca senti amor à primeira impressão.",
+        "Eu nunca namorei alguém com filhos.",
+        "Eu nunca me arrependi de morar com um parceiro(a).",
+        "Eu nunca fiz de cupido para amigos.",
+        "Eu nunca namorei alguém que conheci online.",
+        "Eu nunca namorei mais de uma pessoa ao mesmo tempo.",
+        "Eu nunca tive um parceiro(a) que não gostava dos meus amigos.",
+        "Eu nunca tive um término em público.",
+        "Eu nunca fui pego(a) traindo.",
+        "Eu nunca saí em um encontro para conseguir comida de graça.",
+        "Eu nunca sonhei em me casar com um parceiro(a).",
+        "Eu nunca flertei com um garçom ou bartender.",
+        "Eu nunca tive um parceiro(a) que cozinhou uma refeição para mim.",
+        "Eu nunca tive uma discussão em público com um parceiro(a).",
+        "Eu nunca estive de férias com um parceiro(a).",
+        "Eu nunca fui a terapia ou a aconselhamento.",
+        "Eu nunca tive uma aventura de uma noite que virou um relacionamento.",
+        "Eu nunca menti sobre um parceiro(a) para meus pais.",
+        "Eu nunca fingi estar solteiro(a).",
+        "Eu nunca saí em um encontro para um lugar que eu odiava.",
+        "Eu nunca permaneci amigo(a) de um ex.",
+        "Eu nunca tive um parceiro(a) com um fetiche estranho.",
+        "Eu nunca namorei alguém mais baixo(a)/alto(a) do que eu.",
+        "Eu nunca fui surpreendido(a) enquanto estava com um parceiro(a).",
+        "Eu nunca menti sobre gostar de um presente de um parceiro(a).",
+        "Eu nunca escondi um grande segredo de um parceiro(a).",
+        "Eu nunca fui terminado(a) por outra pessoa.",
+        "Eu nunca fiz jogo duro.",
+        "Eu nunca namorei alguém que meus amigos não gostavam.",
+        "Eu nunca tive um relacionamento com alguém que conheci em férias.",
+        "Eu nunca tive uma queda por uma celebridade.",
+        "Eu nunca fui infiel.",
+        "Eu nunca planejei um encontro surpresa para um parceiro(a).",
+        "Eu nunca escrevi um poema ou canção para um(a) namorado(a).",
+        "Eu nunca cozinhei uma refeição especial para comemorar nosso relacionamento.",
+        "Eu nunca fiz uma viagem espontânea com um parceiro(a).",
+        "Eu nunca organizei um presente atencioso para um parceiro(a) ‘só porque sim’.",
+        "Eu nunca fiz uma festa para comemorar as conquistas de um parceiro(a).",
+        "Eu nunca passei a noite toda só conversando e rindo com um parceiro(a).",
+        "Eu nunca menti sobre onde eu estava indo para um parceiro(a).",
+        "Eu nunca chamei alguém pelo nome de um ex.",
+        "Eu nunca fui confundido(a) com um terapeuta de casais.",
+        "Eu nunca fingi não estar em casa quando um parceiro(a) veio.",
+        "Eu nunca esqueci uma ocasião especial.",
+        "Eu nunca fui a uma festa como um casal.",
+        "Eu nunca dei um presente ruim intencionalmente.",
+        "Eu nunca estive em um relacionamento por motivos errados.",
+        "Eu nunca fui pego(a) em uma mentira por um parceiro(a).",
+        "Eu nunca tive um parceiro(a) que me deu uma festa surpresa.",
+        "Eu nunca fiz uma fantasia de casal para o Halloween.",
+        "Eu nunca questionei minha sexualidade.",
+        "Eu nunca assisti ao pôr do sol ou ao nascer do sol com um parceiro(a).",
+        "Eu nunca disse acidentalmente ‘eu te amo’ para alguém.",
+        "Eu nunca estive em um relacionamento com uma diferença significativa de idade.",
+        "Eu nunca namorei alguém de uma cultura diferente.",
+        "Eu nunca fingi gostar da família de um parceiro(a).",
+        "Eu nunca disse ‘eu te amo’ sem realmente sentir isso.",
+        "Eu nunca tive um parceiro(a) que disse ‘eu te amo’ e eu não disse de volta.",
+        "Eu nunca namorei alguém por quem eu não me sentia atraído(a).",
+        "Eu nunca menti sobre onde eu estava indo.",
+        "Eu nunca saí em um encontro duplo.",
+        "Eu nunca usei a escova de dentes de um parceiro(a) sem permissão.",
+        "Eu nunca stalkei o novo parceiro(a) de um ex nas redes sociais.",
+        "Eu nunca beijei alguém no primeiro encontro.",
+        "Eu nunca ri tanto que acabei fazendo xixi nas calças.",
+        "Eu nunca tentei perder em um jogo de verdade ou desafio.",
+        "Eu nunca fiz topless ou natação nua.",
+        "Eu nunca esqueci o aniversário de um parceiro(a).",
+        "Eu nunca estive em um relacionamento aberto.",
+        "Eu nunca fui em um encontro arranjado.",
+        "Eu nunca namorei um colega de trabalho.",
+        "Eu nunca tive uma aventura de uma noite.",
+        "Eu nunca tirei uma selfie sexy.",
+        "Eu nunca me interessei pelo pai ou mãe de um amigo(a).",
+        "Eu nunca fui a um clube de strip.",
+        "Eu nunca estive noivo(a).",
+        "Eu nunca fiz trapaça em um teste.",
+        "Eu nunca fiz uma tatuagem.",
+        "Eu nunca fiz uma viagem de carro com um parceiro(a).",
+        "Eu nunca dei ou recebi um chupão.",
+        "Eu nunca fui serenado(a).",
+        "Eu nunca fui preso(a).",
+        "Eu nunca aprendi uma nova habilidade ou hobby porque era importante para o meu parceiro(a).",
+        "Eu nunca ajudei meu parceiro(a) a realizar um sonho ou objetivo.",
+        "Eu nunca apareci no trabalho do meu parceiro(a) para levar ele(a) para o almoço.",
+        "Eu nunca tive uma experiência paranormal.",
+        "Eu nunca virei vegano(a) ou vegetariano(a).",
+        "Eu nunca viajei para o exterior.",
+        "Eu nunca fui acampar com um parceiro(a).",
+        "Eu nunca levei uma multa por excesso de velocidade.",
+        "Eu nunca tive medo de conhecer os pais de um parceiro(a).",
+        "Eu nunca tive uma queda pelo parceiro(a) de um amigo(a).",
+        "Eu nunca esqueci nosso aniversário.",
+        "Eu nunca beijei alguém do mesmo sexo.",
+        "Eu nunca menti sobre o número de parceiros que já tive.",
+        "Eu nunca fui fazer bungee jumping ou paraquedismo.",
+        "Eu nunca estive em um relacionamento à distância.",
+        "Eu nunca fui pedido(a) em casamento.",
+        "Eu nunca estive apaixonado(a) por duas pessoas ao mesmo tempo.",
+        "Eu nunca quebrei o coração de alguém.",
+        "Eu nunca fui a um vidente ou cartomante.",
+        "Eu nunca tive um susto de gravidez.",
+        "Eu nunca fui em um encontro às cegas arranjado por amigos.",
+        "Eu nunca mencionei um ex desnecessariamente.",
+        "Eu nunca saí sem roupa íntima.",
+        "Eu nunca me arrependi de um término.",
+        "Eu nunca enviei uma mensagem flertando com alguém que não era meu parceiro(a).",
+        "Eu nunca fiz xixi no chuveiro.",
+        "Eu nunca cantei no karaokê."
+    ]
+}
+    // Carrega as perguntas ao iniciar (modificado para usar dados embutidos)
+    loadQuestions();
+</script>
+</body>
+</html>

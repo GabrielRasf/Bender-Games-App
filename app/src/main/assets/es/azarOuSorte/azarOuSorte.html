@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Azar o Suerte</title>
+    <link rel="stylesheet" type="text/css" href="../../stylesCards.css" />
+</head>
+
+<body>
+
+<div class="game-container">
+    <!-- Menu -->
+    <nav class="menu">
+        <a href="../menuEs.html" class="menu-title">
+            <img class="logo-bebedeira" src="../images/logo.png" alt="Bender Games Logo" />
+        </a>
+    </nav>
+
+    <!-- Título do jogo -->
+    <h1>Azar o Suerte</h1>
+    <a href="#" onclick="openPopup()"><br />
+        <img class="img-regras" src="../images/regras.png" alt="Reglas" />
+    </a>
+    <h4>Reglas</h4>
+
+    <!-- Área do jogo -->
+    <div class="container-randomizador popup-content">
+        <div class="resultado-randomizador" id="resultado-randomizador"></div>
+    </div>
+    <div class="button-container">
+        <button class="button-randomizador" onclick="sortearNumero()">Sacar Número</button>
+    </div>
+</div>
+
+<!-- Pop-up de Regras -->
+<div id="popup" class="popup" style="display:none;">
+    <div class="popup-content">
+        <span class="close" onclick="closePopup()">&times;</span>
+        <h3>Reglas del Juego</h3>
+        <h5>Azar o Suerte</h5>
+        <ul>
+            <li>Todos los jugadores deben elegir un número entre 1 y 6</li>
+            <li>Luego, activa el generador de números</li>
+            <li>Quien acierte el número sorteado, bebe</li>
+            <li>¿Fue azar o suerte?</li>
+            <li><strong>VARIACIÓN</strong></li>
+            <li>Pueden elegir 2, 3 o 4 números por ronda</li>
+            <li>Así el riesgo de acertar es mayor</li>
+            <li>¡Diviértanse! 🍻</li>
+        </ul>
+    </div>
+</div>
+
+<!-- Script JS embutido -->
+<script>
+    // Gerador de número randômico com efeito de roleta
+    function sortearNumero() {
+        const resultado = document.getElementById("resultado-randomizador");
+        let contador = 0;
+        let intervalo = setInterval(() => {
+            const numeroAleatorio = Math.floor(Math.random() * 6) + 1;
+            resultado.innerHTML = `<strong>${numeroAleatorio}</strong>`;
+            contador++;
+            if (contador >= 20) {
+                clearInterval(intervalo);
+            }
+        }, 100);
+    }
+
+    // Abertura e fechamento do popup
+    function openPopup() {
+        document.getElementById("popup").style.display = "block";
+    }
+
+    function closePopup() {
+        document.getElementById("popup").style.display = "none";
+    }
+
+    // Fechar popup clicando fora dele
+    window.onclick = function (event) {
+        const popup = document.getElementById("popup");
+        if (event.target === popup) {
+            popup.style.display = "none";
+        }
+    };
+</script>
+</body>
+
+</html>

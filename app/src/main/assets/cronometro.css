@@ -1,0 +1,23 @@
+
+  #timer {
+    margin: 0 auto;
+    width: 45px;
+    height: 45px;
+    font-size: 16px;
+    padding: 0;
+    border: none;
+    background-color: #222;
+    color: #fff;
+    border-radius: 12px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    font-size: 32px
+}
+
+#timer:hover {
+    background-color: #333;
+}

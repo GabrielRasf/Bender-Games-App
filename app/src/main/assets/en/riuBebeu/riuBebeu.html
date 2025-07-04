@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="../../stylesCards.css" />
+    <link rel="stylesheet" type="text/css" href="../../cronometro.css" />
+    <title>Laughed, Drank</title>
+</head>
+<body>
+
+<div class="game-container">
+    <!-- Menu -->
+    <nav class="menu">
+        <a href="../menuEn.html" class="menu-title">
+            <img class="logo-bebedeira" src="../images/logo.png" alt="Bender Games Logo" />
+        </a>
+    </nav>
+
+    <!-- Game content -->
+    <h1>Laughed, Drank</h1>
+    <a href="#" onclick="openPopup()">
+        <img class="img-regras" src="../images/regras.png" alt="Rules" />
+    </a>
+    <h4>Rules</h4>
+
+    <div class="card-frase">
+        <p id="questionRiuBebeu"></p>
+    </div>
+    <div class="button-container">
+        <button onclick="nextQuestion()">Next question</button>
+    </div>
+    <div id="result"></div>
+</div>
+
+<!-- Pop-up -->
+<div id="popup" class="popup">
+    <div class="popup-content">
+        <span class="close" onclick="closePopup()">&times;</span>
+        <h3>Game Rules</h3>
+        <h5>Laughed? Drank</h5>
+        <ul>
+            <li>One player selects a card (other players should not know the content)</li>
+            <li>The card will provide a mission for the player who reads it</li>
+            <li>If the target player laughs, they must drink</li>
+            <li>If the player who chose the mission cannot make the target laugh, they must drink instead</li>
+            <li>Have fun! 🍻</li>
+        </ul>
+    </div>
+</div>
+
+<!-- Timer -->
+<button id="timer" onclick="handleTimerClick()">30</button>
+
+<script>
+    // Embedded game data in HTML
+    const gameData = {
+        "questions": [
+            "Make eye contact with your target and sensually lick your lips",
+            "Sensually ask your target in the ear: 'Do you like it when the dentist inserts instruments in your mouth?'",
+            "Pretend to be a virtual assistant (Siri or Alexa) and answer other players’ questions in a funny way",
+            "Show your target how to play golf by standing behind them and holding their hands",
+            "You and your target are on a podcast. Ask them: 'How do you win a Chokito?' Answer: 'Just put your finger in the little hole'",
+            "You are a drunk Santa Claus talking to your reindeer (your target)",
+            "Sensually whisper in your target's ear: 'There’s something in the world that loves to be licked to get inside a hole. What is it?' Answer: 'The eye of a needle'",
+            "You are Mr. Tickles. Attack your target.",
+            "Make the best imitation of Shrek and Fiona’s orgasm for your target.",
+            "Spin in circles yelling 'I am a washing machine!'",
+            "Imitate the sounds of sex in your target’s ear",
+            "You are learning ballet, show the others the moves you’ve learned",
+            "With your best imitation of Faustão say to your target: 'Oh man, dude! This beast, man!'",
+            "Imitate a conversation with people in a bank line, act like a reporter doing a TV news report",
+            "Read your target’s palm and say 'I’m sorry but tomorrow a terrible accident will happen while you wash your armpit'",
+            "Imitate a penguin sliding on ice",
+            "Look your target in the eyes and say 'Today you’re very funny. Aren’t you afraid of getting roasted in the group?'",
+            "Whisper to your target: 'I’m totally attracted to you. I want to wear your clothes.'",
+            "You and the player to your right are going skydiving. They are the instructor and will be behind you. Pretend to be scared to jump",
+            "Pretend to be a circus trainer and teach a trick to your animal (your target)",
+            "Pretend to be a famous DJ hyping up a party, use nearby objects as DJ equipment and make funny mouth sounds",
+            "Pretend to be a dramatic baby who just lost their pacifier, cry exaggeratedly, fall to the ground and roll around your target",
+            "Demonstrate how to put on a condom using your target’s hand as a tool",
+            "You are a porn star and must give powerful advice to a newbie (your target)",
+            "You are a fitness influencer, teach your target a home workout using household objects as weights",
+            "You are a cowboy, teach how to lasso a bull (your target)",
+            "Ask your target 'Shall we have a coffee? I heard you think coffee is stronger when filtered'",
+            "Imitate sucking a lollipop looking at your target, then say: 'That’s the best lollipop I’ve ever sucked'",
+            "Stroke your target’s neck while giving motivational advice",
+            "You are learning Mandarin, show your target the words you have learned",
+            "Imitate a butterfly emerging from a cocoon",
+            "The lost treasure map shows the treasure is in your target’s pants. Imitate a pirate and find it",
+            "Look your target in the eyes and say: 'I went to cook an egg and found the egg was heavy… it had a chick inside. Imagine your cook with a chick inside.'",
+            "Imitate a dolphin clapping its fins and rubbing against your target",
+            "Sensually whisper in your target's ear: 'I have 5 bottles of whiskey, you sell 4 and I’ll give you one'",
+            "Teach your target a viral TikTok dance, do all the moves necessary to make them laugh",
+            "Your target is a chair, make adjustments to it so it’s comfortable to use",
+            "Go to your target sucking your thumb. With a baby voice say: 'Baby wants to sleep'",
+            "Sing and dance the song 'Gangnam Style' to make your target laugh",
+            "Give a yoga lesson to your target, invent funny names for poses like 'lazy cat pose' and 'crooked flamingo pose'",
+            "Looking at your target, tell the funniest story you know about them",
+            "Get close to your target without saying anything, quickly sniff their neck",
+            "Pretend to be an extremely charming duck trying to seduce your target using your beak and sensual moves",
+            "Do a live report about 'Grandma who told Grandpa to go to hell.' Include interviews with other players.",
+            "You are a little mouse, try to get into your target’s pants and make them uncomfortable",
+            "Pretend to be a hairdresser giving your target a haircut",
+            "You are a used car salesman, try to sell an imaginary car to another player",
+            "Sensually whisper in your target's ear: 'It goes in hard and dry. Comes out soft and wet. I love chewing gum.'",
+            "You are a hummingbird. Flap your wings and drink some nectar from the juiciest flower (your target)",
+            "Massage your target’s ears while looking directly into their eyes",
+            "Imitate a model walking the runway, touch your target and whisper in their ear 'Aaaaiiiiinnnn'",
+            "Make an inspiring presentation of your favorite sex positions, act as if giving a lecture",
+            "Ask your target to get on all fours. Pretend to be milking them while explaining the quality of the milk"
+        ]
+    };
+
+    let questions = [];
+    let currentQuestion = 0;
+    let timeLeft = 30;
+    let timerInterval = null;
+    let isRunning = false;
+
+    // Função para carregar as perguntas
+    function loadQuestions() {
+        questions = shuffleArray([...gameData.questions]);
+        nextQuestion();
+    }
+
+    // Função para embaralhar um array (Fisher-Yates Shuffle)
+    function shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array;
+    }
+
+    // Função para exibir a próxima pergunta
+    function nextQuestion() {
+        if (questions.length === 0) {
+            document.getElementById("questionRiuBebeu").textContent = "Loading questions...";
+            loadQuestions();
+            return;
+        }
+
+        if (currentQuestion < questions.length) {
+            document.getElementById("questionRiuBebeu").textContent = questions[currentQuestion];
+            document.getElementById("result").textContent = "";
+            currentQuestion++;
+        } else {
+            document.getElementById("questionRiuBebeu").textContent = "Game Over! Hope you’re having fun! Want to play again?";
+            document.getElementById("result").textContent = "";
+            currentQuestion = 0;
+            questions = shuffleArray([...gameData.questions]);
+        }
+    }
+
+    // Pop-up functions
+    function openPopup() {
+        document.getElementById("popup").style.display = "block";
+    }
+
+    function closePopup() {
+        document.getElementById("popup").style.display = "none";
+    }
+
+    // Fechar o pop-up ao clicar fora dele
+    window.onclick = function(event) {
+        let popup = document.getElementById("popup");
+        if (event.target === popup) {
+            popup.style.display = "none";
+        }
+    };
+
+    // Cronômetro
+    function updateDisplay() {
+        const timerButton = document.getElementById('timer');
+        timerButton.textContent = timeLeft;
+    }
+
+    function handleTimerClick() {
+        const timerButton = document.getElementById('timer');
+
+        if (isRunning) {
+            clearInterval(timerInterval);
+            timerInterval = null;
+            timeLeft = 30;
+            isRunning = false;
+            updateDisplay();
+        } else {
+            isRunning = true;
+            timerInterval = setInterval(() => {
+                timeLeft--;
+                updateDisplay();
+
+                if (timeLeft <= 0) {
+                    clearInterval(timerInterval);
+                    timerInterval = null;
+                    isRunning = false;
+                    alert("⏰ Tempo esgotado!");
+                    timeLeft = 30;
+                    updateDisplay();
+                }
+            }, 1000);
+        }
+    }
+
+    // Carrega as perguntas ao iniciar
+    window.onload = loadQuestions;
+</script>
+
+</body>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Bad Luck or Good Luck</title>
+    <link rel="stylesheet" type="text/css" href="../../stylesCards.css" />
+</head>
+
+<body>
+
+<div class="game-container">
+    <!-- Menu -->
+    <nav class="menu">
+        <a href="../menuEn.html" class="menu-title">
+            <img class="logo-bebedeira" src="../images/logo.png" alt="Bender Games Logo" />
+        </a>
+    </nav>
+
+    <!-- Game Title -->
+    <h1>Bad Luck or Good Luck</h1>
+    <a href="#" onclick="openPopup()"><br />
+        <img class="img-regras" src="../images/regras.png" alt="Rules" />
+    </a>
+    <h4>Rules</h4>
+
+    <!-- Game Area -->
+    <div class="container-randomizador popup-content">
+        <div class="resultado-randomizador" id="resultado-randomizador"></div>
+    </div>
+    <div class="button-container">
+        <button class="button-randomizador" onclick="sortearNumero()">Draw Number</button>
+    </div>
+</div>
+
+<!-- Rules Pop-up -->
+<div id="popup" class="popup" style="display:none;">
+    <div class="popup-content">
+        <span class="close" onclick="closePopup()">&times;</span>
+        <h3>Game Rules</h3>
+        <h5>Bad Luck or Good Luck</h5>
+        <ul>
+            <li>All players must choose a number between 1 and 6</li>
+            <li>Then, activate the number generator</li>
+            <li>Whoever guesses the drawn number drinks</li>
+            <li>Was it bad luck or good luck?</li>
+            <li><strong>VARIATION</strong></li>
+            <li>You can choose 2, 3, or 4 numbers per round</li>
+            <li>This way the chance of guessing correctly is higher</li>
+            <li>Have fun! 🍻</li>
+        </ul>
+    </div>
+</div>
+
+<!-- Embedded JS Script -->
+<script>
+    // Random number generator with roulette effect
+    function sortearNumero() {
+        const resultado = document.getElementById("resultado-randomizador");
+        let contador = 0;
+        let intervalo = setInterval(() => {
+            const numeroAleatorio = Math.floor(Math.random() * 6) + 1;
+            resultado.innerHTML = `<strong>${numeroAleatorio}</strong>`;
+            contador++;
+            if (contador >= 20) {
+                clearInterval(intervalo);
+            }
+        }, 100);
+    }
+
+    // Open and close popup
+    function openPopup() {
+        document.getElementById("popup").style.display = "block";
+    }
+
+    function closePopup() {
+        document.getElementById("popup").style.display = "none";
+    }
+
+    // Close popup when clicking outside
+    window.onclick = function (event) {
+        const popup = document.getElementById("popup");
+        if (event.target === popup) {
+            popup.style.display = "none";
+        }
+    };
+</script>
+</body>
+
+</html>

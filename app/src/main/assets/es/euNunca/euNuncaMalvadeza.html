@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="../../stylesCards.css">
+    <title>Yo Nunca - Maldad</title>
+</head>
+
+<body>
+
+<div class="game-container">
+    <!-- Menú -->
+    <nav class="menu">
+        <a href="../menuEs.html" class="menu-title">
+            <img class="logo-bebedeira" src="../images/logo.png" alt="Bender Games Logo" />
+        </a>
+    </nav>
+
+    <!-- Contenido del juego -->
+    <h1>
+        <a href="euNuncaMenu.html">Yo Nunca</a>
+    </h1>
+    <h3>Maldad</h3>
+    <a href="#" onclick="openPopup()"><br>
+        <img class="img-regras" src="../images/regras.png" alt="Reglas">
+    </a>
+    <h4>Reglas</h4>
+
+    <div class="card-frase">
+        <p id="questionMalvadeza"></p>
+    </div>
+
+    <div class="button-container">
+        <button onclick="nextQuestion()">Siguiente pregunta</button>
+    </div>
+
+    <div id="result">
+    </div>
+</div>
+
+<!-- Pop-up -->
+<div id="popup" class="popup">
+    <div class="popup-content">
+        <span class="close" onclick="closePopup()">&times;</span>
+        <h3>Reglas del Juego</h3>
+        <h5>Yo Nunca <br> Maldad</h5>
+        <ul>
+            <li>Lee la pregunta en voz alta</li>
+            <li>Quien haya hecho lo que se pregunta, bebe</li>
+            <li>Si nadie lo hizo, quien preguntó bebe</li>
+            <li>¡Diviértanse! 🍻</li>
+        </ul>
+    </div>
+</div>
+
+
+<script>
+
+    let questions = [];
+    let currentQuestion = 0;
+
+    // Função para carregar as perguntas (agora usando dados embutidos)
+    function loadQuestions() {
+        questions = shuffleArray([...embeddedData.questions]); // Usa spread para criar cópia
+        nextQuestion(); // Exibe a primeira pergunta
+    }
+
+    // Fisher-Yates Shuffle (mantido igual)
+    function shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array;
+    }
+
+    // Função para exibir a próxima pergunta (mantida igual)
+    function nextQuestion() {
+        if (questions.length === 0) {
+            document.getElementById("questionMalvadeza").textContent = "Carregando perguntas...";
+            loadQuestions();
+            return;
+        }
+
+        if (currentQuestion < questions.length) {
+            document.getElementById("questionMalvadeza").textContent = questions[currentQuestion];
+            document.getElementById("result").textContent = "";
+            currentQuestion++;
+        } else {
+            document.getElementById("questionMalvadeza").textContent = "Fim do Jogo! Espero que estejam se divertindo! Quer jogar novamente?";
+            document.getElementById("result").textContent = "";
+            currentQuestion = 0;
+            questions = shuffleArray([...embeddedData.questions]); // Reinicia com os dados originais
+        }
+    }
+
+    // Pop-up functions (mantidas iguais)
+    function openPopup() {
+        document.getElementById("popup").style.display = "block";
+    }
+
+    function closePopup() {
+        document.getElementById("popup").style.display = "none";
+    }
+
+    window.onclick = function(event) {
+        let popup = document.getElementById("popup");
+        if (event.target === popup) {
+            popup.style.display = "none";
+        }
+    };
+
+
+
+        // Datos del juego INCRUSTADOS en el HTML
+const embeddedData = {
+  "questions": [
+    "Yo nunca entrené el beso con lengua",
+    "Yo nunca borré una publicación por vergüenza después",
+    "Yo nunca estacioné en un lugar para personas mayores / discapacitadas",
+    "Yo nunca fui solo(a) a un sex shop",
+    "Yo nunca usé una identidad falsa",
+    "Yo nunca tuve sexo estando borracho(a)",
+    "Yo nunca me emborraché y estuve con alguien muy feo",
+    "Yo nunca deseé que despidieran a un compañero",
+    "Yo nunca hice de vela",
+    "Yo nunca me arrepentí de usar el celular borracho(a)",
+    "Yo nunca dormí con un(a) modelo",
+    "Yo nunca tuve una cita desastrosa",
+    "Yo nunca tuve sexo en la caseta del salvavidas",
+    "Yo nunca rompí el corazón de alguien",
+    "Yo nunca me hice caca en la fiesta",
+    "Yo nunca tomé la pastilla del día después",
+    "Yo nunca creé un OnlyFans",
+    "Yo nunca tuve sexo en la universidad",
+    "Yo nunca me pareció atractiva(o) la hermana o el hermano de mi amigo(a)",
+    "Yo nunca pensé en tener pase libre",
+    "Yo nunca tuve vergüenza de estar desnudo(a) frente a alguien",
+    "Yo nunca fui seducido(a) en el trabajo",
+    "Yo nunca me vestí del sexo opuesto",
+    "Yo nunca tuve una amistad con derechos",
+    "Yo nunca chupé dedos de los pies o me los chuparon",
+    "Yo nunca hice un striptease para alguien",
+    "Yo nunca abrí una cerveza con mis dientes",
+    "Yo nunca recibí suero en la vena",
+    "Yo nunca fui expulsado(a) de un pub/bar/club",
+    "Yo nunca me bajé por el olor de los genitales de alguien",
+    "Yo nunca besé a alguien del grupo",
+    "Yo nunca conocí a alguien en el bar y terminé teniendo sexo con esa persona el mismo día",
+    "Yo nunca estuve con alguien comprometido mientras el(los) pareja(s) estaba(n) cerca",
+    "Yo nunca recibí un masaje erótico",
+    "Yo nunca publiqué algo solo para poner celoso a alguien",
+    "Yo nunca mandé un audio gracioso estando borracho(a)",
+    "Yo nunca tuve sexo virtual",
+    "Yo nunca tuve miedo de estar siendo engañado(a)",
+    "Yo nunca me hice pasar por amigo(a) para descubrir secretos",
+    "Yo nunca hice sexo tántrico",
+    "Yo nunca fui a una playa nudista",
+    "Yo nunca tomé unos tragos y dije cosas que no debía",
+    "Yo nunca participé en una protesta o manifestación",
+    "Yo nunca usé un condón que brilla en la oscuridad",
+    "Yo nunca estuve desnudo(a) frente a más de una persona al mismo tiempo",
+    "Yo nunca oculté algo importante a alguien solo para evitar problemas",
+    "Yo nunca publiqué algo estando borracho(a)",
+    "Yo nunca probé una posición sexual inusual",
+    "Yo nunca hice un chiste pesado sobre un tema polémico",
+    "Yo nunca me reí tan fuerte que terminé 'roncando' sin querer",
+    "Yo nunca recibí un regalo erótico",
+    "Yo nunca hice una playlist de música para tener sexo",
+    "Yo nunca participé en un juego erótico grupal",
+    "Yo nunca vi pornografía con un(a) pareja",
+    "Yo nunca coqueteé con alguien para que me invitaran a una bebida gratis",
+    "Yo nunca estuve con alguien y después me arrepentí",
+    "Yo nunca usé condones con sabor",
+    "Yo nunca tuve sexo en la ducha",
+    "Yo nunca olí la ropa interior de mi pareja",
+    "Yo nunca usé un objeto para masturbarme",
+    "Yo nunca salí con más de una persona en el mismo día",
+    "Yo nunca di un mal consejo a propósito",
+    "Yo nunca caí en una estafa de WhatsApp / Instagram",
+    "Yo nunca usé caramelos mentolados negros en ese momento",
+    "Yo nunca bailé desnudo(a) frente a un espejo",
+    "Yo nunca difundí una noticia falsa",
+    "Yo nunca intercambié parejas con otra persona",
+    "Yo nunca engañé",
+    "Yo nunca me preocupé pensando si tendría un hijo",
+    "Yo nunca tuve crisis de celos",
+    "Yo nunca mezclé agua en la bebida para que rindiera más",
+    "Yo nunca fui atado(a) o até a alguien en la cama",
+    "Yo nunca sentí atracción por un(a) amigo(a)",
+    "Yo nunca me arrepentí de haber estado con alguien",
+    "Yo nunca recibí nudes",
+    "Yo nunca tuve un affaire con alguien que conocí en el gimnasio",
+    "Yo nunca pedí algo al vecino con segundas intenciones",
+    "Yo nunca tuve sexo en el capó del carro",
+    "Yo nunca tiré un pedo silencioso en el trabajo y salí de la sala",
+    "Yo nunca fui a trabajar con resaca",
+    "Yo nunca me llevé el crédito por el trabajo de otra persona",
+    "Yo nunca estuve con alguien mayor",
+    "Yo nunca hice algo ilegal solo para parecer atrevido",
+    "Yo nunca me oriné en la piscina",
+    "Yo nunca hice un chiste inapropiado y solo me di cuenta después",
+    "Yo nunca vi a un niño maleducado y pensé 'el mundo está perdido'",
+    "Yo nunca dejé que alguien eyaculara en mi cara",
+    "Yo nunca hice cosas traviesas en el cine",
+    "Yo nunca fui besado(a) inesperadamente por un(a) amigo(a)",
+    "Yo nunca stalkeé las redes sociales del/de la ex de mi novio(a)",
+    "Yo nunca tuve sexo por venganza",
+    "Yo nunca probé una posición sexual nueva y me lastimé",
+    "Yo nunca tuve sexo con alguien del mismo sexo",
+    "Yo nunca recibí flores",
+    "Yo nunca robé algo en una tienda",
+    "Yo nunca fui a una salida sin ropa interior",
+    "Yo nunca tuve sexo en un lugar inusual",
+    "Yo nunca entré a una fiesta sin ser invitado",
+    "Yo nunca quise estar con el papá o la mamá de un amigo",
+    "Yo nunca anduve con la cremallera abierta sin darme cuenta",
+    "Yo nunca me dormí durante el sexo",
+    "Yo nunca tuve vergüenza de pedir algo en la cama",
+    "Yo nunca hablé mal de alguien a sus espaldas y luego fui simpático(a) con esa persona",
+    "Yo nunca toqué el timbre y salí corriendo",
+    "Yo nunca hice sexo anal",
+    "Yo nunca dejé a un crush enamorado solo por diversión",
+    "Yo nunca fui arrestado(a)",
+    "Yo nunca conocí a un traficante",
+    "Yo nunca fui invitado(a) a una orgía",
+    "Yo nunca me maquillé para esconder granos",
+    "Yo nunca di un beso triple",
+    "Yo nunca caché a alguien engañando a su pareja",
+    "Yo nunca tuve sexo sin depilar mis partes íntimas",
+    "Yo nunca fingí un orgasmo",
+    "Yo nunca fui rechazado(a) al intentar coquetear",
+    "Yo nunca le pedí a mi pareja que trajera a un tercero a la relación",
+    "Yo nunca fui a una boda de pareja del mismo sexo",
+    "Yo nunca tuve sexo estando drogado(a) con marihuana",
+    "Yo nunca tapé un inodoro",
+    "Yo nunca vi una foto de una pareja feliz y pensé 'esto terminará en infidelidad'",
+    "Yo nunca tiré un pedo y fingí que no fui yo",
+    "Yo nunca confundí a un enano con un niño",
+    "Yo nunca jugué a la tarta en la cara",
+    "Yo nunca estuve con alguien solo por estatus",
+    "Yo nunca recibí o di un chupetón",
+    "Yo nunca me forcé a estar con alguien solo porque era bueno en la cama",
+    "Yo nunca usé una app de citas",
+    "Yo nunca probé un columpio sexual",
+    "Yo nunca fui a la iglesia y a un bar el mismo día",
+    "Yo nunca usé ropa provocativa para llamar la atención",
+    "Yo nunca mandé nudes",
+    "Yo nunca tuve sexo en el coche",
+    "Yo nunca fingí gustar una canción / película solo para impresionar a alguien",
+    "Yo nunca vi a una persona bonita en el transporte público",
+    "Yo nunca estuve con un(a) ex",
+    "Yo nunca gané dinero con internet",
+    "Yo nunca tuve una 'sugar mommy' o un 'sugar daddy'",
+    "Yo nunca bloqueé a un amigo en redes sociales",
+    "Yo nunca terminé una relación por mensaje",
+    "Yo nunca fui a una cita sin expectativas y fue increíble",
+    "Yo nunca tuve sexo sin condón",
+    "Yo nunca tuve sexo en una sauna",
+    "Yo nunca tuve sexo en la hora del almuerzo",
+    "Yo nunca tuve sexo escuchando funk o pagode",
+    "Yo nunca mandé un mensaje subido de tono a la persona equivocada",
+    "Yo nunca soñé que estaba teniendo sexo con un(a) amigo(a)",
+    "Yo nunca tuve un orgasmo demasiado rápido",
+    "Yo nunca mentí diciendo que era virgen",
+    "Yo nunca estuve con alguien solo para olvidar a otra persona",
+    "Yo nunca pedí nudes y me decepcioné con lo que recibí",
+    "Yo nunca besé a alguien solo por desafío",
+    "Yo nunca mandé mensaje borracho(a) y me arrepentí al día siguiente",
+    "Yo nunca seguí a alguien solo porque era atractivo(a)",
+    "Yo nunca coqueteé con alguien comprometido",
+    "Yo nunca tuve sexo escuchando mi propia playlist",
+    "Yo nunca sentí deseo en un lugar público",
+    "Yo nunca me fui de una cita sin avisar",
+    "Yo nunca fingí estar ocupado para evitar una cita",
+    "Yo nunca tuve sexo con uniforme (escuela, trabajo, etc.)",
+    "Yo nunca usé la excusa de “vamos a ver una película” solo para tener sexo",
+    "Yo nunca tuve un crush en un(a) profesor(a)",
+    "Yo nunca tuve sexo con alguien cuyo nombre no recordaba",
+    "Yo nunca probé juguetes sexuales",
+    "Yo nunca imaginé a una celebridad durante el sexo",
+    "Yo nunca tuve sexo con alguien mientras otro estaba en la casa",
+    "Yo nunca pedí disculpas después de un mal sexo",
+    "Yo nunca rodé de la cama durante el sexo",
+    "Yo nunca fui ignorado(a) después de mandar nudes",
+    "Yo nunca tuve sexo escuchando gemidos de otra pareja",
+    "Yo nunca me caché masturbándome",
+    "Yo nunca me reí durante el sexo",
+    "Yo nunca tuve sexo con alguien solo por aburrimiento",
+    "Yo nunca me masturbé en el baño del trabajo/facultad",
+    "Yo nunca me enamoré después de un sexo casual",
+    "Yo nunca mandé nudes en un lugar público",
+    "Yo nunca pagué por sexo (o recibí dinero por sexo)",
+    "Yo nunca hice algo que juré nunca hacer en la cama",
+    "Yo nunca besé a alguien solo por su apariencia",
+    "Yo nunca comparé a alguien con un ex durante el sexo",
+    "Yo nunca fui a un motel y no tuve sexo",
+    "Yo nunca tuve una resaca moral después del sexo",
+    "Yo nunca usé un apodo sexy para guardar un contacto",
+    "Yo nunca tuve sexo con alguien que conocí el mismo día",
+    "Yo nunca tuve celos de un 'like' en redes sociales",
+    "Yo nunca stalkeé al ex de la persona con quien estoy",
+    "Yo nunca mandé mensaje a dos contactos al mismo tiempo y confundí las respuestas",
+    "Yo nunca me fui antes del desayuno",
+    "Yo nunca estuve con alguien más de 10 años mayor/menor",
+    "Yo nunca tuve sexo en una fiesta familiar (escondido, claro)",
+    "Yo nunca tuve sexo en el baño de un bar",
+    "Yo nunca quise grabar un video íntimo",
+    "Yo nunca hice un “felación/sexo oral” solo por obligación",
+    "Yo nunca usé un disfraz sexual"
+  ]
+}
+
+    // Carrega as perguntas ao iniciar (modificado para usar dados embutidos)
+    loadQuestions();
+</script>
+</body>
+</html>

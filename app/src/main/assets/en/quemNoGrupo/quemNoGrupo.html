@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="../../stylesCards.css">
+
+    <title>Who in the Group</title>
+
+</head>
+<body>
+
+<div class="game-container">
+    <!-- Menu -->
+    <nav class="menu">
+        <a href="../menuEn.html" class="menu-title">
+            <img class="logo-bebedeira" src="../images/logo.png" alt="Bender Games Logo" />
+        </a>
+    </nav>
+
+    <!-- Game content -->
+    <h1>Who in the Group</h1>
+    <a href="#" onclick="openPopup()">
+        <img class="img-regras" src="../images/regras.png" alt="Rules">
+    </a>
+    <h4>Rules</h4>
+
+    <!-- Pop-up -->
+    <div id="popup" class="popup">
+        <div class="popup-content">
+            <span class="close" onclick="closePopup()">&times;</span>
+            <h3>Game Rules</h3>
+            <h5>Who in the Group</h5>
+            <ul>
+                <li>Each round, one person reads a phrase out loud</li>
+                <li>Everyone counts to 3 and points at the person who has done, does, or would do what’s described in the phrase.</li>
+                <li>You can’t point at yourself</li>
+                <li>The most voted person must take a shot</li>
+                <li>The best part is the discussion after the decision!</li>
+                <li>Have fun! 🍻</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="card-frase">
+        <p id="questionQuemNoGrupo">Loading questions...</p>
+    </div>
+    <div class="button-container">
+        <button onclick="nextQuestion()">Next question</button>
+    </div>
+    <div id="result"></div>
+</div>
+
+<script>
+    // Game data embedded directly in HTML
+    const gameData = {
+        "questions": [
+            "Who in the group has flown on a plane the most times?",
+            "Who in the group would be willing to walk around town in matching outfits?",
+            "Who in the group has the worst music taste?",
+            "Who in the group could most easily get a new job if they were fired?",
+            "Who in the group spends the most time on TikTok every week?",
+            "Who in the group has the sexiest mom or dad?",
+            "Who in the group wouldn't pick up a coin from the sidewalk?",
+            "Who in the group would donate half their money to charity if they won 5 million reais?",
+            "Who in the group lies the most?",
+            "Who in the group is the biggest crybaby?",
+            "Who in the group sleeps all weekend?",
+            "Who in the group would tell their partner if they cheated?",
+            "Who in the group can cook the most dishes without looking at a recipe?",
+            "Who in the group would cut their own hair to save money?",
+            "Who in the group leaves the worst tips at restaurants?",
+            "Who in the group is best at organizing receipts and old tax documents?",
+            "Who in the group gets most nervous before going to the dentist?",
+            "Who in the group doesn't make their bed in the morning?",
+            "Who in the group would win an arm wrestling competition right now?",
+            "Who in the group would hook up with a married person without feeling guilty?",
+            "Who in the group has opened other people's bathroom cabinets the most?",
+            "Who in the group does the dumbest things when drunk?",
+            "Who in the group pees in the shower?",
+            "Who in the group swears the most?",
+            "Who in the group is the biggest cheapskate?",
+            "Who in the group still has underwear bought over ten years ago?",
+            "Who in the group can count to 5 in the most languages?",
+            "Who in the group would break a plate or glass if they got really angry?",
+            "Who in the group has the most expensive cell phone plan?",
+            "Who in the group has been to a police station the most times?",
+            "Who in the group would most likely dress as Hitler for Carnival?",
+            "Who in the group has had sex with someone at least 20 years younger?",
+            "Who in the group couldn't tell the difference between expensive and cheap wine?",
+            "Who in the group is most likely to gain weight in the next 10 years?",
+            "Who in the group would try to guess someone else's email password to hack their account?",
+            "Who in the group doesn't like pets?",
+            "Who in the group has tried cocaine?",
+            "Who in the group brushes their teeth in the shower?",
+            "Who in the group looks better in profile than head-on?",
+            "Who in the group has stolen towels from a hotel room?",
+            "Who in the group is the worst at parking?",
+            "Who in the group couldn't drive a manual car?",
+            "Who in the group would steal someone else's drink at a bar?",
+            "Who in the group can't use chopsticks?",
+            "Who in the group got the worst ENEM score?",
+            "Who in the group had the most acne as a teenager?",
+            "Who in the group is the least romantic?",
+            "Who in the group would be willing to participate in a reality show?",
+            "Who in the group would struggle the most without their phone for 24 hours?",
+            "Who in the group is most likely to become famous one day?",
+            "Who in the group would rather die than confess to cheating in a relationship?",
+            "Who in the group has the worst relationships with their exes?",
+            "Who in the group would have the hardest time going a month without alcohol?",
+            "Who in the group always puts products back in their original place if they decide not to buy them?",
+            "Who in the group is the biggest know-it-all?",
+            "Who in the group would spend R$1500 on a t-shirt?",
+            "Who in the group can hold their breath the longest?",
+            "Who in the group spends the most time on Instagram?",
+            "Who in the group can't touch their toes without bending their knees?",
+            "Who in the group would you have wanted as your high school teacher?",
+            "Who in the group speaks without thinking?",
+            "Who in the group is most likely to drink and drive?",
+            "Who in the group takes the most selfies?",
+            "Who in the group can touch the tip of their nose with their tongue?",
+            "Who in the group would date someone twice their age?",
+            "Who in the group prays on airplanes even if they're not religious?",
+            "Who in the group talks much more than they listen?",
+            "Who in the group was the teachers' pet in school?",
+            "Who in the group is most likely to cheat or be cheated on?",
+            "Who in the group is most likely to be fired for always being late?",
+            "Who in the group leaves clothes on the fitting room floor after trying them on?",
+            "Who in the group is the most competitive?",
+            "Who in the group always puts toilet paper on public toilet seats?",
+            "Who in the group would get a tattoo of someone's name after just meeting them?",
+            "Who in the group owns a Spice Girls album?",
+            "Who in the group has Googled themselves the most?",
+            "Who in the group is most likely to become CEO of a million-dollar company one day?",
+            "Who in the group would buy the cheapest Christmas present for their partner?",
+            "Who in the group has sent the most nudes?",
+            "Who in the group failed their driver's test the most times?",
+            "Who in the group would survive the least time on a desert island?",
+            "Who in the group would be happiest if they could change their first or last name?",
+            "Who in the group would find it easiest to make friends if they moved to a new city?",
+            "Who in the group is the first to ask 'What's your sign?' when meeting someone?",
+            "Who in the group has been handcuffed?",
+            "Who in the group would be the best TV host?",
+            "Who in the group would be least likely to try bungee jumping?",
+            "Who in the group is most likely to be arrested one day?",
+            "Who in the group would you most want to swap houses with?",
+            "Who in the group would press their ear against the wall to hear their neighbors having sex?",
+            "Who in the group is the worst cook?",
+            "Who in the group tries on the most outfits before deciding what to wear to a party?",
+            "Who in the group could run 10km in the shortest time?",
+            "Who in the group would break their phone on purpose to get a new one before the insurance expires?",
+            "Who in the group has ended the most relationships?",
+            "Who in the group is the slowest at typing?",
+            "Who in the group gets most scared during a thunderstorm?",
+            "Who in the group is the most politically conservative?",
+            "Who in the group do you think you could learn the most from?",
+            "Who in the group would start an unpleasant rumor about a coworker or classmate?",
+            "Who in the group would be the worst enemy?",
+            "Who in the group pays attention to flight safety instructions?",
+            "Who in the group would marry to get a visa?",
+            "Who in the group would still be hot when old?",
+            "Who in the group would press all the elevator buttons just to be funny?",
+            "Who in the group would win a 'smelliest feet' competition if held now?",
+            "Who in the group has fallen for the most scams in recent years?",
+            "Who in the group was the youngest when they lost their virginity?",
+            "Who in the group would pay their child for good grades?",
+            "Who in the group is most likely to have sex while wearing socks?",
+            "Who in the group always needs the latest tech before anyone else?",
+            "Who in the group has sex most frequently?",
+            "Who in the group likes the sound of their own voice the least?",
+            "Who in the group would score highest on an IQ test?",
+            "Who in the group is the most politically liberal?",
+            "Who in the group can do the best Donald Duck voice impression?",
+            "Who in the group would buy counterfeit brand clothes and watches as gifts?",
+            "Who in the group got the most points after a car accident?",
+            "Who in the group is most likely to check their phone during sex?",
+            "Who in the group would you trust to take care of your kids for a week while you're on vacation?",
+            "Who in the group has the richest parents?",
+            "Who in the group is the most naive?",
+            "Who in the group buys the most takeout meals per month?",
+            "Who in the group would never leave a note with their phone number after accidentally scratching someone's car?",
+            "Who in the group has bought condoms recently?",
+            "Who in the group is most likely to miss a flight?",
+            "Who in the group has the most in common with you?",
+            "Who in the group would act in a porn movie?",
+            "Who in the group is most likely to move abroad one day?",
+            "Who in the group looks most attractive in formal wear?",
+            "Who in the group would stop and watch if they saw two dogs mating in the street?",
+            "Who in the group has appeared on TV the most?",
+            "Who in the group could date two people at the same time?",
+            "Who in the group gives the most compliments?",
+            "Who in the group spends the most time on the phone with telemarketers?",
+            "Who in the group is most likely to tell a telemarketer to fuck off?",
+            "Who in the group was the most annoying and loud as a child?",
+            "Who in the group shouldn't have had kids?",
+            "Who in the group cries at sentimental commercials?",
+            "Who in the group thinks the most highly of themselves?",
+             "Who in the group is most likely to get into a fight at a bar or club?",
+    "Who in the group has the least in common with you?",
+    "Who in the group would be most likely to send a restaurant dish back multiple times?",
+    "Who in the group has the highest number of phobias?",
+    "Who in the group would allow their 16-year-old daughter to date a 35-year-old man?",
+    "Who in the group has the most prejudice against people from other countries and cultures?",
+    "Who in the group would pet a stranger's dog on the street?",
+    "Who in the group has the messiest house?",
+    "Who in the group would traumatize their preschool students for life if they were the teacher?",
+    "Who in the group would let their kids stay up the latest at night?",
+    "Who in the group would seduce a police officer to avoid a ticket?",
+    "Who in the group would purposely give someone a fake phone number?",
+    "Who in the group stole the most expensive item?",
+    "Who in the group would lie about their career or position to seem more interesting?",
+    "Who in the group spends the most time in front of the mirror before a date?",
+    "Who in the group would at least consider eating a spoonful of spoiled food for money?",
+    "Who in the group would you not trust to take care of your children?",
+    "Who in the group is the most vain?",
+    "Who in the group would be the first to get naked if they entered a nudist beach?",
+    "Who in the group would pay the most for a pair of jeans?",
+    "Who in the group would say something to a parent who hit their child in public?",
+    "Who in the group buys their Christmas presents just a few days before Christmas?",
+    "Who in the group is the biggest prude when it comes to talking about sex?",
+    "Who in the group would never give money to a homeless person?",
+    "Who in the group wouldn't deserve your trust to buy a used car?",
+    "Who in the group will have the highest salary in ten years?",
+    "Who in the group would end a relationship by text message?",
+    "Who in the group would you like to switch lives with?",
+    "Who in the group will have the most money at 65 years old?",
+    "Who in the group would rate their sexual skills the highest on a scale from 1 to 10?",
+    "Who in the group is most likely to have had an STD?",
+    "Who in the group would post nude photos of themselves online?",
+    "Who in the group would change the least if they won 50 million in the lottery?",
+    "Who in the group knows swear words in multiple languages?",
+    "Who in the group has dropped their phone in the toilet the most times?",
+    "Who in the group would get naked in front of everyone in the room for the smallest amount of money?",
+    "Who in the group always tries to get a seat near the emergency exit on planes?",
+    "Who in the group would never forgive cheating in a relationship?",
+    "Who in the group can’t pass by a mirror without looking at themselves?",
+    "Who in the group would be the worst roommate?",
+    "Who in the group is most likely to lie on their resume to get a job?",
+    "Who in the group is most likely to divorce at least once by age 50?",
+    "Who in the group read the fewest books as an adult?",
+    "Who in the group is easiest to flirt with, even when single?",
+    "Who in the group would write vulgar words in a public bathroom?",
+    "Who in the group has the most money in the bank?",
+    "Who in the group prefers watching animated movies over soccer games?",
+    "Who in the group is the most ignorant about social media?",
+    "Who in the group brushes their teeth for the shortest amount of time?",
+    "Who in the group wouldn’t give CPR to a homeless person even if they were lying on the ground unable to breathe?",
+    "Who in the group always sees the bright side of life?",
+    "Who in the group is the worst loser?",
+    "Who in the group is the worst when it comes to silent but deadly farts?",
+    "Who in the group is the biggest hypochondriac?",
+    "Who in the group is most likely to leave the door open when leaving home?",
+    "Who in the group is the worst at keeping secrets?",
+    "Who in the group has the strangest laugh?",
+    "Who in the group folds and irons all their clothes?",
+    "Who in the group is the biggest gossip?",
+    "Who in the group has the best clothing style?",
+    "Who in the group types messages on their phone the fastest?",
+    "Who in the group would sacrifice their social life to work hard and make a lot of money?",
+    "Who in the group always interrupts others when they are talking?",
+    "Who in the group has the worst first name?",
+    "Who in the group has the best life?",
+    "Who in the group will be the poorest in 10 years?",
+    "Who in the group has the worst handwriting?",
+    "Who in the group would agree to have a leg amputated in exchange for 10 million reais?",
+    "Who in the group never admits they are wrong?",
+    "Who in the group usually sat in the back of the classroom during high school?",
+    "Who in the group changes their underwear the least frequently?",
+    "Who in the group receives the most phone calls daily?",
+    "Who in the group supports marijuana legalization?",
+    "Who in the group was the most spoiled child?",
+    "Who in the group would deserve your trust to buy a used car?",
+    "Who in the group is too punctual?",
+    "Who in the group throws batteries in the regular trash?",
+    "Who in the group wouldn’t mind singing a song in front of everyone here?",
+    "Who in the group would chase after a thief?",
+    "Who in the group has the most handsome dad?",
+    "Who in the group would get a tattoo on their shoulder saying 'I ❤️ Britney Spears' for 10 thousand reais?",
+    "Who in the group had the most cavities?",
+    "Who in the group has the smallest feet?",
+    "Who in the group would you rather switch noses with if you had no choice?",
+    "Who in the group will have the most people at their own funeral?",
+    "Who in the group has the highest tolerance for spicy food?",
+    "Who in the group would break up immediately if they found out their partner kissed someone else?",
+    "Who in the group talks the most about people behind their backs?",
+    "Who in the group needs the least time to get ready in the morning?",
+    "Who in the group has flirted with a friend’s partner?",
+    "Who in the group has the most childish sense of humor when it comes to thinking farts are funny?",
+    "Who in the group has the hardest time waking up in the morning?",
+    "Who in the group lost the most phones in the last 4 years?",
+    "Who in the group is most likely to be bisexual?",
+    "Who in the group will live the longest?",
+    "Who in the group would you like to switch voices with?",
+    "Who in the group is the most skilled stalker?",
+    "Who in the group is the best at wiggling their ears?",
+    "Who in the group cares the least about wearing a seatbelt?",
+    "Who in the group changes the most when drinking alcohol?",
+    "Who in the group is most likely to have been a bully at school?",
+    "Who in the group was the first to get pubic hair?",
+    "Who in the group would choose money over love?",
+    "Who in the group uses their hands the most when talking?",
+    "Who in the group has used deodorant and perfume instead of taking a shower?",
+    "Who in the group was the oldest when they lost their virginity?",
+    "Who in the group would burst out laughing at a funeral?",
+    "Who in the group would have no problem working at a tobacco company?",
+    "Who in the group prefers to pass a test by cheating rather than studying?",
+    "Who in the group drinks the most alcohol per year?",
+    "Who in the group would you never want to face in a trivia game?",
+    "Who in the group would take a celebrity’s photo to the hairdresser to ask for the same haircut?",
+    "Who in the group would most likely forget where they parked their car?",
+    "Who in the group is most likely to fall in love with a fictional character?",
+    "Who in the group would make a great soap opera villain?",
+    "Who in the group would agree to live in an isolated cabin for a year for money?",
+    "Who in the group looks most like someone who has cried watching cartoons?",
+    "Who in the group is most likely to become a meme by accident?",
+    "Who in the group has the highest chance of participating in a reality show?",
+    "Who in the group would embarrass themselves in a job interview due to nerves?",
+    "Who in the group has declared their feelings by text and regretted it?",
+    "Who in the group is most likely to laugh at inappropriate moments?",
+    "Who in the group do you think is hiding a bizarre talent?",
+    "Who in the group would most likely buy something just because they saw it on TikTok?",
+    "Who in the group would purposely use a bad pick-up line?",
+    "Who in the group would be the first to die in a zombie apocalypse?",
+    "Who in the group looks most like someone who has fallen flat on their face in public?",
+    "Who in the group would be easily caught lying?",
+    "Who in the group would most likely be late to their own wedding?",
+    "Who in the group would go on a date just for the food?",
+    "Who in the group probably has a secret social media profile?",
+    "Who in the group would try to speak another language and invent words?",
+    "Who in the group would fake knowing about a subject just to seem smart?",
+    "Who in the group has thought about running away to another country because of drama?",
+    "Who in the group gets most excited telling gossip?",
+    "Who in the group spends the most time choosing a filter for selfies?",
+    "Who in the group would order delivery even for a glass of water if they could?",
+    "Who in the group is most likely to become a motivational coach?",
+    "Who in the group would have the courage to confess love in public?",
+    "Who in the group would most likely forget the name of their crush?",
+    "Who in the group is most likely to still have a secret diary?",
+    "Who in the group would be successful as a food influencer?",
+    "Who in the group would most likely wear the same clothes without noticing?",
+    "Who in the group has the highest chance of laughing at their own misfortune?",
+    "Who in the group ever wanted to be famous just to appear on a talk show?",
+    "Who in the group would be willing to trade everything to live on another planet?",
+    "Who in the group would post a subtle hint and then delete it?",
+    "Who in the group is most likely to cry out of anger?",
+    "Who in the group would accidentally leave a crush on read?",
+    "Who in the group would lose their phone at home and freak out?",
+    "Who in the group would use emojis to break up with someone?",
+    "Who in the group would pretend to be asleep to avoid replying to a message?",
+    "Who in the group would sign up for a reality show and get eliminated the first day?",
+    "Who in the group is most likely to give their child a weird name?",
+    "Who in the group would forget to reply to a message for days?",
+    "Who in the group always ends up in fights without being at fault?",
+    "Who in the group said they were going to sleep but stayed online until 3 a.m.?",
+    "Who in the group would accidentally send a nude?",
+    "Who in the group would most likely confuse numbers and important dates?",
+    "Who in the group would impulsively adopt an animal?",
+    "Who in the group would judge someone just by their zodiac sign?",
+    "Who in the group talks in their sleep and reveals secrets?",
+    "Who in the group has wanted to throw their phone against the wall out of anger?",
+    "Who in the group would agree to participate in a crazy experiment for money?",
+    "Who in the group would cry if their crush read their message but didn’t reply?",
+    "Who in the group has posted a song as a subtle hint the most?",
+    "Who in the group would most likely have a podcast?",
+    "Who in the group would give a recycled gift and pretend it was new?",
+    "Who in the group would agree to tattoo their crush’s name?",
+    "Who in the group has pretended to be fine just to hide jealousy?",
+    "Who in the group is most likely to believe in conspiracy theories?",
+    "Who in the group would get lost easily even with GPS?",
+    "Who in the group has wanted to disappear because of drama?",
+    "Who in the group would have the courage to propose to someone on a cinema big screen?",
+    "Who in the group gets involved in fights that aren’t theirs the most?",
+    "Who in the group would become famous for a random viral video?",
+    "Who in the group has pretended to be busy to avoid going out?",
+    "Who in the group would get canceled on social media for something silly?",
+    "Who in the group would post crying stories and then delete them?",
+    "Who in the group talks to themselves the most without noticing?",
+    "Who in the group would wear the same clothes as their crush without planning it?",
+    "Who in the group would write a long birthday message just to impress?",
+    "Who in the group is most likely to forward a wrong message?",
+    "Who in the group would agree to live a month without the internet?",
+    "Who in the group would have the courage to get married in Las Vegas?",
+    "Who in the group most likely forgot their school materials?",
+    "Who in the group would get lost in a crowded party the most?",
+    "Who in the group would pretend to know how to cook just to impress someone?",
+    "Who in the group would start laughing before telling a joke?",
+    "Who in the group would accept a job just because the boss is attractive?",
+    "Who in the group would post a photo of an ex just to cause drama?",
+    "Who in the group would agree to sleep in a cemetery as part of a bet?",
+    "Who in the group would become famous for a random dance?",
+    "Who in the group would make up excuses to skip a party the most?",
+    "Who in the group would fall in love with someone online the most?",
+    "Who in the group has pretended to feel bad just to get attention?",
+    "Who in the group would cause a scene because of jealousy the most?",
+    "Who in the group has the highest chance of becoming the typical barbecue uncle?",
+    "Who in the group would agree to go on a blind date?",
+    "Who in the group sends the longest voice messages?",
+    "Who in the group has accidentally liked a post while stalking someone?",
+    "Who in the group would post motivational quotes pretending to be fine?",
+    "Who in the group would be the most competitive in a board game?",
+    "Who in the group is most likely to forget a close person’s birthday?",
+    "Who in the group would sing off-key but confidently?",
+    "Who in the group has cried watching a dog video?",
+    "Who in the group would agree to film an embarrassing TikTok video?",
+    "Who in the group would be mistaken for a celebrity on the street?",
+    "Who in the group probably has done boyband/girlband choreography?",
+    "Who in the group would regret something the next day the most?",
+    "Who in the group would use a catchphrase just to annoy others?",
+    "Who in the group has pretended not to see someone to avoid talking?",
+    "Who in the group has tried to be a YouTuber?",
+    "Who in the group would watch the same series 5 times in a row without getting tired?",
+    "Who in the group is most likely to be late to a job interview?",
+    "Who in the group reads the last page of a book first?",
+    "Who in the group is the most jealous?",
+    "Who in the group has padded their bra or underwear to make their chest or bulge bigger?",
+    "Who in the group has stayed at a 5-star hotel?",
+    "Who in the group is the most generous?",
+    "Who in the group would change their last name if they had to choose?",
+    "Who in the group is most likely to google everyone?",
+    "Who in the group would do their children’s school homework?",
+    "Who in the group would care the least if they got fired from their job today?",
+    "Who in the group would take the longest to figure out the subtraction 3177 - 1661?",
+    "Who in the group can do the most push-ups?",
+    "Who in the group can’t roll their tongue?",
+    "Who in the group sleeps naked?",
+    "Who in the group moans the most in bed?",
+    "Who in the group is the messiest?",
+    "Who in the group would be the first to help if they saw someone being attacked on the street?",
+    "Who in the group would spend the most time comparing prices before buying a TV or a car?",
+    "Who in the group is the best storyteller of funny stories?",
+    "Who in the group is the strongest supporter of the death penalty?",
+    "Who in the group uses the most toilet paper on average?",
+    "Who in the group has taken an HIV test?",
+    "Who in the group is most afraid of flying?",
+    "Who in the group is most concerned about global warming?",
+    "Who in the group can list the most synonyms for 'having sex'?",
+    "Who in the group took the most sick leaves last year?",
+    "Who in the group is the most popular?",
+    "Who in the group used to hang out with the tough and dangerous kids at school?",
+    "Who in the group has the most difficulty speaking in front of large crowds?",
+    "Who in the group is the most stubborn?",
+    "Who in the group is most likely to use the same bath towel for over a month?",
+"Who in the group would fake being asleep to avoid giving up their seat to an elderly person on a crowded subway?",
+"Who in the group has the worst grammar?",
+"Who in the group would you send to prison for a year if you had to choose someone?",
+"Who in the group has stolen money from their parents?",
+"Who in the group is the best in bed?",
+"Who in the group would start laughing if they saw a stranger fall in the street?",
+"Who in the group is most likely to join a cult?",
+"Who in the group can say 'I love you' in the most languages?",
+"Who in the group has sexual fantasies about a friend's parent?",
+"Who in the group would marry someone for money?",
+"Who in the group has the best radio voice?",
+"Who in the group always takes hotel shampoo bottles home?",
+"Who in the group gets most nervous at police checkpoints?",
+"Who in the group would you hire if you owned a company?",
+"Who in the group is most likely to comment on online news articles?",
+"Who in the group has secretly napped at work?",
+"Who in the group looks better naked than clothed?",
+"Who in the group is laziest about recycling?",
+"Who in the group is wearing the most expensive clothes right now?",
+"Who in the group is most likely to be late for a job interview?",
+"Who in the group is most likely to spend a year traveling the world with just a backpack?",
+"Who in the group will make the most money?",
+"Who in the group would create a fake account to stalk someone?",
+"Who in the group is always late to appointments?",
+"Who in the group takes dozens of photos to get the 'perfect' shot?",
+"Who in the group would buy something they'd never use just because it was on sale?",
+"Who in the group is always the last to leave the club?",
+"Who in the group would order a drink just because it looks pretty for Instagram?",
+"Who in the group would try a crazy fad diet?",
+"Who in the group dances in front of the mirror?",
+"Who in the group would run a marathon?",
+"Who in the group would spend their entire savings on a trip?",
+"Who in the group would stay up all night learning something new?",
+"Who in the group would participate (or has participated) in a protest?",
+"Who in the group would stay up all night watching horror stories/movies?",
+"Who in the group is most likely to forget about a festival date?",
+"Who in the group keeps posting gym mirror selfies?",
+"Who in the group can't read a GPS?",
+"Who in the group has shown up drunk to work?",
+"Who in the group has flirted with their partner's friend?",
+"Who in the group has lied to go out with friends?",
+"Who in the group has hooked up with someone out of pity?",
+"Who in the group has hooked up with multiple people in one day?",
+"Who in the group has cheated or been cheated on?",
+"Who in the group has cried over love?",
+"Who in the group has hooked up with someone much older?",
+"Who in the group has hooked up with someone much younger?",
+"Who in the group has hooked up with a friend's ex?",
+"Who in the group has flirted with someone who's taken?",
+"Who in the group has hooked up with someone just to forget another person?",
+"Who in the group has hooked up with a coworker?",
+"Who in the group has hooked up with someone from school/college?",
+"Who in the group has hooked up with someone at a party and regretted it later?",
+"Who in the group has hooked up with someone for money?",
+"Who in the group has hooked up with someone for status?",
+"Who in the group has hooked up with someone for revenge?",
+"Who in the group has hooked up with someone they didn't like?",
+"Who in the group has hooked up with someone they really liked?",
+"Who in the group has hooked up with someone they barely knew?",
+"Who in the group has hooked up with someone they'd known for a long time?",
+"Who in the group has hooked up with someone in a bathroom?",
+"Who in the group has hooked up with someone in a car?",
+"Who in the group has hooked up with someone at the beach?",
+"Who in the group has hooked up with someone in a pool?",
+"Who in the group has hooked up with someone at a club?",
+"Who in the group has hooked up with someone at a friend's house?",
+"Who in the group has hooked up with someone at their own house?",
+"Who in the group has hooked up with someone at the other person's house?",
+"Who in the group has hooked up with someone while traveling?",
+"Who in the group has hooked up with someone in another country?",
+"Who in the group has hooked up with someone from another country?",
+"Who in the group has hooked up with someone from another city?",
+"Who in the group has hooked up with someone from another state?",
+"Who in the group has hooked up with someone from another religion?",
+"Who in the group has hooked up with someone with a different zodiac sign?",
+"Who in the group has hooked up with someone who supports a rival sports team?",
+"Who in the group has hooked up with someone from an opposing political party?",
+"Who in the group has hooked up with someone who didn't speak the same language?",
+"Who in the group has hooked up with someone who had a boyfriend/girlfriend?",
+"Who in the group has hooked up with someone who was married?",
+"Who in the group has hooked up with someone who had kids?",
+"Who in the group has hooked up with someone who was friends with their ex?",
+"Who in the group has hooked up with someone who was related to their ex?",
+"Who in the group has hooked up with someone who was their ex's coworker?",
+"Who in the group has hooked up with someone who was their ex's classmate?",
+"Who in the group has hooked up with someone who was their ex's neighbor?",
+"Who in the group has hooked up with someone who was their ex's childhood friend?",
+"Who in the group has hooked up with someone who was their ex's best friend?"
+        ]
+    };
+
+    let questions = [];
+    let currentQuestion = 0;
+
+    // Função para carregar as perguntas
+    function loadQuestions() {
+        questions = shuffleArray([...gameData.questions]);
+        nextQuestion();
+    }
+
+    // Fisher-Yates Shuffle
+    function shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array;
+    }
+
+    // Função para exibir a próxima pergunta
+    function nextQuestion() {
+        if (questions.length === 0) {
+            document.getElementById("questionQuemNoGrupo").textContent = "Carregando perguntas...";
+            return;
+        }
+
+        if (currentQuestion < questions.length) {
+            document.getElementById("questionQuemNoGrupo").textContent = questions[currentQuestion];
+            document.getElementById("result").textContent = "";
+            currentQuestion++;
+        } else {
+            document.getElementById("questionQuemNoGrupo").textContent = "Fim do Jogo! Espero que estejam se divertindo! Quer jogar novamente?";
+            document.getElementById("result").textContent = "";
+            currentQuestion = 0;
+            questions = shuffleArray(questions);
+        }
+    }
+
+    // Pop-up functions
+    function openPopup() {
+        document.getElementById("popup").style.display = "block";
+    }
+
+    function closePopup() {
+        document.getElementById("popup").style.display = "none";
+    }
+
+    // Fechar o pop-up ao clicar fora dele
+    window.onclick = function(event) {
+        let popup = document.getElementById("popup");
+        if (event.target === popup) {
+            popup.style.display = "none";
+        }
+    };
+
+    // Carrega as perguntas quando a página é aberta
+    window.onload = loadQuestions;
+</script>
+</body>
+</html>

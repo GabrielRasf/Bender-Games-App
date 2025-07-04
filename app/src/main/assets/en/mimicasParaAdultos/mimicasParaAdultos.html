@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="../../stylesCards.css">
+    <link rel="stylesheet" type="text/css" href="../../cronometro.css">
+    <title>Adult Charades</title>
+</head>
+<body>
+
+<div class="game-container">
+    <!-- Menu -->
+    <nav class="menu">
+        <a href="../menuEn.html" class="menu-title">
+            <img class="logo-bebedeira" src="../images/logo.png" alt="Bender Games Logo" />
+        </a>
+    </nav>
+
+    <!-- Game content -->
+    <h1>Adult Charades</h1>
+    <a href="#" onclick="openPopup()">
+        <img class="img-regras" src="../images/regras.png">
+    </a>
+
+    <div class="card-frase">
+        <p id="questionMimicasParaAdultos"></p>
+    </div>
+    <div class="button-container">
+        <button onclick="nextQuestion()">Next question</button>
+    </div>
+    <div id="result"></div>
+</div>
+
+<!-- Pop-up -->
+<div id="popup" class="popup">
+    <div class="popup-content">
+        <span class="close" onclick="closePopup()">&times;</span>
+        <h3>Game Rules</h3>
+        <h5>Adult Charades</h5>
+        <ul>
+            <li>Divide players into two teams.</li>
+            <li>In each round, one team selects a player to act out the charade.</li>
+            <li>This person will read a charade and act it out for their team.</li>
+            <li>Start the 60-second timer and begin miming.</li>
+            <li>The player's team must try to guess what’s on the card.</li>
+            <li>If the team guesses correctly, they earn a point.</li>
+            <li>If the team guesses wrong, one of the players takes a shot.</li>
+            <li>In the next round, the other team plays.</li>
+            <li>The team with the most points wins.</li>
+            <li><strong>VARIATION</strong></li>
+            <li>The player doing the charade must act it out for everyone.</li>
+            <li>The players with the fewest correct guesses after X rounds take a shot.</li>
+            <li>Have fun! 🍻</li>
+        </ul>
+    </div>
+</div>
+
+<!-- Timer -->
+<button id="timer" onclick="handleTimerClick()">60</button>
+
+<script>
+    // Dados do jogo embutidos no HTML
+    const gameData = {
+    "questions": [
+ "Portable toilet",
+    "Pancakes",
+    "Welder",
+    "Pepper spray",
+    "Lame rabbit",
+    "Ceiling fan",
+    "Ping pong",
+    "Snowflake",
+    "Mouth-to-mouth",
+    "Furacão truck",
+    "Gynecologist",
+    "Macarena",
+    "Motorboat",
+    "Wrong hole",
+    "Gossip",
+    "Combing",
+    "Embarrassment",
+    "Orgasm",
+    "Water truck",
+    "Watering plants",
+    "Natural childbirth",
+    "Changing a diaper",
+    "Horse ride",
+    "Loan shark",
+    "Slug",
+    "Chiropractor",
+    "Dunk the biscuit",
+    "Eat baguette",
+    "Exorcism",
+    "Snort cocaine",
+    "Whip",
+    "Anal plug",
+    "War tank",
+    "Footvolley",
+    "Vape",
+    "Dick pic",
+    "Rock, paper, scissors",
+    "Pelé",
+    "Asthma inhaler",
+    "Joelma",
+    "Anal sex",
+    "Drum",
+    "Clitoris",
+    "Synchronized swimming",
+    "Birth control",
+    "Neymar",
+    "Micro penis",
+    "Shot put",
+    "Christ the Redeemer",
+    "Pagode circle",
+    "Bridal bouquet",
+    "Penguin",
+    "Alok",
+    "Squid (Lula)",
+    "Barbecue grill",
+    "Cooler box",
+    "Burn the rock",
+    "Phone sex",
+    "Ballet",
+    "Dolphin",
+    "Fish and pay",
+    "Unicorn",
+    "Tarzan",
+    "Car sex",
+    "Penis ring",
+    "Gangnam style (dance)",
+    "Unibrow",
+    "69",
+    "Sniper",
+    "Vibrator",
+    "Fencing",
+    "Tongue-staining lollipop",
+    "Minions",
+    "Bottle dance",
+    "Helicopter",
+    "Kettle",
+    "Washing machine",
+    "Barões da Pisadinha",
+    "Wedding cake",
+    "Stretch marks",
+    "Firefly",
+    "Corn with butter",
+    "Pay a bill",
+    "Air fryer",
+    "Walking the dog",
+    "Farting",
+    "Jackhammer",
+    "Crop spraying",
+    "Michael Jackson",
+    "Quad bike",
+    "Harry Potter",
+    "Make coffee",
+    "Ice bucket",
+    "Cliff",
+    "Chimney",
+    "Vulture",
+    "Pedicure",
+    "Karaoke",
+    "Blowjob",
+    "Foot fetish",
+    "Gender reveal",
+    "Beatbox",
+    "Liposuction",
+    "Louro José",
+    "Doggy style",
+    "Suck toe",
+    "Stick",
+    "Tea bag",
+    "G-spot",
+    "Forklift",
+    "Skydiving",
+    "Income tax",
+    "Worm dance",
+    "Truck horn",
+    "Curling (sport)",
+    "Big Brother Brazil",
+    "Defined abs",
+    "Cookies",
+    "Breathalyzer test",
+    "Viagra",
+    "Eiffel Tower",
+    "Bald",
+    "Love triangle",
+    "Shower curtain",
+    "Make sushi",
+    "Rainbow",
+    "Ice skating",
+    "Whale",
+    "Breakfast in bed",
+    "Newlywed",
+    "Bodybuilder",
+    "Tiktoker",
+    "Slow motion",
+    "Zebra",
+    "Crow",
+    "Diarrhea",
+    "Choke the chicken",
+    "Bad breath",
+    "Nipple piercing",
+    "Drown the goose",
+    "Blow-up doll",
+    "Wrench",
+    "Speaker",
+    "Doorman",
+    "Intimate waxing",
+    "Leather underwear",
+    "Seed",
+    "Stray dog",
+    "Marijuana",
+    "Mow the lawn",
+    "Breast exam",
+    "Drunk driving",
+    "Titanic",
+    "Crane",
+    "Dark beer",
+    "Santa Claus",
+    "Condom",
+    "Women's bathroom",
+    "Street vendor",
+    "Lube gel",
+    "Hot glue",
+    "Peace of mind",
+    "Plastic surgeon",
+    "Trampoline",
+    "Yoga",
+    "Federal police",
+    "Carrot cake",
+    "Snake",
+    "Mona Lisa",
+    "Ice sculpture",
+    "Beach tennis",
+    "Botox",
+    "Herniated disc",
+    "Karate",
+    "Set meal",
+    "Rim job",
+    "Pottery class",
+    "Earthquake",
+    "Transvestite",
+    "Obstacle course",
+    "Lobster",
+    "Breastfeeding",
+    "Balloon priest",
+    "Bolsonaro",
+    "Internet",
+    "Iron Maiden",
+    "Sled",
+    "Bald blind man",
+    "Shower sex",
+    "Lover",
+    "Mermaid",
+    "Peanut",
+    "Bathtub bath",
+    "Stripper",
+    "Spare change at traffic light",
+    "Rhinoceros",
+    "Bottle opener",
+    "Cockfight",
+    "Caterpillar",
+    "Choke the chicken",
+    "Play with the pussy",
+    "Sit with passion",
+    "Dick-copter"
+    ]
+};
+
+    let questions = [];
+    let currentQuestion = 0;
+    let timeLeft = 60;
+    let timerInterval = null;
+    let isRunning = false;
+
+    function loadQuestions() {
+        questions = shuffleArray([...gameData.questions]);
+        nextQuestion();
+    }
+
+    function shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array;
+    }
+
+    function nextQuestion() {
+        if (questions.length === 0) {
+            document.getElementById("questionMimicasParaAdultos").textContent = "Loading questions...";
+            loadQuestions();
+            return;
+        }
+
+        if (currentQuestion < questions.length) {
+            document.getElementById("questionMimicasParaAdultos").textContent = questions[currentQuestion];
+            document.getElementById("result").textContent = "";
+            currentQuestion++;
+        } else {
+            document.getElementById("questionMimicasParaAdultos").textContent = "End of the game! Hope you’re having fun! Want to play again?";
+            document.getElementById("result").textContent = "";
+            currentQuestion = 0;
+            questions = shuffleArray([...gameData.questions]);
+        }
+    }
+
+    function openPopup() {
+        document.getElementById("popup").style.display = "block";
+    }
+
+    function closePopup() {
+        document.getElementById("popup").style.display = "none";
+    }
+
+    window.onclick = function(event) {
+        let popup = document.getElementById("popup");
+        if (event.target === popup) {
+            popup.style.display = "none";
+        }
+    };
+
+    function updateDisplay() {
+        const timerButton = document.getElementById('timer');
+        timerButton.textContent = timeLeft;
+    }
+
+    function handleTimerClick() {
+        const timerButton = document.getElementById('timer');
+
+        if (isRunning) {
+            clearInterval(timerInterval);
+            timerInterval = null;
+            timeLeft = 60;
+            isRunning = false;
+            updateDisplay();
+        } else {
+            isRunning = true;
+            timerInterval = setInterval(() => {
+                timeLeft--;
+                updateDisplay();
+
+                if (timeLeft <= 0) {
+                    clearInterval(timerInterval);
+                    timerInterval = null;
+                    isRunning = false;
+                    alert("⏰ Time’s up!");
+                    timeLeft = 60;
+                    updateDisplay();
+                }
+            }, 1000);
+        }
+    }
+
+    window.onload = loadQuestions;
+</script>
+
+</body>
+</html>

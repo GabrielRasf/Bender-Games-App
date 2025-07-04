@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Intimidad - Inmersión</title>
+    <link rel="stylesheet" type="text/css" href="../../stylesCards.css">
+</head>
+
+<body>
+<div class="game-container">
+    <!-- Menú -->
+    <nav class="menu">
+        <a href="../menuEs.html" class="menu-title">
+            <img class="logo-bebedeira" src="../images/logo.png" alt="Bender Games Logo" />
+        </a>
+    </nav>
+
+    <!-- Contenido del juego -->
+    <h1>
+        <a href="intimidade.html">Intimidad</a>
+    </h1>
+    <h3>Inmersión</h3>
+    <a href="#" onclick="openPopup()"><br>
+        <img class="img-regras" src="../images/regras.png">
+    </a>
+
+    <h4>Reglas</h4>
+
+    <!-- Pop-up de reglas -->
+    <div id="popup" class="popup">
+        <div class="popup-content">
+            <span class="close" onclick="closePopup()">&times;</span>
+            <h3>Reglas del Juego</h3>
+            <h5>Intimidad - Inmersión</h5>
+            <ul>
+                <li>En esta etapa, serán pequeños desafíos para realizar una vez por semana.</li>
+                <li>Pueden hacerse junto con la etapa 2.</li>
+                <li>¡Diviértanse! 🍻</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="card-frase">
+        <p id="questionMergulho"></p>
+        <ol id="optionsList" class="options-list"></ol>
+    </div>
+
+    <div class="button-container">
+        <button onclick="nextQuestion()">Siguiente pregunta</button>
+    </div>
+    <div id="result"></div>
+</div>
+
+<!-- Pop-up de la respuesta -->
+<div id="answerPopup" class="popup">
+    <div class="popup-content">
+        <span class="close" onclick="closeAnswerPopup(); popup()">&times;</span>
+        <h2>Respuesta</h2>
+        <p id="answerText">¡Haz clic en una pregunta primero!</p>
+    </div>
+</div>
+
+</body>
+</html>
+
+
+<script>
+    // JSON incrustado directamente
+const questionData = {
+    questions: [
+        "Si nos hiciéramos un tatuaje juntos, ¿qué tatuaríamos? Dibújense uno en el otro.",
+        "De los mismos creadores de 'vale night', llega 'vale day'. Creen una programación sorpresa para su pareja con lo que podrían hacer durante el día. Él o ella vivirá este día solo/a. (¡Tranquilos! La nostalgia es buena para la relación).",
+        "¡Detengan todo y estén presentes para un beso apasionado, largo y delicioso! Intenten agregar uno de estos besos a diario.",
+        "Escriban una canción de amor o un poema y recítenlo/cántenlo el uno para el otro. Tienen 5 minutos cronometrados para escribir y luego revelarlo cantando o recitando.",
+        "Creen una lista de reproducción de pareja, elijan las canciones que más les gusten y no olviden darle un nombre creativo.",
+        "Ejercicio de contemplación: pónganse de pie, cara a cara, y hablen sobre cada parte del cuerpo que admiran en el otro. Si quieren, mientras hablan, usen las manos para tocar cada parte del cuerpo del otro.",
+        "Intercambien roles: pasen todo un día expresando amor/afecto/actitudes como lo expresa su pareja.",
+        "Creen un desafío para cumplir durante la semana. Elijan juntos cuál será el premio para el ganador.",
+        "Recordar para (re)recordar: revisen las conversaciones antiguas, del inicio del flirteo en WhatsApp, Instagram, Facebook o en la galería de fotos y observen qué ha cambiado desde entonces.",
+        "(Re)creen la primera cita que tuvieron. Usen la creatividad para reproducir lo que sucedió en esa época.",
+        "Tómense de las manos o átenlas con un hilo y quédense así unos minutos. Hagan algo, por ejemplo, cocinar, comer algo o bailar. Perciban cómo es el trabajo en equipo y cómo fluyen juntos.",
+        "Creen un nuevo hobbie para hacer juntos, semanal o quincenalmente. Por ejemplo: clases de baile, cerámica, pintura, leer el mismo libro o ver una película en el cine.",
+        "Hagan un pacto y escriban juntos las reglas más importantes en una relación para ustedes. Colóquenlas donde puedan verlas siempre (por ejemplo, en la nevera).",
+        "¿Listos para verse a través de los ojos del otro? Tomen el celular y hagan una sesión de fotos del otro (al menos 10 fotos). Es normal sentirse tímidos al comienzo. ¡Diviértanse!",
+        "Pasen un día entero sin celular. Luego, escriban cómo fue esta experiencia para ustedes. Transformen los sentimientos en palabras.",
+        "El poder de la mirada: flétense el uno al otro solo con la mirada.",
+        "Siéntense frente a frente, tómense de las manos y miren los ojos del otro. Respiren profundamente y relajen la vista. Luego hablen sobre cómo fue esta experiencia.",
+        "Asuman el papel de profesor y alumno/a. Cada uno elige una habilidad que enseñará al otro (o al menos lo intentará).",
+        "Elijan una serie, película, etc., para ver juntos. Compartan entre ustedes sus percepciones sobre la película.",
+        "Por separado, hagan un dibujo de cómo se ven en el futuro, el uno con el otro. ¡Comenten el resultado!"
+    ]
+};
+
+    let questions = [];
+        let currentQuestion = 0;
+
+        // Embaralhar e carregar perguntas
+        function loadQuestions() {
+            questions = shuffleArray(questionData.questions);
+            nextQuestion();
+        }
+
+        // Embaralha array
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        // Exibe próxima pergunta
+        function nextQuestion() {
+            if (questions.length === 0) {
+                document.getElementById("questionMergulho").textContent = "Carregando perguntas...";
+                return;
+            }
+
+            if (currentQuestion < questions.length) {
+                document.getElementById("questionMergulho").textContent = questions[currentQuestion];
+                document.getElementById("result").textContent = "";
+                currentQuestion++;
+            } else {
+                document.getElementById("questionMergulho").textContent = "Fim do Jogo! Espero que estejam se divertindo! Quer jogar novamente?";
+                document.getElementById("result").textContent = "";
+                currentQuestion = 0;
+                questions = shuffleArray(questions);
+            }
+        }
+
+        // Funções do pop-up
+        function openPopup() {
+            document.getElementById("popup").style.display = "block";
+        }
+
+        function closePopup() {
+            document.getElementById("popup").style.display = "none";
+        }
+
+        function closeAnswerPopup() {
+            document.getElementById("answerPopup").style.display = "none";
+        }
+
+        window.onclick = function (event) {
+            const popup = document.getElementById("popup");
+            if (event.target === popup) {
+                popup.style.display = "none";
+            }
+        };
+
+        // Inicia o jogo ao carregar
+        loadQuestions();
+</script>
+</body>
+
+</html>

@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="../../stylesCards.css">
+    <title>Não fez? Bebeu</title>
+
+</head>
+<body>
+
+<div class="game-container">
+    <!-- Menu -->
+    <nav class="menu">
+        <a href="../menuPtBr.html" class="menu-title">
+            <img class="logo-bebedeira" src="../images/logo.png" alt="Logo Bebedeira" />
+        </a>
+    </nav>
+
+    <!-- Conteúdo do jogo -->
+    <h1>Não fez? Bebeu</h1>
+    <a href="#" onclick="openPopup()">
+        <img class="img-regras" src="../images/regras.png" alt="Regras">
+    </a>
+    <h4>Regras</h4>
+
+    <!-- Pop-up -->
+    <div id="popup" class="popup">
+        <div class="popup-content">
+            <span class="close" onclick="closePopup()">&times;</span>
+            <h3>Regras do Jogo</h3>
+            <h5>Não fez? Bebeu</h5>
+            <ul>
+                <li>Um dos jogadores pega o celular e lê uma carta em voz alta.</li>
+                <li>Se o jogador fizer o desafio corretamente, ele ganha pontos. Se não fizer, tem que beber.</li>
+                <li>Ganha o jogo quem tiver mais pontos ou estiver sóbrio.</li>
+                <li>Cada desafio realizado vale 1 ponto.</li>
+                <li>Cada desafio ABSURDO realizado vale 2 pontos.</li>
+                <li>Algumas cartas não oferecem opção. Apenas beba!</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="card-frase">
+        <p id="questionNaoFezBebeu">Carregando perguntas...</p>
+    </div>
+    <div class="button-container">
+        <button onclick="nextQuestion()">Próxima pergunta</button>
+    </div>
+    <div id="result"></div>
+</div>
+
+<script>
+    // Dados do jogo embutidos diretamente no HTML
+    const gameData = {
+        "questions": [
+            "Beber 1 shot sem usar as mãos",
+            "Imitar um animal por 10 segundos",
+            "Fazer 10 polichinelos",
+            "Dançar por 15 segundos sem música",
+            "Falar um trava-língua sem errar",
+            "Fazer uma careta engraçada",
+            "Contar uma piada que faça alguém rir",
+            "Fazer 5 flexões",
+            "Cantar um trecho de música em outro idioma",
+            "Equilibrar uma colher no nariz por 10 segundos",
+            "Fazer uma imitação de celebridade",
+            "Dizer o alfabeto ao contrário",
+            "Ficar em um pé só por 30 segundos",
+            "Fazer uma declaração de amor para um objeto na sala",
+            "Falar 5 palavras difíceis em 10 segundos",
+            "Fazer um discurso de 30 segundos sobre um tema aleatório",
+            "Beber um shot com os olhos vendados",
+            "Fazer uma mímica para os outros adivinharem",
+            "Contar até 20 em outro idioma",
+            "Fazer uma pose de ioga por 15 segundos",
+            "Recitar um poema ou música de cor",
+            "Fazer um rap improvisado por 10 segundos",
+            "Falar 3 verdades e 1 mentira sobre você",
+            "Fazer um truque de mágica (pode ser simples)",
+            "Desenhar algo com os olhos fechados",
+            "Fazer uma acrobacia simples (rolamento, estrela, etc.)",
+            "Falar com sotaque por 1 minuto",
+            "Fazer um comercial improvisado sobre um produto na sala",
+            "Equilibrar 3 objetos em cima do outro",
+            "Fazer uma performance dramática de 15 segundos",
+            "Fazer um discurso motivacional para o grupo",
+            "Fazer um barulho engraçado por 5 segundos",
+            "Falar sobre um assunto aleatório por 30 segundos sem parar",
+            "Fazer uma receita imaginária em voz alta",
+            "Fazer um juramento de amizade com alguém do grupo",
+            "Fazer um mini-podcast de 30 segundos sobre um tema aleatório",
+            "Fazer uma previsão do futuro para cada pessoa do grupo",
+            "Fazer uma entrevista improvisada com alguém do grupo",
+            "Fazer um comercial de infomercial para um produto bizarro",
+            "Fazer um discurso de formatura improvisado",
+            "Fazer uma dublagem dramática de um filme imaginário",
+            "Fazer um tutorial de maquiagem com objetos aleatórios",
+            "Fazer um comentário esportivo sobre uma ação comum",
+            "Fazer um relatório de clima como um meteorologista",
+            "Fazer uma narração de documentário sobre o grupo",
+            "Fazer um stand-up comedy de 30 segundos",
+            "Fazer um discurso político improvisado",
+            "Fazer uma sessão de terapia para um objeto inanimado",
+            "Fazer um anúncio de casamento falso com alguém do grupo",
+            "Fazer uma sessão de perguntas e respostas como um especialista em ginecologia",
+            "Faça o movimento de ginástica mais impressionante que consegue OU beba uma dose.",
+            "DESAFIO: Desafie outro jogador para um 'Jogo de Insultos'. Ambos jogadores devem ficar sérios, o primeiro a rir OU chorar, deve beber uma dose.",
+            "BEBA SE você tiver algum piercing além dos brincos em suas orelhas.",
+            "Faça contato visual com algum jogador por 30 segundos, enquanto come uma banana de maneira sensual. Se não fizer, beba uma dose.",
+            "Faça uma rodada completa de Morto OU Vivo. O primeiro a ser eliminado(a) bebe uma dose. Você é o juiz.",
+            "Sente no colo da pesoa à sua direita até a próxima rodada OU beba uma dose.",
+            "ABSURDO: Ligue para seu(sua) ex e diga que quer voltar e tome uma dose OU saia do jogo.",
+            "DESAFIO: Desafie outro jogador para um 'Pedra, Papel OU Tesoura'.O perdedor deve beber uma dose. ",
+            "RECEBA: Parabéns, você foi sorteado! Beba toda a sua a sua bebida e receba um PIX de R$2,00 de cada jogador.",
+            "ABSURDO: Coloque um cubo de gelo na boc e passe para a pessoa da sua direita, depois beba uma dose OU saia do jogo.",
+            "Fale o alfabeto de trás pra frente: 'Z, Y, X, W... Se errar beba uma dose.",
+            "ABSURDO: Ligue pra uma pizzaria e diga que você quer que o entregador venha com salsicha extra grande, tome uma dose OU saia do jogo.",
+            "Segure sua língua com dois dedos e cante uma música OU beba uma dose.",
+            "MEMÓRIA: Conte a história do seu primeiro beijo.",
+            "BEBA SE você é heterossexal.",
+            "Faça a dança da garrafa OU beba uma dose.",
+            "Mande uma mensagem para seu chefe agradecendo as férias surpresas de 30 dias OU beba uma dose.",
+            "Faça um striptease para os jogadores ficando apenas de roupas íntimas e beba uma dose OU saia do jogo.",
+            "Revele ao grupo com quantas pessoas você já transou OU beba 3 doses. Se alguém falar que é mentira e provar, beba mais uma.",
+            "TROCA: escreva num papel para se lembrar que você poderá transferir, em qualquer momento, o que você deve beber para outra pessoa",
+            "Ligue para alguém dizendo que atropelaram uma vaca e convide a pessoa para um churrasco OU beba uma dose.",
+            "DESAFIO: Trava língua: 'Errou, bebeu! Diga: 'Trate trinta e três trutas e traga três das trinta e três trutas tratadas'.",
+            "Deite no chão e deixe alguém fazer agachamento na sua cara por 10 segundos OU beba uma dose.",
+            "Faça garganta profunda em algo fálico OU beba uma dose.",
+            "Deixe o grupo fazer cócegas em você por 15 segundos OU beba uma dose.",
+            "Mande uma mensagem para sua mãe OU pai com a mensagem:'Tenho 2 gramas por R$300,00 OU beba uma dose.",
+            "Faça uma massagem nas costas da pessoa a sua direita por 30 segundos enquanto sussurra coisas sensuais no ouvido dela OU beba uma dose.",
+            "Escolha alguém para vocês encenarem uma posição sexual qualquer OU ambos tomam uma dose.",
+            "ABSURDO: Lamba a orelha da pessoa a sua direita e depois tome uma dose OU saia do jogo.",
+            "O grupo escolhe alguém para encenar uma posição sexual com você OU os dois tomam uma dose.",
+            "BEBA SE você o jogador mais baixo.",
+            "Tire uma selfie embaraçosa e poste no storie do seu instagram OU beba uma dose.",
+            "ABSURDO: Lamba o mamilo da pessoa a sua direita e tome um shot OU saia do jogo.",
+            "DISCURSO: Você se formou! Faça um discurso de agradecimento de agradecimento em outra língua OU beba uma dose.",
+            "Deixe outro jogador fazer um desenho de pênis no seu antebraço OU pescoço OU beba uma dose.",
+            "LOIRAS: Todas as loiras devem beber.",
+            "Ligue para sua mãe OU pai e diga que você precisa que eles paguem sua fiança para sair da cadeia OU termine sua bebida.",
+            "Revele um fetiche sexual ao grupo OU beba uma dose.",
+            "Tire 3 peças de roupa OU beba uma dose.",
+            "Deixe o grupo ver seu histórico de pesquisa do Instagram OU beba uma dose.",
+            "Faça uma pergunta a alguém sobre você, se a pessoa acertar você bebe uma dose e tira uma peça de roupa. Caso contrário a pessoa deve beber e tirar uma peça de roupa.",
+            "ABSURDO: Abra sua porta da frente e grite: 'Eu amo anal!' e beba uma dose OU saia do jogo.",
+            "Advinhe qual dos jogadores já fez um oral no carro. Se você acertar, ele(ela) bebe uma dose. Se você errar, você bebe uma dose.",
+            "Coloque a menor pessoa do grupo no colo e dê bebida a ela como se fose um bebê. Se não fizer, beba uma dose.",
+            "Molhe o dedo da terceira pessoa a sua direita na sua bebida e chupe o dedo dela OU beba toda sua bebida.",
+            "Desenhe um bigode na sua cara com caneta OU beba uma dose.",
+            "Finja que está se masturbando por 15 segundos OU beba uma dose.",
+            "Tire uma selfie e poste no Instagra: 'Me mande um diret pra noite ficar louca' OU beba uma dose.",
+            "BEBA SE você é o jogador mais velho.",
+            "Faça uma todada de Verdade OU Desafio.",
+            "Faça uma pergunta de verdadeiro OU falso sobre você para outro jogador. Se ele errar, bebe uma dose. Se acertar, você bebe uma dose.",
+            "Abra o Instagram e entre no primeiro perfil que você ver e curta todas as 20 primeiras fotos do perfil OU beba uma dose.",
+            "ABSURDO: Mande: 'Aqui só tem otário' no seu grupo da família e tome uma dose OU saia do grupo.",
+            "O grupo escolhe alguém para encenar uma cena sexual com você OU os dois tomam uma dose.",
+            "Fale três posições sexuais OU beba uma dose.",
+            "Mande um direct pro seu crush '👀' OU beba uma dose.",
+            "ABSURDO: Entre no Instagram de alguém que namora e curta 10 publicações e beba uma dose OU saia do jogo.",
+            "Ligue para uma pizzaria e pergunte se eles podem fazer uma pizza no formato de pênis OU termine sua bebida.",
+            "Mostre sua bunda ao grupo OU beba uma dose.",
+            "Tente descobrir o perfume que a pessoa à sua direita está usando, se errar beba uma dose.",
+            "Deixe alguém te filmar botando o dedo no umbigo enquanto geme fingindo um orgasmo OU beba sua bebida.",
+            "Faça um Freestyle de Rap por 15 segundos sobre uma pessoa idosa OU termine sua bebida.",
+            "SAÚDE: Todos os jogadores devem tomar uma dose. Saúde!",
+            "Abra o Instagram e deixe a pessoa a sua esquerda escolher alguém quem você segue. Curta as 10 últimas fotos desa pessoa.",
+            "Faça uma demonstração de como fazer um beijo grego em uma garrafa vazia OU beba uma dose.",
+            "Deixe o grupo escolher alguém pra você ficar se esfregando por 15 segundos OU os dois bebem uma dose.",
+            "Escolha uma pessoa para te dar um beijo, a pessoa escolhe onde OU beba uma dose.",
+            "Tente fazer a dança da minhoca OU beba uma dose.",
+            "Dê uma cheirada na axila da pessoa a sua esquerda OU beba uma dose.",
+            "ABSURDO: Crie um grupo no Whatsapp chamado orgia e adicione 10 pessoas e saia dele, depois tome uma dose OU saia do jogo.",
+            "BEBA SE você tem um iPhone.",
+            "SEGREDO: Simplesmente comece uma discussão sobre um assunto que a pessoa contou apenas pra você OU beba uma dose.",
+            "Descreva a coisa mais humilhante que você fez durante o sexo OU beba uma dose.",
+            "Tome uma colher de ketchup OU beba uma dose. Se não tiver ketchup, o dono da casa deve beber uma dose.",
+            "Mande uma mensagem pro seu colega de trabalho falando que você dormiu com seu chefe OU beba uma dose.",
+            "SAÚDE: Todos o jogadores devem beber uma dose. Saúde!",
+            "Mostre a todos o saldo da sua conta bancária OU beba uma dose.",
+            "Fique sem camisa por uma rodada OU beba uma dose.",
+            "CULTURA: Escolha uma categoria, por ex.: times de futebol, frutas, filmes, etc. Em seguida, todos devem falar, em sentido horário, uma palavra que se encaix na categoria. O primeiro a errar bebe uma vez.",
+            "CANTE: Faça uma serenata de joelhos para algum jogador.",
+            "ABSURDO: Escolha alguém do grupo para que você abra o zíper dessa pessoa com seus dentes e tome uma dose OU saia do jogo.",
+            "Nomeie no mínimo 3 brinquedos sexuais OU beba uma dose.",
+            "Dance entusiasmadamente para sua cadeira OU beba uma dose.",
+            "Poste uma foto de você fingindo que está bebendo água da privada com a hashtag #comsede OU beba uma dose.",
+            "PIADISTA: Conte uma piada. Se ninguém rir você deve beber uma dose.",
+            "DESANCASO: Fique três rodadas sem jogar OU beba uma dose.",
+            "Escolha dois jogadores para fazer uma pirâmide humana com você. Se não conseguirem os três bebem uma dose.",
+            "Escolha duas pessoas do grupo para se beijarem, se não concordarem os três bebem uma dose.",
+            "Bote dois cubos de gelo embaixo do seu braço e deixe derreter por completo OU beba uma dose.",
+            "Diga ao grupo qual lugar mais inusitado você já transou OU termine sua bebida.",
+            "Dê seu telefone para a pessoa à sua direita e deixe-a escrever uma mensagem para qualquer um de seus contatos OU beba uma dose.",
+            "Lata como um cachorro toda vez que alguém falar durante uma rodada OU beba uma dose.",
+            "HOMENS: Todos os homens devem beber uma dose.",
+            "DESAFIO: O grupo deve fazer três rodadas de 'Eu nunca'.",
+            "Coloque a mão na virília da pessoa à sua direita por uma rodada e tome uma dose OU saia do jogo.",
+            "Faça um origami de um animal ou beba uma dose.",
+            "Deixe o grupo te deixar em qualquer posição até a próxima rodada OU beba uma dose.",
+            "GARÇOM: Sirva uma dose para alguém.",
+            "Deixe a pessoa à sua direita girar seus mamilos ou beba uma dose.",
+            "Peça nudes para o irmão ou irmã de outro jogador ou beba uma dose.",
+            "Escolha uma pessoa do grupo que você levaria para sobreviver em uma ilha deserta e outra que você levaria pra comer OU beba uma dose.",
+            "Rebole de cabeça pra baixo na parede por 15 segundos OU beba uma dose",
+            "Ligue para sua mãe e diga que a ama OU beba uma dose.",
+            "ABSURDO: Encoste sua cara no meio do peito da pessoa a sua direita e faça o baurlhe de um trem e beba uma dose OU saia do jogo.",
+            "DESAFIO: Desafie outro jogador para o 'Jogo de ficar sério'. Quem rir primeiro deve tomar uma dose.",
+            "BEBA SE: Beba se você é o jogador mais alto.",
+            "Dê seu telefone para a pessoa na sua frente e deixe-a postar uma foto de sua galeria de fotos no Instagram OU beba uma dose",
+            "A pessoa à sua esquerda é seu Mestre. Faça o que a pessoa mandar durante uma rodada.",
+            "Mande um direct para seu(sua) ex 'Estou com saudades'. Logo em seguida, envie 'Não estou mais com saudades'.",
+            "Tire uma peça de roupa para cada palavrão que você falar até o fim do jogo OU beba 3 doses.",
+            "Jogue 'não pode piscar' com a pessoa à sua esquerda. Quem piscar primeiro bebe uma dose.",
+            "Diga a característica mais sexy de cada participante OU beba uma dose.",
+            "Beba uma dose sem usar as mãos OU beba duas doses.",
+            "Mostre a foto mais vergonhosa do seu celular pro grupo OU beba uma dose.",
+            "Fique sem calça por uma rodada OU beba uma dose.",
+            "BEBA SE: Beba se você está em um relacionamento.",
+            "SURPRESA: Vende seus olhos, alguém do grupo deve lhe dar um beijo. Se você acertar quem o beijou, o grupo bebe uma dose. Se você errar, você bebe uma dose.",
+            "Deixe alguém do grupo usar sua conta da Amazon para comprar algo de R$20,00 ou menos com seu cartão e tome uma dose OU saia do jogo.",
+            "Deixe a pessoa à sua direita montar em você como um cavalo OU beba uma dose.",
+            "Morda a bunda da pessoa à sua direita OU os dois bebem uma dose.",
+            "Apoie-se na parede com as mãos e rebole lentamente OU beba uma dose.",
+            "CAVALGUE: Ande a cavalo nas costas de alguém, enquanto isso você da bebida pro seu cavalo.",
+            "Mande uma selfie de agora no grupo da empresa ou da faculdade OU beba uma dose.",
+            "Fique de costas para alguém do grupo e se jogue para trás. Teste sua confiança OU beba uma dose.",
+            "Conte a história de como você perdeu a virgindade OU beba uma dose.",
+            "Encoste o nariz com o da pessoa de sua direita por 60 segundos sem quebrar o contato visual OU os dois bebem uma dose.",
+            "Vende seus olhos e apalpe o rosto de uma pessoa. Se você não descobrir quem é na primeira tentativa, beba uma dose. Se acertar, todos bebem uma dose.",
+            "Deixe o grupo olhar a galeria do seu celular por 30 segundos e tome duas doses OU saia do jogo.",
+            "Deixe alguém te dar uns tapas na bunda enquanto você fala 'mais forte, isso, mais forte' por 10 segundos OU beba uma dose.",
+            "Ao mesmo tempo, pule com um pé só, toque na sua cabeça e esfregue a mão barriga por 109 segundos OU beba uma dose.",
+            "Diga três pessoas do seu grupo social que você transaria OU beba uma dose.",
+            "Usando um objeto aleatório, demonstre como fazer um boquete OU termine sua bebida.",
+            "Troque de calça com a pessoa à sua direita até a próxima rodada OU beba uma dose.",
+            "DJ: Coloque 3 de suas músicas favoritas para tocar durante o jogo.",
+            "BEBA SE: Beba se você já quebrou a tela do seu celular.",
+            "Mergulhe sua cabeça num balde de água fria OU beba uma dose.",
+            "Confesse quem do grupo você transaria, casaria ou mataria OU beba uma dose.",
+            "Ponha a pessoa à sua direita nos seus ombros OU beba uma dose.",
+            "Imite uma galinha por 15 segundos OU beba uma dose.",
+            "BEBA SE: Beba se você não é heterossexual.",
+            "MESTRE: Escolha uma pessoa para tomar uma dose.",
+            "ABSURDO: Faça uma dança sensual para a pessoa à sua esquerda e depois tome uma dose OU saia do jogo.",
+            "Diga ao grupom todas as drogas que vpc}e já usou OU beba uma dose.",
+            "Chupe seu dedo sensualmente enquanto encara a pessoa na sua frente OU beba uma dose.",
+            "ANFITRIÃO: O otário que trouxe esse jogo pra festa, deve beber. O dono da casa também deve beber uma dose. Se por acaso ele também for o dono da casa, deve uma dose.",
+            "Advinhe qual dos jogadores já fez sexo anal. Se você acertar, a pessoa bebe uma dose. Se você erra, você bebe uma dose.",
+            "A pessoa à sua direita deve mandar um emoji de '🍆' ou '🍑' para qualquer contato OU os dois bebem uma dose.",
+            "Fale com o grupo quem você acha que tem o maior pênis OU beba uma dose.",
+            "Desafie outro jogador para dançar. O grupo vai decidir quem é o vencedor. O perdedor bebe uma dose.",
+            "Tire uma selfie no Instagram e use um filtro para trocar de sexo e poste nos Stories OU beba uma dose.",
+            "Faça uma live de exercícios no Instagram e comece com 'muitos de vocês tem me pedido sobre uma rotina de exercícios' OU beba uma dose.",
+            "MULHERES: Todas as mulheres devem beber uma dose.",
+            "SEM AR: O jogo consiste em passar a carta de boca em boca no círculo de jogadores usando apenas os lábios. O primeiro a deixar cair bebe uma dose.",
+            "VOTAÇÃO: Todos do grupoapontam uma pessoa para beber uma dose. A pessoa mais votada tem de beber uma vez.",
+            "Mande um meme para qualquer pessoa que você conheça com mais de 50 anos OU beba uma dose.",
+            "MORENAS: Todas as morenas devem beber uma dose.",
+            "Advinhe qual dos jogadores já fez um Ménage. Se você acertar, ele(s) bebe(m) uma dose. Se errar, você bebe uma dose.",
+            "ABSURDO: Faça um bodyshot na pessoa da sua direita OU saia do jogo.",
+            "ABSURDO: Dance em cima da mesa uma música que o grupo escolher e beba uma dose OU saia do jogo.",
+            "Diga quem do grupo você acha mais bonito do sexo oposto OU beba uma dose.",
+            "Coma uma fatia de limão sem fazer careta ou beba uma dose.",
+            "Mostre todas as suas tatuagens ao grupo, não importando o lugar OU beba uma dose. Se não tem tatuagens, beba uma dose.",
+            "Imite o Mr. Catra para o grupo.",
+            "BEBA SE: Beba se você tem alguma tatuagem.",
+            "REINADO: Você é um rei / rainha. Escolha uma pessoa para te servir durante 3 rodadas."
+            ]
+        };
+
+    let questions = [];
+    let currentQuestion = 0;
+
+    // Função para carregar as perguntas
+    function loadQuestions() {
+        questions = shuffleArray([...gameData.questions]);
+        nextQuestion();
+    }
+
+    // Fisher-Yates Shuffle
+    function shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array;
+    }
+
+    // Função para exibir a próxima pergunta
+    function nextQuestion() {
+        if (questions.length === 0) {
+            document.getElementById("questionNaoFezBebeu").textContent = "Carregando perguntas...";
+            return;
+        }
+
+        if (currentQuestion < questions.length) {
+            document.getElementById("questionNaoFezBebeu").textContent = questions[currentQuestion];
+            document.getElementById("result").textContent = "";
+            currentQuestion++;
+        } else {
+            document.getElementById("questionNaoFezBebeu").textContent = "Fim do Jogo! Espero que estejam se divertindo! Quer jogar novamente?";
+            document.getElementById("result").textContent = "";
+            currentQuestion = 0;
+            questions = shuffleArray(questions);
+        }
+    }
+
+    // Pop-up functions
+    function openPopup() {
+        document.getElementById("popup").style.display = "block";
+    }
+
+    function closePopup() {
+        document.getElementById("popup").style.display = "none";
+    }
+
+    // Fechar o pop-up ao clicar fora dele
+    window.onclick = function(event) {
+        let popup = document.getElementById("popup");
+        if (event.target === popup) {
+            popup.style.display = "none";
+        }
+    };
+
+    // Carrega as perguntas quando a página é aberta
+    window.onload = loadQuestions;
+</script>
+</body>
+</html>

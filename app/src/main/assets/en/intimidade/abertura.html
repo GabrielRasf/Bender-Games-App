@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" type="text/css" href="../../stylesCards.css">
+
+    <title>Intimacy - Opening</title>
+
+</head>
+
+<body>
+<div class="game-container">
+    <!-- Menu -->
+    <nav class="menu">
+        <a href="../menuEn.html" class="menu-title">
+            <img class="logo-bebedeira" src="../images/logo.png" alt="Bender Games Logo" />
+        </a>
+    </nav>
+
+    <!-- Game content -->
+    <h1>
+        <a href="intimidade.html">Intimacy</a>
+    </h1>
+    <h3>Opening</h3>
+    <a href="#" onclick="openPopup()"><br>
+        <img class="img-regras" src="../images/regras.png" alt="Rules Image">
+    </a>
+
+    <h4>Rules</h4>
+
+    <!-- Rules popup -->
+    <div id="popup" class="popup" role="dialog" aria-modal="true" aria-labelledby="popup-title">
+        <div class="popup-content">
+            <span class="close" onclick="closePopup()" aria-label="Close">&times;</span>
+            <h3 id="popup-title">Game Rules</h3>
+            <h5>Intimacy - Opening</h5>
+            <ul>
+                <li>Great game for couples!</li>
+                <li>Each round the couple reads a sentence out loud</li>
+                <li>One will try to guess the other's answer</li>
+                <li>Then the other person will try to guess</li>
+                <li>The goal is to put yourself in the other's shoes</li>
+                <li>And of course, after both answer, you can talk about it!</li>
+                <li>If one player guesses what the other would say, both drink</li>
+                <li>Have fun! 🍻</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="card-frase">
+        <p id="questionAbertura">Loading questions...</p>
+        <!-- Option list (if needed) -->
+        <ol id="optionsList" class="options-list"></ol>
+    </div>
+
+    <div class="button-container">
+        <button onclick="nextQuestion()">Next question</button>
+    </div>
+
+    <div id="result"></div>
+</div>
+
+<script>
+    // Questions as JSON embedded in the code
+    const data = {
+        "questions": [
+            "What was the most memorable moment we had together?",
+            "What do you value most in me?",
+            "What is your biggest dream you’d like to share with me?",
+            "If you could change something in our relationship, what would it be?",
+            "What is your biggest fear in our relationship?",
+            "What makes you feel loved?",
+            "What is the happiest memory we have together?",
+            "What do you think we could improve in our communication?",
+            "What do you think I like most about you physically?",
+            "If I had to choose another job for myself, what do you think it would be?",
+            "What is my all-time favorite song?",
+            "What do you think was the moment that affected me the most during our relationship?",
+            "If I were a public figure, who do you think I would choose to be?",
+            "What do you do that drives me crazy?",
+            "What would be a perfect day for me?",
+            "Currently, what do you think is my biggest dream?",
+            "Which animal do you think I identify with most?",
+            "If I could only say one word for the rest of my life, what do you think it would be?",
+            "Which part of my body do you think I like the most?",
+            "What do you think I value most in a relationship?",
+            "What was the first detail about me that caught your attention?",
+            "If I were sad right now, what would you do to cheer me up?",
+            "What do you think I think about when I am silent?",
+            "What was the funniest moment we experienced together?",
+            "If we had to run away somewhere in the world, where do you think I would choose?",
+            "What habit of mine do you consider the cutest?",
+            "If I had to describe you in one word, what do you think it would be?",
+            "What was the biggest surprise you think I ever gave you?",
+            "What do you believe makes me insecure?",
+            "Which of our memories do you think I like to relive the most?",
+            "If I had a superpower, what do you think would suit me?",
+            "What about me makes you want to take care of me the most?",
+            "Do you think I am more reason or emotion?",
+            "Which part of our intimacy do you think I appreciate the most?",
+            "What romantic fantasy do you think I would agree to fulfill?",
+            "When I am angry, what do you think is best to do?",
+            "What compliment you gave me do I never forget?",
+            "What was our most unforgettable kiss, in your opinion?",
+            "If I could change something about myself, what do you think it would be?",
+            "What smell instantly makes you think of me?",
+            "When did you realize you were in love with me?",
+            "What song do you think defines our story?",
+            "What touch from you calms me the most?",
+            "If I could relive one day with you, which would it be?",
+            "What habit of mine do you find irresistible?",
+            "If I were missing you, what do you think I would do?",
+            "What is the craziest thing you think I would do for love?",
+            "What impresses you most about me to this day?",
+            "What do you think I think when I look at you silently?",
+            "If I had to write a love letter to you, what do you think I would write first?",
+            "What unique detail about my manner do you consider most special?",
+            "Do you think I am more needy or emotionally independent?",
+            "Which memory of ours do you think I keep most fondly?",
+            "What is the biggest lesson you think I learned from our relationship?",
+            "What about me awakens your most affectionate side?",
+            "If I could take you anywhere right now, where do you think I would choose?",
+            "What do you think excites me most besides physical touch?",
+            "What gesture of affection do you think I would never get tired of?",
+            "If I could stop time at one of our moments, which do you think it would be?",
+            "What is the first thing you notice about me when we wake up together?",
+            "Do you think I am more jealous or calm?",
+            "What affectionate nickname suits me best?",
+            "If I were a season, which would I be and why?",
+            "What part of our relationship surprises you the most to this day?",
+            "What do you think I hide most for fear of getting hurt?",
+            "What compliment you gave me affected me the most, in your opinion?",
+            "If I were a song, which do you think I would be?",
+            "What about me makes you feel at home?",
+            "What intimate moment of ours affected you the most?",
+            "Do you think I am more intense or balanced?",
+            "If I had to write a poem about you, what do you think would be the theme?",
+            "What do you think makes me feel most loved?",
+            "Do you believe I truly gave myself to you from the start?",
+            "What question are you afraid I might ask you?",
+            "If our love were a movie, what would its name be?",
+            "What is my biggest fear when it comes to love?",
+            "What would you do if you knew this was our last day together?",
+            "What part of you did I transform for the better?",
+            "What was the most unexpected moment when you felt deeply connected to me?",
+            "If our story were a book, what would the title of the next chapter be?",
+            "What about me makes you feel emotionally safer?",
+            "What is your biggest unspoken wish about our future together?",
+            "If I could give you any gift in the world, what would you want it to be?",
+            "What gesture of mine made you feel most loved recently?",
+            "If we could relive one day of our relationship, which would it be and why?",
+            "What do you think we learned together that changed how we see love?",
+            "What is the most memorable memory of our first month together?",
+            "If we had to create a tradition just for us, what would it be?",
+            "What is your biggest hope for us in the next five years?",
+            "What about me inspires you to be a better person?",
+            "If I were a song, which would I be and why?",
+            "What was the funniest moment we shared that you never forgot?",
+            "If we could travel now, where would we go and what would we do there?",
+            "What do you think is our greatest strength as a couple?",
+            "What is your biggest fear about our relationship?",
+            "If I could change one thing about myself to make you happier, what would it be?",
+            "What small everyday thing makes you think of me?",
+            "If our story were adapted into a movie, who would play us?",
+            "What is your favorite memory of a simple moment we spent together?",
+            "What do you think makes our relationship unique?",
+            "If we had to write wedding vows now, what would you include?",
+            "What is the bravest thing we have done together?",
+            "What do you think we can still discover about each other?",
+            "If I were a flavor, which would I be and why?",
+            "What is your sweetest memory of our early relationship?",
+            "If we had a motto as a couple, what would it be?",
+            "What do you think is essential to keep our connection strong?",
+            "If I could take you to a place from the past, where would it be and why?",
+            "A TV character I could be.",
+            "Do I seem intimidating to people?",
+            "Do you think I would like to be famous?",
+            "What do you think my phone wallpaper says about me?",
+            "Do you think I have ever done something illegal? If yes, what do you think it was?",
+            "Name a value you believe is very important to me.",
+            "Do you think I fall in love quickly?",
+            "Do you think I would move to another country? If yes, which one?",
+            "Which profession fits me?",
+            "Do you think I have had my heart broken?",
+            "Activate your phone camera and take a spontaneous photo of the person playing with you. Keep these memories to see in a week.",
+            "Imagine you have each other's Instagram passwords. How would you write this person's bio? Write it on a paper.",
+            "What do you think I want to communicate with the clothes I’m wearing today?",
+            "A flaw you think I seem to have.",
+            "What is the first thing you think I notice in someone?",
+            "What would you say is essential in my life?",
+            "What kind of student do you think I was at school?",
+            "What band do you think I like the most?",
+            "What do you think I consider sexy in a person?",
+            "What tattoo do you think I would get? Draw it on me with a pen.",
+            "What was your first impression of me?",
+            "What is the first thing you think I do when I wake up?",
+            "What do you think I would do if I won the lottery?",
+            "From 1 to 10, how messy do you think my house (room) is? Explain."
+        ]
+    };
+
+    let questions = [];
+    let currentQuestion = 0;
+
+    // Shuffle array function (Fisher-Yates)
+    function shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array;
+    }
+
+    function loadQuestions() {
+        questions = shuffleArray(data.questions.slice()); // copy and shuffle
+        currentQuestion = 0;
+        nextQuestion();
+    }
+
+    function nextQuestion() {
+        const questionElem = document.getElementById("questionAbertura");
+        const resultElem = document.getElementById("result");
+
+        if (questions.length === 0) {
+            questionElem.textContent = "No questions available.";
+            return;
+        }
+
+        if (currentQuestion < questions.length) {
+            questionElem.textContent = questions[currentQuestion];
+            resultElem.textContent = "";
+            currentQuestion++;
+        } else {
+            questionElem.textContent = "Game Over! Hope you are having fun! Want to play again?";
+            resultElem.textContent = "";
+            currentQuestion = 0;
+            questions = shuffleArray(data.questions.slice());
+        }
+    }
+
+    // Rules popup
+    function openPopup() {
+        document.getElementById("popup").style.display = "block";
+    }
+
+    function closePopup() {
+        document.getElementById("popup").style.display = "none";
+    }
+
+    // Close popup by clicking outside
+    window.onclick = function (event) {
+        let popup = document.getElementById("popup");
+        if (event.target === popup) {
+            closePopup();
+        }
+    };
+
+    // Start loading
+    loadQuestions();
+</script>
+</body>
+
+</html>

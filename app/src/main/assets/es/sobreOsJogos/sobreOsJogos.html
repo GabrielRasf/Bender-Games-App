@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="sobreOsJogos.css">
+
+    <title>¿Qué juego elegir?</title>
+
+</head>
+
+<body>
+<div class="main-container">
+    <div class="logo-container">
+        <a href="../menuEs.html">
+            <img class="logo-bebedeira" src="../images/logo.png" alt="Bender Games Logo" />
+        </a>
+    </div>
+
+    <div class="title-container">
+        <h1>¿Qué juego elegir?</h1>
+        <p class="qual-jogo-escolher">18 juegos para mayores de 18.</p>
+        <p class="qual-jogo-escolher">Conoce más sobre cada uno.</p>
+        <p class="qual-jogo-escolher">¡Diviértanse!</p>
+    </div>
+
+    <div class="game-box-content">
+        <a href="#" onclick="openPopup('popup-eununca')" class="game-box">
+            <p>Yo Nunca</p>
+        </a>
+        <a href="#" onclick="openPopup('popup-topzeira')" class="game-box">
+            <p>Topzeira</p>
+        </a>
+        <a href="#" onclick="openPopup('popup-riubebeu')" class="game-box">
+            <p>Se Rió, Bebió</p>
+        </a>
+        <a href="#" onclick="openPopup('popup-segredos')" class="game-box">
+            <p>Secretos</p>
+        </a>
+        <a href="#" onclick="openPopup('popup-amigodebosta')" class="game-box">
+            <p>Peores Amigos</p>
+        </a>
+        <a href="#" onclick="openPopup('popup-mimicas')" class="game-box">
+            <p>Mímicas para Adultos</p>
+        </a>
+        <a href="#" onclick="openPopup('popup-verdadeconsequencia')" class="game-box">
+            <p>Verdad o Consecuencia</p>
+        </a>
+        <a href="#" onclick="openPopup('popup-quemnogrupo')" class="game-box">
+            <p>Quién del Grupo</p>
+        </a>
+        <a href="#" onclick="openPopup('popup-paraconversar')" class="game-box">
+            <p>Para Conversar</p>
+        </a>
+        <a href="#" onclick="openPopup('popup-oquee')" class="game-box">
+            <p>¿Qué es, qué es?</p>
+        </a>
+        <a href="#" onclick="openPopup('popup-perguntassemresposta')" class="game-box">
+            <p>Preguntas sin Respuesta</p>
+        </a>
+        <a href="#" onclick="openPopup('popup-naofez')" class="game-box">
+            <p>¿No lo hizo? ¡Bebió!</p>
+        </a>
+        <a href="#" onclick="openPopup('popup-intimidade')" class="game-box">
+            <p>Intimidad</p>
+        </a>
+        <a href="#" onclick="openPopup('popup-showDoBebao')" class="game-box">
+            <p>Show del Borracho</p>
+        </a>
+        <a href="#" onclick="openPopup('popup-tiroAoAlvo')" class="game-box">
+            <p>Tiro al Blanco</p>
+        </a>
+        <a href="#" onclick="openPopup('popup-fatoOuFalso')" class="game-box">
+            <p>Verdadero o Falso</p>
+        </a>
+        <a href="#" onclick="openPopup('popup-azarOuSorte')" class="game-box">
+            <p>Azar o Suerte</p>
+        </a>
+        <a href="#" onclick="openPopup('popup-antesOuDepois')" class="game-box div-antes-ou-depois">
+            <p>Antes o Después</p>
+        </a>
+    </div>
+</div>
+
+<!-- Pop-up Yo Nunca -->
+<div id="popup-eununca" class="overlay" onclick="closePopup('popup-eununca')">
+    <div class="popup" onclick="event.stopPropagation()">
+        <h3>Yo Nunca</h3>
+        <li>Cada jugador debe decir "Yo nunca..." seguido de algo que nunca haya hecho (o que sí haya hecho, si quiere beber).</li>
+        <li>Quien ya lo haya hecho, debe beber.</li>
+        <li>El objetivo es divertirse, compartir historias y conocer mejor a los demás.</li>
+    </div>
+</div>
+
+<!-- Pop-up Topzeira -->
+<div id="popup-topzeira" class="overlay" onclick="closePopup('popup-topzeira')">
+    <div class="popup" onclick="event.stopPropagation()">
+        <h3>Topzeira</h3>
+        <li>Alguien dice un tema, como "Alergias alimentarias más comunes".</li>
+        <li>Los jugadores responden en orden. Si alguien duda, dice "No es topzeira".</li>
+        <li>Se revisa la respuesta. Si era correcta, quien dudó bebe; si no, quien se equivocó bebe.</li>
+    </div>
+</div>
+
+<!-- Pop-up Se Rió, Bebió -->
+<div id="popup-riubebeu" class="overlay" onclick="closePopup('popup-riubebeu')">
+    <div class="popup" onclick="event.stopPropagation()">
+        <h3>Se Rió, Bebió</h3>
+        <li>Un jugador hace una acción para hacer reír en 30 segundos.</li>
+        <li>Si alguien se ríe, bebe. Si nadie se ríe, el que lo intentó bebe.</li>
+    </div>
+</div>
+
+<!-- Pop-up Secretos -->
+<div id="popup-segredos" class="overlay" onclick="closePopup('popup-segredos')">
+    <div class="popup" onclick="event.stopPropagation()">
+        <h3>Secretos</h3>
+        <li>Cuenta una verdad y una mentira; los demás adivinan cuál es cuál.</li>
+        <li>Si adivinan, bebes tú. Si fallan, tú eliges quién bebe.</li>
+    </div>
+</div>
+
+<!-- Pop-up Amigo de M... -->
+<div id="popup-amigodebosta" class="overlay" onclick="closePopup('popup-amigodebosta')">
+    <div class="popup" onclick="event.stopPropagation()">
+        <h3>Amigo de M...</h3>
+        <li>Señala al amigo que hizo algo mal.</li>
+        <li>¡Solo es un juego, no lo tomes personal!</li>
+    </div>
+</div>
+
+<!-- Pop-up Mímicas -->
+<div id="popup-mimicas" class="overlay" onclick="closePopup('popup-mimicas')">
+    <div class="popup" onclick="event.stopPropagation()">
+        <h3>Mímicas para Adultos</h3>
+        <li>Haz mímicas graciosas y atrevidas para que adivinen.</li>
+    </div>
+</div>
+
+<!-- Pop-up Verdadero o Falso -->
+<div id="popup-fatoOuFalso" class="overlay" onclick="closePopup('popup-fatoOuFalso')">
+    <div class="popup" onclick="event.stopPropagation()">
+        <h3>Verdadero o Falso</h3>
+        <li>Di si algo es verdadero o falso.</li>
+        <li>Si aciertas, bien hecho. Si no, bebes.</li>
+    </div>
+</div>
+
+<!-- Pop-up Azar o Suerte -->
+<div id="popup-azarOuSorte" class="overlay" onclick="closePopup('popup-azarOuSorte')">
+    <div class="popup" onclick="event.stopPropagation()">
+        <h3>Azar o Suerte</h3>
+        <li>Aquí eliges uno, dos o tres números entre 1 y 6</li>
+        <li>Haces clic en el botón y, si cae en algún número elegido, ya sabes. Bebe</li>
+        <li>Bebe un trago</li>
+        <li>Juego de pura suerte (o mala suerte)... ¡risas garantizadas!</li>
+
+    </div>
+</div>
+
+<!-- Pop-up Antes o Después -->
+<div id="popup-antesOuDepois" class="overlay" onclick="closePopup('popup-antesOuDepois')">
+    <div class="popup" onclick="event.stopPropagation()">
+        <h3>Antes o Después</h3>
+        <li>Dos hechos históricos, una respuesta.</li>
+        <li>Si fallas, bebes. Si aciertas, ¡felicidades!</li>
+    </div>
+</div>
+
+<!-- Pop-ups restantes siguen el mismo patrón traducido... -->
+
+<script>
+    function openPopup(popupId) {
+        const allPopups = document.querySelectorAll('.overlay');
+        allPopups.forEach(popup => popup.style.display = 'none');
+
+        const popup = document.getElementById(popupId);
+        if (popup) {
+            popup.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+    }
+
+    function closePopup(popupId) {
+        const popup = document.getElementById(popupId);
+        if (popup) {
+            popup.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+    }
+
+    document.addEventListener('keydown', function(event) {
+        if (event.key === 'Escape') {
+            const allPopups = document.querySelectorAll('.overlay');
+            allPopups.forEach(popup => {
+                if (popup.style.display === 'flex') {
+                    popup.style.display = 'none';
+                    document.body.style.overflow = 'auto';
+                }
+            });
+        }
+    });
+</script>
+</body>
+</html>

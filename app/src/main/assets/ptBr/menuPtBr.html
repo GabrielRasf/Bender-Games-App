@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8" />
+    <link rel="manifest" href="../manifest.json">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <link rel="stylesheet" href="../stylesCards.css" />
+    <title>Bebedeira Games</title>
+</head>
+
+<body>
+<div class="game-container">
+    <a href="../index.html">
+        <img class="logo-bebedeira" src="images/logo.png" alt="Logo Bebedeira" />
+    </a>
+    <div class="game-box-content">
+        <!-- Links para as páginas de jogos -->
+        <a href="euNunca/euNuncaMenu.html" class="game-box">
+            <p>Eu Nunca</p>
+        </a>
+        <a href="topzeira/topzeira.html" class="game-box">
+            <p>Topzeira</p>
+        </a>
+        <a href="riuBebeu/riuBebeu.html" class="game-box">
+            <p>Riu, Bebeu</p>
+        </a>
+        <a href="segredos/segredos.html" class="game-box">
+            <p>Segredos</p>
+        </a>
+        <a href="pioresAmigos/pioresAmigos.html" class="game-box">
+            <p>Piores Amigos</p>
+        </a>
+        <a href="mimicasParaAdultos/mimicasParaAdultos.html" class="game-box">
+            <p>Mímicas para Adultos</p>
+        </a>
+        <a href="verdadeOuConsequencia/verdadeOuConsequencia.html" class="game-box">
+            <p>Verdade ou Consequência</p>
+        </a>
+        <a href="quemNoGrupo/quemNoGrupo.html" class="game-box">
+            <p>Quem no Grupo</p>
+        </a>
+        <a href="paraConversar/paraConversar.html" class="game-box">
+            <p>Para conversar</p>
+        </a>
+        <a href="showDoBebao/showDoBebao.html" class="game-box">
+            <p>Show do Bebão</p>
+        </a>
+        <a href="charadas/charadas.html" class="game-box">
+            <p>Charadas</p>
+        </a>
+        <a href="perguntasSemRespostas/perguntasSemRespostas.html" class="game-box">
+            <p>Perguntas sem Resposta</p>
+        </a>
+        <a href="naoFezBebeu/naoFezBebeu.html" class="game-box">
+            <p>Não fez? Bebeu</p>
+        </a>
+        <a href="intimidade/intimidade.html" class="game-box">
+            <p>Intimidade</p>
+        </a>
+        <a href="fatoOuFalso/fatoOuFalso.html" class="game-box">
+            <p>Fato ou Falso</p>
+        </a>
+        <a href="tiroAoAlvo/tiroAoAlvo.html" class="game-box">
+            <p>Tiro ao Alvo</p>
+        </a>
+        <a href="azarOuSorte/azarOuSorte.html" class="game-box">
+            <p>Azar ou Sorte</p>
+        </a>
+        <a href="antesOuDepois/antesOuDepois.html" class="game-box">
+            <p>Antes ou Depois?</p>
+        </a>
+        <a href="sobreOsJogos/sobreOsJogos.html" class="game-box">
+            <p>Qual jogo escolher?</p>
+        </a>
+    </div>
+</div>
+
+<script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.getRegistrations().then(registrations => {
+        for (let registration of registrations) {
+          registration.unregister().then(() => {
+            console.log('Service Worker removido');
+          });
+        }
+      });
+    }
+
+</script>
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" type="text/css" href="../../stylesCards.css">
+
+    <title>Intimidade</title>
+
+</head>
+<body>
+
+<div class="game-container">
+    <!-- Menu -->
+    <nav class="menu">
+        <a href="../menuPtBr.html" class="menu-title">
+            <img class="logo-bebedeira" src="../images/logo.png" alt="Logo Bebedeira" />
+        </a>
+    </nav>
+
+    <h1 class="h1-menu espacamento-h1-intimidade">Intimidade</h1>
+    <!-- Opções de jogo -->
+    <div class="game-box-content">
+        <a href="abertura.html" class="game-box game-1"><p>01 - Abertura</p></a>
+        <a href="desenvolvimento.html" class="game-box game-2"><p class="break-word">02 - Desenvolvimento</p></a>
+        <a href="mergulho.html" class="game-box game-3"><p>03 - Mergulho</p></a>
+
+    </div>
+</div>
+
+<!-- Pop-up de Regras -->
+<div class="popup" id="popup">
+    <div class="popup-content">
+        <h3>Regras do Jogo</h3>
+        <h5>Intimidade</h5>
+        <ul>
+            <li>Este jogo possui 3 etapas!</li>
+            <li>A primeira etapa, a pessoa que responder tentará advinhar a resposta da outra pessoa.</li>
+            <li>A segunda etapa, ambos responderão as perguntas, um de cada vez, prestando bastante atenção.</li>
+            <li>A terceira etapa são pequenos desafios a serem realizados 1 vez por semana. Podem ser feitos juntos com a etapa 2.</li>
+            <li>Este jogo pode ser realizado tomando uma bebida leve e romântica, um vinho ou um drink!</li>
+            <li>Divirta-se! 🍻</li>
+        </ul>
+    </div>
+</div>
+
+<script>
+    // Função para abrir o pop-up
+    function openPopup() {
+        document.getElementById("popup").style.display = "flex";
+    }
+
+    // Função para fechar o pop-up
+    function closePopup() {
+        document.getElementById("popup").style.display = "none";
+    }
+
+    // Fechar o pop-up ao clicar fora do conteúdo
+    window.onclick = function(event) {
+        let popup = document.getElementById("popup");
+        if (event.target === popup) {
+            closePopup();
+        }
+    };
+</script>
+
+</body>
+</html>

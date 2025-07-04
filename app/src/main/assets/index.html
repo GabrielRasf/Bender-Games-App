@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="index.css">
+    <title>Bebedeira Games</title>
+</head>
+
+<body>
+<div class="main-container">
+    <div class="logo-container">
+        <a href="#">
+            <img class="logo-bebedeira" src="ptBr/images/logo.png" alt="Logo Bebedeira" />
+        </a>
+    </div>
+
+    <div class="title-container">
+        <h3>Escolha seu idioma</h3>
+        <h3>Choose your language</h3>
+        <h3>Elige tu idioma</h3>
+    </div>
+
+    <button class="button-language" onclick="setLanguage('pt')">🇧🇷 Português</button>
+    <button class="button-language" onclick="setLanguage('en')">🇬🇧 English</button>
+    <button class="button-language" onclick="setLanguage('es')">🇪🇸 Español</button>
+
+</div>
+
+<script>
+
+    function setLanguage(lang) {
+        if (lang === 'pt') {
+            window.location.href = './ptBr/menuPtBr.html';
+        } else if (lang === 'en') {
+            window.location.href = './en/menuEn.html';
+        } else if (lang === 'es') {
+            window.location.href = './es/menuEs.html';
+        }
+    }
+</script>
+
+</body>
+</html>

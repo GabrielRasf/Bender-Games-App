@@ -1,0 +1,1339 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="../../stylesCards.css">
+    <title>Topzeira</title>
+</head>
+
+<body>
+
+<div class="game-container">
+    <!-- Menu -->
+    <nav class="menu">
+        <a href="../menuEn.html" class="menu-title">
+            <img class="logo-bebedeira" src="../images/logo.png" alt="Bender Games Logo" />
+        </a>
+    </nav>
+    <!-- Game Content -->
+    <h1>Topzeira</h1>
+    <a href="#" onclick="openPopup()">
+        <img class="img-regras" src="../images/regras.png">
+    </a>
+    <h4>Rules</h4>
+
+    <!-- Pop-up -->
+    <div id="popup" class="popup">
+        <div class="popup-content">
+            <span class="close" onclick="closePopup()">&times;</span>
+            <h2>Game Rules</h2>
+            <ul>
+                <li>In this game, each player must give an answer that is within the Top 10 of that subject.</li>
+                <li>And how does this happen?</li>
+                <li>One person reads the topic on the card.</li>
+                <li>Then, clockwise, each player answers what they think is in the top 10 of that subject.</li>
+                <li>You have the option to pass or answer.</li>
+                <li>If you pass, you don't play anymore this round.</li>
+                <li>If you answer and someone doubts it, there will be two options to resolve the challenge.</li>
+                <li>If the doubter was right, the person who answered wrong takes a shot and this Top ends.</li>
+                <li>If the doubter was wrong, they themselves take a shot and this Top ends.</li>
+                <li>Have fun! 🍻</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="card-frase">
+        <p id="questionTopzeira"></p>
+        <div class="center-container">
+            <img class="pergunta-e-resposta" src="../images/pergunta-e-resposta.png" onclick="showAnswerPopup()">
+        </div>
+    </div>
+
+    <div class="button-container">
+        <button onclick="nextQuestion()">Next question</button>
+    </div>
+
+    <div id="result"></div>
+
+    <!-- Answer Pop-up -->
+    <div id="answerPopup" class="popup">
+        <div class="popup-content">
+            <span class="close" onclick="closeAnswerPopup(); popup()">&times;</span>
+            <h3>Answer</h3>
+            <h5>Topzeira</h5>
+            <p id="answerText">Click a question first!</p>
+        </div>
+    </div>
+
+<script>
+
+    const topzeiraData = {
+        "questions": [
+            {
+                "question": "Top 10 countries that consume the most beer in the world",
+                "answer": [
+                    "China",
+                    "United States",
+                    "Brazil",
+                    "Germany",
+                    "Russia",
+                    "Mexico",
+                    "Japan",
+                    "United Kingdom",
+                    "Poland",
+                    "Spain"
+                ]
+            },
+            {
+                "question": "Top 10 most consumed alcoholic beverages in the world",
+                "answer": [
+                    "Beer",
+                    "Wine",
+                    "Vodka",
+                    "Sake",
+                    "Whiskey",
+                    "Rum",
+                    "Tequila",
+                    "Gin",
+                    "Champagne",
+                    "Cognac"
+                ]
+            },
+            {
+                "question": "Top 10 cities with the best nightlife in the world",
+                "answer": [
+                    "Berlin, Germany",
+                    "New York, USA",
+                    "Ibiza, Spain",
+                    "Las Vegas, USA",
+                    "Bangkok, Thailand",
+                    "Rio de Janeiro, Brazil",
+                    "Buenos Aires, Argentina",
+                    "Amsterdam, Netherlands",
+                    "Miami, USA",
+                    "Barcelona, Spain"
+                ]
+            },
+            {
+                "question": "Top 10 most ordered drinks at bars",
+                "answer": [
+                    "Caipirinha",
+                    "Margarita",
+                    "Mojito",
+                    "Martini",
+                    "Old Fashioned",
+                    "Negroni",
+                    "Piña Colada",
+                    "Cosmopolitan",
+                    "Manhattan",
+                    "Daiquiri"
+                ]
+            },
+            {
+                "question": "Countries with the most deaths in World War II",
+                "answer": [
+                    "Soviet Union",
+                    "China",
+                    "Germany",
+                    "Poland",
+                    "Indonesia/Dutch East Indies",
+                    "Japan",
+                    "India",
+                    "Serbia/Yugoslavia",
+                    "Vietnam/French Indochina",
+                    "France"
+                ]
+            },
+            {
+                "question": "Most mentioned characters in the Bible",
+                "answer": [
+                    "Jesus",
+                    "David",
+                    "Moses",
+                    "Jacob",
+                    "Aaron",
+                    "Saul",
+                    "Solomon",
+                    "Joseph",
+                    "Paul",
+                    "Abraham"
+                ]
+            },
+            {
+                "question": "Top scorers of the Brazilian National Soccer Team (all time)",
+                "answer": [
+                    "Neymar",
+                    "Pelé",
+                    "Ronaldo",
+                    "Romário",
+                    "Zico",
+                    "Jairzinho",
+                    "Rivelino",
+                    "Bebeto",
+                    "Leonidas",
+                    "Rivaldo"
+                ]
+            },
+            {
+                "question": "Coldest countries",
+                "answer": [
+                    "Russia",
+                    "Canada",
+                    "Norway",
+                    "Iceland",
+                    "Mongolia",
+                    "Finland",
+                    "Kyrgyzstan",
+                    "Estonia",
+                    "Sweden",
+                    "Switzerland"
+                ]
+            },
+            {
+                "question": "Countries with the most billionaires",
+                "answer": [
+                    "United States",
+                    "China",
+                    "Germany",
+                    "Russia",
+                    "United Kingdom / England",
+                    "Switzerland",
+                    "India",
+                    "Saudi Arabia",
+                    "France",
+                    "Italy"
+                ]
+            },
+            {
+                "question": "Greatest football clubs of the 20th century",
+                "answer": [
+                    "Real Madrid",
+                    "Manchester United",
+                    "Bayern Munich",
+                    "Barcelona",
+                    "Ajax",
+                    "Santos",
+                    "Juventus",
+                    "Peñarol",
+                    "River Plate",
+                    "Flamengo"
+                ]
+            },
+            {
+                "question": "National rock bands with the most albums sold",
+                "answer": [
+                    "Legião Urbana",
+                    "Sepultura",
+                    "Kid Abelha",
+                    "Roupa Nova",
+                    "KLB",
+                    "Titãs",
+                    "Skank",
+                    "Charlie Brown Jr",
+                    "Os Paralamas do Sucesso",
+                    "Raimundos"
+                ]
+            },
+            {
+                "question": "Most used keys on the keyboard",
+                "answer": [
+                    "Space bar",
+                    "Backspace",
+                    "Control",
+                    "Down arrow",
+                    "Up arrow",
+                    "Enter",
+                    "Shift",
+                    "Tab",
+                    "Left arrow",
+                    "Right arrow"
+                ]
+            },
+            {
+                "question": "Most numerous mammals on the planet",
+                "answer": [
+                    "Squirrel",
+                    "Rat",
+                    "Mouse",
+                    "Bat",
+                    "Human",
+                    "Cow/Bull",
+                    "Sheep",
+                    "Pig",
+                    "Dog",
+                    "Goat"
+                ]
+            },
+            {
+                "question": "Largest objects in the solar system",
+                "answer": [
+                    "Sun",
+                    "Jupiter",
+                    "Saturn",
+                    "Uranus",
+                    "Neptune",
+                    "Earth",
+                    "Venus",
+                    "Mars",
+                    "Ganymede (Jupiter's moon)",
+                    "Titan (Saturn's moon)"
+                ]
+            },
+            {
+                "question": "Most produced types of fabric in the world",
+                "answer": [
+                    "Polyester",
+                    "Cotton",
+                    "Leather",
+                    "Nylon",
+                    "Viscose",
+                    "Acrylic fiber",
+                    "Jute",
+                    "Wool",
+                    "Coir (coconut fiber)",
+                    "Acetate"
+                ]
+            },
+            {
+                "question": "Bands that sold the most records in history",
+                "answer": [
+                    "The Beatles",
+                    "Led Zeppelin",
+                    "Pink Floyd",
+                    "Queen",
+                    "Eagles",
+                    "AC/DC",
+                    "The Rolling Stones",
+                    "U2",
+                    "Aerosmith",
+                    "ABBA"
+                ]
+            },
+            {
+                "question": "Animals most used for cargo transport in the world",
+                "answer": [
+                    "Donkey",
+                    "Mule",
+                    "Horse",
+                    "Ox/Cow",
+                    "Dromedary",
+                    "Goat",
+                    "Buffalo",
+                    "Llama",
+                    "Elephant",
+                    "Camel"
+                ]
+            },
+            {
+                "question": "Countries with the most Olympic medals",
+                "answer": [
+                    "United States",
+                    "Russia (+ Soviet Union)",
+                    "Germany (East, West, Unified)",
+                    "United Kingdom/England",
+                    "China",
+                    "France",
+                    "Italy",
+                    "Hungary",
+                    "Japan",
+                    "Australia"
+                ]
+            },
+            {
+                "question": "Languages with the most articles on Wikipedia",
+                "answer": [
+                    "English",
+                    "Cebuano",
+                    "German",
+                    "Swedish",
+                    "French",
+                    "Dutch",
+                    "Russian",
+                    "Spanish",
+                    "Italian",
+                    "Arabic"
+                ]
+            },
+            {
+                "question": "Most produced fruits in the world",
+                "answer": [
+                    "Banana",
+                    "Watermelon",
+                    "Apple",
+                    "Grape",
+                    "Orange",
+                    "Mango",
+                    "Plantain",
+                    "Tangerine",
+                    "Pineapple",
+                    "Melon"
+                ]
+            },
+            {
+                "question": "Most populous countries",
+                "answer": [
+                    "China",
+                    "India",
+                    "United States",
+                    "Indonesia",
+                    "Pakistan",
+                    "Brazil",
+                    "Nigeria",
+                    "Bangladesh",
+                    "Russia",
+                    "Mexico"
+                ]
+            },
+            {
+                "question": "Most important classical composers",
+                "answer": [
+                    "Beethoven",
+                    "Bach",
+                    "Mozart",
+                    "Brahms",
+                    "Wagner",
+                    "Debussy",
+                    "Tchaikovsky",
+                    "Chopin",
+                    "Haydn",
+                    "Vivaldi"
+                ]
+            },
+            {
+                "question": "Countries that mine the most gold",
+                "answer": [
+                    "China",
+                    "Australia",
+                    "Russia",
+                    "United States",
+                    "Canada",
+                    "Ghana",
+                    "Peru",
+                    "Sudan",
+                    "Indonesia",
+                    "Brazil"
+                ]
+            },
+            {
+                "question": "First signs of the traditional Chinese horoscope",
+                "answer": [
+                    "Rat",
+                    "Ox",
+                    "Tiger",
+                    "Rabbit",
+                    "Dragon",
+                    "Snake",
+                    "Horse",
+                    "Goat",
+                    "Monkey",
+                    "Rooster"
+                ]
+            },
+            {
+                "question": "Most used vegetables in juices worldwide",
+                "answer": [
+                    "Carrot",
+                    "Beet",
+                    "Spinach",
+                    "Kale",
+                    "Cucumber",
+                    "Celery",
+                    "Lettuce",
+                    "Arugula",
+                    "Tomato",
+                    "Ginger"
+                ]
+            },
+            {
+                "question": "Body parts that suffer fractures the most",
+                "answer": [
+                    "Arm",
+                    "Leg",
+                    "Wrist",
+                    "Spine",
+                    "Torso",
+                    "Femur",
+                    "Clavicle",
+                    "Rib",
+                    "Cervical spine",
+                    "Ankle"
+                ]
+            },
+            {
+        "question": "Animals that appear in the most fables",
+        "answer": [
+            "Fox",
+            "Lion",
+            "Wolf",
+            "Rabbit",
+            "Crow",
+            "Cicada",
+            "Ant",
+            "Tortoise",
+            "Hare",
+            "Bear"
+        ]
+    },
+    {
+        "question": "Most commonly used gemstones in engagement rings",
+        "answer": [
+            "Diamond",
+            "Sapphire",
+            "Emerald",
+            "Ruby",
+            "Topaz",
+            "Amethyst",
+            "Tourmaline",
+            "Opal",
+            "Tanzanite",
+            "Morganite"
+        ]
+    },
+    {
+        "question": "Most farmed insects",
+        "answer": [
+            "Bee",
+            "Silkworm",
+            "Cricket",
+            "Mealworm (Tenebrio)",
+            "Locust",
+            "Black soldier fly",
+            "Rhinoceros beetle",
+            "Ant (for research or exotic food)",
+            "Cochineal",
+            "Termite (in some countries)"
+        ]
+    },
+    {
+        "question": "Countries with the most dromedaries",
+        "answer": [
+            "Somalia",
+            "Sudan",
+            "Chad",
+            "Ethiopia",
+            "Kenya",
+            "Saudi Arabia",
+            "Niger",
+            "Mauritania",
+            "India",
+            "Pakistan"
+        ]
+    },
+    {
+        "question": "Countries with the greatest biodiversity",
+        "answer": [
+            "Brazil",
+            "Colombia",
+            "Indonesia",
+            "China",
+            "Mexico",
+            "Peru",
+            "Australia",
+            "India",
+            "Ecuador",
+            "Venezuela"
+        ]
+    },
+    {
+        "question": "Heaviest animals in South America (excluding aquatic)",
+        "answer": [
+            "Tapir",
+            "Giant armadillo",
+            "Giant anteater",
+            "Jaguar",
+            "Peccary",
+            "Capybara",
+            "Gray brocket deer",
+            "Marsh deer",
+            "Black caiman",
+            "Wild pig"
+        ]
+    },
+    {
+        "question": "Most venomous animals",
+        "answer": [
+            "Box jellyfish",
+            "Blue-ringed octopus",
+            "Stonefish",
+            "Inland taipan snake",
+            "Poison dart frog",
+            "Stingray",
+            "Yellow scorpion",
+            "Cone snail",
+            "Black widow spider",
+            "Wandering spider"
+        ]
+    },
+    {
+        "question": "Countries with the longest coastlines",
+        "answer": [
+            "Canada",
+            "Norway",
+            "Indonesia",
+            "Russia",
+            "Philippines",
+            "Japan",
+            "Australia",
+            "United States",
+            "New Zealand",
+            "Brazil"
+        ]
+    },
+    {
+        "question": "Top rice-producing countries",
+        "answer": [
+            "China",
+            "India",
+            "Indonesia",
+            "Bangladesh",
+            "Vietnam",
+            "Thailand",
+            "Myanmar",
+            "Philippines",
+            "Brazil",
+            "Japan"
+        ]
+    },
+    {
+        "question": "Longest marine animals",
+        "answer": [
+            "Blue whale",
+            "Sperm whale",
+            "Whale shark",
+            "Basking shark",
+            "Colossal squid",
+            "Giant squid",
+            "Great white shark",
+            "Orca",
+            "Wolf eel",
+            "Sawfish"
+        ]
+    },
+    {
+        "question": "Most mentioned animals in the Bible",
+        "answer": [
+            "Lamb",
+            "Lion",
+            "Serpent",
+            "Donkey",
+            "Camel",
+            "Eagle",
+            "Ox",
+            "Deer",
+            "Dove",
+            "Fish"
+        ]
+    },
+    {
+        "question": "Most used trees for furniture in Brazil",
+        "answer": [
+            "Mahogany",
+            "Ipê",
+            "Cedar",
+            "Peroba",
+            "Jatobá",
+            "Angelim",
+            "Cumaru",
+            "Tauari",
+            "Freijó",
+            "Ivorywood"
+        ]
+    },
+    {
+        "question": "Smallest dog breeds",
+        "answer": [
+            "Chihuahua",
+            "Pomeranian (German Spitz)",
+            "Yorkshire Terrier",
+            "Maltese",
+            "Papillon",
+            "Shih Tzu",
+            "Toy Poodle",
+            "Brussels Griffon",
+            "Japanese Chin",
+            "Russian Toy"
+        ]
+    },
+    {
+        "question": "Dinosaurs that appear most in Jurassic Park films",
+        "answer": [
+            "Tyrannosaurus rex",
+            "Velociraptor",
+            "Triceratops",
+            "Brachiosaurus",
+            "Dilophosaurus",
+            "Stegosaurus",
+            "Gallimimus",
+            "Pteranodon",
+            "Ankylosaurus",
+            "Spinosaurus"
+        ]
+    },
+    {
+        "question": "Most common male dog names in Brazil",
+        "answer": [
+            "Thor",
+            "Bob",
+            "Max",
+            "Fred",
+            "Billy",
+            "Luke",
+            "Toby",
+            "Nick",
+            "Theo",
+            "Marley"
+        ]
+    },
+    {
+        "question": "Heaviest African animals",
+        "answer": [
+            "African elephant",
+            "Hippopotamus",
+            "White rhinoceros",
+            "Black rhinoceros",
+            "Giraffe",
+            "African buffalo",
+            "Nile crocodile",
+            "Eland (giant antelope)",
+            "Lion",
+            "Wildebeest"
+        ]
+    },
+    {
+        "question": "Best-selling flowers in the world",
+        "answer": [
+            "Rose",
+            "Tulip",
+            "Lily",
+            "Carnation",
+            "Orchid",
+            "Sunflower",
+            "Daisy",
+            "Peony",
+            "Hydrangea",
+            "Amaryllis"
+        ]
+    },
+    {
+        "question": "Large animals most seen on African safaris",
+        "answer": [
+            "African elephant",
+            "Lion",
+            "Leopard",
+            "Rhinoceros",
+            "African buffalo",
+            "Giraffe",
+            "Hyena",
+            "Zebra",
+            "Hippopotamus",
+            "Nile crocodile"
+        ]
+    },
+    {
+        "question": "Countries with the most lions",
+        "answer": [
+            "Tanzania",
+            "South Africa",
+            "Kenya",
+            "Zambia",
+            "Botswana",
+            "Zimbabwe",
+            "Mozambique",
+            "Namibia",
+            "Ethiopia",
+            "Uganda"
+        ]
+    },
+        {
+        "question": "Countries with the most earthquakes",
+        "answer": [
+            "Japan",
+            "Indonesia",
+            "Chile",
+            "Mexico",
+            "Nepal",
+            "Turkey",
+            "Iran",
+            "New Zealand",
+            "Philippines",
+            "United States"
+        ]
+    },
+    {
+        "question": "Countries with the most pet dogs",
+        "answer": [
+            "United States",
+            "Brazil",
+            "China",
+            "Russia",
+            "Germany",
+            "United Kingdom",
+            "France",
+            "Italy",
+            "Japan",
+            "Argentina"
+        ]
+    },
+    {
+        "question": "Most common gases in the atmosphere",
+        "answer": [
+            "Nitrogen",
+            "Oxygen",
+            "Argon",
+            "Carbon dioxide",
+            "Neon",
+            "Helium",
+            "Methane",
+            "Krypton",
+            "Hydrogen",
+            "Ozone"
+        ]
+    },
+    {
+        "question": "Heaviest fruits",
+        "answer": [
+            "Jackfruit",
+            "Watermelon",
+            "Pumpkin (botanically a fruit)",
+            "Avocado",
+            "Papaya",
+            "Melon",
+            "Coconut",
+            "Breadfruit",
+            "Durian",
+            "Plantain"
+        ]
+    },
+    {
+        "question": "Primary carbohydrate-rich foods most cultivated in the world",
+        "answer": [
+            "Rice",
+            "Wheat",
+            "Corn",
+            "Potato",
+            "Cassava",
+            "Barley",
+            "Oats",
+            "Yam",
+            "Sorghum",
+            "Banana"
+        ]
+    },
+    {
+        "question": "Most popular fruits for chocolate fondue",
+        "answer": [
+            "Strawberry",
+            "Banana",
+            "Grape",
+            "Apple",
+            "Kiwi",
+            "Pear",
+            "Pineapple",
+            "Orange",
+            "Raspberry",
+            "Mango"
+        ]
+    },
+    {
+        "question": "Organs most donated for transplant",
+        "answer": [
+            "Kidneys",
+            "Liver",
+            "Heart",
+            "Lungs",
+            "Pancreas",
+            "Intestines",
+            "Corneas",
+            "Skin",
+            "Bone marrow",
+            "Heart valves"
+        ]
+    },
+    {
+        "question": "Countries richest in natural resources",
+        "answer": [
+            "Russia",
+            "United States",
+            "China",
+            "Brazil",
+            "Australia",
+            "Canada",
+            "India",
+            "Saudi Arabia",
+            "Venezuela",
+            "Indonesia"
+        ]
+    },
+    {
+        "question": "Most popular animals as stuffed toys",
+        "answer": [
+            "Bear",
+            "Rabbit",
+            "Dog",
+            "Cat",
+            "Panda",
+            "Elephant",
+            "Lion",
+            "Tiger",
+            "Monkey",
+            "Giraffe"
+        ]
+    },
+    {
+        "question": "Heaviest land or semi-terrestrial animals",
+        "answer": [
+            "African elephant",
+            "Asian elephant",
+            "Hippopotamus",
+            "White rhinoceros",
+            "Indian rhinoceros",
+            "Giraffe",
+            "African buffalo",
+            "Siberian tiger",
+            "Brown bear",
+            "Polar bear"
+        ]
+    },
+    {
+        "question": "Countries with the most endangered species",
+        "answer": [
+            "Indonesia",
+            "Mexico",
+            "India",
+            "China",
+            "Brazil",
+            "Ecuador",
+            "Peru",
+            "Colombia",
+            "Malaysia",
+            "Philippines"
+        ]
+    },
+    {
+        "question": "Most abundant chemical elements in the human body",
+        "answer": [
+            "Oxygen",
+            "Carbon",
+            "Hydrogen",
+            "Nitrogen",
+            "Calcium",
+            "Phosphorus",
+            "Potassium",
+            "Sulfur",
+            "Sodium",
+            "Chlorine"
+        ]
+    },
+    {
+        "question": "Species appearing most often in the Ice Age franchise",
+        "answer": [
+            "Mammoth",
+            "Giant sloth",
+            "Smilodon (saber-tooth tiger)",
+            "Sabertooth squirrel",
+            "Woolly rhinoceros",
+            "Lemur",
+            "Dinosaur",
+            "Wolf",
+            "Prehistoric rabbit",
+            "Seal"
+        ]
+    },
+    {
+        "question": "Most common herbs in apartment gardens",
+        "answer": [
+            "Basil",
+            "Mint",
+            "Rosemary",
+            "Parsley",
+            "Chives",
+            "Cilantro",
+            "Oregano",
+            "Thyme",
+            "Bay leaf",
+            "Fennel"
+        ]
+    },
+    {
+        "question": "Most used spices and herbs worldwide as seasoning",
+        "answer": [
+            "Black pepper",
+            "Garlic",
+            "Onion",
+            "Cumin",
+            "Ginger",
+            "Cinnamon",
+            "Clove",
+            "Curry",
+            "Nutmeg",
+            "Paprika"
+        ]
+    },
+    {
+        "question": "First animal species protagonists in Disney animations",
+        "answer": [
+            "Mouse (Mickey)",
+            "Duck (Donald)",
+            "Dog (Pluto)",
+            "Deer (Bambi)",
+            "Cat (Figaro)",
+            "Elephant (Dumbo)",
+            "Lion (The Lion King)",
+            "Fox (Robin Hood)",
+            "Fish (Pinocchio's Fish)",
+            "Kangaroo (Sleeping Beauty)"
+        ]
+    },
+    {
+        "question": "Most common farm animals in Brazil",
+        "answer": [
+            "Cattle",
+            "Pigs",
+            "Chickens",
+            "Ducks",
+            "Goats",
+            "Sheep",
+            "Horses",
+            "Turkeys",
+            "Geese",
+            "Donkeys"
+        ]
+    },
+    {
+        "question": "Countries with the most shark attacks",
+        "answer": [
+            "United States",
+            "Australia",
+            "South Africa",
+            "Bahamas",
+            "Brazil",
+            "New Caledonia",
+            "Réunion (island)",
+            "Mexico",
+            "Egypt",
+            "New Zealand"
+        ]
+    },
+    {
+        "question": "Largest big cats",
+        "answer": [
+            "Siberian tiger",
+            "Bengal tiger",
+            "Lion",
+            "Sumatran tiger",
+            "Malayan tiger",
+            "Leopard",
+            "Snow leopard",
+            "Jaguar",
+            "Puma",
+            "Eurasian lynx"
+        ]
+    },
+    {
+        "question": "Most consumed nuts in the world",
+        "answer": [
+            "Almond",
+            "Cashew",
+            "Brazil nut",
+            "Walnut",
+            "Hazelnut",
+            "Pistachio",
+            "Macadamia",
+            "Pequi",
+            "Pecan",
+            "Pine nut"
+        ]
+    },
+    {
+        "question": "Vegetables and greens richest in iron",
+        "answer": [
+            "Spinach",
+            "Kale",
+            "Broccoli",
+            "Beetroot",
+            "Green bean",
+            "Parsley",
+            "Lentil",
+            "Pea",
+            "Pumpkin",
+            "Chickpea"
+        ]
+    },
+     {
+        "question": "Species that appear in the most SpongeBob episodes",
+        "answer": [
+            "Sea sponge",
+            "Starfish",
+            "Squid",
+            "Crab",
+            "Plankton",
+            "Clownfish",
+            "Whale",
+            "Seahorse",
+            "Jellyfish",
+            "Fish"
+        ]
+    },
+    {
+        "question": "Dog breeds most used by police worldwide",
+        "answer": [
+            "German Shepherd",
+            "Belgian Malinois",
+            "Rottweiler",
+            "Labrador Retriever",
+            "Doberman",
+            "Dutch Shepherd",
+            "Bloodhound",
+            "Springer Spaniel",
+            "Boxer",
+            "Akita"
+        ]
+    },
+    {
+        "question": "Most used metals in industry",
+        "answer": [
+            "Iron",
+            "Aluminum",
+            "Copper",
+            "Zinc",
+            "Lead",
+            "Nickel",
+            "Tin",
+            "Chromium",
+            "Titanium",
+            "Magnesium"
+        ]
+    },
+    {
+        "question": "Countries that cultivate the most marijuana",
+        "answer": [
+            "United States",
+            "Canada",
+            "Mexico",
+            "Colombia",
+            "Afghanistan",
+            "Jamaica",
+            "Paraguay",
+            "Netherlands",
+            "Morocco",
+            "South Africa"
+        ]
+    },
+    {
+        "question": "Most popular beach cities in Northeast Brazil for tourists",
+        "answer": [
+            "Porto de Galinhas (PE)",
+            "Natal (RN)",
+            "Jericoacoara (CE)",
+            "Maceió (AL)",
+            "Salvador (BA)",
+            "Praia do Forte (BA)",
+            "João Pessoa (PB)",
+            "São Miguel dos Milagres (AL)",
+            "Aracaju (SE)",
+            "Canoa Quebrada (CE)"
+        ]
+    },
+    {
+        "question": "Most commonly found wild mammals and birds in cities (excluding domestic animals)",
+        "answer": [
+            "Rat",
+            "Pigeon",
+            "Bat",
+            "Crow",
+            "Squirrel",
+            "Seagull",
+            "Opossum",
+            "Raccoon",
+            "Swallow",
+            "Sparrow"
+        ]
+    },
+    {
+        "question": "Countries with the most ski resorts",
+        "answer": [
+            "United States",
+            "France",
+            "Austria",
+            "Switzerland",
+            "Italy",
+            "Canada",
+            "Japan",
+            "Germany",
+            "Sweden",
+            "Spain"
+        ]
+    },
+    {
+        "question": "Animals with the longest gestation periods",
+        "answer": [
+            "African elephant",
+            "Asian elephant",
+            "Rhinoceros",
+            "Giraffe",
+            "Camel",
+            "Orca",
+            "Blue whale",
+            "Horse",
+            "Donkey",
+            "Cow"
+        ]
+    },
+    {
+        "question": "Parts of the body that sweat the most",
+        "answer": [
+            "Armpits",
+            "Forehead",
+            "Back",
+            "Palms of the hands",
+            "Soles of the feet",
+            "Face",
+            "Chest",
+            "Neck",
+            "Groin",
+            "Abdomen"
+        ]
+    },
+    {
+        "question": "Mammals with the heaviest brains",
+        "answer": [
+            "Sperm whale",
+            "Blue whale",
+            "African elephant",
+            "Orca",
+            "Asian elephant",
+            "Fin whale",
+            "Bottlenose dolphin",
+            "Human",
+            "Brown bear",
+            "Hippopotamus"
+        ]
+    },
+    {
+        "question": "Countries with the most immigrants in the world",
+        "answer": [
+            "United States",
+            "Germany",
+            "Saudi Arabia",
+            "Russia",
+            "United Kingdom",
+            "United Arab Emirates",
+            "France",
+            "Canada",
+            "Australia",
+            "Spain"
+        ]
+    }
+        ]
+    };
+
+
+
+
+        let questions = [];
+        let currentQuestionIndex = 0;
+        let shuffledQuestions = [];
+
+        // Função para carregar as perguntas
+        function loadQuestions() {
+            // Filtra perguntas válidas (com question e answer)
+            questions = topzeiraData.questions.filter(q => q.question && q.answer);
+            shuffledQuestions = shuffleArray([...questions]); // Cria uma cópia embaralhada
+            showCurrentQuestion();
+        }
+
+        // Fisher-Yates Shuffle melhorado
+        function shuffleArray(array) {
+            const newArray = [...array];
+            for (let i = newArray.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
+            }
+            return newArray;
+        }
+
+        // Função para exibir a pergunta atual
+        function showCurrentQuestion() {
+            if (shuffledQuestions.length === 0) {
+                document.getElementById("questionTopzeira").textContent = "Loading questions...";
+                return;
+            }
+
+            if (currentQuestionIndex < shuffledQuestions.length) {
+                document.getElementById("questionTopzeira").textContent = shuffledQuestions[currentQuestionIndex].question;
+                document.getElementById("result").textContent = "";
+            } else {
+                // Reinicia o jogo quando todas as perguntas foram exibidas
+                document.getElementById("questionTopzeira").textContent = "Game Over! Hope you’re having fun! Want to play again?";
+                document.getElementById("result").textContent = "";
+                currentQuestionIndex = 0;
+                shuffledQuestions = shuffleArray([...questions]); // Reembaralha as perguntas
+            }
+        }
+
+        // Função para exibir a próxima pergunta
+        function nextQuestion() {
+            currentQuestionIndex++;
+            if (currentQuestionIndex >= shuffledQuestions.length) {
+                // Se chegou ao final, reinicia
+                currentQuestionIndex = 0;
+                shuffledQuestions = shuffleArray([...questions]); // Reembaralha as perguntas
+            }
+            showCurrentQuestion();
+        }
+
+        // Pop-up functions
+        function openPopup() {
+            document.getElementById("popup").style.display = "block";
+        }
+
+        function closePopup() {
+            document.getElementById("popup").style.display = "none";
+        }
+
+        function closeAnswerPopup() {
+            document.getElementById("answerPopup").style.display = "none";
+        }
+
+        // Fechar os pop-ups ao clicar fora deles
+        window.onclick = function(event) {
+            let popup = document.getElementById("popup");
+            let answerPopup = document.getElementById("answerPopup");
+
+            if (event.target === popup) {
+                popup.style.display = "none";
+            }
+
+            if (event.target === answerPopup) {
+                answerPopup.style.display = "none";
+            }
+        };
+
+        function showAnswerPopup() {
+            const answerElement = document.getElementById("answerText");
+
+            if (shuffledQuestions.length > 0 && currentQuestionIndex < shuffledQuestions.length) {
+                const answerData = shuffledQuestions[currentQuestionIndex].answer;
+
+                // Verifica se é uma lista ou uma string simples
+                if (Array.isArray(answerData)) {
+                    const listHTML = answerData.map(item => `<li>${item}</li>`).join("");
+                    answerElement.innerHTML = `<ol>${listHTML}</ol>`;
+                } else {
+                    answerElement.textContent = answerData;
+                }
+            } else {
+                answerElement.textContent = "Clique em 'Próxima pergunta' primeiro!";
+            }
+
+            document.getElementById("answerPopup").style.display = "block";
+        }
+
+        // Carrega as perguntas ao iniciar
+        loadQuestions();
+</script>
+
+</body>
+</html>

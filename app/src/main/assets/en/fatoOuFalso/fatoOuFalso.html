@@ -1,0 +1,931 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="../../stylesCards.css">
+    <title>Truth or Dare</title>
+</head>
+<body>
+
+<div class="game-container">
+    <!-- Menu -->
+    <nav class="menu">
+        <a href="../menuEn.html" class="menu-title">
+            <img class="logo-bebedeira" src="../images/logo.png" alt="Bender Games Logo" />
+        </a>
+    </nav>
+
+    <!-- Game Content -->
+    <h1>True or False </h1>
+    <a href="#" onclick="openPopup()">
+        <img class="img-regras" src="../images/regras.png" alt="Rules">
+    </a>
+    <h4>Rules</h4>
+
+    <!-- Pop-up -->
+    <div id="popup" class="popup">
+        <div class="popup-content">
+            <span class="close" onclick="closePopup()">&times;</span>
+            <h3>Game Rules</h3>
+            <h5>Truth or Dare</h5>
+            <ul>
+                <li>One player reads a statement</li>
+                <li>The player to their right answers if it's 'truth' or 'dare'</li>
+                <li>Then click the 'truth' or 'dare' button</li>
+                <li>If the player is correct, congratulations</li>
+                <li>If wrong, take a shot</li>
+                <li>Now, the player who just answered takes the phone and reads to the next player on the right</li>
+                <li>The cycle continues</li>
+                <li>Have fun! 🍻</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="card-frase">
+        <p id="questionFatoOuFalso">Loading questions...</p>
+    </div>
+    <div class="button-container-fato-falso">
+        <button id="btnFato" class="btn-fato">True</button>
+        <button id="btnFalso" class="btn-falso">Dare</button>
+    </div>
+
+    <div id="result"></div>
+</div>
+
+
+<script>
+    // Dados do jogo embutidos
+    const gameData = {
+        "questions": [
+        {
+        "frase": "The blood of horseshoe crabs is blue because it contains copper instead of iron, and it is used to detect toxins in vaccines.",
+        "correta": "Fact",
+        "explicacao": "Horseshoe crab blood contains hemocyanin, which uses copper to transport oxygen, making it blue. It is indeed used in sterility testing of vaccines and medicines."
+    },
+    {
+        "frase": "The Sun accounts for 99.86% of the total mass of the Solar System — all the planets combined are just a fraction of its weight.",
+        "correta": "Fact",
+        "explicacao": "Correct! The Sun really concentrates about 99.86% of the total mass of the Solar System, with planets and other bodies representing only a small part."
+    },
+    {
+        "frase": "Earth is the only planet that does not have the name of a Roman or Greek god.",
+        "correta": "Fact",
+        "explicacao": "All other planets in the Solar System have names derived from Greco-Roman mythology. Earth is the exception, with a name coming from Old English and German ('Erda', 'Earth'), meaning 'soil'."
+    },
+    {
+        "frase": "Bees can recognize human faces, just as we recognize other faces.",
+        "correta": "Fact",
+        "explicacao": "Research has shown that bees use a process similar to ours called ‘configurational processing’ to recognize human faces."
+    },
+    {
+        "frase": "Your stomach renews itself every 3 to 4 days so that it does not digest itself.",
+        "correta": "Fact",
+        "explicacao": "The stomach lining cells are constantly renewed to withstand the acidity of gastric juices, preventing self-digestion."
+    },
+    {
+        "frase": "Google was originally called 'BackRub'.",
+        "correta": "Fact",
+        "explicacao": "In 1996, Larry Page and Sergey Brin developed the search engine called 'BackRub' before renaming it Google."
+    },
+    {
+        "frase": "Giant squids have eyes the size of basketballs.",
+        "correta": "Fact",
+        "explicacao": "Giant squids can have eyes up to 30 cm in diameter, the largest known in the animal kingdom — comparable to the size of basketballs."
+    },
+    {
+        "frase": "Human DNA and banana DNA are 60% similar.",
+        "correta": "Fact",
+        "explicacao": "Humans share about 60% genetic similarity with bananas, since both are living organisms with many cellular functions in common."
+    },
+    {
+        "frase": "Space is not completely silent — there are radio waves and sounds detectable with specific equipment.",
+        "correta": "Fact",
+        "explicacao": "Although sound does not propagate in a vacuum like on Earth, instruments can capture vibrations and radio waves converted into audible sounds."
+    },
+    {
+        "frase": "Japan has more pets than children.",
+        "correta": "Fact",
+        "explicacao": "Data shows that in Japan there are more registered pets than children under 15 years old, reflecting demographic and cultural changes."
+    },
+    {
+        "frase": "The human brain generates about 20 watts of energy — enough to light a lamp.",
+        "correta": "Fact",
+        "explicacao": "The human brain, at rest, consumes about 20 watts of energy, enough to light a small bulb."
+    },
+    {
+        "frase": "Trees communicate with each other through chemical signals in the roots and air.",
+        "correta": "Fact",
+        "explicacao": "Trees exchange chemical signals through underground fungal networks and volatile compounds released into the air to warn others about threats."
+    },
+    {
+        "frase": "The largest organ in the human body is the skin.",
+        "correta": "Fact",
+        "explicacao": "The skin is the largest organ in the human body by area and weight, functioning as a protective barrier and thermal regulator."
+    },
+    {
+        "frase": "The first email in history was sent by Ray Tomlinson to himself in 1971.",
+        "correta": "Fact",
+        "explicacao": "Ray Tomlinson created the email system and sent the first message to himself as a test in 1971."
+    },
+    {
+        "frase": "Flamingos are naturally gray; they turn pink because of a diet rich in beta-carotene.",
+        "correta": "Fact",
+        "explicacao": "The pink coloration of flamingos comes from eating algae and crustaceans rich in carotenoid pigments."
+    },
+    {
+        "frase": "In ancient Egypt, cats were considered sacred and killing a cat could be punished by death.",
+        "correta": "Fact",
+        "explicacao": "Egyptians saw cats as sacred animals associated with the goddess Bastet. Killing a cat was a serious crime."
+    },
+    {
+        "frase": "Octopuses have three hearts and blue blood.",
+        "correta": "Fact",
+        "explicacao": "Octopuses have three hearts: two pump blood to the gills and one to the body. Their blood is blue due to hemocyanin."
+    },
+    {
+        "frase": "There are more stars in the observable universe than grains of sand on all the beaches of Earth.",
+        "correta": "Fact",
+        "explicacao": "It is estimated that there are over 100 trillion galaxies, each with billions of stars — far surpassing the number of sand grains on Earth."
+    },
+    {
+        "frase": "In Ancient Rome, urine was used as a cleaning product and even to brush teeth.",
+        "correta": "Fact",
+        "explicacao": "In Ancient Rome, urine was valued for containing ammonia, useful for cleaning clothes and even used in oral hygiene."
+    },
+    {
+        "frase": "The barcode was patented before the computer mouse.",
+        "correta": "Fact",
+        "explicacao": "The barcode was patented in 1952, while the computer mouse was only invented in the 1960s."
+    },
+    {
+        "frase": "Penguins have knees! They are hidden beneath the layer of feathers and fat.",
+        "correta": "Fact",
+        "explicacao": "Penguins have internal knees. Their legs are bent inside the body, under dense feathers, giving the impression they don't have any."
+    },
+    {
+        "frase": "Sound cannot propagate in the vacuum of space, so movies exaggerate loud explosions.",
+        "correta": "Fact",
+        "explicacao": "In space, being a vacuum, there is no medium for sound propagation. The loud explosions in movies are artistic license."
+    },
+    {
+        "frase": "The first website on the internet is still online: info.cern.ch.",
+        "correta": "Fact",
+        "explicacao": "The site info.cern.ch, created by Tim Berners-Lee in 1991, was the first on the web and remains active as part of internet history."
+    },
+    {
+        "frase": "Shakespeare invented over 1,700 English words, many still used today.",
+        "correta": "Fact",
+        "explicacao": "Shakespeare coined hundreds of new English words, many of which are still used today, such as 'lonely', 'bedroom', and 'swagger'."
+    },
+    {
+        "frase": "Cows have best friends and get stressed when separated.",
+        "correta": "Fact",
+        "explicacao": "Studies show cows form strong social bonds with other cows and may suffer stress when separated from their favorite companions."
+    },
+    {
+        "frase": "3D printers have already been used to print artificial human organs (like ears and tissues).",
+        "correta": "Fact",
+        "explicacao": "Biotechnology already allows the use of 3D printers to create structures such as ears, cartilage, and tissues, with potential for future medical applications."
+    },
+    {
+        "frase": "Chocolate can be lethal to dogs because they cannot metabolize theobromine.",
+        "correta": "Fact",
+        "explicacao": "Theobromine, present in chocolate, is toxic to dogs because they metabolize it very slowly, potentially causing poisoning or death."
+    },
+    {
+        "frase": "Ants do not sleep, but they take regular inactivity breaks.",
+        "correta": "Fact",
+        "explicacao": "Ants do not sleep like humans, but have inactivity cycles that function as rest, essential for their survival."
+    },
+    {
+        "frase": "The moon moves away from Earth about 3.8 cm per year.",
+        "correta": "Fact",
+        "explicacao": "The Moon is moving away from Earth due to gravitational interaction between the two bodies, especially influenced by tides."
+    },
+    {
+        "frase": "Honey never spoils — archaeologists have found edible pots in Egyptian tombs.",
+        "correta": "Fact",
+        "explicacao": "Honey is naturally antimicrobial and highly stable, allowing it to last thousands of years without spoiling."
+    },
+    {
+        "frase": "Your nose can remember up to 50,000 different smells.",
+        "correta": "Fact",
+        "explicacao": "The human sense of smell is extremely sensitive, and studies show we can distinguish between tens of thousands of different odors."
+    },
+    {
+        "frase": "The jellyfish Turritopsis dohrnii is biologically immortal.",
+        "correta": "Fact",
+        "explicacao": "This species can reverse its life cycle, returning to the juvenile stage after reaching maturity, making it theoretically immortal."
+    },
+    {
+        "frase": "Cats have 32 muscles in each ear.",
+        "correta": "Fact",
+        "explicacao": "Cats have highly developed muscles in their ears, allowing independent movements to locate sounds precisely."
+    },
+    {
+        "frase": "Only 5% of the planet's oceans have been explored.",
+        "correta": "Fact",
+        "explicacao": "Most of the ocean remains unexplored due to technological limitations and the vastness and depth of the seas."
+    },
+    {
+        "frase": "There are more trees on Earth than stars in the Milky Way.",
+        "correta": "Fact",
+        "explicacao": "It is estimated that there are about 3 trillion trees on Earth, more than the 100 to 400 billion stars in the Milky Way."
+    },
+    {
+        "frase": "Potatoes were the first food grown in space.",
+        "correta": "Fact",
+        "explicacao": "NASA and the University of Wisconsin grew potatoes in space environments as an experiment in agriculture outside Earth."
+    },
+    {
+        "frase": "Humans share about 50% of DNA with fruit flies.",
+        "correta": "Fact",
+        "explicacao": "Despite differences, many basic genes are similar between humans and fruit flies, making them useful for genetic research."
+    },
+    {
+        "frase": "Your body glows in the dark — at levels too low for the human eye to perceive.",
+        "correta": "Fact",
+        "explicacao": "The human body emits a small amount of visible light due to natural chemical reactions, but it is invisible without special equipment."
+    },
+    {
+        "frase": "Mount Everest grows about 4 mm per year due to tectonic plate movement.",
+        "correta": "Fact",
+        "explicacao": "The collision between the Indian and Asian tectonic plates causes the Himalayas to slowly rise each year."
+    },
+    {
+        "frase": "The first webcam in history was used to monitor a coffee pot.",
+        "correta": "Fact",
+        "explicacao": "Researchers at the University of Cambridge created the first webcam to avoid unnecessary trips to the coffee room when the pot was empty."
+    },
+    {
+        "frase": "The Eiffel Tower can be up to 15 cm taller in summer due to thermal expansion of the iron.",
+        "correta": "Fact",
+        "explicacao": "Iron expands with heat, causing the Eiffel Tower to increase in height on warmer days."
+    },
+    {
+        "frase": "Your heart beats about 100,000 times per day.",
+        "correta": "Fact",
+        "explicacao": "On average, a human heart beats approximately 100,000 times per day, pumping about 7,500 liters of blood."
+    },
+    {
+        "frase": "There are more ways to shuffle a 52-card deck than atoms on Earth.",
+        "correta": "Fact",
+        "explicacao": "There are 52! (factorial of 52) possible ways to arrange a deck — a number greater than the estimated atoms on Earth."
+    },
+    {
+        "frase": "Some octopuses 'walk' on two legs on the sea floor.",
+        "correta": "Fact",
+        "explicacao": "Some octopuses use two of their rear tentacles to move along the sea floor, mimicking bipedal movement."
+    },
+    {
+        "frase": "An ostrich's eye is bigger than its brain.",
+        "correta": "Fact",
+        "explicacao": "The ostrich's eye measures about 5 cm in diameter, larger than its brain, which contributes to its excellent vision."
+    },
+    {
+        "frase": "Onions make you cry because they release sulfur compounds that reacts with the moisture in your eyes.",
+        "correta": "Fact",
+        "explicacao": "When cutting onions, sulfur compounds are released, forming sulfuric acid that reacts with the moisture in the eyes, causing stinging and tears."
+    },
+    {
+        "frase": "Humpback whales have songs that travel thousands of kilometers underwater.",
+        "correta": "Fact",
+        "explicacao": "Humpback vocalizations can propagate long distances underwater due to the efficient sound propagation in the aquatic medium."
+    },
+    {
+        "frase": "Earth has had two 'moons' for short periods in its history.",
+        "correta": "Fact",
+        "explicacao": "Small objects, like asteroids temporarily captured by Earth's gravity, can orbit the planet for a while before escaping or falling."
+    },
+
+            {
+        "frase": "Dinosaurs lived on Earth for more than 160 million years — humans have been here for about 300 thousand.",
+        "correta": "Fact",
+        "explicacao": "Dinosaurs dominated the Earth for about 160 million years, while the modern human species has existed for only 300 thousand years."
+    },
+    {
+        "frase": "A teaspoon of a neutron star weighs more than a billion tons.",
+        "correta": "Fact",
+        "explicacao": "The density of a neutron star is so extreme that a teaspoon of its matter would weigh billions of tons on Earth."
+    },
+    {
+        "frase": "The octopus can escape through any hole larger than its beak, which is the only rigid part of its body.",
+        "correta": "Fact",
+        "explicacao": "The beak is the only rigid structure in the octopus's body; if the opening is larger than it, the animal can pass through."
+    },
+    {
+        "frase": "Zebras have stripes unique like fingerprints.",
+        "correta": "Fact",
+        "explicacao": "Each zebra has a unique stripe pattern, like fingerprints, allowing for individual identification."
+    },
+    {
+        "frase": "Antarctica is the only continent without reptiles.",
+        "correta": "Fact",
+        "explicacao": "Antarctica is a very cold and isolated continent, with no suitable conditions for reptile survival."
+    },
+    {
+        "frase": "The human eye can distinguish about 10 million colors.",
+        "correta": "Fact",
+        "explicacao": "The human eye can perceive a vast range of colors due to the presence of light-sensitive cones in the retina."
+    },
+    {
+        "frase": "Most pencils are not made of lead, but of graphite.",
+        "correta": "Fact",
+        "explicacao": "The 'lead' mentioned is actually graphite, a mineral used in pencil manufacturing."
+    },
+    {
+        "frase": "The largest internal organ of the human body is the liver.",
+        "correta": "Fact",
+        "explicacao": "The liver is the largest internal organ of the human body, responsible for functions such as detoxification and bile production."
+    },
+    {
+        "frase": "The cracking sound when snapping fingers does not come from the bone, but from the collapse of gas bubbles in the joints.",
+        "correta": "Fact",
+        "explicacao": "The snap occurs due to the collapse of small gas bubbles that form in the joints when they are stretched."
+    },
+    {
+        "frase": "The speed of a sneeze can exceed 160 km/h.",
+        "correta": "Fact",
+        "explicacao": "A sneeze is an air explosion that can reach very high speeds, sometimes surpassing 160 km/h."
+    },
+    {
+        "frase": "NASA's computers used for the Apollo mission were weaker than a current smartphone.",
+        "correta": "Fact",
+        "explicacao": "The computers used in the Apollo mission were extremely limited in processing power and memory compared to modern smartphones."
+    },
+    {
+        "frase": "The human body has about 37 trillion cells.",
+        "correta": "Fact",
+        "explicacao": "The human body is made up of approximately 37 trillion cells, each with a specific function."
+    },
+    {
+        "frase": "Dolphins call each other by unique names (distinct whistles).",
+        "correta": "Fact",
+        "explicacao": "Dolphins have an advanced communication system and each has a unique whistle to be identified by others."
+    },
+    {
+        "frase": "Clouds can weigh more than one million kilograms.",
+        "correta": "Fact",
+        "explicacao": "Clouds are formed by water droplets or ice crystals, and these particles can accumulate to reach a significant weight."
+    },
+    {
+        "frase": "The brain consumes about 20% of the human body's energy.",
+        "correta": "Fact",
+        "explicacao": "Although it accounts for only 2% of total body weight, the brain uses about 20% of the energy consumed by the human body."
+    },
+    {
+        "frase": "Sunlight takes 8 minutes and 20 seconds to reach the Earth.",
+        "correta": "Fact",
+        "explicacao": "Sunlight travels approximately 150 million kilometers to reach the Earth, taking about 8 minutes and 20 seconds."
+    },
+    {
+        "frase": "A day on Venus is longer than a year on Venus.",
+        "correta": "Fact",
+        "explicacao": "Venus takes longer to complete one rotation on its axis (a day) than to orbit the Sun (a year)."
+    },
+    {
+        "frase": "Chameleons do not change color only to camouflage but also to communicate.",
+        "correta": "Fact",
+        "explicacao": "Chameleons change color as a form of communication, to show emotions or interact with other chameleons."
+    },
+    {
+        "frase": "Cockroaches can live for weeks without a head, until they die of starvation.",
+        "correta": "Fact",
+        "explicacao": "Cockroaches can survive for days or weeks without a head due to their physiology but eventually die of dehydration or starvation."
+    },
+    {
+        "frase": "Emotional tears have a different chemical composition than irritation tears.",
+        "correta": "Fact",
+        "explicacao": "Emotional tears contain different chemical compounds, such as stress hormones, compared to tears caused by irritation."
+    },
+    {
+        "frase": "There are fungi that control the behavior of insects, like the famous 'zombie fungus' of ants.",
+        "correta": "Fact",
+        "explicacao": "The fungus Ophiocordyceps alters ant behavior, controlling their movements until they die and the fungus spreads."
+    },
+    {
+        "frase": "Bats always turn left when exiting a cave.",
+        "correta": "Fact",
+        "explicacao": "Bats tend to always turn left when leaving a cave due to their flight behavior and orientation."
+    },
+    {
+        "frase": "The heart of a blue whale is the size of a small car.",
+        "correta": "Fact",
+        "explicacao": "The blue whale's heart is the largest among animals and can reach the size of a small car."
+    },
+    {
+        "frase": "The first video game in history was 'Tennis for Two', created in 1958.",
+        "correta": "Fact",
+        "explicacao": "'Tennis for Two' was created in 1958 by William Higinbotham and is considered the precursor to modern video games."
+    },
+    {
+        "frase": "Earth's gravity is not perfectly uniform, so there are places with slightly greater or lesser gravity.",
+        "correta": "Fact",
+        "explicacao": "Gravity on Earth varies due to factors such as the planet's irregular shape and the composition of its interior."
+    },
+    {
+        "frase": "Penguins propose marriage with stones — males offer the best stone to the female.",
+        "correta": "Fact",
+        "explicacao": "Male penguins offer stones as a form of courtship, and the female chooses the best gift as a symbol of commitment."
+    },
+    {
+        "frase": "Cows have different accents depending on the region.",
+        "correta": "Fact",
+        "explicacao": "Cows, like humans, can have variations in the sounds they make depending on the environment and location."
+    },
+    {
+        "frase": "Paper can be folded in half a maximum of 7 times by human strength.",
+        "correta": "Fact",
+        "explicacao": "Due to paper's resistance and thickness, it cannot be folded more than seven times by most people."
+    },
+    {
+        "frase": "The letter 'J' was the last to be added to the Latin alphabet.",
+        "correta": "Fact",
+        "explicacao": "The letter 'J' was added to the Latin alphabet in the 16th century, initially as a variation of the letter 'I'."
+    },
+    {
+        "frase": "There are more possible combinations in a Rubik's Cube than atoms in the observable universe.",
+        "correta": "Fact",
+        "explicacao": "A Rubik's Cube has 43 quintillion possible combinations, far more than the number of atoms in the universe."
+    },
+    {
+        "frase": "Some turtles breathe through the cloacal cavity when hibernating.",
+        "correta": "Fact",
+        "explicacao": "When hibernating, some turtles can breathe through the cloacal cavity, allowing them to survive without air for long periods."
+    },
+    {
+        "frase": "Donald Duck's full name is Donald Fauntleroy Duck.",
+        "correta": "Fact",
+        "explicacao": "The character Donald Duck has a full name that includes 'Fauntleroy', a tribute to the character 'Little Lord Fauntleroy'."
+    },
+    {
+        "frase": "Seahorses are the only animals in which the males get pregnant.",
+        "correta": "Fact",
+        "explicacao": "In seahorses, the male carries the fertilized eggs, taking care of them until they hatch."
+    },
+    {
+        "frase": "The human body has about 96,000 km of blood vessels.",
+        "correta": "Fact",
+        "explicacao": "The human circulatory system is complex and extensive, with blood vessels stretching about 96,000 km."
+    },
+    {
+        "frase": "Bananas are slightly radioactive because of potassium-40.",
+        "correta": "Fact",
+        "explicacao": "Bananas contain potassium-40, a naturally occurring radioactive isotope, although at extremely low levels."
+    },
+    {
+        "frase": "The most spoken language in the world is English, but the language with the most native speakers is Mandarin.",
+        "correta": "Fact",
+        "explicacao": "English is the most spoken language globally, but Mandarin has the most native speakers due to China's large population."
+    },
+
+            {
+        "frase": "Some kangaroos cannot walk backwards.",
+        "correta": "True",
+        "explicacao": "Kangaroos have a unique anatomy that prevents them from walking backwards due to the shape of their legs and tail."
+    },
+    {
+        "frase": "There are more possible versions of chess than atoms in the observable universe.",
+        "correta": "True",
+        "explicacao": "The number of possible chess games vastly exceeds the number of atoms in the universe."
+    },
+    {
+        "frase": "Babies have about 300 bones at birth, but many fuse to 206 in adulthood.",
+        "correta": "True",
+        "explicacao": "At birth, babies have more bones due to the presence of cartilage that fuses as they grow."
+    },
+    {
+        "frase": "Google processes more than 8 billion searches per day.",
+        "correta": "True",
+        "explicacao": "Google handles billions of searches every day, making it one of the most used search engines in the world."
+    },
+    {
+        "frase": "Light can bend when passing through intense gravitational fields — this is what Einstein predicted with the Theory of Relativity.",
+        "correta": "True",
+        "explicacao": "Einstein's Theory of Relativity predicts that light is bent by intense gravitational fields, as demonstrated by astronomical observations."
+    },
+    {
+        "frase": "Some spiders play dead to fool predators.",
+        "correta": "True",
+        "explicacao": "Some spiders use the behavior of playing dead as a tactic to escape predators."
+    },
+    {
+        "frase": "The loudest sound recorded on Earth was the eruption of the Krakatoa volcano in 1883.",
+        "correta": "True",
+        "explicacao": "The Krakatoa eruption produced the loudest sound ever recorded, with sound waves traveling around the planet."
+    },
+    {
+        "frase": "The first photographic camera was invented in 1816.",
+        "correta": "True",
+        "explicacao": "The first photographic camera was invented by Joseph Nicéphore Niépce in 1816, revolutionizing image capture."
+    },
+
+    {
+        "id": 2,
+        "frase": "The conscious mind controls the body's actions.",
+        "correta": "False",
+        "explicacao": "In fact, many of our actions are governed by automatic and subconscious processes."
+    },
+    {
+        "frase": "Opposites attract.",
+        "correta": "False",
+        "explicacao": "Studies indicate that similarities between two people are more important for a successful relationship than differences."
+    },
+    {
+        "frase": "The left brain is logical, the right is creative.",
+        "correta": "False",
+        "explicacao": "Both hemispheres of the brain are involved in reasoning and creativity activities."
+    },
+    {
+        "frase": "Men don't know how to ask for directions.",
+        "correta": "False",
+        "explicacao": "Studies show that both men and women ask for help in equal proportions, but in different ways."
+    },
+    {
+        "frase": "You can learn to be 100% happy.",
+        "correta": "False",
+        "explicacao": "Happiness is a complex experience influenced by many internal and external factors, and it's not something that can be achieved all the time."
+    },
+    {
+        "frase": "Bees always sting and die.",
+        "correta": "False",
+        "explicacao": "Only worker bees sting, and they die after stinging because the stinger gets stuck in their victim. However, queen bees and drones can sting multiple times."
+    },
+    {
+        "frase": "Penguins live in cold climates all the time.",
+        "correta": "False",
+        "explicacao": "Although penguins are associated with cold, some species live in more temperate climates, like the Fiordland penguin that lives in New Zealand and Australia."
+    },
+    {
+        "frase": "Acid rain immediately destroys everything it touches.",
+        "correta": "False",
+        "explicacao": "Acid rain can slowly damage structures and ecosystems but does not cause immediate and catastrophic damage."
+    },
+    {
+        "frase": "Deforestation is the only cause of climate change.",
+        "correta": "False",
+        "explicacao": "Although deforestation is an important factor, climate change is also caused by greenhouse gas emissions from sources like burning fossil fuels."
+    },
+    {
+        "frase": "Antivirus software protects against all cyber threats.",
+        "correta": "False",
+        "explicacao": "Antivirus is an important layer of protection but cannot detect all threats, especially the more sophisticated ones."
+    },
+    {
+        "frase": "More megapixels means a better camera.",
+        "correta": "False",
+        "explicacao": "Image quality depends on several factors, such as sensor size and lens quality, not just the number of megapixels."
+    },
+    {
+        "frase": "Solar energy is expensive and inefficient.",
+        "correta": "False",
+        "explicacao": "The costs of solar panels have dropped significantly, and many solar technologies are highly efficient and affordable."
+    },
+    {
+        "frase": "Cell phone batteries last longer when charged to 100%.",
+        "correta": "False",
+        "explicacao": "Lithium batteries, commonly used in cell phones, work better when not fully discharged or regularly charged to 100%."
+    },
+    {
+        "frase": "You can lose fat in specific localized areas.",
+        "correta": "False",
+        "explicacao": "It is not possible to reduce fat from a specific area of the body only with exercises for that region. Fat loss happens overall."
+    },
+    {
+        "frase": "Intense exercise makes you gain weight.",
+        "correta": "False",
+        "explicacao": "Intense exercise can help burn calories and improve body composition, especially when combined with balanced nutrition."
+    },
+    {
+        "frase": "You need supplements to build muscles.",
+        "correta": "False",
+        "explicacao": "Balanced nutrition is key to muscle gain. Supplements can be helpful but are not essential for everyone."
+    },
+    {
+        "frase": "You need to sweat to burn fat.",
+        "correta": "False",
+        "explicacao": "Sweating is the body's response to heat and is not directly related to fat burning. Weight loss depends on calorie expenditure."
+    },
+    {
+        "frase": "Eating fat makes you fat.",
+        "correta": "False",
+        "explicacao": "Not all fats are harmful. Healthy fats, such as those found in avocados and olive oil, are essential and may even aid weight loss."
+    },
+    {
+        "frase": "Scientists know everything about the human body.",
+        "correta": "False",
+        "explicacao": "Despite huge advances, many aspects of the human body and mind remain mysterious."
+    },
+    {
+        "frase": "You must wait 24 hours to report a missing person.",
+        "correta": "False",
+        "explicacao": "There is no law requiring a waiting period to report a missing person. The sooner the report, the better."
+    },
+    {
+        "frase": "You can't drink alcohol and drive after a few hours.",
+        "correta": "False",
+        "explicacao": "Alcohol affects the body in different ways, and the only factor that really eliminates alcohol from the blood is time."
+    },
+    {
+        "frase": "If you don't use your brain, it atrophies.",
+        "correta": "False",
+        "explicacao": "Although the brain needs stimulation to stay active and healthy, it does not dramatically atrophy if you spend some time without intense activity."
+    },
+    {
+        "frase": "You only use 10% of your brain.",
+        "correta": "False",
+        "explicacao": "In fact, we use almost all parts of the brain for different functions, even during sleep."
+    },
+    {
+        "frase": "Memories can be erased from the brain.",
+        "correta": "False",
+        "explicacao": "Memories are not 'erased', but they can be altered or forgotten over time. The brain can also create false memories."
+    },
+    {
+        "frase": "Men and women have fundamentally different brains.",
+        "correta": "False",
+        "explicacao": "Although there are some average differences between male and female brains, these differences are small and do not determine cognitive abilities."
+    },
+    {
+        "frase": "Intelligence is genetic.",
+        "correta": "False",
+        "explicacao": "Intelligence is influenced both by genetics and environment. Factors such as education and life experiences have a great impact on cognitive development."
+    },
+    {
+        "frase": "Multitasking increases productivity.",
+        "correta": "False",
+        "explicacao": "In fact, multitasking can decrease productivity, as the brain needs to switch quickly between tasks, which consumes more energy and time."
+    },
+    {
+        "frase": "The conscious mind controls the body's actions.",
+        "correta": "False",
+        "explicacao": "In fact, many of our actions are governed by automatic and subconscious processes."
+    },
+
+             {
+            "frase": "Opposites attract.",
+            "correta": "False",
+            "explicacao": "Studies indicate that similarities between two people are more important for a successful relationship than differences."
+        },
+        {
+            "frase": "The left brain is logical, the right brain is creative.",
+            "correta": "False",
+            "explicacao": "Both hemispheres of the brain are involved in reasoning and creativity activities."
+        },
+        {
+            "frase": "Men don't know how to ask for directions.",
+            "correta": "False",
+            "explicacao": "Studies show that both men and women ask for help in equal proportion, but in different ways."
+        },
+        {
+            "frase": "You can learn to be 100% happy.",
+            "correta": "False",
+            "explicacao": "Happiness is a complex experience influenced by many internal and external factors, and it is not something that can be achieved all the time."
+        },
+        {
+            "frase": "Bees always sting and die.",
+            "correta": "False",
+            "explicacao": "Only worker bees sting, and they die after stinging because the stinger gets stuck in the victim. However, queen bees and drones can sting multiple times."
+        },
+        {
+            "frase": "Penguins live in cold environments all the time.",
+            "correta": "False",
+            "explicacao": "Although penguins are associated with cold climates, some species live in more temperate climates, such as the crested penguin, which lives in New Zealand and Australia."
+        },
+        {
+            "frase": "Acid rain destroys everything it touches immediately.",
+            "correta": "False",
+            "explicacao": "Acid rain can slowly damage structures and ecosystems, but it does not cause immediate and catastrophic damage."
+        },
+        {
+            "frase": "Deforestation is the only cause of climate change.",
+            "correta": "False",
+            "explicacao": "Although deforestation is an important factor, climate change is also caused by greenhouse gas emissions from sources like burning fossil fuels."
+        },
+        {
+            "frase": "Antivirus programs protect against all cyber threats.",
+            "correta": "False",
+            "explicacao": "Antivirus software is an important layer of protection, but it cannot detect all threats, especially the most sophisticated ones."
+        },
+        {
+            "frase": "The more megapixels, the better the camera.",
+            "correta": "False",
+            "explicacao": "Image quality depends on several factors, such as sensor size and lens quality, not just the number of megapixels."
+        },
+        {
+            "frase": "Solar energy is expensive and inefficient.",
+            "correta": "False",
+            "explicacao": "The costs of solar panels have dropped significantly, and many solar energy technologies are highly efficient and affordable."
+        },
+        {
+            "frase": "The cell phone battery lasts longer when fully charged to 100%.",
+            "correta": "False",
+            "explicacao": "Lithium batteries, commonly used in cell phones, perform better when they are not regularly fully discharged or charged to 100%."
+        },
+        {
+            "frase": "You can lose fat in a specific area.",
+            "correta": "False",
+            "explicacao": "It is not possible to reduce fat from a specific body area only with exercises targeting that region. Fat loss happens overall."
+        },
+        {
+            "frase": "Intense exercise makes you gain weight.",
+            "correta": "False",
+            "explicacao": "Intense exercise can help burn calories and improve body composition, as long as it is accompanied by a balanced diet."
+        },
+        {
+            "frase": "You need supplements to gain muscle.",
+            "correta": "False",
+            "explicacao": "A balanced diet is key for muscle gain. Supplements can be helpful but are not essential for everyone."
+        },
+        {
+            "frase": "You need to sweat to burn fat.",
+            "correta": "False",
+            "explicacao": "Sweating is the body's response to heat and is not directly related to fat burning. Weight loss depends on calorie expenditure."
+        },
+        {
+            "frase": "Eating fat makes you gain weight.",
+            "correta": "False",
+            "explicacao": "Not all fat is harmful. Healthy fats, like those found in avocados and olive oil, are essential for the body and can even help with weight loss."
+        },
+        {
+            "frase": "Scientists know everything about the human body.",
+            "correta": "False",
+            "explicacao": "Despite great advances, many aspects of the human body and mind remain mysterious."
+        },
+        {
+            "frase": "You should wait 24 hours to report a missing person.",
+            "correta": "False",
+            "explicacao": "There is no law that establishes a waiting period to report someone missing. The sooner the report, the better."
+        },
+        {
+            "frase": "You cannot drink alcohol and drive after a few hours.",
+            "correta": "False",
+            "explicacao": "Alcohol affects the body in different ways, and the only factor that truly eliminates alcohol from the blood is time."
+        },
+        {
+            "frase": "If you don't use your brain, it atrophies.",
+            "correta": "False",
+            "explicacao": "Although the brain needs stimuli to stay active and healthy, it does not atrophy dramatically if you spend some time without intense activities."
+        },
+        {
+            "frase": "You only use 10% of your brain.",
+            "correta": "False",
+            "explicacao": "In fact, we use almost all parts of the brain for different functions, even during sleep."
+        },
+        {
+            "frase": "Memories can be erased from the brain.",
+            "correta": "False",
+            "explicacao": "Memories are not 'erased', but can be altered or forgotten over time. The brain can also create false memories."
+        },
+        {
+            "frase": "Men and women have fundamentally different brains.",
+            "correta": "False",
+            "explicacao": "Although there are some average differences between male and female brains, these differences are small and do not determine cognitive abilities."
+        },
+        {
+            "frase": "Intelligence is genetic.",
+            "correta": "False",
+            "explicacao": "Intelligence is influenced by both genetics and environment. Factors like education and life experiences have a major impact on cognitive development."
+        },
+        {
+            "frase": "Multitasking increases productivity.",
+            "correta": "False",
+            "explicacao": "In fact, multitasking can decrease productivity because the brain has to switch rapidly between tasks, consuming more energy and time."
+        },
+        {
+            "frase": "Alcohol kills brain cells.",
+            "correta": "False",
+            "explicacao": "Alcohol does not kill brain cells but can damage dendrites, affecting communication between neurons."
+        },
+        {
+            "frase": "Drinking coffee helps cure a hangover.",
+            "correta": "False",
+            "explicacao": "Coffee can worsen dehydration caused by alcohol, aggravating the hangover."
+        },
+        {
+            "frase": "The liver can process about one standard drink per hour.",
+            "correta": "True",
+            "explicacao": "On average, the liver metabolizes about 10-15ml of pure alcohol per hour."
+        },
+        {
+            "frase": "Drinking alcohol warms the body.",
+            "correta": "False",
+            "explicacao": "Alcohol dilates blood vessels, giving a sensation of warmth, but actually lowers the body's temperature."
+        },
+        {
+            "frase": "Beer was considered a food in the Middle Ages.",
+            "correta": "True",
+            "explicacao": "In the Middle Ages, beer was an important source of nutrients and calories."
+        },
+        {
+            "frase": "Red wine is healthier than white wine.",
+            "correta": "True",
+            "explicacao": "Red wine contains more antioxidants, like resveratrol, which can bring health benefits."
+        },
+        {
+            "frase": "Drinking alcohol improves sleep.",
+            "correta": "False",
+            "explicacao": "Alcohol may help you fall asleep but impairs sleep quality, especially REM sleep."
+        },
+        {
+            "frase": "Vodka was invented in Poland.",
+            "correta": "True",
+            "explicacao": "Vodka has origins in both Poland and Russia, but the earliest records are from Poland in the 8th century."
+        },
+        {
+            "frase": "Champagne can only be produced in France.",
+            "correta": "True",
+            "explicacao": "By law, only sparkling wines produced in the Champagne region of France can be called champagne."
+        },
+        {
+            "frase": "Alcohol completely evaporates when cooked.",
+            "correta": "False",
+            "explicacao": "Even after hours of cooking, about 5-10% of alcohol may remain in the dish."
+        }
+    ]
+};
+
+    // Variáveis do jogo
+    let questions = [];
+    let currentQuestionIndex = 0;
+
+    // Elementos do DOM
+    const questionText = document.getElementById('questionFatoOuFalso');
+    const resultDiv = document.getElementById('result');
+    const btnFato = document.getElementById('btnFato');
+    const btnFalso = document.getElementById('btnFalso');
+
+    // Função de embaralhamento Fisher-Yates
+    function shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array;
+    }
+
+    // Carregar as perguntas
+    function loadQuestions() {
+        questions = shuffleArray([...gameData.questions]);
+        showQuestion();
+    }
+
+    // Exibir a pergunta atual
+    function showQuestion() {
+        const question = questions[currentQuestionIndex];
+        questionText.textContent = question.frase;
+        resultDiv.innerHTML = '';
+
+        // Reabilita os botões para a nova pergunta
+        btnFato.disabled = false;
+        btnFalso.disabled = false;
+    }
+
+
+    // Verificar a resposta
+    function checkAnswer(resposta) {
+        const question = questions[currentQuestionIndex];
+
+    // Desabilita os botões assim que o usuário responder
+        btnFato.disabled = true;
+        btnFalso.disabled = true;
+
+        if (resposta === question.correta) {
+            resultDiv.innerHTML = `<p style="color: green;">✅ Correct! ${question.explicacao}</p>`;
+        } else {
+            resultDiv.innerHTML = `<p style="color: red;">❌ Wrong! ${question.explicacao}</p>`;
+        }
+
+        setTimeout(() => {
+            currentQuestionIndex = (currentQuestionIndex + 1) % questions.length;
+            showQuestion();
+        }, 5000);
+    }
+
+    // Eventos dos botões
+    btnFato.addEventListener('click', () => checkAnswer('Fato'));
+    btnFalso.addEventListener('click', () => checkAnswer('Falso'));
+
+    // Pop-up
+    function openPopup() {
+        document.getElementById("popup").style.display = "block";
+    }
+
+    function closePopup() {
+        document.getElementById("popup").style.display = "none";
+    }
+
+    // Fechar o pop-up ao clicar fora dele
+    window.onclick = function (event) {
+        let popup = document.getElementById("popup");
+        if (event.target === popup) {
+            popup.style.display = "none";
+        }
+    };
+
+    // Iniciar o jogo quando a página carregar
+    window.onload = loadQuestions;
+</script>
+</body>
+</html>

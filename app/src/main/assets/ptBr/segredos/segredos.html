@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="../../stylesCards.css">
+    <title>Segredos</title>
+</head>
+<body>
+
+<div class="game-container">
+    <!-- Menu -->
+    <nav class="menu">
+        <a href="../menuPtBr.html" class="menu-title">
+            <img class="logo-bebedeira" src="../images/logo.png" alt="Logo Bebedeira" />
+        </a>
+    </nav>
+
+    <!-- Conteúdo do jogo -->
+    <h1>Segredos </h1>
+    <a href="#" onclick="openPopup()">
+        <img class="img-regras" src="../images/regras.png">
+    </a>
+    <h4>Regras</h4>
+
+    <!-- Pop-up -->
+    <div id="popup" class="popup">
+        <div class="popup-content">
+            <span class="close" onclick="closePopup()">&times;</span>
+            <h3>Regras do Jogo</h3>
+            <h5>Segredos</h5>
+            <ul>
+                <li>O jogador mais "sem vergonha" começa</li>
+                <li>Pegue o celular e leia uma mensagem em voz alta</li>
+                <li>Você deverá falar duas opções: uma mentirosa e uma verdadeira</li>
+                <li>O grupo deverá tentar descobrir qual das histórias é a verdadeira</li>
+                <li>Caso o grupo acerte qual a verdadeira, o mentiroso bebe uma dose</li>
+                <li>Se o grupo errar, o grupo bebe uma dose</li>
+                <li>O jogo continua no sentido horário</li>
+                <li>Divirta-se! 🍻</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="card-frase">
+        <p id="questionSegredos"></p>
+    </div>
+    <div class="button-container">
+        <button onclick="nextQuestion()">Próxima pergunta</button>
+    </div>
+    <div id="result"></div>
+</div>
+
+<script>
+    let questions = [];
+    let currentQuestion = 0;
+
+    // JSON data embedded directly in the file
+    const questionsData = {
+        "questions": [
+            "Uma vez quebrei...",
+            "Meu maior medo é...",
+            "uma vez eu vomitei...",
+            "O segredo de ser tão gostoso é...",
+            "Se eu pudesse ter qualquer super poder, eu teria",
+            "Não vou dizer que sofria bullying na escola, mas algumas crianças me chamavam de...",
+            "Sou muito aberto a testar novas pela primeira vez, até mesmo...",
+            "A pessoa mais barraqueira desta sala é...",
+            "Quando transo faço este barulho...",
+            "Se eu pudesse curar uma coisa no mundo, eu curaria...",
+            "Eu amo cheiro de...",
+            "A última vez que chorei muito foi quando...",
+            "Eu pensei em mudar para...",
+            "No ensino médio, eu...",
+            "Eu perdi minha virgindade...",
+            "O esporte mais radical que fiz foi...",
+            "Se pudesse escolher como morrer, seria...",
+            "Uma vez já briguei...",
+            "Já fiz alguém...",
+            "Às vezes sonho com...",
+            "Meu filme favorito de todos os tempos é...",
+            "Tenho problemas com...",
+            "Melhor presente que me deram...",
+            "Eu sou muito fã...",
+            "Meu dia perfeito seria...",
+            "Quando eu era adolescente...",
+            "Gostaria de ter coragem de...",
+            "Meu vício é...",
+            "De natal, uma vez ganhei...",
+            "Meu prazer proibido é...",
+            "É vergonhoso admitir, mas gosto de rir de...",
+            "Uma vez roubei...",
+            "Já me falaram que sou...",
+            "Meu palavrão favorito é...",
+            "Uma vez minha prima...",
+            "A coisa mais bizarra que já fiz foi...",
+            "Até hoje acho muito excitante quando...",
+            "Uma vez cheirei meus dedos e...",
+            "Já me senti muito mal por ter matado...",
+            "Quando estou sozinha(o) eu gosto de...",
+            "Minha mãe já me pegou...",
+            "Pessoas falam que sou parecido com...",
+            "Já fiquei bêbada e...",
+            "O lugar mais estranho que já transei foi...",
+            "A foto mais chocante do meu celular é...",
+            "Eu já falsifiquei...",
+            "Se soubesse que não seria pego, eu...",
+            "Sou muito flexível, posso...",
+            "Se eu tivesse apenas um desejo, seria...",
+            "Eu já fui zoada(o) por...",
+            "Pra transar, uma vez eu...",
+            "Nunca assisti...",
+            "Um esporte sem graça, é...",
+            "Uma vez perdi a paciência e...",
+            "Meu maior erro foi...",
+            "Já fiz algo tão sem noção que até hoje não acredito...",
+            "O que me deixa realmente irritado é...",
+            "Se eu pudesse voltar no tempo, eu...",
+            "Eu já tentei... mas não deu certo.",
+            "Quando estou nervoso(a), minha reação é...",
+            "Algo que eu adoraria aprender, mas nunca tentei é...",
+            "Eu me considero uma pessoa que...",
+            "Já briguei com alguém por causa de algo tão simples como...",
+            "Quando estou com raiva, costumo...",
+            "A situação mais embaraçosa da minha vida foi quando...",
+            "O melhor conselho que já recebi foi...",
+            "Uma vez fiz algo tão legal que todos ficaram chocados quando souberam...",
+            "Eu tenho medo de... mas tento enfrentar.",
+            "Quando criança, eu sonhava em ser...",
+            "Eu já fiquei tão perdido(a) que...",
+            "Quando estou triste, eu costumo...",
+            "Já me arrependi tanto de uma decisão que...",
+            "Algo que me deixa muito feliz é...",
+            "Já me senti tão confuso(a) que...",
+            "Uma vez experimentei algo que achei que odiaria, mas gostei porque...",
+            "Eu adoraria fazer algo radical como...",
+            "Já fugi de alguma situação porque...",
+            "Se eu fosse invisível, a primeira coisa que faria seria...",
+            "O lugar mais romântico que já visitei foi...",
+            "Já fiz algo tão sem sentido que...",
+            "Uma vez, meu maior pesadelo aconteceu quando...",
+            "Eu sempre me esqueço de...",
+            "Quando tenho tempo livre, gosto de...",
+            "Já fiz algo tão louco que ninguém acredita até hoje...",
+            "Meu maior sonho de consumo é...",
+            "Uma vez eu tentei algo tão difícil que quase desisti, mas...",
+            "Se eu tivesse que escolher um lugar para viver, seria...",
+            "Nunca vou me esquecer do dia em que...",
+            "Quando estou em uma situação desconfortável, minha primeira reação é...",
+            "Uma vez fui tão atrevido(a) que...",
+            "Meu maior desejo secreto é...",
+            "Já fiz uma surpresa tão grande que... ninguém esperava.",
+            "Eu já menti para proteger alguém, e a mentira foi...",
+            "Quando era criança, meu super-herói favorito era...",
+            "O pior presente que já ganhei foi...",
+            "Eu nunca soube como lidar com... até que aprendi...",
+            "Sempre quis fazer algo radikal, tipo...",
+            "Já tive um pesadelo tão real que...",
+            "Uma vez, fiquei tão nervoso(a) que...",
+            "Eu adoraria mudar para... só para viver essa experiência.",
+            "Já fiz algo tão vergonhoso que até hoje não falo sobre isso.",
+            "Se eu fosse rico(a), a primeira coisa que faria seria...",
+            "Quando estou em um evento chato, minha solução é...",
+            "Eu sempre esqueço de... e depois me arrependo.",
+            "Nunca consegui entender por que as pessoas...",
+            "Meu maior defeito é... mas estou tentando mudar.",
+            "Já me meti em uma confusão tão grande que...",
+            "Se eu tivesse um superpoder, seria... porque...",
+            "Meu maior arrependimento foi...",
+            "Eu adoro comer... em qualquer hora do dia.",
+            "A coisa mais legal que fiz por alguém foi...",
+            "Já fui surpreendido(a) por algo que...",
+            "Uma vez, tentei aprender... e foi um desastre.",
+            "Já fiz algo tão inesperado que ninguém entendeu até hoje...",
+            "Se eu pudesse mudar uma coisa no meu passado, seria...",
+            "Uma vez fui tão corajoso(a) que...",
+            "Eu nunca consigo dizer não quando me pedem para...",
+            "A maior loucura que já fiz foi...",
+            "Se eu pudesse ter qualquer animal como pet, eu escolheria...",
+            "Uma vez fiz algo tão ridículo que... ninguém acreditou.",
+            "Meu maior arrepio foi quando...",
+            "Eu adoraria passar uma semana em... para relaxar completamente.",
+            "O maior aprendizado da minha vida foi...",
+            "Já experimentei algo tão exótico que até hoje fico surpreso(a) com o sabor...",
+            "Se eu tivesse que viver em um filme, escolheria... porque...",
+            "Eu sempre fugi de... mas um dia vou enfrentar.",
+            "Já tive uma ideia tão maluca que pensei em realizar, mas acabei desistindo porque...",
+            "Quando estou em um dilema, minha primeira reação é...",
+            "Se eu fosse famoso(a) por um dia, eu...",
+            "Nunca me esquecerei do momento em que...",
+            "Já estive em uma situação tão engraçada que... ninguém parava de rir.",
+            "Se eu pudesse viajar no tempo, eu iria para...",
+            "Já fiz algo tão imprevisível que ninguém esperava...",
+            "Meu maior medo de infância era...",
+            "Eu nunca imaginei que faria... até que um dia eu tentei.",
+            "Já fiz algo tão estranho que até me perguntei por que fiz...",
+            "Se eu fosse invisível por um dia, eu usaria esse poder para...",
+            "A maior surpresa que já recebi foi quando...",
+            "Já fiquei tão animado(a) com algo que não consegui parar de falar sobre isso por dias.",
+            "Quando estou em um lugar silencioso, meu maior medo é...",
+            "Já fiz algo tão impulsivo que logo me arrependi...",
+            "Eu sempre quis aprender a fazer... mas nunca tentei.",
+            "Quando estou em dúvida, costumo... para me ajudar a decidir.",
+            "Se eu tivesse que viver em uma cidade diferente, escolheria...",
+            "A coisa mais perigosa que já fiz foi...",
+            "Já fingi que sabia... quando na verdade não tinha ideia.",
+            "Meu segredo mais esquisito sobre meu corpo é...",
+            "Já menti sobre... só para impressionar alguém.",
+            "Se eu pudesse apagar uma memória, seria...",
+            "Já chorei por... mas nunca contei para ninguém.",
+            "Minha mania mais estranha é...",
+            "Já roubei... e me senti terrível depois.",
+            "Se eu pudesse trocar de vida com alguém por um dia, seria...",
+            "Já tive um crush secreto em...",
+            "A pior mentira que já contei para meu chefe foi...",
+            "Já me perdi em... e foi uma aventura inesquecível.",
+            "Meu maior vício secreto é...",
+            "Já fui pego(a) fazendo... e inventei uma desculpa esfarrapada.",
+            "Se eu pudesse comer apenas uma comida para sempre, seria...",
+            "Já quebrei... e culpei outra pessoa.",
+            "Minha maior fantasia boba é...",
+            "Já fiquei preso(a) em... e foi hilário.",
+            "Se eu tivesse que viver sem um sentido, escolheria perder...",
+            "Já inventei que era especialista em... para me enturmar.",
+            "A coisa mais nojenta que já comi foi...",
+            "Já tive medo de... até perceber que era bobagem.",
+            "Meu talento secreto inútil é...",
+            "Já fui demitido(a) de... e nunca contei para minha família.",
+            "Se eu pudesse criar uma nova lei, seria...",
+            "Já me apaixonei por... e me arrependi amargamente.",
+            "Minha maior vergonha alheia foi quando...",
+            "Já fui expulso(a) de... e inventei uma história diferente.",
+            "Se eu pudesse ter vivido em outra época, seria...",
+            "Já fui flagrado(a) fazendo... e neguei até o fim.",
+            "O sonho mais bizarro que já tive envolvia...",
+            "Já tive uma briga feia com... por causa de...",
+            "Meu lugar secreto favorito é...",
+            "Já me arrependi instantaneamente de...",
+            "Se eu pudesse saber uma verdade absoluta, seria sobre...",
+            "Já fiquei doente por comer...",
+            "Minha maior obsessão infantil era...",
+            "Já fui abandonado(a) em... e precisei me virar.",
+            "Se eu pudesse ter uma conversa com meu eu do passado, diria...",
+            "Já fui parado(a) pela polícia por...",
+            "O hábito mais estranho que peguei da minha família é...",
+            "Já me machuquei feio tentando...",
+            "Se eu pudesse eliminar um invento da humanidade, seria...",
+            "Já fiquei sem falar com... por um motivo ridículo.",
+            "Minha maior decepção amorosa foi...",
+            "Já fui humilhado(a) publicamente quando...",
+            "Se eu tivesse que viver sem tecnologia, só levaria...",
+            "Já fui traído(a) de uma maneira inesperada por...",
+            "Meu maior complexo físico é...",
+            "Já salvei uma situação com uma mentira criativa sobre..."
+        ]
+    };
+
+    // Função para carregar as perguntas
+    function loadQuestions() {
+        questions = shuffleArray(questionsData.questions); // Embaralha as perguntas
+        nextQuestion(); // Exibe a primeira pergunta
+    }
+
+    // Função para embaralhar um array (Fisher-Yates Shuffle)
+    function shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array;
+    }
+
+    // Função para exibir a próxima pergunta
+    function nextQuestion() {
+        if (questions.length === 0) {
+            document.getElementById("questionSegredos").textContent = "Carregando perguntas...";
+            return;
+        }
+
+        if (currentQuestion < questions.length) {
+            document.getElementById("questionSegredos").textContent = questions[currentQuestion];
+            document.getElementById("result").textContent = "";
+            currentQuestion++;
+        } else {
+            document.getElementById("questionSegredos").textContent = "Fim do Jogo! Espero que estejam se divertindo! Quer jogar novamente?";
+            document.getElementById("result").textContent = "";
+            currentQuestion = 0;  // Reinicia o jogo
+            questions = shuffleArray(questions); // Embaralha novamente para uma nova rodada
+        }
+    }
+
+    // Carrega as perguntas ao iniciar
+    loadQuestions();
+
+    // Pop-up
+    function openPopup() {
+        document.getElementById("popup").style.display = "block";
+    }
+
+    function closePopup() {
+        document.getElementById("popup").style.display = "none";
+    }
+
+    // Fechar o pop-up ao clicar fora dele
+    window.onclick = function(event) {
+        let popup = document.getElementById("popup");
+        if (event.target === popup) {
+            popup.style.display = "none";
+        }
+    };
+</script>
+
+</body>
+</html>

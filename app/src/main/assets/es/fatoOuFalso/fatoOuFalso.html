@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="../../stylesCards.css">
+    <title>Hecho o Falso</title>
+</head>
+<body>
+
+<div class="game-container">
+    <!-- Menu -->
+    <nav class="menu">
+        <a href="../menuEs.html" class="menu-title">
+            <img class="logo-bebedeira" src="../images/logo.png" alt="Bender Games Logo" />
+        </a>
+    </nav>
+
+    <!-- Contenido del juego -->
+    <h1>Hecho o Falso </h1>
+    <a href="#" onclick="openPopup()">
+        <img class="img-regras" src="../images/regras.png" alt="Reglas">
+    </a>
+    <h4>Reglas</h4>
+
+    <!-- Pop-up -->
+    <div id="popup" class="popup">
+        <div class="popup-content">
+            <span class="close" onclick="closePopup()">&times;</span>
+            <h3>Reglas del Juego</h3>
+            <h5>Hecho o Falso</h5>
+            <ul>
+                <li>Un jugador lee una frase</li>
+                <li>El jugador a su derecha responde si es 'hecho' o si es 'falso'</li>
+                <li>Luego, haz clic en el botón de 'hecho' o 'falso'</li>
+                <li>Si el jugador acierta, ¡felicidades!</li>
+                <li>Si se equivoca, bebe un trago</li>
+                <li>Ahora, el jugador que acaba de responder toma el móvil y lee para el siguiente jugador a la derecha</li>
+                <li>El ciclo continúa</li>
+                <li>¡Diviértete! 🍻</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="card-frase">
+        <p id="questionFatoOuFalso">Cargando preguntas...</p>
+    </div>
+    <div class="button-container-fato-falso">
+        <button id="btnFato" class="btn-fato">Hecho</button>
+        <button id="btnFalso" class="btn-falso">Falso</button>
+    </div>
+
+    <div id="result"></div>
+</div>
+
+
+<script>
+    // Datos del juego incrustados
+const gameData = {
+    "questions": [
+    {
+        "frase": "La sangre de los cangrejos herradura es azul porque contiene cobre en lugar de hierro, y se utiliza para detectar toxinas en las vacunas.",
+        "correta": "Hecho",
+        "explicacao": "La sangre de los cangrejos herradura contiene hemocianina, que usa cobre para transportar oxígeno, dándole un color azul. Realmente se usa en pruebas de esterilidad de vacunas y medicamentos."
+    },
+    {
+        "frase": "El Sol representa el 99,86% de la masa total del Sistema Solar; todos los planetas juntos son solo una fracción de su peso.",
+        "correta": "Hecho",
+        "explicacao": "¡Correcto! El Sol concentra alrededor del 99,86% de la masa total del Sistema Solar, con los planetas y otros cuerpos representando solo una pequeña parte."
+    },
+    {
+        "frase": "La Tierra es el único planeta que no tiene el nombre de un dios romano o griego.",
+        "correta": "Hecho",
+        "explicacao": "Todos los demás planetas del Sistema Solar tienen nombres derivados de la mitología grecorromana. La Tierra es la excepción, con un nombre que proviene del inglés antiguo y alemán ('Erda', 'Earth'), que significan 'suelo'."
+    },
+    {
+        "frase": "Las abejas pueden reconocer rostros humanos, igual que nosotros reconocemos otros rostros.",
+        "correta": "Hecho",
+        "explicacao": "Las investigaciones mostraron que las abejas usan un proceso similar al nuestro llamado ‘procesamiento configural’ para reconocer rostros humanos."
+    },
+    {
+        "frase": "Tu estómago se renueva cada 3 o 4 días para que no se digiera a sí mismo.",
+        "correta": "Hecho",
+        "explicacao": "Las células del revestimiento del estómago se renuevan constantemente para resistir la acidez de los jugos gástricos y evitar la autodigestión."
+    },
+    {
+        "frase": "Google se llamó originalmente 'BackRub'.",
+        "correta": "Hecho",
+        "explicacao": "En 1996, Larry Page y Sergey Brin desarrollaron el motor de búsqueda llamado 'BackRub' antes de renombrarlo como Google."
+    },
+    {
+        "frase": "Los calamares gigantes tienen ojos del tamaño de balones de baloncesto.",
+        "correta": "Hecho",
+        "explicacao": "Los calamares gigantes pueden tener ojos de hasta 30 cm de diámetro, los más grandes conocidos en el reino animal, comparables al tamaño de balones de baloncesto."
+    },
+    {
+        "frase": "El ADN humano y el ADN del plátano son un 60% similares.",
+        "correta": "Hecho",
+        "explicacao": "Los humanos comparten alrededor del 60% de similitud genética con los plátanos, ya que ambos son organismos vivos con muchas funciones celulares en común."
+    },
+    {
+        "frase": "El espacio no es completamente silencioso: existen ondas de radio y sonidos captables con equipos específicos.",
+        "correta": "Hecho",
+        "explicacao": "Aunque el sonido no se propaga en el vacío como en la Tierra, los instrumentos pueden captar vibraciones y ondas de radio convertidas en sonidos audibles."
+    },
+    {
+        "frase": "Japón tiene más mascotas que niños.",
+        "correta": "Hecho",
+        "explicacao": "Los datos muestran que en Japón hay más mascotas registradas que niños menores de 15 años, reflejando cambios demográficos y culturales."
+    },
+    {
+        "frase": "El cerebro humano genera unos 20 vatios de energía, suficiente para encender una bombilla.",
+        "correta": "Hecho",
+        "explicacao": "El cerebro humano, en reposo, consume alrededor de 20 vatios de energía, suficiente para encender una pequeña bombilla."
+    },
+    {
+        "frase": "Los árboles se comunican entre sí mediante señales químicas en las raíces y en el aire.",
+        "correta": "Hecho",
+        "explicacao": "Los árboles intercambian señales químicas a través de redes fúngicas subterráneas y compuestos volátiles liberados al aire para alertar a otros sobre amenazas."
+    },
+    {
+        "frase": "El órgano más grande del cuerpo humano es la piel.",
+        "correta": "Hecho",
+        "explicacao": "La piel es el órgano más grande del cuerpo humano en área y peso, funcionando como barrera protectora y reguladora térmica."
+    },
+    {
+        "frase": "El primer correo electrónico de la historia fue enviado por Ray Tomlinson a sí mismo en 1971.",
+        "correta": "Hecho",
+        "explicacao": "Ray Tomlinson creó el sistema de correos electrónicos y envió el primer mensaje a sí mismo como prueba en 1971."
+    },
+    {
+        "frase": "Los flamencos son naturalmente grises; se vuelven rosados por la alimentación rica en betacaroteno.",
+        "correta": "Hecho",
+        "explicacao": "La coloración rosada de los flamencos proviene de su alimentación con algas y crustáceos ricos en pigmentos carotenoides."
+    },
+    {
+        "frase": "En el antiguo Egipto, los gatos eran considerados sagrados y matar a un gato podía ser castigado con la muerte.",
+        "correta": "Hecho",
+        "explicacao": "Los egipcios veían a los gatos como animales sagrados, asociados con la diosa Bastet. Matar a un gato era un crimen grave."
+    },
+    {
+        "frase": "El pulpo tiene tres corazones y sangre azul.",
+        "correta": "Hecho",
+        "explicacao": "Los pulpos tienen tres corazones: dos bombean sangre a las branquias y uno al cuerpo. Su sangre es azul porque contiene hemocianina."
+    },
+    {
+        "frase": "Hay más estrellas en el universo observable que granos de arena en todas las playas de la Tierra.",
+        "correta": "Hecho",
+        "explicacao": "Se estima que hay más de 100 billones de galaxias, cada una con miles de millones de estrellas, superando con creces el número de granos de arena en la Tierra."
+    },
+    {
+        "frase": "En la Antigua Roma, la orina se usaba como producto de limpieza e incluso para cepillarse los dientes.",
+        "correta": "Hecho",
+        "explicacao": "En la Antigua Roma, la orina era valorada por su contenido de amoníaco, útil para limpiar ropa e incluso usada en la higiene bucal."
+    },
+    {
+        "frase": "El código de barras fue patentado antes que el ratón de computadora.",
+        "correta": "Hecho",
+        "explicacao": "El código de barras fue patentado en 1952, mientras que el ratón de computadora fue inventado en la década de 1960."
+    },
+{
+        "frase": "¡Los pingüinos tienen rodillas! Están ocultas bajo su capa de plumas y grasa.",
+        "correta": "Hecho",
+        "explicacao": "Los pingüinos tienen rodillas internas. Sus patas están dobladas dentro del cuerpo, bajo plumas densas, lo que da la impresión de que no tienen."
+    },
+    {
+        "frase": "El sonido no puede propagarse en el vacío del espacio, por eso las explosiones ruidosas en las películas son una exageración.",
+        "correta": "Hecho",
+        "explicacao": "En el espacio, al ser un vacío, no hay medio para la propagación del sonido. Las explosiones ruidosas de las películas son una licencia artística."
+    },
+    {
+        "frase": "El primer sitio web de la historia sigue en línea: info.cern.ch.",
+        "correta": "Hecho",
+        "explicacao": "El sitio info.cern.ch, creado por Tim Berners-Lee en 1991, fue el primero de la web y sigue activo como parte de la historia de internet."
+    },
+    {
+        "frase": "Shakespeare inventó más de 1.700 palabras en inglés, muchas de las cuales todavía se usan hoy en día.",
+        "correta": "Hecho",
+        "explicacao": "Shakespeare acuñó cientos de palabras nuevas en inglés, muchas de las cuales se utilizan hasta hoy, como 'lonely', 'bedroom' y 'swagger'."
+    },
+    {
+        "frase": "Las vacas tienen mejores amigas y se estresan cuando las separan.",
+        "correta": "Hecho",
+        "explicacao": "Los estudios muestran que las vacas crean lazos sociales fuertes con otras vacas y pueden sufrir estrés al ser separadas de sus compañeras favoritas."
+    },
+    {
+        "frase": "Las impresoras 3D ya se han utilizado para imprimir órganos humanos artificiales (como orejas y tejidos).",
+        "correta": "Hecho",
+        "explicacao": "La biotecnología ya permite usar impresoras 3D para crear estructuras como orejas, cartílagos y tejidos, con potencial para futuras aplicaciones médicas."
+    },
+    {
+        "frase": "El chocolate puede ser letal para los perros, ya que no pueden metabolizar la teobromina.",
+        "correta": "Hecho",
+        "explicacao": "La teobromina, presente en el chocolate, es tóxica para los perros porque la metabolizan muy lentamente, pudiendo causar intoxicación o muerte."
+    },
+    {
+        "frase": "Las hormigas no duermen, pero hacen pausas regulares de inactividad.",
+        "correta": "Hecho",
+        "explicacao": "Las hormigas no duermen como los humanos, pero tienen ciclos de inactividad que funcionan como descanso, esenciales para su supervivencia."
+    },
+    {
+        "frase": "La Luna se aleja de la Tierra unos 3,8 cm por año.",
+        "correta": "Hecho",
+        "explicacao": "La Luna se está alejando de la Tierra debido a la interacción gravitacional entre ambos cuerpos, especialmente por la influencia de las mareas."
+    },
+    {
+        "frase": "La miel nunca se estropea: los arqueólogos han encontrado tarros comestibles en tumbas egipcias.",
+        "correta": "Hecho",
+        "explicacao": "La miel es naturalmente antimicrobiana y altamente estable, lo que permite que dure miles de años sin estropearse."
+    },
+    {
+        "frase": "Tu nariz puede recordar hasta 50.000 olores diferentes.",
+        "correta": "Hecho",
+        "explicacao": "El olfato humano es extremadamente sensible, y los estudios muestran que podemos distinguir entre decenas de miles de olores diferentes."
+    },
+    {
+        "frase": "La medusa Turritopsis dohrnii es biológicamente inmortal.",
+        "correta": "Hecho",
+        "explicacao": "Esta especie puede revertir su ciclo de vida, regresando al estado juvenil después de alcanzar la madurez, lo que la hace teóricamente inmortal."
+    },
+    {
+        "frase": "Los gatos tienen 32 músculos en cada oreja.",
+        "correta": "Hecho",
+        "explicacao": "Los gatos poseen músculos altamente desarrollados en las orejas, lo que les permite moverlas de forma independiente para localizar sonidos con precisión."
+    },
+    {
+        "frase": "Solo el 5% de los océanos del planeta han sido explorados.",
+        "correta": "Hecho",
+        "explicacao": "La mayor parte del océano permanece inexplorada debido a limitaciones tecnológicas y a la vastedad y profundidad de los mares."
+    },
+    {
+        "frase": "Hay más árboles en la Tierra que estrellas en la Vía Láctea.",
+        "correta": "Hecho",
+        "explicacao": "Se estima que hay alrededor de 3 billones de árboles en la Tierra, más que las 100 a 400 mil millones de estrellas en la Vía Láctea."
+    },
+    {
+        "frase": "Las patatas fueron el primer alimento cultivado en el espacio.",
+        "correta": "Hecho",
+        "explicacao": "La NASA y la Universidad de Wisconsin cultivaron patatas en entornos espaciales como experimento de agricultura fuera de la Tierra."
+    },
+
+
+
+
+        {
+    "frase": "Los humanos comparten alrededor del 50% de su ADN con las moscas de la fruta.",
+    "correta": "Hecho",
+    "explicacao": "A pesar de las diferencias, muchos genes básicos son similares entre los humanos y las moscas de la fruta, lo que las hace útiles para la investigación genética."
+},
+{
+    "frase": "Tu cuerpo brilla en la oscuridad, pero en niveles demasiado bajos para que el ojo humano los perciba.",
+    "correta": "Hecho",
+    "explicacao": "El cuerpo humano emite una pequeña cantidad de luz visible debido a reacciones químicas naturales, pero es invisible sin equipos especiales."
+},
+{
+    "frase": "El Monte Everest crece alrededor de 4 mm al año debido al movimiento de las placas tectónicas.",
+    "correta": "Hecho",
+    "explicacao": "La colisión entre las placas tectónicas de la India y Asia hace que el Himalaya continúe elevándose lentamente cada año."
+},
+{
+    "frase": "La primera cámara web de la historia se usó para monitorear una cafetera.",
+    "correta": "Hecho",
+    "explicacao": "Investigadores de la Universidad de Cambridge crearon la primera cámara web para evitar viajes inútiles a la sala de café cuando la cafetera estaba vacía."
+},
+{
+    "frase": "La Torre Eiffel puede ser hasta 15 cm más alta en verano debido a la dilatación térmica del hierro.",
+    "correta": "Hecho",
+    "explicacao": "El hierro se expande con el calor, haciendo que la Torre Eiffel aumente de altura en los días más cálidos."
+},
+{
+    "frase": "Tu corazón late alrededor de 100 mil veces al día.",
+    "correta": "Hecho",
+    "explicacao": "En promedio, un corazón humano late aproximadamente 100 mil veces al día, bombeando unos 7.500 litros de sangre."
+},
+{
+    "frase": "Hay más formas de barajar un mazo de 52 cartas que átomos en la Tierra.",
+    "correta": "Hecho",
+    "explicacao": "Hay 52! (factorial de 52) formas posibles de organizar un mazo, un número mayor que el de átomos estimados en la Tierra."
+},
+{
+    "frase": "Algunos pulpos 'caminan' sobre dos patas en el fondo del mar.",
+    "correta": "Hecho",
+    "explicacao": "Algunos pulpos usan dos de sus tentáculos traseros para desplazarse por el fondo marino, imitando el movimiento bípedo."
+},
+{
+    "frase": "El ojo de un avestruz es más grande que su cerebro.",
+    "correta": "Hecho",
+    "explicacao": "El ojo del avestruz mide unos 5 cm de diámetro, mayor que su cerebro, lo que contribuye a su excelente visión."
+},
+{
+    "frase": "Las cebollas te hacen llorar porque liberan compuestos sulfurosos que reacciona con la humedad de los ojos.",
+    "correta": "Hecho",
+    "explicacao": "Al cortar cebollas, se liberan compuestos sulfurosos que forman ácido sulfhídrico, el cual reacciona con la humedad de los ojos causando ardor y lágrimas."
+},
+{
+    "frase": "Las ballenas jorobadas tienen canciones que viajan miles de kilómetros bajo el agua.",
+    "correta": "Hecho",
+    "explicacao": "Las vocalizaciones de las jorobadas pueden propagarse largas distancias bajo el agua gracias a la eficiencia de la transmisión del sonido en el medio acuático."
+},
+{
+    "frase": "La Tierra ya tuvo dos 'lunas' durante cortos períodos en su historia.",
+    "correta": "Hecho",
+    "explicacao": "Pequeños objetos como asteroides capturados temporalmente por la gravedad terrestre pueden orbitar el planeta un tiempo antes de escapar o caer."
+},
+{
+    "frase": "Los dinosaurios vivieron en la Tierra durante más de 160 millones de años; los humanos llevamos aquí unos 300 mil.",
+    "correta": "Hecho",
+    "explicacao": "Los dinosaurios dominaron la Tierra por unos 160 millones de años, mientras que la especie humana moderna existe hace solo 300 mil años."
+},
+{
+    "frase": "Una cucharadita de una estrella de neutrones pesa más de mil millones de toneladas.",
+    "correta": "Hecho",
+    "explicacao": "La densidad de una estrella de neutrones es tan extrema que una cucharadita de su materia pesaría miles de millones de toneladas en la Tierra."
+},
+{
+    "frase": "El pulpo puede escapar por cualquier agujero mayor que su pico, que es la única parte rígida de su cuerpo.",
+    "correta": "Hecho",
+    "explicacao": "El pico es la única estructura rígida en el cuerpo del pulpo; si la abertura es mayor que él, el animal puede pasar."
+},
+{
+    "frase": "Las cebras tienen rayas únicas como las huellas digitales.",
+    "correta": "Hecho",
+    "explicacao": "Cada cebra tiene un patrón de rayas único, como las huellas digitales, lo que permite su identificación individual."
+},
+{
+    "frase": "El colibrí es el único pájaro capaz de volar hacia atrás.",
+    "correta": "Hecho",
+    "explicacao": "Gracias a la estructura única de sus alas, los colibríes pueden realizar maniobras complejas como el vuelo hacia atrás y el vuelo estacionario."
+},
+{
+    "frase": "Las estrellas de mar no tienen cerebro ni sangre.",
+    "correta": "Hecho",
+    "explicacao": "En lugar de sangre, las estrellas de mar bombean agua de mar a través de su sistema vascular y no tienen cerebro centralizado."
+},
+{
+    "frase": "La miel nunca se echa a perder; se han encontrado frascos de miel de miles de años todavía comestibles.",
+    "correta": "Hecho",
+    "explicacao": "La miel tiene propiedades antibacterianas y un bajo contenido de agua, lo que le permite conservarse indefinidamente si está bien almacenada."
+},
+{
+    "frase": "Los caracoles pueden dormir durante años.",
+    "correta": "Hecho",
+    "explicacao": "En condiciones adversas, como sequía, algunas especies de caracoles pueden hibernar o entrar en estado de estivation durante largos períodos, a veces años."
+},
+{
+    "frase": "Las jirafas solo duermen entre 10 minutos y 2 horas al día, generalmente de pie.",
+    "correta": "Hecho",
+    "explicacao": "Debido al riesgo de depredadores, las jirafas duermen poco y a menudo permanecen de pie durante el sueño ligero."
+},
+{
+    "frase": "El ADN humano se estira hasta alcanzar el Sol y regresar si se colocan todas las hebras de un cuerpo una tras otra.",
+    "correta": "Hecho",
+    "explicacao": "Si se desenrollara y alineara el ADN de todas las células de un cuerpo humano, su longitud superaría los 150 mil millones de kilómetros, suficiente para ir al Sol y volver cientos de veces."
+},
+{
+    "frase": "Los flamencos son rosados porque comen camarones.",
+    "correta": "Hecho",
+    "explicacao": "Los flamencos obtienen el pigmento carotenoide de su dieta de camarones y algas, lo que les da su color rosado característico."
+},
+{
+    "frase": "Los tiburones existieron antes que los árboles.",
+    "correta": "Hecho",
+    "explicacao": "Los tiburones surgieron hace más de 400 millones de años, mientras que los árboles aparecieron unos 350 millones de años atrás."
+},
+{
+    "frase": "Los plátanos son bayas, pero las fresas no.",
+    "correta": "Hecho",
+    "explicacao": "Botánicamente, el plátano es una baya porque proviene de un solo ovario y tiene semillas internas. La fresa, sin embargo, es un fruto agregado."
+},
+{
+    "frase": "Las vacas tienen mejores amigas y se estresan si se separan.",
+    "correta": "Hecho",
+    "explicacao": "Estudios muestran que las vacas forman fuertes lazos sociales y exhiben signos de estrés cuando se separan de sus compañeras preferidas."
+},
+{
+    "frase": "Algunos canguros no pueden caminar hacia atrás.",
+    "correta": "Hecho",
+    "explicacao": "Los canguros tienen una anatomía única que les impide caminar hacia atrás debido a la forma de sus patas y cola."
+},
+{
+    "frase": "Existen más versiones posibles del ajedrez que átomos en el universo observable.",
+    "correta": "Hecho",
+    "explicacao": "El número de posibles partidas de ajedrez es vastamente superior al número de átomos en el universo."
+},
+{
+    "frase": "Los bebés tienen alrededor de 300 huesos al nacer, pero muchos se fusionan quedando con 206 en la adultez.",
+    "correta": "Hecho",
+    "explicacao": "Al nacer, los bebés tienen más huesos debido a la presencia de cartílagos que se fusionan a medida que crecen."
+},
+{
+    "frase": "Google procesa más de 8 mil millones de búsquedas por día.",
+    "correta": "Hecho",
+    "explicacao": "Google maneja miles de millones de búsquedas todos los días, convirtiéndose en uno de los motores de búsqueda más utilizados del mundo."
+},
+{
+    "frase": "La luz puede curvarse al pasar por campos gravitacionales intensos — es lo que Einstein predijo con la Teoría de la Relatividad.",
+    "correta": "Hecho",
+    "explicacao": "La Teoría de la Relatividad de Einstein predice que la luz es curvada por campos gravitacionales intensos, como lo demuestran las observaciones astronómicas."
+},
+{
+    "frase": "Algunas arañas fingen estar muertas para engañar a los depredadores.",
+    "correta": "Hecho",
+    "explicacao": "Algunas arañas utilizan el comportamiento de hacerse las muertas como táctica para escapar de los depredadores."
+},
+{
+    "frase": "El sonido más fuerte registrado en la Tierra fue la erupción del volcán Krakatoa en 1883.",
+    "correta": "Hecho",
+    "explicacao": "La erupción del Krakatoa generó el sonido más fuerte jamás registrado, con ondas sonoras que viajaron por el planeta."
+},
+{
+    "frase": "La primera cámara fotográfica fue inventada en 1816.",
+    "correta": "Hecho",
+    "explicacao": "La primera cámara fotográfica fue inventada por Joseph Nicéphore Niépce en 1816, revolucionando la forma de capturar imágenes."
+},
+{
+    "id": 2,
+    "frase": "La mente consciente controla las acciones del cuerpo.",
+    "correta": "Falso",
+    "explicacao": "En realidad, muchas de nuestras acciones están gobernadas por procesos automáticos y subconscientes."
+},
+{
+    "frase": "Los opuestos se atraen.",
+    "correta": "Falso",
+    "explicacao": "Los estudios indican que las similitudes entre dos personas son más importantes para una relación exitosa que las diferencias."
+},
+{
+    "frase": "El lado izquierdo del cerebro es lógico, el derecho es creativo.",
+    "correta": "Falso",
+    "explicacao": "Ambos hemisferios del cerebro participan en actividades de razonamiento y creatividad."
+},
+{
+    "frase": "Los hombres no saben pedir direcciones.",
+    "correta": "Falso",
+    "explicacao": "Los estudios muestran que tanto hombres como mujeres piden ayuda en igual proporción, aunque de maneras diferentes."
+},
+{
+    "frase": "Puedes aprender a ser 100% feliz.",
+    "correta": "Falso",
+    "explicacao": "La felicidad es una experiencia compleja influenciada por muchos factores internos y externos, y no es algo que se pueda alcanzar todo el tiempo."
+},
+{
+    "frase": "Las abejas siempre pican y mueren.",
+    "correta": "Falso",
+    "explicacao": "Solo las abejas obreras pican y mueren porque su aguijón queda incrustado en la víctima. Sin embargo, las abejas reinas y los zánganos pueden picar varias veces."
+},
+{
+    "frase": "Los pingüinos viven en el frío todo el tiempo.",
+    "correta": "Falso",
+    "explicacao": "Aunque los pingüinos están asociados al frío, algunas especies viven en climas más templados, como el pingüino de penacho amarillo que habita en Nueva Zelanda y Australia."
+},
+{
+    "frase": "La lluvia ácida destruye inmediatamente todo lo que toca.",
+    "correta": "Falso",
+    "explicacao": "La lluvia ácida puede dañar lentamente estructuras y ecosistemas, pero no causa daños inmediatos y catastróficos."
+},
+{
+    "frase": "La deforestación es la única causa del cambio climático.",
+    "correta": "Falso",
+    "explicacao": "Aunque la deforestación es un factor importante, el cambio climático también es causado por las emisiones de gases de efecto invernadero de fuentes como la quema de combustibles fósiles."
+},
+{
+    "frase": "Los antivirus protegen contra todas las amenazas cibernéticas.",
+    "correta": "Falso",
+    "explicacao": "Los antivirus son una capa importante de protección, pero no pueden detectar todas las amenazas, especialmente las más sofisticadas."
+},
+{
+    "frase": "Cuantos más megapíxeles, mejor la cámara.",
+    "correta": "Falso",
+    "explicacao": "La calidad de la imagen depende de varios factores como el tamaño del sensor y la lente, no solo de la cantidad de megapíxeles."
+},
+{
+    "frase": "La energía solar es cara e ineficiente.",
+    "correta": "Falso",
+    "explicacao": "El costo de los paneles solares ha bajado significativamente y muchas tecnologías de energía solar son altamente eficientes y asequibles."
+},
+{
+    "frase": "La batería del celular dura más cuando se carga al 100%.",
+    "correta": "Falso",
+    "explicacao": "Las baterías de litio, comunes en los celulares, funcionan mejor cuando no se descargan por completo ni se cargan al 100% de forma habitual."
+},
+{
+    "frase": "Puedes perder grasa de forma localizada.",
+    "correta": "Falso",
+    "explicacao": "No es posible reducir grasa de una zona específica del cuerpo solo con ejercicios para esa área. La pérdida de grasa ocurre de manera general."
+},
+{
+    "frase": "El ejercicio intenso te hace engordar.",
+    "correta": "Falso",
+    "explicacao": "El ejercicio intenso puede ayudar a quemar calorías y mejorar la composición corporal, siempre que se acompañe de una alimentación equilibrada."
+},
+{
+    "frase": "Necesitas suplementos para ganar músculo.",
+    "correta": "Falso",
+    "explicacao": "Una alimentación equilibrada es clave para el desarrollo muscular. Los suplementos pueden ser útiles, pero no son esenciales para todos."
+},
+{
+    "frase": "Necesitas sudar para quemar grasa.",
+    "correta": "Falso",
+    "explicacao": "El sudor es una respuesta del cuerpo al calor y no tiene relación directa con la quema de grasa. El adelgazamiento depende del gasto calórico."
+},
+{
+    "frase": "Comer grasa te hace engordar.",
+    "correta": "Falso",
+    "explicacao": "No toda la grasa es perjudicial. Las grasas saludables, como las que se encuentran en los aguacates y el aceite de oliva, son esenciales para el cuerpo y pueden incluso ayudar en la pérdida de peso."
+},
+{
+    "frase": "Los científicos saben todo sobre el cuerpo humano.",
+    "correta": "Falso",
+    "explicacao": "A pesar de los enormes avances, muchos aspectos del cuerpo humano y de la mente siguen siendo un misterio."
+},
+{
+    "frase": "Debes esperar 24 horas para reportar a una persona desaparecida.",
+    "correta": "Falso",
+    "explicacao": "No hay ley que determine un plazo para reportar la desaparición de alguien. Cuanto antes se reporte, mejor."
+},
+{
+    "frase": "No puedes beber alcohol y conducir después de unas horas.",
+    "correta": "Falso",
+    "explicacao": "El alcohol afecta al cuerpo de diferentes maneras, y el único factor que realmente elimina el alcohol de la sangre es el tiempo."
+},
+{
+    "frase": "Si no usas tu cerebro, se atrofia.",
+    "correta": "Falso",
+    "explicacao": "Aunque el cerebro necesita estímulos para mantenerse activo y saludable, no se atrofia de forma dramática por pasar un tiempo sin actividades intensas."
+},
+{
+    "frase": "Usas solo el 10% de tu cerebro.",
+    "correta": "Falso",
+    "explicacao": "En realidad usamos casi todas las partes del cerebro para funciones diferentes, incluso durante el sueño."
+},
+{
+    "frase": "Los recuerdos pueden ser borrados del cerebro.",
+    "correta": "Falso",
+    "explicacao": "Los recuerdos no se borran, pero pueden ser alterados o olvidados con el tiempo. El cerebro también puede crear falsos recuerdos."
+},
+{
+    "frase": "Los hombres y las mujeres tienen cerebros fundamentalmente diferentes.",
+    "correta": "Falso",
+    "explicacao": "Aunque hay algunas diferencias promedio en el cerebro entre hombres y mujeres, estas diferencias son pequeñas y no determinan las habilidades cognitivas."
+},
+{
+    "frase": "La inteligencia es genética.",
+    "correta": "Falso",
+    "explicacao": "La inteligencia está influenciada tanto por la genética como por el entorno. Factores como la educación y las experiencias de vida tienen un gran impacto en el desarrollo cognitivo."
+},
+        {
+            "frase": "Hacer multitarea aumenta la productividad.",
+            "correta": "Falso",
+            "explicacao": "En realidad, la multitarea puede disminuir la productividad, ya que el cerebro necesita alternar rápidamente entre las tareas, lo que consume más energía y tiempo."
+        },
+        {
+            "frase": "La mente consciente controla las acciones del cuerpo.",
+            "correta": "Falso",
+            "explicacao": "En realidad, muchas de nuestras acciones están dirigidas por procesos automáticos y subconscientes."
+        },
+        {
+            "frase": "Los opuestos se atraen.",
+            "correta": "Falso",
+            "explicacao": "Los estudios indican que las similitudes entre dos personas son más importantes para una relación exitosa que las diferencias."
+        },
+        {
+            "frase": "El lado izquierdo del cerebro es lógico, el derecho es creativo.",
+            "correta": "Falso",
+            "explicacao": "Ambos hemisferios del cerebro están involucrados en actividades de razonamiento y creatividad."
+        },
+        {
+            "frase": "Los hombres no saben pedir direcciones.",
+            "correta": "Falso",
+            "explicacao": "Los estudios muestran que tanto hombres como mujeres piden ayuda en igual proporción, aunque de diferentes maneras."
+        },
+        {
+            "frase": "Puedes aprender a ser 100% feliz.",
+            "correta": "Falso",
+            "explicacao": "La felicidad es una experiencia compleja influenciada por muchos factores internos y externos, y no es algo que se pueda alcanzar todo el tiempo."
+        },
+        {
+            "frase": "Las abejas siempre pican y mueren.",
+            "correta": "Falso",
+            "explicacao": "Solo las abejas obreras pican y mueren después de picar porque su aguijón queda atrapado en la víctima. Sin embargo, las reinas y los zánganos pueden picar varias veces."
+        },
+        {
+            "frase": "Los pingüinos viven todo el tiempo en el frío.",
+            "correta": "Falso",
+            "explicacao": "Aunque los pingüinos se asocian con el frío, algunas especies viven en climas más templados, como el pingüino de penacho amarillo que habita en Nueva Zelanda y Australia."
+        },
+        {
+            "frase": "La lluvia ácida destruye inmediatamente todo lo que toca.",
+            "correta": "Falso",
+            "explicacao": "La lluvia ácida puede dañar lentamente las estructuras y los ecosistemas, pero no causa daños inmediatos y catastróficos."
+        },
+        {
+            "frase": "La deforestación es la única causa del cambio climático.",
+            "correta": "Falso",
+            "explicacao": "Aunque la deforestación es un factor importante, el cambio climático también es causado por las emisiones de gases de efecto invernadero provenientes de la quema de combustibles fósiles."
+        },
+        {
+            "frase": "Los antivirus protegen contra todas las amenazas cibernéticas.",
+            "correta": "Falso",
+            "explicacao": "Los antivirus son una capa importante de protección, pero no pueden detectar todas las amenazas, especialmente las más sofisticadas."
+        },
+        {
+            "frase": "Cuantos más megapíxeles, mejor es la cámara.",
+            "correta": "Falso",
+            "explicacao": "La calidad de la imagen depende de varios factores, como el tamaño del sensor y la lente, no solo de la cantidad de megapíxeles."
+        },
+        {
+            "frase": "La energía solar es cara e ineficiente.",
+            "correta": "Falso",
+            "explicacao": "El costo de los paneles solares ha disminuido significativamente y muchas tecnologías solares son altamente eficientes y asequibles."
+        },
+        {
+            "frase": "La batería del celular dura más si se carga al 100%.",
+            "correta": "Falso",
+            "explicacao": "Las baterías de litio, que se usan comúnmente en los celulares, funcionan mejor si no se descargan completamente ni se cargan al 100% de forma regular."
+        },
+        {
+            "frase": "Puedes perder grasa de forma localizada.",
+            "correta": "Falso",
+            "explicacao": "No es posible reducir la grasa de una zona específica del cuerpo solo con ejercicios para esa región. La pérdida de grasa ocurre de manera general."
+        },
+        {
+            "frase": "El ejercicio intenso hace que engordes.",
+            "correta": "Falso",
+            "explicacao": "El ejercicio intenso puede ayudar a quemar calorías y a mejorar la composición corporal, siempre que se acompañe de una alimentación equilibrada."
+        },
+        {
+            "frase": "Necesitas suplementos para ganar músculo.",
+            "correta": "Falso",
+            "explicacao": "Una alimentación equilibrada es clave para ganar músculo. Los suplementos pueden ser útiles, pero no son esenciales para todos."
+        },
+        {
+            "frase": "Necesitas sudar para quemar grasa.",
+            "correta": "Falso",
+            "explicacao": "El sudor es una respuesta del cuerpo al calor y no tiene relación directa con la quema de grasa. La pérdida de peso depende del gasto calórico."
+        },
+        {
+            "frase": "Comer grasa te hace engordar.",
+            "correta": "Falso",
+            "explicacao": "No toda la grasa es perjudicial. Las grasas saludables, como las que se encuentran en el aguacate y el aceite de oliva, son esenciales para el cuerpo e incluso pueden ayudar en la pérdida de peso."
+        },
+        {
+            "frase": "Los científicos lo saben todo sobre el cuerpo humano.",
+            "correta": "Falso",
+            "explicacao": "A pesar de los grandes avances, muchos aspectos del cuerpo y la mente siguen siendo un misterio."
+        },
+        {
+            "frase": "Debes esperar 24 horas para denunciar a una persona desaparecida.",
+            "correta": "Falso",
+            "explicacao": "No existe una ley que determine un plazo para denunciar la desaparición de alguien. Cuanto antes se haga la denuncia, mejor."
+        },
+        {
+            "frase": "No puedes beber alcohol y conducir después de unas horas.",
+            "correta": "Falso",
+            "explicacao": "El alcohol afecta al cuerpo de diferentes maneras, y el único factor que realmente elimina el alcohol de la sangre es el tiempo."
+        },
+        {
+            "frase": "Si no usas tu cerebro, se atrofia.",
+            "correta": "Falso",
+            "explicacao": "Aunque el cerebro necesita estímulos para mantenerse activo y saludable, no se atrofia de forma dramática si pasas un tiempo sin actividades intensas."
+        },
+        {
+            "frase": "Usas solo el 10% de tu cerebro.",
+            "correta": "Falso",
+            "explicacao": "En realidad, usamos casi todas las partes del cerebro para diferentes funciones, incluso durante el sueño."
+        },
+        {
+            "frase": "Los recuerdos pueden borrarse del cerebro.",
+            "correta": "Falso",
+            "explicacao": "Los recuerdos no se 'borran', pero pueden modificarse u olvidarse con el tiempo. El cerebro también puede crear recuerdos falsos."
+        },
+        {
+            "frase": "Los cerebros de hombres y mujeres son fundamentalmente diferentes.",
+            "correta": "Falso",
+            "explicacao": "Aunque existen algunas diferencias promedio en el cerebro entre hombres y mujeres, estas diferencias son pequeñas y no determinan las habilidades cognitivas."
+        },
+        {
+            "frase": "La inteligencia es genética.",
+            "correta": "Falso",
+            "explicacao": "La inteligencia está influenciada tanto por la genética como por el entorno. Factores como la educación y las experiencias de vida tienen un gran impacto en el desarrollo cognitivo."
+        },
+        {
+            "frase": "El alcohol mata las células cerebrales.",
+            "correta": "Falso",
+            "explicacao": "El alcohol no mata las células cerebrales, pero puede dañar los dendritas, afectando la comunicación entre neuronas."
+        },
+        {
+            "frase": "Beber café ayuda a curar la resaca.",
+            "correta": "Falso",
+            "explicacao": "El café puede empeorar la deshidratación causada por el alcohol, agravando la resaca."
+        },
+        {
+            "frase": "El hígado puede procesar alrededor de una dosis de alcohol por hora.",
+            "correta": "Cierto",
+            "explicacao": "En promedio, el hígado metaboliza alrededor de 10-15 ml de alcohol puro por hora."
+        },
+        {
+            "frase": "Beber alcohol calienta el cuerpo.",
+            "correta": "Falso",
+            "explicacao": "El alcohol dilata los vasos sanguíneos, dando una sensación de calor, pero en realidad reduce la temperatura corporal."
+        },
+        {
+            "frase": "La cerveza era considerada un alimento en la Edad Media.",
+            "correta": "Cierto",
+            "explicacao": "En la Edad Media, la cerveza era una fuente importante de nutrientes y calorías."
+        },
+        {
+            "frase": "El vino tinto es más saludable que el blanco.",
+            "correta": "Cierto",
+            "explicacao": "El vino tinto contiene más antioxidantes, como el resveratrol, que pueden aportar beneficios a la salud."
+        },
+        {
+            "frase": "Beber alcohol mejora el sueño.",
+            "correta": "Falso",
+            "explicacao": "El alcohol puede ayudar a conciliar el sueño, pero perjudica la calidad del sueño, especialmente el sueño REM."
+        },
+        {
+            "frase": "El vodka fue inventado en Polonia.",
+            "correta": "Cierto",
+            "explicacao": "El vodka tiene orígenes tanto en Polonia como en Rusia, pero los primeros registros son de Polonia en el siglo VIII."
+        },
+        {
+            "frase": "El champán solo puede producirse en Francia.",
+            "correta": "Cierto",
+            "explicacao": "Por ley, solo los vinos espumosos producidos en la región de Champagne, Francia, pueden llamarse champán."
+        },
+        {
+            "frase": "El alcohol se evapora completamente al cocinar.",
+            "correta": "Falso",
+            "explicacao": "Incluso después de horas de cocción, alrededor del 5-10% del alcohol puede permanecer en el plato."
+        }
+    ]
+}
+
+
+    // Variáveis do jogo
+    let questions = [];
+    let currentQuestionIndex = 0;
+
+    // Elementos do DOM
+    const questionText = document.getElementById('questionFatoOuFalso');
+    const resultDiv = document.getElementById('result');
+    const btnFato = document.getElementById('btnFato');
+    const btnFalso = document.getElementById('btnFalso');
+
+    // Função de embaralhamento Fisher-Yates
+    function shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array;
+    }
+
+    // Carregar as perguntas
+    function loadQuestions() {
+        questions = shuffleArray([...gameData.questions]);
+        showQuestion();
+    }
+
+    // Exibir a pergunta atual
+    function showQuestion() {
+        const question = questions[currentQuestionIndex];
+        questionText.textContent = question.frase;
+        resultDiv.innerHTML = '';
+
+    // Reabilita os botões
+        btnFato.disabled = false;
+        btnFalso.disabled = false;
+    }
+
+    // Verificar a resposta
+    function checkAnswer(resposta) {
+        const question = questions[currentQuestionIndex];
+
+    // Desabilita os botões para impedir múltiplos cliques
+        btnFato.disabled = true;
+        btnFalso.disabled = true;
+
+        if (resposta === question.correta) {
+            resultDiv.innerHTML = `<p style="color: green;">✅ Correto! ${question.explicacao}</p>`;
+        } else {
+            resultDiv.innerHTML = `<p style="color: red;">❌ Errado! ${question.explicacao}</p>`;
+        }
+
+        setTimeout(() => {
+            currentQuestionIndex = (currentQuestionIndex + 1) % questions.length;
+            showQuestion();
+        }, 7500);
+    }
+
+    // Eventos dos botões
+    btnFato.addEventListener('click', () => checkAnswer('Hecho'));
+    btnFalso.addEventListener('click', () => checkAnswer('Falso'));
+
+    // Pop-up
+    function openPopup() {
+        document.getElementById("popup").style.display = "block";
+    }
+
+    function closePopup() {
+        document.getElementById("popup").style.display = "none";
+    }
+
+    // Fechar o pop-up ao clicar fora dele
+    window.onclick = function (event) {
+        let popup = document.getElementById("popup");
+        if (event.target === popup) {
+            popup.style.display = "none";
+        }
+    };
+
+    // Iniciar o jogo quando a página carregar
+    window.onload = loadQuestions;
+</script>
+</body>
+</html>

@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="../../stylesCards.css">
+    <title>Eu Nunca - Família</title>
+</head>
+
+<body>
+
+<div class="game-container">
+    <!-- Menu -->
+    <nav class="menu">
+        <a href="../menuPtBr.html" class="menu-title">
+            <img class="logo-bebedeira" src="../images/logo.png" alt="Logo Bebedeira" />
+        </a>
+    </nav>
+
+    <!-- Conteúdo do jogo -->
+    <h1>
+        <a href="euNuncaMenu.html">Eu Nunca</a>
+    </h1>
+    <h3>Família</h3>
+    <a href="#" onclick="openPopup()"><br>
+        <img class="img-regras" src="../images/regras.png">
+    </a>
+    <h4>Regras</h4>
+
+    <div class="card-frase">
+        <p id="questionFamilia"></p>
+    </div>
+
+    <div class="button-container">
+        <button onclick="nextQuestion()">Próxima pergunta</button>
+    </div>
+
+    <div id="result">
+    </div>
+</div>
+
+<!-- Pop-up -->
+<div id="popup" class="popup">
+    <div class="popup-content">
+        <span class="close" onclick="closePopup()">&times;</span>
+        <h3>Regras do Jogo</h3>
+        <h5>Eu Nunca <br> Família</h5>
+        <ul>
+            <li>Leia a pergunta em voz alta</li>
+            <li>Quem já fez o que foi perguntado, bebe</li>
+            <li>Se ninguém fez, quem perguntou bebe</li>
+            <li>Divirta-se! 🍻</li>
+        </ul>
+    </div>
+</div>
+
+<script>
+
+    let questions = [];
+    let currentQuestion = 0;
+
+    // Função para carregar as perguntas (agora usando dados embutidos)
+    function loadQuestions() {
+        questions = shuffleArray([...embeddedData.questions]); // Usa spread para criar cópia
+        nextQuestion(); // Exibe a primeira pergunta
+    }
+
+    // Fisher-Yates Shuffle (mantido igual)
+    function shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array;
+    }
+
+    // Função para exibir a próxima pergunta (mantida igual)
+    function nextQuestion() {
+        if (questions.length === 0) {
+            document.getElementById("questionFamilia").textContent = "Carregando perguntas...";
+            loadQuestions();
+            return;
+        }
+
+        if (currentQuestion < questions.length) {
+            document.getElementById("questionFamilia").textContent = questions[currentQuestion];
+            document.getElementById("result").textContent = "";
+            currentQuestion++;
+        } else {
+            document.getElementById("questionFamilia").textContent = "Fim do Jogo! Espero que estejam se divertindo! Quer jogar novamente?";
+            document.getElementById("result").textContent = "";
+            currentQuestion = 0;
+            questions = shuffleArray([...embeddedData.questions]); // Reinicia com os dados originais
+        }
+    }
+
+    // Pop-up functions (mantidas iguais)
+    function openPopup() {
+        document.getElementById("popup").style.display = "block";
+    }
+
+    function closePopup() {
+        document.getElementById("popup").style.display = "none";
+    }
+
+    window.onclick = function(event) {
+        let popup = document.getElementById("popup");
+        if (event.target === popup) {
+            popup.style.display = "none";
+        }
+    };
+
+
+
+        // Dados do jogo EMBUTIDOS no HTML
+    const embeddedData = {
+    "questions": [
+      "Eu nunca viajei sozinho.",
+      "Eu nunca subi em uma árvore.",
+      "Eu nunca dormi na aula.",
+      "Eu nunca joguei meu próprio nome no Google.",
+      "Eu nunca ri alto enquanto digitava 'kkkkkkk'.",
+      "Eu nunca caí subindo as escadas.",
+      "Eu nunca comi comida de cachorro.",
+      "Eu nunca tentei fugir de casa.",
+      "Eu nunca engoli um chiclete.",
+      "Eu nunca vi um fantasma.",
+      "Eu nunca comi algo que caiu no chão.",
+      "Eu nunca fingi estar dormindo para não fazer algo.",
+      "Eu nunca chorei assistindo um filme.",
+      "Eu nunca dei um presente que eu mesmo queria ganhar.",
+      "Eu nunca tive um apelido vergonhoso.",
+      "Eu nunca dormi no sofá porque estava com preguiça de ir para a cama.",
+      "Eu nunca briguei por um controle remoto.",
+      "Eu nunca fingi estar doente para faltar na escola.",
+      "Eu nunca roubei comida da geladeira escondido.",
+      "Eu nunca tive medo do escuro.",
+      "Eu nunca fingi saber algo só para não parecer burro.",
+      "Eu nunca contei um segredo sem querer.",
+      "Eu nunca passei o dia inteiro de pijama.",
+      "Eu nunca errei a letra de uma música e cantei errado.",
+      "Eu nunca fui o último a ser escolhido para um time.",
+      "Eu nunca joguei um jogo sem ler as regras.",
+      "Eu nunca dormi antes da meia-noite no Ano Novo.",
+      "Eu nunca fiquei sem tomar banho por mais de um dia.",
+      "Eu nunca perdi a paciência montando um quebra-cabeça.",
+      "Eu nunca tive um crush em um personagem de desenho animado.",
+      "Eu nunca tentei imitar a voz de um personagem famoso.",
+      "Eu nunca fiz careta no espelho e morri de rir.",
+      "Eu nunca esqueci um aniversário importante.",
+      "Eu nunca tive um ataque de riso no momento errado.",
+      "Eu nunca fiquei entediado em um passeio em família.",
+      "Eu nunca levei bronca por responder de forma engraçadinha.",
+      "Eu nunca tentei cozinhar e deu tudo errado.",
+      "Eu nunca tomei um susto e dei um grito alto.",
+      "Eu nunca fiquei viciado em um desenho ou série infantil.",
+      "Eu nunca fiz algo bobo só para animar alguém triste.",
+      "Eu nunca tentei abrir um presente antes da hora.",
+      "Eu nunca desenhei no meu próprio rosto sem querer.",
+      "Eu nunca tirei uma foto e me arrependi depois.",
+      "Eu nunca passei um dia inteiro assistindo TV.",
+      "Eu nunca comecei um livro e nunca terminei.",
+      "Eu nunca apertei o botão do elevador várias vezes achando que ia chegar mais rápido.",
+      "Eu nunca derrubei comida na roupa enquanto comia.",
+      "Eu nunca me confundi e entrei em um lugar errado.",
+      "Eu nunca corri para apagar o fogão depois de esquecer algo no fogo.",
+      "Eu nunca tentei assustar alguém e acabei me assustando mais.",
+      "Eu nunca fui dormir de luz acesa por medo.",
+      "Eu nunca fiquei sem graça por errar uma resposta fácil.",
+      "Eu nunca briguei com um irmão ou primo por besteira.",
+      "Eu nunca tentei espiar um presente antes de abrir.",
+      "Eu nunca me escondi no supermercado e depois me arrependi.",
+      "Eu nunca disse que ia dormir cedo e fiquei no celular até tarde.",
+      "Eu nunca empurrei alguém na piscina de brincadeira.",
+      "Eu nunca dei risada em um momento que não podia.",
+      "Eu nunca fui pego mentindo sobre algo bobo.",
+      "Eu nunca me arrependi de cortar o cabelo.",
+      "Eu nunca tentei repetir uma acrobacia que vi na TV e falhei.",
+      "Eu nunca mandei mensagem para a pessoa errada.",
+      "Eu nunca perdi algo e depois achei no bolso.",
+      "Eu nunca brinquei de esconde-esconde e fiquei tempo demais escondido.",
+      "Eu nunca fiz um pedido e depois me arrependi.",
+      "Eu nunca esqueci onde estacionei o carro.",
+      "Eu nunca usei uma desculpa estranha para sair de um compromisso.",
+      "Eu nunca passei um trote para alguém da família.",
+      "Eu nunca exagerei na comida e me arrependi depois.",
+      "Eu nunca tentei contar uma piada e esqueci o final.",
+      "Eu nunca comi algo que não sabia o que era.",
+    "Eu nunca fui dormir sem escovar os dentes.",
+    "Eu nunca assustei alguém só por diversão.",
+    "Eu nunca contei até 10 para me acalmar.",
+    "Eu nunca deixei a louça para depois e me arrependi.",
+    "Eu nunca imitei alguém da família.",
+    "Eu nunca dancei sozinho no quarto.",
+    "Eu nunca brinquei de falar com um animal como se ele fosse gente.",
+    "Eu nunca tentei cozinhar e queimei tudo.",
+    "Eu nunca falei com a TV durante um filme ou jogo.",
+    "Eu nunca fui ao mercado e esqueci o principal item.",
+    "Eu nunca disse que estava pronto(a) e ainda estava de pijama.",
+    "Eu nunca falei sozinho(a) como se fosse um personagem.",
+    "Eu nunca tomei banho cantando alto.",
+    "Eu nunca fiquei com medo de um filme de terror infantil.",
+    "Eu nunca fui ao banheiro e esqueci o celular.",
+    "Eu nunca joguei água em alguém sem querer.",
+    "Eu nunca comi doce escondido.",
+    "Eu nunca dancei sem música só por estar feliz.",
+    "Eu nunca coloquei uma roupa do avesso sem perceber.",
+    "Eu nunca disse que não estava com fome e roubei batata do outro.",
+    "Eu nunca tirei uma selfie feia só por zoeira.",
+    "Eu nunca fingi saber onde estava no GPS.",
+    "Eu nunca fiz cócegas em alguém e saí correndo.",
+    "Eu nunca falei 'bom dia' à noite.",
+    "Eu nunca respondi uma pergunta sem entender direito.",
+    "Eu nunca fiquei com sono no meio de uma conversa.",
+    "Eu nunca inventei uma desculpa para sair de um grupo.",
+    "Eu nunca usei a mesma roupa por preguiça de escolher outra.",
+    "Eu nunca tirei foto de comida antes de comer.",
+    "Eu nunca coloquei açúcar no lugar do sal.",
+    "Eu nunca dancei igual ao TikTok (mesmo sem saber dançar).",
+    "Eu nunca tentei usar roupa do irmão ou irmã sem pedir.",
+    "Eu nunca espirrei tão forte que assustei alguém.",
+    "Eu nunca tentei fazer uma careta mais feia que a do outro.",
+    "Eu nunca fingi entender uma piada só para não ficar de fora.",
+    "Eu nunca me perdi dentro de uma loja.",
+    "Eu nunca derramei suco e culpei o vento.",
+    "Eu nunca tentei me esconder com um cobertor.",
+    "Eu nunca comi algo que estava vencido sem perceber.",
+    "Eu nunca dei nome para objetos inanimados.",
+    "Eu nunca brinquei com comida no prato.",
+    "Eu nunca fiz drama só para ganhar atenção.",
+    "Eu nunca quis ir embora no meio de um filme chato.",
+    "Eu nunca dormi com roupa do dia anterior.",
+    "Eu nunca fui ao mercado só para comprar uma besteira.",
+    "Eu nunca pedi comida mesmo com geladeira cheia.",
+    "Eu nunca dei risada só porque alguém estava rindo.",
+    "Eu nunca chorei de tanto rir.",
+    "Eu nunca escorreguei no banheiro.",
+    "Eu nunca esqueci o que ia dizer no meio da frase.",
+    "Eu nunca sonhei com comida.",
+    "Eu nunca fiquei com vergonha de cantar em público.",
+    "Eu nunca chorei por perder um jogo.",
+    "Eu nunca pulei na cama como se fosse um trampolim.",
+    "Eu nunca dormi no sofá vendo TV.",
+    "Eu nunca usei o celular escondido quando era pra dormir.",
+    "Eu nunca fui ao mercado com fome e exagerei nas compras.",
+    "Eu nunca vi desenho animado mesmo sendo adulto.",
+    "Eu nunca tentei fazer uma receita do YouTube e deu errado.",
+    "Eu nunca briguei com o controle da TV.",
+    "Eu nunca me enrolei no cobertor como um burrito.",
+    "Eu nunca falei com um objeto achando que era uma pessoa.",
+    "Eu nunca comi escondido para não ter que dividir.",
+    "Eu nunca tentei usar uma palavra difícil só para parecer inteligente.",
+    "Eu nunca mordi a língua sem querer.",
+    "Eu nunca fiquei bravo e esqueci o motivo depois.",
+    "Eu nunca fiquei preso em uma roupa que não servia.",
+    "Eu nunca entrei na sala errada.",
+    "Eu nunca olhei para trás achando que alguém me chamou.",
+    "Eu nunca dei nome para uma planta de casa.",
+    "Eu nunca dormi durante um filme no cinema.",
+    "Eu nunca segurei o riso em situação séria.",
+    "Eu nunca comi bolo antes de cantar parabéns.",
+    "Eu nunca me assustei com meu próprio reflexo.",
+    "Eu nunca fui tropeçar e fingi que estava dançando.",
+    "Eu nunca cantei errado uma música famosa.",
+    "Eu nunca tirei selfie com filtro engraçado.",
+    "Eu nunca fiz promessa e quebrei no mesmo dia.",
+    "Eu nunca falei com espelho me achando um ator famoso.",
+    "Eu nunca disse 'tá chegando' e nem tinha saído ainda.",
+    "Eu nunca tentei fingir que entendia um filme confuso.",
+    "Eu nunca fiquei com preguiça de responder mensagem.",
+    "Eu nunca falei mal de alguém e percebi que estava perto.",
+    "Eu nunca vi um vídeo triste e chorei de verdade.",
+    "Eu nunca usei a toalha como capa de super-herói.",
+    "Eu nunca fui na geladeira só para ver se apareceu algo novo.",
+    "Eu nunca apertei botão errado e fingi que sabia o que estava fazendo.",
+    "Eu nunca peguei controle e sentei no lugar mais estratégico.",
+    "Eu nunca cantei no banho como se fosse um show.",
+    "Eu nunca brinquei de detetive tentando achar presente escondido.",
+    "Eu nunca coloquei o despertador e continuei dormindo.",
+    "Eu nunca fiz drama por uma comida que acabou.",
+    "Eu nunca entrei no quarto e esqueci o motivo.",
+    "Eu nunca imaginei que estava num clipe musical olhando pela janela.",
+    "Eu nunca vesti a roupa ao contrário sem perceber.",
+    "Eu nunca balancei a cabeça fingindo que estava ouvindo.",
+    "Eu nunca fui arrumar a cama e acabei deitado.",
+    "Eu nunca brinquei de espiar atrás da porta.",
+    "Eu nunca dei tchau para alguém e quase fui para o lado errado depois."
+    ]
+  }
+
+    // Carrega as perguntas ao iniciar (modificado para usar dados embutidos)
+    loadQuestions();
+</script>
+</body>
+</html>

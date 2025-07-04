@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="../../stylesCards.css">
+    <link rel="stylesheet" type="text/css" href="../../cronometro.css">
+    <title>Mímicas para Adultos</title>
+
+</head>
+<body>
+
+<div class="game-container">
+    <!-- Menu -->
+    <nav class="menu">
+        <a href="../menuEs.html" class="menu-title">
+            <img class="logo-bebedeira" src="../images/logo.png" alt="Bender Games Logo" />
+        </a>
+    </nav>
+
+    <!-- Conteúdo do jogo -->
+    <h1>Mímicas para Adultos</h1>
+    <a href="#" onclick="openPopup()">
+        <img class="img-regras" src="../images/regras.png" alt="Regras">
+    </a>
+    <h4>Reglas</h4>
+
+    <div class="card-frase">
+        <p id="questionMimicasParaAdultos"></p>
+    </div>
+    <div class="button-container">
+        <button onclick="nextQuestion()">Próxima pregunta</button>
+    </div>
+    <div id="result"></div>
+</div>
+
+<!-- Pop-up -->
+<div id="popup" class="popup">
+    <div class="popup-content">
+        <span class="close" onclick="closePopup()">&times;</span>
+        <h3>Reglas del Juego</h3>
+        <h5>Mímicas para Adultos</h5>
+        <ul>
+            <li>Divide a los jugadores en dos equipos.</li>
+            <li>En cada ronda, un equipo elige un jugador para realizar las mímicas.</li>
+            <li>Esta persona leerá una mímica y actuará para su grupo.</li>
+            <li>Activa el cronómetro de 60 segundos y comienza a hacer la mímica.</li>
+            <li>El equipo de este jugador que está realizando la mímica debe intentar adivinar el contenido de la carta.</li>
+            <li>Si el equipo acierta, gana un punto.</li>
+            <li>Si el equipo falla, uno de los jugadores toma un trago.</li>
+            <li>En la siguiente ronda, juega el otro equipo.</li>
+            <li>El equipo que tenga más puntos gana.</li>
+            <li><strong>VARIACIÓN</strong></li>
+            <li>El jugador que hará la mímica debe actuar para todo el grupo.</li>
+            <li>Los jugadores que tengan menos aciertos entre un número x de rondas, toman un trago.</li>
+            <li>¡Diviértete! 🍻</li>
+        </ul>
+    </div>
+</div>
+
+
+<!-- Cronômetro -->
+
+<button id="timer" onclick="handleTimerClick()">60</button>
+
+<script>
+    // Datos del juego incrustados en el HTML
+    const gameData = {
+    "questions": [
+        "Baño químico",
+        "Panqueques",
+        "Soldador",
+        "Spray de pimienta",
+        "Conejo cojo",
+        "Ventilador de techo",
+        "Ping-pong",
+        "Copo de nieve",
+        "Boca a boca",
+        "Camión furacão",
+        "Ginecólogo",
+        "Macarena",
+        "Bote a motor",
+        "Agujero equivocado",
+        "Chisme",
+        "Peinar",
+        "Vergüenza",
+        "Orgasmo",
+        "Camión cisterna",
+        "Regar plantas",
+        "Parto natural",
+        "Cambiar pañal",
+        "Paseo a caballo",
+        "Prestamista",
+        "Babosa",
+        "Quiropráctico",
+        "Mojar la galleta",
+        "Comer baguette",
+        "Exorcismo",
+        "Oler cocaína",
+        "Látigo",
+        "Plug anal",
+        "Tanque de guerra",
+        "Futvoley",
+        "Cigarrillo electrónico",
+        "Foto del pito",
+        "Piedra, papel o tijera",
+        "Pelé",
+        "Inhalador",
+        "Joelma",
+        "Sexo anal",
+        "Tambor",
+        "Clítoris",
+        "Natación sincronizada",
+        "Anticonceptivo",
+        "Neymar",
+        "Micropene",
+        "Lanzamiento de peso",
+        "Cristo Redentor",
+        "Rueda de pagode",
+        "Ramo de novia",
+        "Pingüino",
+        "Alok",
+        "Lula",
+        "Parrilla",
+        "Hielera",
+        "Quemar la roca",
+        "Sexo por teléfono",
+        "Ballet",
+        "Delfín",
+        "Pesque y pague",
+        "Unicornio",
+        "Tarzán",
+        "Sexo en el coche",
+        "Anillo peneano",
+        "Baile Gangnam style",
+        "Ceja unida",
+        "69",
+        "Francotirador",
+        "Vibrador",
+        "Esgrima",
+        "Chupetín pinta lengua",
+        "Minions",
+        "Baile de la botella",
+        "Helicóptero",
+        "Hervidor",
+        "Lavadora",
+        "Barones de la pisadinha",
+        "Torta de bodas",
+        "Estrías",
+        "Luciérnaga",
+        "Maíz con mantequilla",
+        "Pagar factura",
+        "Air Fryer",
+        "Pasear al perro",
+        "Tirarse un pedo",
+        "Perforadora",
+        "Pulverización agrícola",
+        "Michael Jackson",
+        "Cuatrimoto",
+        "Harry Potter",
+        "Hacer café",
+        "Balde de hielo",
+        "Acantilado",
+        "Chimenea",
+        "Buitre",
+        "Pedicura",
+        "Karaoke",
+        "Sexo oral",
+        "Fetiche por pies",
+        "Fiesta de revelación",
+        "Beatbox",
+        "Liposucción",
+        "Loro José",
+        "A cuatro",
+        "Chupar dedo del pie",
+        "Bastón",
+        "Bolsa de té",
+        "Punto G",
+        "Montacargas",
+        "Salto en paracaídas",
+        "Declaración de renta",
+        "Baile de la lombriz",
+        "Bocina de camión",
+        "Curling",
+        "Big Brother Brasil",
+        "Abdomen definido",
+        "Galletas",
+        "Prueba de alcoholemia",
+        "Viagra",
+        "Torre Eiffel",
+        "Calvo",
+        "Triángulo amoroso",
+        "Cortina de ducha",
+        "Hacer sushi",
+        "Arcoíris",
+        "Patinaje sobre hielo",
+        "Ballena",
+        "Café en la cama",
+        "Recién casados",
+        "Fisicoculturista",
+        "Tiktoker",
+        "Cámara lenta",
+        "Cebra",
+        "Cuervo",
+        "Diarrea",
+        "Masturbarse",
+        "Mal aliento",
+        "Piercing en el pezón",
+        "Ahogar el ganso",
+        "Muñeca inflable",
+        "Llave inglesa",
+        "Parlante",
+        "Portero",
+        "Depilación íntima",
+        "Calzón de cuero",
+        "Semilla",
+        "Perro callejero",
+        "Marihuana",
+        "Cortar el césped",
+        "Examen de mamas",
+        "Conducir borracho",
+        "Titanic",
+        "Grúa",
+        "Cerveza negra",
+        "Papá Noel",
+        "Preservativo",
+        "Baño de mujeres",
+        "Vendedor ambulante",
+        "Gel lubricante",
+        "Silicona caliente",
+        "Paz mental",
+        "Cirujano plástico",
+        "Trampolín",
+        "Yoga",
+        "Policía federal",
+        "Pastel de zanahoria",
+        "Serpiente",
+        "Mona Lisa",
+        "Escultura de hielo",
+        "Beach tennis",
+        "Botox",
+        "Hernia de disco",
+        "Karate",
+        "Plato hecho",
+        "Beso negro",
+        "Clase de cerámica",
+        "Terremoto",
+        "Travesti",
+        "Carrera de obstáculos",
+        "Langosta",
+        "Amamantar",
+        "Padre del globo",
+        "Bolsonaro",
+        "Internet",
+        "Iron Maiden",
+        "Trineo",
+        "Ciego calvo",
+        "Sexo en la ducha",
+        "Amante",
+        "Sirena",
+        "Maní",
+        "Baño de tina",
+        "Stripper",
+        "Mendigo en el semáforo",
+        "Rinoceronte",
+        "Destapador",
+        "Pelea de gallos",
+        "Oruga",
+        "Masturbarse",
+        "Jugar con la pepa",
+        "Sentarse con ganas",
+        "Helicóptero peneano"
+    ]
+};
+
+    let questions = [];
+    let currentQuestion = 0;
+    let timeLeft = 60;
+    let timerInterval = null;
+    let isRunning = false;
+
+    // Função para carregar as perguntas
+    function loadQuestions() {
+        questions = shuffleArray([...gameData.questions]);
+        nextQuestion();
+    }
+
+    // Função para embaralhar um array (Fisher-Yates Shuffle)
+    function shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array;
+    }
+
+    // Função para exibir a próxima pergunta
+    function nextQuestion() {
+        if (questions.length === 0) {
+            document.getElementById("questionMimicasParaAdultos").textContent = "Carregando preguntas...";
+            loadQuestions();
+            return;
+        }
+
+        if (currentQuestion < questions.length) {
+            document.getElementById("questionMimicasParaAdultos").textContent = questions[currentQuestion];
+            document.getElementById("result").textContent = "";
+            currentQuestion++;
+        } else {
+            document.getElementById("questionMimicasParaAdultos").textContent = "¡Fin del juego! ¡Espero que se estén divirtiendo! ¿Quieren jugar de nuevo?";
+            document.getElementById("result").textContent = "";
+            currentQuestion = 0;
+            questions = shuffleArray([...gameData.questions]);
+        }
+    }
+
+    // Pop-up functions
+    function openPopup() {
+        document.getElementById("popup").style.display = "block";
+    }
+
+    function closePopup() {
+        document.getElementById("popup").style.display = "none";
+    }
+
+    // Fechar o pop-up ao clicar fora dele
+    window.onclick = function(event) {
+        let popup = document.getElementById("popup");
+        if (event.target === popup) {
+            popup.style.display = "none";
+        }
+    };
+
+    // Cronômetro
+    function updateDisplay() {
+        const timerButton = document.getElementById('timer');
+        timerButton.textContent = timeLeft;
+    }
+
+    function handleTimerClick() {
+        const timerButton = document.getElementById('timer');
+
+        if (isRunning) {
+            clearInterval(timerInterval);
+            timerInterval = null;
+            timeLeft = 60;
+            isRunning = false;
+            updateDisplay();
+        } else {
+            isRunning = true;
+            timerInterval = setInterval(() => {
+                timeLeft--;
+                updateDisplay();
+
+                if (timeLeft <= 0) {
+                    clearInterval(timerInterval);
+                    timerInterval = null;
+                    isRunning = false;
+                    alert("⏰ Tempo esgotado!");
+                    timeLeft = 60;
+                    updateDisplay();
+                }
+            }, 1000);
+        }
+    }
+
+    // Carrega as perguntas ao iniciar
+    window.onload = loadQuestions;
+</script>
+
+</body>
+</html>

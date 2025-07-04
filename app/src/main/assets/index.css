@@ -1,0 +1,74 @@
+/* Reset e estilos base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    color: white;
+    -webkit-tap-highlight-color: transparent;
+    list-style: none;
+    border: none;
+}
+
+/* Estilização geral */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #010B13;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Container principal */
+.main-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    width: 100%;
+    max-width: 450px;
+}
+
+/* Logo */
+.logo-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.logo-bebedeira {
+    max-width: 270px;
+    height: auto;
+}
+
+/* Títulos */
+.title-container {
+    text-align: center;
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+h3 {
+    color: #facc15;
+    margin-bottom: 10px;
+}
+
+/* Botões de linguagem */
+.button-language {
+    width: 300px;
+    max-width: 450px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+    color: #F1F1F1;
+    background: linear-gradient(145deg, #0F3460, #1A1A2E);
+    font-size: 1.1rem;
+    font-weight: bold;
+    border-radius: 10px;
+    padding: 5px;
+    margin: 0 0 10px 0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+}

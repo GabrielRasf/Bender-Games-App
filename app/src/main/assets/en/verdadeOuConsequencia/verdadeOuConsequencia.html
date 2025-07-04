@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="../../stylesCards.css">
+    <title>Truth ou Dare</title>
+</head>
+<body>
+
+<div class="game-container">
+    <!-- Menu -->
+    <nav class="menu">
+        <a href="../menuEn.html" class="menu-title">
+            <img class="logo-bebedeira" src="../images/logo.png" alt="Bender Games Logo" />
+        </a>
+    </nav>
+
+    <!-- Game content -->
+    <h1>Truth or Dare</h1>
+    <a href="#" onclick="openPopup()">
+        <img class="img-regras" src="../images/regras.png" alt="Rules" />
+    </a>
+    <h4>Rules</h4>
+
+    <!-- Pop-up -->
+    <div id="popup" class="popup">
+        <div class="popup-content">
+            <span class="close" onclick="closePopup()">&times;</span>
+            <h3>Game Rules</h3>
+            <h5>Truth or Dare</h5>
+            <ul>
+                <li>A person decides whether they want truth or dare.</li>
+                <li>Then, they click the chosen button.</li>
+                <li>Finally, they do what is requested.</li>
+                <li>If they refuse, they take a shot.</li>
+                <li>After that, the player on the right must do a 'truth' or 'dare'.</li>
+                <li>And so on, consecutively.</li>
+                <li>Have fun! 🍻</li>
+            </ul>
+        </div>
+    </div>
+
+
+    <div class="card-frase">
+        <p id="questionVerdadeOuConsequencia"></p>
+    </div>
+    <div class="button-container-vdd-conseq">
+        <button class="btn-vdd" onclick="verdade()">Truth</button>
+        <button class="btn-conseq" onclick="consequencia()">Dare</button>
+    </div>
+
+    <div id="result"></div>
+</div>
+
+<script>
+    // Dados do jogo embutidos no HTML
+    const gameData = {
+    verdade: [
+            "What was your biggest lie?",
+    "Have you ever hooked up with someone who was already committed?",
+    "Share an occasion when you had to hide your true feelings to avoid hurting someone.",
+    "If you had to choose between traveling to the future or the past, which would you choose and why?",
+    "Share an impulsive decision you made.",
+    "Share an experience that changed the way you see the world.",
+    "Share a story about something you did for love.",
+    "Share an unusual situation that happened during a trip.",
+    "Share a story that makes you laugh every time you remember it.",
+    "What was the riskiest financial decision you have ever made?",
+    "What is the strangest thing you like to do alone?",
+    "What was the most embarrassing moment in front of your family?",
+    "What is the strangest thing you like to do alone?",
+    "Reveal a secret you've never told anyone in the group.",
+    "Talk about a place you fell in love with so much you wanted to live there.",
+    "What is your biggest 'What if...' in life?",
+    "Recall an embarrassing moment you wish you could forget.",
+    "Share a belief or opinion that completely changed over time.",
+    "Tell about a recurring dream you have.",
+    "Talk about the first time you fell in love.",
+    "If you could choose one past friendship to relive, who would it be?",
+    "If you could choose one quality of yours to pass on.",
+    "Talk about the last time you cried and why.",
+    "What is the best advice you have ever received?",
+    "Talk about a friendship that ended and why.",
+    "Share something you did and regretted.",
+    "What was the biggest surprise you've ever received in life?",
+    "Have you ever pretended to be sick to avoid a commitment? What was the excuse?",
+    "If you could change one moment in your life, what would it be and why?",
+    "What was the strangest dream you've ever had?",
+    "Have you ever regretted not telling someone something important?",
+    "What is your biggest fear that nobody knows?",
+    "Tell about a time when you had to apologize even though you thought you were right.",
+    "Have you ever had a crush on someone completely unusual? Who?",
+    "When was the last time you stepped out of your comfort zone?",
+    "Have you ever stalked someone on social media? Who and why?",
+    "If you had to live the same day forever, which day would you choose?",
+    "What is a habit of yours that almost no one understands?",
+    "Have you ever done something just to impress someone? What?",
+    "If you could swap lives with someone for a day, who would it be?",
+    "What was the biggest misunderstanding you have ever caused?",
+    "Have you ever lied to protect someone? What was the lie?",
+    "What is the most immature thing you still do?",
+    "If you could talk to your past self, what would you say?",
+    "Have you ever had a toxic friendship? How did you realize it?",
+    "What is the funniest secret you keep?",
+    "Have you ever pretended to like something just to please someone? What?",
+    "What is a childhood memory you cherish?",
+    "Have you ever wanted to drop everything and start over? Why?",
+    "What is one life goal you still really want to achieve?",
+    "Would you rather be remembered for your intelligence or your heart? Why?",
+    "What is the craziest thing you have ever done on impulse?",
+    "What was the last lie you told?",
+    "What was the most embarrassing thing you have done on a date?",
+    "Have you ever accidentally hit something (or someone!) with your car?",
+    "Name someone you pretended to like but actually couldn’t stand.",
+    "What is your weirdest nickname?",
+    "What was your most painful physical experience?",
+    "What bridges were you happy to burn?",
+    "What was the craziest thing you ever did on public transportation?",
+    "If you found a genie, what would your three wishes be?",
+    "If you could write the name of anyone to be president of the United States, who would it be and why?",
+    "What was the meanest thing you have ever said to someone?",
+    "Who was your worst kiss ever?",
+    "What is something you would do if you knew there would be no consequences?",
+    "What was the craziest thing you have done in front of a mirror?",
+    "What was the meanest thing you have ever said about someone else?",
+    "What is something you love doing with your friends but would never do in front of your partner?",
+    "Who do you envy the most?",
+    "What are your favorite pajamas like?",
+    "Have you ever pretended to be sick not to go to a party?",
+    "Who was the oldest person you have ever dated?",
+    "How many selfies do you take per day?",
+    "Meatloaf says he'd do anything for love but he won't do 'that'. What is your 'that'?",
+    "How many times per week do you wear the same pants?",
+    "Would you date your high school crush today?",
+    "Where are you most sensitive to touch?",
+    "Do you believe in any superstition? If yes, which one?",
+    "What’s a movie you’re embarrassed to admit you like?",
+    "What is your most embarrassing hygiene habit?",
+    "When was the last time you apologized? For what?",
+    "Have you ever fallen for someone much older or younger than you?",
+    "Where do most of your embarrassing odors come from?",
+    "Have you ever considered cheating on a partner?",
+    "Have you ever cheated on a partner?",
+    "Boxers or briefs?",
+    "Have you ever peed in a pool?",
+    "What is the strangest place you have had hair?",
+    "If you were guaranteed to never get caught, who would you kill?",
+    "What was the cheapest gift you ever gave someone?",
+    "Which app do you waste the most time on?",
+    "What was the strangest thing you ever did on a plane?",
+    "Have you ever been naked in public?",
+    "How many gossip blogs do you read per day?",
+    "What is the youngest partner’s age you would date?",
+    "Have you ever picked your nose in public?",
+    "Have you ever lied about your age?",
+    "If you had to delete one app on your phone, which would it be?",
+    "What was your most embarrassing midnight purchase?",
+    "What was the longest period you went without showering?",
+    "Have you ever used a fake identity?",
+    "Who is your 'hall pass'?",
+    "What is the most embarrassing thing you ever posted on social media?",
+    "Have you ever kept a library book? For how long?",
+    "If you could hire someone to do one thing for you, what would it be?",
+    "Have you ever considered being a nudist?",
+    "Have you ever lied on your resume?",
+    "What is the best lie you ever told someone?",
+    "Who was the last person you stalked on social media?",
+    "What is your most embarrassing childhood memory?",
+    "Have you ever pretended not to receive a message to avoid doing something?",
+    "What is the strangest thing you ever did in a bathroom?",
+    "What is the craziest thing you did to get out of a speeding ticket?",
+    "Do you have any hidden talents? Will you show us?",
+    "When was the last time you got caught lying?",
+    "How do you really feel about your mother-in-law?",
+    "What do you think happens when you die?",
+    "When was the last time you watched an adult movie?",
+    "Have you ever been in a fight?",
+    "Would you marry a rich person even if you weren’t in love with them?",
+    "Have you ever been caught staring at someone?",
+    "What was the worst advice you ever gave to someone?",
+    "What was the worst advice someone ever gave you?",
+    "Would you volunteer as tribute for someone in this room in the Hunger Games?",
+    "Is there an ex you would consider getting back with?",
+    "What is the weirdest thing you do while driving?",
+    "Who was the last person who called you?",
+    "When was the last time you wanted to hit someone?",
+    "What is the grossest smell you secretly like?",
+    "What is the biggest prank you ever pulled on someone?",
+    "What is one thing about your partner that you find least attractive?",
+    "When was the last time you got really angry? Why?",
+    "What is your least favorite college memory?",
+    "What is the grossest thing you do alone?",
+    "Have you ever deliberately sabotaged a coworker?",
+    "What is your favorite guilty pleasure song?",
+    "Would you ever have plastic surgery?",
+    "Have you ever had a near-death experience?",
+    "What skill would you like to have?",
+    "Have you ever compromised your principles for money? How?",
+    "Who was the last person you said 'I love you' to?",
+    "What was your first heartbreak?",
+    "Have you ever broken someone’s heart?",
+    "Have you ever peed in the shower?",
+    "What is the most false rumor you ever heard about yourself?",
+    "What is the most false rumor you ever spread or heard about someone else?",
+    "When and where was your first kiss? Who was it with?",
+    "Do you think betrayal can be justified? How?",
+    "Have you ever vomited in public?",
+    "When was the last time you were rejected?",
+    "What is the most common misconception about you?",
+    "Have you ever seriously hurt someone else?",
+    "What is your worst habit?",
+    "Who was your first celebrity crush?",
+    "What is the most expensive thing you ever bought?",
+    "Do you still have a stuffed animal you sleep with?",
+    "What is the strangest food combination you like?"
+    ],
+consequencia: [
+  "Dance funk for 30 seconds.",
+  "Send a voice message singing in the family group chat.",
+  "Do a mime of a profession until someone guesses it.",
+  "Stay 2 minutes without laughing staring at a person chosen by the group.",
+  "Invent a story using words suggested by the players.",
+  "Create a funny nickname for someone in the group and use it until the end of the game.",
+  "Do 30 jumping jacks.",
+  "Do an exaggerated imitation of how someone in the group acts when angry. Don't say who it is. The group needs to guess.",
+  "Tell a joke until someone laughs. You can look it up on the internet.",
+  "Imitate an animal chosen by the players.",
+  "Speak with an accent from another region during one round.",
+  "Try juggling small objects.",
+  "Choose a player and act out a dramatic soap opera scene.",
+  "Create a funny dance and teach it to the group.",
+  "Hold a yoga pose for 30 seconds.",
+  "Strut like a runway model.",
+  "Pretend you are on a reality show and give an elimination speech.",
+  "Take a silly selfie and post it on social media tagging @bebedeiraGames.",
+  "During a round, switch roles with another player. Act exactly like them.",
+  "Pretend to explain to a child where babies come from.",
+  "Make a crazy hairstyle on another player of your choice.",
+  "Declare your love to an object chosen by other players.",
+  "Do a viral TikTok dance.",
+  "Walk around the room balancing a book on your head.",
+  "Draw a portrait of another person in the room with your eyes closed.",
+  "Make an advertisement for a useless product.",
+  "Say a random sentence as if it was the most important thing in the world.",
+  "Pretend to be a cooking show host for 1 minute.",
+  "Say a cheesy pickup line as if it were very romantic.",
+  "Hold a pencil with your upper lip for 1 minute.",
+  "Choose someone in the group and invent a new biography for them.",
+  "Make an improvised rap with 3 words chosen by the players.",
+  "Read an old message from your phone out loud (you can choose which one).",
+  "Imitate a celebrity everyone knows.",
+  "Invent a new emoji and explain its meaning.",
+  "Draw your biggest fear with your finger in the air and make the group guess.",
+  "Pretend you are in a TV commercial selling your personality.",
+  "Use a cartoon voice for the entire next round.",
+  "Take a random object from your bag/backpack and defend it as the best item in the world.",
+  "Give an exaggerated compliment to every person in the group.",
+  "Walk as if you were in slow motion for 1 minute.",
+  "Imitate a famous dramatic movie scene.",
+  "Give a speech as if you just won an Oscar.",
+  "Talk about the weather as if it was the most urgent news of the day.",
+  "Act like a zombie trying to ask for food.",
+  "Use a pillow as a microphone and interview someone.",
+  "Say a famous phrase but with mixed-up emotion (e.g., saying 'I'm the king of the world!' in a sad tone).",
+  "Wiggle your arms like a dancing worm for 20 seconds.",
+  "Create a crazy new rule for the game and everyone must obey it until the end of the round.",
+  "Do a funny dubbing of someone in the group.",
+  "Invent a new choreography for a known song and teach it to the group.",
+  "Let another player post a status on your social media.",
+  "Do a freestyle rap for one minute about the other participants.",
+  "Sniff the armpits of every other player.",
+  "Kiss the person to your left.",
+  "Imitate another player until someone guesses who it is.",
+  "Call your crush.",
+  "Dance without music for one minute.",
+  "Do a somersault.",
+  "Let the person to your right draw on your face.",
+  "Give your phone to another player who can send a message to any of your contacts saying whatever they want.",
+  "Drink lemon juice.",
+  "Break an egg on your head.",
+  "Swap clothes with someone of the opposite sex for two rounds.",
+  "Act like a chicken until your next turn.",
+  "Burp the alphabet.",
+  "Speak with a Jamaican accent until your next turn.",
+  "Call a friend, pretend it's their birthday, and sing 'Happy Birthday' to them.",
+  "Do ballet for one minute.",
+  "Take a shower fully clothed.",
+  "Take a selfie in the bathroom and post it.",
+  "End every sentence with the word 'no' until your next turn.",
+  "Say a famous person who looks like each player.",
+  "Dance like your life depends on it.",
+  "Eat a packet of hot sauce or ketchup directly. If none is available, the group decides what you should eat (it must not be harmful).",
+  "Pour ice cubes down your pants.",
+  "Spin 11 times and try to walk straight.",
+  "Put on a blindfold and touch the faces of other players until you guess who it is.",
+  "Let the other players redo your hairstyle.",
+  "Eat a raw egg.",
+  "Let the player to your right redo your makeup.",
+  "Pretend to be a squirrel until your next turn.",
+  "Pour a bucket of cold water on your head.",
+  "Lick a bar of soap.",
+  "Eat a teaspoon of mustard.",
+  "Speak without closing your mouth.",
+  "You have five minutes to write a country song and perform it.",
+  "Let someone paint your nails however they want.",
+  "Do five minutes of stand-up comedy.",
+  "Make duck sounds until your next turn.",
+  "Sing the national anthem with a British accent."
+    ]
+}
+
+    // Variáveis globais
+    let verdadeList = [];
+    let consequenciaList = [];
+
+    // Função para embaralhar array
+    function shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array;
+    }
+
+    // Inicializa o jogo
+    function initGame() {
+        verdadeList = shuffleArray([...gameData.verdade]);
+        consequenciaList = shuffleArray([...gameData.consequencia]);
+        console.log("Jogo inicializado com sucesso!");
+    }
+
+    // Funções do jogo
+    function verdade() {
+        if (verdadeList.length === 0) {
+            document.getElementById("questionVerdadeOuConsequencia").textContent = "Acabaram as verdades! Reiniciando...";
+            verdadeList = shuffleArray([...gameData.verdade]);
+            return;
+        }
+        const pergunta = verdadeList.pop();
+        document.getElementById("questionVerdadeOuConsequencia").textContent = pergunta;
+    }
+
+    function consequencia() {
+        if (consequenciaList.length === 0) {
+            document.getElementById("questionVerdadeOuConsequencia").textContent = "Acabaram as consequências! Reiniciando...";
+            consequenciaList = shuffleArray([...gameData.consequencia]);
+            return;
+        }
+        const desafio = consequenciaList.pop();
+        document.getElementById("questionVerdadeOuConsequencia").textContent = desafio;
+    }
+
+    // Pop-up functions
+    function openPopup() {
+        document.getElementById("popup").style.display = "block";
+    }
+
+    function closePopup() {
+        document.getElementById("popup").style.display = "none";
+    }
+
+    window.onclick = function(event) {
+        let popup = document.getElementById("popup");
+        if (event.target === popup) {
+            popup.style.display = "none";
+        }
+    };
+
+    // Inicializa o jogo quando a página carrega
+    window.onload = initGame;
+</script>
+</body>
+</html>

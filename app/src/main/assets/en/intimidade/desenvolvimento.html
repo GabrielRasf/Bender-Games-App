@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Intimacy - Development</title>
+    <link rel="stylesheet" type="text/css" href="../../stylesCards.css">
+</head>
+
+<body>
+<div class="game-container">
+    <!-- Menu -->
+    <nav class="menu">
+        <a href="../menuEn.html" class="menu-title">
+            <img class="logo-bebedeira" src="../images/logo.png" alt="Bender Games Logo" />
+        </a>
+    </nav>
+
+    <!-- Game content -->
+    <h1>
+        <a href="intimidade.html">Intimacy</a>
+    </h1>
+    <h3>Dive</h3>
+    <a href="#" onclick="openPopup()"><br>
+        <img class="img-regras" src="../images/regras.png" alt="Rules Image">
+    </a>
+
+    <h4>Rules</h4>
+
+    <!-- Rules popup -->
+    <div id="popup" class="popup">
+        <div class="popup-content">
+            <span class="close" onclick="closePopup()">&times;</span>
+            <h3>Game Rules</h3>
+            <h5>Intimacy - Dive</h5>
+            <ul>
+                <li>In this stage, there will be small challenges to be done once a week.</li>
+                <li>They can be done together with stage 2.</li>
+                <li>Have fun! 🍻</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="card-frase">
+        <p id="questionMergulho"></p>
+        <ol id="optionsList" class="options-list"></ol>
+    </div>
+
+    <div class="button-container">
+        <button onclick="nextQuestion()">Next question</button>
+    </div>
+    <div id="result"></div>
+</div>
+
+<!-- Answer popup -->
+<div id="answerPopup" class="popup">
+    <div class="popup-content">
+        <span class="close" onclick="closeAnswerPopup(); popup()">&times;</span>
+        <h2>Answer</h2>
+        <p id="answerText">Click on a question first!</p>
+    </div>
+</div>
+
+<script>
+    const questionData = {
+        questions: [
+            "If we got a tattoo together, what would we tattoo? Draw one on each other.",
+            "From the same creators of 'vale night', comes 'vale day'. Create a surprise day plan for your partner for a day they will live alone. (Relax! Missing each other is good for the relationship).",
+            "Stop everything and be present for a long, passionate French kiss! Try adding one of these kisses daily.",
+            "Write a love song or poem and recite/sing it to each other. You have 5 minutes to write and then reveal by singing or reciting.",
+            "Create a couple's playlist, choose the songs you both love and give it a creative name.",
+            "Contemplation exercise: stand facing each other, look into each other’s eyes and talk about each part of the body you admire in the other. If you want, touch each part as you speak.",
+            "Swap roles: Spend an entire day expressing love/affection as your partner does.",
+            "Create a challenge to be completed during the week. Choose together what the winner’s prize will be.",
+            "Remember to (re)call: review your old conversations from the start of the flirt on WhatsApp, Instagram, Facebook or the photo gallery and notice what has changed since then.",
+            "(Re)create your first date. Use your creativity to reproduce what happened at the time.",
+            "Hold hands or tie them with string and stay like that for a few minutes. Do something, for example, cook, eat something or dance. Notice how teamwork flows between you.",
+            "Create a new hobby to do together, weekly or biweekly. For example: forró dance class, pottery, painting, reading the same book or going to the movies.",
+            "Make a pact and write together the most important rules in a relationship for you. Place it somewhere you can always see it (like the fridge).",
+            "Ready to see yourself through the other's eyes? Grab your phone and do a photo session of each other (at least 10 photos). It's normal to feel shy at first. Have fun!",
+            "Spend an entire day without your phone. Then, write about how the experience was for you. Turn the feelings into words.",
+            "The power of the gaze: flirt with each other using only your eyes.",
+            "Sit facing each other, hold hands and look into each other’s eyes. Take deep breaths and relax your gaze. Then talk about how the experience was.",
+            "Play the role of teacher and student. Each of you chooses a skill to teach the other (or at least try).",
+            "Choose a series, movie, etc to watch together. Share your thoughts about it afterwards.",
+            "Separately, draw how you see yourselves in the future, together. Comment on the results!"
+        ]
+    };
+
+    let questions = [];
+    let currentQuestion = 0;
+
+    function loadQuestions() {
+        questions = shuffleArray(questionData.questions);
+        nextQuestion();
+    }
+
+    function shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array;
+    }
+
+    function nextQuestion() {
+        if (questions.length === 0) {
+            document.getElementById("questionMergulho").textContent = "Loading questions...";
+            return;
+        }
+
+        if (currentQuestion < questions.length) {
+            document.getElementById("questionMergulho").textContent = questions[currentQuestion];
+            document.getElementById("result").textContent = "";
+            currentQuestion++;
+        } else {
+            document.getElementById("questionMergulho").textContent = "End of the game! Hope you're having fun! Want to play again?";
+            document.getElementById("result").textContent = "";
+            currentQuestion = 0;
+            questions = shuffleArray(questions);
+        }
+    }
+
+    function openPopup() {
+        document.getElementById("popup").style.display = "block";
+    }
+
+    function closePopup() {
+        document.getElementById("popup").style.display = "none";
+    }
+
+    function closeAnswerPopup() {
+        document.getElementById("answerPopup").style.display = "none";
+    }
+
+    window.onclick = function (event) {
+        const popup = document.getElementById("popup");
+        if (event.target === popup) {
+            popup.style.display = "none";
+        }
+    };
+
+    loadQuestions();
+</script>
+</body>
+
+</html>
