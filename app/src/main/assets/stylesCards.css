@@ -6,7 +6,7 @@
     text-decoration: none;
     color: white;
     -webkit-tap-highlight-color: transparent;
-    list-style: none;
+    /* list-style: none; */
     border: none;
 }
 
@@ -20,6 +20,7 @@ body {
     padding-bottom: 50px;
     font-size: 1.2rem;
     line-height: 1.4;
+    text-align: center;
 }
 
 p {
@@ -60,7 +61,7 @@ p {
     font-weight: bold;
     border-radius: 10px;
     padding: 5px;
-    margin: 0 0 10px 0;
+    margin-bottom: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     overflow: hidden;
 }
@@ -104,7 +105,7 @@ h4,
 h5 {
     color: #facc15;
     text-decoration: none;
-    margin-botton: 15px;
+    margin-bottom: 15px; /* corrigido de margin-botton */
 }
 
 h1 {
@@ -129,6 +130,12 @@ h5 {
     transition: color 0.3s ease;
     display: block;
 }
+
+ul, ol {
+    list-style-position: inside;
+    padding-left: 0;
+}
+
 
 /* Texto principal */
 #question {
@@ -183,22 +190,25 @@ h5 {
 
 .game-box-vdd-cons p {
     font-size: 1rem;
-
 }
 
-/* Especiricações Eu Nunca */
+/* Especificações Eu Nunca */
 .h1-eu-nunca {
     margin-bottom: 0.9375rem;
 }
 
-/* Botão */
-.button-container {
+/* Botões */
+.button-container,
+.button-container-vdd-conseq,
+.button-container-fato-falso,
+.button-container-antes-ou-depois {
     display: flex;
     justify-content: center;
     align-items: center;
     margin: 0 auto;
     padding: 1rem 0;
     max-width: 400px;
+    gap: 0.5rem;
 }
 
 .button-container button {
@@ -233,16 +243,6 @@ h5 {
     width: 45%;
 }
 
-.button-container-vdd-conseq,
-.button-container-fato-falso,
-.button-container-antes-ou-depois {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 0.5rem;
-    margin-top: 1rem;
-}
-
 /* Resultado */
 #result {
     margin-top: 1.25rem;
@@ -259,7 +259,6 @@ h5 {
     align-items: center;
     gap: 1rem;
     height: 7rem;
-    align-items: center;
     justify-content: center;
 }
 
@@ -271,13 +270,10 @@ h5 {
     border-radius: 8px;
 }
 
-.resultado-randomizador {
+.resultado-randomizador,
+#resultado-randomizador {
     font-size: 3rem;
     font-weight: bold;
-    color: #facc15;
-}
-
-#resultado-randomizador {
     color: #facc15;
 }
 
@@ -339,7 +335,7 @@ h5 {
     top: 10px;
     right: 15px;
     color: #ffffff;
-    font-size: 28px;
+    font-size: 36px;
     font-weight: bold;
 }
 
@@ -349,7 +345,7 @@ h5 {
 
 /* Popup Regras */
 .popup ul li {
-    font-ize: 1.2rem;
+    font-size: 1.2rem; /* corrigido de font-ize */
     margin-top: 8px;
     color: white;
     line-height: 1.2;
@@ -406,7 +402,7 @@ ol {
 
 @media (max-width: 25rem) {
     .game-container {
-        padding-top: 40px
+        padding-top: 40px;
         width: 100%;
         padding: 0.625rem;
     }

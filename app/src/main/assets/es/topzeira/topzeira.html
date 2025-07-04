@@ -1318,7 +1318,7 @@
             // Verifica se é uma lista ou uma string simples
             if (Array.isArray(answerData)) {
                 const listHTML = answerData.map(item => `<li>${item}</li>`).join("");
-                answerElement.innerHTML = `<ol>${listHTML}</ol>`;
+                answerElement.innerHTML = `<ul>${listHTML}</ul>`;
             } else {
                 answerElement.textContent = answerData;
             }
