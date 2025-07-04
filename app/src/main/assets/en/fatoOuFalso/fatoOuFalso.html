@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="../../stylesCards.css">
-    <title>Truth or Dare</title>
+    <title>Fact or False</title>
 </head>
 <body>
 
@@ -20,7 +20,7 @@
 </nav>
 
     <!-- Game Content -->
-    <h1>True or False </h1>
+    <h1>Fact or False </h1>
     <a href="#" onclick="openPopup()">
         <img class="img-regras" src="../images/regras.png" alt="Rules">
     </a>
@@ -31,16 +31,17 @@
         <div class="popup-content">
             <span class="close" onclick="closePopup()">&times;</span>
             <h3>Game Rules</h3>
-            <h5>Truth or Dare</h5>
+            <h5>Fact or False</h5>
             <ul>
-                <li>One player reads a statement</li>
-                <li>The player to their right answers if it's 'truth' or 'dare'</li>
-                <li>Then click the 'truth' or 'dare' button</li>
-                <li>If the player is correct, congratulations</li>
-                <li>If wrong, take a shot</li>
-                <li>Now, the player who just answered takes the phone and reads to the next player on the right</li>
+                <li>A player reads a statement</li>
+                <li>The player to their right answers whether it's 'fact' or 'false'</li>
+                <li>Right after, click the 'fact' or 'false' button</li>
+                <li>If the player gets it right, congratulations</li>
+                <li>If they get it wrong, they drink a shot</li>
+                <li>Now, the player who just answered takes the phone and reads to the next player on their right</li>
                 <li>The cycle continues</li>
                 <li>Have fun! 🍻</li>
+
             </ul>
         </div>
     </div>
@@ -49,8 +50,8 @@
         <p id="questionFatoOuFalso">Loading questions...</p>
     </div>
     <div class="button-container-fato-falso">
-        <button id="btnFato" class="btn-fato">True</button>
-        <button id="btnFalso" class="btn-falso">Dare</button>
+        <button id="btnFato" class="btn-fato">Fact</button>
+        <button id="btnFalso" class="btn-falso">False</button>
     </div>
 
     <div id="result"></div>

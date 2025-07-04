@@ -18,14 +18,20 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    signingConfigs {
+        create("release") {
+            storeFile = file("C:/Users/gbi/Documents/BebedeiraGames/keystore/upload-key.jks")
+            storePassword = "Grsfaria3003**Bebes"
+            keyAlias = "upload"
+            keyPassword = "Grasfaria3003**Bebes"
+        }
+    }
+
     buildTypes {
-        release {
-            // Ativa ofuscação e otimização do código
+        getByName("release") {
+            signingConfig = signingConfigs.getByName("release")
             isMinifyEnabled = true
-
-            // Remove recursos não usados (imagens, strings, etc)
             isShrinkResources = true
-
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
