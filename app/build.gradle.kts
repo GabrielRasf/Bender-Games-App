@@ -12,8 +12,8 @@ android {
         applicationId = "com.app.bebedeiragames"
         minSdk = 24
         targetSdk = 35
-        versionCode = 6
-        versionName = "1.6"
+        versionCode = 7
+        versionName = "1.7"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -21,7 +21,7 @@ android {
     signingConfigs {
         create("release") {
             storeFile = file("C:/Users/gbi/Documents/BebedeiraGames/keystore/upload-key.jks")
-            storePassword = "Grsfaria3003**Bebes"
+            storePassword = "Grasfaria3003**Bebes"
             keyAlias = "upload"
             keyPassword = "Grasfaria3003**Bebes"
         }
