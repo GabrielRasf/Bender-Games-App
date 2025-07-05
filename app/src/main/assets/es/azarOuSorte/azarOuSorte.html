@@ -12,24 +12,23 @@
 
 <div class="game-container">
     <!-- Menu -->
-<nav class="menu">
-    <a href="../menuEs.html" class="menu-title" style="position: relative;">
-        <div class="voltar-container" onclick="window.location.href='../menuPtBr.html'">
-            &#8678; <!-- Isso é ← -->
-        </div>
-        <img class="logo-bebedeira" src="../images/logo.png" alt="Logo Bebedeira" />
-    </a>
-</nav>
+    <nav class="menu">
+        <a href="../menuEs.html" class="menu-title" style="position: relative;">
+            <div class="voltar-container" onclick="window.location.href='../menuPtBr.html'">
+                &#8678; <!-- Isso é ← -->
+            </div>
+            <img class="logo-bebedeira" src="../images/logo.png" alt="Logo Bebedeira" />
+        </a>
+    </nav>
 
     <!-- Título do jogo -->
-    <h1>Azar o Suerte</h1>
     <div>
-    <div>
-    <a href="#" onclick="openPopup()"><br />
-        <img class="img-regras" src="../images/regras.png" alt="Reglas" />
-    </a>
-    <h4>Reglas</h4>
-    </div>
+        <h1>Azar o Suerte</h1>
+
+        <a href="#" onclick="openPopup()"><br />
+            <img class="img-regras" src="../images/regras.png" alt="Reglas" />
+        </a>
+        <h4>Reglas</h4>
     </div>
     <!-- Área do jogo -->
     <div class="container-randomizador popup-content">
@@ -41,11 +40,12 @@
 </div>
 
 <!-- Pop-up de Regras -->
-<div id="popup" class="popup" style="display:none;">
+<div id="popup" class="popup">
     <div class="popup-content">
-        <span class="close" onclick="closePopup()">&times;</span>
-        <h3>Reglas del Juego</h3>
-        <h5>Azar o Suerte</h5>
+        <div class="popup-header">
+            <h2>Reglas del Juego</h2>
+            <span class="close" onclick="closePopup()">&times;</span>
+        </div>
         <ul>
             <li>Todos los jugadores deben elegir un número entre 1 y 6</li>
             <li>Luego, activa el generador de números</li>

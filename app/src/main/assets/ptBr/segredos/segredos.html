@@ -1,32 +1,35 @@
 <!DOCTYPE html>
 <html lang="pt">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="../../stylesCards.css">
     <title>Segredos</title>
 </head>
+
 <body>
 
 <div class="game-container">
     <!-- Menu -->
-<nav class="menu">
-    <a href="../menuPtBr.html" class="menu-title" style="position: relative;">
-        <div class="voltar-container" onclick="window.location.href='../menuPtBr.html'">
-            &#8678; <!-- Isso é ← -->
-        </div>
-        <img class="logo-bebedeira" src="../images/logo.png" alt="Logo Bebedeira" />
-    </a>
-</nav>
+    <nav class="menu">
+        <a href="../menuPtBr.html" class="menu-title" style="position: relative;">
+            <div class="voltar-container" onclick="window.location.href='../menuPtBr.html'">
+                &#8678; <!-- Isso é ← -->
+            </div>
+            <img class="logo-bebedeira" src="../images/logo.png" alt="Logo Bebedeira" />
+        </a>
+    </nav>
 
     <!-- Conteúdo do jogo -->
-    <h1>Segredos </h1>
-<div>
-            <a href="#" onclick="openPopup()">
+    <div>
+        <h1>Segredos </h1>
+
+        <a href="#" onclick="openPopup()">
             <img class="img-regras" src="../images/regras.png" alt="Regras" />
-            </a>
-            <h4>Regras</h4>
-        </div>
+        </a>
+        <h4>Regras</h4>
+    </div>
 
     <!-- Pop-up -->
     <div id="popup" class="popup">
@@ -307,7 +310,7 @@
     }
 
     // Fechar o pop-up ao clicar fora dele
-    window.onclick = function(event) {
+    window.onclick = function (event) {
         let popup = document.getElementById("popup");
         if (event.target === popup) {
             popup.style.display = "none";
@@ -316,4 +319,5 @@
 </script>
 
 </body>
+
 </html>

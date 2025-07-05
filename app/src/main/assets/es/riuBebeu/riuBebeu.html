@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,26 +9,28 @@
     <title>Rió, Bebió</title>
 
 </head>
+
 <body>
 
 <div class="game-container">
     <!-- Menú -->
-<nav class="menu">
-    <a href="../menuEs.html" class="menu-title" style="position: relative;">
-        <div class="voltar-container" onclick="window.location.href='../menuPtBr.html'">
-            &#8678; <!-- Isso é ← -->
-        </div>
-        <img class="logo-bebedeira" src="../images/logo.png" alt="Logo Bebedeira" />
-    </a>
-</nav>
+    <nav class="menu">
+        <a href="../menuEs.html" class="menu-title" style="position: relative;">
+            <div class="voltar-container" onclick="window.location.href='../menuPtBr.html'">
+                &#8678; <!-- Isso é ← -->
+            </div>
+            <img class="logo-bebedeira" src="../images/logo.png" alt="Logo Bebedeira" />
+        </a>
+    </nav>
 
     <!-- Contenido del juego -->
-    <h1>Rió, Bebió</h1>
     <div>
-    <a href="#" onclick="openPopup()"><br />
-        <img class="img-regras" src="../images/regras.png" alt="Reglas" />
-    </a>
-    <h4>Reglas</h4>
+        <h1>Rió, Bebió</h1>
+
+        <a href="#" onclick="openPopup()"><br />
+            <img class="img-regras" src="../images/regras.png" alt="Reglas" />
+        </a>
+        <h4>Reglas</h4>
     </div>
 
 
@@ -43,9 +46,10 @@
 <!-- Pop-up -->
 <div id="popup" class="popup">
     <div class="popup-content">
-        <span class="close" onclick="closePopup()">&times;</span>
-        <h3>Reglas del Juego</h3>
-        <h5>Rió? Bebió</h5>
+        <div class="popup-header">
+            <h2>Reglas del Juego</h2>
+            <span class="close" onclick="closePopup()">&times;</span>
+        </div>
         <ul>
             <li>Un jugador selecciona una carta (los demás jugadores no deben saber el contenido)</li>
             <li>La carta dará una misión para el jugador que la leyó</li>
@@ -58,66 +62,66 @@
 
 <!-- Cronômetro -->
 
-    <button id="timer" onclick="handleTimerClick()">30</button>
+<button id="timer" onclick="handleTimerClick()">30</button>
 
 <script>
     const gameData = {
-    "questions": [
-        "Haz contacto visual con tu objetivo y lame sensualmente tus labios",
-        "Pregunta sensualmente al oído del objetivo '¿Te gusta cuando el dentista introduce un instrumento en tu boca?'",
-        "Finge ser un asistente virtual (Siri o Alexa) y responde a las preguntas de los otros jugadores de manera graciosa",
-        "Muestra al objetivo cómo jugar golf, estando detrás de él y sujetando sus manos",
-        "Tú y el objetivo están en un podcast, pregúntale: '¿Cómo se gana un Chokito?' Respuesta: 'Solo hay que poner el dedo en el enchufe'",
-        "Eres Papá Noel borracho y estás hablando con tu reno (tu objetivo)",
-        "Habla sensualmente al oído del objetivo: 'Hay algo en el mundo que le encanta que lo laman para entrar en el agujero. ¿Qué es?' Respuesta: 'El hilo de la aguja'",
-        "Eres el Señor Cosquillas. Ataca al objetivo.",
-        "Haz la mejor imitación del orgasmo de Shrek y Fiona para tu objetivo.",
-        "Gira en círculos gritando 'Soy una lavadora'",
-        "Imita los sonidos de una relación sexual al oído de tu objetivo",
-        "Estás aprendiendo ballet, muestra a los demás los movimientos que ya has aprendido",
-        "Con tu mejor imitación de Faustão dile a tu objetivo '¡Ay loco, bicho! ¡Esta fiera, amigo!'",
-        "Imita una conversación con personas en la fila del banco, actúa como un periodista haciendo un reportaje para la TV",
-        "Lee la mano de tu objetivo y di 'Lo siento, pero mañana ocurrirá un accidente terrible mientras te lavas la axila'",
-        "Imita un pingüino deslizándose sobre el hielo",
-        "Mira a los ojos del objetivo y di 'Hoy estás muy gracioso. ¿No tienes miedo de quedar quemado en la ronda?'",
-        "Habla bajito al oído del objetivo: 'Estoy totalmente atraído por ti. Quiero usar tu ropa.'",
-        "Tú y el jugador a tu derecha van a saltar en paracaídas. Él es el instructor y va detrás de ti. Finge tener miedo de saltar",
-        "Finge ser un entrenador de circo y enseña un truco a tu animal (tu objetivo)",
-        "Finge ser un DJ famoso animando una fiesta, usa objetos cercanos como equipo de sonido y haz sonidos graciosos con la boca",
-        "Finge ser un bebé dramático que acaba de perder su chupete y llora exageradamente, cayendo al suelo y rodando alrededor del objetivo",
-        "Muestra cómo poner un preservativo usando la mano del objetivo como herramienta",
-        "Eres una estrella porno y debes dar consejos poderosos a un novato (tu objetivo)",
-        "Eres un influencer fitness, enseña a tu objetivo un entrenamiento en casa usando objetos domésticos como pesas",
-        "Eres un vaquero, enseña cómo lazar un toro (yo soy el objetivo)",
-        "Pregunta a tu objetivo '¿Vamos a tomar un café? Me dijeron que piensas que en el filtro es más fuerte'",
-        "Imita chupar una paleta mirando a tu objetivo, luego di: 'Es la paleta más rica que he chupado'",
-        "Hazle caricias en la nuca a tu objetivo mientras das consejos motivacionales",
-        "Estás aprendiendo mandarín, muestra a tu objetivo las palabras que ya has aprendido",
-        "Imita una mariposa saliendo del capullo",
-        "El mapa del tesoro perdido muestra que el tesoro está en los pantalones del objetivo. Imita un pirata y encuéntralo",
-        "Mira a los ojos del objetivo y di: 'Fui a cocinar un huevo y el huevo estaba un poco pesado... tenía un pollito dentro. Imagina tu cocina con un pollito dentro'",
-        "Imita un delfín batiendo sus aletas y frótate contra tu objetivo",
-        "Habla sensualmente al oído del objetivo 'Tengo 5 botellas de whisky, vendes 4 y te doy una'",
-        "Enseña un baile viral de TikTok a tu objetivo, haz todos los movimientos necesarios para que se ría",
-        "Tu objetivo es una silla, haz ajustes en él para poder usarlo sin que sea incómodo",
-        "Ve hacia tu objetivo chupando tu dedo pulgar. Con voz de bebé di: 'Bebé quiere dormir'",
-        "Canta y baila la canción 'Gangnam Style' para hacer reír a tu objetivo",
-        "Da una clase de yoga a tu objetivo, inventa nombres graciosos para las poses como 'pose del gato perezoso' y 'pose del flamenco torcido'",
-        "Mirando a tu objetivo, cuenta la historia más graciosa que sepas sobre él",
-        "Acércate a tu objetivo sin decir nada, rápidamente huele su cuello",
-        "Finge ser un pato extremadamente encantador tratando de conquistar a tu objetivo, usando tu pico y movimientos sensuales",
-        "Haz un reportaje en vivo sobre 'Abuela que mandó al abuelo a la mierda'. Incluye entrevistas con otros jugadores.",
-        "Eres un ratoncito, intenta entrar en los pantalones de tu objetivo y hazlo sentir incómodo",
-        "Finge ser un peluquero cortándole el cabello a tu objetivo",
-        "Eres un vendedor de autos usados, intenta vender un auto imaginario a otro jugador",
-        "Habla sensualmente al oído del objetivo. 'Entra duro y seco. Y sale suave y húmedo. Me encanta el chicle'",
-        "Eres un colibrí. Bate tus alas y bebe un poco del néctar de la flor más suculenta (tu objetivo)",
-        "Masajea las orejas de tu objetivo mientras miras directamente a sus ojos",
-        "Imita una modelo caminando en la pasarela, toca al objetivo y dile al oído 'Aaaaiiiiinnnn'",
-        "Haz una presentación inspiradora de tus posiciones sexuales favoritas, actúa como si fuera una conferencia",
-        "Pídele al objetivo que se ponga en cuatro. Finge estar sacándole leche, mientras explicas la calidad de la leche"
-    ]
-};
+        "questions": [
+            "Haz contacto visual con tu objetivo y lame sensualmente tus labios",
+            "Pregunta sensualmente al oído del objetivo '¿Te gusta cuando el dentista introduce un instrumento en tu boca?'",
+            "Finge ser un asistente virtual (Siri o Alexa) y responde a las preguntas de los otros jugadores de manera graciosa",
+            "Muestra al objetivo cómo jugar golf, estando detrás de él y sujetando sus manos",
+            "Tú y el objetivo están en un podcast, pregúntale: '¿Cómo se gana un Chokito?' Respuesta: 'Solo hay que poner el dedo en el enchufe'",
+            "Eres Papá Noel borracho y estás hablando con tu reno (tu objetivo)",
+            "Habla sensualmente al oído del objetivo: 'Hay algo en el mundo que le encanta que lo laman para entrar en el agujero. ¿Qué es?' Respuesta: 'El hilo de la aguja'",
+            "Eres el Señor Cosquillas. Ataca al objetivo.",
+            "Haz la mejor imitación del orgasmo de Shrek y Fiona para tu objetivo.",
+            "Gira en círculos gritando 'Soy una lavadora'",
+            "Imita los sonidos de una relación sexual al oído de tu objetivo",
+            "Estás aprendiendo ballet, muestra a los demás los movimientos que ya has aprendido",
+            "Con tu mejor imitación de Faustão dile a tu objetivo '¡Ay loco, bicho! ¡Esta fiera, amigo!'",
+            "Imita una conversación con personas en la fila del banco, actúa como un periodista haciendo un reportaje para la TV",
+            "Lee la mano de tu objetivo y di 'Lo siento, pero mañana ocurrirá un accidente terrible mientras te lavas la axila'",
+            "Imita un pingüino deslizándose sobre el hielo",
+            "Mira a los ojos del objetivo y di 'Hoy estás muy gracioso. ¿No tienes miedo de quedar quemado en la ronda?'",
+            "Habla bajito al oído del objetivo: 'Estoy totalmente atraído por ti. Quiero usar tu ropa.'",
+            "Tú y el jugador a tu derecha van a saltar en paracaídas. Él es el instructor y va detrás de ti. Finge tener miedo de saltar",
+            "Finge ser un entrenador de circo y enseña un truco a tu animal (tu objetivo)",
+            "Finge ser un DJ famoso animando una fiesta, usa objetos cercanos como equipo de sonido y haz sonidos graciosos con la boca",
+            "Finge ser un bebé dramático que acaba de perder su chupete y llora exageradamente, cayendo al suelo y rodando alrededor del objetivo",
+            "Muestra cómo poner un preservativo usando la mano del objetivo como herramienta",
+            "Eres una estrella porno y debes dar consejos poderosos a un novato (tu objetivo)",
+            "Eres un influencer fitness, enseña a tu objetivo un entrenamiento en casa usando objetos domésticos como pesas",
+            "Eres un vaquero, enseña cómo lazar un toro (yo soy el objetivo)",
+            "Pregunta a tu objetivo '¿Vamos a tomar un café? Me dijeron que piensas que en el filtro es más fuerte'",
+            "Imita chupar una paleta mirando a tu objetivo, luego di: 'Es la paleta más rica que he chupado'",
+            "Hazle caricias en la nuca a tu objetivo mientras das consejos motivacionales",
+            "Estás aprendiendo mandarín, muestra a tu objetivo las palabras que ya has aprendido",
+            "Imita una mariposa saliendo del capullo",
+            "El mapa del tesoro perdido muestra que el tesoro está en los pantalones del objetivo. Imita un pirata y encuéntralo",
+            "Mira a los ojos del objetivo y di: 'Fui a cocinar un huevo y el huevo estaba un poco pesado... tenía un pollito dentro. Imagina tu cocina con un pollito dentro'",
+            "Imita un delfín batiendo sus aletas y frótate contra tu objetivo",
+            "Habla sensualmente al oído del objetivo 'Tengo 5 botellas de whisky, vendes 4 y te doy una'",
+            "Enseña un baile viral de TikTok a tu objetivo, haz todos los movimientos necesarios para que se ría",
+            "Tu objetivo es una silla, haz ajustes en él para poder usarlo sin que sea incómodo",
+            "Ve hacia tu objetivo chupando tu dedo pulgar. Con voz de bebé di: 'Bebé quiere dormir'",
+            "Canta y baila la canción 'Gangnam Style' para hacer reír a tu objetivo",
+            "Da una clase de yoga a tu objetivo, inventa nombres graciosos para las poses como 'pose del gato perezoso' y 'pose del flamenco torcido'",
+            "Mirando a tu objetivo, cuenta la historia más graciosa que sepas sobre él",
+            "Acércate a tu objetivo sin decir nada, rápidamente huele su cuello",
+            "Finge ser un pato extremadamente encantador tratando de conquistar a tu objetivo, usando tu pico y movimientos sensuales",
+            "Haz un reportaje en vivo sobre 'Abuela que mandó al abuelo a la mierda'. Incluye entrevistas con otros jugadores.",
+            "Eres un ratoncito, intenta entrar en los pantalones de tu objetivo y hazlo sentir incómodo",
+            "Finge ser un peluquero cortándole el cabello a tu objetivo",
+            "Eres un vendedor de autos usados, intenta vender un auto imaginario a otro jugador",
+            "Habla sensualmente al oído del objetivo. 'Entra duro y seco. Y sale suave y húmedo. Me encanta el chicle'",
+            "Eres un colibrí. Bate tus alas y bebe un poco del néctar de la flor más suculenta (tu objetivo)",
+            "Masajea las orejas de tu objetivo mientras miras directamente a sus ojos",
+            "Imita una modelo caminando en la pasarela, toca al objetivo y dile al oído 'Aaaaiiiiinnnn'",
+            "Haz una presentación inspiradora de tus posiciones sexuales favoritas, actúa como si fuera una conferencia",
+            "Pídele al objetivo que se ponga en cuatro. Finge estar sacándole leche, mientras explicas la calidad de la leche"
+        ]
+    };
 
     let questions = [];
     let currentQuestion = 0;
@@ -170,7 +174,7 @@
     }
 
     // Fechar o pop-up ao clicar fora dele
-    window.onclick = function(event) {
+    window.onclick = function (event) {
         let popup = document.getElementById("popup");
         if (event.target === popup) {
             popup.style.display = "none";
@@ -215,4 +219,5 @@
 </script>
 
 </body>
+
 </html>

@@ -12,14 +12,14 @@
 
 <div class="game-container">
     <!-- Menú -->
-<nav class="menu">
-    <a href="../menuEs.html" class="menu-title" style="position: relative;">
-        <div class="voltar-container" onclick="window.location.href='../menuPtBr.html'">
-            &#8678; <!-- Isso é ← -->
-        </div>
-        <img class="logo-bebedeira" src="../images/logo.png" alt="Logo Bebedeira" />
-    </a>
-</nav>
+    <nav class="menu">
+        <a href="../menuEs.html" class="menu-title" style="position: relative;">
+            <div class="voltar-container" onclick="window.location.href='../menuPtBr.html'">
+                &#8678; <!-- Isso é ← -->
+            </div>
+            <img class="logo-bebedeira" src="../images/logo.png" alt="Logo Bebedeira" />
+        </a>
+    </nav>
 
     <!-- Contenido del juego -->
     <h1>
@@ -27,10 +27,10 @@
     </h1>
     <h3>Familia</h3>
     <div>
-    <a href="#" onclick="openPopup()"><br />
-        <img class="img-regras" src="../images/regras.png" alt="Reglas" />
-    </a>
-    <h4>Reglas</h4>
+        <a href="#" onclick="openPopup()"><br />
+            <img class="img-regras" src="../images/regras.png" alt="Reglas" />
+        </a>
+        <h4>Reglas</h4>
     </div>
 
     <div class="card-frase">
@@ -48,9 +48,11 @@
 <!-- Pop-up -->
 <div id="popup" class="popup">
     <div class="popup-content">
-        <span class="close" onclick="closePopup()">&times;</span>
-        <h3>Reglas del Juego</h3>
-        <h5>Yo Nunca <br> Familia</h5>
+        <div class="popup-header">
+            <h2>Reglas del Juego</h2>
+            <span class="close" onclick="closePopup()">&times;</span>
+            <h5>Yo Nunca <br> Familia</h5>
+        </div>
         <ul>
             <li>Lee la pregunta en voz alta</li>
             <li>Quien haya hecho lo que se pregunta, bebe</li>
@@ -64,238 +66,239 @@
 <script>
 
     let questions = [];
-let currentQuestion = 0;
+    let currentQuestion = 0;
 
-// Función para cargar las preguntas (ahora usando datos embebidos)
-function loadQuestions() {
-    questions = shuffleArray([...embeddedData.questions]); // Usa spread para crear copia
-    nextQuestion(); // Muestra la primera pregunta
-}
-
-// Fisher-Yates Shuffle (mantenido igual)
-function shuffleArray(array) {
-    for (let i = array.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [array[i], array[j]] = [array[j], array[i]];
-    }
-    return array;
-}
-
-// Función para mostrar la siguiente pregunta (mantenida igual)
-function nextQuestion() {
-    if (questions.length === 0) {
-        document.getElementById("questionFamilia").textContent = "Cargando preguntas...";
-        loadQuestions();
-        return;
+    // Función para cargar las preguntas (ahora usando datos embebidos)
+    function loadQuestions() {
+        questions = shuffleArray([...embeddedData.questions]); // Usa spread para crear copia
+        nextQuestion(); // Muestra la primera pregunta
     }
 
-    if (currentQuestion < questions.length) {
-        document.getElementById("questionFamilia").textContent = questions[currentQuestion];
-        document.getElementById("result").textContent = "";
-        currentQuestion++;
-    } else {
-        document.getElementById("questionFamilia").textContent = "¡Fin del juego! Espero que se estén divirtiendo. ¿Quieres jugar de nuevo?";
-        document.getElementById("result").textContent = "";
-        currentQuestion = 0;
-        questions = shuffleArray([...embeddedData.questions]); // Reinicia con los datos originales
+    // Fisher-Yates Shuffle (mantenido igual)
+    function shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array;
     }
-}
 
-// Funciones del pop-up (mantenidas iguales)
-function openPopup() {
-    document.getElementById("popup").style.display = "block";
-}
+    // Función para mostrar la siguiente pregunta (mantenida igual)
+    function nextQuestion() {
+        if (questions.length === 0) {
+            document.getElementById("questionFamilia").textContent = "Cargando preguntas...";
+            loadQuestions();
+            return;
+        }
 
-function closePopup() {
-    document.getElementById("popup").style.display = "none";
-}
-
-window.onclick = function(event) {
-    let popup = document.getElementById("popup");
-    if (event.target === popup) {
-        popup.style.display = "none";
+        if (currentQuestion < questions.length) {
+            document.getElementById("questionFamilia").textContent = questions[currentQuestion];
+            document.getElementById("result").textContent = "";
+            currentQuestion++;
+        } else {
+            document.getElementById("questionFamilia").textContent = "¡Fin del juego! Espero que se estén divirtiendo. ¿Quieres jugar de nuevo?";
+            document.getElementById("result").textContent = "";
+            currentQuestion = 0;
+            questions = shuffleArray([...embeddedData.questions]); // Reinicia con los datos originales
+        }
     }
-};
 
-// Datos del juego EMBEBIDOS en el HTML
-const embeddedData = {
-  "questions": [
-    "Nunca he viajado solo.",
-    "Nunca he trepado a un árbol.",
-    "Nunca me he dormido en clase.",
-    "Nunca he buscado mi propio nombre en Google.",
-    "Nunca me he reído en voz alta mientras escribía 'jajajajaja'.",
-    "Nunca me he caído subiendo las escaleras.",
-    "Nunca he comido comida de perro.",
-    "Nunca he intentado escapar de casa.",
-    "Nunca me he tragado un chicle.",
-    "Nunca he visto un fantasma.",
-    "Nunca he comido algo que cayó al suelo.",
-    "Nunca he fingido estar dormido para no hacer algo.",
-    "Nunca he llorado viendo una película.",
-    "Nunca he dado un regalo que yo mismo quería recibir.",
-    "Nunca he tenido un apodo vergonzoso.",
-    "Nunca he dormido en el sofá porque tenía pereza de ir a la cama.",
-    "Nunca he peleado por un control remoto.",
-    "Nunca he fingido estar enfermo para faltar a la escuela.",
-    "Nunca he robado comida de la nevera a escondidas.",
-    "Nunca he tenido miedo a la oscuridad.",
-    "Nunca he fingido saber algo solo para no parecer tonto.",
-    "Nunca he contado un secreto sin querer.",
-    "Nunca he pasado todo el día en pijama.",
-    "Nunca he cantado mal la letra de una canción.",
-    "Nunca he sido el último en ser elegido para un equipo.",
-    "Nunca he jugado sin leer las reglas.",
-    "Nunca me he dormido antes de medianoche en Año Nuevo.",
-    "Nunca he pasado más de un día sin bañarme.",
-    "Nunca he perdido la paciencia armando un rompecabezas.",
-    "Nunca he tenido un crush con un personaje de dibujos animados.",
-    "Nunca he intentado imitar la voz de un personaje famoso.",
-    "Nunca he hecho una mueca frente al espejo y me he reído mucho.",
-    "Nunca he olvidado un cumpleaños importante.",
-    "Nunca he tenido ataques de risa en momentos inapropiados.",
-    "Nunca me he aburrido en una salida familiar.",
-    "Nunca me han regañado por responder con gracia.",
-    "Nunca he intentado cocinar y todo salió mal.",
-    "Nunca me he asustado y he gritado fuerte.",
-    "Nunca me he vuelto adicto a un dibujo o serie infantil.",
-    "Nunca he hecho algo tonto para animar a alguien triste.",
-    "Nunca he intentado abrir un regalo antes de tiempo.",
-    "Nunca he dibujado en mi propia cara sin querer.",
-    "Nunca he tomado una foto de la que me arrepentí después.",
-    "Nunca he pasado un día entero viendo televisión.",
-    "Nunca he empezado un libro y no lo he terminado.",
-    "Nunca he apretado varias veces el botón del ascensor pensando que llegaría más rápido.",
-    "Nunca he derramado comida en mi ropa mientras comía.",
-    "Nunca me he confundido y he entrado en un lugar equivocado.",
-    "Nunca he corrido a apagar la estufa después de olvidar algo al fuego.",
-    "Nunca he intentado asustar a alguien y me he asustado más yo.",
-    "Nunca me he dormido con la luz encendida por miedo.",
-    "Nunca me he sentido incómodo por responder mal una pregunta fácil.",
-    "Nunca he peleado con un hermano o primo por tonterías.",
-    "Nunca he intentado espiar un regalo antes de abrirlo.",
-    "Nunca me he escondido en el supermercado y luego me he arrepentido.",
-    "Nunca he dicho que me iba a dormir temprano y me quedé en el celular hasta tarde.",
-    "Nunca he empujado a alguien a la piscina por diversión.",
-    "Nunca me he reído en un momento inapropiado.",
-    "Nunca me han descubierto mintiendo sobre algo tonto.",
-    "Nunca me he arrepentido de cortarme el pelo.",
-    "Nunca he intentado repetir una acrobacia que vi en la TV y he fallado.",
-    "Nunca he enviado un mensaje a la persona equivocada.",
-    "Nunca he perdido algo y luego lo he encontrado en el bolsillo.",
-    "Nunca he jugado a esconderme y he estado demasiado tiempo escondido.",
-    "Nunca he pedido algo y luego me he arrepentido.",
-    "Nunca he olvidado dónde estacioné el coche.",
-    "Nunca he usado una excusa rara para salir de un compromiso.",
-    "Nunca he hecho una broma telefónica a alguien de la familia.",
-    "Nunca he comido en exceso y me he arrepentido.",
-    "Nunca he intentado contar un chiste y olvidé el final.",
-    "Nunca he comido algo sin saber qué era.",
-    "Nunca me he acostado sin cepillarme los dientes.",
-    "Nunca he asustado a alguien solo por diversión.",
-    "Nunca he contado hasta 10 para calmarme.",
-    "Nunca he dejado los platos para después y me he arrepentido.",
-    "Nunca he imitado a alguien de la familia.",
-    "Nunca he bailado solo en mi cuarto.",
-    "Nunca he hablado con un animal como si fuera una persona.",
-    "Nunca he intentado cocinar y quemé todo.",
-    "Nunca he hablado con la TV durante una película o partido.",
-    "Nunca he ido al mercado y olvidé el artículo principal.",
-    "Nunca he dicho que estaba listo(a) y todavía estaba en pijama.",
-    "Nunca he hablado solo(a) como si fuera un personaje.",
-    "Nunca he cantado en la ducha a todo volumen.",
-    "Nunca he tenido miedo de una película infantil de terror.",
-    "Nunca he ido al baño y olvidé el celular.",
-    "Nunca he tirado agua a alguien sin querer.",
-    "Nunca he comido dulces escondido.",
-    "Nunca he bailado sin música solo por estar feliz.",
-    "Nunca me he puesto la ropa al revés sin darme cuenta.",
-    "Nunca he dicho que no tenía hambre y robé papas fritas de otro.",
-    "Nunca he tomado una selfie fea solo por diversión.",
-    "Nunca he fingido saber dónde estaba en el GPS.",
-    "Nunca he hecho cosquillas a alguien y luego salí corriendo.",
-    "Nunca he dicho 'buenos días' en la noche.",
-    "Nunca he respondido una pregunta sin entenderla bien.",
-    "Nunca me he quedado dormido en medio de una conversación.",
-    "Nunca he inventado una excusa para salir de un grupo.",
-    "Nunca he usado la misma ropa por pereza de elegir otra.",
-    "Nunca he tomado foto de comida antes de comer.",
-    "Nunca he puesto azúcar en lugar de sal.",
-    "Nunca he bailado como en TikTok (aunque no sepa bailar).",
-    "Nunca he intentado usar ropa del hermano o hermana sin pedir.",
-    "Nunca he estornudado tan fuerte que asusté a alguien.",
-    "Nunca he intentado hacer una mueca más fea que otra persona.",
-    "Nunca he fingido entender un chiste para no quedarme fuera.",
-    "Nunca me he perdido dentro de una tienda.",
-    "Nunca he derramado jugo y culpé al viento.",
-    "Nunca he intentado esconderme con una manta.",
-    "Nunca he comido algo vencido sin darme cuenta.",
-    "Nunca he puesto nombre a objetos inanimados.",
-    "Nunca he jugado con la comida en el plato.",
-    "Nunca he hecho drama solo para llamar la atención.",
-    "Nunca he querido irme en medio de una película aburrida.",
-    "Nunca he dormido con la ropa del día anterior.",
-    "Nunca he ido al mercado solo para comprar algo tonto.",
-    "Nunca he pedido comida aunque la nevera esté llena.",
-    "Nunca me he reído solo porque alguien más se reía.",
-    "Nunca he llorado de tanto reír.",
-    "Nunca he resbalado en el baño.",
-    "Nunca he olvidado lo que iba a decir en medio de una frase.",
-    "Nunca he soñado con comida.",
-    "Nunca me he sentido avergonzado de cantar en público.",
-    "Nunca he llorado por perder un juego.",
-    "Nunca he saltado en la cama como si fuera un trampolín.",
-    "Nunca he dormido en el sofá viendo televisión.",
-    "Nunca he usado el celular escondido cuando debía dormir.",
-    "Nunca he ido al mercado con hambre y exageré en las compras.",
-    "Nunca he visto dibujos animados siendo adulto.",
-    "Nunca he intentado hacer una receta de YouTube y me salió mal.",
-    "Nunca he peleado con el control de la TV.",
-    "Nunca me he envuelto en la manta como un burrito.",
-    "Nunca he hablado con un objeto pensando que era una persona.",
-    "Nunca he comido a escondidas para no compartir.",
-    "Nunca he intentado usar una palabra difícil para parecer inteligente.",
-    "Nunca me he mordido la lengua sin querer.",
-    "Nunca me he enojado y luego olvidé por qué.",
-    "Nunca me he quedado atrapado en una ropa que no me quedaba.",
-    "Nunca he entrado en la sala equivocada.",
-    "Nunca he mirado hacia atrás pensando que alguien me llamó.",
-    "Nunca he puesto nombre a una planta de la casa.",
-    "Nunca me he dormido durante una película en el cine.",
-    "Nunca he contenido la risa en una situación seria.",
-    "Nunca he comido pastel antes de cantar cumpleaños.",
-    "Nunca me he asustado con mi propio reflejo.",
-    "Nunca he tropezado y fingí que estaba bailando.",
-    "Nunca he cantado mal una canción famosa.",
-    "Nunca he tomado selfie con filtro gracioso.",
-    "Nunca he hecho una promesa y la he roto el mismo día.",
-    "Nunca he hablado con el espejo pensando que soy un actor famoso.",
-    "Nunca he dicho 'ya voy' y ni siquiera había salido todavía.",
-    "Nunca he fingido entender una película confusa.",
-    "Nunca he tenido pereza de responder mensajes.",
-    "Nunca he hablado mal de alguien y me di cuenta que estaba cerca.",
-    "Nunca he visto un video triste y he llorado de verdad.",
-    "Nunca he usado la toalla como capa de superhéroe.",
-    "Nunca he ido a la nevera solo para ver si apareció algo nuevo.",
-    "Nunca he apretado el botón equivocado y fingí que sabía qué hacía.",
-    "Nunca he tomado el control y me senté en el lugar más estratégico.",
-    "Nunca he cantado en la ducha como si fuera un concierto.",
-    "Nunca he jugado a ser detective buscando un regalo escondido.",
-    "Nunca he puesto el despertador y seguí durmiendo.",
-    "Nunca he hecho drama por una comida que se acabó.",
-    "Nunca he entrado al cuarto y olvidé el motivo.",
-    "Nunca he imaginado que estaba en un videoclip mirando por la ventana.",
-    "Nunca me he puesto la ropa al revés sin darme cuenta.",
-    "Nunca he movido la cabeza fingiendo que escuchaba.",
-    "Nunca he ido a arreglar la cama y terminé acostado.",
-    "Nunca he jugado a espiar detrás de la puerta.",
-    "Nunca he dicho adiós a alguien y casi fui al lado equivocado después."
-  ]
-};
+    // Funciones del pop-up (mantenidas iguales)
+    function openPopup() {
+        document.getElementById("popup").style.display = "block";
+    }
+
+    function closePopup() {
+        document.getElementById("popup").style.display = "none";
+    }
+
+    window.onclick = function (event) {
+        let popup = document.getElementById("popup");
+        if (event.target === popup) {
+            popup.style.display = "none";
+        }
+    };
+
+    // Datos del juego EMBEBIDOS en el HTML
+    const embeddedData = {
+        "questions": [
+            "Nunca he viajado solo.",
+            "Nunca he trepado a un árbol.",
+            "Nunca me he dormido en clase.",
+            "Nunca he buscado mi propio nombre en Google.",
+            "Nunca me he reído en voz alta mientras escribía 'jajajajaja'.",
+            "Nunca me he caído subiendo las escaleras.",
+            "Nunca he comido comida de perro.",
+            "Nunca he intentado escapar de casa.",
+            "Nunca me he tragado un chicle.",
+            "Nunca he visto un fantasma.",
+            "Nunca he comido algo que cayó al suelo.",
+            "Nunca he fingido estar dormido para no hacer algo.",
+            "Nunca he llorado viendo una película.",
+            "Nunca he dado un regalo que yo mismo quería recibir.",
+            "Nunca he tenido un apodo vergonzoso.",
+            "Nunca he dormido en el sofá porque tenía pereza de ir a la cama.",
+            "Nunca he peleado por un control remoto.",
+            "Nunca he fingido estar enfermo para faltar a la escuela.",
+            "Nunca he robado comida de la nevera a escondidas.",
+            "Nunca he tenido miedo a la oscuridad.",
+            "Nunca he fingido saber algo solo para no parecer tonto.",
+            "Nunca he contado un secreto sin querer.",
+            "Nunca he pasado todo el día en pijama.",
+            "Nunca he cantado mal la letra de una canción.",
+            "Nunca he sido el último en ser elegido para un equipo.",
+            "Nunca he jugado sin leer las reglas.",
+            "Nunca me he dormido antes de medianoche en Año Nuevo.",
+            "Nunca he pasado más de un día sin bañarme.",
+            "Nunca he perdido la paciencia armando un rompecabezas.",
+            "Nunca he tenido un crush con un personaje de dibujos animados.",
+            "Nunca he intentado imitar la voz de un personaje famoso.",
+            "Nunca he hecho una mueca frente al espejo y me he reído mucho.",
+            "Nunca he olvidado un cumpleaños importante.",
+            "Nunca he tenido ataques de risa en momentos inapropiados.",
+            "Nunca me he aburrido en una salida familiar.",
+            "Nunca me han regañado por responder con gracia.",
+            "Nunca he intentado cocinar y todo salió mal.",
+            "Nunca me he asustado y he gritado fuerte.",
+            "Nunca me he vuelto adicto a un dibujo o serie infantil.",
+            "Nunca he hecho algo tonto para animar a alguien triste.",
+            "Nunca he intentado abrir un regalo antes de tiempo.",
+            "Nunca he dibujado en mi propia cara sin querer.",
+            "Nunca he tomado una foto de la que me arrepentí después.",
+            "Nunca he pasado un día entero viendo televisión.",
+            "Nunca he empezado un libro y no lo he terminado.",
+            "Nunca he apretado varias veces el botón del ascensor pensando que llegaría más rápido.",
+            "Nunca he derramado comida en mi ropa mientras comía.",
+            "Nunca me he confundido y he entrado en un lugar equivocado.",
+            "Nunca he corrido a apagar la estufa después de olvidar algo al fuego.",
+            "Nunca he intentado asustar a alguien y me he asustado más yo.",
+            "Nunca me he dormido con la luz encendida por miedo.",
+            "Nunca me he sentido incómodo por responder mal una pregunta fácil.",
+            "Nunca he peleado con un hermano o primo por tonterías.",
+            "Nunca he intentado espiar un regalo antes de abrirlo.",
+            "Nunca me he escondido en el supermercado y luego me he arrepentido.",
+            "Nunca he dicho que me iba a dormir temprano y me quedé en el celular hasta tarde.",
+            "Nunca he empujado a alguien a la piscina por diversión.",
+            "Nunca me he reído en un momento inapropiado.",
+            "Nunca me han descubierto mintiendo sobre algo tonto.",
+            "Nunca me he arrepentido de cortarme el pelo.",
+            "Nunca he intentado repetir una acrobacia que vi en la TV y he fallado.",
+            "Nunca he enviado un mensaje a la persona equivocada.",
+            "Nunca he perdido algo y luego lo he encontrado en el bolsillo.",
+            "Nunca he jugado a esconderme y he estado demasiado tiempo escondido.",
+            "Nunca he pedido algo y luego me he arrepentido.",
+            "Nunca he olvidado dónde estacioné el coche.",
+            "Nunca he usado una excusa rara para salir de un compromiso.",
+            "Nunca he hecho una broma telefónica a alguien de la familia.",
+            "Nunca he comido en exceso y me he arrepentido.",
+            "Nunca he intentado contar un chiste y olvidé el final.",
+            "Nunca he comido algo sin saber qué era.",
+            "Nunca me he acostado sin cepillarme los dientes.",
+            "Nunca he asustado a alguien solo por diversión.",
+            "Nunca he contado hasta 10 para calmarme.",
+            "Nunca he dejado los platos para después y me he arrepentido.",
+            "Nunca he imitado a alguien de la familia.",
+            "Nunca he bailado solo en mi cuarto.",
+            "Nunca he hablado con un animal como si fuera una persona.",
+            "Nunca he intentado cocinar y quemé todo.",
+            "Nunca he hablado con la TV durante una película o partido.",
+            "Nunca he ido al mercado y olvidé el artículo principal.",
+            "Nunca he dicho que estaba listo(a) y todavía estaba en pijama.",
+            "Nunca he hablado solo(a) como si fuera un personaje.",
+            "Nunca he cantado en la ducha a todo volumen.",
+            "Nunca he tenido miedo de una película infantil de terror.",
+            "Nunca he ido al baño y olvidé el celular.",
+            "Nunca he tirado agua a alguien sin querer.",
+            "Nunca he comido dulces escondido.",
+            "Nunca he bailado sin música solo por estar feliz.",
+            "Nunca me he puesto la ropa al revés sin darme cuenta.",
+            "Nunca he dicho que no tenía hambre y robé papas fritas de otro.",
+            "Nunca he tomado una selfie fea solo por diversión.",
+            "Nunca he fingido saber dónde estaba en el GPS.",
+            "Nunca he hecho cosquillas a alguien y luego salí corriendo.",
+            "Nunca he dicho 'buenos días' en la noche.",
+            "Nunca he respondido una pregunta sin entenderla bien.",
+            "Nunca me he quedado dormido en medio de una conversación.",
+            "Nunca he inventado una excusa para salir de un grupo.",
+            "Nunca he usado la misma ropa por pereza de elegir otra.",
+            "Nunca he tomado foto de comida antes de comer.",
+            "Nunca he puesto azúcar en lugar de sal.",
+            "Nunca he bailado como en TikTok (aunque no sepa bailar).",
+            "Nunca he intentado usar ropa del hermano o hermana sin pedir.",
+            "Nunca he estornudado tan fuerte que asusté a alguien.",
+            "Nunca he intentado hacer una mueca más fea que otra persona.",
+            "Nunca he fingido entender un chiste para no quedarme fuera.",
+            "Nunca me he perdido dentro de una tienda.",
+            "Nunca he derramado jugo y culpé al viento.",
+            "Nunca he intentado esconderme con una manta.",
+            "Nunca he comido algo vencido sin darme cuenta.",
+            "Nunca he puesto nombre a objetos inanimados.",
+            "Nunca he jugado con la comida en el plato.",
+            "Nunca he hecho drama solo para llamar la atención.",
+            "Nunca he querido irme en medio de una película aburrida.",
+            "Nunca he dormido con la ropa del día anterior.",
+            "Nunca he ido al mercado solo para comprar algo tonto.",
+            "Nunca he pedido comida aunque la nevera esté llena.",
+            "Nunca me he reído solo porque alguien más se reía.",
+            "Nunca he llorado de tanto reír.",
+            "Nunca he resbalado en el baño.",
+            "Nunca he olvidado lo que iba a decir en medio de una frase.",
+            "Nunca he soñado con comida.",
+            "Nunca me he sentido avergonzado de cantar en público.",
+            "Nunca he llorado por perder un juego.",
+            "Nunca he saltado en la cama como si fuera un trampolín.",
+            "Nunca he dormido en el sofá viendo televisión.",
+            "Nunca he usado el celular escondido cuando debía dormir.",
+            "Nunca he ido al mercado con hambre y exageré en las compras.",
+            "Nunca he visto dibujos animados siendo adulto.",
+            "Nunca he intentado hacer una receta de YouTube y me salió mal.",
+            "Nunca he peleado con el control de la TV.",
+            "Nunca me he envuelto en la manta como un burrito.",
+            "Nunca he hablado con un objeto pensando que era una persona.",
+            "Nunca he comido a escondidas para no compartir.",
+            "Nunca he intentado usar una palabra difícil para parecer inteligente.",
+            "Nunca me he mordido la lengua sin querer.",
+            "Nunca me he enojado y luego olvidé por qué.",
+            "Nunca me he quedado atrapado en una ropa que no me quedaba.",
+            "Nunca he entrado en la sala equivocada.",
+            "Nunca he mirado hacia atrás pensando que alguien me llamó.",
+            "Nunca he puesto nombre a una planta de la casa.",
+            "Nunca me he dormido durante una película en el cine.",
+            "Nunca he contenido la risa en una situación seria.",
+            "Nunca he comido pastel antes de cantar cumpleaños.",
+            "Nunca me he asustado con mi propio reflejo.",
+            "Nunca he tropezado y fingí que estaba bailando.",
+            "Nunca he cantado mal una canción famosa.",
+            "Nunca he tomado selfie con filtro gracioso.",
+            "Nunca he hecho una promesa y la he roto el mismo día.",
+            "Nunca he hablado con el espejo pensando que soy un actor famoso.",
+            "Nunca he dicho 'ya voy' y ni siquiera había salido todavía.",
+            "Nunca he fingido entender una película confusa.",
+            "Nunca he tenido pereza de responder mensajes.",
+            "Nunca he hablado mal de alguien y me di cuenta que estaba cerca.",
+            "Nunca he visto un video triste y he llorado de verdad.",
+            "Nunca he usado la toalla como capa de superhéroe.",
+            "Nunca he ido a la nevera solo para ver si apareció algo nuevo.",
+            "Nunca he apretado el botón equivocado y fingí que sabía qué hacía.",
+            "Nunca he tomado el control y me senté en el lugar más estratégico.",
+            "Nunca he cantado en la ducha como si fuera un concierto.",
+            "Nunca he jugado a ser detective buscando un regalo escondido.",
+            "Nunca he puesto el despertador y seguí durmiendo.",
+            "Nunca he hecho drama por una comida que se acabó.",
+            "Nunca he entrado al cuarto y olvidé el motivo.",
+            "Nunca he imaginado que estaba en un videoclip mirando por la ventana.",
+            "Nunca me he puesto la ropa al revés sin darme cuenta.",
+            "Nunca he movido la cabeza fingiendo que escuchaba.",
+            "Nunca he ido a arreglar la cama y terminé acostado.",
+            "Nunca he jugado a espiar detrás de la puerta.",
+            "Nunca he dicho adiós a alguien y casi fui al lado equivocado después."
+        ]
+    };
 
 
     // Carrega as perguntas ao iniciar (modificado para usar dados embutidos)
     loadQuestions();
 </script>
 </body>
+
 </html>

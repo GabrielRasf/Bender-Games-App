@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,24 +9,26 @@
     <title>Charadas</title>
 
 </head>
+
 <body>
 
 <div class="game-container">
     <!-- Menu -->
-<nav class="menu">
-    <a href="../menuEn.html" class="menu-title" style="position: relative;">
-        <div class="voltar-container" onclick="window.location.href='../menuPtBr.html'">
-            &#8678; <!-- Isso é ← -->
-        </div>
-        <img class="logo-bebedeira" src="../images/logo.png" alt="Logo Bebedeira" />
-    </a>
-</nav>
+    <nav class="menu">
+        <a href="../menuEn.html" class="menu-title" style="position: relative;">
+            <div class="voltar-container" onclick="window.location.href='../menuPtBr.html'">
+                &#8678; <!-- Isso é ← -->
+            </div>
+            <img class="logo-bebedeira" src="../images/logo.png" alt="Logo Bebedeira" />
+        </a>
+    </nav>
 
     <!-- Conteúdo do jogo -->
-    <h1>Riddles </h1>
     <div>
+        <h1>Riddles </h1>
+
         <a href="#" onclick="openPopup()"><br />
-        <img class="img-regras" src="../images/regras.png" alt="Regras" />
+            <img class="img-regras" src="../images/regras.png" alt="Regras" />
         </a>
         <h4>Rules</h4>
     </div>
@@ -33,9 +36,10 @@
     <!-- Pop-up -->
     <div id="popup" class="popup">
         <div class="popup-content">
-            <span class="close" onclick="closePopup()">&times;</span>
-            <h3>Game Rules</h3>
-            <h5>Riddles</h5>
+            <div class="popup-header">
+                <h2>Game Rules</h2>
+                <span class="close" onclick="closePopup()">&times;</span>
+            </div>
             <ul>
                 <li>A classic riddles game!</li>
                 <li>Everyone must discuss to come up with the answer within 60 seconds</li>
@@ -50,7 +54,8 @@
     <div class="card-frase">
         <p id="questionCharadas"></p>
         <div class="center-container">
-            <img class="pergunta-e-resposta" src="../images/pergunta-e-resposta.png" onclick="showAnswerPopup()" alt="Answer">
+            <img class="pergunta-e-resposta" src="../images/pergunta-e-resposta.png" onclick="showAnswerPopup()"
+                 alt="Answer">
             <h4>Answer</h4>
         </div>
     </div>
@@ -76,473 +81,473 @@
 
 <script>
 
-document.addEventListener('DOMContentLoaded', function() {
-    closeAllPopups();
+    document.addEventListener('DOMContentLoaded', function () {
+        closeAllPopups();
 
-    nextQuestion();
+        nextQuestion();
 
-    function closeAllPopups() {
-    document.getElementById("popup").style.display = "none";
-    document.getElementById("answerPopup").style.display = "none";
-}
+        function closeAllPopups() {
+            document.getElementById("popup").style.display = "none";
+            document.getElementById("answerPopup").style.display = "none";
+        }
 
-// Modifique a função showAnswerPopup para ter mais controle
-function showAnswerPopup() {
-    // Verifica se há uma pergunta ativa antes de mostrar o popup
-    if (currentQuestionIndex >= 0 && questions[currentQuestionIndex]) {
-        const answer = questions[currentQuestionIndex].answer;
-        document.getElementById("answer").textContent = answer;
-        document.getElementById("answerPopup").style.display = "block";
-    }
-}
+        // Modifique a função showAnswerPopup para ter mais controle
+        function showAnswerPopup() {
+            // Verifica se há uma pergunta ativa antes de mostrar o popup
+            if (currentQuestionIndex >= 0 && questions[currentQuestionIndex]) {
+                const answer = questions[currentQuestionIndex].answer;
+                document.getElementById("answer").textContent = answer;
+                document.getElementById("answerPopup").style.display = "block";
+            }
+        }
 
-});
+    });
 
     // Embedded JSON data
     const questionsData = {
-  "questions": [
-  {
-    "question": "What gets smaller every time it takes a bath?",
-    "answer": "Soap"
-  },
-  {
-    "question": "I'm not a blanket, yet I cover the ground; a crystal from heaven that doesn't make a sound. What am I?",
-    "answer": "Snowflake."
-  },
-  {
-    "question": "I'm sweet and cold with a stick to hold; a treat on a hot day, worth more than gold. What am I?",
-    "answer": "Popsicle."
-  },
-  {
-    "question": "What has a head but no brain?",
-    "answer": "Lettuce."
-  },
-  {
-    "question": "Why do cats make good warriors?",
-    "answer": "Because they’ve got nine lives."
-  },
-  {
-    "question": "I have a neck, but no head. I have two arms, but no hands. What am I?",
-    "answer": "A shirt."
-  },
-  {
-    "question": "What word contains 26 letters but only has three syllables?",
-    "answer": "Alphabet."
-  },
-  {
-    "question": "What comes down but never goes up?",
-    "answer": "Rain."
-  },
-  {
-    "question": "What five-letter word typed in all capital letters can be read the same upside down?",
-    "answer": "SWIMS."
-  },
-  {
-    "question": "The more you take, the more you leave behind. What am I?",
-    "answer": "Footsteps."
-  },
-  {
-    "question": "David's father has three sons: Snap, Crackle and _____?",
-    "answer": "David."
-  },
-  {
-    "question": "What is more useful when it is broken?",
-    "answer": "An egg."
-  },
-  {
-    "question": "I am easy to lift, but hard to throw. What am I?",
-    "answer": "A feather."
-  },
-  {
-    "question": "Where do you take a sick boat?",
-    "answer": "To the dock-tor."
-  },
-  {
-    "question": "Which fish costs the most?",
-    "answer": "A goldfish."
-  },
-  {
-    "question": "What goes up, but never comes down?",
-    "answer": "Age."
-  },
-  {
-    "question": "A cowboy rode into town on Friday. He stayed for three nights and rode out on Friday. How is this possible?",
-    "answer": "His horse's name is Friday."
-  },
-  {
-    "question": "What has a neck but no head?",
-    "answer": "A bottle."
-  },
-  {
-    "question": "What is full of holes but still holds water?",
-    "answer": "A sponge."
-  },
-  {
-    "question": "How do you spell COW in thirteen letters?",
-    "answer": "SEE O DOUBLE YOU."
-  },
-  {
-    "question": "Why is Europe like a frying pan?",
-    "answer": "Because it has Greece at the bottom."
-  },
-  {
-    "question": "What do the numbers 11, 69 and 88 all have in common?",
-    "answer": "They all read the same way when placed upside down."
-  },
-  {
-    "question": "If 2 is company and 3 is a crowd, what are 4 and 5?",
-    "answer": "9."
-  },
-  {
-    "question": "I add 5 to 9 and get 2. The answer is correct, so what am I?",
-    "answer": "A clock. When it is 9 a.m., adding 5 hours would make it 2 p.m."
-  },
-  {
-    "question": "Rachel goes to the supermarket and buys 10 tomatoes. Unfortunately, on the way back home, all but 9 get ruined. How many tomatoes are left in a good condition?",
-    "answer": "9."
-  },
-  {
-    "question": "What is 3/7 chicken, 2/3 cat, and 2/4 goat?",
-    "answer": "Chicago!"
-  },
-  {
-    "question": "If a zookeeper had 100 pairs of animals in her zoo, and two pairs of babies are born for each one of the original animals, then (sadly) 23 animals don’t survive, how many animals do you have left in total?",
-    "answer": "977 animals (100 x 2 = 200; 200 + 800 = 1000; 1000 – 23 = 977)"
-  },
-  {
-    "question": "I saw my math teacher with a piece of graph paper yesterday.",
-    "answer": "I think he must be plotting something."
-  },
-  {
-    "question": "If you multiply this number by any other number, the answer will always be the same. What number is this?",
-    "answer": "Zero."
-  },
-  {
-    "question": "I am an odd number. Take away a letter and I become even. What number am I?",
-    "answer": "Seven."
-  },
-  {
-    "question": "What three numbers give the same result when multiplied and added together?",
-    "answer": "1, 2, and 3 (1 + 2 + 3 = 6 and 1 x 2 x 3 = 6)."
-  },
-  {
-    "question": "What's a single-digit number with no value?",
-    "answer": "Zero."
-  },
-  {
-    "question": "A tree doubled in height each year until it reached its maximum height over the course of ten years. How many years did it take for the tree to reach half its maximum height?",
-    "answer": "Nine years."
-  },
-  {
-    "question": "Every night I’m told what to do, and each morning I do what I’m told. But I still don’t escape your scold. What am I?",
-    "answer": "An alarm clock."
-  },
-  {
-    "question": "What do the letter \"t\" and an island have in common?",
-    "answer": "They're both in the middle of water."
-  },
-  {
-    "question": "Which word in the dictionary is spelled incorrectly?",
-    "answer": "Incorrectly."
-  },
-  {
-    "question": "How can you drop a raw egg from a height onto a concrete floor without cracking it?",
-    "answer": "Concrete floors are very hard to crack."
-  },
-  {
-    "question": "What do you call a bear with no teeth?",
-    "answer": "A gummy bear."
-  },
-  {
-    "question": "What has many rings but no fingers?",
-    "answer": "A phone."
-  },
-  {
-    "question": "What can you break without touching it?",
-    "answer": "A promise."
-  },
-  {
-    "question": "I sometimes run, but I can’t walk. What am I?",
-    "answer": "A nose."
-  },
-  {
-    "question": "It has keys, but no locks. It has space, but no room. You can enter, but can’t go inside. What is it?",
-    "answer": "A keyboard."
-  },
-  {
-    "question": "I have pointed fangs, and I sit and wait. I have piercing force, and I crunch with weight. I grab my victims, but they do not fight. I join them each with a single, quick bite. What am I?",
-    "answer": "A stapler."
-  },
-  {
-    "question": "Pronounced as one letter, And written with three, two letters there are, and two only in me. I’m double, I’m single, I’m black blue and gray, I’m read from both ends, and the same either way. What am I?",
-    "answer": "Eye."
-  },
-  {
-    "question": "Who has married many women but was never married?",
-    "answer": "The priest."
-  },
-  {
-    "question": "Forward, I am heavy; backward, I am not. What am I?",
-    "answer": "Ton."
-  },
-  {
-    "question": "What can you hold in your right hand, but never in your left hand?",
-    "answer": "Your left hand."
-  },
-  {
-    "question": "If two snakes marry, what will their towels say?",
-    "answer": "Hiss and hers."
-  },
-  {
-    "question": "What does a man do only once in his lifetime, but women do once a year after they are 29?",
-    "answer": "Turn 30."
-  },
-  {
-    "question": "What has four fingers and a thumb, but is not living?",
-    "answer": "A glove."
-  },
-  {
-    "question": "What starts with T, ends with T, and has T in it?",
-    "answer": "A teapot."
-  },
-  {
-    "question": "What kind of ship has two mates but no captain?",
-    "answer": "A relationship."
-  },
-  {
-    "question": "Ask this question all day long, but always get completely different answers, and yet all the answers will be correct. What is the question?",
-    "answer": "What time is it?"
-  },
-  {
-    "question": "What loses its head in the morning but gets it back at night?",
-    "answer": "A pillow."
-  },
-  {
-    "question": "Four cars come to a four-way stop, each coming from a different direction. They can’t decide who got there first, so they all go forward at the same time. All four cars go, but none crash into each other. How is this possible?",
-    "answer": "They all made right-hand turns."
-  },
-  {
-    "question": "I have a head like a cat and feet like a cat, but I am not a cat. What am I?",
-    "answer": "A kitten."
-  },
-  {
-    "question": "Who makes it, has no need of it. Who buys it, has no use for it. Who uses it can neither see nor feel it. What is it?",
-    "answer": "A coffin."
-  },
-  {
-    "question": "What has hands but cannot clap?",
-    "answer": "A clock."
-  },
-  {
-    "question": "Paul's height is six feet, he's an assistant at a butcher's shop, and wears size 9 shoes. What does he weigh?",
-    "answer": "Meat."
-  },
-  {
-    "question": "Poor people have it. Rich people need it. If you eat it you die. What is it?",
-    "answer": "Nothing."
-  },
-  {
-    "question": "What is the longest word in the dictionary?",
-    "answer": "Smiles, because there is a mile between each ‘s’."
-  },
-  {
-    "question": "Throw away the outside and cook the inside, then eat the outside and throw away the inside. What is it?",
-    "answer": "Corn on the cob."
-  },
-  {
-    "question": "What is at the end of a rainbow?",
-    "answer": "The letter W!"
-  },
-  {
-    "question": "What kind of tree can you carry in your hand?",
-    "answer": "A palm!"
-  },
-  {
-    "question": "They come out at night without being called, and are lost in the day without being stolen. What are they?",
-    "answer": "Stars!"
-  },
-  {
-    "question": "What is always in front of you, but can’t be seen?",
-    "answer": "The future."
-  },
-  {
-    "question": "You’ll find me in Mercury, Earth, Mars, Jupiter, Saturn and Uranus. But never Neptune, or Venus. What am I?",
-    "answer": "The letter “R”."
-  },
-  {
-    "question": "How many months have 28 days?",
-    "answer": "Every month has 28 days."
-  },
-  {
-    "question": "I can be cracked, made, told and played. What am I?",
-    "answer": "A joke."
-  },
-  {
-    "question": "I cannot talk, but I always reply when spoken to. What am I?",
-    "answer": "An echo."
-  },
-  {
-    "question": "When is the top of a mountain similar to a savings account?",
-    "answer": "When it peaks one’s interest."
-  },
-  {
-    "question": "A man goes out for a walk during a storm with nothing to protect him from the rain. He doesn’t have a hat, a hood or an umbrella. But by the end of his walk, there isn’t a single wet hair on his head. Why doesn’t the man have wet hair?",
-    "answer": "He’s bald."
-  },
-  {
-    "question": "I love to dance and twist. I shake my tail as I sail away. When I fly wingless into the sky. What am I?",
-    "answer": "A kite."
-  },
-  {
-    "question": "When you stop to look, you can always see me. But if you try to touch me, you can never feel me. Although you walk towards me, I remain the same distance from you. What am I?",
-    "answer": "The horizon."
-  },
-  {
-    "question": "You see a boat filled with people. It has not sunk. But when you look back, you don’t see a single person on the boat. Why?",
-    "answer": "All the people on board are married."
-  },
-  {
-    "question": "What is it that no one wants to have, but no one wants to lose either?",
-    "answer": "A lawsuit."
-  },
-  {
-    "question": "I welcome the day with a show of light, I stealthily came here in the night.I bathe the earthy stuff at dawn, But by noon, alas! I'm gone.",
-    "answer": "The morning dew."
-  },
-  {
-    "question": "What goes through cities and fields, but never moves?",
-    "answer": "A road."
-  },
-  {
-    "question": "What can be touched but can't be seen?",
-    "answer": "Someone’s heart."
-  },
-  {
-    "question": "In a bus, there is a 26-year-old pregnant lady, a 30-year-old policeman, a 52-year-old random woman, and the driver who is 65 years old. Who is the youngest?",
-    "answer": "The baby of the pregnant lady."
-  },
-  {
-    "question": "When it is alive we sing, when it is dead we clap our hands. What is it?",
-    "answer": "A birthday candle."
-  },
-  {
-    "question": "What can go through glass without breaking it?",
-    "answer": "Light."
-  },
-  {
-    "question": "What gets bigger the more you take away?",
-    "answer": "A hole."
-  },
-  {
-    "question": "I have no life, but I can die. What am I?",
-    "answer": "A battery."
-  },
-  {
-    "question": "What kind of room has no walls, door or windows?",
-    "answer": "A mushroom."
-  },
-  {
-    "question": "It belongs to you, but your friends use it more. What is it?",
-    "answer": "Your name."
-  },
-  {
-    "question": "What two things can you never eat for breakfast?",
-    "answer": "Lunch and dinner."
-  },
-  {
-    "question": "I make a loud sound when I’m changing. When I do change, I get bigger but weigh less. What am I?",
-    "answer": "Popcorn."
-  },
-  {
-    "question": "I’m orange, I wear a green hat and I sound like a parrot. What am I?",
-    "answer": "A carrot."
-  },
-  {
-    "question": "What runs all around a backyard, yet never moves?",
-    "answer": "A fence."
-  },
-  {
-    "question": "Take off my skin — I won't cry, but you will! What am I?",
-    "answer": "An onion."
-  },
-  {
-    "question": "What invention lets you look right through a wall?",
-    "answer": "A window."
-  },
-  {
-    "question": "What is always on its way but never arrives?",
-    "answer": "Tomorrow."
-  },
-  {
-    "question": "Two girls were born to the same mother, on the same day, at the same time, in the same month and year, and yet they're not twins. How can this be?",
-    "answer": "The two babies are two of a set of triplets."
-  },
-  {
-    "question": "What has a bottom at the top?",
-    "answer": "Your legs."
-  },
-  {
-    "question": "What can you catch but never throw?",
-    "answer": "A cold."
-  },
-  {
-    "question": "What has many teeth but cannot bite?",
-    "answer": "A comb."
-  },
-  {
-    "question": "What has branches, but no fruit, trunk or leaves?",
-    "answer": "A bank."
-  },
-  {
-    "question": "What thrives when you feed it but dies when you water it?",
-    "answer": "A fire."
-  },
-  {
-    "question": "What do you buy to eat but never consume?",
-    "answer": "Cutlery."
-  },
-  {
-    "question": "Two fathers and two sons are in a car, yet there are only three people in the car. How?",
-    "answer": "They are grandfather, father, and son."
-  },
-  {
-    "question": "A bus driver goes the wrong way down a one-way street. He passes the cops, but they don’t stop him. Why?",
-    "answer": "He was walking."
-  },
-  {
-    "question": "If an electric train is traveling south, then which way is the smoke going?",
-    "answer": "There is no smoke — it's an electric train."
-  },
-  {
-    "question": "Where is the only place where today comes before yesterday?",
-    "answer": "The dictionary."
-  },
-  {
-    "question": "What can you put in a bucket to make it weigh less?",
-    "answer": "A hole."
-  },
-  {
-    "question": "How can kids drink beer and not get drunk?",
-    "answer": "By sticking to root beer."
-  },
-  {
-    "question": "What is black when it’s clean and white when it’s dirty?",
-    "answer": "A chalkboard."
-  },
-  {
-    "question": "I have one eye but am unable to see. What am I?",
-    "answer": "A needle."
-  },
-  {
-    "question": "What two keys can’t open any door?",
-    "answer": "A monkey and a donkey."
-  },
-  {
-    "question": "A man and his boss have the same parents but are not siblings. How is this possible?",
-    "answer": "He’s self-employed."
-   }
-  ]
-}
+        "questions": [
+            {
+                "question": "What gets smaller every time it takes a bath?",
+                "answer": "Soap"
+            },
+            {
+                "question": "I'm not a blanket, yet I cover the ground; a crystal from heaven that doesn't make a sound. What am I?",
+                "answer": "Snowflake."
+            },
+            {
+                "question": "I'm sweet and cold with a stick to hold; a treat on a hot day, worth more than gold. What am I?",
+                "answer": "Popsicle."
+            },
+            {
+                "question": "What has a head but no brain?",
+                "answer": "Lettuce."
+            },
+            {
+                "question": "Why do cats make good warriors?",
+                "answer": "Because they’ve got nine lives."
+            },
+            {
+                "question": "I have a neck, but no head. I have two arms, but no hands. What am I?",
+                "answer": "A shirt."
+            },
+            {
+                "question": "What word contains 26 letters but only has three syllables?",
+                "answer": "Alphabet."
+            },
+            {
+                "question": "What comes down but never goes up?",
+                "answer": "Rain."
+            },
+            {
+                "question": "What five-letter word typed in all capital letters can be read the same upside down?",
+                "answer": "SWIMS."
+            },
+            {
+                "question": "The more you take, the more you leave behind. What am I?",
+                "answer": "Footsteps."
+            },
+            {
+                "question": "David's father has three sons: Snap, Crackle and _____?",
+                "answer": "David."
+            },
+            {
+                "question": "What is more useful when it is broken?",
+                "answer": "An egg."
+            },
+            {
+                "question": "I am easy to lift, but hard to throw. What am I?",
+                "answer": "A feather."
+            },
+            {
+                "question": "Where do you take a sick boat?",
+                "answer": "To the dock-tor."
+            },
+            {
+                "question": "Which fish costs the most?",
+                "answer": "A goldfish."
+            },
+            {
+                "question": "What goes up, but never comes down?",
+                "answer": "Age."
+            },
+            {
+                "question": "A cowboy rode into town on Friday. He stayed for three nights and rode out on Friday. How is this possible?",
+                "answer": "His horse's name is Friday."
+            },
+            {
+                "question": "What has a neck but no head?",
+                "answer": "A bottle."
+            },
+            {
+                "question": "What is full of holes but still holds water?",
+                "answer": "A sponge."
+            },
+            {
+                "question": "How do you spell COW in thirteen letters?",
+                "answer": "SEE O DOUBLE YOU."
+            },
+            {
+                "question": "Why is Europe like a frying pan?",
+                "answer": "Because it has Greece at the bottom."
+            },
+            {
+                "question": "What do the numbers 11, 69 and 88 all have in common?",
+                "answer": "They all read the same way when placed upside down."
+            },
+            {
+                "question": "If 2 is company and 3 is a crowd, what are 4 and 5?",
+                "answer": "9."
+            },
+            {
+                "question": "I add 5 to 9 and get 2. The answer is correct, so what am I?",
+                "answer": "A clock. When it is 9 a.m., adding 5 hours would make it 2 p.m."
+            },
+            {
+                "question": "Rachel goes to the supermarket and buys 10 tomatoes. Unfortunately, on the way back home, all but 9 get ruined. How many tomatoes are left in a good condition?",
+                "answer": "9."
+            },
+            {
+                "question": "What is 3/7 chicken, 2/3 cat, and 2/4 goat?",
+                "answer": "Chicago!"
+            },
+            {
+                "question": "If a zookeeper had 100 pairs of animals in her zoo, and two pairs of babies are born for each one of the original animals, then (sadly) 23 animals don’t survive, how many animals do you have left in total?",
+                "answer": "977 animals (100 x 2 = 200; 200 + 800 = 1000; 1000 – 23 = 977)"
+            },
+            {
+                "question": "I saw my math teacher with a piece of graph paper yesterday.",
+                "answer": "I think he must be plotting something."
+            },
+            {
+                "question": "If you multiply this number by any other number, the answer will always be the same. What number is this?",
+                "answer": "Zero."
+            },
+            {
+                "question": "I am an odd number. Take away a letter and I become even. What number am I?",
+                "answer": "Seven."
+            },
+            {
+                "question": "What three numbers give the same result when multiplied and added together?",
+                "answer": "1, 2, and 3 (1 + 2 + 3 = 6 and 1 x 2 x 3 = 6)."
+            },
+            {
+                "question": "What's a single-digit number with no value?",
+                "answer": "Zero."
+            },
+            {
+                "question": "A tree doubled in height each year until it reached its maximum height over the course of ten years. How many years did it take for the tree to reach half its maximum height?",
+                "answer": "Nine years."
+            },
+            {
+                "question": "Every night I’m told what to do, and each morning I do what I’m told. But I still don’t escape your scold. What am I?",
+                "answer": "An alarm clock."
+            },
+            {
+                "question": "What do the letter \"t\" and an island have in common?",
+                "answer": "They're both in the middle of water."
+            },
+            {
+                "question": "Which word in the dictionary is spelled incorrectly?",
+                "answer": "Incorrectly."
+            },
+            {
+                "question": "How can you drop a raw egg from a height onto a concrete floor without cracking it?",
+                "answer": "Concrete floors are very hard to crack."
+            },
+            {
+                "question": "What do you call a bear with no teeth?",
+                "answer": "A gummy bear."
+            },
+            {
+                "question": "What has many rings but no fingers?",
+                "answer": "A phone."
+            },
+            {
+                "question": "What can you break without touching it?",
+                "answer": "A promise."
+            },
+            {
+                "question": "I sometimes run, but I can’t walk. What am I?",
+                "answer": "A nose."
+            },
+            {
+                "question": "It has keys, but no locks. It has space, but no room. You can enter, but can’t go inside. What is it?",
+                "answer": "A keyboard."
+            },
+            {
+                "question": "I have pointed fangs, and I sit and wait. I have piercing force, and I crunch with weight. I grab my victims, but they do not fight. I join them each with a single, quick bite. What am I?",
+                "answer": "A stapler."
+            },
+            {
+                "question": "Pronounced as one letter, And written with three, two letters there are, and two only in me. I’m double, I’m single, I’m black blue and gray, I’m read from both ends, and the same either way. What am I?",
+                "answer": "Eye."
+            },
+            {
+                "question": "Who has married many women but was never married?",
+                "answer": "The priest."
+            },
+            {
+                "question": "Forward, I am heavy; backward, I am not. What am I?",
+                "answer": "Ton."
+            },
+            {
+                "question": "What can you hold in your right hand, but never in your left hand?",
+                "answer": "Your left hand."
+            },
+            {
+                "question": "If two snakes marry, what will their towels say?",
+                "answer": "Hiss and hers."
+            },
+            {
+                "question": "What does a man do only once in his lifetime, but women do once a year after they are 29?",
+                "answer": "Turn 30."
+            },
+            {
+                "question": "What has four fingers and a thumb, but is not living?",
+                "answer": "A glove."
+            },
+            {
+                "question": "What starts with T, ends with T, and has T in it?",
+                "answer": "A teapot."
+            },
+            {
+                "question": "What kind of ship has two mates but no captain?",
+                "answer": "A relationship."
+            },
+            {
+                "question": "Ask this question all day long, but always get completely different answers, and yet all the answers will be correct. What is the question?",
+                "answer": "What time is it?"
+            },
+            {
+                "question": "What loses its head in the morning but gets it back at night?",
+                "answer": "A pillow."
+            },
+            {
+                "question": "Four cars come to a four-way stop, each coming from a different direction. They can’t decide who got there first, so they all go forward at the same time. All four cars go, but none crash into each other. How is this possible?",
+                "answer": "They all made right-hand turns."
+            },
+            {
+                "question": "I have a head like a cat and feet like a cat, but I am not a cat. What am I?",
+                "answer": "A kitten."
+            },
+            {
+                "question": "Who makes it, has no need of it. Who buys it, has no use for it. Who uses it can neither see nor feel it. What is it?",
+                "answer": "A coffin."
+            },
+            {
+                "question": "What has hands but cannot clap?",
+                "answer": "A clock."
+            },
+            {
+                "question": "Paul's height is six feet, he's an assistant at a butcher's shop, and wears size 9 shoes. What does he weigh?",
+                "answer": "Meat."
+            },
+            {
+                "question": "Poor people have it. Rich people need it. If you eat it you die. What is it?",
+                "answer": "Nothing."
+            },
+            {
+                "question": "What is the longest word in the dictionary?",
+                "answer": "Smiles, because there is a mile between each ‘s’."
+            },
+            {
+                "question": "Throw away the outside and cook the inside, then eat the outside and throw away the inside. What is it?",
+                "answer": "Corn on the cob."
+            },
+            {
+                "question": "What is at the end of a rainbow?",
+                "answer": "The letter W!"
+            },
+            {
+                "question": "What kind of tree can you carry in your hand?",
+                "answer": "A palm!"
+            },
+            {
+                "question": "They come out at night without being called, and are lost in the day without being stolen. What are they?",
+                "answer": "Stars!"
+            },
+            {
+                "question": "What is always in front of you, but can’t be seen?",
+                "answer": "The future."
+            },
+            {
+                "question": "You’ll find me in Mercury, Earth, Mars, Jupiter, Saturn and Uranus. But never Neptune, or Venus. What am I?",
+                "answer": "The letter “R”."
+            },
+            {
+                "question": "How many months have 28 days?",
+                "answer": "Every month has 28 days."
+            },
+            {
+                "question": "I can be cracked, made, told and played. What am I?",
+                "answer": "A joke."
+            },
+            {
+                "question": "I cannot talk, but I always reply when spoken to. What am I?",
+                "answer": "An echo."
+            },
+            {
+                "question": "When is the top of a mountain similar to a savings account?",
+                "answer": "When it peaks one’s interest."
+            },
+            {
+                "question": "A man goes out for a walk during a storm with nothing to protect him from the rain. He doesn’t have a hat, a hood or an umbrella. But by the end of his walk, there isn’t a single wet hair on his head. Why doesn’t the man have wet hair?",
+                "answer": "He’s bald."
+            },
+            {
+                "question": "I love to dance and twist. I shake my tail as I sail away. When I fly wingless into the sky. What am I?",
+                "answer": "A kite."
+            },
+            {
+                "question": "When you stop to look, you can always see me. But if you try to touch me, you can never feel me. Although you walk towards me, I remain the same distance from you. What am I?",
+                "answer": "The horizon."
+            },
+            {
+                "question": "You see a boat filled with people. It has not sunk. But when you look back, you don’t see a single person on the boat. Why?",
+                "answer": "All the people on board are married."
+            },
+            {
+                "question": "What is it that no one wants to have, but no one wants to lose either?",
+                "answer": "A lawsuit."
+            },
+            {
+                "question": "I welcome the day with a show of light, I stealthily came here in the night.I bathe the earthy stuff at dawn, But by noon, alas! I'm gone.",
+                "answer": "The morning dew."
+            },
+            {
+                "question": "What goes through cities and fields, but never moves?",
+                "answer": "A road."
+            },
+            {
+                "question": "What can be touched but can't be seen?",
+                "answer": "Someone’s heart."
+            },
+            {
+                "question": "In a bus, there is a 26-year-old pregnant lady, a 30-year-old policeman, a 52-year-old random woman, and the driver who is 65 years old. Who is the youngest?",
+                "answer": "The baby of the pregnant lady."
+            },
+            {
+                "question": "When it is alive we sing, when it is dead we clap our hands. What is it?",
+                "answer": "A birthday candle."
+            },
+            {
+                "question": "What can go through glass without breaking it?",
+                "answer": "Light."
+            },
+            {
+                "question": "What gets bigger the more you take away?",
+                "answer": "A hole."
+            },
+            {
+                "question": "I have no life, but I can die. What am I?",
+                "answer": "A battery."
+            },
+            {
+                "question": "What kind of room has no walls, door or windows?",
+                "answer": "A mushroom."
+            },
+            {
+                "question": "It belongs to you, but your friends use it more. What is it?",
+                "answer": "Your name."
+            },
+            {
+                "question": "What two things can you never eat for breakfast?",
+                "answer": "Lunch and dinner."
+            },
+            {
+                "question": "I make a loud sound when I’m changing. When I do change, I get bigger but weigh less. What am I?",
+                "answer": "Popcorn."
+            },
+            {
+                "question": "I’m orange, I wear a green hat and I sound like a parrot. What am I?",
+                "answer": "A carrot."
+            },
+            {
+                "question": "What runs all around a backyard, yet never moves?",
+                "answer": "A fence."
+            },
+            {
+                "question": "Take off my skin — I won't cry, but you will! What am I?",
+                "answer": "An onion."
+            },
+            {
+                "question": "What invention lets you look right through a wall?",
+                "answer": "A window."
+            },
+            {
+                "question": "What is always on its way but never arrives?",
+                "answer": "Tomorrow."
+            },
+            {
+                "question": "Two girls were born to the same mother, on the same day, at the same time, in the same month and year, and yet they're not twins. How can this be?",
+                "answer": "The two babies are two of a set of triplets."
+            },
+            {
+                "question": "What has a bottom at the top?",
+                "answer": "Your legs."
+            },
+            {
+                "question": "What can you catch but never throw?",
+                "answer": "A cold."
+            },
+            {
+                "question": "What has many teeth but cannot bite?",
+                "answer": "A comb."
+            },
+            {
+                "question": "What has branches, but no fruit, trunk or leaves?",
+                "answer": "A bank."
+            },
+            {
+                "question": "What thrives when you feed it but dies when you water it?",
+                "answer": "A fire."
+            },
+            {
+                "question": "What do you buy to eat but never consume?",
+                "answer": "Cutlery."
+            },
+            {
+                "question": "Two fathers and two sons are in a car, yet there are only three people in the car. How?",
+                "answer": "They are grandfather, father, and son."
+            },
+            {
+                "question": "A bus driver goes the wrong way down a one-way street. He passes the cops, but they don’t stop him. Why?",
+                "answer": "He was walking."
+            },
+            {
+                "question": "If an electric train is traveling south, then which way is the smoke going?",
+                "answer": "There is no smoke — it's an electric train."
+            },
+            {
+                "question": "Where is the only place where today comes before yesterday?",
+                "answer": "The dictionary."
+            },
+            {
+                "question": "What can you put in a bucket to make it weigh less?",
+                "answer": "A hole."
+            },
+            {
+                "question": "How can kids drink beer and not get drunk?",
+                "answer": "By sticking to root beer."
+            },
+            {
+                "question": "What is black when it’s clean and white when it’s dirty?",
+                "answer": "A chalkboard."
+            },
+            {
+                "question": "I have one eye but am unable to see. What am I?",
+                "answer": "A needle."
+            },
+            {
+                "question": "What two keys can’t open any door?",
+                "answer": "A monkey and a donkey."
+            },
+            {
+                "question": "A man and his boss have the same parents but are not siblings. How is this possible?",
+                "answer": "He’s self-employed."
+            }
+        ]
+    }
 
     const questions = questionsData.questions;
     let currentQuestionIndex = -1;
@@ -606,7 +611,7 @@ function showAnswerPopup() {
     }
 
     // Fecha popups ao clicar fora deles
-    window.onclick = function(event) {
+    window.onclick = function (event) {
         if (event.target.classList.contains("popup")) {
             closePopup();
             closeAnswerPopup();
@@ -616,4 +621,5 @@ function showAnswerPopup() {
 
 </script>
 </body>
+
 </html>

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -8,25 +9,32 @@
     <title>Intimacy</title>
 
 </head>
+
 <body>
 
 <div class="game-container">
     <!-- Menu -->
-<nav class="menu">
-    <a href="../menuEn.html" class="menu-title" style="position: relative;">
-        <div class="voltar-container" onclick="window.location.href='../menuPtBr.html'">
-            &#8678; <!-- Isso é ← -->
-        </div>
-        <img class="logo-bebedeira" src="../images/logo.png" alt="Logo Bebedeira" />
-    </a>
-</nav>
+    <nav class="menu">
+        <a href="../menuEn.html" class="menu-title" style="position: relative;">
+            <div class="voltar-container" onclick="window.location.href='../menuPtBr.html'">
+                &#8678; <!-- Isso é ← -->
+            </div>
+            <img class="logo-bebedeira" src="../images/logo.png" alt="Logo Bebedeira" />
+        </a>
+    </nav>
 
     <h1 class="h1-menu espacamento-h1-intimidade">Intimacy</h1>
     <!-- Game options -->
     <div class="game-box-content">
-        <a href="abertura.html" class="game-box game-1"><p>01 - Opening</p></a>
-        <a href="desenvolvimento.html" class="game-box game-2"><p class="break-word">02 - Development</p></a>
-        <a href="mergulho.html" class="game-box game-3"><p>03 - Dive</p></a>
+        <a href="abertura.html" class="game-box game-1">
+            <p>01 - Opening</p>
+        </a>
+        <a href="desenvolvimento.html" class="game-box game-2">
+            <p class="break-word">02 - Development</p>
+        </a>
+        <a href="mergulho.html" class="game-box game-3">
+            <p>03 - Dive</p>
+        </a>
     </div>
 </div>
 
@@ -39,7 +47,8 @@
             <li>This game has 3 stages!</li>
             <li>In the first stage, the person answering will try to guess the other person's answer.</li>
             <li>In the second stage, both will answer the questions, one at a time, paying close attention.</li>
-            <li>The third stage consists of small challenges to be done once a week. They can be done together with stage 2.</li>
+            <li>The third stage consists of small challenges to be done once a week. They can be done together with
+                stage 2.</li>
             <li>This game can be played while enjoying a light and romantic drink, like wine or a cocktail!</li>
             <li>Have fun! 🍻</li>
         </ul>
@@ -58,7 +67,7 @@
     }
 
     // Close popup when clicking outside the content
-    window.onclick = function(event) {
+    window.onclick = function (event) {
         let popup = document.getElementById("popup");
         if (event.target === popup) {
             closePopup();
@@ -67,4 +76,5 @@
 </script>
 
 </body>
+
 </html>

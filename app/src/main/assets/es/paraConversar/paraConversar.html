@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,26 +8,28 @@
     <title>Para Conversar</title>
 
 </head>
+
 <body>
 
 <div class="game-container">
     <!-- Menu -->
-<nav class="menu">
-    <a href="../menuEs.html" class="menu-title" style="position: relative;">
-        <div class="voltar-container" onclick="window.location.href='../menuPtBr.html'">
-            &#8678; <!-- Isso é ← -->
-        </div>
-        <img class="logo-bebedeira" src="../images/logo.png" alt="Logo Bebedeira" />
-    </a>
-</nav>
+    <nav class="menu">
+        <a href="../menuEs.html" class="menu-title" style="position: relative;">
+            <div class="voltar-container" onclick="window.location.href='../menuPtBr.html'">
+                &#8678; <!-- Isso é ← -->
+            </div>
+            <img class="logo-bebedeira" src="../images/logo.png" alt="Logo Bebedeira" />
+        </a>
+    </nav>
 
     <!-- Conteúdo do jogo -->
-    <h1>Para Conversar</h1>
     <div>
-    <a href="#" onclick="openPopup()"><br />
-        <img class="img-regras" src="../images/regras.png" alt="Reglas" />
-    </a>
-    <h4>Reglas</h4>
+        <h1>Para Conversar</h1>
+
+        <a href="#" onclick="openPopup()"><br />
+            <img class="img-regras" src="../images/regras.png" alt="Reglas" />
+        </a>
+        <h4>Reglas</h4>
     </div>
 
     <div class="card-frase">
@@ -41,16 +44,19 @@
 <!-- Pop-up -->
 <div id="popup" class="popup">
     <div class="popup-content">
-        <span class="close" onclick="closePopup()">&times;</span>
-        <h3>Reglas del Juego</h3>
-        <h5>Para Conversar</h5>
+        <div class="popup-header">
+            <h2>Reglas del Juego</h2>
+            <span class="close" onclick="closePopup()">&times;</span>
+        </div>
         <ul>
             <li>Este juego puede ser jugado en grupo o en pareja.</li>
             <li>Una persona leerá una pregunta y la(s) otra(s) responderán.</li>
             <li>Después de responder, otra persona leerá otra pregunta y el ciclo continúa.</li>
             <li><strong>Variante:</strong></li>
-            <li>Si las respuestas de los participantes coinciden, los jugadores que respondieron lo mismo beben un trago.</li>
-            <li>En este juego no es necesario beber, es un juego más ligero enfocado en conocerse mejor mediante preguntas variadas y ligeras.</li>
+            <li>Si las respuestas de los participantes coinciden, los jugadores que respondieron lo mismo beben un
+                trago.</li>
+            <li>En este juego no es necesario beber, es un juego más ligero enfocado en conocerse mejor mediante
+                preguntas variadas y ligeras.</li>
             <li>¡Diviértete! 🍻</li>
         </ul>
     </div>
@@ -192,283 +198,284 @@
             "¿Sueles ser indulgente en los juegos o deportes cuando sabes que eres mejor?",
             "¿Cuál crees que es el propósito de la vida?",
             "¿Qué libro cambió tu vida?",
-        "¿Qué es lo que más necesita el mundo?",
-        "¿Hay algo que tus padres no te dejaron hacer cuando eras niño y que tú sí permitirías a tus propios hijos?",
-        "Si tuvieras una cantidad ilimitada de dinero, ¿cómo diseñarías tu casa?",
-        "¿Crees en el amor a primera vista?",
-        "¿Piensas que las pruebas de coeficiente intelectual son una medida precisa de la inteligencia?",
-        "¿Aún mantienes contacto con tu primer novio o novia?",
-        "¿Cuál era tu actividad favorita cuando tenías 10 años?",
-        "Si solo pudieras comer una cosa por el resto de tu vida, ¿qué sería?",
-        "¿Qué te parece muy impresionante?",
-        "¿Había alguna regla en tu casa durante la infancia que fuera muy estricta?",
-        "¿Todavía imprimes fotos para poner en marcos o álbumes?",
-        "Si pudieras añadir un mes extra al calendario, ¿cómo lo llamarías?",
-        "¿Qué crees que responderían tus padres si les preguntaran cuál fue la cosa más loca que hiciste de niño?",
-        "¿Cuál es la mayor ventaja de los hombres sobre las mujeres y viceversa?",
-        "¿Qué cualidad personal la gente aprecia en ti?",
-        "¿Piensas que las guerras llevaron a algunos de los mayores avances de la ciencia?",
-        "¿Qué canción dirías que es la banda sonora de tu generación?",
-        "¿El dinero puede comprar el amor? ¿Por qué sí o por qué no?",
-        "¿Cómo crees que tus mejores amigos te describirían si solo pudieran usar tres palabras?",
-        "¿Tú 'encuentras el amor' o el 'amor te encuentra a ti'?",
-        "Describe una vez en la que te sentiste una persona terrible.",
-        "Describe una vez en la que tu primera impresión de alguien fue completamente equivocada.",
-        "¿Dirías que el tiempo que pasas en las redes sociales está bien invertido?",
-        "¿Crees que recibes lo suficiente a cambio del gobierno por los impuestos que pagas?",
-        "¿Cuál es la película más sobrevalorada?",
-        "¿Prefieres trabajar desde casa?",
-        "¿Cuál es el paisaje más cinematográfico que has visitado?",
-        "¿En qué te gustaría ser mejor?",
-        "¿Cuándo fue la última vez que lloraste?",
-        "¿Crees que una lectura de la palma de la mano puede predecir el futuro?",
-        "¿A qué edad dirías que la gente es más feliz?",
-        "¿Puedes mencionar dos cosas buenas y dos malas sobre el 'jeitinho brasileiro'?",
-        "Si fuera posible grabar tus sueños en video, ¿los verías?",
-        "Cuenta algo de tu pasado que te hace pensar 'No puedo creer que hice eso'.",
-        "¿Cuál es la mayor diferencia entre tus padres?",
-        "¿Qué sería lo primero que harías si pudieras cambiar de sexo por un día?",
-        "¿Cuál es el sonido más molesto?",
-        "¿Eres más o menos romántico(a) que la mayoría de la gente?",
-        "¿Qué nombre nunca le pondrías a tu hijo?",
-        "¿Hay algo con lo que nunca se debe bromear?",
-        "Si fuera posible, ¿optarías por la educación en casa para tus hijos?",
-        "¿Qué producto crees que la gente seguirá usando dentro de 500 años?",
-        "¿Crees que los hombres son tan sensibles como las mujeres o simplemente no lo demuestran?",
-        "¿Puedes mencionar algo que probaste por primera vez el año pasado?",
-        "¿Crees que los uniformes escolares son una buena o mala idea?",
-        "¿Cuál es el acto más amable que alguien ha hecho por ti?",
-        "¿Alguna vez dijiste 'te amo' sin sentirlo?",
-        "¿Cuándo fue la última vez que tuviste ganas de rendirte?",
-        "Si pudieras invitar a cualquier persona, viva o muerta, a cantar un dueto de karaoke contigo, ¿quién sería?",
-        "¿Eres tradicionalista o un rompedor de reglas?",
-        "¿Cómo sería un día perfecto para ti?",
-        "Cuenta algo que la mayoría de las personas no sabe sobre ti.",
-        "¿Cuál fue tu primera dirección de correo electrónico?",
-        "¿Tienes algo sin valor monetario pero con un valor sentimental tan grande que no lo venderías ni por 10.000 reales?",
-        "¿Hay algún tema recurrente en tus sueños?",
-        "¿Crees que habría menos conflictos en el mundo si todos habláramos el mismo idioma?",
-        "¿Siempre duermes en el mismo lado de la cama?",
-        "¿Qué es mejor: el amor o el dinero?",
-        "Si pudieras aprobar una ley que todos debieran seguir, ¿cuál sería?",
-        "Si pudieras estar en cualquier lugar del mundo, ¿dónde estarías?",
-        "¿Qué te pone muy enojado?",
-        "¿Hubo algún período de tu vida que fue difícil, pero que al final te hizo una persona más fuerte o mejor?",
-        "¿De qué grupo formabas parte en la escuela secundaria?",
-        "¿Cuál es el lado positivo de estar en una relación y cuál es el de estar soltero(a)?",
-        "¿Había algo en lo que eras excepcionalmente bueno cuando eras más joven?",
-        "En tu opinión, ¿cuál es la principal característica que hace exitosas a las personas?",
-        "¿Hay algún problema en salir de un restaurante sin pagar si pediste la cuenta varias veces y llevas esperando 20 minutos?",
-        "¿Hay suficiente diversión y aventura en tu vida?",
-        "¿Los padres deberían tener derecho a poner el nombre que quieran a su hijo, sin importar lo raro o inapropiado que sea?",
-        "¿Qué tarea de tu lista de cosas por hacer a largo plazo nunca llegas a realizar?",
-        "En general, ¿la vida es más fácil para los niños o para los adultos?",
-        "¿Qué te gustaría experimentar por primera vez otra vez?",
-        "Dinos algo que te dé vergüenza admitir que te gusta.",
-        "Si solo pudieras tener una aplicación en tu celular, ¿cuál sería?",
-        "Si pudieras viajar al año 1800 y llevar un objeto moderno para impresionar a la gente, ¿qué llevarías?",
-        "Si pudieras hacerle una pregunta a Dios, ¿cuál sería?",
-        "¿Qué ropa o accesorio del pasado pensabas que era lo más cool?",
-        "¿Las mujeres están genéticamente mejor preparadas para cuidar de los niños?",
-        "¿Los alumnos deberían evaluar a sus profesores?",
-        "¿Qué ciudad realmente superó tus expectativas la primera vez que la visitaste?",
-        "¿La publicidad dirigida a los niños debería permitirse?",
-        "¿Cuál es tu primer recuerdo de infancia?",
-        "¿Crees que serías una persona diferente si hubieras tenido otros padres?",
-        "¿Cuál fue el mejor gasto de 500 reales que has hecho?",
-        "¿Qué tipo de persona admiras más?",
-        "¿Hay algún valor en comprar diccionarios de papel hoy en día?",
-        "¿Cuál es la mejor canción jamás escrita?",
-        "¿Hay algo de lo que nunca estarías dispuesto(a) a renunciar en una relación?",
-        "Si tuvieras una habitación extra en tu casa, ¿para qué la usarías?",
-        "Describe una vez que hiciste algo arriesgado y valiente.",
-        "¿Prefieres los libros en papel o los e-books?",
-        "Si las calorías no existieran y toda la comida fuera saludable, ¿qué comerías más?",
-        "¿Alguna vez saliste con alguien que tus padres odiaban?",
-        "¿Tu familia tiene muchas bromas internas?",
-        "Si fueras invisible, ¿qué sería lo primero que harías?",
-        "¿Qué crees que la mayoría de los ancianos lamentan cuando miran atrás en su vida?",
-        "¿Te llevas bien con los niños?",
-        "¿Por qué crees que tantos matrimonios terminan en divorcio?",
-        "En tu opinión, ¿cuál es la materia escolar más importante?",
-        "¿En qué piensas antes de dormir?",
-        "Si tuvieras una máquina del tiempo, ¿preferirías viajar al futuro o al pasado?",
-        "¿Qué actividad cara te gustaría probar si pudieras pagarla?",
-        "En tu opinión, ¿cuál es una buena edad para jubilarse?",
-        "¿Hay algún talento que parezca heredado en tu familia?",
-        "¿Por qué crees que tantas personas viven solas hoy en día más que antes?",
-        "¿En cuántos idiomas sabes decir 'te amo'?",
-        "De las personas que conoces, ¿quién tiene la vida más interesante y por qué?",
-        "Cuenta algo de tu pasado que te hace pensar 'No puedo creer que tuviera miedo de eso'.",
-        "¿Cuál es la cosa más rara que has comido?",
-        "¿Qué esperas con ansias que suceda en los próximos doce meses?",
-        "¿Crees que todas las compras se harán en línea dentro de 20 años?",
-        "¿Cuál fue la mejor década de tu vida hasta ahora?",
-        "¿Compruebas la fecha de caducidad de los alimentos antes de comprarlos?",
-        "¿Quién ha sido el mayor ejemplo en tu vida?",
-        "¿Para qué película te gustaría que hicieran una secuela?",
-        "Si tuvieras que elegir, ¿de cuál de tus amigos sentirías celos?",
-        "¿Cómo defines la inteligencia?",
-        "¿Cuál fue la fila más larga que has enfrentado y qué estabas esperando?",
-        "¿Dirías que las personas con las que mejor te llevas comparten tu sentido del humor?",
-        "¿Cuál fue tu peor experiencia de vacaciones?",
-        "¿Qué cualidad aprecias más en un amigo?",
-        "¿Qué es lo peor de envejecer?",
-        "Si tuvieras que elegir, ¿preferirías sentarte o estar de pie por el resto de tu vida?",
-        "Menciona una vez en la que te sentiste muy orgulloso(a) de ti mismo(a).",
-        "¿Con cuál de tus parientes crees que tienes menos en común?",
-        "¿Crees que los criminales realmente pueden ser rehabilitados en prisión?",
-        "Describe una vez en la que te sentiste muy nervioso(a).",
-        "¿Te harías un tatuaje con el nombre de tu pareja?",
-        "¿Solías saltarte clases en la escuela?",
-        "¿Qué emoción es más fuerte: el amor o el odio?",
-        "Si pudieras predecir el futuro, ¿qué tan lejos te gustaría ver?",
-        "¿Cuál es la materia menos importante en la escuela?",
-        "Si pudieras dar un consejo basado en tu experiencia de los últimos años, ¿cuál sería?",
-        "¿Te gusta comprar y usar artículos de segunda mano?",
-        "Si pudieras tomarte una semana de vacaciones en cualquier lugar del mundo solo(a), ¿a dónde irías?",
-        "¿Los gobiernos deben pagar rescates para liberar rehenes y arriesgarse a incentivar más situaciones futuras de rehenes?",
-        "¿Alguna vez has hecho algo que pocas personas en el mundo han hecho?",
-        "¿Cuál crees que será el mayor cambio en tu vida en cinco años?",
-        "Si alguien del año 3000 pudiera ver cómo vivimos hoy, ¿qué lo sorprendería más?",
-        "Describe una oportunidad que rechazaste y que ahora te gustaría haber aceptado.",
-        "¿Alguna vez has cometido o estado cerca de cometer un crimen?",
-        "¿A qué edad una persona pasa a ser considerada adulta?",
-        "¿Cuál ha sido el mejor día de tu vida hasta ahora?",
-        "¿Crees que los actores y los atletas profesionales están demasiado bien pagados?",
-        "¿Tienes alguna fobia irracional?",
-        "¿Cuánto tiempo deberían estar juntas las personas antes de casarse?",
-        "¿Te mudarías con tu pareja al otro lado del mundo?",
-        "¿Cuál es el nombre de tu primer amor serio?",
-        "¿Está bien mentir para no herir los sentimientos de alguien?",
-        "¿Quién es la persona más interesante que has conocido?",
-        "¿Qué podemos aprender de los niños?",
-        "¿Los padres deben presentar una religión a sus hijos o dejarlos descubrirla por sí mismos?",
-        "¿Alguna vez te has convertido en el mejor amigo(a) de un(a) enemigo(a)?",
-        "¿Quién fue tu mayor ídolo en la infancia?",
-        "¿Qué lugar debería visitar todo el mundo antes de morir?",
-        "Describe a una persona que es exactamente lo opuesto a ti en tres palabras.",
-        "¿Te han roto el corazón alguna vez?",
-        "Sin contar a tu pareja o familiares, ¿quién ha sido la persona más amable contigo?",
-        "¿En qué idioma extranjero te gustaría ser fluido(a)?",
-        "Si estuvieras contratando a alguien, ¿cuáles serían los tres criterios más importantes?",
-        "¿Las personas que reciben asistencia social deberían estar obligadas a encontrar un trabajo?",
-        "¿Qué película tiene la mejor banda sonora?",
-        "Si tuvieras que decir algo que crees que otros envidian de ti, ¿qué sería?",
-        "¿Cuál es tu animal favorito en el zoológico?",
-        "¿Cuál es la mejor película jamás hecha?",
-        "¿Cuál de tus amigos lo haría mejor en un concurso de preguntas como el Show del Millón?",
-        "¿Crees en los amuletos de la suerte?",
-        "¿Cuál es la comida más deliciosa que has comido?",
-        "¿Tu opinión sobre las personas cambia cuando notas que tienen tatuajes?",
-        "¿De qué pariente fallecido extrañas más?",
-        "¿Crees que las personas realmente pueden cambiar?",
-        "¿Qué invención tuvo el mayor impacto en la cultura y la civilización humana?",
-        "Si pudieras cambiar tu edad, ¿elegirías ser más joven, más viejo o permanecer igual?",
-        "¿Sabes cómo se conocieron tus abuelos maternos y paternos?",
-        "¿Qué dulce recuerdas más de tu infancia?",
-        "Describe al hombre o la mujer perfecta en 3 palabras.",
-        "Te ganas un coche gratis de tu elección: ¿qué coche conducirías?",
-        "¿Qué ventaja tiene ser hijo único en comparación con tener uno o más hermanos?",
-        "¿Cuáles son las dos cosas más importantes para que las personas sean felices?",
-        "¿Estarías dispuesto(a) a esforzarte por aprender un idioma extranjero si eso duplicara tu salario?",
-        "¿Cuál fue la mejor fiesta a la que has ido?",
-        "Sin contar una casa o un coche, ¿cuál es la cosa más cara que has comprado?",
-        "¿Por qué incidente de tu infancia probablemente le debes una disculpa a tus padres?",
-        "¿Has comprado algo que te dio vergüenza comprar? ¿Qué fue?",
-        "¿Te gustaría saber cuándo y cómo vas a morir?",
-        "¿Qué importancia tiene para ti una casa limpia y ordenada?",
-        "¿Cuál fue el tiempo más largo que has estado sin dormir?",
-        "¿Genio y locura van de la mano?",
-        "Los investigadores dicen que es imposible cambiar tu nivel de felicidad: incluso si ganas la lotería, pronto volverás al mismo nivel de felicidad de antes. ¿Crees que esto es cierto?",
-        "Si pudieras interpretar al personaje principal en cualquier película, ¿cuál sería?",
-        "¿Estás feliz de vivir en la época moderna o te hubiera gustado vivir en otra época?",
-        "¿Cuál es tu recuerdo favorito del año pasado?",
-        "Aparte de la apariencia, ¿cuál es la mayor diferencia entre hombres y mujeres?",
-        "¿Hay alguna foto tuya en el álbum familiar que preferirías ver destruida?",
-        "En tu opinión, ¿quién es la persona más famosa del mundo?",
-        "¿Cuál es la forma más divertida de gastar 300 reales?",
-        "¿Cuál es probablemente la razón más común por la que las parejas discuten?",
-        "¿Qué harías si ganases la lotería?",
-        "Cuando eras niño(a), ¿qué querías ser de mayor?",
-        "¿Hasta dónde puedes rastrear tu árbol genealógico?",
-        "Si pudieras volver y revivir un día de tu vida, ¿qué día sería?",
-        "¿Qué canción te hace llorar cada vez que la escuchas?",
-        "¿Cuáles son las dos cosas que cogerías si tu casa se estuviera incendiando?",
-        "¿Crees que las películas y los videojuegos violentos hacen que las personas sean violentas?",
-        "¿Preferirías estar atrapado(a) en una isla desierta para siempre con tu madre o tu padre? ¿Por qué?",
-        "¿Brasil debería tener voto voluntario?",
-        "Describe una vez en la que hiciste algo realmente amable por otra persona.",
-        "Si pudieras vivir en cualquier lugar, ¿dónde sería y por qué?",
-        "¿Escondiste algo de tus padres en la infancia? ¿Qué escondiste?",
-        "¿Quién en tu familia tiene más éxito?",
-        "¿Crees que sería posible conocer y hacerte amigo(a) cercano(a) de una celebridad?",
-        "¿A qué marca eres fiel simplemente por costumbre y no por su calidad?",
-        "¿Alguna vez has hecho una dieta de moda?",
-        "¿Tuviste un apodo cuando eras niño(a)?",
-        "¿Qué significa para ti la frase 'vivir una buena vida'?",
-        "¿Crees que el uso de dinero físico desaparecerá?"
+            "¿Qué es lo que más necesita el mundo?",
+            "¿Hay algo que tus padres no te dejaron hacer cuando eras niño y que tú sí permitirías a tus propios hijos?",
+            "Si tuvieras una cantidad ilimitada de dinero, ¿cómo diseñarías tu casa?",
+            "¿Crees en el amor a primera vista?",
+            "¿Piensas que las pruebas de coeficiente intelectual son una medida precisa de la inteligencia?",
+            "¿Aún mantienes contacto con tu primer novio o novia?",
+            "¿Cuál era tu actividad favorita cuando tenías 10 años?",
+            "Si solo pudieras comer una cosa por el resto de tu vida, ¿qué sería?",
+            "¿Qué te parece muy impresionante?",
+            "¿Había alguna regla en tu casa durante la infancia que fuera muy estricta?",
+            "¿Todavía imprimes fotos para poner en marcos o álbumes?",
+            "Si pudieras añadir un mes extra al calendario, ¿cómo lo llamarías?",
+            "¿Qué crees que responderían tus padres si les preguntaran cuál fue la cosa más loca que hiciste de niño?",
+            "¿Cuál es la mayor ventaja de los hombres sobre las mujeres y viceversa?",
+            "¿Qué cualidad personal la gente aprecia en ti?",
+            "¿Piensas que las guerras llevaron a algunos de los mayores avances de la ciencia?",
+            "¿Qué canción dirías que es la banda sonora de tu generación?",
+            "¿El dinero puede comprar el amor? ¿Por qué sí o por qué no?",
+            "¿Cómo crees que tus mejores amigos te describirían si solo pudieran usar tres palabras?",
+            "¿Tú 'encuentras el amor' o el 'amor te encuentra a ti'?",
+            "Describe una vez en la que te sentiste una persona terrible.",
+            "Describe una vez en la que tu primera impresión de alguien fue completamente equivocada.",
+            "¿Dirías que el tiempo que pasas en las redes sociales está bien invertido?",
+            "¿Crees que recibes lo suficiente a cambio del gobierno por los impuestos que pagas?",
+            "¿Cuál es la película más sobrevalorada?",
+            "¿Prefieres trabajar desde casa?",
+            "¿Cuál es el paisaje más cinematográfico que has visitado?",
+            "¿En qué te gustaría ser mejor?",
+            "¿Cuándo fue la última vez que lloraste?",
+            "¿Crees que una lectura de la palma de la mano puede predecir el futuro?",
+            "¿A qué edad dirías que la gente es más feliz?",
+            "¿Puedes mencionar dos cosas buenas y dos malas sobre el 'jeitinho brasileiro'?",
+            "Si fuera posible grabar tus sueños en video, ¿los verías?",
+            "Cuenta algo de tu pasado que te hace pensar 'No puedo creer que hice eso'.",
+            "¿Cuál es la mayor diferencia entre tus padres?",
+            "¿Qué sería lo primero que harías si pudieras cambiar de sexo por un día?",
+            "¿Cuál es el sonido más molesto?",
+            "¿Eres más o menos romántico(a) que la mayoría de la gente?",
+            "¿Qué nombre nunca le pondrías a tu hijo?",
+            "¿Hay algo con lo que nunca se debe bromear?",
+            "Si fuera posible, ¿optarías por la educación en casa para tus hijos?",
+            "¿Qué producto crees que la gente seguirá usando dentro de 500 años?",
+            "¿Crees que los hombres son tan sensibles como las mujeres o simplemente no lo demuestran?",
+            "¿Puedes mencionar algo que probaste por primera vez el año pasado?",
+            "¿Crees que los uniformes escolares son una buena o mala idea?",
+            "¿Cuál es el acto más amable que alguien ha hecho por ti?",
+            "¿Alguna vez dijiste 'te amo' sin sentirlo?",
+            "¿Cuándo fue la última vez que tuviste ganas de rendirte?",
+            "Si pudieras invitar a cualquier persona, viva o muerta, a cantar un dueto de karaoke contigo, ¿quién sería?",
+            "¿Eres tradicionalista o un rompedor de reglas?",
+            "¿Cómo sería un día perfecto para ti?",
+            "Cuenta algo que la mayoría de las personas no sabe sobre ti.",
+            "¿Cuál fue tu primera dirección de correo electrónico?",
+            "¿Tienes algo sin valor monetario pero con un valor sentimental tan grande que no lo venderías ni por 10.000 reales?",
+            "¿Hay algún tema recurrente en tus sueños?",
+            "¿Crees que habría menos conflictos en el mundo si todos habláramos el mismo idioma?",
+            "¿Siempre duermes en el mismo lado de la cama?",
+            "¿Qué es mejor: el amor o el dinero?",
+            "Si pudieras aprobar una ley que todos debieran seguir, ¿cuál sería?",
+            "Si pudieras estar en cualquier lugar del mundo, ¿dónde estarías?",
+            "¿Qué te pone muy enojado?",
+            "¿Hubo algún período de tu vida que fue difícil, pero que al final te hizo una persona más fuerte o mejor?",
+            "¿De qué grupo formabas parte en la escuela secundaria?",
+            "¿Cuál es el lado positivo de estar en una relación y cuál es el de estar soltero(a)?",
+            "¿Había algo en lo que eras excepcionalmente bueno cuando eras más joven?",
+            "En tu opinión, ¿cuál es la principal característica que hace exitosas a las personas?",
+            "¿Hay algún problema en salir de un restaurante sin pagar si pediste la cuenta varias veces y llevas esperando 20 minutos?",
+            "¿Hay suficiente diversión y aventura en tu vida?",
+            "¿Los padres deberían tener derecho a poner el nombre que quieran a su hijo, sin importar lo raro o inapropiado que sea?",
+            "¿Qué tarea de tu lista de cosas por hacer a largo plazo nunca llegas a realizar?",
+            "En general, ¿la vida es más fácil para los niños o para los adultos?",
+            "¿Qué te gustaría experimentar por primera vez otra vez?",
+            "Dinos algo que te dé vergüenza admitir que te gusta.",
+            "Si solo pudieras tener una aplicación en tu celular, ¿cuál sería?",
+            "Si pudieras viajar al año 1800 y llevar un objeto moderno para impresionar a la gente, ¿qué llevarías?",
+            "Si pudieras hacerle una pregunta a Dios, ¿cuál sería?",
+            "¿Qué ropa o accesorio del pasado pensabas que era lo más cool?",
+            "¿Las mujeres están genéticamente mejor preparadas para cuidar de los niños?",
+            "¿Los alumnos deberían evaluar a sus profesores?",
+            "¿Qué ciudad realmente superó tus expectativas la primera vez que la visitaste?",
+            "¿La publicidad dirigida a los niños debería permitirse?",
+            "¿Cuál es tu primer recuerdo de infancia?",
+            "¿Crees que serías una persona diferente si hubieras tenido otros padres?",
+            "¿Cuál fue el mejor gasto de 500 reales que has hecho?",
+            "¿Qué tipo de persona admiras más?",
+            "¿Hay algún valor en comprar diccionarios de papel hoy en día?",
+            "¿Cuál es la mejor canción jamás escrita?",
+            "¿Hay algo de lo que nunca estarías dispuesto(a) a renunciar en una relación?",
+            "Si tuvieras una habitación extra en tu casa, ¿para qué la usarías?",
+            "Describe una vez que hiciste algo arriesgado y valiente.",
+            "¿Prefieres los libros en papel o los e-books?",
+            "Si las calorías no existieran y toda la comida fuera saludable, ¿qué comerías más?",
+            "¿Alguna vez saliste con alguien que tus padres odiaban?",
+            "¿Tu familia tiene muchas bromas internas?",
+            "Si fueras invisible, ¿qué sería lo primero que harías?",
+            "¿Qué crees que la mayoría de los ancianos lamentan cuando miran atrás en su vida?",
+            "¿Te llevas bien con los niños?",
+            "¿Por qué crees que tantos matrimonios terminan en divorcio?",
+            "En tu opinión, ¿cuál es la materia escolar más importante?",
+            "¿En qué piensas antes de dormir?",
+            "Si tuvieras una máquina del tiempo, ¿preferirías viajar al futuro o al pasado?",
+            "¿Qué actividad cara te gustaría probar si pudieras pagarla?",
+            "En tu opinión, ¿cuál es una buena edad para jubilarse?",
+            "¿Hay algún talento que parezca heredado en tu familia?",
+            "¿Por qué crees que tantas personas viven solas hoy en día más que antes?",
+            "¿En cuántos idiomas sabes decir 'te amo'?",
+            "De las personas que conoces, ¿quién tiene la vida más interesante y por qué?",
+            "Cuenta algo de tu pasado que te hace pensar 'No puedo creer que tuviera miedo de eso'.",
+            "¿Cuál es la cosa más rara que has comido?",
+            "¿Qué esperas con ansias que suceda en los próximos doce meses?",
+            "¿Crees que todas las compras se harán en línea dentro de 20 años?",
+            "¿Cuál fue la mejor década de tu vida hasta ahora?",
+            "¿Compruebas la fecha de caducidad de los alimentos antes de comprarlos?",
+            "¿Quién ha sido el mayor ejemplo en tu vida?",
+            "¿Para qué película te gustaría que hicieran una secuela?",
+            "Si tuvieras que elegir, ¿de cuál de tus amigos sentirías celos?",
+            "¿Cómo defines la inteligencia?",
+            "¿Cuál fue la fila más larga que has enfrentado y qué estabas esperando?",
+            "¿Dirías que las personas con las que mejor te llevas comparten tu sentido del humor?",
+            "¿Cuál fue tu peor experiencia de vacaciones?",
+            "¿Qué cualidad aprecias más en un amigo?",
+            "¿Qué es lo peor de envejecer?",
+            "Si tuvieras que elegir, ¿preferirías sentarte o estar de pie por el resto de tu vida?",
+            "Menciona una vez en la que te sentiste muy orgulloso(a) de ti mismo(a).",
+            "¿Con cuál de tus parientes crees que tienes menos en común?",
+            "¿Crees que los criminales realmente pueden ser rehabilitados en prisión?",
+            "Describe una vez en la que te sentiste muy nervioso(a).",
+            "¿Te harías un tatuaje con el nombre de tu pareja?",
+            "¿Solías saltarte clases en la escuela?",
+            "¿Qué emoción es más fuerte: el amor o el odio?",
+            "Si pudieras predecir el futuro, ¿qué tan lejos te gustaría ver?",
+            "¿Cuál es la materia menos importante en la escuela?",
+            "Si pudieras dar un consejo basado en tu experiencia de los últimos años, ¿cuál sería?",
+            "¿Te gusta comprar y usar artículos de segunda mano?",
+            "Si pudieras tomarte una semana de vacaciones en cualquier lugar del mundo solo(a), ¿a dónde irías?",
+            "¿Los gobiernos deben pagar rescates para liberar rehenes y arriesgarse a incentivar más situaciones futuras de rehenes?",
+            "¿Alguna vez has hecho algo que pocas personas en el mundo han hecho?",
+            "¿Cuál crees que será el mayor cambio en tu vida en cinco años?",
+            "Si alguien del año 3000 pudiera ver cómo vivimos hoy, ¿qué lo sorprendería más?",
+            "Describe una oportunidad que rechazaste y que ahora te gustaría haber aceptado.",
+            "¿Alguna vez has cometido o estado cerca de cometer un crimen?",
+            "¿A qué edad una persona pasa a ser considerada adulta?",
+            "¿Cuál ha sido el mejor día de tu vida hasta ahora?",
+            "¿Crees que los actores y los atletas profesionales están demasiado bien pagados?",
+            "¿Tienes alguna fobia irracional?",
+            "¿Cuánto tiempo deberían estar juntas las personas antes de casarse?",
+            "¿Te mudarías con tu pareja al otro lado del mundo?",
+            "¿Cuál es el nombre de tu primer amor serio?",
+            "¿Está bien mentir para no herir los sentimientos de alguien?",
+            "¿Quién es la persona más interesante que has conocido?",
+            "¿Qué podemos aprender de los niños?",
+            "¿Los padres deben presentar una religión a sus hijos o dejarlos descubrirla por sí mismos?",
+            "¿Alguna vez te has convertido en el mejor amigo(a) de un(a) enemigo(a)?",
+            "¿Quién fue tu mayor ídolo en la infancia?",
+            "¿Qué lugar debería visitar todo el mundo antes de morir?",
+            "Describe a una persona que es exactamente lo opuesto a ti en tres palabras.",
+            "¿Te han roto el corazón alguna vez?",
+            "Sin contar a tu pareja o familiares, ¿quién ha sido la persona más amable contigo?",
+            "¿En qué idioma extranjero te gustaría ser fluido(a)?",
+            "Si estuvieras contratando a alguien, ¿cuáles serían los tres criterios más importantes?",
+            "¿Las personas que reciben asistencia social deberían estar obligadas a encontrar un trabajo?",
+            "¿Qué película tiene la mejor banda sonora?",
+            "Si tuvieras que decir algo que crees que otros envidian de ti, ¿qué sería?",
+            "¿Cuál es tu animal favorito en el zoológico?",
+            "¿Cuál es la mejor película jamás hecha?",
+            "¿Cuál de tus amigos lo haría mejor en un concurso de preguntas como el Show del Millón?",
+            "¿Crees en los amuletos de la suerte?",
+            "¿Cuál es la comida más deliciosa que has comido?",
+            "¿Tu opinión sobre las personas cambia cuando notas que tienen tatuajes?",
+            "¿De qué pariente fallecido extrañas más?",
+            "¿Crees que las personas realmente pueden cambiar?",
+            "¿Qué invención tuvo el mayor impacto en la cultura y la civilización humana?",
+            "Si pudieras cambiar tu edad, ¿elegirías ser más joven, más viejo o permanecer igual?",
+            "¿Sabes cómo se conocieron tus abuelos maternos y paternos?",
+            "¿Qué dulce recuerdas más de tu infancia?",
+            "Describe al hombre o la mujer perfecta en 3 palabras.",
+            "Te ganas un coche gratis de tu elección: ¿qué coche conducirías?",
+            "¿Qué ventaja tiene ser hijo único en comparación con tener uno o más hermanos?",
+            "¿Cuáles son las dos cosas más importantes para que las personas sean felices?",
+            "¿Estarías dispuesto(a) a esforzarte por aprender un idioma extranjero si eso duplicara tu salario?",
+            "¿Cuál fue la mejor fiesta a la que has ido?",
+            "Sin contar una casa o un coche, ¿cuál es la cosa más cara que has comprado?",
+            "¿Por qué incidente de tu infancia probablemente le debes una disculpa a tus padres?",
+            "¿Has comprado algo que te dio vergüenza comprar? ¿Qué fue?",
+            "¿Te gustaría saber cuándo y cómo vas a morir?",
+            "¿Qué importancia tiene para ti una casa limpia y ordenada?",
+            "¿Cuál fue el tiempo más largo que has estado sin dormir?",
+            "¿Genio y locura van de la mano?",
+            "Los investigadores dicen que es imposible cambiar tu nivel de felicidad: incluso si ganas la lotería, pronto volverás al mismo nivel de felicidad de antes. ¿Crees que esto es cierto?",
+            "Si pudieras interpretar al personaje principal en cualquier película, ¿cuál sería?",
+            "¿Estás feliz de vivir en la época moderna o te hubiera gustado vivir en otra época?",
+            "¿Cuál es tu recuerdo favorito del año pasado?",
+            "Aparte de la apariencia, ¿cuál es la mayor diferencia entre hombres y mujeres?",
+            "¿Hay alguna foto tuya en el álbum familiar que preferirías ver destruida?",
+            "En tu opinión, ¿quién es la persona más famosa del mundo?",
+            "¿Cuál es la forma más divertida de gastar 300 reales?",
+            "¿Cuál es probablemente la razón más común por la que las parejas discuten?",
+            "¿Qué harías si ganases la lotería?",
+            "Cuando eras niño(a), ¿qué querías ser de mayor?",
+            "¿Hasta dónde puedes rastrear tu árbol genealógico?",
+            "Si pudieras volver y revivir un día de tu vida, ¿qué día sería?",
+            "¿Qué canción te hace llorar cada vez que la escuchas?",
+            "¿Cuáles son las dos cosas que cogerías si tu casa se estuviera incendiando?",
+            "¿Crees que las películas y los videojuegos violentos hacen que las personas sean violentas?",
+            "¿Preferirías estar atrapado(a) en una isla desierta para siempre con tu madre o tu padre? ¿Por qué?",
+            "¿Brasil debería tener voto voluntario?",
+            "Describe una vez en la que hiciste algo realmente amable por otra persona.",
+            "Si pudieras vivir en cualquier lugar, ¿dónde sería y por qué?",
+            "¿Escondiste algo de tus padres en la infancia? ¿Qué escondiste?",
+            "¿Quién en tu familia tiene más éxito?",
+            "¿Crees que sería posible conocer y hacerte amigo(a) cercano(a) de una celebridad?",
+            "¿A qué marca eres fiel simplemente por costumbre y no por su calidad?",
+            "¿Alguna vez has hecho una dieta de moda?",
+            "¿Tuviste un apodo cuando eras niño(a)?",
+            "¿Qué significa para ti la frase 'vivir una buena vida'?",
+            "¿Crees que el uso de dinero físico desaparecerá?"
         ]
     };
 
-        // Variáveis do jogo
-        let questions = [];
-        let currentQuestion = 0;
+    // Variáveis do jogo
+    let questions = [];
+    let currentQuestion = 0;
 
-        // Função para embaralhar um array (Fisher-Yates Shuffle)
-        function shuffleArray(array) {
-            for (let i = array.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [array[i], array[j]] = [array[j], array[i]];
-            }
-            return array;
+    // Função para embaralhar um array (Fisher-Yates Shuffle)
+    function shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array;
+    }
+
+    // Função para carregar as perguntas
+    function loadQuestions() {
+        questions = shuffleArray([...gameData.questions]);
+        nextQuestion();
+    }
+
+    // Função para exibir a próxima pergunta
+    function nextQuestion() {
+        if (questions.length === 0) {
+            document.getElementById("questionParaConversar").textContent = "Carregando perguntas...";
+            loadQuestions();
+            return;
         }
 
-        // Função para carregar as perguntas
-        function loadQuestions() {
+        if (currentQuestion < questions.length) {
+            document.getElementById("questionParaConversar").textContent = questions[currentQuestion];
+            document.getElementById("result").textContent = "";
+            currentQuestion++;
+        } else {
+            document.getElementById("questionParaConversar").textContent = "Fim do Jogo! Espero que estejam se divertindo! Quer jogar novamente?";
+            document.getElementById("result").textContent = "";
+            currentQuestion = 0;
             questions = shuffleArray([...gameData.questions]);
-            nextQuestion();
         }
+    }
 
-        // Função para exibir a próxima pergunta
-        function nextQuestion() {
-            if (questions.length === 0) {
-                document.getElementById("questionParaConversar").textContent = "Carregando perguntas...";
-                loadQuestions();
-                return;
-            }
+    // Pop-up functions
+    function openPopup() {
+        document.getElementById("popup").style.display = "block";
+    }
 
-            if (currentQuestion < questions.length) {
-                document.getElementById("questionParaConversar").textContent = questions[currentQuestion];
-                document.getElementById("result").textContent = "";
-                currentQuestion++;
-            } else {
-                document.getElementById("questionParaConversar").textContent = "Fim do Jogo! Espero que estejam se divertindo! Quer jogar novamente?";
-                document.getElementById("result").textContent = "";
-                currentQuestion = 0;
-                questions = shuffleArray([...gameData.questions]);
-            }
+    function closePopup() {
+        document.getElementById("popup").style.display = "none";
+    }
+
+    // Fechar o pop-up ao clicar fora dele
+    window.onclick = function (event) {
+        let popup = document.getElementById("popup");
+        if (event.target === popup) {
+            popup.style.display = "none";
         }
+    };
 
-        // Pop-up functions
-        function openPopup() {
-            document.getElementById("popup").style.display = "block";
-        }
-
-        function closePopup() {
-            document.getElementById("popup").style.display = "none";
-        }
-
-        // Fechar o pop-up ao clicar fora dele
-        window.onclick = function(event) {
-            let popup = document.getElementById("popup");
-            if (event.target === popup) {
-                popup.style.display = "none";
-            }
-        };
-
-        // Carrega as perguntas ao iniciar
-        window.onload = loadQuestions;
+    // Carrega as perguntas ao iniciar
+    window.onload = loadQuestions;
 </script>
 </body>
+
 </html>

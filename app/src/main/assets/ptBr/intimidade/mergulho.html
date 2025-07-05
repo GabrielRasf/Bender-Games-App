@@ -4,40 +4,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Intimidade - Desenvolvimento</title>
+    <title>Intimidade - Mergulho</title>
     <link rel="stylesheet" type="text/css" href="../../stylesCards.css">
 </head>
 
 <body>
 <div class="game-container">
     <!-- Menu -->
-<nav class="menu">
-    <a href="../menuPtBr.html" class="menu-title" style="position: relative;">
-        <div class="voltar-container" onclick="window.location.href='../menuPtBr.html'">
-            &#8678; <!-- Isso é ← -->
-        </div>
-        <img class="logo-bebedeira" src="../images/logo.png" alt="Logo Bebedeira" />
-    </a>
-</nav>
+    <nav class="menu">
+        <a href="../menuPtBr.html" class="menu-title" style="position: relative;">
+            <div class="voltar-container" onclick="window.location.href='../menuPtBr.html'">
+                &#8678; <!-- Isso é ← -->
+            </div>
+            <img class="logo-bebedeira" src="../images/logo.png" alt="Logo Bebedeira" />
+        </a>
+    </nav>
 
     <!-- Conteúdo do jogo -->
     <h1>
         <a href="intimidade.html">Intimidade</a>
     </h1>
     <h3>Mergulho</h3>
-<div>
-            <a href="#" onclick="openPopup()">
+    <div>
+        <a href="#" onclick="openPopup()">
             <img class="img-regras" src="../images/regras.png" alt="Regras" />
-            </a>
-            <h4>Regras</h4>
-        </div>
+        </a>
+        <h4>Regras</h4>
+    </div>
 
     <!-- Pop-up de regras -->
     <div id="popup" class="popup">
         <div class="popup-content">
-            <span class="close" onclick="closePopup()">&times;</span>
-            <h3>Regras do Jogo</h3>
-            <h5>Abertura <br> Mergulho</h5>
+            <div class="popup-header">
+                <h2>Regras do Jogo</h2>
+                <span class="close" onclick="closePopup()">&times;</span>
+                <h5>Abertura <br> Mergulho</h5>
+            </div>
             <ul>
                 <li>Nesta etapa, serão pequenos desafios a serem realizados 1 vez por semana.</li>
                 <li>Podem ser feitos juntos com a etapa 2.</li>
@@ -71,87 +73,87 @@
     const questionData = {
         questions: [
             "Se fizéssemos uma tatuagem juntos, o que tatuaríamos? Desenhem um no outro.",
-    "Dos mesmos criadores de 'vale night', chegou o 'vale day'. Criem uma programação surpresa para seu parceiro(a) com o que você poderiam fazer durante o dia. Ele viverá este dia sozinho. (Calma! Saudade faz bem pro relacionamento).",
-    "Pare tudo e esteja presente para um beijaço de língua, demorado e gostoso! Experimentem acrescentar um beijo destes diariamente.",
-    "Escrevam uma canção de amor ou poema e recitem/cantem um para o outro. Vocês tem 5 minutos que devem ser cronometrados para escrever e depois revelar, cantando ou recitando.",
-    "Criem uma playlist do casal, escolham as músicas que vocês mais gostam e não se esqueçam de colocar um nome criativo para ela.",
-    "Exercício de contemplação: fiquem de pé, olho no olho e falem sobre cada parte do corpo que um admira no outro. Se quiserem, enquanto falam, usem as mãos para tocar cada parte do corpo do outro.",
-    "Troquem de papel: Passem um dia inteiro expressando amor/afeto/atitudes como seu parceiro(a) a expressa.",
-    "Criem um desafio para ser cumprido durante a semana. Escolham juntos qual será o prêmio vencedor.",
-    "Recordar para (re)lembrar: revejam as conversas antigas, do começo do flerte no whatsapp, instagram, facebook ou na galeria de fotos e reparem o que mudou de lá pra cá.",
-    "(Re)criem o primeiro date de vocês. Usem a criatividade para reproduzir o que aconteceu na época.",
-    "Deem as mãos ou as amarre com um barbante e fiquem alguns minutos assim. Façam algo, por exemplo, cozinhar, comer algo ou dançar. Percebam como é o trabalho em equipe e como vocês fluem juntos.",
-    "Criem um novo hobbie para ser feito juntos, semanalmente ou quinzenalmente. Por ex.: aula de forró, de cerâmica, pintura, lerem o mesmo livro ou assistir um filme no cinema.",
-    "Façam um trato e escrevam juntos as regras mais importantes em um relacionamento para vocês. Coloquem onde possam ver sempre! (Geladeira, por exemplo).",
-    "Pronto para se ver pelo olhar do outro? Pegue o celular e façam uma sessão de fotos um do outro (pelo menos 10 fotos). É normal ficar tímido no começo. Divirta-se!",
-    "Passem um dia inteiro sem celular. Depois, escreva sobre como foi essa experiência para vocês. Transforme os sentimentos em palavras.",
-    "O poder do olhar: flertem um com o outro apenas com o olhar.",
-    "Sentem-se um de frente para o outro, deem as mãos e olhem os olhos um do outro. Respirem profundamente e relaxem o olhar. Depois conversem sobre como foi essa experiência.",
-    "Vistam o papel de professor e aluno(a). Cada um escolhe uma habilidade que irá ensinar ao outro (ao menos tentar).",
-    "Escolham uma série, filme, etc para assistirem juntos. Compartilhem um com o outro suas percepções sobre o filme.",
-    "Separadamente façam um desenho de como vocês se veem no futuro, um com o outro. Comentem o resultado!"
+            "Dos mesmos criadores de 'vale night', chegou o 'vale day'. Criem uma programação surpresa para seu parceiro(a) com o que você poderiam fazer durante o dia. Ele viverá este dia sozinho. (Calma! Saudade faz bem pro relacionamento).",
+            "Pare tudo e esteja presente para um beijaço de língua, demorado e gostoso! Experimentem acrescentar um beijo destes diariamente.",
+            "Escrevam uma canção de amor ou poema e recitem/cantem um para o outro. Vocês tem 5 minutos que devem ser cronometrados para escrever e depois revelar, cantando ou recitando.",
+            "Criem uma playlist do casal, escolham as músicas que vocês mais gostam e não se esqueçam de colocar um nome criativo para ela.",
+            "Exercício de contemplação: fiquem de pé, olho no olho e falem sobre cada parte do corpo que um admira no outro. Se quiserem, enquanto falam, usem as mãos para tocar cada parte do corpo do outro.",
+            "Troquem de papel: Passem um dia inteiro expressando amor/afeto/atitudes como seu parceiro(a) a expressa.",
+            "Criem um desafio para ser cumprido durante a semana. Escolham juntos qual será o prêmio vencedor.",
+            "Recordar para (re)lembrar: revejam as conversas antigas, do começo do flerte no whatsapp, instagram, facebook ou na galeria de fotos e reparem o que mudou de lá pra cá.",
+            "(Re)criem o primeiro date de vocês. Usem a criatividade para reproduzir o que aconteceu na época.",
+            "Deem as mãos ou as amarre com um barbante e fiquem alguns minutos assim. Façam algo, por exemplo, cozinhar, comer algo ou dançar. Percebam como é o trabalho em equipe e como vocês fluem juntos.",
+            "Criem um novo hobbie para ser feito juntos, semanalmente ou quinzenalmente. Por ex.: aula de forró, de cerâmica, pintura, lerem o mesmo livro ou assistir um filme no cinema.",
+            "Façam um trato e escrevam juntos as regras mais importantes em um relacionamento para vocês. Coloquem onde possam ver sempre! (Geladeira, por exemplo).",
+            "Pronto para se ver pelo olhar do outro? Pegue o celular e façam uma sessão de fotos um do outro (pelo menos 10 fotos). É normal ficar tímido no começo. Divirta-se!",
+            "Passem um dia inteiro sem celular. Depois, escreva sobre como foi essa experiência para vocês. Transforme os sentimentos em palavras.",
+            "O poder do olhar: flertem um com o outro apenas com o olhar.",
+            "Sentem-se um de frente para o outro, deem as mãos e olhem os olhos um do outro. Respirem profundamente e relaxem o olhar. Depois conversem sobre como foi essa experiência.",
+            "Vistam o papel de professor e aluno(a). Cada um escolhe uma habilidade que irá ensinar ao outro (ao menos tentar).",
+            "Escolham uma série, filme, etc para assistirem juntos. Compartilhem um com o outro suas percepções sobre o filme.",
+            "Separadamente façam um desenho de como vocês se veem no futuro, um com o outro. Comentem o resultado!"
         ]
     };
 
     let questions = [];
-        let currentQuestion = 0;
+    let currentQuestion = 0;
 
-        // Embaralhar e carregar perguntas
-        function loadQuestions() {
-            questions = shuffleArray(questionData.questions);
-            nextQuestion();
+    // Embaralhar e carregar perguntas
+    function loadQuestions() {
+        questions = shuffleArray(questionData.questions);
+        nextQuestion();
+    }
+
+    // Embaralha array
+    function shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array;
+    }
+
+    // Exibe próxima pergunta
+    function nextQuestion() {
+        if (questions.length === 0) {
+            document.getElementById("questionMergulho").textContent = "Carregando perguntas...";
+            return;
         }
 
-        // Embaralha array
-        function shuffleArray(array) {
-            for (let i = array.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [array[i], array[j]] = [array[j], array[i]];
-            }
-            return array;
+        if (currentQuestion < questions.length) {
+            document.getElementById("questionMergulho").textContent = questions[currentQuestion];
+            document.getElementById("result").textContent = "";
+            currentQuestion++;
+        } else {
+            document.getElementById("questionMergulho").textContent = "Fim do Jogo! Espero que estejam se divertindo! Quer jogar novamente?";
+            document.getElementById("result").textContent = "";
+            currentQuestion = 0;
+            questions = shuffleArray(questions);
         }
+    }
 
-        // Exibe próxima pergunta
-        function nextQuestion() {
-            if (questions.length === 0) {
-                document.getElementById("questionMergulho").textContent = "Carregando perguntas...";
-                return;
-            }
+    // Funções do pop-up
+    function openPopup() {
+        document.getElementById("popup").style.display = "block";
+    }
 
-            if (currentQuestion < questions.length) {
-                document.getElementById("questionMergulho").textContent = questions[currentQuestion];
-                document.getElementById("result").textContent = "";
-                currentQuestion++;
-            } else {
-                document.getElementById("questionMergulho").textContent = "Fim do Jogo! Espero que estejam se divertindo! Quer jogar novamente?";
-                document.getElementById("result").textContent = "";
-                currentQuestion = 0;
-                questions = shuffleArray(questions);
-            }
+    function closePopup() {
+        document.getElementById("popup").style.display = "none";
+    }
+
+    function closeAnswerPopup() {
+        document.getElementById("answerPopup").style.display = "none";
+    }
+
+    window.onclick = function (event) {
+        const popup = document.getElementById("popup");
+        if (event.target === popup) {
+            popup.style.display = "none";
         }
+    };
 
-        // Funções do pop-up
-        function openPopup() {
-            document.getElementById("popup").style.display = "block";
-        }
-
-        function closePopup() {
-            document.getElementById("popup").style.display = "none";
-        }
-
-        function closeAnswerPopup() {
-            document.getElementById("answerPopup").style.display = "none";
-        }
-
-        window.onclick = function (event) {
-            const popup = document.getElementById("popup");
-            if (event.target === popup) {
-                popup.style.display = "none";
-            }
-        };
-
-        // Inicia o jogo ao carregar
-        loadQuestions();
+    // Inicia o jogo ao carregar
+    loadQuestions();
 </script>
 </body>
 

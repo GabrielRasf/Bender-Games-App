@@ -1,6 +1,6 @@
-
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -8,23 +8,25 @@
     <link rel="stylesheet" type="text/css" href="../../cronometro.css" />
     <title>Target Shooting</title>
 </head>
+
 <body>
 <div class="game-container">
     <!-- Menu -->
-<nav class="menu">
-    <a href="../menuEn.html" class="menu-title" style="position: relative;">
-        <div class="voltar-container" onclick="window.location.href='../menuPtBr.html'">
-            &#8678; <!-- Isso é ← -->
-        </div>
-        <img class="logo-bebedeira" src="../images/logo.png" alt="Logo Bebedeira" />
-    </a>
-</nav>
+    <nav class="menu">
+        <a href="../menuEn.html" class="menu-title" style="position: relative;">
+            <div class="voltar-container" onclick="window.location.href='../menuPtBr.html'">
+                &#8678; <!-- Isso é ← -->
+            </div>
+            <img class="logo-bebedeira" src="../images/logo.png" alt="Logo Bebedeira" />
+        </a>
+    </nav>
 
     <!-- Game content -->
-    <h1>Target Shooting</h1>
     <div>
+        <h1>Target Shooting</h1>
+
         <a href="#" onclick="openPopup()"><br />
-        <img class="img-regras" src="../images/regras.png" alt="Regras" />
+            <img class="img-regras" src="../images/regras.png" alt="Regras" />
         </a>
         <h4>Rules</h4>
     </div>
@@ -32,9 +34,10 @@
     <!-- Rules Pop-up -->
     <div id="popup" class="popup">
         <div class="popup-content">
-            <span class="close" onclick="closePopup()">&times;</span>
-            <h3>Game Rules</h3>
-            <h5>Target Shooting</h5>
+            <div class="popup-header">
+                <h2>Game Rules</h2>
+                <span class="close" onclick="closePopup()">&times;</span>
+            </div>
             <ul>
                 <li>This game is like a target shooting game.</li>
                 <li>Whoever hits the answer dead on gets 5 points.</li>
@@ -51,7 +54,8 @@
     <div class="card-frase">
         <p id="questionTiroAoAlvo"></p>
         <div class="center-container">
-            <img class="pergunta-e-resposta" src="../images/pergunta-e-resposta.png" alt="See Answer" onclick="showAnswerPopup()" />
+            <img class="pergunta-e-resposta" src="../images/pergunta-e-resposta.png" alt="See Answer"
+                 onclick="showAnswerPopup()" />
         </div>
     </div>
 
@@ -76,2358 +80,2358 @@
 <button id="timer" onclick="handleTimerClick()">15</button>
 
 <script>
-const questions = [
-{
-"question": "In what year did American Mary Anderson invent the windshield wiper?",
-"answer": [
-"1903"
-]
-},
-{
-"question": "How many meters from the goal line is the penalty mark in professional soccer?",
-"answer": [
-"11 meters"
-]
-},
-{
-"question": "Measured by wingspan, from tip to tip, what is the size of the largest moth in the world?",
-"answer": [
-"30.4 cm"
-]
-},
-{
-"question": "How many soldiers lost their lives in World War II?",
-"answer": [
-"10 million soldiers"
-]
-},
-{
-"question": "What percentage of Brazilians who consume alcoholic beverages prefer beer over other drinks?",
-"answer": [
-"49%"
-]
-},
-{
-"question": "The largest wine cellar on the planet is located underground in Moldova, a neighbor of Ukraine. How many kilometers long is this cellar?",
-"answer": [
-"200 Km"
-]
-},
-{
-"question": "What is the width of an official soccer goal?",
-"answer": [
-"7.32 meters"
-]
-},
-{
-"question": "What is the length of the longest hair in the world, belonging to Ukrainian Aliia Nasyrova?",
-"answer": [
-"2.57 meters"
-]
-},
-{
-"question": "How many days are there in one million seconds?",
-"answer": [
-"11 days"
-]
-},
-{
-"question": "What percentage of drownings occur in fresh water?",
-"answer": [
-"90%"
-]
-},
-{
-"question": "How many liters of urine does a cow produce in one day?",
-"answer": [
-"13.2 liters"
-]
-},
-{
-"question": "What is the height of the official men's volleyball net?",
-"answer": [
-"2.43 meters"
-]
-},
-{
-"question": "How many countries use the Euro as their official currency?",
-"answer": [
-"20 countries"
-]
-},
-{
-"question": "What is the ranking position of the Puma among the largest cats on the planet?",
-"answer": [
-"4th, after the tiger, lion, and jaguar"
-]
-},
-{
-"question": "In what year was the tea bag invented?",
-"answer": [
-"1908"
-]
-},
-{
-"question": "How tall is the tallest building in the world, the Burj Khalifa in Dubai?",
-"answer": [
-"828 meters"
-]
-},
-{
-"question": "How many liters of water does a cow drink per day?",
-"answer": [
-"57 liters"
-]
-},
-{
-"question": "In what year was the first Polaroid camera released?",
-"answer": [
-"1948"
-]
-},
-{
-"question": "What is the height of the tallest chimney in the world, located at the Ekibastuz power plant in Kazakhstan?",
-"answer": [
-"420 meters"
-]
-},
-{
-"question": "Approximately how many inhabitants lived in New York in the 1700s?",
-"answer": [
-"5,000 inhabitants"
-]
-},
-{
-"question": "How many days did a human spend in space during the longest space mission?",
-"answer": [
-"437 days"
-]
-},
-{
-"question": "In what year was the first speeding ticket issued?",
-"answer": [
-"1896"
-]
-},
-{
-"question": "How many countries are there in Africa?",
-"answer": [
-"54 countries"
-]
-},
-{
-"question": "In what year was the first Volkswagen Beetle produced in Brazil?",
-"answer": [
-"1959"
-]
-},
-{
-"question": "According to experts, how many bristles should a toothbrush have?",
-"answer": [
-"1,440 bristles"
-]
-},
-{
-"question": "How many days did the Apollo 11 mission last?",
-"answer": [
-"8 days"
-]
-},
-{
-"question": "What is the minimum height for a location to be considered a mountain?",
-"answer": [
-"300 meters"
-]
-},
-{
-"question": "How old was John Lennon when he was assassinated in 1980?",
-"answer": [
-"40 years old"
-]
-},
-{
-"question": "What percentage of a person's weight is represented by their skeleton?",
-"answer": [
-"15%"
-]
-},
-{
-"question": "How many colors are on the South African flag?",
-"answer": [
-"6 (black, yellow, green, red, blue, and white)"
-]
-},
-{
-"question": "How many bridges are there in the city of Amsterdam?",
-"answer": [
-"1,281 bridges"
-]
-},
-{
-"question": "How many babies are born on Earth daily (on average)?",
-"answer": [
-"220,000 babies"
-]
-},
-{
-"question": "What is the total population of Africa?",
-"answer": [
-"1.4 billion people"
-]
-},
-{
-"question": "How tall is the tallest building in Brazil, located in Balneário Camboriú?",
-"answer": [
-"290 meters"
-]
-},
-{
-"question": "How much does the horizontal pole in pole vaulting weigh?",
-"answer": [
-"2.25 Kg"
-]
-},
-{
-"question": "What is the distance food travels during the digestion process?",
-"answer": [
-"9.15 meters"
-]
-},
-{
-"question": "How many lanes are there in an Olympic swimming pool?",
-"answer": [
-"10 lanes"
-]
-},
-{
-"question": "What is the height of the tallest man currently alive, Turkish Sultan Kosen?",
-"answer": [
-"2.51 meters"
-]
-},
-{
-"question": "How many containers can the largest cargo ship in the world carry?",
-"answer": [
-"23,000 containers"
-]
-},
-{
-"question": "What is the alcohol content of Hapsburg Absinthe?",
-"answer": [
-"89.90%"
-]
-},
-{
-"question": "How many kilograms of pasta does the average Italian eat per year?",
-"answer": [
-"23 kg"
-]
-},
-{
-"question": "What percentage of Brazilian territory is covered by forests?",
-"answer": [
-"58.50%"
-]
-},
-{
-"question": "How many waterfalls are there at the Iguazu Falls?",
-"answer": [
-"275 waterfalls"
-]
-},
-{
-"question": "What is the length of the longest escalator in the world, located in Saint Petersburg, Russia?",
-"answer": [
-"138 meters (66 meters high)"
-]
-},
-{
-"question": "How long was Medusa, the largest snake kept in captivity?",
-"answer": [
-"7.62 meters"
-]
-},
-{
-"question": "How many people worldwide die each year due to scorpion stings?",
-"answer": [
-"3,000 people"
-]
-},
-{
-"question": "What percentage of the world's coffee is produced in Brazil?",
-"answer": [
-"40%"
-]
-},
-{
-"question": "How many U.S. states border Canada?",
-"answer": [
-"13 states"
-]
-},
-{
-"question": "In what year was the passport system introduced in Europe?",
-"answer": [
-"1914"
-]
-},
-{
-"question": "How long would it take to travel from Earth to the Moon in the largest passenger airplane today?",
-"answer": [
-"16 days"
-]
-},
-{
-"question": "What is the average weight of sumo wrestlers?",
-"answer": [
-"159 Kg"
-]
-},
-{
-"question": "How many liters of water can an elephant store in its trunk?",
-"answer": [
-"9.5 liters"
-]
-},
-{
-"question": "How many billiard balls are needed to weigh one kilogram?",
-"answer": [
-"6 balls"
-]
-},
-{
-"question": "How many chickens are consumed daily in the USA?",
-"answer": [
-"22 million chickens"
-]
-},
-{
-"question": "What is the length of a ping-pong table?",
-"answer": [
-"2.74 meters"
-]
-},
-{
-"question": "What is the average height of NBA players?",
-"answer": [
-"2.03 meters"
-]
-},
-{
-"question": "In what year was Atari launched in Brazil?",
-"answer": [
-"1983"
-]
-},
-{
-"question": "How many trips to the Americas did Christopher Columbus make?",
-"answer": [
-"4 trips"
-]
-},
-{
-"question": "In what year was the first James Bond movie shown in Chinese cinemas?",
-"answer": [
-"2006 (Casino Royale)"
-]
-},
-{
-"question": "How many coffee beans are needed to make one espresso cup?",
-"answer": [
-"71 beans"
-]
-},
-{
-"question": "How many bars and restaurants are there in Spain, the country with the most bars and restaurants in Europe?",
-"answer": [
-"250,000 bars and restaurants"
-]
-},
-{
-"question": "How many European countries are recognized by the UN?",
-"answer": [
-"44 countries"
-]
-},
-{
-"question": "What percentage of people can roll their tongue?",
-"answer": [
-"70%"
-]
-},
-{
-"question": "How long did the Titanic take to sink after colliding with the iceberg?",
-"answer": [
-"160 minutes"
-]
-},
-{
-"question": "What is the shortest distance between the USA and Russia?",
-"answer": [
-"3.8 Km (distance between Big Diomede and Little Diomede islands in the Bering Strait)"
-]
-},
-{
-"question": "In what year did the United Kingdom abolish the death penalty?",
-"answer": [
-"1969"
-]
-},
-{
-"question": "How many people can the largest cruise ship, Icon of the Seas, carry including passengers and crew?",
-"answer": [
-"9,950 (7,600 passengers and 2,350 crew)"
-]
-},
-{
-"question": "How many James Bond films did Sean Connery star in?",
-"answer": [
-"7 films"
-]
-},
-{
-"question": "How many kilograms of food can an elephant eat per day?",
-"answer": [
-"136 Kg"
-]
-},
-{
-"question": "How many employees does the U.S. Department of Defense have, considered the largest employer in the world?",
-"answer": [
-"2.8 million"
-]
-},
-{
-"question": "What is the average life expectancy of the Earth's population?",
-"answer": [
-"72 years"
-]
-},
-{
-"question": "How many steps did Usain Bolt take when he broke the world record for the 100 meters in 2009?",
-"answer": [
-"41 steps"
-]
-},
-{
-"question": "In what year did Albert Einstein die?",
-"answer": [
-"1955"
-]
-},
-{
-"question": "How many times larger is the diameter of the Sun compared to the Earth?",
-"answer": [
-"109 times"
-]
-},
-{
-"question": "What position would the state of São Paulo hold in the ranking of area occupied in km²?",
-"answer": [
-"12th"
-]
-},
-{
-"question": "What was the height of the Berlin Wall?",
-"answer": [
-"3.60 meters"
-]
-},
-{
-"question": "How many statues are there atop the columns around St. Peter's Square in the Vatican?",
-"answer": [
-"140 statues"
-]
-},
-{
-"question": "How many passengers can the Airbus A380 carry?",
-"answer": [
-"853 passengers"
-]
-},
-{
-"question": "What percentage of the Chinese population has the surnames Li, Wang, or Zhang?",
-"answer": [
-"21%"
-]
-},
-{
-"question": "If a man never shaved his beard, how long would it be by the end of his life, considering a normal beard?",
-"answer": [
-"9.2 meters"
-]
-},
-{
-"question": "What is the average height of a Dutch man?",
-"answer": [
-"184 cm"
-]
-},
-{
-"question": "What is the height of the Salto Ángel waterfall, the highest waterfall in the world?",
-"answer": [
-"976 meters"
-]
-},
-{
-"question": "How many teeth does a great white shark have?",
-"answer": [
-"300 teeth"
-]
-},
-{
-"question": "From how many decibels can long exposure harm a person?",
-"answer": [
-"70 dB"
-]
-},
-{
-"question": "When was Viagra launched on the market?",
-"answer": [
-"1998"
-]
-},
-{
-"question": "At what speed does a normal raindrop fall?",
-"answer": [
-"32 Km/h"
-]
-},
-{
-"question": "In which year did the world population reach 1 billion?",
-"answer": [
-"1804"
-]
-},
-{
-"question": "In which year was the bikini invented?",
-"answer": [
-"1946"
-]
-},
-{
-"question": "Until what year was New York City called New Amsterdam?",
-"answer": [
-"1665"
-]
-},
-{
-"question": "How many countries in the world start with the letter B?",
-"answer": [
-"18 countries"
-]
-},
-{
-"question": "What percentage of people in Scotland have red hair?",
-"answer": [
-"13%"
-]
-},
-{
-"question": "How many years was Nelson Mandela imprisoned before becoming president of South Africa?",
-"answer": [
-"27 years"
-]
-},
-{
-"question": "What is the time zone difference between São Paulo and Auckland, New Zealand?",
-"answer": [
-"15 hours"
-]
-},
-{
-"question": "How many kilometers did the record holder Yiannis Kouros run in 24 hours?",
-"answer": [
-"303.5 Km"
-]
-},
-{
-"question": "How many Tamagotchis were sold worldwide during the 1990s?",
-"answer": [
-"~82 million"
-]
-},
-{
-"question": "How many years did the Vietnam War last?",
-"answer": [
-"19 years"
-]
-},
-{
-"question": "How old was Marie Antoinette when she was beheaded in 1793?",
-"answer": [
-"37 years"
-]
-},
-{
-"question": "How many kilometers is the longest train route in the world, the Trans-Siberian Railway?",
-"answer": [
-"9,289 Km"
-]
-},
-{
-"question": "How many days of paid vacation do Chinese workers have?",
-"answer": [
-"5 days"
-]
-},
-{
-"question": "What was the year with the highest CD sales worldwide?",
-"answer": [
-"2000"
-]
-},
-{
-"question": "How much do a person's ashes weigh after cremation?",
-"answer": [
-"4 Kg"
-]
-},
-{
-"question": "What percentage of the Earth's surface is occupied by South America?",
-"answer": [
-"12%"
-]
-},
-{
-"question": "How many soldiers landed in Normandy on D-Day in 1944?",
-"answer": [
-"156,000 soldiers"
-]
-},
-{
-"question": "In which year did author Stephen King release his book Carrie?",
-"answer": [
-"1974"
-]
-},
-{
-"question": "How many countries and states does the state of Pará border in total?",
-"answer": [
-"8 (6 states and 2 countries)"
-]
-},
-{
-"question": "How many European Union countries have flags with vertical stripes?",
-"answer": [
-"5 (France, Italy, Belgium, Ireland, and Romania)"
-]
-},
-{
-"question": "What percentage of banknotes worldwide have women depicted on their faces?",
-"answer": [
-"15%"
-]
-},
-{
-"question": "How many times the size of their own body can fleas jump?",
-"answer": [
-"200 times"
-]
-},
-{
-"question": "How many meters is the baton passing zone in track relay races?",
-"answer": [
-"30 meters"
-]
-},
-{
-"question": "How many countries does Brazil border?",
-"answer": [
-"10 countries"
-]
-},
-{
-"question": "How many liters of water can a camel drink at once?",
-"answer": [
-"120 liters"
-]
-},
-{
-"question": "What is the highest speed ever reached by a train?",
-"answer": [
-"603 Km/h"
-]
-},
-{
-"question": "How much does the Falabella horse, the smallest horse in the world, weigh on average?",
-"answer": [
-"80 Kg"
-]
-},
-{
-"question": "In which year was the Santa Genoveva Cantina, São Paulo's first pizzeria, inaugurated?",
-"answer": [
-"1910"
-]
-},
-{
-"question": "How long did the Rubik's cube world record holder take to solve it?",
-"answer": [
-"3.47 seconds"
-]
-},
-{
-"question": "Out of 100 dog owners, how many let their pets sleep with them in bed?",
-"answer": [
-"45 owners"
-]
-},
-{
-"question": "How many million people in the world are blind?",
-"answer": [
-"39 million"
-]
-},
-{
-"question": "How many eggs does a chicken lay on average per year?",
-"answer": [
-"260 eggs"
-]
-},
-{
-"question": "In which year did Beach Tennis arrive in Brazil?",
-"answer": [
-"2008"
-]
-},
-{
-"question": "According to FIFA, how many people watched the 2022 World Cup final?",
-"answer": [
-"1.5 billion people"
-]
-},
-{
-"question": "From what age can a female cat get pregnant?",
-"answer": [
-"4 months"
-]
-},
-{
-"question": "In which year were the first Winter Olympic Games held?",
-"answer": [
-"1924 (in Chamonix, France)"
-]
-},
-{
-"question": "How long does it take for a person's fingernail to grow 1.5 cm?",
-"answer": [
-"5 months"
-]
-},
-{
-"question": "How old was the youngest person to receive a Nobel Prize?",
-"answer": [
-"17 years old (Malala - Nobel Peace Prize)"
-]
-},
-{
-"question": "What is the length of the gondolas in Venice?",
-"answer": [
-"9 meters"
-]
-},
-{
-"question": "How many tons did the Argentinosaurus, which reached 40 meters tall, weigh?",
-"answer": [
-"77 tons"
-]
-},
-{
-"question": "In which year did the swimsuit manufacturer Catalina hold the first Miss Universe contest?",
-"answer": [
-"1952"
-]
-},
-{
-"question": "According to estimates, how many Brazilians currently live abroad?",
-"answer": [
-"4.9 million"
-]
-},
-{
-"question": "How many windows did the World Trade Center towers have?",
-"answer": [
-"43,600 windows"
-]
-},
-{
-"question": "In which year did Pastor Samuel Hensall invent the modern corkscrew?",
-"answer": [
-"1795"
-]
-},
-{
-"question": "How many days did Christopher Columbus take to cross the Atlantic between the Canary Islands and the Bahamas in 1492?",
-"answer": [
-"37 days"
-]
-},
-{
-"question": "What is the fat content of milk taken straight from the cow?",
-"answer": [
-"4%"
-]
-},
-{
-"question": "How many players are on a hockey team?",
-"answer": [
-"11 players"
-]
-},
-{
-"question": "In which year did James Ritty invent the cash register?",
-"answer": [
-"1897"
-]
-},
-{
-"question": "What was the largest recorded litter of live kittens in the world?",
-"answer": [
-"15 kittens (4 were stillborn)"
-]
-},
-{
-"question": "At what temperature does butter melt?",
-"answer": [
-"~ 32° C"
-]
-},
-{
-"question": "How many babies are born every second worldwide?",
-"answer": [
-"4 babies"
-]
-},
-{
-"question": "What percentage of an apple's composition is air?",
-"answer": [
-"25%"
-]
-},
-{
-"question": "How many rooms are in the White House?",
-"answer": [
-"132 rooms"
-]
-},
-{
-"question": "In which year did Hungarian journalist László Bíró invent the ballpoint pen?",
-"answer": [
-"1938"
-]
-},
-{
-"question": "At what age did Jeanne Calment, the longest-living person to date, die?",
-"answer": [
-"122 years"
-]
-},
-{
-"question": "What percentage of cat owners dry their cats' fur after bathing them?",
-"answer": [
-"25%"
-]
-},
-{
-"question": "How long did the longest tennis match in history, held at Wimbledon, last?",
-"answer": [
-"11 hours and 5 minutes"
-]
-},
-{
-"question": "How old was Princess Diana when she died in the car accident in Paris in 1997?",
-"answer": [
-"36 years"
-]
-},
-{
-"question": "In which year was Facebook launched in Brazil?",
-"answer": [
-"2007"
-]
-},
-{
-"question": "In which year was the Oscars ceremony first televised?",
-"answer": [
-"1953"
-]
-},
-{
-"question": "The Great Pyramid of Giza is composed of 2.3 million blocks of stone. How much does each stone block weigh on average?",
-"answer": [
-"2,500 Kg"
-]
-},
-{
-"question": "How many Friday the 13ths are possible during the same year?",
-"answer": [
-"3"
-]
-},
-{
-"question": "How many US states have coastline on the Atlantic Ocean?",
-"answer": [
-"14 states"
-]
-},
-{
-"question": "What is the length of the Laerdal Tunnel in Norway, the longest tunnel in the world?",
-"answer": [
-"24.5 Km"
-]
-},
-{
-"question": "In which year was food served onboard an aircraft for the first time?",
-"answer": [
-"1919"
-]
-},
-{
-"question": "According to estimates, how many Brazilians have the surname Silva approximately?",
-"answer": [
-"4 million"
-]
-},
-{
-"question": "How many people watched the wedding of Princess Diana and Prince Charles on television in 1981?",
-"answer": [
-"750 million"
-]
-},
-{
-"question": "How many continents are totally or partially located on the Equator line?",
-"answer": [
-"5 (Antarctica, Australia, South America, Asia, and Africa)"
-]
-},
-{
-"question": "How much does the javelin used in men's Olympic javelin throw weigh?",
-"answer": [
-"800 grams"
-]
-},
-{
-"question": "What is the average height of people in Indonesia, the country with the shortest average stature in the world?",
-"answer": [
-"1.52 meters"
-]
-},
-{
-"question": "How many cards are in a deck of playing cards?",
-"answer": [
-"52 cards"
-]
-},
-{
-"question": "What percentage of the world's soybean production comes from Brazil?",
-"answer": [
-"42%"
-]
-},
-{
-"question": "At what age did Fernando Collor take office as president of Brazil?",
-"answer": [
-"40 years"
-]
-},
-{
-"question": "What percentage of people are circumcised worldwide?",
-"answer": [
-"38%"
-]
-},
-{
-"question": "In which year was the R$200.00 banknote launched in Brazil?",
-"answer": [
-"2020"
-]
-},
-{
-"question": "How long did the French Revolution last?",
-"answer": [
-"10 years (1789 - 1799)"
-]
-},
-{
-"question": "In which year was the first parachute jump from an airplane?",
-"answer": [
-"1912"
-]
-},
-{
-"question": "How many countries in the world are smaller than Central Park in New York?",
-"answer": [
-"2 countries (Monaco and Vatican)"
-]
-},
-{
-"question": "How many liters of blood does the heart pump approximately per day?",
-"answer": [
-"7,600 liters"
-]
-},
-{
-"question": "What is the height of the tallest giraffe ever recorded?",
-"answer": [
-"5.8 meters"
-]
-},
-{
-"question": "In which year does the Stranger Things series begin?",
-"answer": [
-"1983"
-]
-},
-{
-"question": "In which year was the first Olympic flame lit?",
-"answer": [
-"1928 (Amsterdam)"
-]
-},
-{
-"question": "How long was the world record holder able to hold their breath underwater?",
-"answer": [
-"24 minutes and 37 seconds"
-]
-},
-{
-"question": "In what year was Tom Cruise born?",
-"answer": [
-"1962"
-]
-},
-{
-"question": "How many Brazilian states start with the letter 'R'?",
-"answer": [
-"5 states"
-]
-},
-{
-"question": "What percentage of a cat's bones are in its tail?",
-"answer": [
-"10%"
-]
-},
-{
-"question": "According to the UN, how many countries are there in the world?",
-"answer": [
-"195 countries"
-]
-},
-{
-"question": "What was Brazil's population in 1822?",
-"answer": [
-"4.5 million inhabitants"
-]
-},
-{
-"question": "What percentage of time do cats spend sleeping?",
-"answer": [
-"66%"
-]
-},
-{
-"question": "What is the distance between the 3-point line and the basketball hoop?",
-"answer": [
-"6.75 meters"
-]
-},
-{
-"question": "In what year was the first refrigerator commercialized worldwide?",
-"answer": [
-"1913"
-]
-},
-{
-"question": "The sailfish, also known as the needlefish, is the fastest fish in the world. What speed can it reach?",
-"answer": [
-"109 km/h"
-]
-},
-{
-"question": "How many countries belong to the European Union?",
-"answer": [
-"27 countries"
-]
-},
-{
-"question": "How long does a space trip to Mars take?",
-"answer": [
-"8 months"
-]
-},
-{
-"question": "How many horsepower did the first Ford Model T have?",
-"answer": [
-"20 horsepower"
-]
-},
-{
-"question": "How old was the oldest whale ever found in Greenland?",
-"answer": [
-"211 years"
-]
-},
-{
-"question": "What is the average distance between human pupils?",
-"answer": [
-"63 mm"
-]
-},
-{
-"question": "How old was Tom Hanks when he acted in Forrest Gump?",
-"answer": [
-"37 years"
-]
-},
-{
-"question": "In what year was the world's first long-distance railway line (Liverpool to Manchester) inaugurated?",
-"answer": [
-"1830"
-]
-},
-{
-"question": "What percentage of the world population drives on the left side?",
-"answer": [
-"34%"
-]
-},
-{
-"question": "How fast did Kenyan Kelvin Kiptum break the world record at the Chicago Marathon?",
-"answer": [
-"02:00:35"
-]
-},
-{
-"question": "How many countries border Argentina?",
-"answer": [
-"5 countries"
-]
-},
-{
-"question": "How many continents are there in the world?",
-"answer": [
-"7 continents"
-]
-},
-{
-"question": "How many chemical elements are currently listed in the periodic table?",
-"answer": [
-"118 elements"
-]
-},
-{
-"question": "What is the speed of light in a vacuum in km/s?",
-"answer": [
-"299,792 km/s"
-]
-},
-{
-"question": "How old is the Universe, according to scientific estimates?",
-"answer": [
-"13.8 billion years"
-]
-},
-{
-"question": "How many bones does the adult human body have?",
-"answer": [
-"206 bones"
-]
-},
-{
-"question": "What is the height of Mount Everest in meters?",
-"answer": [
-"8,848 meters"
-]
-},
-{
-"question": "How many natural satellites (moons) does the Earth have?",
-"answer": [
-"1 moon"
-]
-},
-{
-"question": "How many liters of blood does the average adult human body have?",
-"answer": [
-"5 liters"
-]
-},
-{
-"question": "What is the average depth of the oceans in meters?",
-"answer": [
-"3,688 meters"
-]
-},
-{
-"question": "What is the tilt angle of the Earth's axis?",
-"answer": [
-"23.5 degrees"
-]
-},
-{
-"question": "How many countries are currently members of NATO?",
-"answer": [
-"32 countries"
-]
-},
-{
-"question": "How many teeth does an adult human have (including wisdom teeth)?",
-"answer": [
-"32 teeth"
-]
-},
-{
-"question": "What is the current average global life expectancy?",
-"answer": [
-"73 years"
-]
-},
-{
-"question": "How many chromosomes does a normal human cell have?",
-"answer": [
-"46 chromosomes"
-]
-},
-{
-"question": "What is the average body temperature in degrees Celsius?",
-"answer": [
-"37°C"
-]
-},
-{
-"question": "How many minutes does an official soccer match last?",
-"answer": [
-"90 minutes"
-]
-},
-{
-"question": "How many states are there in the United States of America?",
-"answer": [
-"50 states"
-]
-},
-{
-"question": "How many planets are there in our Solar System?",
-"answer": [
-"8 planets"
-]
-},
-{
-"question": "What is the average distance between the Earth and the Moon in kilometers?",
-"answer": [
-"384,400 km"
-]
-},
-{
-"question": "How many years did World War II last?",
-"answer": [
-"6 years"
-]
-},
-{
-"question": "In which year was the first fully computer-animated film released?",
-"answer": [
-"1995 (Toy Story)"
-]
-},
-{
-"question": "How much does the skin of an average adult person weigh?",
-"answer": [
-"3.6 kg"
-]
-},
-{
-"question": "What percentage of people worldwide have blood type O?",
-"answer": [
-"44%"
-]
-},
-{
-"question": "How many carats does the Cullinan, the largest diamond in the world, have?",
-"answer": [
-"3,106 carats"
-]
-},
-{
-"question": "How many lovers did the Venetian seducer Casanova have?",
-"answer": [
-"122 lovers"
-]
-},
-{
-"question": "What percentage of Europeans speak German as their native language, considering it is the most spoken mother tongue in the EU?",
-"answer": [
-"18%"
-]
-},
-{
-"question": "How many times has the singer Gretchen been married?",
-"answer": [
-"18 times"
-]
-},
-{
-"question": "What percentage of the Earth's water is saltwater?",
-"answer": [
-"97%"
-]
-},
-{
-"question": "What is the length of the longest cat, from nose to tail tip?",
-"answer": [
-"123.2 cm"
-]
-},
-{
-"question": "At what age do Brazilians, on average, lose their virginity?",
-"answer": [
-"17.3 years"
-]
-},
-{
-"question": "In what year was the first Hard Rock Café opened?",
-"answer": [
-"1971 (in London)"
-]
-},
-{
-"question": "In what year did Colgate launch the first toothpaste in a jar?",
-"answer": [
-"1873"
-]
-},
-{
-"question": "What is the average height of a Brazilian man?",
-"answer": [
-"173 cm"
-]
-},
-{
-"question": "How many years did it take to build the city of Brasília?",
-"answer": [
-"4 years (1956-1960)"
-]
-},
-{
-"question": "How many push-ups did the record holder do in one hour according to Guinness?",
-"answer": [
-"2,919"
-]
-},
-{
-"question": "How many legs does a lobster have?",
-"answer": [
-"8 legs"
-]
-},
-{
-"question": "How many Brazilians live in London according to the Brazilian Consulate?",
-"answer": [
-"220,000"
-]
-},
-{
-"question": "What percentage of oranges produced worldwide are sold whole?",
-"answer": [
-"20%"
-]
-},
-{
-"question": "When Elvis died in 1977, how old was he?",
-"answer": [
-"42 years"
-]
-},
-{
-"question": "What percentage of Brazilian households have at least one pet?",
-"answer": [
-"About 50%"
-]
-},
-{
-"question": "How many kilometers long is Route 66 from start to finish?",
-"answer": [
-"3,940 km"
-]
-},
-{
-"question": "What is the length of the Rio Negro bridge in Manaus?",
-"answer": [
-"3,595 m"
-]
-},
-{
-"question": "Through how many countries do the Amazon River and its tributaries flow?",
-"answer": [
-"7 countries"
-]
-},
-{
-"question": "What is the width of Spreuerhofstrasse street in Reutlingen at its narrowest point?",
-"answer": [
-"30.5 cm"
-]
-},
-{
-"question": "What is the length of a tennis net from one post to the other?",
-"answer": [
-"12.80 m"
-]
-},
-{
-"question": "In what year did the last Jô program air?",
-"answer": [
-"2016"
-]
-},
-{
-"question": "What percentage of the shrimp's weight is its meat?",
-"answer": [
-"45%"
-]
-},
-{
-"question": "How many teeth does a rat have?",
-"answer": [
-"16 teeth"
-]
-},
-{
-"question": "What is the minimum alcohol content a drink must have to ignite a fire with it?",
-"answer": [
-"40%"
-]
-},
-{
-"question": "In what year was the modern bra patented?",
-"answer": [
-"1914"
-]
-},
-{
-"question": "What percentage of Brazilian households have a TV?",
-"answer": [
-"94.30%"
-]
-},
-{
-"question": "How deep can whale sounds reach in the ocean?",
-"answer": [
-"2.6 km"
-]
-},
-{
-"question": "How many cards are there in the game Uno?",
-"answer": [
-"108 cards"
-]
-},
-{
-"question": "In what year was the nickname 'Cidade Maravilhosa' (Marvelous City) for Rio de Janeiro popularized?",
-"answer": [
-"1935"
-]
-},
-{
-"question": "What is the length of the arms of the Christ the Redeemer statue, from one end to the other?",
-"answer": [
-"28 meters"
-]
-},
-{
-"question": "In what year was modern barbed wire invented?",
-"answer": [
-"1874"
-]
-},
-{
-"question": "How many minutes, on average, does a person speak per day?",
-"answer": [
-"100 minutes"
-]
-},
-{
-"question": "Our feet make a 90° angle with the legs, but socks have a different angle. What is the angle of socks?",
-"answer": [
-"120°"
-]
-},
-{
-"question": "How much do 100 bills of R$100.00 weigh?",
-"answer": [
-"25 grams (0.25g each)"
-]
-},
-{
-"question": "In what year was Pringles potato chips launched?",
-"answer": [
-"1967"
-]
-},
-{
-"question": "How many pets did the 2022 Pet Census register?",
-"answer": [
-"27.1 million"
-]
-},
-{
-"question": "In what year were the first eyeglasses recorded in a painting?",
-"answer": [
-"1352"
-]
-},
-{
-"question": "What percentage of a razor blade would dissolve in 24 hours if submerged in gastric juice?",
-"answer": [
-"37%"
-]
-},
-{
-"question": "What is the height of the tallest flagpole in the world, located in Jeddah, Saudi Arabia?",
-"answer": [
-"171 meters"
-]
-},
-{
-"question": "In what year was the term television coined?",
-"answer": [
-"1900"
-]
-},
-{
-"question": "What percentage of nitrogen composes the air we breathe?",
-"answer": [
-"78%"
-]
-},
-{
-"question": "How many strings does a harp have?",
-"answer": [
-"47 strings"
-]
-},
-{
-"question": "What percentage of all spices worldwide originate from India?",
-"answer": [
-"75%"
-]
-},
-{
-"question": "How many monarchies exist in the world?",
-"answer": [
-"29 monarchies"
-]
-},
-{
-"question": "What is the length of the famous Copacabana beach in Rio de Janeiro?",
-"answer": [
-"4 Km"
-]
-},
-{
-"question": "How many millions of copies of Roberto Carlos' albums have been sold?",
-"answer": [
-"140 million"
-]
-},
-{
-"question": "From what age does men's beard start to grow slower?",
-"answer": [
-"35 years old"
-]
-},
-{
-"question": "In which year was the first Christmas card commercialized in the world?",
-"answer": [
-"1843"
-]
-},
-{
-"question": "What was Napoleon's height?",
-"answer": [
-"1.68 meters"
-]
-},
-{
-"question": "How old was Napoleon when he died in 1821?",
-"answer": [
-"51 years old"
-]
-},
-{
-"question": "In which year was Orkut discontinued in Brazil?",
-"answer": [
-"2014"
-]
-},
-{
-"question": "What speed can a ski jumper reach?",
-"answer": [
-"105 Km/h"
-]
-},
-{
-"question": "How many seconds does sound take to travel one kilometer?",
-"answer": [
-"3 seconds"
-]
-},
-{
-"question": "What is the longest recorded distance a polar bear has swum?",
-"answer": [
-"685 Km"
-]
-},
-{
-"question": "What is the longest jump ever recorded by a kangaroo?",
-"answer": [
-"12.8 meters"
-]
-},
-{
-"question": "How many cups of decaffeinated coffee contain the same amount of caffeine as one cup of regular coffee?",
-"answer": [
-"10 cups"
-]
-},
-{
-"question": "At what distance did the world record javelin thrower throw his javelin?",
-"answer": [
-"98.48 meters"
-]
-},
-{
-"question": "Until which year was tug of war an Olympic sport?",
-"answer": [
-"1920"
-]
-},
-{
-"question": "How many movies did Elvis Presley star in?",
-"answer": [
-"31"
-]
-},
-{
-"question": "How many episodes of the series 'Friends' were filmed?",
-"answer": [
-"236 episodes"
-]
-},
-{
-"question": "How many times per second can a hummingbird flap its wings?",
-"answer": [
-"80 times"
-]
-},
-{
-"question": "How many grams of salt are there in 1 liter of seawater?",
-"answer": [
-"35 grams"
-]
-},
-{
-"question": "For how much was a Stradivarius violin auctioned in 2011?",
-"answer": [
-"$15.9 million"
-]
-},
-{
-"question": "What is the height record for a jump from the stratosphere?",
-"answer": [
-"41,419 meters"
-]
-},
-{
-"question": "How many people die each year on the planet?",
-"answer": [
-"60 million people"
-]
-},
-{
-"question": "How many normal bottles of champagne are equivalent to one 'Mélchizedek' bottle, the largest champagne bottle in the world?",
-"answer": [
-"40 bottles"
-]
-},
-{
-"question": "In which year did Tim Berners-Lee create the term WWW?",
-"answer": [
-"1989"
-]
-},
-{
-"question": "In which year did McDonald's introduce Chicken McNuggets?",
-"answer": [
-"1981"
-]
-},
-{
-"question": "How many doors are there in Buckingham Palace, London?",
-"answer": [
-"1,514 doors"
-]
-},
-{
-"question": "On average, how many pizzas are consumed daily in the state of São Paulo?",
-"answer": [
-"572,000 pizzas"
-]
-},
-{
-"question": "What percentage of the world's wealth is held by the richest 1%?",
-"answer": [
-"50%"
-]
-},
-{
-"question": "In which year did John Rockefeller become the first billionaire in the world?",
-"answer": [
-"1916"
-]
-},
-{
-"question": "How many countries have a coastline on the Mediterranean Sea?",
-"answer": [
-"21 countries"
-]
-},
-{
-"question": "What percentage of Catholics in the world live in Brazil?",
-"answer": [
-"11.70%"
-]
-},
-{
-"question": "How many European immigrants went to North America between 1821 and 1932?",
-"answer": [
-"32.2 million"
-]
-},
-{
-"question": "During pregnancy, how many kilos does a woman gain on average?",
-"answer": [
-"11 Kg"
-]
-},
-{
-"question": "At what age do children start to have less fear of snakes, the dark, and monsters?",
-"answer": [
-"5 years old"
-]
-},
-{
-"question": "In which year did British actor Charlie Chaplin die?",
-"answer": [
-"1977"
-]
-},
-{
-"question": "What position does Mallorca, the Spanish island, hold in the ranking of the largest islands in the world?",
-"answer": [
-"7th place"
-]
-},
-{
-"question": "How many strings does the Russian instrument balalaika have?",
-"answer": [
-"3 strings"
-]
-},
-{
-"question": "In which year did Leonardo da Vinci start the Mona Lisa?",
-"answer": [
-"1503"
-]
-},
-{
-"question": "What percentage of New York's population is foreign-born?",
-"answer": [
-"38%"
-]
-},
-{
-"question": "In which year did frozen food commercialization start in the USA?",
-"answer": [
-"1930"
-]
-},
-{
-"question": "What percentage of the world's freshwater is stored in glaciers or ice caps?",
-"answer": [
-"69%"
-]
-},
-{
-"question": "How many fights did Mike Tyson win by knockout?",
-"answer": [
-"44 fights"
-]
-},
-{
-"question": "What was the weight of the heaviest cat in the world?",
-"answer": [
-"20.9 Kg"
-]
-},
-{
-"question": "In which year did Merlin Robbins invent the Uno card game?",
-"answer": [
-"1971"
-]
-},
-{
-"question": "How many elements are there in the periodic table?",
-"answer": [
-"118 elements"
-]
-},
-{
-"question": "For how much was the most expensive painting ever auctioned sold?",
-"answer": [
-"US$ 450.3 million (Leonardo da Vinci's painting, Salvator Mundi)"
-]
-},
-{
-"question": "What is the average length of the umbilical cord at birth?",
-"answer": [
-"60 cm"
-]
-},
-{
-"question": "How many medium hamburgers can be made from the meat of a single cow?",
-"answer": [
-"1,200 hamburgers"
-]
-},
-{
-"question": "What percentage of watermelon is water?",
-"answer": [
-"92%"
-]
-},
-{
-"question": "How many days can a person survive with only water?",
-"answer": [
-"61 days"
-]
-},
-{
-"question": "What is the length of the Andes mountain range in kilometers?",
-"answer": [
-"8,000 Km"
-]
-},
-{
-"question": "What is the internal area of St. Peter's Basilica in square meters?",
-"answer": [
-"15,000 m²"
-]
-},
-{
-"question": "How much does an official men's basketball weigh?",
-"answer": [
-"600 grams"
-]
-},
-{
-"question": "How many steps are needed to reach the top of the Eiffel Tower?",
-"answer": [
-"1,665 steps"
-]
-},
-{
-"question": "How many seconds did the fastest cheetah run 100 meters?",
-"answer": [
-"5.95 seconds"
-]
-},
-{
-"question": "How many gladiators died in the games at the Roman Colosseum?",
-"answer": [
-"400,000 people"
-]
-},
-{
-"question": "How many bicycles are there in the Netherlands?",
-"answer": [
-"22.9 million bicycles"
-]
-},
-{
-"question": "How many people are estimated to have been on board the Titanic?",
-"answer": [
-"2,224 people"
-]
-},
-{
-"question": "In which year was the soda Sprite launched?",
-"answer": [
-"1961"
-]
-},
-{
-"question": "What is the length of the Nile River?",
-"answer": [
-"6,650 Km"
-]
-},
-{
-"question": "How many planets can be seen from Earth with the naked eye?",
-"answer": [
-"5 (Mercury, Venus, Mars, Jupiter, Saturn)"
-]
-},
-{
-"question": "For how many years were Barbie and Ken together before divorcing in 2004?",
-"answer": [
-"43 years"
-]
-},
-{
-"question": "What is the record time for the person who stayed awake the longest?",
-"answer": [
-"11 days"
-]
-},
-{
-"question": "How many countries have territory on both sides of the Equator line?",
-"answer": [
-"11 countries"
-]
-},
-{
-"question": "At what age do children lie the most?",
-"answer": [
-"12 years"
-]
-},
-{
-"question": "How many times more vitamin C does acerola have compared to orange or lemon?",
-"answer": [
-"60 times more"
-]
-},
-{
-"question": "In which year was the One Penny Black, the world's first postage stamp, created?",
-"answer": [
-"1840"
-]
-},
-{
-"question": "What is the height of Mount Everest?",
-"answer": [
-"8,848 meters"
-]
-},
-{
-"question": "What percentage of Swiss people speak French as their first language?",
-"answer": [
-"23%"
-]
-},
-{
-"question": "What is the height of the Great Pyramid of Khufu?",
-"answer": [
-"138 meters"
-]
-},
-{
-"question": "How many cars are on the Formula 1 starting grid?",
-"answer": [
-"20 cars"
-]
-},
-{
-"question": "How many countries in South America do not have access to the sea?",
-"answer": [
-"2 countries (Bolivia and Paraguay)"
-]
-},
-{
-"question": "What is the height, in meters, of the highest point of Niagara Falls?",
-"answer": [
-"57 meters"
-]
-},
-{
-"question": "How many people die annually from lung cancer worldwide?",
-"answer": [
-"1.8 million people"
-]
-},
-{
-"question": "How many people die annually from snake bites?",
-"answer": [
-"100,000 people"
-]
-},
-{
-"question": "How many countries in the world do not use the metric system?",
-"answer": [
-"3 countries (USA, Myanmar, and Liberia)"
-]
-},
-{
-"question": "In which year was the first casino resort in Las Vegas inaugurated?",
-"answer": [
-"1941"
-]
-},
-{
-"question": "How many countries participated in the first modern Olympic Games in Athens in 1896?",
-"answer": [
-"14 countries"
-]
-},
-{
-"question": "What percentage of the world's population does not have access to electricity?",
-"answer": [
-"13%"
-]
-},
-{
-"question": "What is the length of the longest Formula 1 circuit?",
-"answer": [
-"7,004 meters"
-]
-},
-{
-"question": "In which year was the code 'Mayday' invented?",
-"answer": [
-"1923"
-]
-},
-{
-"question": "In what year was the Trans-Amazonian Highway inaugurated?",
-"answer": [
-"1972"
-]
-},
-{
-"question": "How long do long dreams last?",
-"answer": [
-"45 minutes"
-]
-},
-{
-"question": "How many statues, or moai, were documented on Easter Island?",
-"answer": [
-"887 moai"
-]
-},
-{
-"question": "What is the diameter of the Moon?",
-"answer": [
-"3,474 Km"
-]
-},
-{
-"question": "How many countries does China share a land border with?",
-"answer": [
-"14 countries"
-]
-},
-{
-"question": "In which year was the doping test first performed at the Olympic Games?",
-"answer": [
-"1968 (Mexico City)"
-]
-},
-{
-"question": "How long would you need to walk to burn off the calories in a glass of wine?",
-"answer": [
-"27 minutes"
-]
-},
-{
-"question": "How many hours did the first balloon flight crossing the Atlantic Ocean in 1978 take?",
-"answer": [
-"137 hours"
-]
-},
-{
-"question": "How old was Queen Elizabeth's mother when she died in 2002?",
-"answer": [
-"101 years old"
-]
-},
-{
-"question": "In what year was Pelé born?",
-"answer": [
-"1940"
-]
-},
-{
-"question": "How many steps are there between the ground floor and the 102nd floor of the Empire State Building?",
-"answer": [
-"1,860 steps"
-]
-},
-{
-"question": "What percentage of a carrot is water?",
-"answer": [
-"90%"
-]
-},
-{
-"question": "What is the internal diameter of the rings used in men's Olympic gymnastics?",
-"answer": [
-"18 cm"
-]
-},
-{
-"question": "How many libraries are there in Paris?",
-"answer": [
-"57 libraries"
-]
-},
-{
-"question": "What would be the weight of a pigeon's droppings over an entire year?",
-"answer": [
-"11 Kg"
-]
-},
-{
-"question": "How many times larger is Greenland compared to Denmark?",
-"answer": [
-"50 times larger"
-]
-},
-{
-"question": "In what year was the first canned beer marketed?",
-"answer": [
-"1935"
-]
-},
-{
-"question": "How many times do we breathe on average during a day?",
-"answer": [
-"20,000 times"
-]
-},
-{
-"question": "What percentage of the world's population is left-handed?",
-"answer": [
-"10%"
-]
-},
-{
-"question": "How many pieces are there in a domino set?",
-"answer": [
-"28 pieces"
-]
-},
-{
-"question": "Out of 100 people visiting Las Vegas, how many try gambling in casinos?",
-"answer": [
-"81 people"
-]
-},
-{
-"question": "How many windows are there in the crown of the Statue of Liberty?",
-"answer": [
-"25 windows"
-]
-},
-{
-"question": "How many hours per day do cows graze on average?",
-"answer": [
-"8 hours"
-]
-},
-{
-"question": "What was the weight of the largest emperor penguin ever recorded?",
-"answer": [
-"115 Kg"
-]
-},
-{
-"question": "What is the length of Avenida Sapopemba, located in São Paulo?",
-"answer": [
-"45 Km"
-]
-},
-{
-"question": "In what year did Alan Freed coin the term 'Rock 'n Roll'?",
-"answer": [
-"1951"
-]
-},
-{
-"question": "How many people have walked on the surface of the Moon?",
-"answer": [
-"12 people"
-]
-},
-{
-"question": "What percentage of women survived the sinking of the Titanic?",
-"answer": [
-"74%"
-]
-},
-{
-"question": "What is the altitude of the city of Curitiba?",
-"answer": [
-"934 meters"
-]
-},
-{
-"question": "How many kilograms of meat does a jaguar eat on average per week?",
-"answer": [
-"39 Kg"
-]
-},
-{
-"question": "How many lightning strikes hit the Earth every second?",
-"answer": [
-"100 (6,000 per minute)"
-]
-},
-{
-"question": "What is the maximum number of full moons in a year?",
-"answer": [
-"13 times"
-]
-},
-{
-"question": "How many grapes are needed to make a glass of wine?",
-"answer": [
-"75 grapes"
-]
-},
-{
-"question": "What percentage of the world population can speak at least two languages?",
-"answer": [
-"65%"
-]
-},
-{
-"question": "If you ran the entire length of the Great Wall of China, how many marathons would that be?",
-"answer": [
-"502 marathons"
-]
-},
-{
-"question": "How tall is the Mona Lisa painting?",
-"answer": [
-"77 cm"
-]
-},
-{
-"question": "How long can a single hair survive on the head?",
-"answer": [
-"5 years"
-]
-},
-{
-"question": "How many times brighter is the full moon compared to the crescent or waning moon?",
-"answer": [
-"9 times"
-]
-},
-{
-"question": "How many centimeters is the nose of the Statue of Liberty?",
-"answer": [
-"137 cm"
-]
-},
-{
-"question": "In what year did the Disney character Pluto debut?",
-"answer": [
-"1930"
-]
-},
-{
-"question": "How deep is the Mariana Trench?",
-"answer": [
-"10,983 meters"
-]
-},
-{
-"question": "How many teeth does an elephant have?",
-"answer": [
-"26 teeth"
-]
-},
-{
-"question": "What was the top speed of the first car driven by Karl Benz?",
-"answer": [
-"16 Km/h"
-]
-},
-{
-"question": "How many people can the world's largest restaurant, Bawabet Dimashq in Damascus, Syria, accommodate?",
-"answer": [
-"6,014 people"
-]
-},
-{
-"question": "What is the height of the tallest side of the Leaning Tower of Pisa?",
-"answer": [
-"55.86 meters"
-]
-},
-{
-"question": "How many bones are there in our feet?",
-"answer": [
-"26 bones"
-]
-},
-{
-"question": "In what year did the first person die in a car accident?",
-"answer": [
-"1896"
-]
-},
-{
-"question": "How many liters of water does an Olympic swimming pool hold?",
-"answer": [
-"1,890,000 liters"
-]
-},
-{
-"question": "How long does an eyelash stay on the body before falling out?",
-"answer": [
-"11 months"
-]
-},
-{
-"question": "How many countries border France?",
-"answer": [
-"11 countries"
-]
-},
-{
-"question": "What percentage of people worldwide have never consumed alcoholic beverages?",
-"answer": [
-"45%"
-]
-},
-{
-"question": "How many spokes are there on an average bicycle wheel?",
-"answer": [
-"32 spokes"
-]
-}
+    const questions = [
+        {
+            "question": "In what year did American Mary Anderson invent the windshield wiper?",
+            "answer": [
+                "1903"
+            ]
+        },
+        {
+            "question": "How many meters from the goal line is the penalty mark in professional soccer?",
+            "answer": [
+                "11 meters"
+            ]
+        },
+        {
+            "question": "Measured by wingspan, from tip to tip, what is the size of the largest moth in the world?",
+            "answer": [
+                "30.4 cm"
+            ]
+        },
+        {
+            "question": "How many soldiers lost their lives in World War II?",
+            "answer": [
+                "10 million soldiers"
+            ]
+        },
+        {
+            "question": "What percentage of Brazilians who consume alcoholic beverages prefer beer over other drinks?",
+            "answer": [
+                "49%"
+            ]
+        },
+        {
+            "question": "The largest wine cellar on the planet is located underground in Moldova, a neighbor of Ukraine. How many kilometers long is this cellar?",
+            "answer": [
+                "200 Km"
+            ]
+        },
+        {
+            "question": "What is the width of an official soccer goal?",
+            "answer": [
+                "7.32 meters"
+            ]
+        },
+        {
+            "question": "What is the length of the longest hair in the world, belonging to Ukrainian Aliia Nasyrova?",
+            "answer": [
+                "2.57 meters"
+            ]
+        },
+        {
+            "question": "How many days are there in one million seconds?",
+            "answer": [
+                "11 days"
+            ]
+        },
+        {
+            "question": "What percentage of drownings occur in fresh water?",
+            "answer": [
+                "90%"
+            ]
+        },
+        {
+            "question": "How many liters of urine does a cow produce in one day?",
+            "answer": [
+                "13.2 liters"
+            ]
+        },
+        {
+            "question": "What is the height of the official men's volleyball net?",
+            "answer": [
+                "2.43 meters"
+            ]
+        },
+        {
+            "question": "How many countries use the Euro as their official currency?",
+            "answer": [
+                "20 countries"
+            ]
+        },
+        {
+            "question": "What is the ranking position of the Puma among the largest cats on the planet?",
+            "answer": [
+                "4th, after the tiger, lion, and jaguar"
+            ]
+        },
+        {
+            "question": "In what year was the tea bag invented?",
+            "answer": [
+                "1908"
+            ]
+        },
+        {
+            "question": "How tall is the tallest building in the world, the Burj Khalifa in Dubai?",
+            "answer": [
+                "828 meters"
+            ]
+        },
+        {
+            "question": "How many liters of water does a cow drink per day?",
+            "answer": [
+                "57 liters"
+            ]
+        },
+        {
+            "question": "In what year was the first Polaroid camera released?",
+            "answer": [
+                "1948"
+            ]
+        },
+        {
+            "question": "What is the height of the tallest chimney in the world, located at the Ekibastuz power plant in Kazakhstan?",
+            "answer": [
+                "420 meters"
+            ]
+        },
+        {
+            "question": "Approximately how many inhabitants lived in New York in the 1700s?",
+            "answer": [
+                "5,000 inhabitants"
+            ]
+        },
+        {
+            "question": "How many days did a human spend in space during the longest space mission?",
+            "answer": [
+                "437 days"
+            ]
+        },
+        {
+            "question": "In what year was the first speeding ticket issued?",
+            "answer": [
+                "1896"
+            ]
+        },
+        {
+            "question": "How many countries are there in Africa?",
+            "answer": [
+                "54 countries"
+            ]
+        },
+        {
+            "question": "In what year was the first Volkswagen Beetle produced in Brazil?",
+            "answer": [
+                "1959"
+            ]
+        },
+        {
+            "question": "According to experts, how many bristles should a toothbrush have?",
+            "answer": [
+                "1,440 bristles"
+            ]
+        },
+        {
+            "question": "How many days did the Apollo 11 mission last?",
+            "answer": [
+                "8 days"
+            ]
+        },
+        {
+            "question": "What is the minimum height for a location to be considered a mountain?",
+            "answer": [
+                "300 meters"
+            ]
+        },
+        {
+            "question": "How old was John Lennon when he was assassinated in 1980?",
+            "answer": [
+                "40 years old"
+            ]
+        },
+        {
+            "question": "What percentage of a person's weight is represented by their skeleton?",
+            "answer": [
+                "15%"
+            ]
+        },
+        {
+            "question": "How many colors are on the South African flag?",
+            "answer": [
+                "6 (black, yellow, green, red, blue, and white)"
+            ]
+        },
+        {
+            "question": "How many bridges are there in the city of Amsterdam?",
+            "answer": [
+                "1,281 bridges"
+            ]
+        },
+        {
+            "question": "How many babies are born on Earth daily (on average)?",
+            "answer": [
+                "220,000 babies"
+            ]
+        },
+        {
+            "question": "What is the total population of Africa?",
+            "answer": [
+                "1.4 billion people"
+            ]
+        },
+        {
+            "question": "How tall is the tallest building in Brazil, located in Balneário Camboriú?",
+            "answer": [
+                "290 meters"
+            ]
+        },
+        {
+            "question": "How much does the horizontal pole in pole vaulting weigh?",
+            "answer": [
+                "2.25 Kg"
+            ]
+        },
+        {
+            "question": "What is the distance food travels during the digestion process?",
+            "answer": [
+                "9.15 meters"
+            ]
+        },
+        {
+            "question": "How many lanes are there in an Olympic swimming pool?",
+            "answer": [
+                "10 lanes"
+            ]
+        },
+        {
+            "question": "What is the height of the tallest man currently alive, Turkish Sultan Kosen?",
+            "answer": [
+                "2.51 meters"
+            ]
+        },
+        {
+            "question": "How many containers can the largest cargo ship in the world carry?",
+            "answer": [
+                "23,000 containers"
+            ]
+        },
+        {
+            "question": "What is the alcohol content of Hapsburg Absinthe?",
+            "answer": [
+                "89.90%"
+            ]
+        },
+        {
+            "question": "How many kilograms of pasta does the average Italian eat per year?",
+            "answer": [
+                "23 kg"
+            ]
+        },
+        {
+            "question": "What percentage of Brazilian territory is covered by forests?",
+            "answer": [
+                "58.50%"
+            ]
+        },
+        {
+            "question": "How many waterfalls are there at the Iguazu Falls?",
+            "answer": [
+                "275 waterfalls"
+            ]
+        },
+        {
+            "question": "What is the length of the longest escalator in the world, located in Saint Petersburg, Russia?",
+            "answer": [
+                "138 meters (66 meters high)"
+            ]
+        },
+        {
+            "question": "How long was Medusa, the largest snake kept in captivity?",
+            "answer": [
+                "7.62 meters"
+            ]
+        },
+        {
+            "question": "How many people worldwide die each year due to scorpion stings?",
+            "answer": [
+                "3,000 people"
+            ]
+        },
+        {
+            "question": "What percentage of the world's coffee is produced in Brazil?",
+            "answer": [
+                "40%"
+            ]
+        },
+        {
+            "question": "How many U.S. states border Canada?",
+            "answer": [
+                "13 states"
+            ]
+        },
+        {
+            "question": "In what year was the passport system introduced in Europe?",
+            "answer": [
+                "1914"
+            ]
+        },
+        {
+            "question": "How long would it take to travel from Earth to the Moon in the largest passenger airplane today?",
+            "answer": [
+                "16 days"
+            ]
+        },
+        {
+            "question": "What is the average weight of sumo wrestlers?",
+            "answer": [
+                "159 Kg"
+            ]
+        },
+        {
+            "question": "How many liters of water can an elephant store in its trunk?",
+            "answer": [
+                "9.5 liters"
+            ]
+        },
+        {
+            "question": "How many billiard balls are needed to weigh one kilogram?",
+            "answer": [
+                "6 balls"
+            ]
+        },
+        {
+            "question": "How many chickens are consumed daily in the USA?",
+            "answer": [
+                "22 million chickens"
+            ]
+        },
+        {
+            "question": "What is the length of a ping-pong table?",
+            "answer": [
+                "2.74 meters"
+            ]
+        },
+        {
+            "question": "What is the average height of NBA players?",
+            "answer": [
+                "2.03 meters"
+            ]
+        },
+        {
+            "question": "In what year was Atari launched in Brazil?",
+            "answer": [
+                "1983"
+            ]
+        },
+        {
+            "question": "How many trips to the Americas did Christopher Columbus make?",
+            "answer": [
+                "4 trips"
+            ]
+        },
+        {
+            "question": "In what year was the first James Bond movie shown in Chinese cinemas?",
+            "answer": [
+                "2006 (Casino Royale)"
+            ]
+        },
+        {
+            "question": "How many coffee beans are needed to make one espresso cup?",
+            "answer": [
+                "71 beans"
+            ]
+        },
+        {
+            "question": "How many bars and restaurants are there in Spain, the country with the most bars and restaurants in Europe?",
+            "answer": [
+                "250,000 bars and restaurants"
+            ]
+        },
+        {
+            "question": "How many European countries are recognized by the UN?",
+            "answer": [
+                "44 countries"
+            ]
+        },
+        {
+            "question": "What percentage of people can roll their tongue?",
+            "answer": [
+                "70%"
+            ]
+        },
+        {
+            "question": "How long did the Titanic take to sink after colliding with the iceberg?",
+            "answer": [
+                "160 minutes"
+            ]
+        },
+        {
+            "question": "What is the shortest distance between the USA and Russia?",
+            "answer": [
+                "3.8 Km (distance between Big Diomede and Little Diomede islands in the Bering Strait)"
+            ]
+        },
+        {
+            "question": "In what year did the United Kingdom abolish the death penalty?",
+            "answer": [
+                "1969"
+            ]
+        },
+        {
+            "question": "How many people can the largest cruise ship, Icon of the Seas, carry including passengers and crew?",
+            "answer": [
+                "9,950 (7,600 passengers and 2,350 crew)"
+            ]
+        },
+        {
+            "question": "How many James Bond films did Sean Connery star in?",
+            "answer": [
+                "7 films"
+            ]
+        },
+        {
+            "question": "How many kilograms of food can an elephant eat per day?",
+            "answer": [
+                "136 Kg"
+            ]
+        },
+        {
+            "question": "How many employees does the U.S. Department of Defense have, considered the largest employer in the world?",
+            "answer": [
+                "2.8 million"
+            ]
+        },
+        {
+            "question": "What is the average life expectancy of the Earth's population?",
+            "answer": [
+                "72 years"
+            ]
+        },
+        {
+            "question": "How many steps did Usain Bolt take when he broke the world record for the 100 meters in 2009?",
+            "answer": [
+                "41 steps"
+            ]
+        },
+        {
+            "question": "In what year did Albert Einstein die?",
+            "answer": [
+                "1955"
+            ]
+        },
+        {
+            "question": "How many times larger is the diameter of the Sun compared to the Earth?",
+            "answer": [
+                "109 times"
+            ]
+        },
+        {
+            "question": "What position would the state of São Paulo hold in the ranking of area occupied in km²?",
+            "answer": [
+                "12th"
+            ]
+        },
+        {
+            "question": "What was the height of the Berlin Wall?",
+            "answer": [
+                "3.60 meters"
+            ]
+        },
+        {
+            "question": "How many statues are there atop the columns around St. Peter's Square in the Vatican?",
+            "answer": [
+                "140 statues"
+            ]
+        },
+        {
+            "question": "How many passengers can the Airbus A380 carry?",
+            "answer": [
+                "853 passengers"
+            ]
+        },
+        {
+            "question": "What percentage of the Chinese population has the surnames Li, Wang, or Zhang?",
+            "answer": [
+                "21%"
+            ]
+        },
+        {
+            "question": "If a man never shaved his beard, how long would it be by the end of his life, considering a normal beard?",
+            "answer": [
+                "9.2 meters"
+            ]
+        },
+        {
+            "question": "What is the average height of a Dutch man?",
+            "answer": [
+                "184 cm"
+            ]
+        },
+        {
+            "question": "What is the height of the Salto Ángel waterfall, the highest waterfall in the world?",
+            "answer": [
+                "976 meters"
+            ]
+        },
+        {
+            "question": "How many teeth does a great white shark have?",
+            "answer": [
+                "300 teeth"
+            ]
+        },
+        {
+            "question": "From how many decibels can long exposure harm a person?",
+            "answer": [
+                "70 dB"
+            ]
+        },
+        {
+            "question": "When was Viagra launched on the market?",
+            "answer": [
+                "1998"
+            ]
+        },
+        {
+            "question": "At what speed does a normal raindrop fall?",
+            "answer": [
+                "32 Km/h"
+            ]
+        },
+        {
+            "question": "In which year did the world population reach 1 billion?",
+            "answer": [
+                "1804"
+            ]
+        },
+        {
+            "question": "In which year was the bikini invented?",
+            "answer": [
+                "1946"
+            ]
+        },
+        {
+            "question": "Until what year was New York City called New Amsterdam?",
+            "answer": [
+                "1665"
+            ]
+        },
+        {
+            "question": "How many countries in the world start with the letter B?",
+            "answer": [
+                "18 countries"
+            ]
+        },
+        {
+            "question": "What percentage of people in Scotland have red hair?",
+            "answer": [
+                "13%"
+            ]
+        },
+        {
+            "question": "How many years was Nelson Mandela imprisoned before becoming president of South Africa?",
+            "answer": [
+                "27 years"
+            ]
+        },
+        {
+            "question": "What is the time zone difference between São Paulo and Auckland, New Zealand?",
+            "answer": [
+                "15 hours"
+            ]
+        },
+        {
+            "question": "How many kilometers did the record holder Yiannis Kouros run in 24 hours?",
+            "answer": [
+                "303.5 Km"
+            ]
+        },
+        {
+            "question": "How many Tamagotchis were sold worldwide during the 1990s?",
+            "answer": [
+                "~82 million"
+            ]
+        },
+        {
+            "question": "How many years did the Vietnam War last?",
+            "answer": [
+                "19 years"
+            ]
+        },
+        {
+            "question": "How old was Marie Antoinette when she was beheaded in 1793?",
+            "answer": [
+                "37 years"
+            ]
+        },
+        {
+            "question": "How many kilometers is the longest train route in the world, the Trans-Siberian Railway?",
+            "answer": [
+                "9,289 Km"
+            ]
+        },
+        {
+            "question": "How many days of paid vacation do Chinese workers have?",
+            "answer": [
+                "5 days"
+            ]
+        },
+        {
+            "question": "What was the year with the highest CD sales worldwide?",
+            "answer": [
+                "2000"
+            ]
+        },
+        {
+            "question": "How much do a person's ashes weigh after cremation?",
+            "answer": [
+                "4 Kg"
+            ]
+        },
+        {
+            "question": "What percentage of the Earth's surface is occupied by South America?",
+            "answer": [
+                "12%"
+            ]
+        },
+        {
+            "question": "How many soldiers landed in Normandy on D-Day in 1944?",
+            "answer": [
+                "156,000 soldiers"
+            ]
+        },
+        {
+            "question": "In which year did author Stephen King release his book Carrie?",
+            "answer": [
+                "1974"
+            ]
+        },
+        {
+            "question": "How many countries and states does the state of Pará border in total?",
+            "answer": [
+                "8 (6 states and 2 countries)"
+            ]
+        },
+        {
+            "question": "How many European Union countries have flags with vertical stripes?",
+            "answer": [
+                "5 (France, Italy, Belgium, Ireland, and Romania)"
+            ]
+        },
+        {
+            "question": "What percentage of banknotes worldwide have women depicted on their faces?",
+            "answer": [
+                "15%"
+            ]
+        },
+        {
+            "question": "How many times the size of their own body can fleas jump?",
+            "answer": [
+                "200 times"
+            ]
+        },
+        {
+            "question": "How many meters is the baton passing zone in track relay races?",
+            "answer": [
+                "30 meters"
+            ]
+        },
+        {
+            "question": "How many countries does Brazil border?",
+            "answer": [
+                "10 countries"
+            ]
+        },
+        {
+            "question": "How many liters of water can a camel drink at once?",
+            "answer": [
+                "120 liters"
+            ]
+        },
+        {
+            "question": "What is the highest speed ever reached by a train?",
+            "answer": [
+                "603 Km/h"
+            ]
+        },
+        {
+            "question": "How much does the Falabella horse, the smallest horse in the world, weigh on average?",
+            "answer": [
+                "80 Kg"
+            ]
+        },
+        {
+            "question": "In which year was the Santa Genoveva Cantina, São Paulo's first pizzeria, inaugurated?",
+            "answer": [
+                "1910"
+            ]
+        },
+        {
+            "question": "How long did the Rubik's cube world record holder take to solve it?",
+            "answer": [
+                "3.47 seconds"
+            ]
+        },
+        {
+            "question": "Out of 100 dog owners, how many let their pets sleep with them in bed?",
+            "answer": [
+                "45 owners"
+            ]
+        },
+        {
+            "question": "How many million people in the world are blind?",
+            "answer": [
+                "39 million"
+            ]
+        },
+        {
+            "question": "How many eggs does a chicken lay on average per year?",
+            "answer": [
+                "260 eggs"
+            ]
+        },
+        {
+            "question": "In which year did Beach Tennis arrive in Brazil?",
+            "answer": [
+                "2008"
+            ]
+        },
+        {
+            "question": "According to FIFA, how many people watched the 2022 World Cup final?",
+            "answer": [
+                "1.5 billion people"
+            ]
+        },
+        {
+            "question": "From what age can a female cat get pregnant?",
+            "answer": [
+                "4 months"
+            ]
+        },
+        {
+            "question": "In which year were the first Winter Olympic Games held?",
+            "answer": [
+                "1924 (in Chamonix, France)"
+            ]
+        },
+        {
+            "question": "How long does it take for a person's fingernail to grow 1.5 cm?",
+            "answer": [
+                "5 months"
+            ]
+        },
+        {
+            "question": "How old was the youngest person to receive a Nobel Prize?",
+            "answer": [
+                "17 years old (Malala - Nobel Peace Prize)"
+            ]
+        },
+        {
+            "question": "What is the length of the gondolas in Venice?",
+            "answer": [
+                "9 meters"
+            ]
+        },
+        {
+            "question": "How many tons did the Argentinosaurus, which reached 40 meters tall, weigh?",
+            "answer": [
+                "77 tons"
+            ]
+        },
+        {
+            "question": "In which year did the swimsuit manufacturer Catalina hold the first Miss Universe contest?",
+            "answer": [
+                "1952"
+            ]
+        },
+        {
+            "question": "According to estimates, how many Brazilians currently live abroad?",
+            "answer": [
+                "4.9 million"
+            ]
+        },
+        {
+            "question": "How many windows did the World Trade Center towers have?",
+            "answer": [
+                "43,600 windows"
+            ]
+        },
+        {
+            "question": "In which year did Pastor Samuel Hensall invent the modern corkscrew?",
+            "answer": [
+                "1795"
+            ]
+        },
+        {
+            "question": "How many days did Christopher Columbus take to cross the Atlantic between the Canary Islands and the Bahamas in 1492?",
+            "answer": [
+                "37 days"
+            ]
+        },
+        {
+            "question": "What is the fat content of milk taken straight from the cow?",
+            "answer": [
+                "4%"
+            ]
+        },
+        {
+            "question": "How many players are on a hockey team?",
+            "answer": [
+                "11 players"
+            ]
+        },
+        {
+            "question": "In which year did James Ritty invent the cash register?",
+            "answer": [
+                "1897"
+            ]
+        },
+        {
+            "question": "What was the largest recorded litter of live kittens in the world?",
+            "answer": [
+                "15 kittens (4 were stillborn)"
+            ]
+        },
+        {
+            "question": "At what temperature does butter melt?",
+            "answer": [
+                "~ 32° C"
+            ]
+        },
+        {
+            "question": "How many babies are born every second worldwide?",
+            "answer": [
+                "4 babies"
+            ]
+        },
+        {
+            "question": "What percentage of an apple's composition is air?",
+            "answer": [
+                "25%"
+            ]
+        },
+        {
+            "question": "How many rooms are in the White House?",
+            "answer": [
+                "132 rooms"
+            ]
+        },
+        {
+            "question": "In which year did Hungarian journalist László Bíró invent the ballpoint pen?",
+            "answer": [
+                "1938"
+            ]
+        },
+        {
+            "question": "At what age did Jeanne Calment, the longest-living person to date, die?",
+            "answer": [
+                "122 years"
+            ]
+        },
+        {
+            "question": "What percentage of cat owners dry their cats' fur after bathing them?",
+            "answer": [
+                "25%"
+            ]
+        },
+        {
+            "question": "How long did the longest tennis match in history, held at Wimbledon, last?",
+            "answer": [
+                "11 hours and 5 minutes"
+            ]
+        },
+        {
+            "question": "How old was Princess Diana when she died in the car accident in Paris in 1997?",
+            "answer": [
+                "36 years"
+            ]
+        },
+        {
+            "question": "In which year was Facebook launched in Brazil?",
+            "answer": [
+                "2007"
+            ]
+        },
+        {
+            "question": "In which year was the Oscars ceremony first televised?",
+            "answer": [
+                "1953"
+            ]
+        },
+        {
+            "question": "The Great Pyramid of Giza is composed of 2.3 million blocks of stone. How much does each stone block weigh on average?",
+            "answer": [
+                "2,500 Kg"
+            ]
+        },
+        {
+            "question": "How many Friday the 13ths are possible during the same year?",
+            "answer": [
+                "3"
+            ]
+        },
+        {
+            "question": "How many US states have coastline on the Atlantic Ocean?",
+            "answer": [
+                "14 states"
+            ]
+        },
+        {
+            "question": "What is the length of the Laerdal Tunnel in Norway, the longest tunnel in the world?",
+            "answer": [
+                "24.5 Km"
+            ]
+        },
+        {
+            "question": "In which year was food served onboard an aircraft for the first time?",
+            "answer": [
+                "1919"
+            ]
+        },
+        {
+            "question": "According to estimates, how many Brazilians have the surname Silva approximately?",
+            "answer": [
+                "4 million"
+            ]
+        },
+        {
+            "question": "How many people watched the wedding of Princess Diana and Prince Charles on television in 1981?",
+            "answer": [
+                "750 million"
+            ]
+        },
+        {
+            "question": "How many continents are totally or partially located on the Equator line?",
+            "answer": [
+                "5 (Antarctica, Australia, South America, Asia, and Africa)"
+            ]
+        },
+        {
+            "question": "How much does the javelin used in men's Olympic javelin throw weigh?",
+            "answer": [
+                "800 grams"
+            ]
+        },
+        {
+            "question": "What is the average height of people in Indonesia, the country with the shortest average stature in the world?",
+            "answer": [
+                "1.52 meters"
+            ]
+        },
+        {
+            "question": "How many cards are in a deck of playing cards?",
+            "answer": [
+                "52 cards"
+            ]
+        },
+        {
+            "question": "What percentage of the world's soybean production comes from Brazil?",
+            "answer": [
+                "42%"
+            ]
+        },
+        {
+            "question": "At what age did Fernando Collor take office as president of Brazil?",
+            "answer": [
+                "40 years"
+            ]
+        },
+        {
+            "question": "What percentage of people are circumcised worldwide?",
+            "answer": [
+                "38%"
+            ]
+        },
+        {
+            "question": "In which year was the R$200.00 banknote launched in Brazil?",
+            "answer": [
+                "2020"
+            ]
+        },
+        {
+            "question": "How long did the French Revolution last?",
+            "answer": [
+                "10 years (1789 - 1799)"
+            ]
+        },
+        {
+            "question": "In which year was the first parachute jump from an airplane?",
+            "answer": [
+                "1912"
+            ]
+        },
+        {
+            "question": "How many countries in the world are smaller than Central Park in New York?",
+            "answer": [
+                "2 countries (Monaco and Vatican)"
+            ]
+        },
+        {
+            "question": "How many liters of blood does the heart pump approximately per day?",
+            "answer": [
+                "7,600 liters"
+            ]
+        },
+        {
+            "question": "What is the height of the tallest giraffe ever recorded?",
+            "answer": [
+                "5.8 meters"
+            ]
+        },
+        {
+            "question": "In which year does the Stranger Things series begin?",
+            "answer": [
+                "1983"
+            ]
+        },
+        {
+            "question": "In which year was the first Olympic flame lit?",
+            "answer": [
+                "1928 (Amsterdam)"
+            ]
+        },
+        {
+            "question": "How long was the world record holder able to hold their breath underwater?",
+            "answer": [
+                "24 minutes and 37 seconds"
+            ]
+        },
+        {
+            "question": "In what year was Tom Cruise born?",
+            "answer": [
+                "1962"
+            ]
+        },
+        {
+            "question": "How many Brazilian states start with the letter 'R'?",
+            "answer": [
+                "5 states"
+            ]
+        },
+        {
+            "question": "What percentage of a cat's bones are in its tail?",
+            "answer": [
+                "10%"
+            ]
+        },
+        {
+            "question": "According to the UN, how many countries are there in the world?",
+            "answer": [
+                "195 countries"
+            ]
+        },
+        {
+            "question": "What was Brazil's population in 1822?",
+            "answer": [
+                "4.5 million inhabitants"
+            ]
+        },
+        {
+            "question": "What percentage of time do cats spend sleeping?",
+            "answer": [
+                "66%"
+            ]
+        },
+        {
+            "question": "What is the distance between the 3-point line and the basketball hoop?",
+            "answer": [
+                "6.75 meters"
+            ]
+        },
+        {
+            "question": "In what year was the first refrigerator commercialized worldwide?",
+            "answer": [
+                "1913"
+            ]
+        },
+        {
+            "question": "The sailfish, also known as the needlefish, is the fastest fish in the world. What speed can it reach?",
+            "answer": [
+                "109 km/h"
+            ]
+        },
+        {
+            "question": "How many countries belong to the European Union?",
+            "answer": [
+                "27 countries"
+            ]
+        },
+        {
+            "question": "How long does a space trip to Mars take?",
+            "answer": [
+                "8 months"
+            ]
+        },
+        {
+            "question": "How many horsepower did the first Ford Model T have?",
+            "answer": [
+                "20 horsepower"
+            ]
+        },
+        {
+            "question": "How old was the oldest whale ever found in Greenland?",
+            "answer": [
+                "211 years"
+            ]
+        },
+        {
+            "question": "What is the average distance between human pupils?",
+            "answer": [
+                "63 mm"
+            ]
+        },
+        {
+            "question": "How old was Tom Hanks when he acted in Forrest Gump?",
+            "answer": [
+                "37 years"
+            ]
+        },
+        {
+            "question": "In what year was the world's first long-distance railway line (Liverpool to Manchester) inaugurated?",
+            "answer": [
+                "1830"
+            ]
+        },
+        {
+            "question": "What percentage of the world population drives on the left side?",
+            "answer": [
+                "34%"
+            ]
+        },
+        {
+            "question": "How fast did Kenyan Kelvin Kiptum break the world record at the Chicago Marathon?",
+            "answer": [
+                "02:00:35"
+            ]
+        },
+        {
+            "question": "How many countries border Argentina?",
+            "answer": [
+                "5 countries"
+            ]
+        },
+        {
+            "question": "How many continents are there in the world?",
+            "answer": [
+                "7 continents"
+            ]
+        },
+        {
+            "question": "How many chemical elements are currently listed in the periodic table?",
+            "answer": [
+                "118 elements"
+            ]
+        },
+        {
+            "question": "What is the speed of light in a vacuum in km/s?",
+            "answer": [
+                "299,792 km/s"
+            ]
+        },
+        {
+            "question": "How old is the Universe, according to scientific estimates?",
+            "answer": [
+                "13.8 billion years"
+            ]
+        },
+        {
+            "question": "How many bones does the adult human body have?",
+            "answer": [
+                "206 bones"
+            ]
+        },
+        {
+            "question": "What is the height of Mount Everest in meters?",
+            "answer": [
+                "8,848 meters"
+            ]
+        },
+        {
+            "question": "How many natural satellites (moons) does the Earth have?",
+            "answer": [
+                "1 moon"
+            ]
+        },
+        {
+            "question": "How many liters of blood does the average adult human body have?",
+            "answer": [
+                "5 liters"
+            ]
+        },
+        {
+            "question": "What is the average depth of the oceans in meters?",
+            "answer": [
+                "3,688 meters"
+            ]
+        },
+        {
+            "question": "What is the tilt angle of the Earth's axis?",
+            "answer": [
+                "23.5 degrees"
+            ]
+        },
+        {
+            "question": "How many countries are currently members of NATO?",
+            "answer": [
+                "32 countries"
+            ]
+        },
+        {
+            "question": "How many teeth does an adult human have (including wisdom teeth)?",
+            "answer": [
+                "32 teeth"
+            ]
+        },
+        {
+            "question": "What is the current average global life expectancy?",
+            "answer": [
+                "73 years"
+            ]
+        },
+        {
+            "question": "How many chromosomes does a normal human cell have?",
+            "answer": [
+                "46 chromosomes"
+            ]
+        },
+        {
+            "question": "What is the average body temperature in degrees Celsius?",
+            "answer": [
+                "37°C"
+            ]
+        },
+        {
+            "question": "How many minutes does an official soccer match last?",
+            "answer": [
+                "90 minutes"
+            ]
+        },
+        {
+            "question": "How many states are there in the United States of America?",
+            "answer": [
+                "50 states"
+            ]
+        },
+        {
+            "question": "How many planets are there in our Solar System?",
+            "answer": [
+                "8 planets"
+            ]
+        },
+        {
+            "question": "What is the average distance between the Earth and the Moon in kilometers?",
+            "answer": [
+                "384,400 km"
+            ]
+        },
+        {
+            "question": "How many years did World War II last?",
+            "answer": [
+                "6 years"
+            ]
+        },
+        {
+            "question": "In which year was the first fully computer-animated film released?",
+            "answer": [
+                "1995 (Toy Story)"
+            ]
+        },
+        {
+            "question": "How much does the skin of an average adult person weigh?",
+            "answer": [
+                "3.6 kg"
+            ]
+        },
+        {
+            "question": "What percentage of people worldwide have blood type O?",
+            "answer": [
+                "44%"
+            ]
+        },
+        {
+            "question": "How many carats does the Cullinan, the largest diamond in the world, have?",
+            "answer": [
+                "3,106 carats"
+            ]
+        },
+        {
+            "question": "How many lovers did the Venetian seducer Casanova have?",
+            "answer": [
+                "122 lovers"
+            ]
+        },
+        {
+            "question": "What percentage of Europeans speak German as their native language, considering it is the most spoken mother tongue in the EU?",
+            "answer": [
+                "18%"
+            ]
+        },
+        {
+            "question": "How many times has the singer Gretchen been married?",
+            "answer": [
+                "18 times"
+            ]
+        },
+        {
+            "question": "What percentage of the Earth's water is saltwater?",
+            "answer": [
+                "97%"
+            ]
+        },
+        {
+            "question": "What is the length of the longest cat, from nose to tail tip?",
+            "answer": [
+                "123.2 cm"
+            ]
+        },
+        {
+            "question": "At what age do Brazilians, on average, lose their virginity?",
+            "answer": [
+                "17.3 years"
+            ]
+        },
+        {
+            "question": "In what year was the first Hard Rock Café opened?",
+            "answer": [
+                "1971 (in London)"
+            ]
+        },
+        {
+            "question": "In what year did Colgate launch the first toothpaste in a jar?",
+            "answer": [
+                "1873"
+            ]
+        },
+        {
+            "question": "What is the average height of a Brazilian man?",
+            "answer": [
+                "173 cm"
+            ]
+        },
+        {
+            "question": "How many years did it take to build the city of Brasília?",
+            "answer": [
+                "4 years (1956-1960)"
+            ]
+        },
+        {
+            "question": "How many push-ups did the record holder do in one hour according to Guinness?",
+            "answer": [
+                "2,919"
+            ]
+        },
+        {
+            "question": "How many legs does a lobster have?",
+            "answer": [
+                "8 legs"
+            ]
+        },
+        {
+            "question": "How many Brazilians live in London according to the Brazilian Consulate?",
+            "answer": [
+                "220,000"
+            ]
+        },
+        {
+            "question": "What percentage of oranges produced worldwide are sold whole?",
+            "answer": [
+                "20%"
+            ]
+        },
+        {
+            "question": "When Elvis died in 1977, how old was he?",
+            "answer": [
+                "42 years"
+            ]
+        },
+        {
+            "question": "What percentage of Brazilian households have at least one pet?",
+            "answer": [
+                "About 50%"
+            ]
+        },
+        {
+            "question": "How many kilometers long is Route 66 from start to finish?",
+            "answer": [
+                "3,940 km"
+            ]
+        },
+        {
+            "question": "What is the length of the Rio Negro bridge in Manaus?",
+            "answer": [
+                "3,595 m"
+            ]
+        },
+        {
+            "question": "Through how many countries do the Amazon River and its tributaries flow?",
+            "answer": [
+                "7 countries"
+            ]
+        },
+        {
+            "question": "What is the width of Spreuerhofstrasse street in Reutlingen at its narrowest point?",
+            "answer": [
+                "30.5 cm"
+            ]
+        },
+        {
+            "question": "What is the length of a tennis net from one post to the other?",
+            "answer": [
+                "12.80 m"
+            ]
+        },
+        {
+            "question": "In what year did the last Jô program air?",
+            "answer": [
+                "2016"
+            ]
+        },
+        {
+            "question": "What percentage of the shrimp's weight is its meat?",
+            "answer": [
+                "45%"
+            ]
+        },
+        {
+            "question": "How many teeth does a rat have?",
+            "answer": [
+                "16 teeth"
+            ]
+        },
+        {
+            "question": "What is the minimum alcohol content a drink must have to ignite a fire with it?",
+            "answer": [
+                "40%"
+            ]
+        },
+        {
+            "question": "In what year was the modern bra patented?",
+            "answer": [
+                "1914"
+            ]
+        },
+        {
+            "question": "What percentage of Brazilian households have a TV?",
+            "answer": [
+                "94.30%"
+            ]
+        },
+        {
+            "question": "How deep can whale sounds reach in the ocean?",
+            "answer": [
+                "2.6 km"
+            ]
+        },
+        {
+            "question": "How many cards are there in the game Uno?",
+            "answer": [
+                "108 cards"
+            ]
+        },
+        {
+            "question": "In what year was the nickname 'Cidade Maravilhosa' (Marvelous City) for Rio de Janeiro popularized?",
+            "answer": [
+                "1935"
+            ]
+        },
+        {
+            "question": "What is the length of the arms of the Christ the Redeemer statue, from one end to the other?",
+            "answer": [
+                "28 meters"
+            ]
+        },
+        {
+            "question": "In what year was modern barbed wire invented?",
+            "answer": [
+                "1874"
+            ]
+        },
+        {
+            "question": "How many minutes, on average, does a person speak per day?",
+            "answer": [
+                "100 minutes"
+            ]
+        },
+        {
+            "question": "Our feet make a 90° angle with the legs, but socks have a different angle. What is the angle of socks?",
+            "answer": [
+                "120°"
+            ]
+        },
+        {
+            "question": "How much do 100 bills of R$100.00 weigh?",
+            "answer": [
+                "25 grams (0.25g each)"
+            ]
+        },
+        {
+            "question": "In what year was Pringles potato chips launched?",
+            "answer": [
+                "1967"
+            ]
+        },
+        {
+            "question": "How many pets did the 2022 Pet Census register?",
+            "answer": [
+                "27.1 million"
+            ]
+        },
+        {
+            "question": "In what year were the first eyeglasses recorded in a painting?",
+            "answer": [
+                "1352"
+            ]
+        },
+        {
+            "question": "What percentage of a razor blade would dissolve in 24 hours if submerged in gastric juice?",
+            "answer": [
+                "37%"
+            ]
+        },
+        {
+            "question": "What is the height of the tallest flagpole in the world, located in Jeddah, Saudi Arabia?",
+            "answer": [
+                "171 meters"
+            ]
+        },
+        {
+            "question": "In what year was the term television coined?",
+            "answer": [
+                "1900"
+            ]
+        },
+        {
+            "question": "What percentage of nitrogen composes the air we breathe?",
+            "answer": [
+                "78%"
+            ]
+        },
+        {
+            "question": "How many strings does a harp have?",
+            "answer": [
+                "47 strings"
+            ]
+        },
+        {
+            "question": "What percentage of all spices worldwide originate from India?",
+            "answer": [
+                "75%"
+            ]
+        },
+        {
+            "question": "How many monarchies exist in the world?",
+            "answer": [
+                "29 monarchies"
+            ]
+        },
+        {
+            "question": "What is the length of the famous Copacabana beach in Rio de Janeiro?",
+            "answer": [
+                "4 Km"
+            ]
+        },
+        {
+            "question": "How many millions of copies of Roberto Carlos' albums have been sold?",
+            "answer": [
+                "140 million"
+            ]
+        },
+        {
+            "question": "From what age does men's beard start to grow slower?",
+            "answer": [
+                "35 years old"
+            ]
+        },
+        {
+            "question": "In which year was the first Christmas card commercialized in the world?",
+            "answer": [
+                "1843"
+            ]
+        },
+        {
+            "question": "What was Napoleon's height?",
+            "answer": [
+                "1.68 meters"
+            ]
+        },
+        {
+            "question": "How old was Napoleon when he died in 1821?",
+            "answer": [
+                "51 years old"
+            ]
+        },
+        {
+            "question": "In which year was Orkut discontinued in Brazil?",
+            "answer": [
+                "2014"
+            ]
+        },
+        {
+            "question": "What speed can a ski jumper reach?",
+            "answer": [
+                "105 Km/h"
+            ]
+        },
+        {
+            "question": "How many seconds does sound take to travel one kilometer?",
+            "answer": [
+                "3 seconds"
+            ]
+        },
+        {
+            "question": "What is the longest recorded distance a polar bear has swum?",
+            "answer": [
+                "685 Km"
+            ]
+        },
+        {
+            "question": "What is the longest jump ever recorded by a kangaroo?",
+            "answer": [
+                "12.8 meters"
+            ]
+        },
+        {
+            "question": "How many cups of decaffeinated coffee contain the same amount of caffeine as one cup of regular coffee?",
+            "answer": [
+                "10 cups"
+            ]
+        },
+        {
+            "question": "At what distance did the world record javelin thrower throw his javelin?",
+            "answer": [
+                "98.48 meters"
+            ]
+        },
+        {
+            "question": "Until which year was tug of war an Olympic sport?",
+            "answer": [
+                "1920"
+            ]
+        },
+        {
+            "question": "How many movies did Elvis Presley star in?",
+            "answer": [
+                "31"
+            ]
+        },
+        {
+            "question": "How many episodes of the series 'Friends' were filmed?",
+            "answer": [
+                "236 episodes"
+            ]
+        },
+        {
+            "question": "How many times per second can a hummingbird flap its wings?",
+            "answer": [
+                "80 times"
+            ]
+        },
+        {
+            "question": "How many grams of salt are there in 1 liter of seawater?",
+            "answer": [
+                "35 grams"
+            ]
+        },
+        {
+            "question": "For how much was a Stradivarius violin auctioned in 2011?",
+            "answer": [
+                "$15.9 million"
+            ]
+        },
+        {
+            "question": "What is the height record for a jump from the stratosphere?",
+            "answer": [
+                "41,419 meters"
+            ]
+        },
+        {
+            "question": "How many people die each year on the planet?",
+            "answer": [
+                "60 million people"
+            ]
+        },
+        {
+            "question": "How many normal bottles of champagne are equivalent to one 'Mélchizedek' bottle, the largest champagne bottle in the world?",
+            "answer": [
+                "40 bottles"
+            ]
+        },
+        {
+            "question": "In which year did Tim Berners-Lee create the term WWW?",
+            "answer": [
+                "1989"
+            ]
+        },
+        {
+            "question": "In which year did McDonald's introduce Chicken McNuggets?",
+            "answer": [
+                "1981"
+            ]
+        },
+        {
+            "question": "How many doors are there in Buckingham Palace, London?",
+            "answer": [
+                "1,514 doors"
+            ]
+        },
+        {
+            "question": "On average, how many pizzas are consumed daily in the state of São Paulo?",
+            "answer": [
+                "572,000 pizzas"
+            ]
+        },
+        {
+            "question": "What percentage of the world's wealth is held by the richest 1%?",
+            "answer": [
+                "50%"
+            ]
+        },
+        {
+            "question": "In which year did John Rockefeller become the first billionaire in the world?",
+            "answer": [
+                "1916"
+            ]
+        },
+        {
+            "question": "How many countries have a coastline on the Mediterranean Sea?",
+            "answer": [
+                "21 countries"
+            ]
+        },
+        {
+            "question": "What percentage of Catholics in the world live in Brazil?",
+            "answer": [
+                "11.70%"
+            ]
+        },
+        {
+            "question": "How many European immigrants went to North America between 1821 and 1932?",
+            "answer": [
+                "32.2 million"
+            ]
+        },
+        {
+            "question": "During pregnancy, how many kilos does a woman gain on average?",
+            "answer": [
+                "11 Kg"
+            ]
+        },
+        {
+            "question": "At what age do children start to have less fear of snakes, the dark, and monsters?",
+            "answer": [
+                "5 years old"
+            ]
+        },
+        {
+            "question": "In which year did British actor Charlie Chaplin die?",
+            "answer": [
+                "1977"
+            ]
+        },
+        {
+            "question": "What position does Mallorca, the Spanish island, hold in the ranking of the largest islands in the world?",
+            "answer": [
+                "7th place"
+            ]
+        },
+        {
+            "question": "How many strings does the Russian instrument balalaika have?",
+            "answer": [
+                "3 strings"
+            ]
+        },
+        {
+            "question": "In which year did Leonardo da Vinci start the Mona Lisa?",
+            "answer": [
+                "1503"
+            ]
+        },
+        {
+            "question": "What percentage of New York's population is foreign-born?",
+            "answer": [
+                "38%"
+            ]
+        },
+        {
+            "question": "In which year did frozen food commercialization start in the USA?",
+            "answer": [
+                "1930"
+            ]
+        },
+        {
+            "question": "What percentage of the world's freshwater is stored in glaciers or ice caps?",
+            "answer": [
+                "69%"
+            ]
+        },
+        {
+            "question": "How many fights did Mike Tyson win by knockout?",
+            "answer": [
+                "44 fights"
+            ]
+        },
+        {
+            "question": "What was the weight of the heaviest cat in the world?",
+            "answer": [
+                "20.9 Kg"
+            ]
+        },
+        {
+            "question": "In which year did Merlin Robbins invent the Uno card game?",
+            "answer": [
+                "1971"
+            ]
+        },
+        {
+            "question": "How many elements are there in the periodic table?",
+            "answer": [
+                "118 elements"
+            ]
+        },
+        {
+            "question": "For how much was the most expensive painting ever auctioned sold?",
+            "answer": [
+                "US$ 450.3 million (Leonardo da Vinci's painting, Salvator Mundi)"
+            ]
+        },
+        {
+            "question": "What is the average length of the umbilical cord at birth?",
+            "answer": [
+                "60 cm"
+            ]
+        },
+        {
+            "question": "How many medium hamburgers can be made from the meat of a single cow?",
+            "answer": [
+                "1,200 hamburgers"
+            ]
+        },
+        {
+            "question": "What percentage of watermelon is water?",
+            "answer": [
+                "92%"
+            ]
+        },
+        {
+            "question": "How many days can a person survive with only water?",
+            "answer": [
+                "61 days"
+            ]
+        },
+        {
+            "question": "What is the length of the Andes mountain range in kilometers?",
+            "answer": [
+                "8,000 Km"
+            ]
+        },
+        {
+            "question": "What is the internal area of St. Peter's Basilica in square meters?",
+            "answer": [
+                "15,000 m²"
+            ]
+        },
+        {
+            "question": "How much does an official men's basketball weigh?",
+            "answer": [
+                "600 grams"
+            ]
+        },
+        {
+            "question": "How many steps are needed to reach the top of the Eiffel Tower?",
+            "answer": [
+                "1,665 steps"
+            ]
+        },
+        {
+            "question": "How many seconds did the fastest cheetah run 100 meters?",
+            "answer": [
+                "5.95 seconds"
+            ]
+        },
+        {
+            "question": "How many gladiators died in the games at the Roman Colosseum?",
+            "answer": [
+                "400,000 people"
+            ]
+        },
+        {
+            "question": "How many bicycles are there in the Netherlands?",
+            "answer": [
+                "22.9 million bicycles"
+            ]
+        },
+        {
+            "question": "How many people are estimated to have been on board the Titanic?",
+            "answer": [
+                "2,224 people"
+            ]
+        },
+        {
+            "question": "In which year was the soda Sprite launched?",
+            "answer": [
+                "1961"
+            ]
+        },
+        {
+            "question": "What is the length of the Nile River?",
+            "answer": [
+                "6,650 Km"
+            ]
+        },
+        {
+            "question": "How many planets can be seen from Earth with the naked eye?",
+            "answer": [
+                "5 (Mercury, Venus, Mars, Jupiter, Saturn)"
+            ]
+        },
+        {
+            "question": "For how many years were Barbie and Ken together before divorcing in 2004?",
+            "answer": [
+                "43 years"
+            ]
+        },
+        {
+            "question": "What is the record time for the person who stayed awake the longest?",
+            "answer": [
+                "11 days"
+            ]
+        },
+        {
+            "question": "How many countries have territory on both sides of the Equator line?",
+            "answer": [
+                "11 countries"
+            ]
+        },
+        {
+            "question": "At what age do children lie the most?",
+            "answer": [
+                "12 years"
+            ]
+        },
+        {
+            "question": "How many times more vitamin C does acerola have compared to orange or lemon?",
+            "answer": [
+                "60 times more"
+            ]
+        },
+        {
+            "question": "In which year was the One Penny Black, the world's first postage stamp, created?",
+            "answer": [
+                "1840"
+            ]
+        },
+        {
+            "question": "What is the height of Mount Everest?",
+            "answer": [
+                "8,848 meters"
+            ]
+        },
+        {
+            "question": "What percentage of Swiss people speak French as their first language?",
+            "answer": [
+                "23%"
+            ]
+        },
+        {
+            "question": "What is the height of the Great Pyramid of Khufu?",
+            "answer": [
+                "138 meters"
+            ]
+        },
+        {
+            "question": "How many cars are on the Formula 1 starting grid?",
+            "answer": [
+                "20 cars"
+            ]
+        },
+        {
+            "question": "How many countries in South America do not have access to the sea?",
+            "answer": [
+                "2 countries (Bolivia and Paraguay)"
+            ]
+        },
+        {
+            "question": "What is the height, in meters, of the highest point of Niagara Falls?",
+            "answer": [
+                "57 meters"
+            ]
+        },
+        {
+            "question": "How many people die annually from lung cancer worldwide?",
+            "answer": [
+                "1.8 million people"
+            ]
+        },
+        {
+            "question": "How many people die annually from snake bites?",
+            "answer": [
+                "100,000 people"
+            ]
+        },
+        {
+            "question": "How many countries in the world do not use the metric system?",
+            "answer": [
+                "3 countries (USA, Myanmar, and Liberia)"
+            ]
+        },
+        {
+            "question": "In which year was the first casino resort in Las Vegas inaugurated?",
+            "answer": [
+                "1941"
+            ]
+        },
+        {
+            "question": "How many countries participated in the first modern Olympic Games in Athens in 1896?",
+            "answer": [
+                "14 countries"
+            ]
+        },
+        {
+            "question": "What percentage of the world's population does not have access to electricity?",
+            "answer": [
+                "13%"
+            ]
+        },
+        {
+            "question": "What is the length of the longest Formula 1 circuit?",
+            "answer": [
+                "7,004 meters"
+            ]
+        },
+        {
+            "question": "In which year was the code 'Mayday' invented?",
+            "answer": [
+                "1923"
+            ]
+        },
+        {
+            "question": "In what year was the Trans-Amazonian Highway inaugurated?",
+            "answer": [
+                "1972"
+            ]
+        },
+        {
+            "question": "How long do long dreams last?",
+            "answer": [
+                "45 minutes"
+            ]
+        },
+        {
+            "question": "How many statues, or moai, were documented on Easter Island?",
+            "answer": [
+                "887 moai"
+            ]
+        },
+        {
+            "question": "What is the diameter of the Moon?",
+            "answer": [
+                "3,474 Km"
+            ]
+        },
+        {
+            "question": "How many countries does China share a land border with?",
+            "answer": [
+                "14 countries"
+            ]
+        },
+        {
+            "question": "In which year was the doping test first performed at the Olympic Games?",
+            "answer": [
+                "1968 (Mexico City)"
+            ]
+        },
+        {
+            "question": "How long would you need to walk to burn off the calories in a glass of wine?",
+            "answer": [
+                "27 minutes"
+            ]
+        },
+        {
+            "question": "How many hours did the first balloon flight crossing the Atlantic Ocean in 1978 take?",
+            "answer": [
+                "137 hours"
+            ]
+        },
+        {
+            "question": "How old was Queen Elizabeth's mother when she died in 2002?",
+            "answer": [
+                "101 years old"
+            ]
+        },
+        {
+            "question": "In what year was Pelé born?",
+            "answer": [
+                "1940"
+            ]
+        },
+        {
+            "question": "How many steps are there between the ground floor and the 102nd floor of the Empire State Building?",
+            "answer": [
+                "1,860 steps"
+            ]
+        },
+        {
+            "question": "What percentage of a carrot is water?",
+            "answer": [
+                "90%"
+            ]
+        },
+        {
+            "question": "What is the internal diameter of the rings used in men's Olympic gymnastics?",
+            "answer": [
+                "18 cm"
+            ]
+        },
+        {
+            "question": "How many libraries are there in Paris?",
+            "answer": [
+                "57 libraries"
+            ]
+        },
+        {
+            "question": "What would be the weight of a pigeon's droppings over an entire year?",
+            "answer": [
+                "11 Kg"
+            ]
+        },
+        {
+            "question": "How many times larger is Greenland compared to Denmark?",
+            "answer": [
+                "50 times larger"
+            ]
+        },
+        {
+            "question": "In what year was the first canned beer marketed?",
+            "answer": [
+                "1935"
+            ]
+        },
+        {
+            "question": "How many times do we breathe on average during a day?",
+            "answer": [
+                "20,000 times"
+            ]
+        },
+        {
+            "question": "What percentage of the world's population is left-handed?",
+            "answer": [
+                "10%"
+            ]
+        },
+        {
+            "question": "How many pieces are there in a domino set?",
+            "answer": [
+                "28 pieces"
+            ]
+        },
+        {
+            "question": "Out of 100 people visiting Las Vegas, how many try gambling in casinos?",
+            "answer": [
+                "81 people"
+            ]
+        },
+        {
+            "question": "How many windows are there in the crown of the Statue of Liberty?",
+            "answer": [
+                "25 windows"
+            ]
+        },
+        {
+            "question": "How many hours per day do cows graze on average?",
+            "answer": [
+                "8 hours"
+            ]
+        },
+        {
+            "question": "What was the weight of the largest emperor penguin ever recorded?",
+            "answer": [
+                "115 Kg"
+            ]
+        },
+        {
+            "question": "What is the length of Avenida Sapopemba, located in São Paulo?",
+            "answer": [
+                "45 Km"
+            ]
+        },
+        {
+            "question": "In what year did Alan Freed coin the term 'Rock 'n Roll'?",
+            "answer": [
+                "1951"
+            ]
+        },
+        {
+            "question": "How many people have walked on the surface of the Moon?",
+            "answer": [
+                "12 people"
+            ]
+        },
+        {
+            "question": "What percentage of women survived the sinking of the Titanic?",
+            "answer": [
+                "74%"
+            ]
+        },
+        {
+            "question": "What is the altitude of the city of Curitiba?",
+            "answer": [
+                "934 meters"
+            ]
+        },
+        {
+            "question": "How many kilograms of meat does a jaguar eat on average per week?",
+            "answer": [
+                "39 Kg"
+            ]
+        },
+        {
+            "question": "How many lightning strikes hit the Earth every second?",
+            "answer": [
+                "100 (6,000 per minute)"
+            ]
+        },
+        {
+            "question": "What is the maximum number of full moons in a year?",
+            "answer": [
+                "13 times"
+            ]
+        },
+        {
+            "question": "How many grapes are needed to make a glass of wine?",
+            "answer": [
+                "75 grapes"
+            ]
+        },
+        {
+            "question": "What percentage of the world population can speak at least two languages?",
+            "answer": [
+                "65%"
+            ]
+        },
+        {
+            "question": "If you ran the entire length of the Great Wall of China, how many marathons would that be?",
+            "answer": [
+                "502 marathons"
+            ]
+        },
+        {
+            "question": "How tall is the Mona Lisa painting?",
+            "answer": [
+                "77 cm"
+            ]
+        },
+        {
+            "question": "How long can a single hair survive on the head?",
+            "answer": [
+                "5 years"
+            ]
+        },
+        {
+            "question": "How many times brighter is the full moon compared to the crescent or waning moon?",
+            "answer": [
+                "9 times"
+            ]
+        },
+        {
+            "question": "How many centimeters is the nose of the Statue of Liberty?",
+            "answer": [
+                "137 cm"
+            ]
+        },
+        {
+            "question": "In what year did the Disney character Pluto debut?",
+            "answer": [
+                "1930"
+            ]
+        },
+        {
+            "question": "How deep is the Mariana Trench?",
+            "answer": [
+                "10,983 meters"
+            ]
+        },
+        {
+            "question": "How many teeth does an elephant have?",
+            "answer": [
+                "26 teeth"
+            ]
+        },
+        {
+            "question": "What was the top speed of the first car driven by Karl Benz?",
+            "answer": [
+                "16 Km/h"
+            ]
+        },
+        {
+            "question": "How many people can the world's largest restaurant, Bawabet Dimashq in Damascus, Syria, accommodate?",
+            "answer": [
+                "6,014 people"
+            ]
+        },
+        {
+            "question": "What is the height of the tallest side of the Leaning Tower of Pisa?",
+            "answer": [
+                "55.86 meters"
+            ]
+        },
+        {
+            "question": "How many bones are there in our feet?",
+            "answer": [
+                "26 bones"
+            ]
+        },
+        {
+            "question": "In what year did the first person die in a car accident?",
+            "answer": [
+                "1896"
+            ]
+        },
+        {
+            "question": "How many liters of water does an Olympic swimming pool hold?",
+            "answer": [
+                "1,890,000 liters"
+            ]
+        },
+        {
+            "question": "How long does an eyelash stay on the body before falling out?",
+            "answer": [
+                "11 months"
+            ]
+        },
+        {
+            "question": "How many countries border France?",
+            "answer": [
+                "11 countries"
+            ]
+        },
+        {
+            "question": "What percentage of people worldwide have never consumed alcoholic beverages?",
+            "answer": [
+                "45%"
+            ]
+        },
+        {
+            "question": "How many spokes are there on an average bicycle wheel?",
+            "answer": [
+                "32 spokes"
+            ]
+        }
 
-];
+    ];
 
     let currentQuestionIndex = -1;
 
     function shuffle(array) {
-    for (let i = array.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [array[i], array[j]] = [array[j], array[i]];
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
     }
-}
 
     document.addEventListener('DOMContentLoaded', function () {
         closeAllPopups();
         shuffle(questions);
         nextQuestion();
-});
+    });
 
     document.addEventListener('DOMContentLoaded', function () {
         closeAllPopups();
@@ -2492,7 +2496,7 @@ const questions = [
     }
 
     // Fecha popups ao clicar fora deles
-    window.onclick = function(event) {
+    window.onclick = function (event) {
         if (event.target.classList.contains("popup")) {
             closePopup();
             closeAnswerPopup();
@@ -2500,4 +2504,5 @@ const questions = [
     };
 </script>
 </body>
+
 </html>

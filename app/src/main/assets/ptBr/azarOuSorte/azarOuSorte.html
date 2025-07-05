@@ -10,8 +10,8 @@
 
 <body>
 
-    <div class="game-container">
-        <!-- Menu -->
+<div class="game-container">
+    <!-- Menu -->
     <nav class="menu">
         <a href="../menuPtBr.html" class="menu-title" style="position: relative;">
             <div class="voltar-container" onclick="window.location.href='../menuPtBr.html'">
@@ -20,33 +20,32 @@
             <img class="logo-bebedeira" src="../images/logo.png" alt="Logo Bebedeira" />
         </a>
     </nav>
-    </div>
+</div>
 
-        <!-- Conteúdo do jogo -->
-        <h1>Azar ou Sorte</h1>
-        <div>
-            <a href="#" onclick="openPopup()">
-            <img class="img-regras" src="../images/regras.png" alt="Regras" />
-            </a>
-            <h4>Regras</h4>
-        </div>
+<!-- Conteúdo do jogo -->
+<div>
+    <h1>Azar ou Sorte</h1>
+    <a href="#" onclick="openPopup()">
+        <img class="img-regras" src="../images/regras.png" alt="Regras" />
+    </a>
+    <h4>Regras</h4>
+</div>
 
-    <!-- Área do jogo -->
-    <div class="container-randomizador popup-content">
-        <div class="resultado-randomizador" id="resultado-randomizador"></div>
-    </div>
-    <div class="button-container">
-        <button class="button-randomizador" onclick="sortearNumero()">Sortear Número</button>
-    </div>
+<!-- Área do jogo -->
+<div class="container-randomizador popup-content">
+    <div class="resultado-randomizador" id="resultado-randomizador"></div>
+</div>
+<div class="button-container">
+    <button class="button-randomizador" onclick="sortearNumero()">Sortear Número</button>
+</div>
 
 
 <!-- Pop-up de Regras -->
 <div id="popup" class="popup">
     <div class="popup-content">
-        <span class="close" onclick="closePopup()">&times;</span>
-        <div>
-            <h3>Regras do Jogo</h3>
-            <h5>Azar ou Sorte</h5>
+        <div class="popup-header">
+            <h2>Regras do Jogo</h2>
+            <span class="close" onclick="closePopup()">&times;</span>
         </div>
         <ul>
             <li>Todos os jogadores devem escolher um número entre 1 e 6</li>

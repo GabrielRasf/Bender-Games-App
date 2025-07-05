@@ -13,14 +13,14 @@
 <body>
 <div class="game-container">
     <!-- Menú -->
-<nav class="menu">
-    <a href="../menuEs.html" class="menu-title" style="position: relative;">
-        <div class="voltar-container" onclick="window.location.href='../menuEs.html'">
-            &#8678; <!-- Isso é ← -->
-        </div>
-        <img class="logo-bebedeira" src="../images/logo.png" alt="Logo Bebedeira" />
-    </a>
-</nav>
+    <nav class="menu">
+        <a href="../menuEs.html" class="menu-title" style="position: relative;">
+            <div class="voltar-container" onclick="window.location.href='../menuEs.html'">
+                &#8678; <!-- Isso é ← -->
+            </div>
+            <img class="logo-bebedeira" src="../images/logo.png" alt="Logo Bebedeira" />
+        </a>
+    </nav>
 
     <!-- Contenido del juego -->
     <h1>
@@ -28,18 +28,20 @@
     </h1>
     <h3>Apertura</h3>
     <div>
-    <a href="#" onclick="openPopup()"><br />
-        <img class="img-regras" src="../images/regras.png" alt="Reglas" />
-    </a>
-    <h4>Reglas</h4>
+        <a href="#" onclick="openPopup()"><br />
+            <img class="img-regras" src="../images/regras.png" alt="Reglas" />
+        </a>
+        <h4>Reglas</h4>
     </div>
 
     <!-- Pop-up de reglas -->
     <div id="popup" class="popup">
         <div class="popup-content">
-            <span class="close" onclick="closePopup()">&times;</span>
-            <h3>Reglas del Juego</h3>
-            <h5>Intimidad <br> Apertura</h5>
+            <div class="popup-header">
+                <h2>Reglas del Juego</h2>
+                <span class="close" onclick="closePopup()">&times;</span>
+                <h5>intimidad <br> Apertura</h5>
+            </div>
             <ul>
                 <li>¡Excelente juego para parejas!</li>
                 <li>En cada ronda, la pareja lee una frase en voz alta</li>

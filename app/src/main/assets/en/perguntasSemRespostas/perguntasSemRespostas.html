@@ -1,29 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="../../stylesCards.css">
     <title>Unanswerable Questions</title>
 </head>
+
 <body>
 
 <div class="game-container">
     <!-- Menu -->
-<nav class="menu">
-    <a href="../menuEn.html" class="menu-title" style="position: relative;">
-        <div class="voltar-container" onclick="window.location.href='../menuPtBr.html'">
-            &#8678; <!-- Isso é ← -->
-        </div>
-        <img class="logo-bebedeira" src="../images/logo.png" alt="Logo Bebedeira" />
-    </a>
-</nav>
+    <nav class="menu">
+        <a href="../menuEn.html" class="menu-title" style="position: relative;">
+            <div class="voltar-container" onclick="window.location.href='../menuPtBr.html'">
+                &#8678; <!-- Isso é ← -->
+            </div>
+            <img class="logo-bebedeira" src="../images/logo.png" alt="Logo Bebedeira" />
+        </a>
+    </nav>
 
     <!-- Game content -->
-    <h1>Unanswerable Questions</h1>
     <div>
+        <h1>Unanswerable Questions</h1>
+
         <a href="#" onclick="openPopup()"><br />
-        <img class="img-regras" src="../images/regras.png" alt="Regras" />
+            <img class="img-regras" src="../images/regras.png" alt="Regras" />
         </a>
         <h4>Rules</h4>
     </div>
@@ -31,9 +34,10 @@
     <!-- Pop-up -->
     <div id="popup" class="popup">
         <div class="popup-content">
-            <span class="close" onclick="closePopup()">&times;</span>
-            <h3>Game Rules</h3>
-            <h5>Unanswerable Questions</h5>
+            <div class="popup-header">
+                <h2>Game Rules</h2>
+                <span class="close" onclick="closePopup()">&times;</span>
+            </div>
             <ul>
                 <li>This game is ideal for couples</li>
                 <li>Here, both will take a shot when they choose the same option.</li>
@@ -56,1865 +60,1865 @@
     const gameData = {
         "questions": [
             {
-    "text": "If you could choose between:",
-    "or": "or",
-    "text2": "Being rich and unhappy or poor and happy?"
-},
-{
-    "text": "Would you rather:",
-    "or": "or",
-    "text2": "Live without music or without TV/movies?"
-},
-{
-    "text": "What would you choose:",
-    "or": "or",
-    "text2": "Knowing everything about the past or about the future?"
-},
-{
-    "text": "Between these options:",
-    "or": "or",
-    "text2": "Having a lot of money or a lot of free time?"
-},
-{
-    "text": "Would you prefer:",
-    "or": "or",
-    "text2": "Being very intelligent or very attractive?"
-},
-{
-    "text": "What matters more:",
-    "or": "or",
-    "text2": "A great friendship or a great love?"
-},
-{
-    "text": "If you had to choose:",
-    "or": "or",
-    "text2": "Go without internet or without a car for a month?"
-},
-{
-    "text": "Between these possibilities:",
-    "or": "or",
-    "text2": "Time travel or mind reading?"
-},
-{
-    "text": "Would you choose:",
-    "or": "or",
-    "text2": "Live 200 years in the future or 200 years in the past?"
-},
-{
-    "text": "What would be worse:",
-    "or": "or",
-    "text2": "Never being able to lie or always hearing the truth?"
-},
-{
-    "text": "Love can end",
-    "or": "OR",
-    "text2": "if it ended, it was never love"
-},
-{
-    "text": "Never love again",
-    "or": "OR",
-    "text2": "never be loved again"
-},
-{
-    "text": "Being in a relationship with someone exactly like you is the perfect match",
-    "or": "OR",
-    "text2": "the worst nightmare"
-},
-{
-    "text": "In a romantic relationship, it's ideal for your partner to join you in your personal activities",
-    "or": "OR",
-    "text2": "for the couple to maintain their individuality"
-},
-{
-    "text": "What's worse: an intensely painful and unexpected breakup",
-    "or": "OR",
-    "text2": "a breakup that drags on and slowly corrodes"
-},
-{
-    "text": "Can love end",
-    "or": "OR",
-    "text2": "if it ended, was it ever love?"
-},
-{
-    "text": "Never love again",
-    "or": "OR",
-    "text2": "never be loved again?"
-},
-{
-    "text": "Being in a relationship with someone exactly like you is the perfect match",
-    "or": "OR",
-    "text2": "the worst nightmare?"
-},
-{
-    "text": "In a romantic relationship, is it ideal for your partner to join you in your personal activities",
-    "or": "OR",
-    "text2": "for the couple to maintain their individuality?"
-},
-{
-    "text": "What's worse: an intensely painful and unexpected breakup",
-    "or": "OR",
-    "text2": "a breakup that drags on and slowly corrodes?"
-},
-{
-    "text": "Is it easier to deal with a partner whose self-esteem is very low (self-deprecating)",
-    "or": "OR",
-    "text2": "with extremely high self-esteem (arrogant)?"
-},
-{
-    "text": "Do you believe in soulmates",
-    "or": "OR",
-    "text2": "that there are only people who daily strive and choose to stay together?"
-},
-{
-    "text": "Being completely alone in the world",
-    "or": "OR",
-    "text2": "living forever with someone you don't love?"
-},
-{
-    "text": "Never feel love again",
-    "or": "OR",
-    "text2": "relive your worst breakup?"
-},
-{
-    "text": "In a romantic relationship, would you prefer a partner who is: EXTREMELY sensitive",
-    "or": "OR",
-    "text2": "COMPLETELY insensitive?"
-},
-{
-    "text": "Have people started giving up on relationships too easily",
-    "or": "OR",
-    "text2": "have they just stopped accepting less than they deserve?"
-},
-{
-    "text": "Trust too easily",
-    "or": "OR",
-    "text2": "never be able to trust anyone?"
-},
-{
-    "text": "Are you the type of person who confesses and expresses your feelings",
-    "or": "OR",
-    "text2": "or who keeps everything to yourself?"
-},
-{
-    "text": "Dating apps are the peak of superficiality",
-    "or": "OR",
-    "text2": "are they perfect because they can bring together people who would never meet in real life?"
-},
-{
-    "text": "Is it possible to maintain a relationship where both partners are 'leaders'",
-    "or": "OR",
-    "text2": "to maintain harmony, is it necessary for someone to have a less authoritarian personality?"
-},
-{
-    "text": "Do you love someone",
-    "or": "OR",
-    "text2": "or do you love the feeling that person gives you?"
-},
-{
-    "text": "Do you want to marry with a ceremony and traditional wedding",
-    "or": "OR",
-    "text2": "is moving in together the new concept of marriage?"
-},
-{
-    "text": "Would you rather hurt others but be content with yourself",
-    "or": "OR",
-    "text2": "make others happy, even if it hurts you?"
-},
-{
-    "text": "In a closed relationship, would you want to know if someone flirted with your partner",
-    "or": "OR",
-    "text2": "what the eyes don't see, the heart doesn't feel?"
-},
-{
-    "text": "Is it possible to love someone you've never met in person",
-    "or": "OR",
-    "text2": "is contact/coexistence essential to truly feel love for someone?"
-},
-{
-    "text": "Does public display of affection make you happy",
-    "or": "OR",
-    "text2": "or uncomfortable?"
-},
-{
-    "text": "Is jealousy more of a: demonstration of care/affection",
-    "or": "OR",
-    "text2": "feeling linked to possession/insecurity?"
-},
-        {
-    "text": "Ideal love is: intense and full of emotions, like a rollercoaster",
-    "or": "OR",
-    "text2": "calm and peaceful, without many ups and downs?"
-},
-{
-    "text": "Which feeling is worse: disappointing/hurting someone",
-    "or": "OR",
-    "text2": "being disappointed/hurt?"
-},
-{
-    "text": "Longing is a reflection of emotional dependency",
-    "or": "OR",
-    "text2": "proof of love, care, and affection?"
-},
-{
-    "text": "Living intense loves with the possibility of getting hurt",
-    "or": "OR",
-    "text2": "never truly opening up, but avoiding pain and heartbreak?"
-},
-{
-    "text": "Do you agree with the phrase 'right person, wrong time'",
-    "or": "OR",
-    "text2": "there’s no wrong time when it’s the right person?"
-},
-{
-    "text": "Marriage is still a celebration of love",
-    "or": "OR",
-    "text2": "has it become a failed institution?"
-},
-{
-    "text": "Never travel again",
-    "or": "OR",
-    "text2": "never fall in love again?"
-},
-{
-    "text": "What’s considered worse in a relationship: physical/carnal betrayal",
-    "or": "OR",
-    "text2": "emotional/affectionate betrayal?"
-},
-{
-    "text": "Considering factors like employability, social circles, and your own personality, would you choose to have:",
-    "or": "OR",
-    "text2": "beauty?"
-},
-{
-    "text": "Do you consider yourself a sensitive person",
-    "or": "OR",
-    "text2": "more objective when it comes to situations in your life?"
-},
-{
-    "text": "What weighs more on the scale: fame, money, opportunities, and experiences",
-    "or": "OR",
-    "text2": "a simple life, but with luxury and privacy?"
-},
-{
-    "text": "Living with the certainty that something bad will happen",
-    "or": "OR",
-    "text2": "dealing with the uncertainty of a 50% chance for either outcome?"
-},
-{
-    "text": "Do it and risk regretting it",
-    "or": "OR",
-    "text2": "not do it and live with eternal doubt?"
-},
-{
-    "text": "Are you the type of person who prefers doing 9876 activities at the same time",
-    "or": "OR",
-    "text2": "functions better by doing one task at a time?"
-},
-{
-    "text": "Most of the time, do you try to see the good side of situations",
-    "or": "OR",
-    "text2": "already expect the worst of everything?"
-},
-{
-    "text": "When you're physically/emotionally unwell, does thinking that others are in worse situations help ease your pain",
-    "or": "OR",
-    "text2": "does it not lessen your pain at all?"
-},
-{
-    "text": "Do you want to achieve great feats, be remembered as someone important to society",
-    "or": "OR",
-    "text2": "do you see greatness in life's small things?"
-},
-{
-    "text": "Be the funniest person",
-    "or": "OR",
-    "text2": "the smartest person in the room?"
-},
-{
-    "text": "Are you the type of person who is too hard on yourself",
-    "or": "OR",
-    "text2": "who should be harder on yourself?"
-},
-{
-    "text": "If you could choose to always keep one type of self-esteem high, would you choose your: physical self-esteem",
-    "or": "OR",
-    "text2": "intellectual self-esteem?"
-},
-{
-    "text": "Be someone considered 'shameless,' but always get what you want",
-    "or": "OR",
-    "text2": "choose common sense and miss out on experiences/opportunities?"
-},
-{
-    "text": "Living without knowing what will happen is exciting",
-    "or": "OR",
-    "text2": "agonizing?"
-},
-{
-    "text": "Always be the center of attention",
-    "or": "OR",
-    "text2": "never be noticed in any situation?"
-},
-{
-    "text": "Do you currently have the same/similar religious beliefs as those who raised you",
-    "or": "OR",
-    "text2": "have you gone in a completely different direction?"
-},
-{
-    "text": "Always make decisions from a rational perspective",
-    "or": "OR",
-    "text2": "trust your emotions?"
-},
-{
-    "text": "Do you prefer living a stable and routine life",
-    "or": "OR",
-    "text2": "a life full of surprises and unpredictability?"
-},
-{
-    "text": "Never experience any kind of feeling again",
-    "or": "OR",
-    "text2": "continue feeling everything, but extremely intensely?"
-},
-{
-    "text": "Do you usually separate the art from the artist",
-    "or": "OR",
-    "text2": "do you believe they are inevitably interconnected?"
-},
-{
-    "text": "What do you think is more capable of provoking change and moving people: anger and hate",
-    "or": "OR",
-    "text2": "hope and love?"
-},
-{
-    "text": "To achieve your desires and goals in life, which of these traits is more important to have: passion",
-    "or": "OR",
-    "text2": "discipline?"
-},
-{
-    "text": "At the end of the day, is selfishness a positive/necessary trait",
-    "or": "OR",
-    "text2": "is it undeniably negative?"
-},
-{
-    "text": "Can someone who is politically correct all the time succeed in life",
-    "or": "OR",
-    "text2": "is it inevitable to 'bend the rules' in certain situations?"
-},
-{
-    "text": "To judge a person’s character, what’s more important: their actions",
-    "or": "OR",
-    "text2": "their intentions?"
-},
-{
-    "text": "Do humans have free will",
-    "or": "OR",
-    "text2": "are they born with predetermined factors?"
-},
-{
-    "text": "Turning your Instagram profile into an autobiography is: interesting/creative",
-    "or": "OR",
-    "text2": "problematic/creepy?"
-},
-{
-    "text": "Turn your hobby into your main source of income",
-    "or": "OR",
-    "text2": "work with something you’re not passionate about to fund your hobbies?"
-},
-{
-    "text": "In life, do you think the absence of purpose is liberating",
-    "or": "OR",
-    "text2": "agonizing?"
-},
-{
-    "text": "Everyone deserves a second chance",
-    "or": "OR",
-    "text2": "some actions are unforgivable?"
-},
-{
-    "text": "In general, do you believe religions save people",
-    "or": "OR",
-    "text2": "alienate the population?"
-},
-{
-    "text": "Is it more viable to provoke societal change through politics/education/NGOs",
-    "or": "OR",
-    "text2": "are only protests/revolutions truly effective measures?"
-},
-{
-    "text": "Do you think happiness is truly a constant state of mind",
-    "or": "OR",
-    "text2": "are there moments that are just fleeting happiness?"
-},
-{
-    "text": "Do you think some things in life are just mere coincidences",
-    "or": "OR",
-    "text2": "does everything happen for a reason?"
-},
-{
-    "text": "Do you believe that what goes around comes around",
-    "or": "OR",
-    "text2": "karma doesn’t exist?"
-},
-{
-    "text": "Would you rather be the type of person who knows a lot about a few subjects",
-    "or": "OR",
-    "text2": "a little about many fields of knowledge?"
-},
-{
-    "text": "Would you distance yourself from close people with very different political views than yours",
-    "or": "OR",
-    "text2": "can you separate your relationships from your values and morals?"
-},
-{
-    "text": "Do you believe everything happens for a reason",
-    "or": "OR",
-    "text2": "do we find reasons for why things happened?"
-},
-    {
-        "text": "If you only had one more day to live, would you tell someone",
-        "or": "OR",
-        "text2": "or die with that last secret?"
-    },
-    {
-        "text": "Would you give up everything you lived/everyone you know to have the life you wished for",
-        "or": "OR",
-        "text2": "give up your dream to keep everything you’ve built?"
-    },
-    {
-        "text": "In which phase of your life would you be trapped forever: the current one",
-        "or": "OR",
-        "text2": "any other from your past?"
-    },
-    {
-        "text": "Have a poor financial condition but with the love of your life",
-        "or": "OR",
-        "text2": "live well financially and never have a romantic relationship again?"
-    },
-    {
-        "text": "Would you rather lose 10 years of memories",
-        "or": "OR",
-        "text2": "lose 10 years of your life?"
-    },
-    {
-        "text": "Save someone’s life",
-        "or": "OR",
-        "text2": "win 1 million reais?"
-    },
-    {
-        "text": "If you could, would you erase from your memory someone who hurt you",
-        "or": "OR",
-        "text2": "believe that person is part of who you became?"
-    },
-    {
-        "text": "Be cheated on and never find out",
-        "or": "OR",
-        "text2": "cheat on someone and never be caught but live without guilt?"
-    },
-    {
-        "text": "Would you rather live with stability and boredom",
-        "or": "OR",
-        "text2": "live intensely with constant uncertainty?"
-    },
-    {
-        "text": "Is it more important to be true to yourself",
-        "or": "OR",
-        "text2": "adapt to what others expect of you?"
-    },
-    {
-        "text": "Be loved without being understood",
-        "or": "OR",
-        "text2": "be understood without being loved?"
-    },
-    {
-        "text": "Do you think forgiveness frees the one who forgives",
-        "or": "OR",
-        "text2": "only the one who is forgiven?"
-    },
-    {
-        "text": "Is it braver to move forward",
-        "or": "OR",
-        "text2": "admit that you need to stop?"
-    },
-    {
-        "text": "Would you rather feel nothing",
-        "or": "OR",
-        "text2": "feel everything intensely, even if it hurts?"
-    },
-    {
-        "text": "Do you think the ends justify the means",
-        "or": "OR",
-        "text2": "or that the means define who we are?"
-    },
-    {
-        "text": "Is it better to fail trying something big",
-        "or": "OR",
-        "text2": "always succeed in small comfort zones?"
-    },
-    {
-        "text": "Would you leave everything behind for love",
-        "or": "OR",
-        "text2": "believe that true love doesn’t require extreme sacrifices?"
-    },
-    {
-        "text": "Do you feel freer making decisions alone",
-        "or": "OR",
-        "text2": "or sharing decisions with someone you trust?"
-    },
-    {
-        "text": "Is it wiser to follow reason",
-        "or": "OR",
-        "text2": "listen to intuition?"
-    },
-    {
-        "text": "Would you prefer a truth that destroys you",
-        "or": "OR",
-        "text2": "a lie that makes you happy for a while?"
-    },
-    {
-        "text": "Be the protagonist of your own life",
-        "or": "OR",
-        "text2": "a supporting character in the story of someone you love?"
-    },
-    {
-        "text": "Do you think life has a defined purpose",
-        "or": "OR",
-        "text2": "or that we are the ones who give it meaning?"
-    },
-    {
-        "text": "Is it worse to lose someone who loves you",
-        "or": "OR",
-        "text2": "realize you never truly loved them?"
-    },
-    {
-        "text": "Does time heal everything",
-        "or": "OR",
-        "text2": "just teach you to live with the pain?"
-    },
-    {
-        "text": "Do you believe people truly change",
-        "or": "OR",
-        "text2": "or just adjust their behavior?"
-    },
-    {
-        "text": "Should justice be impartial",
-        "or": "OR",
-        "text2": "or take intentions behind actions into account?"
-    },
-    {
-        "text": "Is it easier to deal with silence",
-        "or": "OR",
-        "text2": "with poorly chosen words?"
-    },
-    {
-        "text": "Would you rather live with doubts",
-        "or": "OR",
-        "text2": "believe in something just for peace of mind?"
-    },
-    {
-        "text": "Is it harder to forgive others",
-        "or": "OR",
-        "text2": "forgive yourself for something you did?"
-    },
-    {
-        "text": "Would you rather live a lonely truth",
-        "or": "OR",
-        "text2": "a shared illusion?"
-    },
-    {
-        "text": "Is it worse to be forgotten",
-        "or": "OR",
-        "text2": "be remembered for something you are no longer?"
-    },
-    {
-        "text": "Do you believe more in destiny",
-        "or": "OR",
-        "text2": "or in the choices we make?"
-    },
-    {
-        "text": "Love someone who doesn’t love you",
-        "or": "OR",
-        "text2": "be loved by someone you can’t love?"
-    },
-    {
-        "text": "Would you give everything for a dream",
-        "or": "OR",
-        "text2": "give it up for someone important?"
-    },
-    {
-        "text": "Live a thousand lives in dreams",
-        "or": "OR",
-        "text2": "one intense and real life?"
-    },
-    {
-        "text": "Would you rather lose your memory",
-        "or": "OR",
-        "text2": "remember everything and not be able to move on?"
-    },
-    {
-        "text": "Is a crueler absence",
-        "or": "OR",
-        "text2": "a presence that no longer feels anything?"
-    },
-    {
-        "text": "Do you live waiting for the right moment",
-        "or": "OR",
-        "text2": "believe that the right thing is to create the moment?"
-    },
-    {
-        "text": "Always be honest and hurt",
-        "or": "OR",
-        "text2": "lie to protect?"
-    },
-    {
-        "text": "Would you give a second chance to someone who broke you",
-        "or": "OR",
-        "text2": "believe the past should stay in the past?"
-    },
-    {
-        "text": "Would you rather have never met someone who marked you",
-        "or": "OR",
-        "text2": "relive it all even knowing it would end?"
-    },
-    {
-        "text": "Do you believe more in what you see",
-        "or": "OR",
-        "text2": "or in what you feel?"
-    },
-    {
-        "text": "Is it easier to run away",
-        "or": "OR",
-        "text2": "face it knowing it will hurt?"
-    },
-    {
-        "text": "Have everything but feel empty",
-        "or": "OR",
-        "text2": "have little but feel at peace?"
-    },
-    {
-        "text": "Would you change your past",
-        "or": "OR",
-        "text2": "accept that it shaped who you are?"
-    },
-    {
-        "text": "Trust blindly",
-        "or": "OR",
-        "text2": "doubt everything?"
-    },
-    {
-        "text": "Wait for someone to change",
-        "or": "OR",
-        "text2": "move on with pain?"
-    },
-    {
-        "text": "Do you give yourself easily",
-        "or": "OR",
-        "text2": "keep everything inside for fear of losing yourself?"
-    },
-    {
-        "text": "Is it stronger to feel too much",
-        "or": "OR",
-        "text2": "or feel nothing at all?"
-    },
-    {
-        "text": "Live under control",
-        "or": "OR",
-        "text2": "risk and lose balance?"
-    },
-    {
-        "text": "Do you believe love is a choice",
-        "or": "OR",
-        "text2": "or that it just happens?"
-    },
-    {
-        "text": "Would you rather be needed",
-        "or": "OR",
-        "text2": "or desired?"
-    },
-    {
-        "text": "Would you adapt to an ordinary life for safety",
-        "or": "OR",
-        "text2": "face chaos for freedom?"
-    },
-    {
-        "text": "Is it harder to start",
-        "or": "OR",
-        "text2": "know when to stop?"
-    },
-    {
-        "text": "Is being brave about not being afraid",
-        "or": "OR",
-        "text2": "acting even when you are afraid?"
-    },
-    {
-        "text": "Would you choose to know everything about the future",
-        "or": "OR",
-        "text2": "discover things at the right time?"
-    },
-    {
-        "text": "Lose someone to life",
-        "or": "OR",
-        "text2": "have that person near but distant?"
-    },
-    {
-        "text": "Would you rather fight for something uncertain",
-        "or": "OR",
-        "text2": "stay still and never know what could have been?"
-    },
-    {
-        "text": "Have an unlimited gift card for your favorite restaurant",
-        "or": "OR",
-        "text2": "have an unlimited gift card for your favorite store?"
-    },
-    {
-        "text": "Not know what you’ll be doing tomorrow for the next 10 years",
-        "or": "OR",
-        "text2": "know exactly what you’ll be doing every day for the next 10 years?"
-    },
-    {
-        "text": "Never see your best friend again",
-        "or": "OR",
-        "text2": "never be able to speak to your best friend again?"
-    },
-{
-    "text": "Is it better to experience something amazing and lose it",
-    "or": "OR",
-    "text2": "never experience it at all?"
-},
-{
-    "text": "Do you think our essence is unchangeable",
-    "or": "OR",
-    "text2": "can people become entirely different over time?"
-},
-{
-    "text": "Is ambition synonymous with greed",
-    "or": "OR",
-    "text2": "with drive and determination?"
-},
-{
-    "text": "Can a work of art’s sole purpose be entertainment",
-    "or": "OR",
-    "text2": "must art inherently have intellectual depth?"
-},
-{
-    "text": "Does globalization lead to homogenization, where everything and everyone becomes similar",
-    "or": "OR",
-    "text2": "does it foster diversity, since people now have more access to different cultures and references?"
-},
-{
-    "text": "Can 'guilty pleasure' shows (reality TV, teen dramas) be considered culture",
-    "or": "OR",
-    "text2": "are they purely commercial?"
-},
-{
-    "text": "Can you claim to be happy at any given moment",
-    "or": "OR",
-    "text2": "can you only confirm a happy life when you reach the end of it?"
-},
-{
-    "text": "Is the internet truly a democratic space",
-    "or": "OR",
-    "text2": "is it all just appearances, where dictators and authoritarians also exist?"
-},
-{
-    "text": "Who exerts more physical effort against strong wind: a person riding a bike",
-    "or": "OR",
-    "text2": "a bird flying?"
-},
-{
-    "text": "Coming home late after a long day out, starving and exhausted, would you rather: eat",
-    "or": "OR",
-    "text2": "sleep?"
-},
-{
-    "text": "Would you rather live in a place where it’s always daytime",
-    "or": "OR",
-    "text2": "or always nighttime?"
-},
-{
-    "text": "Say everything that comes to mind without filter",
-    "or": "OR",
-    "text2": "never speak again?"
-},
-{
-    "text": "Have children tomorrow",
-    "or": "OR",
-    "text2": "never have children?"
-},
-{
-    "text": "Would you join a reality show",
-    "or": "OR",
-    "text2": "is no amount of money worth that level of exposure?"
-},
-{
-    "text": "Assuming both trips reach the same destination, would you prefer: 8 uninterrupted hours by car",
-    "or": "OR",
-    "text2": "20 hours by plane?"
-},
-{
-    "text": "Would you rather have a fixed income of 5,000 BRL/month for life",
-    "or": "OR",
-    "text2": "1,000 BRL/month but receive 10 million BRL in 20 years?"
-},
-{
-    "text": "Would you take a shot of your own pee for 5,000 BRL",
-    "or": "OR",
-    "text2": "are you not *that* desperate for money?"
-},
-{
-    "text": "Are you the type to curate your own playlists",
-    "or": "OR",
-    "text2": "do you prefer 'Top 100 Global Hits' and others’ playlists?"
-},
-{
-    "text": "Is ice cream’s physical state: liquid",
-    "or": "OR",
-    "text2": "solid?"
-},
-{
-    "text": "Never listen to music again",
-    "or": "OR",
-    "text2": "never watch anything audiovisual again (movies, shows, TV)?"
-},
-{
-    "text": "Never talk again",
-    "or": "OR",
-    "text2": "never have sex again?"
-},
-{
-    "text": "Ignoring financial/safety concerns, would you rather go to space",
-    "or": "OR",
-    "text2": "explore the ocean’s depths?"
-},
-{
-    "text": "Do you flirt with people in unexpected places",
-    "or": "OR",
-    "text2": "stick to social media/spaces 'made for it'?"
-},
-{
-    "text": "Do you have moments in your routine where you do nothing but listen to music",
-    "or": "OR",
-    "text2": "is music just background noise for other activities?"
-},
-{
-    "text": "Never taste your favorite dessert again",
-    "or": "OR",
-    "text2": "never eat any dish from your favorite cuisine again?"
-},
-{
-    "text": "The ideal first date is sitting at a bar to chat and drink",
-    "or": "OR",
-    "text2": "having a secondary activity (exhibitions, events, amusement parks, game bars, etc)?"
-},
-{
-    "text": "Who was right in the 2022 Oscars slap incident: Chris Rock",
-    "or": "OR",
-    "text2": "Will Smith?"
-},
-{
-    "text": "Would you eat a heaping spoonful of poop for 25,000 BRL",
-    "or": "OR",
-    "text2": "do you still cling to the last shred of dignity in your body?"
-},
-{
-    "text": "Is lying necessary to maintain social order",
-    "or": "OR",
-    "text2": "is a painful truth better than a comforting lie?"
-},
-{
-    "text": "Would you want to live forever",
-    "or": "OR",
-    "text2": "do you believe life is precious because it ends?"
-},
-{
-    "text": "Do you empathize with sad/unjust everyday situations",
-    "or": "OR",
-    "text2": "have you become desensitized and indifferent?"
-},
-{
-    "text": "Is vulnerability a sign of strength",
-    "or": "OR",
-    "text2": "weakness?"
-},
-{
-    "text": "Would you change something in your past knowing it would alter your present",
-    "or": "OR",
-    "text2": "keep everything as is, mistakes and all?"
-},
-{
-    "text": "Is the opposite of love hatred",
-    "or": "OR",
-    "text2": "are these emotions closer than we think?"
-},
-{
-    "text": "What motivates people more: words of encouragement (love-based)",
-    "or": "OR",
-    "text2": "or disdain (hate-based)?"
-},
-{
-    "text": "Is it okay to step on others to get what you want",
-    "or": "OR",
-    "text2": "does collective effort go further?"
-},
-{
-    "text": "Is ambition a virtue",
-    "or": "OR",
-    "text2": "a flaw?"
-},
-{
-    "text": "Do you believe in parallel universes/alternate realities",
-    "or": "OR",
-    "text2": "is there only one true reality?"
-},
-{
-    "text": "Would you endure suffering if it positively impacted the world in the future",
-    "or": "OR",
-    "text2": "prioritize yourself, since you wouldn’t benefit from the outcome?"
-},
-{
-    "text": "Confessing feelings to someone already in a relationship is selfish",
-    "or": "OR",
-    "text2": "romantic?"
-},
-{
-    "text": "Are a person’s actions determined by their character",
-    "or": "OR",
-    "text2": "the context they’re in?"
-},
-{
-    "text": "Can you be friends with your friend’s enemy",
-    "or": "OR",
-    "text2": "is someone who’s friends with everyone truly friends with no one?"
-},
-{
-    "text": "Are there limits to humor",
-    "or": "OR",
-    "text2": "is anything fair game in comedy?"
-},
-{
-    "text": "Can a relationship exist without sex",
-    "or": "OR",
-    "text2": "is love without sex just friendship?"
-},
-{
-    "text": "Are you more 'go with the flow'",
-    "or": "OR",
-    "text2": "or do you plan every step?"
-},
-{
-    "text": "Would you date someone whose hobbies don’t interest you",
-    "or": "OR",
-    "text2": "is it ideal to share similar lifestyles?"
-},
-{
-    "text": "Do you believe in chance and coincidence",
-    "or": "OR",
-    "text2": "is everything predestined?"
-},
-{
-    "text": "Can someone truly know themselves while in a relationship",
-    "or": "OR",
-    "text2": "must you be alone to self-discover?"
-},
-{
-    "text": "Would you rather relive your worst memory",
-    "or": "OR",
-    "text2": "erase your best one?"
-},
-{
-    "text": "Those unwilling to make sacrifices don’t truly love",
-    "or": "OR",
-    "text2": "they just prioritize their individuality and desires?"
-},
-{
-    "text": "Is stepping on others to succeed wrong",
-    "or": "OR",
-    "text2": "necessary?"
-},
-{
-    "text": "Must artists conform to trends to stay relevant",
-    "or": "OR",
-    "text2": "do true artists not need to?"
-},
-{
-    "text": "Does the constant search for what’s missing in life push us out of our comfort zone",
-    "or": "OR",
-    "text2": "or cause eternal dissatisfaction?"
-},
-{
-    "text": "Would you want to know the whole truth about the world—good and bad",
-    "or": "OR",
-    "text2": "live in blissful ignorance forever?"
-},
-{
-    "text": "If possible, would you block people in real life",
-    "or": "OR",
-    "text2": "is that crossing reality’s boundaries?"
-},
-{
-    "text": "Relive the same day on repeat for a year",
-    "or": "OR",
-    "text2": "skip an entire year of your life?"
-},
-{
-    "text": "Erase your ex’s memories of you",
-    "or": "OR",
-    "text2": "your memories of them?"
-},
-{
-    "text": "Would you replace meals with a nutrient pill",
-    "or": "OR",
-    "text2": "spend time eating for pleasure?"
-},
-{
-    "text": "Relive the worst year of your life",
-    "or": "OR",
-    "text2": "erase the best year?"
-},
-{
-    "text": "If you could live in a different historical era, would you choose 100 years in the past",
-    "or": "OR",
-    "text2": "100 years in the future?"
-},
-{
-    "text": "If guaranteed future success, would you endure years of frustration",
-    "or": "OR",
-    "text2": "give up your goal for a higher-quality life now?"
-},
-{
-    "text": "Experience the pain of everyone you’ve ever hurt",
-    "or": "OR",
-    "text2": "make others feel the pain they caused you?"
-},
-{
-    "text": "Forget everyone you’ve ever met",
-    "or": "OR",
-    "text2": "be forgotten by everyone you know?"
-},
-{
-    "text": "Would you rather lose all your memories",
-    "or": "OR",
-    "text2": "never make new ones?"
-},
-{
-    "text": "Live a career of failures but gain recognition after 65",
-    "or": "OR",
-    "text2": "be eternally average?"
-},
-{
-    "text": "Would you rather relive the best day of your life",
-    "or": "OR",
-    "text2": "get 10,000 BRL?"
-},
-{
-    "text": "Would you rather lose your short-term memory",
-    "or": "OR",
-    "text2": "or long-term memory?"
-},
-{
-    "text": "Do you prefer a life of constant small pleasures (eating out weekly, binge-watching shows, etc)",
-    "or": "OR",
-    "text2": "rare big pleasures (saving money to travel)?"
-},
-{
-    "text": "Lose your best friend",
-    "or": "OR",
-    "text2": "lose all friends except the closest one?"
-},
-{
-    "text": "Would you rather temporarily see the world through your parents’ eyes",
-    "or": "OR",
-    "text2": "have them see it through yours?"
-},
-{
-        "text": "Would you rather have eyebrows that never stop growing",
-        "or": "OR",
-        "text2": "hair on your fingers that never stops growing?"
-    },
-    {
-        "text": "Would you rather have all your dreams broadcast live on Snapchat",
-        "or": "OR",
-        "text2": "have all your most embarrassing moments go viral on TikTok?"
-    },
-    {
-        "text": "Would you rather always chew with your mouth open",
-        "or": "OR",
-        "text2": "always put your calls on speakerphone in public transport?"
-    },
-    {
-        "text": "Would you rather have to wear stilettos to sleep",
-        "or": "OR",
-        "text2": "wear slippers everywhere you go?"
-    },
-    {
-        "text": "Would you rather have to wear a wedding dress every day",
-        "or": "OR",
-        "text2": "wear a bikini every day?"
-    },
-    {
-        "text": "If you had to join a reality show, would you rather join ‘I'm a Celeb’",
-        "or": "OR",
-        "text2": "‘SAS: Who Dares Wins’?"
-    },
-    {
-        "text": "Would you rather wear sweatpants every day",
-        "or": "OR",
-        "text2": "never be able to wear sweatpants again?"
-    },
-    {
-        "text": "Would you rather accidentally send a spicy message to a relative",
-        "or": "OR",
-        "text2": "to your boss?"
-    },
-    {
-        "text": "Would you rather have fingers made of carrots",
-        "or": "OR",
-        "text2": "feet made of eggplants?"
-    },
-    {
-        "text": "Would you rather clog the toilet on your first day at work",
-        "or": "OR",
-        "text2": "on your first date?"
-    },
-    {
-        "text": "Would you rather have horror movies play on a loop every time you close your eyes",
-        "or": "OR",
-        "text2": "have the song 'Macarena' stuck in your head whenever you're awake?"
-    },
-    {
-        "text": "Would you rather have to sing ‘Bootylicious’ by Destiny’s Child whenever you meet someone new",
-        "or": "OR",
-        "text2": "dance in place every time you speak in a meeting?"
-    },
-    {
-        "text": "Would you rather all your underwear be slightly itchy",
-        "or": "OR",
-        "text2": "all your swimwear be slightly too small?"
-    },
-    {
-        "text": "Would you rather live in a house covered in floral wallpaper",
-        "or": "OR",
-        "text2": "with walls painted in very bright colors?"
-    },
-    {
-        "text": "Would you rather have oven mitts for arms",
-        "or": "OR",
-        "text2": "lamp posts for legs?"
-    },
-    {
-        "text": "Would you rather only be able to move around on roller skates",
-        "or": "OR",
-        "text2": "on skis?"
-    },
-    {
-        "text": "Would you rather live in a world where it rains marshmallows",
-        "or": "OR",
-        "text2": "where it snows cotton candy?"
-    },
-    {
-        "text": "Would you rather get a face tattoo of your choice",
-        "or": "OR",
-        "text2": "a small chest tattoo chosen by someone else?"
-    },
-    {
-        "text": "Would you rather have a mullet haircut",
-        "or": "OR",
-        "text2": "a ponytail forever?"
-    },
-    {
-        "text": "Would you rather never use shampoo again",
-        "or": "OR",
-        "text2": "never use toothpaste again?"
-    },
-    {
-        "text": "Would you rather always speak in rhymes",
-        "or": "OR",
-        "text2": "always speak in riddles?"
-    },
-    {
-        "text": "Would you rather always hop on one foot",
-        "or": "OR",
-        "text2": "always walk squatting?"
-    },
-    {
-        "text": "Would you rather have to eat with chopsticks for the rest of your life",
-        "or": "OR",
-        "text2": "never be able to use a knife again?"
-    },
-    {
-        "text": "Would you rather hear an annoying laugh all day",
-        "or": "OR",
-        "text2": "be tickled for an hour?"
-    },
-    {
-        "text": "Would you rather wear clothes that keep changing",
-        "or": "OR",
-        "text2": "hair that keeps changing?"
-    },
-    {
-        "text": "Would you rather dress up as an Aldi supermarket for Halloween",
-        "or": "OR",
-        "text2": "as a Lidl supermarket?"
-    },
-    {
-        "text": "Would you rather be the funniest person in the world",
-        "or": "OR",
-        "text2": "the most beautiful?"
-    },
-    {
-        "text": "Would you rather pee a little every time you laugh",
-        "or": "OR",
-        "text2": "have a lot of snot come out every time you laugh?"
-    },
-    {
-        "text": "Would you rather pee a little every time you speak",
-        "or": "OR",
-        "text2": "always leave the bathroom door open when using it?"
-    },
-    {
-        "text": "Would you rather always wear clothes that are way too big",
-        "or": "OR",
-        "text2": "always way too tight?"
-    },
-    {
-        "text": "Would you rather eat pizza every day for a year",
-        "or": "OR",
-        "text2": "never be able to eat pizza again?"
-    },
-    {
-        "text": "Would you rather be chased by a giant chicken",
-        "or": "OR",
-        "text2": "by 20 normal-sized chickens?"
-    },
-    {
-        "text": "Would you rather have olives for eyes",
-        "or": "OR",
-        "text2": "a potato for a nose?"
-    },
-    {
-        "text": "Would you rather vomit glitter",
-        "or": "OR",
-        "text2": "cry hot sauce?"
-    },
-    {
-        "text": "Would you rather have hiccups for 10 minutes every time you laugh",
-        "or": "OR",
-        "text2": "never laugh again?"
-    },
-    {
-        "text": "Would you rather have the worst hangover of your life but the funniest night ever",
-        "or": "OR",
-        "text2": "never have a hangover again but also never have a fun night?"
-    },
-    {
-        "text": "Would you rather eat a sand sandwich",
-        "or": "OR",
-        "text2": "drink a glass of mud?"
-    },
-    {
-        "text": "Would you rather be the big spoon",
-        "or": "OR",
-        "text2": "the little spoon?"
-    },
-    {
-        "text": "Would you rather have sex in the morning",
-        "or": "OR",
-        "text2": "have sex late at night?"
-    },
-    {
-        "text": "Would you rather receive kisses on the cheek",
-        "or": "OR",
-        "text2": "kisses on the forehead?"
-    },
-    {
-        "text": "Would you rather have sex in the car",
-        "or": "OR",
-        "text2": "in the shower?"
-    },
-    {
-        "text": "Would you rather more role play",
-        "or": "OR",
-        "text2": "more foreplay?"
-    },
-    {
-        "text": "Would you rather get married, have a house, and a child",
-        "or": "OR",
-        "text2": "never have any of that but travel the world together?"
-    },
-    {
-        "text": "Would you rather have a sex playlist with classical music",
-        "or": "OR",
-        "text2": "with heavy metal?"
-    },
-    {
-        "text": "Would you rather never wear underwear again",
-        "or": "OR",
-        "text2": "never wear socks again?"
-    },
-    {
-        "text": "Would you rather never get married but have your dream house",
-        "or": "OR",
-        "text2": "get married but never live in your dream house?"
-    },
-    {
-        "text": "Would you rather know the date of your death",
-        "or": "OR",
-        "text2": "the cause of your death?"
-    },
-    {
-        "text": "Would you rather receive a thoughtful gift",
-        "or": "OR",
-        "text2": "an expensive gift from your partner?"
-    },
-    {
-        "text": "Would you rather only receive 'good morning' texts",
-        "or": "OR",
-        "text2": "only 'good night' texts?"
-    },
-    {
-        "text": "Would you rather make your partner happy with a white lie",
-        "or": "OR",
-        "text2": "tell the truth directly?"
-    },
-    {
-        "text": "Would you rather have more money and less quality time together",
-        "or": "OR",
-        "text2": "less money and more quality time together?"
-    },
-    {
-        "text": "Would you rather be more personally fulfilled",
-        "or": "OR",
-        "text2": "more professionally fulfilled?"
-    },
-    {
-        "text": "Would you rather stay in a monogamous relationship",
-        "or": "OR",
-        "text2": "explore polyamory?"
-    },
-    {
-        "text": "Would you rather join Love Island",
-        "or": "OR",
-        "text2": "Love is Blind?"
-    },
-    {
-        "text": "Would you rather have sex only in bed for the rest of your life",
-        "or": "OR",
-        "text2": "never be able to have sex in bed again?"
-    },
-    {
-        "text": "Would you rather meet your soulmate but not be able to live with them",
-        "or": "OR",
-        "text2": "be with someone average you can live with?"
-    },
-    {
-        "text": "Would you rather cook every night and your partner clean",
-        "or": "OR",
-        "text2": "the other way around?"
-    },
-    {
-        "text": "Would you rather sleep in separate beds every night and have sex",
-        "or": "OR",
-        "text2": "sleep in the same bed but never have sex again?"
-    },
-    {
-        "text": "Would you rather have the wedding of your dreams",
-        "or": "OR",
-        "text2": "the honeymoon of your dreams?"
-    },
-    {
-        "text": "Would you rather have someone ruin your wedding but still get married",
-        "or": "OR",
-        "text2": "never be able to get married?"
-    },
-    {
-        "text": "Would you rather never be able to talk to each other again but still live together",
-        "or": "OR",
-        "text2": "never see each other again?"
-    },
-    {
-        "text": "Would you rather have a successful business together but break up",
-        "or": "OR",
-        "text2": "live on less than minimum wage but stay together?"
-    },
-{
-        "text": "Be rich",
-        "or": "OR",
-        "text2": "Be famous"
-    },
-    {
-        "text": "Have your body covered from neck to feet with tattoos",
-        "or": "OR",
-        "text2": "Have a large tattoo on your face"
-    },
-    {
-        "text": "Wash your hands every five minutes",
-        "or": "OR",
-        "text2": "Never be able to wash your hair again"
-    },
-    {
-        "text": "Hop around everywhere",
-        "or": "OR",
-        "text2": "Skip around everywhere"
-    },
-    {
-        "text": "Have an unlimited supply of makeup and skincare from your favorite brands",
-        "or": "OR",
-        "text2": "Own your own house by age 30"
-    },
-    {
-        "text": "Become friends with your celebrity crush",
-        "or": "OR",
-        "text2": "Go on a date with them"
-    },
-    {
-        "text": "Never have to commute to work again",
-        "or": "OR",
-        "text2": "Have three-day weekends"
-    },
-    {
-        "text": "Have Kim Kardashian as your mom",
-        "or": "OR",
-        "text2": "Have Kris Jenner as your mom"
-    },
-    {
-        "text": "Do a handstand after every meal",
-        "or": "OR",
-        "text2": "Do a cartwheel after every meal"
-    },
-    {
-        "text": "Have super slow internet",
-        "or": "OR",
-        "text2": "Always have low battery on your phone"
-    },
-    {
-        "text": "Only listen to 'Baby' by Justin Bieber for the rest of your life",
-        "or": "OR",
-        "text2": "Only listen to 'Red' by Taylor Swift for the rest of your life"
-    },
-    {
-        "text": "Be a character in your favorite TV show",
-        "or": "OR",
-        "text2": "That show never existed"
-    },
-    {
-        "text": "Never be able to use search engines (like Google) again",
-        "or": "OR",
-        "text2": "Never be able to use social media again"
-    },
-    {
-        "text": "Be a famous celebrity",
-        "or": "OR",
-        "text2": "Be married to a famous celebrity (while you stay unknown)"
-    },
-    {
-        "text": "Live inside your favorite childhood movie",
-        "or": "OR",
-        "text2": "Live inside your favorite childhood book"
-    },
-    {
-        "text": "Know how to do the perfect eye shadow blend",
-        "or": "OR",
-        "text2": "Know how to do the perfect contour"
-    },
-    {
-        "text": "Travel to space and discover a new planet",
-        "or": "OR",
-        "text2": "Go on an underwater adventure and discover a new aquatic kingdom"
-    },
-    {
-        "text": "Live on a peaceful tropical island",
-        "or": "OR",
-        "text2": "Live in a busy big city"
-    },
-    {
-        "text": "Become famous for singing",
-        "or": "OR",
-        "text2": "Become famous for acting, dancing, being an artist, or influencer"
-    },
-    {
-        "text": "Change jobs every year until you retire",
-        "or": "OR",
-        "text2": "Have the same job your entire career"
-    },
-    {
-        "text": "Live in a houseboat on a canal",
-        "or": "OR",
-        "text2": "Live in an RV"
-    },
-    {
-        "text": "Get professional hair treatments forever",
-        "or": "OR",
-        "text2": "Get professional manicures forever"
-    },
-    {
-        "text": "Be an Olympic athlete",
-        "or": "OR",
-        "text2": "Be a famous scientist who cures a disease"
-    },
-    {
-        "text": "Spend your money traveling the world with few belongings",
-        "or": "OR",
-        "text2": "Have an amazing house but never leave your hometown"
-    },
-    {
-        "text": "Always take vacations at beaches",
-        "or": "OR",
-        "text2": "Always take vacations in cities"
-    },
-    {
-        "text": "Have Dolly Parton’s wardrobe",
-        "or": "OR",
-        "text2": "Have Billie Eilish’s wardrobe"
-    },
-    {
-        "text": "Wear only black every day forever",
-        "or": "OR",
-        "text2": "Wear all the colors of the rainbow mixed in your clothes every day"
-    },
-    {
-        "text": "Live close to work/university",
-        "or": "OR",
-        "text2": "Live far but have a private driver"
-    },
-    {
-        "text": "Eat only spicy foods for the rest of your life",
-        "or": "OR",
-        "text2": "Never eat spicy food again"
-    },
-    {
-        "text": "Write your own cookbook",
-        "or": "OR",
-        "text2": "Write your own novel"
-    },
-    {
-        "text": "Always have hot summers and freezing winters",
-        "or": "OR",
-        "text2": "Have unpredictable summers and mild winters"
-    },
-    {
-        "text": "Live in an escape room",
-        "or": "OR",
-        "text2": "Live in a Clue (Cluedo) game"
-    },
-    {
-        "text": "Never smell your favorite candle again",
-        "or": "OR",
-        "text2": "Never taste freshly baked cookies again"
-    },
-    {
-        "text": "Talk to animals",
-        "or": "OR",
-        "text2": "Speak all the languages in the world"
-    },
-    {
-        "text": "Go on a road trip across the USA",
-        "or": "OR",
-        "text2": "Go on a road trip across Australia"
-    },
-    {
-        "text": "Live in the world of The Lord of the Rings",
-        "or": "OR",
-        "text2": "Live in the world of Star Wars"
-    },
-    {
-        "text": "Always be an hour late for everything",
-        "or": "OR",
-        "text2": "Always be an hour early for everything"
-    },
-    {
-        "text": "Manage the world’s biggest football team",
-        "or": "OR",
-        "text2": "Manage the world’s best band"
-    },
-    {
-        "text": "Never hear your favorite song again but be friends with the artist",
-        "or": "OR",
-        "text2": "Always have front row seats at their concerts but they don’t know who you are"
-    },
-    {
-        "text": "Have all kitchen appliances in black",
-        "or": "OR",
-        "text2": "Have all kitchen appliances in pink"
-    },
-    {
-        "text": "Be known for giving the best gifts",
-        "or": "OR",
-        "text2": "Be known for giving the best advice"
-    },
-    {
-        "text": "Be known for your great taste in movies",
-        "or": "OR",
-        "text2": "Be known for your great taste in art"
-    },
-    {
-        "text": "Only be able to like posts on Instagram, but never receive likes",
-        "or": "OR",
-        "text2": "Only be able to receive likes, but never like anything"
-    },
-    {
-        "text": "Be a Kardashian",
-        "or": "OR",
-        "text2": "Be a Hilton"
-    },
-    {
-        "text": "Be Kourtney, Kim, Khloé, Kendall",
-        "or": "OR",
-        "text2": "Be Kylie"
-    },
-    {
-        "text": "Live in a luxury penthouse",
-        "or": "OR",
-        "text2": "Live in a huge mansion"
-    },
-    {
-        "text": "Be a model",
-        "or": "OR",
-        "text2": "Be a photographer"
-    },
-    {
-        "text": "Be an amazing cartoonist",
-        "or": "OR",
-        "text2": "Be an amazing portrait artist"
-    },
-    {
-        "text": "Never go on vacation again",
-        "or": "OR",
-        "text2": "Never meet the love of your life"
-    },
-    {
-        "text": "Only have one pair of shoes",
-        "or": "OR",
-        "text2": "Only have one coat"
-    },
-    {
-        "text": "Only eat yogurt",
-        "or": "OR",
-        "text2": "Only eat peanut butter"
-    },
-    {
-        "text": "Be followed by a cat all day",
-        "or": "OR",
-        "text2": "Be followed by a dog all day"
-    },
-    {
-        "text": "Live with your best friend",
-        "or": "OR",
-        "text2": "Live with your partner"
-    },
-    {
-        "text": "Live only on Cheese Strings",
-        "or": "OR",
-        "text2": "Live only on Babybels"
-    },
-    {
-        "text": "Only shop at Lidl",
-        "or": "OR",
-        "text2": "Only shop at Aldi"
-    },
-    {
-        "text": "Never eat Christmas dinner again but spend it with your family",
-        "or": "OR",
-        "text2": "Have the best Christmas dinner but spend it all alone"
-    },
-    {
-        "text": "Give up baths but have a powerful shower",
-        "or": "OR",
-        "text2": "Be able to take baths but have a weak shower"
-    },
-    {
-        "text": "Shave your eyebrows",
-        "or": "OR",
-        "text2": "Shave half your hair"
-    },
-    {
-        "text": "Eat an insect",
-        "or": "OR",
-        "text2": "Eat a chocolate covered in dirt"
-    },
-    {
-        "text": "Sweat maple syrup",
-        "or": "OR",
-        "text2": "Cry strawberry jam"
-    },
-    {
-        "text": "Wear pink Ugg boots every day for the rest of your life",
-        "or": "OR",
-        "text2": "Wear pink Crocs every day for the rest of your life"
-    },
-    {
-        "text": "If you could live inside a Disney movie, would you rather live in the sea like The Little Mermaid",
-        "or": "OR",
-        "text2": "or in the world of Aladdin"
-    },
-{
-        "text": "Would you rather be stuck on a deserted island together",
-        "or": "OR",
-        "text2": "in a busy city but apart?"
-    },
-    {
-        "text": "Would you rather have a big wedding",
-        "or": "OR",
-        "text2": "elope and get married in secret?"
-    },
-    {
-        "text": "Would you rather spend a rainy day cuddling at home",
-        "or": "OR",
-        "text2": "exploring the city together?"
-    },
-    {
-        "text": "Would you rather share a hobby",
-        "or": "OR",
-        "text2": "have separate hobbies to teach each other?"
-    },
-    {
-        "text": "Would you rather lose all the money you earned this year",
-        "or": "OR",
-        "text2": "lose all the memories you made this year?"
-    },
-    {
-        "text": "Would you rather have no sense of taste",
-        "or": "OR",
-        "text2": "no sense of smell?"
-    },
-    {
-        "text": "Would you rather always hit red lights for the rest of your life",
-        "or": "OR",
-        "text2": "always have slow internet?"
-    },
-    {
-        "text": "Would you rather win R$ 25,000",
-        "or": "OR",
-        "text2": "your best friend win R$ 250,000?"
-    },
-    {
-        "text": "Would you rather wake up in your underwear at work",
-        "or": "OR",
-        "text2": "wake up naked in the woods far from home?"
-    },
-    {
-        "text": "Would you rather see your mom’s search history",
-        "or": "OR",
-        "text2": "your dad’s search history?"
-    },
-    {
-        "text": "Would you rather find a dead body",
-        "or": "OR",
-        "text2": "witness a murder?"
-    },
-    {
-        "text": "Would you rather have thought bubbles appear over your head so everyone can see what you’re thinking",
-        "or": "OR",
-        "text2": "have your teenage diary published online?"
-    },
-    {
-        "text": "Would you rather be 4 years old forever",
-        "or": "OR",
-        "text2": "be 90 years old forever?"
-    },
-    {
-        "text": "Would you rather blush every time someone says 'hello'",
-        "or": "OR",
-        "text2": "get really angry every time someone says 'goodbye'?"
-    },
-    {
-        "text": "Would you rather be famous in history books",
-        "or": "OR",
-        "text2": "be forgotten after you die?"
-    },
-    {
-        "text": "Would you rather be the strongest person in the world",
-        "or": "OR",
-        "text2": "the smartest person in the world?"
-    },
-    {
-        "text": "Would you rather have a vivid imagination",
-        "or": "OR",
-        "text2": "a photographic memory?"
-    },
-    {
-        "text": "Would you rather live the rest of your life in the wilderness",
-        "or": "OR",
-        "text2": "in prison?"
-    },
-    {
-        "text": "Would you rather live in a country where the government always does the right thing",
-        "or": "OR",
-        "text2": "live in a country where you are the ruler?"
-    },
-    {
-        "text": "Would you rather live in a world with no crime",
-        "or": "OR",
-        "text2": "in a world with no privacy?"
-    },
-    {
-        "text": "Would you rather live 100 more years with your body in perfect health",
-        "or": "OR",
-        "text2": "age normally?"
-    },
-    {
-        "text": "Would you rather give up all technology (phones, computers, etc.)",
-        "or": "OR",
-        "text2": "give up all movies, series, and books?"
-    },
-    {
-        "text": "Would you rather live in a future where everyone takes everything very seriously",
-        "or": "OR",
-        "text2": "a future where no one takes anything seriously?"
-    },
-          {
-            "text": "Would you rather be the center of attention",
-            "or": "OR",
-            "text2": "go unnoticed?"
-          },
-          {
-            "text": "Would you rather communicate through telepathy",
-            "or": "OR",
-            "text2": "know all the languages in the world?"
-          },
-          {
-            "text": "Would you rather have a one-minute conversation with your past self",
-            "or": "OR",
-            "text2": "with your future self?"
-          },
-          {
-            "text": "Would you rather switch bodies with your ex",
-            "or": "OR",
-            "text2": "switch bodies with your grandmother?"
-          },
-          {
-            "text": "Would you rather bring back a loved one and have them be unhappy in the living world",
-            "or": "OR",
-            "text2": "suffer the loss but keep the best memories?"
-          },
-          {
-            "text": "Would you rather cry uncontrollably when sad",
-            "or": "OR",
-            "text2": "scream uncontrollably?"
-          },
-          {
-            "text": "Would you rather end poverty",
-            "or": "OR",
-            "text2": "bring world peace?"
-          },
-          {
-            "text": "Would you rather live in Narnia",
-            "or": "OR",
-            "text2": "in Westeros?"
-          },
-          {
-            "text": "Would you rather have your favorite musician give a private concert for you",
-            "or": "OR",
-            "text2": "have dinner with you?"
-          },
-          {
-            "text": "Would you rather meet Barack Obama",
-            "or": "OR",
-            "text2": "Albert Einstein?"
-          },
-          {
-            "text": "Would you rather work for a kind and fair boss",
-            "or": "OR",
-            "text2": "be a tough and unfair boss?"
-          }
+                "text": "If you could choose between:",
+                "or": "or",
+                "text2": "Being rich and unhappy or poor and happy?"
+            },
+            {
+                "text": "Would you rather:",
+                "or": "or",
+                "text2": "Live without music or without TV/movies?"
+            },
+            {
+                "text": "What would you choose:",
+                "or": "or",
+                "text2": "Knowing everything about the past or about the future?"
+            },
+            {
+                "text": "Between these options:",
+                "or": "or",
+                "text2": "Having a lot of money or a lot of free time?"
+            },
+            {
+                "text": "Would you prefer:",
+                "or": "or",
+                "text2": "Being very intelligent or very attractive?"
+            },
+            {
+                "text": "What matters more:",
+                "or": "or",
+                "text2": "A great friendship or a great love?"
+            },
+            {
+                "text": "If you had to choose:",
+                "or": "or",
+                "text2": "Go without internet or without a car for a month?"
+            },
+            {
+                "text": "Between these possibilities:",
+                "or": "or",
+                "text2": "Time travel or mind reading?"
+            },
+            {
+                "text": "Would you choose:",
+                "or": "or",
+                "text2": "Live 200 years in the future or 200 years in the past?"
+            },
+            {
+                "text": "What would be worse:",
+                "or": "or",
+                "text2": "Never being able to lie or always hearing the truth?"
+            },
+            {
+                "text": "Love can end",
+                "or": "OR",
+                "text2": "if it ended, it was never love"
+            },
+            {
+                "text": "Never love again",
+                "or": "OR",
+                "text2": "never be loved again"
+            },
+            {
+                "text": "Being in a relationship with someone exactly like you is the perfect match",
+                "or": "OR",
+                "text2": "the worst nightmare"
+            },
+            {
+                "text": "In a romantic relationship, it's ideal for your partner to join you in your personal activities",
+                "or": "OR",
+                "text2": "for the couple to maintain their individuality"
+            },
+            {
+                "text": "What's worse: an intensely painful and unexpected breakup",
+                "or": "OR",
+                "text2": "a breakup that drags on and slowly corrodes"
+            },
+            {
+                "text": "Can love end",
+                "or": "OR",
+                "text2": "if it ended, was it ever love?"
+            },
+            {
+                "text": "Never love again",
+                "or": "OR",
+                "text2": "never be loved again?"
+            },
+            {
+                "text": "Being in a relationship with someone exactly like you is the perfect match",
+                "or": "OR",
+                "text2": "the worst nightmare?"
+            },
+            {
+                "text": "In a romantic relationship, is it ideal for your partner to join you in your personal activities",
+                "or": "OR",
+                "text2": "for the couple to maintain their individuality?"
+            },
+            {
+                "text": "What's worse: an intensely painful and unexpected breakup",
+                "or": "OR",
+                "text2": "a breakup that drags on and slowly corrodes?"
+            },
+            {
+                "text": "Is it easier to deal with a partner whose self-esteem is very low (self-deprecating)",
+                "or": "OR",
+                "text2": "with extremely high self-esteem (arrogant)?"
+            },
+            {
+                "text": "Do you believe in soulmates",
+                "or": "OR",
+                "text2": "that there are only people who daily strive and choose to stay together?"
+            },
+            {
+                "text": "Being completely alone in the world",
+                "or": "OR",
+                "text2": "living forever with someone you don't love?"
+            },
+            {
+                "text": "Never feel love again",
+                "or": "OR",
+                "text2": "relive your worst breakup?"
+            },
+            {
+                "text": "In a romantic relationship, would you prefer a partner who is: EXTREMELY sensitive",
+                "or": "OR",
+                "text2": "COMPLETELY insensitive?"
+            },
+            {
+                "text": "Have people started giving up on relationships too easily",
+                "or": "OR",
+                "text2": "have they just stopped accepting less than they deserve?"
+            },
+            {
+                "text": "Trust too easily",
+                "or": "OR",
+                "text2": "never be able to trust anyone?"
+            },
+            {
+                "text": "Are you the type of person who confesses and expresses your feelings",
+                "or": "OR",
+                "text2": "or who keeps everything to yourself?"
+            },
+            {
+                "text": "Dating apps are the peak of superficiality",
+                "or": "OR",
+                "text2": "are they perfect because they can bring together people who would never meet in real life?"
+            },
+            {
+                "text": "Is it possible to maintain a relationship where both partners are 'leaders'",
+                "or": "OR",
+                "text2": "to maintain harmony, is it necessary for someone to have a less authoritarian personality?"
+            },
+            {
+                "text": "Do you love someone",
+                "or": "OR",
+                "text2": "or do you love the feeling that person gives you?"
+            },
+            {
+                "text": "Do you want to marry with a ceremony and traditional wedding",
+                "or": "OR",
+                "text2": "is moving in together the new concept of marriage?"
+            },
+            {
+                "text": "Would you rather hurt others but be content with yourself",
+                "or": "OR",
+                "text2": "make others happy, even if it hurts you?"
+            },
+            {
+                "text": "In a closed relationship, would you want to know if someone flirted with your partner",
+                "or": "OR",
+                "text2": "what the eyes don't see, the heart doesn't feel?"
+            },
+            {
+                "text": "Is it possible to love someone you've never met in person",
+                "or": "OR",
+                "text2": "is contact/coexistence essential to truly feel love for someone?"
+            },
+            {
+                "text": "Does public display of affection make you happy",
+                "or": "OR",
+                "text2": "or uncomfortable?"
+            },
+            {
+                "text": "Is jealousy more of a: demonstration of care/affection",
+                "or": "OR",
+                "text2": "feeling linked to possession/insecurity?"
+            },
+            {
+                "text": "Ideal love is: intense and full of emotions, like a rollercoaster",
+                "or": "OR",
+                "text2": "calm and peaceful, without many ups and downs?"
+            },
+            {
+                "text": "Which feeling is worse: disappointing/hurting someone",
+                "or": "OR",
+                "text2": "being disappointed/hurt?"
+            },
+            {
+                "text": "Longing is a reflection of emotional dependency",
+                "or": "OR",
+                "text2": "proof of love, care, and affection?"
+            },
+            {
+                "text": "Living intense loves with the possibility of getting hurt",
+                "or": "OR",
+                "text2": "never truly opening up, but avoiding pain and heartbreak?"
+            },
+            {
+                "text": "Do you agree with the phrase 'right person, wrong time'",
+                "or": "OR",
+                "text2": "there’s no wrong time when it’s the right person?"
+            },
+            {
+                "text": "Marriage is still a celebration of love",
+                "or": "OR",
+                "text2": "has it become a failed institution?"
+            },
+            {
+                "text": "Never travel again",
+                "or": "OR",
+                "text2": "never fall in love again?"
+            },
+            {
+                "text": "What’s considered worse in a relationship: physical/carnal betrayal",
+                "or": "OR",
+                "text2": "emotional/affectionate betrayal?"
+            },
+            {
+                "text": "Considering factors like employability, social circles, and your own personality, would you choose to have:",
+                "or": "OR",
+                "text2": "beauty?"
+            },
+            {
+                "text": "Do you consider yourself a sensitive person",
+                "or": "OR",
+                "text2": "more objective when it comes to situations in your life?"
+            },
+            {
+                "text": "What weighs more on the scale: fame, money, opportunities, and experiences",
+                "or": "OR",
+                "text2": "a simple life, but with luxury and privacy?"
+            },
+            {
+                "text": "Living with the certainty that something bad will happen",
+                "or": "OR",
+                "text2": "dealing with the uncertainty of a 50% chance for either outcome?"
+            },
+            {
+                "text": "Do it and risk regretting it",
+                "or": "OR",
+                "text2": "not do it and live with eternal doubt?"
+            },
+            {
+                "text": "Are you the type of person who prefers doing 9876 activities at the same time",
+                "or": "OR",
+                "text2": "functions better by doing one task at a time?"
+            },
+            {
+                "text": "Most of the time, do you try to see the good side of situations",
+                "or": "OR",
+                "text2": "already expect the worst of everything?"
+            },
+            {
+                "text": "When you're physically/emotionally unwell, does thinking that others are in worse situations help ease your pain",
+                "or": "OR",
+                "text2": "does it not lessen your pain at all?"
+            },
+            {
+                "text": "Do you want to achieve great feats, be remembered as someone important to society",
+                "or": "OR",
+                "text2": "do you see greatness in life's small things?"
+            },
+            {
+                "text": "Be the funniest person",
+                "or": "OR",
+                "text2": "the smartest person in the room?"
+            },
+            {
+                "text": "Are you the type of person who is too hard on yourself",
+                "or": "OR",
+                "text2": "who should be harder on yourself?"
+            },
+            {
+                "text": "If you could choose to always keep one type of self-esteem high, would you choose your: physical self-esteem",
+                "or": "OR",
+                "text2": "intellectual self-esteem?"
+            },
+            {
+                "text": "Be someone considered 'shameless,' but always get what you want",
+                "or": "OR",
+                "text2": "choose common sense and miss out on experiences/opportunities?"
+            },
+            {
+                "text": "Living without knowing what will happen is exciting",
+                "or": "OR",
+                "text2": "agonizing?"
+            },
+            {
+                "text": "Always be the center of attention",
+                "or": "OR",
+                "text2": "never be noticed in any situation?"
+            },
+            {
+                "text": "Do you currently have the same/similar religious beliefs as those who raised you",
+                "or": "OR",
+                "text2": "have you gone in a completely different direction?"
+            },
+            {
+                "text": "Always make decisions from a rational perspective",
+                "or": "OR",
+                "text2": "trust your emotions?"
+            },
+            {
+                "text": "Do you prefer living a stable and routine life",
+                "or": "OR",
+                "text2": "a life full of surprises and unpredictability?"
+            },
+            {
+                "text": "Never experience any kind of feeling again",
+                "or": "OR",
+                "text2": "continue feeling everything, but extremely intensely?"
+            },
+            {
+                "text": "Do you usually separate the art from the artist",
+                "or": "OR",
+                "text2": "do you believe they are inevitably interconnected?"
+            },
+            {
+                "text": "What do you think is more capable of provoking change and moving people: anger and hate",
+                "or": "OR",
+                "text2": "hope and love?"
+            },
+            {
+                "text": "To achieve your desires and goals in life, which of these traits is more important to have: passion",
+                "or": "OR",
+                "text2": "discipline?"
+            },
+            {
+                "text": "At the end of the day, is selfishness a positive/necessary trait",
+                "or": "OR",
+                "text2": "is it undeniably negative?"
+            },
+            {
+                "text": "Can someone who is politically correct all the time succeed in life",
+                "or": "OR",
+                "text2": "is it inevitable to 'bend the rules' in certain situations?"
+            },
+            {
+                "text": "To judge a person’s character, what’s more important: their actions",
+                "or": "OR",
+                "text2": "their intentions?"
+            },
+            {
+                "text": "Do humans have free will",
+                "or": "OR",
+                "text2": "are they born with predetermined factors?"
+            },
+            {
+                "text": "Turning your Instagram profile into an autobiography is: interesting/creative",
+                "or": "OR",
+                "text2": "problematic/creepy?"
+            },
+            {
+                "text": "Turn your hobby into your main source of income",
+                "or": "OR",
+                "text2": "work with something you’re not passionate about to fund your hobbies?"
+            },
+            {
+                "text": "In life, do you think the absence of purpose is liberating",
+                "or": "OR",
+                "text2": "agonizing?"
+            },
+            {
+                "text": "Everyone deserves a second chance",
+                "or": "OR",
+                "text2": "some actions are unforgivable?"
+            },
+            {
+                "text": "In general, do you believe religions save people",
+                "or": "OR",
+                "text2": "alienate the population?"
+            },
+            {
+                "text": "Is it more viable to provoke societal change through politics/education/NGOs",
+                "or": "OR",
+                "text2": "are only protests/revolutions truly effective measures?"
+            },
+            {
+                "text": "Do you think happiness is truly a constant state of mind",
+                "or": "OR",
+                "text2": "are there moments that are just fleeting happiness?"
+            },
+            {
+                "text": "Do you think some things in life are just mere coincidences",
+                "or": "OR",
+                "text2": "does everything happen for a reason?"
+            },
+            {
+                "text": "Do you believe that what goes around comes around",
+                "or": "OR",
+                "text2": "karma doesn’t exist?"
+            },
+            {
+                "text": "Would you rather be the type of person who knows a lot about a few subjects",
+                "or": "OR",
+                "text2": "a little about many fields of knowledge?"
+            },
+            {
+                "text": "Would you distance yourself from close people with very different political views than yours",
+                "or": "OR",
+                "text2": "can you separate your relationships from your values and morals?"
+            },
+            {
+                "text": "Do you believe everything happens for a reason",
+                "or": "OR",
+                "text2": "do we find reasons for why things happened?"
+            },
+            {
+                "text": "If you only had one more day to live, would you tell someone",
+                "or": "OR",
+                "text2": "or die with that last secret?"
+            },
+            {
+                "text": "Would you give up everything you lived/everyone you know to have the life you wished for",
+                "or": "OR",
+                "text2": "give up your dream to keep everything you’ve built?"
+            },
+            {
+                "text": "In which phase of your life would you be trapped forever: the current one",
+                "or": "OR",
+                "text2": "any other from your past?"
+            },
+            {
+                "text": "Have a poor financial condition but with the love of your life",
+                "or": "OR",
+                "text2": "live well financially and never have a romantic relationship again?"
+            },
+            {
+                "text": "Would you rather lose 10 years of memories",
+                "or": "OR",
+                "text2": "lose 10 years of your life?"
+            },
+            {
+                "text": "Save someone’s life",
+                "or": "OR",
+                "text2": "win 1 million reais?"
+            },
+            {
+                "text": "If you could, would you erase from your memory someone who hurt you",
+                "or": "OR",
+                "text2": "believe that person is part of who you became?"
+            },
+            {
+                "text": "Be cheated on and never find out",
+                "or": "OR",
+                "text2": "cheat on someone and never be caught but live without guilt?"
+            },
+            {
+                "text": "Would you rather live with stability and boredom",
+                "or": "OR",
+                "text2": "live intensely with constant uncertainty?"
+            },
+            {
+                "text": "Is it more important to be true to yourself",
+                "or": "OR",
+                "text2": "adapt to what others expect of you?"
+            },
+            {
+                "text": "Be loved without being understood",
+                "or": "OR",
+                "text2": "be understood without being loved?"
+            },
+            {
+                "text": "Do you think forgiveness frees the one who forgives",
+                "or": "OR",
+                "text2": "only the one who is forgiven?"
+            },
+            {
+                "text": "Is it braver to move forward",
+                "or": "OR",
+                "text2": "admit that you need to stop?"
+            },
+            {
+                "text": "Would you rather feel nothing",
+                "or": "OR",
+                "text2": "feel everything intensely, even if it hurts?"
+            },
+            {
+                "text": "Do you think the ends justify the means",
+                "or": "OR",
+                "text2": "or that the means define who we are?"
+            },
+            {
+                "text": "Is it better to fail trying something big",
+                "or": "OR",
+                "text2": "always succeed in small comfort zones?"
+            },
+            {
+                "text": "Would you leave everything behind for love",
+                "or": "OR",
+                "text2": "believe that true love doesn’t require extreme sacrifices?"
+            },
+            {
+                "text": "Do you feel freer making decisions alone",
+                "or": "OR",
+                "text2": "or sharing decisions with someone you trust?"
+            },
+            {
+                "text": "Is it wiser to follow reason",
+                "or": "OR",
+                "text2": "listen to intuition?"
+            },
+            {
+                "text": "Would you prefer a truth that destroys you",
+                "or": "OR",
+                "text2": "a lie that makes you happy for a while?"
+            },
+            {
+                "text": "Be the protagonist of your own life",
+                "or": "OR",
+                "text2": "a supporting character in the story of someone you love?"
+            },
+            {
+                "text": "Do you think life has a defined purpose",
+                "or": "OR",
+                "text2": "or that we are the ones who give it meaning?"
+            },
+            {
+                "text": "Is it worse to lose someone who loves you",
+                "or": "OR",
+                "text2": "realize you never truly loved them?"
+            },
+            {
+                "text": "Does time heal everything",
+                "or": "OR",
+                "text2": "just teach you to live with the pain?"
+            },
+            {
+                "text": "Do you believe people truly change",
+                "or": "OR",
+                "text2": "or just adjust their behavior?"
+            },
+            {
+                "text": "Should justice be impartial",
+                "or": "OR",
+                "text2": "or take intentions behind actions into account?"
+            },
+            {
+                "text": "Is it easier to deal with silence",
+                "or": "OR",
+                "text2": "with poorly chosen words?"
+            },
+            {
+                "text": "Would you rather live with doubts",
+                "or": "OR",
+                "text2": "believe in something just for peace of mind?"
+            },
+            {
+                "text": "Is it harder to forgive others",
+                "or": "OR",
+                "text2": "forgive yourself for something you did?"
+            },
+            {
+                "text": "Would you rather live a lonely truth",
+                "or": "OR",
+                "text2": "a shared illusion?"
+            },
+            {
+                "text": "Is it worse to be forgotten",
+                "or": "OR",
+                "text2": "be remembered for something you are no longer?"
+            },
+            {
+                "text": "Do you believe more in destiny",
+                "or": "OR",
+                "text2": "or in the choices we make?"
+            },
+            {
+                "text": "Love someone who doesn’t love you",
+                "or": "OR",
+                "text2": "be loved by someone you can’t love?"
+            },
+            {
+                "text": "Would you give everything for a dream",
+                "or": "OR",
+                "text2": "give it up for someone important?"
+            },
+            {
+                "text": "Live a thousand lives in dreams",
+                "or": "OR",
+                "text2": "one intense and real life?"
+            },
+            {
+                "text": "Would you rather lose your memory",
+                "or": "OR",
+                "text2": "remember everything and not be able to move on?"
+            },
+            {
+                "text": "Is a crueler absence",
+                "or": "OR",
+                "text2": "a presence that no longer feels anything?"
+            },
+            {
+                "text": "Do you live waiting for the right moment",
+                "or": "OR",
+                "text2": "believe that the right thing is to create the moment?"
+            },
+            {
+                "text": "Always be honest and hurt",
+                "or": "OR",
+                "text2": "lie to protect?"
+            },
+            {
+                "text": "Would you give a second chance to someone who broke you",
+                "or": "OR",
+                "text2": "believe the past should stay in the past?"
+            },
+            {
+                "text": "Would you rather have never met someone who marked you",
+                "or": "OR",
+                "text2": "relive it all even knowing it would end?"
+            },
+            {
+                "text": "Do you believe more in what you see",
+                "or": "OR",
+                "text2": "or in what you feel?"
+            },
+            {
+                "text": "Is it easier to run away",
+                "or": "OR",
+                "text2": "face it knowing it will hurt?"
+            },
+            {
+                "text": "Have everything but feel empty",
+                "or": "OR",
+                "text2": "have little but feel at peace?"
+            },
+            {
+                "text": "Would you change your past",
+                "or": "OR",
+                "text2": "accept that it shaped who you are?"
+            },
+            {
+                "text": "Trust blindly",
+                "or": "OR",
+                "text2": "doubt everything?"
+            },
+            {
+                "text": "Wait for someone to change",
+                "or": "OR",
+                "text2": "move on with pain?"
+            },
+            {
+                "text": "Do you give yourself easily",
+                "or": "OR",
+                "text2": "keep everything inside for fear of losing yourself?"
+            },
+            {
+                "text": "Is it stronger to feel too much",
+                "or": "OR",
+                "text2": "or feel nothing at all?"
+            },
+            {
+                "text": "Live under control",
+                "or": "OR",
+                "text2": "risk and lose balance?"
+            },
+            {
+                "text": "Do you believe love is a choice",
+                "or": "OR",
+                "text2": "or that it just happens?"
+            },
+            {
+                "text": "Would you rather be needed",
+                "or": "OR",
+                "text2": "or desired?"
+            },
+            {
+                "text": "Would you adapt to an ordinary life for safety",
+                "or": "OR",
+                "text2": "face chaos for freedom?"
+            },
+            {
+                "text": "Is it harder to start",
+                "or": "OR",
+                "text2": "know when to stop?"
+            },
+            {
+                "text": "Is being brave about not being afraid",
+                "or": "OR",
+                "text2": "acting even when you are afraid?"
+            },
+            {
+                "text": "Would you choose to know everything about the future",
+                "or": "OR",
+                "text2": "discover things at the right time?"
+            },
+            {
+                "text": "Lose someone to life",
+                "or": "OR",
+                "text2": "have that person near but distant?"
+            },
+            {
+                "text": "Would you rather fight for something uncertain",
+                "or": "OR",
+                "text2": "stay still and never know what could have been?"
+            },
+            {
+                "text": "Have an unlimited gift card for your favorite restaurant",
+                "or": "OR",
+                "text2": "have an unlimited gift card for your favorite store?"
+            },
+            {
+                "text": "Not know what you’ll be doing tomorrow for the next 10 years",
+                "or": "OR",
+                "text2": "know exactly what you’ll be doing every day for the next 10 years?"
+            },
+            {
+                "text": "Never see your best friend again",
+                "or": "OR",
+                "text2": "never be able to speak to your best friend again?"
+            },
+            {
+                "text": "Is it better to experience something amazing and lose it",
+                "or": "OR",
+                "text2": "never experience it at all?"
+            },
+            {
+                "text": "Do you think our essence is unchangeable",
+                "or": "OR",
+                "text2": "can people become entirely different over time?"
+            },
+            {
+                "text": "Is ambition synonymous with greed",
+                "or": "OR",
+                "text2": "with drive and determination?"
+            },
+            {
+                "text": "Can a work of art’s sole purpose be entertainment",
+                "or": "OR",
+                "text2": "must art inherently have intellectual depth?"
+            },
+            {
+                "text": "Does globalization lead to homogenization, where everything and everyone becomes similar",
+                "or": "OR",
+                "text2": "does it foster diversity, since people now have more access to different cultures and references?"
+            },
+            {
+                "text": "Can 'guilty pleasure' shows (reality TV, teen dramas) be considered culture",
+                "or": "OR",
+                "text2": "are they purely commercial?"
+            },
+            {
+                "text": "Can you claim to be happy at any given moment",
+                "or": "OR",
+                "text2": "can you only confirm a happy life when you reach the end of it?"
+            },
+            {
+                "text": "Is the internet truly a democratic space",
+                "or": "OR",
+                "text2": "is it all just appearances, where dictators and authoritarians also exist?"
+            },
+            {
+                "text": "Who exerts more physical effort against strong wind: a person riding a bike",
+                "or": "OR",
+                "text2": "a bird flying?"
+            },
+            {
+                "text": "Coming home late after a long day out, starving and exhausted, would you rather: eat",
+                "or": "OR",
+                "text2": "sleep?"
+            },
+            {
+                "text": "Would you rather live in a place where it’s always daytime",
+                "or": "OR",
+                "text2": "or always nighttime?"
+            },
+            {
+                "text": "Say everything that comes to mind without filter",
+                "or": "OR",
+                "text2": "never speak again?"
+            },
+            {
+                "text": "Have children tomorrow",
+                "or": "OR",
+                "text2": "never have children?"
+            },
+            {
+                "text": "Would you join a reality show",
+                "or": "OR",
+                "text2": "is no amount of money worth that level of exposure?"
+            },
+            {
+                "text": "Assuming both trips reach the same destination, would you prefer: 8 uninterrupted hours by car",
+                "or": "OR",
+                "text2": "20 hours by plane?"
+            },
+            {
+                "text": "Would you rather have a fixed income of 5,000 BRL/month for life",
+                "or": "OR",
+                "text2": "1,000 BRL/month but receive 10 million BRL in 20 years?"
+            },
+            {
+                "text": "Would you take a shot of your own pee for 5,000 BRL",
+                "or": "OR",
+                "text2": "are you not *that* desperate for money?"
+            },
+            {
+                "text": "Are you the type to curate your own playlists",
+                "or": "OR",
+                "text2": "do you prefer 'Top 100 Global Hits' and others’ playlists?"
+            },
+            {
+                "text": "Is ice cream’s physical state: liquid",
+                "or": "OR",
+                "text2": "solid?"
+            },
+            {
+                "text": "Never listen to music again",
+                "or": "OR",
+                "text2": "never watch anything audiovisual again (movies, shows, TV)?"
+            },
+            {
+                "text": "Never talk again",
+                "or": "OR",
+                "text2": "never have sex again?"
+            },
+            {
+                "text": "Ignoring financial/safety concerns, would you rather go to space",
+                "or": "OR",
+                "text2": "explore the ocean’s depths?"
+            },
+            {
+                "text": "Do you flirt with people in unexpected places",
+                "or": "OR",
+                "text2": "stick to social media/spaces 'made for it'?"
+            },
+            {
+                "text": "Do you have moments in your routine where you do nothing but listen to music",
+                "or": "OR",
+                "text2": "is music just background noise for other activities?"
+            },
+            {
+                "text": "Never taste your favorite dessert again",
+                "or": "OR",
+                "text2": "never eat any dish from your favorite cuisine again?"
+            },
+            {
+                "text": "The ideal first date is sitting at a bar to chat and drink",
+                "or": "OR",
+                "text2": "having a secondary activity (exhibitions, events, amusement parks, game bars, etc)?"
+            },
+            {
+                "text": "Who was right in the 2022 Oscars slap incident: Chris Rock",
+                "or": "OR",
+                "text2": "Will Smith?"
+            },
+            {
+                "text": "Would you eat a heaping spoonful of poop for 25,000 BRL",
+                "or": "OR",
+                "text2": "do you still cling to the last shred of dignity in your body?"
+            },
+            {
+                "text": "Is lying necessary to maintain social order",
+                "or": "OR",
+                "text2": "is a painful truth better than a comforting lie?"
+            },
+            {
+                "text": "Would you want to live forever",
+                "or": "OR",
+                "text2": "do you believe life is precious because it ends?"
+            },
+            {
+                "text": "Do you empathize with sad/unjust everyday situations",
+                "or": "OR",
+                "text2": "have you become desensitized and indifferent?"
+            },
+            {
+                "text": "Is vulnerability a sign of strength",
+                "or": "OR",
+                "text2": "weakness?"
+            },
+            {
+                "text": "Would you change something in your past knowing it would alter your present",
+                "or": "OR",
+                "text2": "keep everything as is, mistakes and all?"
+            },
+            {
+                "text": "Is the opposite of love hatred",
+                "or": "OR",
+                "text2": "are these emotions closer than we think?"
+            },
+            {
+                "text": "What motivates people more: words of encouragement (love-based)",
+                "or": "OR",
+                "text2": "or disdain (hate-based)?"
+            },
+            {
+                "text": "Is it okay to step on others to get what you want",
+                "or": "OR",
+                "text2": "does collective effort go further?"
+            },
+            {
+                "text": "Is ambition a virtue",
+                "or": "OR",
+                "text2": "a flaw?"
+            },
+            {
+                "text": "Do you believe in parallel universes/alternate realities",
+                "or": "OR",
+                "text2": "is there only one true reality?"
+            },
+            {
+                "text": "Would you endure suffering if it positively impacted the world in the future",
+                "or": "OR",
+                "text2": "prioritize yourself, since you wouldn’t benefit from the outcome?"
+            },
+            {
+                "text": "Confessing feelings to someone already in a relationship is selfish",
+                "or": "OR",
+                "text2": "romantic?"
+            },
+            {
+                "text": "Are a person’s actions determined by their character",
+                "or": "OR",
+                "text2": "the context they’re in?"
+            },
+            {
+                "text": "Can you be friends with your friend’s enemy",
+                "or": "OR",
+                "text2": "is someone who’s friends with everyone truly friends with no one?"
+            },
+            {
+                "text": "Are there limits to humor",
+                "or": "OR",
+                "text2": "is anything fair game in comedy?"
+            },
+            {
+                "text": "Can a relationship exist without sex",
+                "or": "OR",
+                "text2": "is love without sex just friendship?"
+            },
+            {
+                "text": "Are you more 'go with the flow'",
+                "or": "OR",
+                "text2": "or do you plan every step?"
+            },
+            {
+                "text": "Would you date someone whose hobbies don’t interest you",
+                "or": "OR",
+                "text2": "is it ideal to share similar lifestyles?"
+            },
+            {
+                "text": "Do you believe in chance and coincidence",
+                "or": "OR",
+                "text2": "is everything predestined?"
+            },
+            {
+                "text": "Can someone truly know themselves while in a relationship",
+                "or": "OR",
+                "text2": "must you be alone to self-discover?"
+            },
+            {
+                "text": "Would you rather relive your worst memory",
+                "or": "OR",
+                "text2": "erase your best one?"
+            },
+            {
+                "text": "Those unwilling to make sacrifices don’t truly love",
+                "or": "OR",
+                "text2": "they just prioritize their individuality and desires?"
+            },
+            {
+                "text": "Is stepping on others to succeed wrong",
+                "or": "OR",
+                "text2": "necessary?"
+            },
+            {
+                "text": "Must artists conform to trends to stay relevant",
+                "or": "OR",
+                "text2": "do true artists not need to?"
+            },
+            {
+                "text": "Does the constant search for what’s missing in life push us out of our comfort zone",
+                "or": "OR",
+                "text2": "or cause eternal dissatisfaction?"
+            },
+            {
+                "text": "Would you want to know the whole truth about the world—good and bad",
+                "or": "OR",
+                "text2": "live in blissful ignorance forever?"
+            },
+            {
+                "text": "If possible, would you block people in real life",
+                "or": "OR",
+                "text2": "is that crossing reality’s boundaries?"
+            },
+            {
+                "text": "Relive the same day on repeat for a year",
+                "or": "OR",
+                "text2": "skip an entire year of your life?"
+            },
+            {
+                "text": "Erase your ex’s memories of you",
+                "or": "OR",
+                "text2": "your memories of them?"
+            },
+            {
+                "text": "Would you replace meals with a nutrient pill",
+                "or": "OR",
+                "text2": "spend time eating for pleasure?"
+            },
+            {
+                "text": "Relive the worst year of your life",
+                "or": "OR",
+                "text2": "erase the best year?"
+            },
+            {
+                "text": "If you could live in a different historical era, would you choose 100 years in the past",
+                "or": "OR",
+                "text2": "100 years in the future?"
+            },
+            {
+                "text": "If guaranteed future success, would you endure years of frustration",
+                "or": "OR",
+                "text2": "give up your goal for a higher-quality life now?"
+            },
+            {
+                "text": "Experience the pain of everyone you’ve ever hurt",
+                "or": "OR",
+                "text2": "make others feel the pain they caused you?"
+            },
+            {
+                "text": "Forget everyone you’ve ever met",
+                "or": "OR",
+                "text2": "be forgotten by everyone you know?"
+            },
+            {
+                "text": "Would you rather lose all your memories",
+                "or": "OR",
+                "text2": "never make new ones?"
+            },
+            {
+                "text": "Live a career of failures but gain recognition after 65",
+                "or": "OR",
+                "text2": "be eternally average?"
+            },
+            {
+                "text": "Would you rather relive the best day of your life",
+                "or": "OR",
+                "text2": "get 10,000 BRL?"
+            },
+            {
+                "text": "Would you rather lose your short-term memory",
+                "or": "OR",
+                "text2": "or long-term memory?"
+            },
+            {
+                "text": "Do you prefer a life of constant small pleasures (eating out weekly, binge-watching shows, etc)",
+                "or": "OR",
+                "text2": "rare big pleasures (saving money to travel)?"
+            },
+            {
+                "text": "Lose your best friend",
+                "or": "OR",
+                "text2": "lose all friends except the closest one?"
+            },
+            {
+                "text": "Would you rather temporarily see the world through your parents’ eyes",
+                "or": "OR",
+                "text2": "have them see it through yours?"
+            },
+            {
+                "text": "Would you rather have eyebrows that never stop growing",
+                "or": "OR",
+                "text2": "hair on your fingers that never stops growing?"
+            },
+            {
+                "text": "Would you rather have all your dreams broadcast live on Snapchat",
+                "or": "OR",
+                "text2": "have all your most embarrassing moments go viral on TikTok?"
+            },
+            {
+                "text": "Would you rather always chew with your mouth open",
+                "or": "OR",
+                "text2": "always put your calls on speakerphone in public transport?"
+            },
+            {
+                "text": "Would you rather have to wear stilettos to sleep",
+                "or": "OR",
+                "text2": "wear slippers everywhere you go?"
+            },
+            {
+                "text": "Would you rather have to wear a wedding dress every day",
+                "or": "OR",
+                "text2": "wear a bikini every day?"
+            },
+            {
+                "text": "If you had to join a reality show, would you rather join ‘I'm a Celeb’",
+                "or": "OR",
+                "text2": "‘SAS: Who Dares Wins’?"
+            },
+            {
+                "text": "Would you rather wear sweatpants every day",
+                "or": "OR",
+                "text2": "never be able to wear sweatpants again?"
+            },
+            {
+                "text": "Would you rather accidentally send a spicy message to a relative",
+                "or": "OR",
+                "text2": "to your boss?"
+            },
+            {
+                "text": "Would you rather have fingers made of carrots",
+                "or": "OR",
+                "text2": "feet made of eggplants?"
+            },
+            {
+                "text": "Would you rather clog the toilet on your first day at work",
+                "or": "OR",
+                "text2": "on your first date?"
+            },
+            {
+                "text": "Would you rather have horror movies play on a loop every time you close your eyes",
+                "or": "OR",
+                "text2": "have the song 'Macarena' stuck in your head whenever you're awake?"
+            },
+            {
+                "text": "Would you rather have to sing ‘Bootylicious’ by Destiny’s Child whenever you meet someone new",
+                "or": "OR",
+                "text2": "dance in place every time you speak in a meeting?"
+            },
+            {
+                "text": "Would you rather all your underwear be slightly itchy",
+                "or": "OR",
+                "text2": "all your swimwear be slightly too small?"
+            },
+            {
+                "text": "Would you rather live in a house covered in floral wallpaper",
+                "or": "OR",
+                "text2": "with walls painted in very bright colors?"
+            },
+            {
+                "text": "Would you rather have oven mitts for arms",
+                "or": "OR",
+                "text2": "lamp posts for legs?"
+            },
+            {
+                "text": "Would you rather only be able to move around on roller skates",
+                "or": "OR",
+                "text2": "on skis?"
+            },
+            {
+                "text": "Would you rather live in a world where it rains marshmallows",
+                "or": "OR",
+                "text2": "where it snows cotton candy?"
+            },
+            {
+                "text": "Would you rather get a face tattoo of your choice",
+                "or": "OR",
+                "text2": "a small chest tattoo chosen by someone else?"
+            },
+            {
+                "text": "Would you rather have a mullet haircut",
+                "or": "OR",
+                "text2": "a ponytail forever?"
+            },
+            {
+                "text": "Would you rather never use shampoo again",
+                "or": "OR",
+                "text2": "never use toothpaste again?"
+            },
+            {
+                "text": "Would you rather always speak in rhymes",
+                "or": "OR",
+                "text2": "always speak in riddles?"
+            },
+            {
+                "text": "Would you rather always hop on one foot",
+                "or": "OR",
+                "text2": "always walk squatting?"
+            },
+            {
+                "text": "Would you rather have to eat with chopsticks for the rest of your life",
+                "or": "OR",
+                "text2": "never be able to use a knife again?"
+            },
+            {
+                "text": "Would you rather hear an annoying laugh all day",
+                "or": "OR",
+                "text2": "be tickled for an hour?"
+            },
+            {
+                "text": "Would you rather wear clothes that keep changing",
+                "or": "OR",
+                "text2": "hair that keeps changing?"
+            },
+            {
+                "text": "Would you rather dress up as an Aldi supermarket for Halloween",
+                "or": "OR",
+                "text2": "as a Lidl supermarket?"
+            },
+            {
+                "text": "Would you rather be the funniest person in the world",
+                "or": "OR",
+                "text2": "the most beautiful?"
+            },
+            {
+                "text": "Would you rather pee a little every time you laugh",
+                "or": "OR",
+                "text2": "have a lot of snot come out every time you laugh?"
+            },
+            {
+                "text": "Would you rather pee a little every time you speak",
+                "or": "OR",
+                "text2": "always leave the bathroom door open when using it?"
+            },
+            {
+                "text": "Would you rather always wear clothes that are way too big",
+                "or": "OR",
+                "text2": "always way too tight?"
+            },
+            {
+                "text": "Would you rather eat pizza every day for a year",
+                "or": "OR",
+                "text2": "never be able to eat pizza again?"
+            },
+            {
+                "text": "Would you rather be chased by a giant chicken",
+                "or": "OR",
+                "text2": "by 20 normal-sized chickens?"
+            },
+            {
+                "text": "Would you rather have olives for eyes",
+                "or": "OR",
+                "text2": "a potato for a nose?"
+            },
+            {
+                "text": "Would you rather vomit glitter",
+                "or": "OR",
+                "text2": "cry hot sauce?"
+            },
+            {
+                "text": "Would you rather have hiccups for 10 minutes every time you laugh",
+                "or": "OR",
+                "text2": "never laugh again?"
+            },
+            {
+                "text": "Would you rather have the worst hangover of your life but the funniest night ever",
+                "or": "OR",
+                "text2": "never have a hangover again but also never have a fun night?"
+            },
+            {
+                "text": "Would you rather eat a sand sandwich",
+                "or": "OR",
+                "text2": "drink a glass of mud?"
+            },
+            {
+                "text": "Would you rather be the big spoon",
+                "or": "OR",
+                "text2": "the little spoon?"
+            },
+            {
+                "text": "Would you rather have sex in the morning",
+                "or": "OR",
+                "text2": "have sex late at night?"
+            },
+            {
+                "text": "Would you rather receive kisses on the cheek",
+                "or": "OR",
+                "text2": "kisses on the forehead?"
+            },
+            {
+                "text": "Would you rather have sex in the car",
+                "or": "OR",
+                "text2": "in the shower?"
+            },
+            {
+                "text": "Would you rather more role play",
+                "or": "OR",
+                "text2": "more foreplay?"
+            },
+            {
+                "text": "Would you rather get married, have a house, and a child",
+                "or": "OR",
+                "text2": "never have any of that but travel the world together?"
+            },
+            {
+                "text": "Would you rather have a sex playlist with classical music",
+                "or": "OR",
+                "text2": "with heavy metal?"
+            },
+            {
+                "text": "Would you rather never wear underwear again",
+                "or": "OR",
+                "text2": "never wear socks again?"
+            },
+            {
+                "text": "Would you rather never get married but have your dream house",
+                "or": "OR",
+                "text2": "get married but never live in your dream house?"
+            },
+            {
+                "text": "Would you rather know the date of your death",
+                "or": "OR",
+                "text2": "the cause of your death?"
+            },
+            {
+                "text": "Would you rather receive a thoughtful gift",
+                "or": "OR",
+                "text2": "an expensive gift from your partner?"
+            },
+            {
+                "text": "Would you rather only receive 'good morning' texts",
+                "or": "OR",
+                "text2": "only 'good night' texts?"
+            },
+            {
+                "text": "Would you rather make your partner happy with a white lie",
+                "or": "OR",
+                "text2": "tell the truth directly?"
+            },
+            {
+                "text": "Would you rather have more money and less quality time together",
+                "or": "OR",
+                "text2": "less money and more quality time together?"
+            },
+            {
+                "text": "Would you rather be more personally fulfilled",
+                "or": "OR",
+                "text2": "more professionally fulfilled?"
+            },
+            {
+                "text": "Would you rather stay in a monogamous relationship",
+                "or": "OR",
+                "text2": "explore polyamory?"
+            },
+            {
+                "text": "Would you rather join Love Island",
+                "or": "OR",
+                "text2": "Love is Blind?"
+            },
+            {
+                "text": "Would you rather have sex only in bed for the rest of your life",
+                "or": "OR",
+                "text2": "never be able to have sex in bed again?"
+            },
+            {
+                "text": "Would you rather meet your soulmate but not be able to live with them",
+                "or": "OR",
+                "text2": "be with someone average you can live with?"
+            },
+            {
+                "text": "Would you rather cook every night and your partner clean",
+                "or": "OR",
+                "text2": "the other way around?"
+            },
+            {
+                "text": "Would you rather sleep in separate beds every night and have sex",
+                "or": "OR",
+                "text2": "sleep in the same bed but never have sex again?"
+            },
+            {
+                "text": "Would you rather have the wedding of your dreams",
+                "or": "OR",
+                "text2": "the honeymoon of your dreams?"
+            },
+            {
+                "text": "Would you rather have someone ruin your wedding but still get married",
+                "or": "OR",
+                "text2": "never be able to get married?"
+            },
+            {
+                "text": "Would you rather never be able to talk to each other again but still live together",
+                "or": "OR",
+                "text2": "never see each other again?"
+            },
+            {
+                "text": "Would you rather have a successful business together but break up",
+                "or": "OR",
+                "text2": "live on less than minimum wage but stay together?"
+            },
+            {
+                "text": "Be rich",
+                "or": "OR",
+                "text2": "Be famous"
+            },
+            {
+                "text": "Have your body covered from neck to feet with tattoos",
+                "or": "OR",
+                "text2": "Have a large tattoo on your face"
+            },
+            {
+                "text": "Wash your hands every five minutes",
+                "or": "OR",
+                "text2": "Never be able to wash your hair again"
+            },
+            {
+                "text": "Hop around everywhere",
+                "or": "OR",
+                "text2": "Skip around everywhere"
+            },
+            {
+                "text": "Have an unlimited supply of makeup and skincare from your favorite brands",
+                "or": "OR",
+                "text2": "Own your own house by age 30"
+            },
+            {
+                "text": "Become friends with your celebrity crush",
+                "or": "OR",
+                "text2": "Go on a date with them"
+            },
+            {
+                "text": "Never have to commute to work again",
+                "or": "OR",
+                "text2": "Have three-day weekends"
+            },
+            {
+                "text": "Have Kim Kardashian as your mom",
+                "or": "OR",
+                "text2": "Have Kris Jenner as your mom"
+            },
+            {
+                "text": "Do a handstand after every meal",
+                "or": "OR",
+                "text2": "Do a cartwheel after every meal"
+            },
+            {
+                "text": "Have super slow internet",
+                "or": "OR",
+                "text2": "Always have low battery on your phone"
+            },
+            {
+                "text": "Only listen to 'Baby' by Justin Bieber for the rest of your life",
+                "or": "OR",
+                "text2": "Only listen to 'Red' by Taylor Swift for the rest of your life"
+            },
+            {
+                "text": "Be a character in your favorite TV show",
+                "or": "OR",
+                "text2": "That show never existed"
+            },
+            {
+                "text": "Never be able to use search engines (like Google) again",
+                "or": "OR",
+                "text2": "Never be able to use social media again"
+            },
+            {
+                "text": "Be a famous celebrity",
+                "or": "OR",
+                "text2": "Be married to a famous celebrity (while you stay unknown)"
+            },
+            {
+                "text": "Live inside your favorite childhood movie",
+                "or": "OR",
+                "text2": "Live inside your favorite childhood book"
+            },
+            {
+                "text": "Know how to do the perfect eye shadow blend",
+                "or": "OR",
+                "text2": "Know how to do the perfect contour"
+            },
+            {
+                "text": "Travel to space and discover a new planet",
+                "or": "OR",
+                "text2": "Go on an underwater adventure and discover a new aquatic kingdom"
+            },
+            {
+                "text": "Live on a peaceful tropical island",
+                "or": "OR",
+                "text2": "Live in a busy big city"
+            },
+            {
+                "text": "Become famous for singing",
+                "or": "OR",
+                "text2": "Become famous for acting, dancing, being an artist, or influencer"
+            },
+            {
+                "text": "Change jobs every year until you retire",
+                "or": "OR",
+                "text2": "Have the same job your entire career"
+            },
+            {
+                "text": "Live in a houseboat on a canal",
+                "or": "OR",
+                "text2": "Live in an RV"
+            },
+            {
+                "text": "Get professional hair treatments forever",
+                "or": "OR",
+                "text2": "Get professional manicures forever"
+            },
+            {
+                "text": "Be an Olympic athlete",
+                "or": "OR",
+                "text2": "Be a famous scientist who cures a disease"
+            },
+            {
+                "text": "Spend your money traveling the world with few belongings",
+                "or": "OR",
+                "text2": "Have an amazing house but never leave your hometown"
+            },
+            {
+                "text": "Always take vacations at beaches",
+                "or": "OR",
+                "text2": "Always take vacations in cities"
+            },
+            {
+                "text": "Have Dolly Parton’s wardrobe",
+                "or": "OR",
+                "text2": "Have Billie Eilish’s wardrobe"
+            },
+            {
+                "text": "Wear only black every day forever",
+                "or": "OR",
+                "text2": "Wear all the colors of the rainbow mixed in your clothes every day"
+            },
+            {
+                "text": "Live close to work/university",
+                "or": "OR",
+                "text2": "Live far but have a private driver"
+            },
+            {
+                "text": "Eat only spicy foods for the rest of your life",
+                "or": "OR",
+                "text2": "Never eat spicy food again"
+            },
+            {
+                "text": "Write your own cookbook",
+                "or": "OR",
+                "text2": "Write your own novel"
+            },
+            {
+                "text": "Always have hot summers and freezing winters",
+                "or": "OR",
+                "text2": "Have unpredictable summers and mild winters"
+            },
+            {
+                "text": "Live in an escape room",
+                "or": "OR",
+                "text2": "Live in a Clue (Cluedo) game"
+            },
+            {
+                "text": "Never smell your favorite candle again",
+                "or": "OR",
+                "text2": "Never taste freshly baked cookies again"
+            },
+            {
+                "text": "Talk to animals",
+                "or": "OR",
+                "text2": "Speak all the languages in the world"
+            },
+            {
+                "text": "Go on a road trip across the USA",
+                "or": "OR",
+                "text2": "Go on a road trip across Australia"
+            },
+            {
+                "text": "Live in the world of The Lord of the Rings",
+                "or": "OR",
+                "text2": "Live in the world of Star Wars"
+            },
+            {
+                "text": "Always be an hour late for everything",
+                "or": "OR",
+                "text2": "Always be an hour early for everything"
+            },
+            {
+                "text": "Manage the world’s biggest football team",
+                "or": "OR",
+                "text2": "Manage the world’s best band"
+            },
+            {
+                "text": "Never hear your favorite song again but be friends with the artist",
+                "or": "OR",
+                "text2": "Always have front row seats at their concerts but they don’t know who you are"
+            },
+            {
+                "text": "Have all kitchen appliances in black",
+                "or": "OR",
+                "text2": "Have all kitchen appliances in pink"
+            },
+            {
+                "text": "Be known for giving the best gifts",
+                "or": "OR",
+                "text2": "Be known for giving the best advice"
+            },
+            {
+                "text": "Be known for your great taste in movies",
+                "or": "OR",
+                "text2": "Be known for your great taste in art"
+            },
+            {
+                "text": "Only be able to like posts on Instagram, but never receive likes",
+                "or": "OR",
+                "text2": "Only be able to receive likes, but never like anything"
+            },
+            {
+                "text": "Be a Kardashian",
+                "or": "OR",
+                "text2": "Be a Hilton"
+            },
+            {
+                "text": "Be Kourtney, Kim, Khloé, Kendall",
+                "or": "OR",
+                "text2": "Be Kylie"
+            },
+            {
+                "text": "Live in a luxury penthouse",
+                "or": "OR",
+                "text2": "Live in a huge mansion"
+            },
+            {
+                "text": "Be a model",
+                "or": "OR",
+                "text2": "Be a photographer"
+            },
+            {
+                "text": "Be an amazing cartoonist",
+                "or": "OR",
+                "text2": "Be an amazing portrait artist"
+            },
+            {
+                "text": "Never go on vacation again",
+                "or": "OR",
+                "text2": "Never meet the love of your life"
+            },
+            {
+                "text": "Only have one pair of shoes",
+                "or": "OR",
+                "text2": "Only have one coat"
+            },
+            {
+                "text": "Only eat yogurt",
+                "or": "OR",
+                "text2": "Only eat peanut butter"
+            },
+            {
+                "text": "Be followed by a cat all day",
+                "or": "OR",
+                "text2": "Be followed by a dog all day"
+            },
+            {
+                "text": "Live with your best friend",
+                "or": "OR",
+                "text2": "Live with your partner"
+            },
+            {
+                "text": "Live only on Cheese Strings",
+                "or": "OR",
+                "text2": "Live only on Babybels"
+            },
+            {
+                "text": "Only shop at Lidl",
+                "or": "OR",
+                "text2": "Only shop at Aldi"
+            },
+            {
+                "text": "Never eat Christmas dinner again but spend it with your family",
+                "or": "OR",
+                "text2": "Have the best Christmas dinner but spend it all alone"
+            },
+            {
+                "text": "Give up baths but have a powerful shower",
+                "or": "OR",
+                "text2": "Be able to take baths but have a weak shower"
+            },
+            {
+                "text": "Shave your eyebrows",
+                "or": "OR",
+                "text2": "Shave half your hair"
+            },
+            {
+                "text": "Eat an insect",
+                "or": "OR",
+                "text2": "Eat a chocolate covered in dirt"
+            },
+            {
+                "text": "Sweat maple syrup",
+                "or": "OR",
+                "text2": "Cry strawberry jam"
+            },
+            {
+                "text": "Wear pink Ugg boots every day for the rest of your life",
+                "or": "OR",
+                "text2": "Wear pink Crocs every day for the rest of your life"
+            },
+            {
+                "text": "If you could live inside a Disney movie, would you rather live in the sea like The Little Mermaid",
+                "or": "OR",
+                "text2": "or in the world of Aladdin"
+            },
+            {
+                "text": "Would you rather be stuck on a deserted island together",
+                "or": "OR",
+                "text2": "in a busy city but apart?"
+            },
+            {
+                "text": "Would you rather have a big wedding",
+                "or": "OR",
+                "text2": "elope and get married in secret?"
+            },
+            {
+                "text": "Would you rather spend a rainy day cuddling at home",
+                "or": "OR",
+                "text2": "exploring the city together?"
+            },
+            {
+                "text": "Would you rather share a hobby",
+                "or": "OR",
+                "text2": "have separate hobbies to teach each other?"
+            },
+            {
+                "text": "Would you rather lose all the money you earned this year",
+                "or": "OR",
+                "text2": "lose all the memories you made this year?"
+            },
+            {
+                "text": "Would you rather have no sense of taste",
+                "or": "OR",
+                "text2": "no sense of smell?"
+            },
+            {
+                "text": "Would you rather always hit red lights for the rest of your life",
+                "or": "OR",
+                "text2": "always have slow internet?"
+            },
+            {
+                "text": "Would you rather win R$ 25,000",
+                "or": "OR",
+                "text2": "your best friend win R$ 250,000?"
+            },
+            {
+                "text": "Would you rather wake up in your underwear at work",
+                "or": "OR",
+                "text2": "wake up naked in the woods far from home?"
+            },
+            {
+                "text": "Would you rather see your mom’s search history",
+                "or": "OR",
+                "text2": "your dad’s search history?"
+            },
+            {
+                "text": "Would you rather find a dead body",
+                "or": "OR",
+                "text2": "witness a murder?"
+            },
+            {
+                "text": "Would you rather have thought bubbles appear over your head so everyone can see what you’re thinking",
+                "or": "OR",
+                "text2": "have your teenage diary published online?"
+            },
+            {
+                "text": "Would you rather be 4 years old forever",
+                "or": "OR",
+                "text2": "be 90 years old forever?"
+            },
+            {
+                "text": "Would you rather blush every time someone says 'hello'",
+                "or": "OR",
+                "text2": "get really angry every time someone says 'goodbye'?"
+            },
+            {
+                "text": "Would you rather be famous in history books",
+                "or": "OR",
+                "text2": "be forgotten after you die?"
+            },
+            {
+                "text": "Would you rather be the strongest person in the world",
+                "or": "OR",
+                "text2": "the smartest person in the world?"
+            },
+            {
+                "text": "Would you rather have a vivid imagination",
+                "or": "OR",
+                "text2": "a photographic memory?"
+            },
+            {
+                "text": "Would you rather live the rest of your life in the wilderness",
+                "or": "OR",
+                "text2": "in prison?"
+            },
+            {
+                "text": "Would you rather live in a country where the government always does the right thing",
+                "or": "OR",
+                "text2": "live in a country where you are the ruler?"
+            },
+            {
+                "text": "Would you rather live in a world with no crime",
+                "or": "OR",
+                "text2": "in a world with no privacy?"
+            },
+            {
+                "text": "Would you rather live 100 more years with your body in perfect health",
+                "or": "OR",
+                "text2": "age normally?"
+            },
+            {
+                "text": "Would you rather give up all technology (phones, computers, etc.)",
+                "or": "OR",
+                "text2": "give up all movies, series, and books?"
+            },
+            {
+                "text": "Would you rather live in a future where everyone takes everything very seriously",
+                "or": "OR",
+                "text2": "a future where no one takes anything seriously?"
+            },
+            {
+                "text": "Would you rather be the center of attention",
+                "or": "OR",
+                "text2": "go unnoticed?"
+            },
+            {
+                "text": "Would you rather communicate through telepathy",
+                "or": "OR",
+                "text2": "know all the languages in the world?"
+            },
+            {
+                "text": "Would you rather have a one-minute conversation with your past self",
+                "or": "OR",
+                "text2": "with your future self?"
+            },
+            {
+                "text": "Would you rather switch bodies with your ex",
+                "or": "OR",
+                "text2": "switch bodies with your grandmother?"
+            },
+            {
+                "text": "Would you rather bring back a loved one and have them be unhappy in the living world",
+                "or": "OR",
+                "text2": "suffer the loss but keep the best memories?"
+            },
+            {
+                "text": "Would you rather cry uncontrollably when sad",
+                "or": "OR",
+                "text2": "scream uncontrollably?"
+            },
+            {
+                "text": "Would you rather end poverty",
+                "or": "OR",
+                "text2": "bring world peace?"
+            },
+            {
+                "text": "Would you rather live in Narnia",
+                "or": "OR",
+                "text2": "in Westeros?"
+            },
+            {
+                "text": "Would you rather have your favorite musician give a private concert for you",
+                "or": "OR",
+                "text2": "have dinner with you?"
+            },
+            {
+                "text": "Would you rather meet Barack Obama",
+                "or": "OR",
+                "text2": "Albert Einstein?"
+            },
+            {
+                "text": "Would you rather work for a kind and fair boss",
+                "or": "OR",
+                "text2": "be a tough and unfair boss?"
+            }
         ]
     };
 
@@ -1967,13 +1971,13 @@
     }
 
     // Fechar o pop-up ao clicar fora dele
-    window.onclick = function(event) {
+    window.onclick = function (event) {
         let popup = document.getElementById("popup");
         if (event.target === popup) {
             popup.style.display = "none";
         }
     };
 
-window.onload = loadQuestions;
+    window.onload = loadQuestions;
 
 </script>

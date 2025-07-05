@@ -12,49 +12,54 @@
 
 <div class="game-container">
     <!-- Menu -->
-<nav class="menu">
-    <a href="../menuEs.html" class="menu-title" style="position: relative;">
-        <div class="voltar-container" onclick="window.location.href='../menuPtBr.html'">
-            &#8678;
-        </div>
-        <img class="logo-bebedeira" src="../images/logo.png" alt="Logo Bebedeira" />
-    </a>
-</nav>
+    <nav class="menu">
+        <a href="../menuEs.html" class="menu-title" style="position: relative;">
+            <div class="voltar-container" onclick="window.location.href='../menuPtBr.html'">
+                &#8678;
+            </div>
+            <img class="logo-bebedeira" src="../images/logo.png" alt="Logo Bebedeira" />
+        </a>
+    </nav>
 
-<!-- Conteudo do jogo -->
-<h1>Topzeira</h1>
+    <!-- Conteudo do jogo -->
     <div>
-    <a href="#" onclick="openPopup()"><br />
-        <img class="img-regras" src="../images/regras.png" alt="Reglas" />
-    </a>
-    <h4>Reglas</h4>
+        <h1>Topzeira</h1>
+
+        <a href="#" onclick="openPopup()"><br />
+            <img class="img-regras" src="../images/regras.png" alt="Reglas" />
+        </a>
+        <h4>Reglas</h4>
     </div>
 
-<!-- Pop-up -->
+    <!-- Pop-up -->
     <div id="popup" class="popup">
         <div class="popup-content">
-            <span class="close" onclick="closePopup()">&times;</span>
-            <h3>Reglas del Juego</h3>
-            <h5>Topzeira</h5>
-        <ul>
-            <li>En este juego cada jugador deberá dar una respuesta que esté entre los Top 10 de ese tema.</li>
-            <li>¿Y cómo va a funcionar?</li>
-            <li>Una persona lee el tema de la carta</li>
-            <li>Y, en sentido horario, cada uno va respondiendo lo que cree que está en el top 10 de ese tema</li>
-            <li>Tienes la opción de pasar o responder</li>
-            <li>Si pasas, no juegas más en esta ronda</li>
-            <li>Si respondes y alguien duda, tendremos dos opciones para resolver el desafío</li>
-            <li>Si quien dudó de la respuesta tenía razón, la persona que respondió mal bebe un trago y ese Top termina</li>
-            <li>Si quien dudó estaba equivocado, él mismo bebe un trago y ese Top termina</li>
-            <li>¡Diviértete! 🍻</li>
-        </ul>
+            <div class="popup-header">
+                <h2>Reglas del Juego</h2>
+                <span class="close" onclick="closePopup()">&times;</span>
+            </div>
+            <ul>
+                <li>En este juego cada jugador deberá dar una respuesta que esté entre los Top 10 de ese tema.</li>
+                <li>¿Y cómo va a funcionar?</li>
+                <li>Una persona lee el tema de la carta</li>
+                <li>Y, en sentido horario, cada uno va respondiendo lo que cree que está en el top 10 de ese tema
+                </li>
+                <li>Tienes la opción de pasar o responder</li>
+                <li>Si pasas, no juegas más en esta ronda</li>
+                <li>Si respondes y alguien duda, tendremos dos opciones para resolver el desafío</li>
+                <li>Si quien dudó de la respuesta tenía razón, la persona que respondió mal bebe un trago y ese Top
+                    termina</li>
+                <li>Si quien dudó estaba equivocado, él mismo bebe un trago y ese Top termina</li>
+                <li>¡Diviértete! 🍻</li>
+            </ul>
+        </div>
     </div>
-</div>
 </div>
 <div class="card-frase">
     <p id="questionTopzeira"></p>
     <div class="center-container">
-        <img class="pergunta-e-resposta" src="../images/pergunta-e-resposta.png" onclick="showAnswerPopup()" alt="Respuesta">
+        <img class="pergunta-e-resposta" src="../images/pergunta-e-resposta.png" onclick="showAnswerPopup()"
+             alt="Respuesta">
         <h4>Respuesta</h4>
     </div>
 </div>
@@ -78,1164 +83,1164 @@
 <script>
 
     const topzeiraData = {
-    "questions": [
-        {
-            "question": "Top 10 países que más consumen cerveza en el mundo",
-            "answer": [
-                "China",
-                "Estados Unidos",
-                "Brasil",
-                "Alemania",
-                "Rusia",
-                "México",
-                "Japón",
-                "Reino Unido",
-                "Polonia",
-                "España"
-            ]
-        },
-        {
-            "question": "Top 10 bebidas alcohólicas más consumidas en el mundo",
-            "answer": [
-                "Cerveza",
-                "Vino",
-                "Vodka",
-                "Sake",
-                "Whisky",
-                "Ron",
-                "Tequila",
-                "Ginebra",
-                "Champán",
-                "Coñac"
-            ]
-        },
-        {
-            "question": "Top 10 ciudades con la mejor vida nocturna del mundo",
-            "answer": [
-                "Berlín, Alemania",
-                "Nueva York, EE.UU.",
-                "Ibiza, España",
-                "Las Vegas, EE.UU.",
-                "Bangkok, Tailandia",
-                "Río de Janeiro, Brasil",
-                "Buenos Aires, Argentina",
-                "Ámsterdam, Holanda",
-                "Miami, EE.UU.",
-                "Barcelona, España"
-            ]
-        },
-        {
-            "question": "Top 10 tragos más pedidos en bares",
-            "answer": [
-                "Caipirinha",
-                "Margarita",
-                "Mojito",
-                "Martini",
-                "Old Fashioned",
-                "Negroni",
-                "Piña Colada",
-                "Cosmopolitan",
-                "Manhattan",
-                "Daiquiri"
-            ]
-        },
-        {
-            "question": "Países con más muertes en la Segunda Guerra Mundial",
-            "answer": [
-                "Unión Soviética",
-                "China",
-                "Alemania",
-                "Polonia",
-                "Indonesia/Indias Orientales Neerlandesas",
-                "Japón",
-                "India",
-                "Serbia/Yugoslavia",
-                "Vietnam/Indochina Francesa",
-                "Francia"
-            ]
-        },
-        {
-            "question": "Personajes más mencionados en la Biblia",
-            "answer": [
-                "Jesús",
-                "David",
-                "Moisés",
-                "Jacob",
-                "Aarón",
-                "Saúl",
-                "Salomón",
-                "José",
-                "Pablo",
-                "Abraham"
-            ]
-        },
-        {
-            "question": "Goleadores de la selección brasileña (todos los tiempos)",
-            "answer": [
-                "Neymar",
-                "Pelé",
-                "Ronaldo",
-                "Romário",
-                "Zico",
-                "Jairzinho",
-                "Rivelino",
-                "Bebeto",
-                "Leônidas",
-                "Rivaldo"
-            ]
-        },
-        {
-            "question": "Países más fríos",
-            "answer": [
-                "Rusia",
-                "Canadá",
-                "Noruega",
-                "Islandia",
-                "Mongolia",
-                "Finlandia",
-                "Kirguistán",
-                "Estonia",
-                "Suecia",
-                "Suiza"
-            ]
-        },
-        {
-            "question": "Países con más multimillonarios",
-            "answer": [
-                "Estados Unidos",
-                "China",
-                "Alemania",
-                "Rusia",
-                "Reino Unido / Inglaterra",
-                "Suiza",
-                "India",
-                "Arabia Saudita",
-                "Francia",
-                "Italia"
-            ]
-        },
-        {
-            "question": "Los mayores clubes de fútbol del siglo XX",
-            "answer": [
-                "Real Madrid",
-                "Manchester United",
-                "Bayern de Múnich",
-                "Barcelona",
-                "Ajax",
-                "Santos",
-                "Juventus",
-                "Peñarol",
-                "River Plate",
-                "Flamengo"
-            ]
-        },
-        {
-            "question": "Bandas de rock nacional con más discos vendidos",
-            "answer": [
-                "Legião Urbana",
-                "Sepultura",
-                "Kid Abelha",
-                "Roupa Nova",
-                "KLB",
-                "Titãs",
-                "Skank",
-                "Charlie Brown Jr",
-                "Os Paralamas do Sucesso",
-                "Raimundos"
-            ]
-        },
-        {
-            "question": "Teclas más utilizadas en el teclado",
-            "answer": [
-                "Barra espaciadora",
-                "Retroceso (Backspace)",
-                "Control",
-                "Flecha abajo",
-                "Flecha arriba",
-                "Enter",
-                "Shift",
-                "Tab",
-                "Flecha izquierda",
-                "Flecha derecha"
-            ]
-        },
-        {
-            "question": "Mamíferos más numerosos en el planeta",
-            "answer": [
-                "Ardilla",
-                "Rata",
-                "Ratón",
-                "Murciélago",
-                "Humano",
-                "Vaca/Buey",
-                "Oveja/Carnero",
-                "Cerdo",
-                "Perro",
-                "Cabra"
-            ]
-        },
-        {
-            "question": "Los mayores objetos del sistema solar",
-            "answer": [
-                "Sol",
-                "Júpiter",
-                "Saturno",
-                "Urano",
-                "Neptuno",
-                "Tierra",
-                "Venus",
-                "Marte",
-                "Ganimedes (luna de Júpiter)",
-                "Titán (luna de Saturno)"
-            ]
-        },
-        {
-            "question": "Tipos de tejidos más producidos en el mundo",
-            "answer": [
-                "Poliéster",
-                "Algodón",
-                "Cuero",
-                "Nylon",
-                "Viscosa",
-                "Fibra acrílica",
-                "Yute",
-                "Lana",
-                "Fibra de coco / Coir",
-                "Acetato"
-            ]
-        },
-        {
-            "question": "Bandas que más discos han vendido en la historia",
-            "answer": [
-                "The Beatles",
-                "Led Zeppelin",
-                "Pink Floyd",
-                "Queen",
-                "Eagles",
-                "AC/DC",
-                "The Rolling Stones",
-                "U2",
-                "Aerosmith",
-                "ABBA"
-            ]
-        },
-        {
-            "question": "Animales más usados para transporte de carga en el mundo",
-            "answer": [
-                "Asno/Burro/Mulo",
-                "Burro/Mula",
-                "Caballo",
-                "Buey/Vaca",
-                "Dromedario",
-                "Cabra/Bode",
-                "Búfalo",
-                "Llama",
-                "Elefante",
-                "Camello"
-            ]
-        },
-        {
-            "question": "Países con más medallas olímpicas",
-            "answer": [
-                "Estados Unidos",
-                "Rusia (+ Unión Soviética)",
-                "Alemania (Oriental, Occidental, Unificada)",
-                "Reino Unido/Inglaterra",
-                "China",
-                "Francia",
-                "Italia",
-                "Hungría",
-                "Japón",
-                "Australia"
-            ]
-        },
-        {
-            "question": "Idiomas con más artículos en Wikipedia",
-            "answer": [
-                "Inglés",
-                "Cebuano",
-                "Alemán",
-                "Sueco",
-                "Francés",
-                "Holandés",
-                "Ruso",
-                "Español",
-                "Italiano",
-                "Árabe"
-            ]
-        },
-        {
-            "question": "Frutas más producidas en el mundo",
-            "answer": [
-                "Banana",
-                "Sandía",
-                "Manzana",
-                "Uva",
-                "Naranja",
-                "Mango",
-                "Plátano/Banana macho",
-                "Mandarina",
-                "Piña",
-                "Melón"
-            ]
-        },
-        {
-            "question": "Países más poblados",
-            "answer": [
-                "China",
-                "India",
-                "Estados Unidos",
-                "Indonesia",
-                "Pakistán",
-                "Brasil",
-                "Nigeria",
-                "Bangladesh",
-                "Rusia",
-                "México"
-            ]
-        },
-        {
-            "question": "Compositores clásicos más importantes",
-            "answer": [
-                "Beethoven",
-                "Bach",
-                "Mozart",
-                "Brahms",
-                "Wagner",
-                "Debussy",
-                "Chaikovski",
-                "Chopin",
-                "Haydn",
-                "Vivaldi"
-            ]
-        },
-        {
-            "question": "Países que más extraen oro",
-            "answer": [
-                "China",
-                "Australia",
-                "Rusia",
-                "Estados Unidos",
-                "Canadá",
-                "Ghana",
-                "Perú",
-                "Sudán",
-                "Indonesia",
-                "Brasil"
-            ]
-        },
-        {
-            "question": "Primeros signos del horóscopo tradicional chino",
-            "answer": [
-                "Rata",
-                "Búfalo",
-                "Tigre",
-                "Conejo",
-                "Dragón",
-                "Serpiente",
-                "Caballo",
-                "Cabra",
-                "Mono",
-                "Gallo"
-            ]
-        },
-        {
-            "question": "Verduras y hortalizas más usadas en jugos en el mundo",
-            "answer": [
-                "Zanahoria",
-                "Remolacha",
-                "Espinaca",
-                "Col rizada",
-                "Pepino",
-                "Apio",
-                "Lechuga",
-                "Rúcula",
-                "Tomate",
-                "Jengibre"
-            ]
-        },
-        {
-            "question": "Partes del cuerpo que más sufren fracturas",
-            "answer": [
-                "Brazo",
-                "Pierna",
-                "Muñeca",
-                "Columna vertebral",
-                "Torso",
-                "Fémur",
-                "Clavícula",
-                "Costilla",
-                "Columna cervical",
-                "Tobillo"
-            ]
-        },
-         {
-        "question": "Animales que aparecen en más fábulas",
-        "answer": [
-            "Zorro",
-            "León",
-            "Lobo",
-            "Conejo",
-            "Cuervo",
-            "Cigarra",
-            "Hormiga",
-            "Tortuga",
-            "Liebre",
-            "Oso"
+        "questions": [
+            {
+                "question": "Top 10 países que más consumen cerveza en el mundo",
+                "answer": [
+                    "China",
+                    "Estados Unidos",
+                    "Brasil",
+                    "Alemania",
+                    "Rusia",
+                    "México",
+                    "Japón",
+                    "Reino Unido",
+                    "Polonia",
+                    "España"
+                ]
+            },
+            {
+                "question": "Top 10 bebidas alcohólicas más consumidas en el mundo",
+                "answer": [
+                    "Cerveza",
+                    "Vino",
+                    "Vodka",
+                    "Sake",
+                    "Whisky",
+                    "Ron",
+                    "Tequila",
+                    "Ginebra",
+                    "Champán",
+                    "Coñac"
+                ]
+            },
+            {
+                "question": "Top 10 ciudades con la mejor vida nocturna del mundo",
+                "answer": [
+                    "Berlín, Alemania",
+                    "Nueva York, EE.UU.",
+                    "Ibiza, España",
+                    "Las Vegas, EE.UU.",
+                    "Bangkok, Tailandia",
+                    "Río de Janeiro, Brasil",
+                    "Buenos Aires, Argentina",
+                    "Ámsterdam, Holanda",
+                    "Miami, EE.UU.",
+                    "Barcelona, España"
+                ]
+            },
+            {
+                "question": "Top 10 tragos más pedidos en bares",
+                "answer": [
+                    "Caipirinha",
+                    "Margarita",
+                    "Mojito",
+                    "Martini",
+                    "Old Fashioned",
+                    "Negroni",
+                    "Piña Colada",
+                    "Cosmopolitan",
+                    "Manhattan",
+                    "Daiquiri"
+                ]
+            },
+            {
+                "question": "Países con más muertes en la Segunda Guerra Mundial",
+                "answer": [
+                    "Unión Soviética",
+                    "China",
+                    "Alemania",
+                    "Polonia",
+                    "Indonesia/Indias Orientales Neerlandesas",
+                    "Japón",
+                    "India",
+                    "Serbia/Yugoslavia",
+                    "Vietnam/Indochina Francesa",
+                    "Francia"
+                ]
+            },
+            {
+                "question": "Personajes más mencionados en la Biblia",
+                "answer": [
+                    "Jesús",
+                    "David",
+                    "Moisés",
+                    "Jacob",
+                    "Aarón",
+                    "Saúl",
+                    "Salomón",
+                    "José",
+                    "Pablo",
+                    "Abraham"
+                ]
+            },
+            {
+                "question": "Goleadores de la selección brasileña (todos los tiempos)",
+                "answer": [
+                    "Neymar",
+                    "Pelé",
+                    "Ronaldo",
+                    "Romário",
+                    "Zico",
+                    "Jairzinho",
+                    "Rivelino",
+                    "Bebeto",
+                    "Leônidas",
+                    "Rivaldo"
+                ]
+            },
+            {
+                "question": "Países más fríos",
+                "answer": [
+                    "Rusia",
+                    "Canadá",
+                    "Noruega",
+                    "Islandia",
+                    "Mongolia",
+                    "Finlandia",
+                    "Kirguistán",
+                    "Estonia",
+                    "Suecia",
+                    "Suiza"
+                ]
+            },
+            {
+                "question": "Países con más multimillonarios",
+                "answer": [
+                    "Estados Unidos",
+                    "China",
+                    "Alemania",
+                    "Rusia",
+                    "Reino Unido / Inglaterra",
+                    "Suiza",
+                    "India",
+                    "Arabia Saudita",
+                    "Francia",
+                    "Italia"
+                ]
+            },
+            {
+                "question": "Los mayores clubes de fútbol del siglo XX",
+                "answer": [
+                    "Real Madrid",
+                    "Manchester United",
+                    "Bayern de Múnich",
+                    "Barcelona",
+                    "Ajax",
+                    "Santos",
+                    "Juventus",
+                    "Peñarol",
+                    "River Plate",
+                    "Flamengo"
+                ]
+            },
+            {
+                "question": "Bandas de rock nacional con más discos vendidos",
+                "answer": [
+                    "Legião Urbana",
+                    "Sepultura",
+                    "Kid Abelha",
+                    "Roupa Nova",
+                    "KLB",
+                    "Titãs",
+                    "Skank",
+                    "Charlie Brown Jr",
+                    "Os Paralamas do Sucesso",
+                    "Raimundos"
+                ]
+            },
+            {
+                "question": "Teclas más utilizadas en el teclado",
+                "answer": [
+                    "Barra espaciadora",
+                    "Retroceso (Backspace)",
+                    "Control",
+                    "Flecha abajo",
+                    "Flecha arriba",
+                    "Enter",
+                    "Shift",
+                    "Tab",
+                    "Flecha izquierda",
+                    "Flecha derecha"
+                ]
+            },
+            {
+                "question": "Mamíferos más numerosos en el planeta",
+                "answer": [
+                    "Ardilla",
+                    "Rata",
+                    "Ratón",
+                    "Murciélago",
+                    "Humano",
+                    "Vaca/Buey",
+                    "Oveja/Carnero",
+                    "Cerdo",
+                    "Perro",
+                    "Cabra"
+                ]
+            },
+            {
+                "question": "Los mayores objetos del sistema solar",
+                "answer": [
+                    "Sol",
+                    "Júpiter",
+                    "Saturno",
+                    "Urano",
+                    "Neptuno",
+                    "Tierra",
+                    "Venus",
+                    "Marte",
+                    "Ganimedes (luna de Júpiter)",
+                    "Titán (luna de Saturno)"
+                ]
+            },
+            {
+                "question": "Tipos de tejidos más producidos en el mundo",
+                "answer": [
+                    "Poliéster",
+                    "Algodón",
+                    "Cuero",
+                    "Nylon",
+                    "Viscosa",
+                    "Fibra acrílica",
+                    "Yute",
+                    "Lana",
+                    "Fibra de coco / Coir",
+                    "Acetato"
+                ]
+            },
+            {
+                "question": "Bandas que más discos han vendido en la historia",
+                "answer": [
+                    "The Beatles",
+                    "Led Zeppelin",
+                    "Pink Floyd",
+                    "Queen",
+                    "Eagles",
+                    "AC/DC",
+                    "The Rolling Stones",
+                    "U2",
+                    "Aerosmith",
+                    "ABBA"
+                ]
+            },
+            {
+                "question": "Animales más usados para transporte de carga en el mundo",
+                "answer": [
+                    "Asno/Burro/Mulo",
+                    "Burro/Mula",
+                    "Caballo",
+                    "Buey/Vaca",
+                    "Dromedario",
+                    "Cabra/Bode",
+                    "Búfalo",
+                    "Llama",
+                    "Elefante",
+                    "Camello"
+                ]
+            },
+            {
+                "question": "Países con más medallas olímpicas",
+                "answer": [
+                    "Estados Unidos",
+                    "Rusia (+ Unión Soviética)",
+                    "Alemania (Oriental, Occidental, Unificada)",
+                    "Reino Unido/Inglaterra",
+                    "China",
+                    "Francia",
+                    "Italia",
+                    "Hungría",
+                    "Japón",
+                    "Australia"
+                ]
+            },
+            {
+                "question": "Idiomas con más artículos en Wikipedia",
+                "answer": [
+                    "Inglés",
+                    "Cebuano",
+                    "Alemán",
+                    "Sueco",
+                    "Francés",
+                    "Holandés",
+                    "Ruso",
+                    "Español",
+                    "Italiano",
+                    "Árabe"
+                ]
+            },
+            {
+                "question": "Frutas más producidas en el mundo",
+                "answer": [
+                    "Banana",
+                    "Sandía",
+                    "Manzana",
+                    "Uva",
+                    "Naranja",
+                    "Mango",
+                    "Plátano/Banana macho",
+                    "Mandarina",
+                    "Piña",
+                    "Melón"
+                ]
+            },
+            {
+                "question": "Países más poblados",
+                "answer": [
+                    "China",
+                    "India",
+                    "Estados Unidos",
+                    "Indonesia",
+                    "Pakistán",
+                    "Brasil",
+                    "Nigeria",
+                    "Bangladesh",
+                    "Rusia",
+                    "México"
+                ]
+            },
+            {
+                "question": "Compositores clásicos más importantes",
+                "answer": [
+                    "Beethoven",
+                    "Bach",
+                    "Mozart",
+                    "Brahms",
+                    "Wagner",
+                    "Debussy",
+                    "Chaikovski",
+                    "Chopin",
+                    "Haydn",
+                    "Vivaldi"
+                ]
+            },
+            {
+                "question": "Países que más extraen oro",
+                "answer": [
+                    "China",
+                    "Australia",
+                    "Rusia",
+                    "Estados Unidos",
+                    "Canadá",
+                    "Ghana",
+                    "Perú",
+                    "Sudán",
+                    "Indonesia",
+                    "Brasil"
+                ]
+            },
+            {
+                "question": "Primeros signos del horóscopo tradicional chino",
+                "answer": [
+                    "Rata",
+                    "Búfalo",
+                    "Tigre",
+                    "Conejo",
+                    "Dragón",
+                    "Serpiente",
+                    "Caballo",
+                    "Cabra",
+                    "Mono",
+                    "Gallo"
+                ]
+            },
+            {
+                "question": "Verduras y hortalizas más usadas en jugos en el mundo",
+                "answer": [
+                    "Zanahoria",
+                    "Remolacha",
+                    "Espinaca",
+                    "Col rizada",
+                    "Pepino",
+                    "Apio",
+                    "Lechuga",
+                    "Rúcula",
+                    "Tomate",
+                    "Jengibre"
+                ]
+            },
+            {
+                "question": "Partes del cuerpo que más sufren fracturas",
+                "answer": [
+                    "Brazo",
+                    "Pierna",
+                    "Muñeca",
+                    "Columna vertebral",
+                    "Torso",
+                    "Fémur",
+                    "Clavícula",
+                    "Costilla",
+                    "Columna cervical",
+                    "Tobillo"
+                ]
+            },
+            {
+                "question": "Animales que aparecen en más fábulas",
+                "answer": [
+                    "Zorro",
+                    "León",
+                    "Lobo",
+                    "Conejo",
+                    "Cuervo",
+                    "Cigarra",
+                    "Hormiga",
+                    "Tortuga",
+                    "Liebre",
+                    "Oso"
+                ]
+            },
+            {
+                "question": "Piedras preciosas más utilizadas en anillos de compromiso",
+                "answer": [
+                    "Diamante",
+                    "Zafiro",
+                    "Esmeralda",
+                    "Rubí",
+                    "Topacio",
+                    "Amatista",
+                    "Turmalina",
+                    "Ópalo",
+                    "Tanzanita",
+                    "Morganita"
+                ]
+            },
+            {
+                "question": "Insectos más cultivados en granjas",
+                "answer": [
+                    "Abeja",
+                    "Gusano de seda",
+                    "Grillo",
+                    "Tenebrio (larva de harina)",
+                    "Saltamontes",
+                    "Mosca soldado negra",
+                    "Escarabajo rinoceronte",
+                    "Hormiga (para estudios o alimentación exótica)",
+                    "Cochinilla",
+                    "Termita (en algunos países)"
+                ]
+            },
+            {
+                "question": "Países con más dromedarios",
+                "answer": [
+                    "Somalia",
+                    "Sudán",
+                    "Chad",
+                    "Etiopía",
+                    "Kenia",
+                    "Arabia Saudita",
+                    "Níger",
+                    "Mauritania",
+                    "India",
+                    "Pakistán"
+                ]
+            },
+            {
+                "question": "Países con mayor biodiversidad",
+                "answer": [
+                    "Brasil",
+                    "Colombia",
+                    "Indonesia",
+                    "China",
+                    "México",
+                    "Perú",
+                    "Australia",
+                    "India",
+                    "Ecuador",
+                    "Venezuela"
+                ]
+            },
+            {
+                "question": "Animales más pesados de América del Sur (excepto acuáticos)",
+                "answer": [
+                    "Tapir",
+                    "Armadillo gigante",
+                    "Oso hormiguero gigante",
+                    "Jaguar",
+                    "Pecarí",
+                    "Capibara",
+                    "Venado catingueiro",
+                    "Venado del pantano",
+                    "Caimán negro",
+                    "Cerdo salvaje"
+                ]
+            },
+            {
+                "question": "Animales más venenosos",
+                "answer": [
+                    "Avispa marina (cubomedusa)",
+                    "Pulpo de anillos azules",
+                    "Pez piedra",
+                    "Serpiente taipán del interior",
+                    "Rana dardo venenosa",
+                    "Raya",
+                    "Escorpión amarillo",
+                    "Caracol cono",
+                    "Viuda negra",
+                    "Araña armadeira"
+                ]
+            },
+            {
+                "question": "Países con la costa más larga",
+                "answer": [
+                    "Canadá",
+                    "Noruega",
+                    "Indonesia",
+                    "Rusia",
+                    "Filipinas",
+                    "Japón",
+                    "Australia",
+                    "Estados Unidos",
+                    "Nueva Zelanda",
+                    "Brasil"
+                ]
+            },
+            {
+                "question": "Países con mayor producción de arroz",
+                "answer": [
+                    "China",
+                    "India",
+                    "Indonesia",
+                    "Bangladés",
+                    "Vietnam",
+                    "Tailandia",
+                    "Myanmar",
+                    "Filipinas",
+                    "Brasil",
+                    "Japón"
+                ]
+            },
+            {
+                "question": "Animales marinos más largos",
+                "answer": [
+                    "Ballena azul",
+                    "Cachalote",
+                    "Tiburón ballena",
+                    "Tiburón peregrino",
+                    "Calamar colosal",
+                    "Calamar gigante",
+                    "Tiburón blanco",
+                    "Orca",
+                    "Anguila lobo",
+                    "Pez sierra"
+                ]
+            },
+            {
+                "question": "Animales más mencionados en la Biblia",
+                "answer": [
+                    "Cordero",
+                    "León",
+                    "Serpiente",
+                    "Asno",
+                    "Camello",
+                    "Águila",
+                    "Buey",
+                    "Ciervo",
+                    "Paloma",
+                    "Pez"
+                ]
+            },
+            {
+                "question": "Árboles más utilizados para fabricar muebles en Brasil",
+                "answer": [
+                    "Caoba",
+                    "Ipê",
+                    "Cedro",
+                    "Peroba",
+                    "Jatobá",
+                    "Angelim",
+                    "Cumaru",
+                    "Tauarí",
+                    "Freijó",
+                    "Marfil"
+                ]
+            },
+            {
+                "question": "Razas de perros más pequeñas",
+                "answer": [
+                    "Chihuahua",
+                    "Pomerania (Spitz Alemán)",
+                    "Yorkshire Terrier",
+                    "Maltés",
+                    "Papillón",
+                    "Shih Tzu",
+                    "Caniche toy",
+                    "Grifón de Bruselas",
+                    "Chin japonés",
+                    "Russian Toy"
+                ]
+            },
+            {
+                "question": "Dinosaurios que aparecen en más películas de Jurassic Park",
+                "answer": [
+                    "Tyrannosaurus rex",
+                    "Velociraptor",
+                    "Triceratops",
+                    "Brachiosaurus",
+                    "Dilophosaurus",
+                    "Stegosaurus",
+                    "Gallimimus",
+                    "Pteranodon",
+                    "Ankylosaurus",
+                    "Spinosaurus"
+                ]
+            },
+            {
+                "question": "Nombres de perros (macho) más comunes en Brasil",
+                "answer": [
+                    "Thor",
+                    "Bob",
+                    "Max",
+                    "Fred",
+                    "Billy",
+                    "Luke",
+                    "Toby",
+                    "Nick",
+                    "Theo",
+                    "Marley"
+                ]
+            },
+            {
+                "question": "Animales africanos más pesados",
+                "answer": [
+                    "Elefante africano",
+                    "Hipopótamo",
+                    "Rinoceronte blanco",
+                    "Rinoceronte negro",
+                    "Jirafa",
+                    "Búfalo africano",
+                    "Cocodrilo del Nilo",
+                    "Eland (antílope gigante)",
+                    "León",
+                    "Ñu"
+                ]
+            },
+            {
+                "question": "Flores más vendidas del mundo",
+                "answer": [
+                    "Rosa",
+                    "Tulipán",
+                    "Lirio",
+                    "Clavel",
+                    "Orquídea",
+                    "Girasol",
+                    "Margarita",
+                    "Peonía",
+                    "Hortensia",
+                    "Amarilis"
+                ]
+            },
+            {
+                "question": "Animales grandes más vistos en safaris en África",
+                "answer": [
+                    "Elefante africano",
+                    "León",
+                    "Leopardo",
+                    "Rinoceronte",
+                    "Búfalo africano",
+                    "Jirafa",
+                    "Hiena",
+                    "Cebra",
+                    "Hipopótamo",
+                    "Cocodrilo del Nilo"
+                ]
+            },
+            {
+                "question": "Países con más leones",
+                "answer": [
+                    "Tanzania",
+                    "Sudáfrica",
+                    "Kenia",
+                    "Zambia",
+                    "Botsuana",
+                    "Zimbabue",
+                    "Mozambique",
+                    "Namibia",
+                    "Etiopía",
+                    "Uganda"
+                ]
+            },
+            {
+                "question": "Especies que aparecen en más episodios de Bob Esponja",
+                "answer": [
+                    "Esponja de mar",
+                    "Estrella de mar",
+                    "Calamar",
+                    "Cangrejo",
+                    "Plancton",
+                    "Pez payaso",
+                    "Ballena",
+                    "Caballito de mar",
+                    "Medusa",
+                    "Pez"
+                ]
+            },
+            {
+                "question": "Razas de perro más utilizadas por la policía en el mundo",
+                "answer": [
+                    "Pastor alemán",
+                    "Pastor belga Malinois",
+                    "Rottweiler",
+                    "Labrador Retriever",
+                    "Doberman",
+                    "Pastor holandés",
+                    "Bloodhound",
+                    "Springer Spaniel",
+                    "Boxer",
+                    "Akita"
+                ]
+            },
+            {
+                "question": "Metales más utilizados en la industria",
+                "answer": [
+                    "Hierro",
+                    "Aluminio",
+                    "Cobre",
+                    "Zinc",
+                    "Plomo",
+                    "Níquel",
+                    "Estaño",
+                    "Cromo",
+                    "Titanio",
+                    "Magnesio"
+                ]
+            },
+            {
+                "question": "Países que más cultivan marihuana",
+                "answer": [
+                    "Estados Unidos",
+                    "Canadá",
+                    "México",
+                    "Colombia",
+                    "Afganistán",
+                    "Jamaica",
+                    "Paraguay",
+                    "Países Bajos",
+                    "Marruecos",
+                    "Sudáfrica"
+                ]
+            },
+            {
+                "question": "Ciudades de playa del noreste más buscadas por turistas",
+                "answer": [
+                    "Porto de Galinhas (PE)",
+                    "Natal (RN)",
+                    "Jericoacoara (CE)",
+                    "Maceió (AL)",
+                    "Salvador (BA)",
+                    "Praia do Forte (BA)",
+                    "João Pessoa (PB)",
+                    "São Miguel dos Milagres (AL)",
+                    "Aracaju (SE)",
+                    "Canoa Quebrada (CE)"
+                ]
+            },
+            {
+                "question": "Mamíferos y aves más comunes en ciudades del mundo (excepto domésticos)",
+                "answer": [
+                    "Rata",
+                    "Paloma",
+                    "Murciélago",
+                    "Cuervo",
+                    "Ardilla",
+                    "Gaviota",
+                    "Zorrillo",
+                    "Mapache",
+                    "Golondrina",
+                    "Gorrión"
+                ]
+            },
+            {
+                "question": "Países con más estaciones de esquí",
+                "answer": [
+                    "Estados Unidos",
+                    "Francia",
+                    "Austria",
+                    "Suiza",
+                    "Italia",
+                    "Canadá",
+                    "Japón",
+                    "Alemania",
+                    "Suecia",
+                    "España"
+                ]
+            },
+            {
+                "question": "Animales con los períodos de gestación más largos",
+                "answer": [
+                    "Elefante africano",
+                    "Elefante asiático",
+                    "Rinoceronte",
+                    "Jirafa",
+                    "Camello",
+                    "Orca",
+                    "Ballena azul",
+                    "Caballo",
+                    "Burro",
+                    "Vaca"
+                ]
+            },
+            {
+                "question": "Partes del cuerpo que más sudan",
+                "answer": [
+                    "Axilas",
+                    "Frente",
+                    "Espalda",
+                    "Palmas de las manos",
+                    "Plantas de los pies",
+                    "Rostro",
+                    "Pecho",
+                    "Cuello",
+                    "Ingle",
+                    "Abdomen"
+                ]
+            },
+            {
+                "question": "Mamíferos con los cerebros más pesados",
+                "answer": [
+                    "Cachalote",
+                    "Ballena azul",
+                    "Elefante africano",
+                    "Orca",
+                    "Elefante asiático",
+                    "Rorcual común",
+                    "Delfín nariz de botella",
+                    "Humano",
+                    "Oso pardo",
+                    "Hipopótamo"
+                ]
+            },
+            {
+                "question": "Países con más inmigrantes en el mundo",
+                "answer": [
+                    "Estados Unidos",
+                    "Alemania",
+                    "Arabia Saudita",
+                    "Rusia",
+                    "Reino Unido",
+                    "Emiratos Árabes Unidos",
+                    "Francia",
+                    "Canadá",
+                    "Australia",
+                    "España"
+                ]
+            },
+            {
+                "question": "Países con más terremotos",
+                "answer": [
+                    "Japón",
+                    "Indonesia",
+                    "Chile",
+                    "México",
+                    "Nepal",
+                    "Turquía",
+                    "Irán",
+                    "Nueva Zelanda",
+                    "Filipinas",
+                    "Estados Unidos"
+                ]
+            },
+            {
+                "question": "Países con más perros como mascotas",
+                "answer": [
+                    "Estados Unidos",
+                    "Brasil",
+                    "China",
+                    "Rusia",
+                    "Alemania",
+                    "Reino Unido",
+                    "Francia",
+                    "Italia",
+                    "Japón",
+                    "Argentina"
+                ]
+            },
+            {
+                "question": "Gases más comunes en la atmósfera",
+                "answer": [
+                    "Nitrógeno",
+                    "Oxígeno",
+                    "Argón",
+                    "Dióxido de carbono",
+                    "Neón",
+                    "Helio",
+                    "Metano",
+                    "Kriptón",
+                    "Hidrógeno",
+                    "Ozono"
+                ]
+            },
+            {
+                "question": "Frutas más pesadas",
+                "answer": [
+                    "Yaca",
+                    "Sandía",
+                    "Calabaza (botánicamente una fruta)",
+                    "Aguacate",
+                    "Papaya",
+                    "Melón",
+                    "Coco",
+                    "Fruta del pan",
+                    "Durio",
+                    "Plátano macho"
+                ]
+            },
+            {
+                "question": "Principales alimentos ricos en carbohidratos más cultivados del mundo",
+                "answer": [
+                    "Arroz",
+                    "Trigo",
+                    "Maíz",
+                    "Papa",
+                    "Yuca",
+                    "Cebada",
+                    "Avena",
+                    "Ñame",
+                    "Sorgo",
+                    "Banana"
+                ]
+            },
+            {
+                "question": "Frutas más populares para fondue de chocolate",
+                "answer": [
+                    "Fresa",
+                    "Banana",
+                    "Uva",
+                    "Manzana",
+                    "Kiwi",
+                    "Pera",
+                    "Piña",
+                    "Naranja",
+                    "Frambuesa",
+                    "Mango"
+                ]
+            },
+            {
+                "question": "Órganos más donados para trasplante",
+                "answer": [
+                    "Riñones",
+                    "Hígado",
+                    "Corazón",
+                    "Pulmones",
+                    "Páncreas",
+                    "Intestinos",
+                    "Córneas",
+                    "Piel",
+                    "Médula ósea",
+                    "Válvulas cardíacas"
+                ]
+            },
+            {
+                "question": "Países más ricos en recursos naturales",
+                "answer": [
+                    "Rusia",
+                    "Estados Unidos",
+                    "China",
+                    "Brasil",
+                    "Australia",
+                    "Canadá",
+                    "India",
+                    "Arabia Saudita",
+                    "Venezuela",
+                    "Indonesia"
+                ]
+            },
+            {
+                "question": "Animales más populares como peluches",
+                "answer": [
+                    "Oso",
+                    "Conejo",
+                    "Perro",
+                    "Gato",
+                    "Panda",
+                    "Elefante",
+                    "León",
+                    "Tigre",
+                    "Mono",
+                    "Jirafa"
+                ]
+            },
+            {
+                "question": "Animales terrestres o semi-terrestres más pesados",
+                "answer": [
+                    "Elefante africano",
+                    "Elefante asiático",
+                    "Hipopótamo",
+                    "Rinoceronte blanco",
+                    "Rinoceronte indio",
+                    "Jirafa",
+                    "Búfalo africano",
+                    "Tigre siberiano",
+                    "Oso pardo",
+                    "Oso polar"
+                ]
+            },
+            {
+                "question": "Países con más especies en peligro de extinción",
+                "answer": [
+                    "Indonesia",
+                    "México",
+                    "India",
+                    "China",
+                    "Brasil",
+                    "Ecuador",
+                    "Perú",
+                    "Colombia",
+                    "Malasia",
+                    "Filipinas"
+                ]
+            },
+            {
+                "question": "Elementos químicos más abundantes en el cuerpo humano",
+                "answer": [
+                    "Oxígeno",
+                    "Carbono",
+                    "Hidrógeno",
+                    "Nitrógeno",
+                    "Calcio",
+                    "Fósforo",
+                    "Potasio",
+                    "Azufre",
+                    "Sodio",
+                    "Cloro"
+                ]
+            },
+            {
+                "question": "Especies que más aparecen en la franquicia La Era de Hielo",
+                "answer": [
+                    "Mamut",
+                    "Perezoso gigante",
+                    "Tigre dientes de sable (Smilodon)",
+                    "Ardilla dientes de sable",
+                    "Rinoceronte lanudo",
+                    "Lémur",
+                    "Dinosaurio",
+                    "Lobo",
+                    "Conejo prehistórico",
+                    "Foca"
+                ]
+            },
+            {
+                "question": "Hierbas más comunes en jardines de apartamento",
+                "answer": [
+                    "Albahaca",
+                    "Menta",
+                    "Romero",
+                    "Perejil",
+                    "Cebollino",
+                    "Cilantro",
+                    "Orégano",
+                    "Tomillo",
+                    "Laurel",
+                    "Hinojo"
+                ]
+            },
+            {
+                "question": "Especias y hierbas más utilizadas en el mundo como condimento",
+                "answer": [
+                    "Pimienta negra",
+                    "Ajo",
+                    "Cebolla",
+                    "Comino",
+                    "Jengibre",
+                    "Canela",
+                    "Clavo",
+                    "Curry",
+                    "Nuez moscada",
+                    "Pimentón"
+                ]
+            },
+            {
+                "question": "Primeras especies de animales protagonistas en animaciones de Disney",
+                "answer": [
+                    "Ratón (Mickey)",
+                    "Pato (Donald)",
+                    "Perro (Pluto)",
+                    "Ciervo (Bambi)",
+                    "Gato (Figaro)",
+                    "Elefante (Dumbo)",
+                    "León (El Rey León)",
+                    "Zorro (Robin Hood)",
+                    "Pez (el de Pinocho)",
+                    "Canguro (La Bella Durmiente)"
+                ]
+            },
+            {
+                "question": "Animales de granja más comunes en Brasil",
+                "answer": [
+                    "Ganado bovino",
+                    "Cerdos",
+                    "Gallinas",
+                    "Patos",
+                    "Cabras",
+                    "Ovejas",
+                    "Caballos",
+                    "Pavos",
+                    "Gansos",
+                    "Burros"
+                ]
+            },
+            {
+                "question": "Países con más ataques de tiburones",
+                "answer": [
+                    "Estados Unidos",
+                    "Australia",
+                    "Sudáfrica",
+                    "Bahamas",
+                    "Brasil",
+                    "Nueva Caledonia",
+                    "Isla Reunión",
+                    "México",
+                    "Egipto",
+                    "Nueva Zelanda"
+                ]
+            },
+            {
+                "question": "Felinos más grandes",
+                "answer": [
+                    "Tigre siberiano",
+                    "Tigre de Bengala",
+                    "León",
+                    "Tigre de Sumatra",
+                    "Tigre de Malasia",
+                    "Leopardo",
+                    "Leopardo de las nieves",
+                    "Jaguar",
+                    "Puma",
+                    "Lince euroasiático"
+                ]
+            },
+            {
+                "question": "Frutos secos más consumidos en el mundo",
+                "answer": [
+                    "Almendra",
+                    "Anacardo",
+                    "Nuez de Brasil",
+                    "Nuez",
+                    "Avellana",
+                    "Pistacho",
+                    "Macadamia",
+                    "Pequi",
+                    "Nuez pecana",
+                    "Piñón"
+                ]
+            },
+            {
+                "question": "Verduras y hortalizas más ricas en hierro",
+                "answer": [
+                    "Espinaca",
+                    "Col rizada",
+                    "Brócoli",
+                    "Remolacha",
+                    "Judía verde",
+                    "Perejil",
+                    "Lenteja",
+                    "Guisante",
+                    "Calabaza",
+                    "Garbanzos"
+                ]
+            }
         ]
-    },
-    {
-        "question": "Piedras preciosas más utilizadas en anillos de compromiso",
-        "answer": [
-            "Diamante",
-            "Zafiro",
-            "Esmeralda",
-            "Rubí",
-            "Topacio",
-            "Amatista",
-            "Turmalina",
-            "Ópalo",
-            "Tanzanita",
-            "Morganita"
-        ]
-    },
-    {
-        "question": "Insectos más cultivados en granjas",
-        "answer": [
-            "Abeja",
-            "Gusano de seda",
-            "Grillo",
-            "Tenebrio (larva de harina)",
-            "Saltamontes",
-            "Mosca soldado negra",
-            "Escarabajo rinoceronte",
-            "Hormiga (para estudios o alimentación exótica)",
-            "Cochinilla",
-            "Termita (en algunos países)"
-        ]
-    },
-    {
-        "question": "Países con más dromedarios",
-        "answer": [
-            "Somalia",
-            "Sudán",
-            "Chad",
-            "Etiopía",
-            "Kenia",
-            "Arabia Saudita",
-            "Níger",
-            "Mauritania",
-            "India",
-            "Pakistán"
-        ]
-    },
-    {
-        "question": "Países con mayor biodiversidad",
-        "answer": [
-            "Brasil",
-            "Colombia",
-            "Indonesia",
-            "China",
-            "México",
-            "Perú",
-            "Australia",
-            "India",
-            "Ecuador",
-            "Venezuela"
-        ]
-    },
-    {
-        "question": "Animales más pesados de América del Sur (excepto acuáticos)",
-        "answer": [
-            "Tapir",
-            "Armadillo gigante",
-            "Oso hormiguero gigante",
-            "Jaguar",
-            "Pecarí",
-            "Capibara",
-            "Venado catingueiro",
-            "Venado del pantano",
-            "Caimán negro",
-            "Cerdo salvaje"
-        ]
-    },
-    {
-        "question": "Animales más venenosos",
-        "answer": [
-            "Avispa marina (cubomedusa)",
-            "Pulpo de anillos azules",
-            "Pez piedra",
-            "Serpiente taipán del interior",
-            "Rana dardo venenosa",
-            "Raya",
-            "Escorpión amarillo",
-            "Caracol cono",
-            "Viuda negra",
-            "Araña armadeira"
-        ]
-    },
-    {
-        "question": "Países con la costa más larga",
-        "answer": [
-            "Canadá",
-            "Noruega",
-            "Indonesia",
-            "Rusia",
-            "Filipinas",
-            "Japón",
-            "Australia",
-            "Estados Unidos",
-            "Nueva Zelanda",
-            "Brasil"
-        ]
-    },
-    {
-        "question": "Países con mayor producción de arroz",
-        "answer": [
-            "China",
-            "India",
-            "Indonesia",
-            "Bangladés",
-            "Vietnam",
-            "Tailandia",
-            "Myanmar",
-            "Filipinas",
-            "Brasil",
-            "Japón"
-        ]
-    },
-    {
-        "question": "Animales marinos más largos",
-        "answer": [
-            "Ballena azul",
-            "Cachalote",
-            "Tiburón ballena",
-            "Tiburón peregrino",
-            "Calamar colosal",
-            "Calamar gigante",
-            "Tiburón blanco",
-            "Orca",
-            "Anguila lobo",
-            "Pez sierra"
-        ]
-    },
-    {
-        "question": "Animales más mencionados en la Biblia",
-        "answer": [
-            "Cordero",
-            "León",
-            "Serpiente",
-            "Asno",
-            "Camello",
-            "Águila",
-            "Buey",
-            "Ciervo",
-            "Paloma",
-            "Pez"
-        ]
-    },
-    {
-        "question": "Árboles más utilizados para fabricar muebles en Brasil",
-        "answer": [
-            "Caoba",
-            "Ipê",
-            "Cedro",
-            "Peroba",
-            "Jatobá",
-            "Angelim",
-            "Cumaru",
-            "Tauarí",
-            "Freijó",
-            "Marfil"
-        ]
-    },
-    {
-        "question": "Razas de perros más pequeñas",
-        "answer": [
-            "Chihuahua",
-            "Pomerania (Spitz Alemán)",
-            "Yorkshire Terrier",
-            "Maltés",
-            "Papillón",
-            "Shih Tzu",
-            "Caniche toy",
-            "Grifón de Bruselas",
-            "Chin japonés",
-            "Russian Toy"
-        ]
-    },
-    {
-        "question": "Dinosaurios que aparecen en más películas de Jurassic Park",
-        "answer": [
-            "Tyrannosaurus rex",
-            "Velociraptor",
-            "Triceratops",
-            "Brachiosaurus",
-            "Dilophosaurus",
-            "Stegosaurus",
-            "Gallimimus",
-            "Pteranodon",
-            "Ankylosaurus",
-            "Spinosaurus"
-        ]
-    },
-    {
-        "question": "Nombres de perros (macho) más comunes en Brasil",
-        "answer": [
-            "Thor",
-            "Bob",
-            "Max",
-            "Fred",
-            "Billy",
-            "Luke",
-            "Toby",
-            "Nick",
-            "Theo",
-            "Marley"
-        ]
-    },
-    {
-        "question": "Animales africanos más pesados",
-        "answer": [
-            "Elefante africano",
-            "Hipopótamo",
-            "Rinoceronte blanco",
-            "Rinoceronte negro",
-            "Jirafa",
-            "Búfalo africano",
-            "Cocodrilo del Nilo",
-            "Eland (antílope gigante)",
-            "León",
-            "Ñu"
-        ]
-    },
-    {
-        "question": "Flores más vendidas del mundo",
-        "answer": [
-            "Rosa",
-            "Tulipán",
-            "Lirio",
-            "Clavel",
-            "Orquídea",
-            "Girasol",
-            "Margarita",
-            "Peonía",
-            "Hortensia",
-            "Amarilis"
-        ]
-    },
-    {
-        "question": "Animales grandes más vistos en safaris en África",
-        "answer": [
-            "Elefante africano",
-            "León",
-            "Leopardo",
-            "Rinoceronte",
-            "Búfalo africano",
-            "Jirafa",
-            "Hiena",
-            "Cebra",
-            "Hipopótamo",
-            "Cocodrilo del Nilo"
-        ]
-    },
-    {
-        "question": "Países con más leones",
-        "answer": [
-            "Tanzania",
-            "Sudáfrica",
-            "Kenia",
-            "Zambia",
-            "Botsuana",
-            "Zimbabue",
-            "Mozambique",
-            "Namibia",
-            "Etiopía",
-            "Uganda"
-        ]
-    },
-        {
-        "question": "Especies que aparecen en más episodios de Bob Esponja",
-        "answer": [
-            "Esponja de mar",
-            "Estrella de mar",
-            "Calamar",
-            "Cangrejo",
-            "Plancton",
-            "Pez payaso",
-            "Ballena",
-            "Caballito de mar",
-            "Medusa",
-            "Pez"
-        ]
-    },
-    {
-        "question": "Razas de perro más utilizadas por la policía en el mundo",
-        "answer": [
-            "Pastor alemán",
-            "Pastor belga Malinois",
-            "Rottweiler",
-            "Labrador Retriever",
-            "Doberman",
-            "Pastor holandés",
-            "Bloodhound",
-            "Springer Spaniel",
-            "Boxer",
-            "Akita"
-        ]
-    },
-    {
-        "question": "Metales más utilizados en la industria",
-        "answer": [
-            "Hierro",
-            "Aluminio",
-            "Cobre",
-            "Zinc",
-            "Plomo",
-            "Níquel",
-            "Estaño",
-            "Cromo",
-            "Titanio",
-            "Magnesio"
-        ]
-    },
-    {
-        "question": "Países que más cultivan marihuana",
-        "answer": [
-            "Estados Unidos",
-            "Canadá",
-            "México",
-            "Colombia",
-            "Afganistán",
-            "Jamaica",
-            "Paraguay",
-            "Países Bajos",
-            "Marruecos",
-            "Sudáfrica"
-        ]
-    },
-    {
-        "question": "Ciudades de playa del noreste más buscadas por turistas",
-        "answer": [
-            "Porto de Galinhas (PE)",
-            "Natal (RN)",
-            "Jericoacoara (CE)",
-            "Maceió (AL)",
-            "Salvador (BA)",
-            "Praia do Forte (BA)",
-            "João Pessoa (PB)",
-            "São Miguel dos Milagres (AL)",
-            "Aracaju (SE)",
-            "Canoa Quebrada (CE)"
-        ]
-    },
-    {
-        "question": "Mamíferos y aves más comunes en ciudades del mundo (excepto domésticos)",
-        "answer": [
-            "Rata",
-            "Paloma",
-            "Murciélago",
-            "Cuervo",
-            "Ardilla",
-            "Gaviota",
-            "Zorrillo",
-            "Mapache",
-            "Golondrina",
-            "Gorrión"
-        ]
-    },
-    {
-        "question": "Países con más estaciones de esquí",
-        "answer": [
-            "Estados Unidos",
-            "Francia",
-            "Austria",
-            "Suiza",
-            "Italia",
-            "Canadá",
-            "Japón",
-            "Alemania",
-            "Suecia",
-            "España"
-        ]
-    },
-    {
-        "question": "Animales con los períodos de gestación más largos",
-        "answer": [
-            "Elefante africano",
-            "Elefante asiático",
-            "Rinoceronte",
-            "Jirafa",
-            "Camello",
-            "Orca",
-            "Ballena azul",
-            "Caballo",
-            "Burro",
-            "Vaca"
-        ]
-    },
-    {
-        "question": "Partes del cuerpo que más sudan",
-        "answer": [
-            "Axilas",
-            "Frente",
-            "Espalda",
-            "Palmas de las manos",
-            "Plantas de los pies",
-            "Rostro",
-            "Pecho",
-            "Cuello",
-            "Ingle",
-            "Abdomen"
-        ]
-    },
-    {
-        "question": "Mamíferos con los cerebros más pesados",
-        "answer": [
-            "Cachalote",
-            "Ballena azul",
-            "Elefante africano",
-            "Orca",
-            "Elefante asiático",
-            "Rorcual común",
-            "Delfín nariz de botella",
-            "Humano",
-            "Oso pardo",
-            "Hipopótamo"
-        ]
-    },
-    {
-        "question": "Países con más inmigrantes en el mundo",
-        "answer": [
-            "Estados Unidos",
-            "Alemania",
-            "Arabia Saudita",
-            "Rusia",
-            "Reino Unido",
-            "Emiratos Árabes Unidos",
-            "Francia",
-            "Canadá",
-            "Australia",
-            "España"
-        ]
-    },
-    {
-        "question": "Países con más terremotos",
-        "answer": [
-            "Japón",
-            "Indonesia",
-            "Chile",
-            "México",
-            "Nepal",
-            "Turquía",
-            "Irán",
-            "Nueva Zelanda",
-            "Filipinas",
-            "Estados Unidos"
-        ]
-    },
-    {
-        "question": "Países con más perros como mascotas",
-        "answer": [
-            "Estados Unidos",
-            "Brasil",
-            "China",
-            "Rusia",
-            "Alemania",
-            "Reino Unido",
-            "Francia",
-            "Italia",
-            "Japón",
-            "Argentina"
-        ]
-    },
-    {
-        "question": "Gases más comunes en la atmósfera",
-        "answer": [
-            "Nitrógeno",
-            "Oxígeno",
-            "Argón",
-            "Dióxido de carbono",
-            "Neón",
-            "Helio",
-            "Metano",
-            "Kriptón",
-            "Hidrógeno",
-            "Ozono"
-        ]
-    },
-    {
-        "question": "Frutas más pesadas",
-        "answer": [
-            "Yaca",
-            "Sandía",
-            "Calabaza (botánicamente una fruta)",
-            "Aguacate",
-            "Papaya",
-            "Melón",
-            "Coco",
-            "Fruta del pan",
-            "Durio",
-            "Plátano macho"
-        ]
-    },
-    {
-        "question": "Principales alimentos ricos en carbohidratos más cultivados del mundo",
-        "answer": [
-            "Arroz",
-            "Trigo",
-            "Maíz",
-            "Papa",
-            "Yuca",
-            "Cebada",
-            "Avena",
-            "Ñame",
-            "Sorgo",
-            "Banana"
-        ]
-    },
-    {
-        "question": "Frutas más populares para fondue de chocolate",
-        "answer": [
-            "Fresa",
-            "Banana",
-            "Uva",
-            "Manzana",
-            "Kiwi",
-            "Pera",
-            "Piña",
-            "Naranja",
-            "Frambuesa",
-            "Mango"
-        ]
-    },
-    {
-        "question": "Órganos más donados para trasplante",
-        "answer": [
-            "Riñones",
-            "Hígado",
-            "Corazón",
-            "Pulmones",
-            "Páncreas",
-            "Intestinos",
-            "Córneas",
-            "Piel",
-            "Médula ósea",
-            "Válvulas cardíacas"
-        ]
-    },
-    {
-        "question": "Países más ricos en recursos naturales",
-        "answer": [
-            "Rusia",
-            "Estados Unidos",
-            "China",
-            "Brasil",
-            "Australia",
-            "Canadá",
-            "India",
-            "Arabia Saudita",
-            "Venezuela",
-            "Indonesia"
-        ]
-    },
-    {
-        "question": "Animales más populares como peluches",
-        "answer": [
-            "Oso",
-            "Conejo",
-            "Perro",
-            "Gato",
-            "Panda",
-            "Elefante",
-            "León",
-            "Tigre",
-            "Mono",
-            "Jirafa"
-        ]
-    },
-    {
-        "question": "Animales terrestres o semi-terrestres más pesados",
-        "answer": [
-            "Elefante africano",
-            "Elefante asiático",
-            "Hipopótamo",
-            "Rinoceronte blanco",
-            "Rinoceronte indio",
-            "Jirafa",
-            "Búfalo africano",
-            "Tigre siberiano",
-            "Oso pardo",
-            "Oso polar"
-        ]
-    },
-    {
-        "question": "Países con más especies en peligro de extinción",
-        "answer": [
-            "Indonesia",
-            "México",
-            "India",
-            "China",
-            "Brasil",
-            "Ecuador",
-            "Perú",
-            "Colombia",
-            "Malasia",
-            "Filipinas"
-        ]
-    },
-    {
-        "question": "Elementos químicos más abundantes en el cuerpo humano",
-        "answer": [
-            "Oxígeno",
-            "Carbono",
-            "Hidrógeno",
-            "Nitrógeno",
-            "Calcio",
-            "Fósforo",
-            "Potasio",
-            "Azufre",
-            "Sodio",
-            "Cloro"
-        ]
-    },
-    {
-        "question": "Especies que más aparecen en la franquicia La Era de Hielo",
-        "answer": [
-            "Mamut",
-            "Perezoso gigante",
-            "Tigre dientes de sable (Smilodon)",
-            "Ardilla dientes de sable",
-            "Rinoceronte lanudo",
-            "Lémur",
-            "Dinosaurio",
-            "Lobo",
-            "Conejo prehistórico",
-            "Foca"
-        ]
-    },
-    {
-        "question": "Hierbas más comunes en jardines de apartamento",
-        "answer": [
-            "Albahaca",
-            "Menta",
-            "Romero",
-            "Perejil",
-            "Cebollino",
-            "Cilantro",
-            "Orégano",
-            "Tomillo",
-            "Laurel",
-            "Hinojo"
-        ]
-    },
-    {
-        "question": "Especias y hierbas más utilizadas en el mundo como condimento",
-        "answer": [
-            "Pimienta negra",
-            "Ajo",
-            "Cebolla",
-            "Comino",
-            "Jengibre",
-            "Canela",
-            "Clavo",
-            "Curry",
-            "Nuez moscada",
-            "Pimentón"
-        ]
-    },
-    {
-        "question": "Primeras especies de animales protagonistas en animaciones de Disney",
-        "answer": [
-            "Ratón (Mickey)",
-            "Pato (Donald)",
-            "Perro (Pluto)",
-            "Ciervo (Bambi)",
-            "Gato (Figaro)",
-            "Elefante (Dumbo)",
-            "León (El Rey León)",
-            "Zorro (Robin Hood)",
-            "Pez (el de Pinocho)",
-            "Canguro (La Bella Durmiente)"
-        ]
-    },
-    {
-        "question": "Animales de granja más comunes en Brasil",
-        "answer": [
-            "Ganado bovino",
-            "Cerdos",
-            "Gallinas",
-            "Patos",
-            "Cabras",
-            "Ovejas",
-            "Caballos",
-            "Pavos",
-            "Gansos",
-            "Burros"
-        ]
-    },
-    {
-        "question": "Países con más ataques de tiburones",
-        "answer": [
-            "Estados Unidos",
-            "Australia",
-            "Sudáfrica",
-            "Bahamas",
-            "Brasil",
-            "Nueva Caledonia",
-            "Isla Reunión",
-            "México",
-            "Egipto",
-            "Nueva Zelanda"
-        ]
-    },
-    {
-        "question": "Felinos más grandes",
-        "answer": [
-            "Tigre siberiano",
-            "Tigre de Bengala",
-            "León",
-            "Tigre de Sumatra",
-            "Tigre de Malasia",
-            "Leopardo",
-            "Leopardo de las nieves",
-            "Jaguar",
-            "Puma",
-            "Lince euroasiático"
-        ]
-    },
-    {
-        "question": "Frutos secos más consumidos en el mundo",
-        "answer": [
-            "Almendra",
-            "Anacardo",
-            "Nuez de Brasil",
-            "Nuez",
-            "Avellana",
-            "Pistacho",
-            "Macadamia",
-            "Pequi",
-            "Nuez pecana",
-            "Piñón"
-        ]
-    },
-    {
-        "question": "Verduras y hortalizas más ricas en hierro",
-        "answer": [
-            "Espinaca",
-            "Col rizada",
-            "Brócoli",
-            "Remolacha",
-            "Judía verde",
-            "Perejil",
-            "Lenteja",
-            "Guisante",
-            "Calabaza",
-            "Garbanzos"
-        ]
-    }
-    ]
-};
+    };
 
     let questions = [];
     let currentQuestionIndex = 0;
@@ -1303,7 +1308,7 @@
     }
 
     // Fechar os pop-ups ao clicar fora deles
-    window.onclick = function(event) {
+    window.onclick = function (event) {
         let popup = document.getElementById("popup");
         let answerPopup = document.getElementById("answerPopup");
 
@@ -1341,4 +1346,5 @@
 </script>
 
 </body>
+
 </html>

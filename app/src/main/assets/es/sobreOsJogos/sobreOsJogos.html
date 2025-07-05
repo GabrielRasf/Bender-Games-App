@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -87,9 +88,11 @@
     <div class="popup" onclick="event.stopPropagation()">
         <h3>Yo Nunca</h3>
         <ul>
-            <li>Cada jugador debe decir "Yo nunca..." seguido de algo que nunca haya hecho (o que sí haya hecho, si quiere beber).</li>
+            <li>Cada jugador debe decir "Yo nunca..." seguido de algo que nunca haya hecho (o que sí haya hecho, si
+                quiere beber).</li>
             <li>Quien ya lo haya hecho, debe beber.</li>
-            <li>El objetivo es divertirse, compartir historias graciosas y conocer mejor a los demás participantes.</li>
+            <li>El objetivo es divertirse, compartir historias graciosas y conocer mejor a los demás participantes.
+            </li>
         </ul>
     </div>
 </div>
@@ -100,8 +103,10 @@
         <h3>Topzeira</h3>
         <ul>
             <li>Una persona lee una propuesta inicial, como "Alergias alimentarias más comunes del mundo".</li>
-            <li>Cada jugador, en sentido horario, da una respuesta. Si alguien duda de una respuesta, puede decir "No es topzeira".</li>
-            <li>En ese caso, ambos verifican la respuesta. Si era correcta, quien dudó bebe; si no lo era, quien dio la respuesta errónea bebe.</li>
+            <li>Cada jugador, en sentido horario, da una respuesta. Si alguien duda de una respuesta, puede decir
+                "No es topzeira".</li>
+            <li>En ese caso, ambos verifican la respuesta. Si era correcta, quien dudó bebe; si no lo era, quien dio
+                la respuesta errónea bebe.</li>
         </ul>
     </div>
 </div>
@@ -124,7 +129,8 @@
     <div class="popup" onclick="event.stopPropagation()">
         <h3>Secretos</h3>
         <ul>
-            <li>Confiesa algo y trata de engañar a los demás. Di una verdad y una mentira, y deja que adivinen cuál es cuál.</li>
+            <li>Confiesa algo y trata de engañar a los demás. Di una verdad y una mentira, y deja que adivinen cuál
+                es cuál.</li>
             <li>Si aciertan la verdad, tú bebes una ronda.</li>
             <li>Si fallan, tú eliges quién bebe.</li>
             <li>Es una forma divertida de conocer mejor a los amigos y revelar secretos.</li>
@@ -172,7 +178,8 @@
     <div class="popup" onclick="event.stopPropagation()">
         <h3>Quién del Grupo</h3>
         <ul>
-            <li>Ejemplo: "¿Quién en el grupo es el más tierno?" – todos apuntan y quien reciba más votos debe beber.</li>
+            <li>Ejemplo: "¿Quién en el grupo es el más tierno?" – todos apuntan y quien reciba más votos debe beber.
+            </li>
             <li>Un juego que revela opiniones de forma divertida e inesperada.</li>
         </ul>
     </div>
@@ -218,7 +225,8 @@
         <h3>Preguntas sin Respuesta</h3>
         <ul>
             <li>Ejemplos: "¿Por qué el cielo es azul?", "Si el tiempo es dinero, ¿el banco es un reloj?"</li>
-            <li>El objetivo es plantear preguntas filosóficas o graciosas que nadie puede responder con certeza.</li>
+            <li>El objetivo es plantear preguntas filosóficas o graciosas que nadie puede responder con certeza.
+            </li>
             <li>Si alguien intenta responder y no convence... ¡bebe!</li>
         </ul>
     </div>
@@ -328,7 +336,7 @@
         }
     }
 
-    document.addEventListener('keydown', function(event) {
+    document.addEventListener('keydown', function (event) {
         if (event.key === 'Escape') {
             const allPopups = document.querySelectorAll('.overlay');
             allPopups.forEach(popup => {
@@ -341,4 +349,5 @@
     });
 </script>
 </body>
+
 </html>

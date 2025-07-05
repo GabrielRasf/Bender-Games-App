@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,27 +9,28 @@
     <title>Riu, Bebeu</title>
 
 </head>
+
 <body>
 
 <div class="game-container">
     <!-- Menu -->
-<nav class="menu">
-    <a href="../menuPtBr.html" class="menu-title" style="position: relative;">
-        <div class="voltar-container" onclick="window.location.href='../menuPtBr.html'">
-            &#8678; <!-- Isso é ← -->
-        </div>
-        <img class="logo-bebedeira" src="../images/logo.png" alt="Logo Bebedeira" />
-    </a>
-</nav>
+    <nav class="menu">
+        <a href="../menuPtBr.html" class="menu-title" style="position: relative;">
+            <div class="voltar-container" onclick="window.location.href='../menuPtBr.html'">
+                &#8678; <!-- Isso é ← -->
+            </div>
+            <img class="logo-bebedeira" src="../images/logo.png" alt="Logo Bebedeira" />
+        </a>
+    </nav>
 
     <!-- Conteúdo do jogo -->
+    <div>
         <h1>Riu, Bebeu </h1>
-<div>
-            <a href="#" onclick="openPopup()">
+        <a href="#" onclick="openPopup()">
             <img class="img-regras" src="../images/regras.png" alt="Regras" />
-            </a>
-            <h4>Regras</h4>
-        </div>
+        </a>
+        <h4>Regras</h4>
+    </div>
 
 
     <div class="card-frase">
@@ -43,9 +45,10 @@
 <!-- Pop-up -->
 <div id="popup" class="popup">
     <div class="popup-content">
-        <span class="close" onclick="closePopup()">&times;</span>
-        <h3>Regras do Jogo</h3>
-        <h5>Riu? Bebeu</h5>
+        <div class="popup-header">
+            <h2>Regras do Jogo</h2>
+            <span class="close" onclick="closePopup()">&times;</span>
+        </div>
         <ul>
             <li>Um jogador seleciona uma carta (os outros jogadores não devem saber o conteúdo)</li>
             <li>A carta fornecerá uma missão para o jogador que a leu</li>
@@ -58,192 +61,193 @@
 
 <!-- Cronômetro -->
 
-    <button id="timer" onclick="handleTimerClick()">30</button>
+<button id="timer" onclick="handleTimerClick()">30</button>
 
 <script>
     const gameData = {
-      "questions": [
-        "Faça contato visual com seu alvo e lamba sensualmente seus lábios",
-        "Pergunte sensualmente no ouvido do alvo 'Você gosta quando o dentista introduz instrumento na sua boca?'",
-        "Finja ser uma assistente virtual (Siri ou Alexa) e responda às perguntas dos outros jogadores de maneira engraçada",
-        "Demonstre ao alvo como jogar golfe, ficando atrás dele e segurando suas mãos",
-        "Você e o alvo estão em um podcast, pergunte a ele: 'Como se faz para ganhar um Chokito?' Resposta: 'É só colocar o dedo na tomadita'",
-        "Você é o Papai Noel bêbado e está falando com sua rena (seu alvo)",
-        "Fale sensualmente no ouvido do alvo 'Tem algo no mundo que adora ser lambido pra entrar no buraco. O que é?' Resposta: 'A linha da agulha'",
-        "Você é o Mister Cócegas. Ataque o alvo.",
-        "Faça a melhor imitação de orgasmo do Shrek e da Fiona para seu alvo.",
-        "Gire em círculos e fique gritando 'Eu sou uma máquina de lavar'",
-        "Imite os sons de uma transa no ouvido do seu alvo",
-        "Você está aprendendo balé, mostre aos demais os movimentos que já aprendeu",
-        "Com sua melhor imitação do Faustão diga ao seu alvo 'Ô loco, bicho! Esta fera, meu!'",
-        "Imite uma conversa com pessoas na fila do banco, atue como um jornalista fazendo uma reportagem para a TV",
-        "Leia a mão do seu alvo e diga 'Sinto muito, mas amanhã vai acontecer um acidente terrível enquanto você lava o suvaco'",
-        "Faça a imitação de um pinguim deslizando no gelo",
-        "Olhe nos olhos do alvo e diga 'Hoje você está muito engraçadinho. Não tem medo de ficar queimado na rodinha?'",
-        "Fale baixinho no ouvido do alvo: 'Sou totalmente atraído por você. Quero usar suas roupas.'",
-        "Você e o jogador da sua direita vão pular de paraquedas. Ele é o instrutor e vai atrás de você. Finja estar com medo de pular",
-        "Finja ser um treinador de circo e ensine um truque ao seu animal (seu alvo)",
-        "Finja ser um DJ famoso animando uma festa, use objetos próximos como equipamentos de som e faça sons engraçados com a boca",
-        "Finja ser um bebê dramático que acabou de perder sua chupeta e chore de forma exagerada, caindo no chão e rolando ao redor do alvo",
-        "Demonstre como colocar uma camisinha usando a mão do alvo como ferramenta",
-        "Você é uma estrela pornô e deve dar conselhos poderosos a um novato (seu alvo)",
-        "Você é um influencer fitness, ensine seu alvo com um treino em casa usando objetos domésticos como pesos",
-        "Você é um cowboy, ensine como laçar um boi (eu alvo)",
-        "Pergunte ao seu alvo 'Vamos tomar um café? Já me falaram que você acha que no coador é mais forte'",
-        "Imite chupar um pirulito olhando o seu alvo, depois diga: 'É o pirulito mais gostoso que já chupei'",
-        "Faça carinho na nuca de seu alvo enquanto dá conselhos motivacionais",
-        "Você está aprendendo mandarim, mostre ao seu alvo as palavras que já aprendeu",
-        "Imite uma borboleta saindo do casulo",
-        "O mapa do tesouro perdido mostra que o tesouro está nas calças do alvo. Imite um pirata e ache-o",
-        "Olhe nos olhos do alvo e diga: 'Fui cozinhar um ovo e achei o ovo meio pesado... tinha um pinto dentro. Imagine seu cozinho com pinto dentro'",
-        "Imite um golfinho batendo suas barbatanas e se esfregue no seu alvo",
-        "Fale sensualmente no ouvido do alvo 'Tenho 5 garrafas de uísque, você vende 4 e eu te dou uma'",
-        "Ensine uma dança viral do TikTok ao seu alvo, faça todos os movimentos necessários para ele rir",
-        "Seu alvo é uma cadeira, faça ajustes nele para poder usá-lo sem ser desconfortável",
-        "Vá em direção ao seu alvo chupando seu dedão. Com voz de bebê diga: 'Nenê quer nanar'",
-        "Cante e dance a música 'Gangnam Style' para fazer seu alvo rir",
-        "Dê uma aula de yoga para seu alvo, invente nomes engraçados para as poses como 'pose do gato preguiçoso' e 'pose do flamingo torto'",
-        "Olhando seu alvo, conte a história mais engraçada que você sabe sobre ele",
-        "Chegue perto do seu alvo sem falar nada, de forma rápida cheire o pescoço dele",
-        "Finja ser um pato extremamente charmoso tentando conquistar seu alvo, usando seu bico e movimentos sensuais",
-        "Faça uma reportagem ao vivo sobre 'Avó que mandou o vô à merda'. Inclua entrevista com outros jogadores.",
-        "Você é um ratinho, tente entrar nas calças do seu alvo e deixe-o desconfortável",
-        "Finja ser um cabeleireiro dando um corte de cabelo em seu alvo",
-        "Você é um vendedor de carros usados, tente vender um carro imaginário a outro jogador",
-        "Fale sensualmente no ouvido do alvo: 'Entra duro e seco. E sai macio e úmido. Adoro chiclete'",
-        "Você é um beija-flor. Bata suas asinhas e beba um pouco do néctar da flor mais suculenta (o seu alvo)",
-        "Massageie as orelhas do seu alvo enquanto olha diretamente nos olhos dele",
-        "Imite uma modelo caminhando na passarela, encoste no alvo e fale no ouvido dele 'Aaaaiiiiinnnn'",
-        "Faça uma apresentação inspiradora das suas posições sexuais favoritas, atue como se fosse uma palestra",
-        "Peça para o alvo ficar de quatro. Finja estar tirando leite dele, enquanto explica a qualidade do leite",
-        "Finja que é um agente secreto e passe uma mensagem cifrada para seu alvo sem usar palavras",
-  "Faça uma dança estranha e diga que é o ritmo oficial da sua cidade natal",
-  "Conte uma mentira absurda sobre o seu alvo e convença os outros que é verdade",
-  "Imite um zumbi faminto tentando devorar o alvo sem assustá-lo demais",
-  "Faça uma serenata improvisada para seu alvo usando apenas sons de animais",
-  "Finja que está preso numa tempestade e peça ajuda desesperadamente para seu alvo",
-  "Crie um comercial engraçado vendendo um produto imaginário usando seu alvo como testemunha",
-  "Finja que seu alvo é seu professor e faça uma pergunta difícil para ele responder",
-  "Faça uma apresentação de mágica sem revelar o truque para seu alvo",
-  "Imite um personagem famoso de filme fazendo uma cena romântica com seu alvo",
-  "Finja que está em uma entrevista de emprego e o alvo é o entrevistador — responda com exagero",
-  "Cante uma música infantil para acalmar seu alvo como se ele fosse um bebê",
-  "Finja que seu alvo é um cachorro e mime como ele reagiria a comandos básicos",
-  "Invente um insulto engraçado e inofensivo para falar para seu alvo",
-  "Faça uma previsão do futuro para seu alvo usando objetos aleatórios como pistas",
-  "Finja que está com um superpoder estranho e mostre como usá-lo com a ajuda do seu alvo",
-  "Conte uma piada sem graça e tente fazer o alvo rir de qualquer jeito",
-  "Finja que seu alvo é seu personal trainer e peça um treino maluco para você",
-  "Faça um comercial de um filme de terror com seu alvo como protagonista",
-  "Imite uma notícia urgente e anuncie algo absurdo que aconteceu com seu alvo",
-  "Finja que você é um repórter investigativo e faça perguntas suspeitas para o alvo",
-  "Demonstre um passo de dança bizarro e peça para o alvo repetir",
-  "Finja que está em um programa de culinária e ensine o alvo a fazer uma receita maluca",
-  "Imite um coach motivacional e dê um discurso exagerado para seu alvo",
-  "Conte uma história de terror envolvendo o alvo e uma geladeira barulhenta",
-  "Finja que seu alvo é uma celebridade e dê uma entrevista para a imprensa",
-  "Faça um tutorial improvisado para algo totalmente inútil usando seu alvo como modelo",
-  "Finja que você e seu alvo são astronautas e descreva a missão espacial de vocês",
-  "Imite um gato com fome pedindo comida para seu alvo",
-  "Finja que você é um guia turístico e faça uma visita guiada exagerada pela sala onde estão"
-      ]
+        "questions": [
+            "Faça contato visual com seu alvo e lamba sensualmente seus lábios",
+            "Pergunte sensualmente no ouvido do alvo 'Você gosta quando o dentista introduz instrumento na sua boca?'",
+            "Finja ser uma assistente virtual (Siri ou Alexa) e responda às perguntas dos outros jogadores de maneira engraçada",
+            "Demonstre ao alvo como jogar golfe, ficando atrás dele e segurando suas mãos",
+            "Você e o alvo estão em um podcast, pergunte a ele: 'Como se faz para ganhar um Chokito?' Resposta: 'É só colocar o dedo na tomadita'",
+            "Você é o Papai Noel bêbado e está falando com sua rena (seu alvo)",
+            "Fale sensualmente no ouvido do alvo 'Tem algo no mundo que adora ser lambido pra entrar no buraco. O que é?' Resposta: 'A linha da agulha'",
+            "Você é o Mister Cócegas. Ataque o alvo.",
+            "Faça a melhor imitação de orgasmo do Shrek e da Fiona para seu alvo.",
+            "Gire em círculos e fique gritando 'Eu sou uma máquina de lavar'",
+            "Imite os sons de uma transa no ouvido do seu alvo",
+            "Você está aprendendo balé, mostre aos demais os movimentos que já aprendeu",
+            "Com sua melhor imitação do Faustão diga ao seu alvo 'Ô loco, bicho! Esta fera, meu!'",
+            "Imite uma conversa com pessoas na fila do banco, atue como um jornalista fazendo uma reportagem para a TV",
+            "Leia a mão do seu alvo e diga 'Sinto muito, mas amanhã vai acontecer um acidente terrível enquanto você lava o suvaco'",
+            "Faça a imitação de um pinguim deslizando no gelo",
+            "Olhe nos olhos do alvo e diga 'Hoje você está muito engraçadinho. Não tem medo de ficar queimado na rodinha?'",
+            "Fale baixinho no ouvido do alvo: 'Sou totalmente atraído por você. Quero usar suas roupas.'",
+            "Você e o jogador da sua direita vão pular de paraquedas. Ele é o instrutor e vai atrás de você. Finja estar com medo de pular",
+            "Finja ser um treinador de circo e ensine um truque ao seu animal (seu alvo)",
+            "Finja ser um DJ famoso animando uma festa, use objetos próximos como equipamentos de som e faça sons engraçados com a boca",
+            "Finja ser um bebê dramático que acabou de perder sua chupeta e chore de forma exagerada, caindo no chão e rolando ao redor do alvo",
+            "Demonstre como colocar uma camisinha usando a mão do alvo como ferramenta",
+            "Você é uma estrela pornô e deve dar conselhos poderosos a um novato (seu alvo)",
+            "Você é um influencer fitness, ensine seu alvo com um treino em casa usando objetos domésticos como pesos",
+            "Você é um cowboy, ensine como laçar um boi (eu alvo)",
+            "Pergunte ao seu alvo 'Vamos tomar um café? Já me falaram que você acha que no coador é mais forte'",
+            "Imite chupar um pirulito olhando o seu alvo, depois diga: 'É o pirulito mais gostoso que já chupei'",
+            "Faça carinho na nuca de seu alvo enquanto dá conselhos motivacionais",
+            "Você está aprendendo mandarim, mostre ao seu alvo as palavras que já aprendeu",
+            "Imite uma borboleta saindo do casulo",
+            "O mapa do tesouro perdido mostra que o tesouro está nas calças do alvo. Imite um pirata e ache-o",
+            "Olhe nos olhos do alvo e diga: 'Fui cozinhar um ovo e achei o ovo meio pesado... tinha um pinto dentro. Imagine seu cozinho com pinto dentro'",
+            "Imite um golfinho batendo suas barbatanas e se esfregue no seu alvo",
+            "Fale sensualmente no ouvido do alvo 'Tenho 5 garrafas de uísque, você vende 4 e eu te dou uma'",
+            "Ensine uma dança viral do TikTok ao seu alvo, faça todos os movimentos necessários para ele rir",
+            "Seu alvo é uma cadeira, faça ajustes nele para poder usá-lo sem ser desconfortável",
+            "Vá em direção ao seu alvo chupando seu dedão. Com voz de bebê diga: 'Nenê quer nanar'",
+            "Cante e dance a música 'Gangnam Style' para fazer seu alvo rir",
+            "Dê uma aula de yoga para seu alvo, invente nomes engraçados para as poses como 'pose do gato preguiçoso' e 'pose do flamingo torto'",
+            "Olhando seu alvo, conte a história mais engraçada que você sabe sobre ele",
+            "Chegue perto do seu alvo sem falar nada, de forma rápida cheire o pescoço dele",
+            "Finja ser um pato extremamente charmoso tentando conquistar seu alvo, usando seu bico e movimentos sensuais",
+            "Faça uma reportagem ao vivo sobre 'Avó que mandou o vô à merda'. Inclua entrevista com outros jogadores.",
+            "Você é um ratinho, tente entrar nas calças do seu alvo e deixe-o desconfortável",
+            "Finja ser um cabeleireiro dando um corte de cabelo em seu alvo",
+            "Você é um vendedor de carros usados, tente vender um carro imaginário a outro jogador",
+            "Fale sensualmente no ouvido do alvo: 'Entra duro e seco. E sai macio e úmido. Adoro chiclete'",
+            "Você é um beija-flor. Bata suas asinhas e beba um pouco do néctar da flor mais suculenta (o seu alvo)",
+            "Massageie as orelhas do seu alvo enquanto olha diretamente nos olhos dele",
+            "Imite uma modelo caminhando na passarela, encoste no alvo e fale no ouvido dele 'Aaaaiiiiinnnn'",
+            "Faça uma apresentação inspiradora das suas posições sexuais favoritas, atue como se fosse uma palestra",
+            "Peça para o alvo ficar de quatro. Finja estar tirando leite dele, enquanto explica a qualidade do leite",
+            "Finja que é um agente secreto e passe uma mensagem cifrada para seu alvo sem usar palavras",
+            "Faça uma dança estranha e diga que é o ritmo oficial da sua cidade natal",
+            "Conte uma mentira absurda sobre o seu alvo e convença os outros que é verdade",
+            "Imite um zumbi faminto tentando devorar o alvo sem assustá-lo demais",
+            "Faça uma serenata improvisada para seu alvo usando apenas sons de animais",
+            "Finja que está preso numa tempestade e peça ajuda desesperadamente para seu alvo",
+            "Crie um comercial engraçado vendendo um produto imaginário usando seu alvo como testemunha",
+            "Finja que seu alvo é seu professor e faça uma pergunta difícil para ele responder",
+            "Faça uma apresentação de mágica sem revelar o truque para seu alvo",
+            "Imite um personagem famoso de filme fazendo uma cena romântica com seu alvo",
+            "Finja que está em uma entrevista de emprego e o alvo é o entrevistador — responda com exagero",
+            "Cante uma música infantil para acalmar seu alvo como se ele fosse um bebê",
+            "Finja que seu alvo é um cachorro e mime como ele reagiria a comandos básicos",
+            "Invente um insulto engraçado e inofensivo para falar para seu alvo",
+            "Faça uma previsão do futuro para seu alvo usando objetos aleatórios como pistas",
+            "Finja que está com um superpoder estranho e mostre como usá-lo com a ajuda do seu alvo",
+            "Conte uma piada sem graça e tente fazer o alvo rir de qualquer jeito",
+            "Finja que seu alvo é seu personal trainer e peça um treino maluco para você",
+            "Faça um comercial de um filme de terror com seu alvo como protagonista",
+            "Imite uma notícia urgente e anuncie algo absurdo que aconteceu com seu alvo",
+            "Finja que você é um repórter investigativo e faça perguntas suspeitas para o alvo",
+            "Demonstre um passo de dança bizarro e peça para o alvo repetir",
+            "Finja que está em um programa de culinária e ensine o alvo a fazer uma receita maluca",
+            "Imite um coach motivacional e dê um discurso exagerado para seu alvo",
+            "Conte uma história de terror envolvendo o alvo e uma geladeira barulhenta",
+            "Finja que seu alvo é uma celebridade e dê uma entrevista para a imprensa",
+            "Faça um tutorial improvisado para algo totalmente inútil usando seu alvo como modelo",
+            "Finja que você e seu alvo são astronautas e descreva a missão espacial de vocês",
+            "Imite um gato com fome pedindo comida para seu alvo",
+            "Finja que você é um guia turístico e faça uma visita guiada exagerada pela sala onde estão"
+        ]
     };
 
 
-        let questions = [];
-        let currentQuestion = 0;
-        let timeLeft = 30;
-        let timerInterval = null;
-        let isRunning = false;
+    let questions = [];
+    let currentQuestion = 0;
+    let timeLeft = 30;
+    let timerInterval = null;
+    let isRunning = false;
 
-        // Função para carregar as perguntas
-        function loadQuestions() {
+    // Função para carregar as perguntas
+    function loadQuestions() {
+        questions = shuffleArray([...gameData.questions]);
+        nextQuestion();
+    }
+
+    // Função para embaralhar um array (Fisher-Yates Shuffle)
+    function shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array;
+    }
+
+    // Função para exibir a próxima pergunta
+    function nextQuestion() {
+        if (questions.length === 0) {
+            document.getElementById("questionRiuBebeu").textContent = "Carregando perguntas...";
+            loadQuestions();
+            return;
+        }
+
+        if (currentQuestion < questions.length) {
+            document.getElementById("questionRiuBebeu").textContent = questions[currentQuestion];
+            document.getElementById("result").textContent = "";
+            currentQuestion++;
+        } else {
+            document.getElementById("questionRiuBebeu").textContent = "Fim do Jogo! Espero que estejam se divertindo! Quer jogar novamente?";
+            document.getElementById("result").textContent = "";
+            currentQuestion = 0;
             questions = shuffleArray([...gameData.questions]);
-            nextQuestion();
         }
+    }
 
-        // Função para embaralhar um array (Fisher-Yates Shuffle)
-        function shuffleArray(array) {
-            for (let i = array.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [array[i], array[j]] = [array[j], array[i]];
-            }
-            return array;
+    // Pop-up functions
+    function openPopup() {
+        document.getElementById("popup").style.display = "block";
+    }
+
+    function closePopup() {
+        document.getElementById("popup").style.display = "none";
+    }
+
+    // Fechar o pop-up ao clicar fora dele
+    window.onclick = function (event) {
+        let popup = document.getElementById("popup");
+        if (event.target === popup) {
+            popup.style.display = "none";
         }
+    };
 
-        // Função para exibir a próxima pergunta
-        function nextQuestion() {
-            if (questions.length === 0) {
-                document.getElementById("questionRiuBebeu").textContent = "Carregando perguntas...";
-                loadQuestions();
-                return;
-            }
+    // Cronômetro
+    function updateDisplay() {
+        const timerButton = document.getElementById('timer');
+        timerButton.textContent = timeLeft;
+    }
 
-            if (currentQuestion < questions.length) {
-                document.getElementById("questionRiuBebeu").textContent = questions[currentQuestion];
-                document.getElementById("result").textContent = "";
-                currentQuestion++;
-            } else {
-                document.getElementById("questionRiuBebeu").textContent = "Fim do Jogo! Espero que estejam se divertindo! Quer jogar novamente?";
-                document.getElementById("result").textContent = "";
-                currentQuestion = 0;
-                questions = shuffleArray([...gameData.questions]);
-            }
-        }
+    function handleTimerClick() {
+        const timerButton = document.getElementById('timer');
 
-        // Pop-up functions
-        function openPopup() {
-            document.getElementById("popup").style.display = "block";
-        }
-
-        function closePopup() {
-            document.getElementById("popup").style.display = "none";
-        }
-
-        // Fechar o pop-up ao clicar fora dele
-        window.onclick = function(event) {
-            let popup = document.getElementById("popup");
-            if (event.target === popup) {
-                popup.style.display = "none";
-            }
-        };
-
-        // Cronômetro
-        function updateDisplay() {
-            const timerButton = document.getElementById('timer');
-            timerButton.textContent = timeLeft;
-        }
-
-        function handleTimerClick() {
-            const timerButton = document.getElementById('timer');
-
-            if (isRunning) {
-                clearInterval(timerInterval);
-                timerInterval = null;
-                timeLeft = 30;
-                isRunning = false;
+        if (isRunning) {
+            clearInterval(timerInterval);
+            timerInterval = null;
+            timeLeft = 30;
+            isRunning = false;
+            updateDisplay();
+        } else {
+            isRunning = true;
+            timerInterval = setInterval(() => {
+                timeLeft--;
                 updateDisplay();
-            } else {
-                isRunning = true;
-                timerInterval = setInterval(() => {
-                    timeLeft--;
+
+                if (timeLeft <= 0) {
+                    clearInterval(timerInterval);
+                    timerInterval = null;
+                    isRunning = false;
+                    alert("⏰ Tempo esgotado!");
+                    timeLeft = 30;
                     updateDisplay();
-
-                    if (timeLeft <= 0) {
-                        clearInterval(timerInterval);
-                        timerInterval = null;
-                        isRunning = false;
-                        alert("⏰ Tempo esgotado!");
-                        timeLeft = 30;
-                        updateDisplay();
-                    }
-                }, 1000);
-            }
+                }
+            }, 1000);
         }
+    }
 
-        // Carrega as perguntas ao iniciar
-        window.onload = loadQuestions;
+    // Carrega as perguntas ao iniciar
+    window.onload = loadQuestions;
 </script>
 
 </body>
+
 </html>

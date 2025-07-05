@@ -22,22 +22,22 @@
     </nav>
 
     <!-- Conteúdo do jogo -->
-    <h1>Antes ou Depois</h1>
+
     <div>
-        <div>
-            <a href="#" onclick="openPopup()">
-                <img class="img-regras" src="../images/regras.png" alt="Regras" />
-            </a>
-            <h4>Regras</h4>
-        </div>
+        <h1>Antes ou Depois</h1>
+        <a href="#" onclick="openPopup()">
+            <img class="img-regras" src="../images/regras.png" alt="Regras" />
+        </a>
+        <h4>Regras</h4>
     </div>
 
     <!-- Pop-up -->
     <div id="popup" class="popup">
         <div class="popup-content">
-            <span class="close" onclick="closePopup()">&times;</span>
-            <h2>Regras do Jogo</h2>
-            <h5>Topzeira</h5>
+            <div class="popup-header">
+                <h2>Regras do Jogo</h2>
+                <span class="close" onclick="closePopup()">&times;</span>
+            </div>
             <ul>
                 <li>Serão citados dois fatos históricos</li>
                 <li>Você deverá marcar se o evento aconteceu antes ou depois do outro</li>
@@ -62,1330 +62,1330 @@
 <script>
     // Dados históricos embutidos
     const fatos = [
-      {
-        "evento": "Unificação do Egito por Menés",
-        "ano": -3100
-      },
-      {
-        "evento": "Conclusão da Grande Pirâmide de Gizé",
-        "ano": -2560
-      },
-      {
-        "evento": "Início do reinado de Hamurábi na Babilônia",
-        "ano": -1792
-      },
-      {
-        "evento": "Primeiras Olimpíadas na Grécia",
-        "ano": -776
-      },
-      {
-        "evento": "Fundação de Roma (segundo a lenda)",
-        "ano": -753
-      },
-      {
-        "evento": "Início da República Romana",
-        "ano": -509
-      },
-      {
-        "evento": "Batalha de Maratona entre gregos e persas",
-        "ano": -490
-      },
-      {
-        "evento": "Batalha das Termópilas",
-        "ano": -480
-      },
-      {
-        "evento": "Alexandre, o Grande, torna-se rei da Macedônia",
-        "ano": -336
-      },
-      {
-        "evento": "Assassinato de Júlio César",
-        "ano": -44
-      },
-      {
-        "evento": "Edito de Milão (liberdade religiosa no Império Romano)",
-        "ano": 313
-      },
-      {
-        "evento": "Queda do Império Romano do Ocidente",
-        "ano": 476
-      },
-      {
-        "evento": "Hégira de Maomé (início do calendário islâmico)",
-        "ano": 622
-      },
-      {
-        "evento": "Batalha de Poitiers (Carlos Martel vence os mouros)",
-        "ano": 732
-      },
-      {
-        "evento": "Coroação de Carlos Magno",
-        "ano": 800
-      },
-      {
-        "evento": "Cisma do Oriente (divisão da Igreja Católica e Ortodoxa)",
-        "ano": 1054
-      },
-      {
-        "evento": "Batalha de Hastings",
-        "ano": 1066
-      },
-      {
-        "evento": "Início da Primeira Cruzada",
-        "ano": 1096
-      },
-      {
-        "evento": "Assinatura da Magna Carta",
-        "ano": 1215
-      },
-      {
-        "evento": "Peste Negra devasta a Europa",
-        "ano": 1347
-      },
-      {
-        "evento": "Queda de Constantinopla",
-        "ano": 1453
-      },
-      {
-        "evento": "Colombo chega à América",
-        "ano": 1492
-      },
-      {
-        "evento": "Tratado de Tordesilhas",
-        "ano": 1494
-      },
-      {
-        "evento": "Início da Reforma Protestante com Lutero",
-        "ano": 1517
-      },
-      {
-        "evento": "Queda do Império Asteca por Hernán Cortés",
-        "ano": 1521
-      },
-      {
-        "evento": "Criação da Igreja Anglicana",
-        "ano": 1534
-      },
-      {
-        "evento": "Chegada dos jesuítas ao Brasil",
-        "ano": 1549
-      },
-      {
-        "evento": "Derrota da Armada Invencível espanhola",
-        "ano": 1588
-      },
-      {
-        "evento": "Tentativa da Conspiração da Pólvora na Inglaterra",
-        "ano": 1605
-      },
-      {
-        "evento": "Guerra dos Trinta Anos",
-        "ano": 1618
-      },
-      {
-        "evento": "Independência dos EUA",
-        "ano": 1776
-      },
-      {
-        "evento": "Início da Revolução Francesa",
-        "ano": 1789
-      },
-      {
-        "evento": "Napoleão assume o poder na França",
-        "ano": 1799
-      },
-      {
-        "evento": "Napoleão se torna imperador",
-        "ano": 1804
-      },
-      {
-        "evento": "Batalha de Waterloo",
-        "ano": 1815
-      },
-      {
-        "evento": "Independência do Brasil",
-        "ano": 1822
-      },
-      {
-        "evento": "Revolução de Julho na França",
-        "ano": 1830
-      },
-      {
-        "evento": "Início da Era Vitoriana no Reino Unido",
-        "ano": 1837
-      },
-      {
-        "evento": "Primavera dos Povos",
-        "ano": 1848
-      },
-      {
-        "evento": "Início da Guerra Civil Americana",
-        "ano": 1861
-      },
-      {
-        "evento": "Abolição da escravidão nos EUA",
-        "ano": 1865
-      },
-      {
-        "evento": "Unificação da Alemanha",
-        "ano": 1871
-      },
-      {
-        "evento": "Abolição da escravidão no Brasil (Lei Áurea)",
-        "ano": 1888
-      },
-      {
-        "evento": "Primeira exibição de cinema pelos irmãos Lumière",
-        "ano": 1895
-      },
-      {
-        "ano": "1914",
-        "evento": "Início da Primeira Guerra Mundial"
-      },
-      {
-        "ano": "1917",
-        "evento": "Revolução Russa"
-      },
-      {
-        "ano": "1918",
-        "evento": "Fim da Primeira Guerra Mundial"
-      },
-      {
-        "ano": "1929",
-        "evento": "Quebra da Bolsa de Valores de Nova York"
-      },
-      {
-        "ano": "1933",
-        "evento": "Hitler assume o poder na Alemanha"
-      },
-      {
-        "ano": "1939",
-        "evento": "Início da Segunda Guerra Mundial"
-      },
-      {
-        "ano": "1941",
-        "evento": "Ataque japonês a Pearl Harbor"
-      },
-      {
-        "ano": "1945",
-        "evento": "Bombas atômicas em Hiroshima e Nagasaki"
-      },
-      {
-        "ano": "1945",
-        "evento": "Criação da ONU"
-      },
-      {
-        "ano": "1948",
-        "evento": "Fundação do Estado de Israel"
-      },
-      {
-        "ano": "1953",
-        "evento": "Morte de Stálin"
-      },
-      {
-        "ano": "1959",
-        "evento": "Revolução Cubana"
-      },
-      {
-        "ano": "1961",
-        "evento": "Construção do Muro de Berlim"
-      },
-      {
-        "ano": "1963",
-        "evento": "Assassinato de John F. Kennedy"
-      },
-      {
-        "ano": "1964",
-        "evento": "Golpe militar no Brasil"
-      },
-      {
-        "ano": "1969",
-        "evento": "Neil Armstrong pisa na Lua"
-      },
-      {
-        "ano": "1973",
-        "evento": "Crise do Petróleo"
-      },
-      {
-        "ano": "1975",
-        "evento": "Fim da Guerra do Vietnã"
-      },
-      {
-        "ano": "1980",
-        "evento": "Assassinato de John Lennon"
-      },
-      {
-        "ano": "1985",
-        "evento": "Gorbachev assume poder na URSS"
-      },
-      {
-        "ano": "1989",
-        "evento": "Queda do Muro de Berlim"
-      },
-      {
-        "ano": "1991",
-        "evento": "Fim da União Soviética"
-      },
-      {
-        "ano": "1994",
-        "evento": "Eleição de Nelson Mandela na África do Sul"
-      },
-      {
-        "ano": "1998",
-        "evento": "Impeachment de Bill Clinton é aprovado pela Câmara"
-      },
-      {
-        "ano": "1999",
-        "evento": "Portugal devolve Macau à China"
-      },
-      {
-        "ano": "2001",
-        "evento": "Atentados de 11 de setembro"
-      },
-      {
-        "ano": "2003",
-        "evento": "Invasão do Iraque pelos EUA"
-      },
-      {
-        "ano": "2004",
-        "evento": "Tsunami no sudeste asiático mata mais de 230 mil pessoas"
-      },
-      {
-        "ano": "2008",
-        "evento": "Crise financeira global"
-      },
-      {
-        "ano": "2009",
-        "evento": "Barack Obama toma posse como presidente dos EUA"
-      },
-      {
-        "ano": "2011",
-        "evento": "Primavera Árabe"
-      },
-      {
-        "ano": "2013",
-        "evento": "Eleição do Papa Francisco"
-      },
-      {
-        "ano": "2014",
-        "evento": "Início da guerra na Ucrânia (Crimeia)"
-      },
-      {
-        "ano": "2016",
-        "evento": "Impeachment de Dilma Rousseff"
-      },
-      {
-        "ano": "2019",
-        "evento": "Incêndio na Catedral de Notre-Dame"
-      },
-      {
-        "ano": "2020",
-        "evento": "Início da pandemia de COVID-19"
-      },
-      {
-        "ano": "2021",
-        "evento": "Vacinação global contra COVID-19"
-      },
-      {
-        "ano": "2022",
-        "evento": "Início da invasão da Ucrânia pela Rússia"
-      },
-      {
-        "ano": "2023",
-        "evento": "ChatGPT se torna febre mundial"
-      },
-      {
-        "ano": "2023",
-        "evento": "Terremoto mortal na Turquia e Síria"
-      },
-      {
-        "ano": "2024",
-        "evento": "Eclipse solar total visível nos EUA"
-      },
-      {
-        "ano": "2024",
-        "evento": "Jogos Olímpicos de Paris"
-      },
-      {
-        "ano": "2025",
-        "evento": "Previsão de estreia da missão Artemis II da NASA (retorno à Lua)"
-      },
-      {
-        "ano": "1859",
-        "evento": "Publicação de A Origem das Espécies por Darwin"
-      },
-      {
-        "ano": "1920",
-        "evento": "Fundação da Liga das Nações"
-      },
-      {
-        "ano": "1947",
-        "evento": "Independência da Índia"
-      },
-      {
-        "ano": "1986",
-        "evento": "Desastre nuclear de Chernobyl"
-      },
-      {
-        "ano": "1990",
-        "evento": "Reunificação da Alemanha"
-      },
-      {
-        "ano": "2007",
-        "evento": "Lançamento do primeiro iPhone"
-      },
-      {
-        "ano": "2010",
-        "evento": "Primavera Árabe começa na Tunísia"
-      },
-      {
-        "ano": "2012",
-        "evento": "Descoberta do bóson de Higgs"
-      },
-      {
-        "ano": "2015",
-        "evento": "Acordo de Paris sobre o clima"
-      },
-      {
-        "ano": "2016",
-        "evento": "Brexit: Reino Unido vota pela saída da UE"
-      },
-      {
-        "ano": "2018",
-        "evento": "Resgate dos garotos presos em caverna na Tailândia"
-      },
-      {
-        "ano": "2021",
-        "evento": "Capitólio dos EUA é invadido"
-      },
-      {
-        "ano": "2022",
-        "evento": "Morte da Rainha Elizabeth II"
-      },
-      {
-        "ano": "1274 a.C.",
-        "evento": "Batalha de Kadesh entre egípcios e hititas"
-      },
-      {
-        "ano": "1000 a.C.",
-        "evento": "Fundação mítica de Jerusalém por Davi"
-      },
-      {
-        "ano": "539 a.C.",
-        "evento": "Ciro, o Grande conquista a Babilônia"
-      },
-      {
-        "ano": "27 a.C.",
-        "evento": "Início do Império Romano com Augusto"
-      },
-      {
-        "ano": "70",
-        "evento": "Destruição do Segundo Templo de Jerusalém"
-      },
-      {
-        "ano": "212",
-        "evento": "Edito de Caracala concede cidadania romana a todos os homens livres do Império"
-      },
-      {
-        "ano": "410",
-        "evento": "Saque de Roma pelos visigodos"
-      },
-      {
-        "ano": "732",
-        "evento": "Carlos Martel derrota os mouros na Batalha de Tours"
-      },
-      {
-        "ano": "793",
-        "evento": "Invasão viking ao monastério de Lindisfarne"
-      },
-      {
-        "ano": "1095",
-        "evento": "Papa Urbano II convoca a Primeira Cruzada"
-      },
-      {
-        "ano": "1440",
-        "evento": "Gutenberg inventa a imprensa com tipos móveis"
-      },
-      {
-        "ano": "1488",
-        "evento": "Bartolomeu Dias contorna o Cabo da Boa Esperança"
-      },
-      {
-        "ano": "1498",
-        "evento": "Vasco da Gama chega à Índia"
-      },
-      {
-        "ano": "1500",
-        "evento": "Descobrimento do Brasil por Pedro Álvares Cabral"
-      },
-      {
-        "ano": "1519",
-        "evento": "Início da circunavegação por Fernão de Magalhães"
-      },
-      {
-        "ano": "1532",
-        "evento": "Fundação de São Vicente, primeira vila do Brasil"
-      },
-      {
-        "ano": "1536",
-        "evento": "Início da Inquisição Portuguesa"
-      },
-      {
-        "ano": "1555",
-        "evento": "Paz de Augsburgo reconhece o luteranismo no Sacro Império"
-      },
-      {
-        "ano": "1580",
-        "evento": "União Ibérica entre Portugal e Espanha"
-      },
-      {
-        "ano": "1607",
-        "evento": "Fundação da colônia de Jamestown (EUA)"
-      },
-      {
-        "ano": "1640",
-        "evento": "Restauração da independência de Portugal"
-      },
-      {
-        "ano": "1648",
-        "evento": "Tratado de Vestfália põe fim à Guerra dos Trinta Anos"
-      },
-      {
-        "ano": "1666",
-        "evento": "Grande Incêndio de Londres"
-      },
-      {
-        "ano": "1687",
-        "evento": "Isaac Newton publica Principia Mathematica"
-      },
-      {
-        "ano": "1703",
-        "evento": "Fundação de São Petersburgo"
-      },
-      {
-        "ano": "1756",
-        "evento": "Início da Guerra dos Sete Anos"
-      },
-      {
-        "ano": "1769",
-        "evento": "Invenção da máquina a vapor por James Watt"
-      },
-      {
-        "ano": "1770",
-        "evento": "Assassinato de um grupo de colonos em Boston (Massacre de Boston)"
-      },
-      {
-        "ano": "1781",
-        "evento": "Vitória americana na Batalha de Yorktown"
-      },
-      {
-        "ano": "1787",
-        "evento": "Constituição dos Estados Unidos é escrita"
-      },
-      {
-        "ano": "1807",
-        "evento": "Fuga da família real portuguesa para o Brasil"
-      },
-      {
-        "ano": "1810",
-        "evento": "Início da independência da América Latina"
-      },
-      {
-        "ano": "1824",
-        "evento": "Primeira Constituição brasileira"
-      },
-      {
-        "ano": "1831",
-        "evento": "Abdicação de D. Pedro I"
-      },
-      {
-        "ano": "1840",
-        "evento": "Início da Era Vitoriana"
-      },
-      {
-        "ano": "1844",
-        "evento": "Invenção do telégrafo por Samuel Morse"
-      },
-      {
-        "ano": "1853",
-        "evento": "Guerra da Crimeia"
-      },
-      {
-        "ano": "1859",
-        "evento": "Início da unificação italiana"
-      },
-      {
-        "ano": "1863",
-        "evento": "Proclamação da Emancipação nos EUA"
-      },
-      {
-        "ano": "1885",
-        "evento": "Conferência de Berlim (partilha da África)"
-      },
-      {
-        "ano": 1903,
-        "evento": "Irmãos Wright fazem o primeiro voo."
-      },
-      {
-        "ano": 1905,
-        "evento": "Teoria da Relatividade Restrita de Einstein."
-      },
-      {
-        "ano": 1912,
-        "evento": "Naufrágio do Titanic."
-      },
-      {
-        "ano": 1917,
-        "evento": "Declaração Balfour (apoio à criação de um Estado judeu)."
-      },
-      {
-        "ano": 1920,
-        "evento": "Primeira transmissão de rádio comercial."
-      },
-      {
-        "ano": 1928,
-        "evento": "Alexander Fleming descobre a penicilina."
-      },
-      {
-        "ano": 1930,
-        "evento": "Revolução de 1930 no Brasil."
-      },
-      {
-        "ano": 1937,
-        "evento": "Bombardeio de Guernica na Guerra Civil Espanhola."
-      },
-      {
-        "ano": 1944,
-        "evento": "Dia D: desembarque na Normandia."
-      },
-      {
-        "ano": 1949,
-        "evento": "Criação da OTAN."
-      },
-      {
-        "ano": 1950,
-        "evento": "Início da Guerra da Coreia."
-      },
-      {
-        "ano": 1955,
-        "evento": "Criação do Pacto de Varsóvia."
-      },
-      {
-        "ano": 1957,
-        "evento": "Lançamento do Sputnik pela URSS."
-      },
-      {
-        "ano": 1959,
-        "evento": "Lançamento da boneca Barbie."
-      },
-      {
-        "ano": 1962,
-        "evento": "Crise dos mísseis em Cuba."
-      },
-      {
-        "ano": 1967,
-        "evento": "Guerra dos Seis Dias."
-      },
-      {
-        "ano": 1968,
-        "evento": "Movimento estudantil de maio na França."
-      },
-      {
-        "ano": 1971,
-        "evento": "Criação do e-mail."
-      },
-      {
-        "ano": 1972,
-        "evento": "Início do escândalo de Watergate."
-      },
-      {
-        "ano": 1979,
-        "evento": "Revolução Islâmica no Irã."
-      },
-      {
-        "ano": 1981,
-        "evento": "Primeiro caso documentado de AIDS."
-      },
-      {
-        "ano": 1982,
-        "evento": "Guerra das Malvinas."
-      },
-      {
-        "ano": 1984,
-        "evento": "Apple lança o Macintosh."
-      },
-      {
-        "ano": 1989,
-        "evento": "Massacre da Praça da Paz Celestial na China."
-      },
-      {
-        "ano": 1990,
-        "evento": "Nelson Mandela é libertado."
-      },
-      {
-        "ano": 1992,
-        "evento": "Conferência da ONU sobre o clima no Rio (ECO-92)."
-      },
-      {
-        "ano": 1993,
-        "evento": "Acordo de Oslo entre Israel e Palestina."
-      },
-      {
-        "ano": 1997,
-        "evento": "Morte da princesa Diana."
-      },
-      {
-        "ano": 1999,
-        "evento": "Criação do euro."
-      },
-      {
-        "ano": 2000,
-        "evento": "Início da era digital em massa (internet popularizada)."
-      },
-      {
-        "ano": 2005,
-        "evento": "YouTube é lançado."
-      },
-      {
-        "ano": 2007,
-        "evento": "Estouro do mercado imobiliário nos EUA."
-      },
-      {
-        "ano": 2010,
-        "evento": "Terremoto no Haiti mata mais de 200 mil pessoas."
-      },
-      {
-        "ano": 2011,
-        "evento": "Morte de Osama Bin Laden."
-      },
-      {
-        "ano": 2012,
-        "evento": "Curiosity pousa em Marte."
-      },
-      {
-        "ano": 2013,
-        "evento": "Protestos de junho no Brasil."
-      },
-      {
-        "ano": 2015,
-        "evento": "Acordo nuclear com o Irã."
-      },
-      {
-        "ano": 2017,
-        "evento": "Escândalo Cambridge Analytica."
-      },
-      {
-        "ano": 2018,
-        "evento": "Jair Bolsonaro é eleito presidente do Brasil."
-      },
-      {
-        "ano": 2020,
-        "evento": "Morte de George Floyd e protestos Black Lives Matter."
-      },
-      {
-        "ano": 1901,
-        "evento": "Primeira transmissão de rádio transatlântica."
-      },
-      {
-        "ano": 1927,
-        "evento": "Primeiro filme falado: The Jazz Singer."
-      },
-      {
-        "ano": 1936,
-        "evento": "Jesse Owens desafia o nazismo nas Olimpíadas."
-      },
-      {
-        "ano": 1960,
-        "evento": "Início da OPEP."
-      },
-      {
-        "ano": 1970,
-        "evento": "Criação do Greenpeace."
-      },
-      {
-        "ano": 1995,
-        "evento": "Lançamento do Windows 95."
-      },
-      {
-        "ano": 2001,
-        "evento": "Lançamento da Wikipedia."
-      },
-      {
-        "ano": 2006,
-        "evento": "Twitter é fundado."
-      },
-      {
-        "ano": 2016,
-        "evento": "Impeachment de Dilma Rousseff."
-      },
-      {
-        "ano": 2021,
-        "evento": "Missões privadas ao espaço (SpaceX)."
-      },
-      {
-        "ano": 1891,
-        "evento": "Primeira Constituição republicana do Brasil."
-      },
-      {
-        "ano": 1932,
-        "evento": "Revolução Constitucionalista em São Paulo."
-      },
-      {
-        "ano": 1942,
-        "evento": "Entrada do Brasil na Segunda Guerra Mundial."
-      },
-      {
-        "ano": 1956,
-        "evento": "Início da construção de Brasília."
-      },
-      {
-        "ano": 1960,
-        "evento": "Inauguração de Brasília."
-      },
-      {
-        "ano": 1985,
-        "evento": "Fim da ditadura militar no Brasil."
-      },
-      {
-        "ano": 1988,
-        "evento": "Constituição Federal é promulgada."
-      },
-      {
-        "ano": 1992,
-        "evento": "Impeachment de Fernando Collor."
-      },
-      {
-        "ano": 2002,
-        "evento": "Lula é eleito presidente."
-      },
-      {
-        "ano": 2022,
-        "evento": "Eleição de Luiz Inácio Lula da Silva para 3º mandato."
-      },
-      {
-        "ano": 509,
-        "evento": "Fim da monarquia em Roma e início da República Romana."
-      },
-      {
-        "ano": 490,
-        "evento": "Batalha de Maratona."
-      },
-      {
-        "ano": 480,
-        "evento": "Batalha das Termópilas."
-      },
-      {
-        "ano": 323,
-        "evento": "Morte de Alexandre, o Grande."
-      },
-      {
-        "ano": 146,
-        "evento": "Roma destrói Cartago (fim das Guerras Púnicas)."
-      },
-      {
-        "ano": 44,
-        "evento": "Assassinato de Júlio César."
-      },
-      {
-        "ano": 27,
-        "evento": "Início do Império com Otávio Augusto."
-      },
-      {
-        "ano": 64,
-        "evento": "Grande incêndio de Roma."
-      },
-      {
-        "ano": 79,
-        "evento": "Erupção do Vesúvio destrói Pompeia."
-      },
-      {
-        "ano": 117,
-        "evento": "Apogeu territorial do Império Romano sob Trajano."
-      },
-      {
-        "ano": 284,
-        "evento": "Diocleciano divide o Império Romano."
-      },
-      {
-        "ano": 313,
-        "evento": "Édito de Milão legaliza o cristianismo."
-      },
-      {
-        "ano": 380,
-        "evento": "Cristianismo se torna religião oficial de Roma."
-      },
-      {
-        "ano": 395,
-        "evento": "Divisão definitiva do Império Romano (Ocidente e Oriente)."
-      },
-      {
-        "ano": 476,
-        "evento": "Queda do Império Romano do Ocidente."
-      },
-      {
-        "ano": 622,
-        "evento": "Hégira: fuga de Maomé para Medina (início do calendário islâmico)."
-      },
-      {
-        "ano": 711,
-        "evento": "Invasão muçulmana da Península Ibérica."
-      },
-      {
-        "ano": 800,
-        "evento": "Coroação de Carlos Magno como imperador."
-      },
-      {
-        "ano": 962,
-        "evento": "Fundação do Sacro Império Romano-Germânico."
-      },
-      {
-        "ano": 1066,
-        "evento": "Batalha de Hastings (invasão normanda na Inglaterra)."
-      },
-      {
-        "ano": 1300,
-        "evento": "Início do Renascimento na Itália."
-      },
-      {
-        "ano": 1347,
-        "evento": "Peste Negra chega à Europa."
-      },
-      {
-        "ano": 1378,
-        "evento": "Início do Cisma do Ocidente (dois papas simultâneos)."
-      },
-      {
-        "ano": 1415,
-        "evento": "Conquista de Ceuta pelos portugueses."
-      },
-      {
-        "ano": 1431,
-        "evento": "Joana d’Arc é queimada viva."
-      },
-      {
-        "ano": 1453,
-        "evento": "Tomada de Constantinopla pelos turcos otomanos."
-      },
-      {
-        "ano": 1492,
-        "evento": "Cristóvão Colombo chega à América."
-      },
-      {
-        "ano": 1501,
-        "evento": "Início da dinastia safávida na Pérsia."
-      },
-      {
-        "ano": 1517,
-        "evento": "Martinho Lutero fixa as 95 teses."
-      },
-      {
-        "ano": 1534,
-        "evento": "Atos de Supremacia (Henrique VIII rompe com a Igreja Católica)."
-      },
-      {
-        "ano": 1543,
-        "evento": "Publicação da teoria heliocêntrica de Copérnico."
-      },
-      {
-        "ano": 1492,
-        "evento": "Cristóvão Colombo chega à América."
-      },
-      {
-        "ano": 1498,
-        "evento": "Vasco da Gama chega à Índia."
-      },
-      {
-        "ano": 1513,
-        "evento": "Vasco Núñez de Balboa avista o Oceano Pacífico."
-      },
-      {
-        "ano": 1519,
-        "evento": "Início da circum-navegação de Fernão de Magalhães."
-      },
-      {
-        "ano": 1521,
-        "evento": "Hernán Cortés conquista o Império Asteca."
-      },
-      {
-        "ano": 1533,
-        "evento": "Francisco Pizarro conquista o Império Inca."
-      },
-      {
-        "ano": 1577,
-        "evento": "Francis Drake inicia volta ao mundo."
-      },
-      {
-        "ano": 1606,
-        "evento": "Descoberta da Austrália por Willem Janszoon."
-      },
-      {
-        "ano": 1642,
-        "evento": "Abel Tasman descobre a Nova Zelândia."
-      },
-      {
-        "ano": 1770,
-        "evento": "James Cook chega à costa leste da Austrália."
-      },
-      {
-        "ano": 1820,
-        "evento": "Descoberta da Antártida."
-      },
-      {
-        "ano": 1909,
-        "evento": "Robert Peary atinge o Polo Norte."
-      },
-      {
-        "ano": 1911,
-        "evento": "Roald Amundsen alcança o Polo Sul."
-      },
-      {
-        "ano": 1953,
-        "evento": "Edmund Hillary e Tenzing Norgay escalam o Everest."
-      },
-      {
-        "ano": 1969,
-        "evento": "Neil Armstrong pisa na Lua."
-      },
-      {
-        "ano": 1971,
-        "evento": "Lançamento da estação espacial Salyut 1."
-      },
-      {
-        "ano": 1997,
-        "evento": "Mars Pathfinder pousa em Marte."
-      },
-      {
-        "ano": 2004,
-        "evento": "Sonda Cassini entra na órbita de Saturno."
-      },
-      {
-        "ano": 2012,
-        "evento": "Curiosity pousa em Marte."
-      },
-      {
-        "ano": 2021,
-        "evento": "China envia sonda para Marte com sucesso."
-      },
-      {
-        "ano": 1602,
-        "evento": "Criação da Companhia das Índias Orientais (Holanda)."
-      },
-      {
-        "ano": 1776,
-        "evento": "Adam Smith publica A Riqueza das Nações."
-      },
-      {
-        "ano": 1792,
-        "evento": "Fundação da Bolsa de Valores de Nova York."
-      },
-      {
-        "ano": 1865,
-        "evento": "Criação do primeiro banco central (Suécia)."
-      },
-      {
-        "ano": 1929,
-        "evento": "Quebra da Bolsa de Nova York (Grande Depressão)."
-      },
-      {
-        "ano": 1944,
-        "evento": "Conferência de Bretton Woods."
-      },
-      {
-        "ano": 1971,
-        "evento": "Fim do padrão ouro nos EUA."
-      },
-      {
-        "ano": 1989,
-        "evento": "Queda do Muro de Berlim impulsiona abertura de mercados."
-      },
-      {
-        "ano": 2001,
-        "evento": "Criação do termo BRICS."
-      },
-      {
-        "ano": 2008,
-        "evento": "Quebra do Lehman Brothers inicia crise financeira."
-      },
-      {
-        "ano": 2010,
-        "evento": "Criação da moeda digital Bitcoin atinge popularidade."
-      },
-      {
-        "ano": 2013,
-        "evento": "Início do uso de PIX na China (via QR Code)."
-      },
-      {
-        "ano": 2020,
-        "evento": "PIX é lançado no Brasil."
-      },
-      {
-        "ano": 2021,
-        "evento": "Criptomoeda Ethereum atinge recorde de valor."
-      },
-      {
-        "ano": 2022,
-        "evento": "Inflação global afeta economia pós-pandemia."
-      },
-      {
-        "ano": 2023,
-        "evento": "Inteligência artificial começa a impactar o mercado de trabalho."
-      },
-      {
-        "ano": 2023,
-        "evento": "Ações da Nvidia disparam com boom da IA."
-      },
-      {
-        "ano": 2024,
-        "evento": "Apple se torna a primeira empresa a ultrapassar US$ 4 trilhões em valor de mercado."
-      },
-      {
-        "ano": 2025,
-        "evento": "Previsão de adoção global de moedas digitais estatais (CBDCs)."
-      },
-      {
-        "ano": 2025,
-        "evento": "Brasil avança com o Drex, real digital."
-      },
-      {
-        "ano": 1973,
-        "evento": "Criação do primeiro celular (Motorola)."
-      },
-      {
-        "ano": 1983,
-        "evento": "Criação do protocolo TCP/IP."
-      },
-      {
-        "ano": 1989,
-        "evento": "Tim Berners-Lee propõe a World Wide Web."
-      },
-      {
-        "ano": 1991,
-        "evento": "Primeiro website entra no ar."
-      },
-      {
-        "ano": 1995,
-        "evento": "Lançamento do Windows 95."
-      },
-      {
-        "ano": 1997,
-        "evento": "Lançamento do Google."
-      },
-      {
-        "ano": 2004,
-        "evento": "Criação do Facebook."
-      },
-      {
-        "ano": 2005,
-        "evento": "Criação do YouTube."
-      },
-      {
-        "ano": 2007,
-        "evento": "Lançamento do primeiro iPhone."
-      },
-      {
-        "ano": 2009,
-        "evento": "Bitcoin entra em circulação."
-      },
-      {
-        "ano": 2010,
-        "evento": "Instagram é lançado."
-      },
-      {
-        "ano": 2011,
-        "evento": "Watson (IBM) vence humanos no Jeopardy!."
-      },
-      {
-        "ano": 2014,
-        "evento": "Lançamento do Alexa (Amazon)."
-      },
-      {
-        "ano": 2015,
-        "evento": "Google lança a IA TensorFlow."
-      },
-      {
-        "ano": 2016,
-        "evento": "AlphaGo vence campeão mundial de Go."
-      },
-      {
-        "ano": 2018,
-        "evento": "GDPR entra em vigor na União Europeia."
-      },
-      {
-        "ano": 2020,
-        "evento": "Zoom e plataformas online explodem com a pandemia."
-      },
-      {
-        "ano": 2021,
-        "evento": "OpenAI lança GPT-3 ao público."
-      },
-      {
-        "ano": 2022,
-        "evento": "ChatGPT viraliza como IA generativa."
-      },
-      {
-        "ano": 2023,
-        "evento": "Google lança o Gemini, IA multimodal."
-      },
-      {
-        "ano": 1776,
-        "evento": "Revolução Americana."
-      },
-      {
-        "ano": 1789,
-        "evento": "Revolução Francesa."
-      },
-      {
-        "ano": 1804,
-        "evento": "Revolução Haitiana consagra a 1ª república negra."
-      },
-      {
-        "ano": 1830,
-        "evento": "Revolução de Julho na França."
-      },
-      {
-        "ano": 1848,
-        "evento": "Revoluções liberais na Europa."
-      },
-      {
-        "ano": 1861,
-        "evento": "Guerra Civil Americana."
-      },
-      {
-        "ano": 1871,
-        "evento": "Comuna de Paris."
-      },
-      {
-        "ano": 1917,
-        "evento": "Revolução Russa."
-      },
-      {
-        "ano": 1922,
-        "evento": "Revolução Turca de Atatürk."
-      },
-      {
-        "ano": 1936,
-        "evento": "Guerra Civil Espanhola."
-      },
-      {
-        "ano": 1949,
-        "evento": "Revolução Comunista na China."
-      },
-      {
-        "ano": 1959,
-        "evento": "Revolução Cubana."
-      },
-      {
-        "ano": 1966,
-        "evento": "Revolução Cultural Chinesa."
-      },
-      {
-        "ano": 1979,
-        "evento": "Revolução Islâmica no Irã."
-      },
-      {
-        "ano": 1989,
-        "evento": "Queda do Muro de Berlim."
-      },
-      {
-        "ano": 1991,
-        "evento": "Dissolução da URSS."
-      },
-      {
-        "ano": 2003,
-        "evento": "Invasão do Iraque pelos EUA."
-      },
-      {
-        "ano": 2010,
-        "evento": "Primavera Árabe."
-      },
-      {
-        "ano": 2014,
-        "evento": "Conflito na Ucrânia começa (anexação da Crimeia)."
-      },
-      {
-        "ano": 2022,
-        "evento": "Rússia invade a Ucrânia (guerra em curso)."
-      },
-      {
-        "ano": 1854,
-        "evento": "Publicação de Walden, de Thoreau, referência ecológica."
-      },
-      {
-        "ano": 1962,
-        "evento": "Primavera Silenciosa de Rachel Carson inicia o ambientalismo moderno."
-      },
-      {
-        "ano": 1972,
-        "evento": "Primeira conferência da ONU sobre o meio ambiente."
-      },
-      {
-        "ano": 1987,
-        "evento": "Protocolo de Montreal para a proteção da camada de ozônio."
-      },
-      {
-        "ano": 1992,
-        "evento": "ECO-92 (Rio de Janeiro)."
-      },
-      {
-        "ano": 1997,
-        "evento": "Protocolo de Kyoto sobre mudanças climáticas."
-      },
-      {
-        "ano": 2000,
-        "evento": "Criação dos Objetivos do Milênio da ONU."
-      },
-      {
-        "ano": 2006,
-        "evento": "Al Gore lança Uma Verdade Inconveniente."
-      },
-      {
-        "ano": 2015,
-        "evento": "Acordo de Paris é assinado."
-      },
-      {
-        "ano": 2019,
-        "evento": "Greta Thunberg discursa na ONU."
-      },
-      {
-        "ano": 2020,
-        "evento": "Pandemia de COVID-19 reduz temporariamente emissões globais."
-      },
-      {
-        "ano": 2021,
-        "evento": "Crise global de fornecimento de energia e aquecimento."
-      },
-      {
-        "ano": 2022,
-        "evento": "ONU declara acesso à água limpa como direito humano."
-      },
-      {
-        "ano": 2023,
-        "evento": "COP28 discute transição energética com metas globais."
-      },
-      {
-        "ano": 2024,
-        "evento": "Brasil bate recorde de geração de energia solar."
-      },
-      {
-        "ano": 2025,
-        "evento": "ONU projeta escassez crítica de água em 60 países."
-      },
-      {
-        "ano": 2025,
-        "evento": "Nova cúpula global sobre IA e sustentabilidade."
-      },
-      {
-        "ano": 2025,
-        "evento": "Amazônia ultrapassa ponto de inflexão em áreas isoladas."
-      },
-      {
-        "ano": 2025,
-        "evento": "Criação de moeda carbono digital entre países da América do Sul."
-      },
-      {
-        "ano": 2025,
-        "evento": "Primeira cidade do mundo com neutralidade total de carbono (Helsinque, projetada)."
-      }
+        {
+            "evento": "Unificação do Egito por Menés",
+            "ano": -3100
+        },
+        {
+            "evento": "Conclusão da Grande Pirâmide de Gizé",
+            "ano": -2560
+        },
+        {
+            "evento": "Início do reinado de Hamurábi na Babilônia",
+            "ano": -1792
+        },
+        {
+            "evento": "Primeiras Olimpíadas na Grécia",
+            "ano": -776
+        },
+        {
+            "evento": "Fundação de Roma (segundo a lenda)",
+            "ano": -753
+        },
+        {
+            "evento": "Início da República Romana",
+            "ano": -509
+        },
+        {
+            "evento": "Batalha de Maratona entre gregos e persas",
+            "ano": -490
+        },
+        {
+            "evento": "Batalha das Termópilas",
+            "ano": -480
+        },
+        {
+            "evento": "Alexandre, o Grande, torna-se rei da Macedônia",
+            "ano": -336
+        },
+        {
+            "evento": "Assassinato de Júlio César",
+            "ano": -44
+        },
+        {
+            "evento": "Edito de Milão (liberdade religiosa no Império Romano)",
+            "ano": 313
+        },
+        {
+            "evento": "Queda do Império Romano do Ocidente",
+            "ano": 476
+        },
+        {
+            "evento": "Hégira de Maomé (início do calendário islâmico)",
+            "ano": 622
+        },
+        {
+            "evento": "Batalha de Poitiers (Carlos Martel vence os mouros)",
+            "ano": 732
+        },
+        {
+            "evento": "Coroação de Carlos Magno",
+            "ano": 800
+        },
+        {
+            "evento": "Cisma do Oriente (divisão da Igreja Católica e Ortodoxa)",
+            "ano": 1054
+        },
+        {
+            "evento": "Batalha de Hastings",
+            "ano": 1066
+        },
+        {
+            "evento": "Início da Primeira Cruzada",
+            "ano": 1096
+        },
+        {
+            "evento": "Assinatura da Magna Carta",
+            "ano": 1215
+        },
+        {
+            "evento": "Peste Negra devasta a Europa",
+            "ano": 1347
+        },
+        {
+            "evento": "Queda de Constantinopla",
+            "ano": 1453
+        },
+        {
+            "evento": "Colombo chega à América",
+            "ano": 1492
+        },
+        {
+            "evento": "Tratado de Tordesilhas",
+            "ano": 1494
+        },
+        {
+            "evento": "Início da Reforma Protestante com Lutero",
+            "ano": 1517
+        },
+        {
+            "evento": "Queda do Império Asteca por Hernán Cortés",
+            "ano": 1521
+        },
+        {
+            "evento": "Criação da Igreja Anglicana",
+            "ano": 1534
+        },
+        {
+            "evento": "Chegada dos jesuítas ao Brasil",
+            "ano": 1549
+        },
+        {
+            "evento": "Derrota da Armada Invencível espanhola",
+            "ano": 1588
+        },
+        {
+            "evento": "Tentativa da Conspiração da Pólvora na Inglaterra",
+            "ano": 1605
+        },
+        {
+            "evento": "Guerra dos Trinta Anos",
+            "ano": 1618
+        },
+        {
+            "evento": "Independência dos EUA",
+            "ano": 1776
+        },
+        {
+            "evento": "Início da Revolução Francesa",
+            "ano": 1789
+        },
+        {
+            "evento": "Napoleão assume o poder na França",
+            "ano": 1799
+        },
+        {
+            "evento": "Napoleão se torna imperador",
+            "ano": 1804
+        },
+        {
+            "evento": "Batalha de Waterloo",
+            "ano": 1815
+        },
+        {
+            "evento": "Independência do Brasil",
+            "ano": 1822
+        },
+        {
+            "evento": "Revolução de Julho na França",
+            "ano": 1830
+        },
+        {
+            "evento": "Início da Era Vitoriana no Reino Unido",
+            "ano": 1837
+        },
+        {
+            "evento": "Primavera dos Povos",
+            "ano": 1848
+        },
+        {
+            "evento": "Início da Guerra Civil Americana",
+            "ano": 1861
+        },
+        {
+            "evento": "Abolição da escravidão nos EUA",
+            "ano": 1865
+        },
+        {
+            "evento": "Unificação da Alemanha",
+            "ano": 1871
+        },
+        {
+            "evento": "Abolição da escravidão no Brasil (Lei Áurea)",
+            "ano": 1888
+        },
+        {
+            "evento": "Primeira exibição de cinema pelos irmãos Lumière",
+            "ano": 1895
+        },
+        {
+            "ano": "1914",
+            "evento": "Início da Primeira Guerra Mundial"
+        },
+        {
+            "ano": "1917",
+            "evento": "Revolução Russa"
+        },
+        {
+            "ano": "1918",
+            "evento": "Fim da Primeira Guerra Mundial"
+        },
+        {
+            "ano": "1929",
+            "evento": "Quebra da Bolsa de Valores de Nova York"
+        },
+        {
+            "ano": "1933",
+            "evento": "Hitler assume o poder na Alemanha"
+        },
+        {
+            "ano": "1939",
+            "evento": "Início da Segunda Guerra Mundial"
+        },
+        {
+            "ano": "1941",
+            "evento": "Ataque japonês a Pearl Harbor"
+        },
+        {
+            "ano": "1945",
+            "evento": "Bombas atômicas em Hiroshima e Nagasaki"
+        },
+        {
+            "ano": "1945",
+            "evento": "Criação da ONU"
+        },
+        {
+            "ano": "1948",
+            "evento": "Fundação do Estado de Israel"
+        },
+        {
+            "ano": "1953",
+            "evento": "Morte de Stálin"
+        },
+        {
+            "ano": "1959",
+            "evento": "Revolução Cubana"
+        },
+        {
+            "ano": "1961",
+            "evento": "Construção do Muro de Berlim"
+        },
+        {
+            "ano": "1963",
+            "evento": "Assassinato de John F. Kennedy"
+        },
+        {
+            "ano": "1964",
+            "evento": "Golpe militar no Brasil"
+        },
+        {
+            "ano": "1969",
+            "evento": "Neil Armstrong pisa na Lua"
+        },
+        {
+            "ano": "1973",
+            "evento": "Crise do Petróleo"
+        },
+        {
+            "ano": "1975",
+            "evento": "Fim da Guerra do Vietnã"
+        },
+        {
+            "ano": "1980",
+            "evento": "Assassinato de John Lennon"
+        },
+        {
+            "ano": "1985",
+            "evento": "Gorbachev assume poder na URSS"
+        },
+        {
+            "ano": "1989",
+            "evento": "Queda do Muro de Berlim"
+        },
+        {
+            "ano": "1991",
+            "evento": "Fim da União Soviética"
+        },
+        {
+            "ano": "1994",
+            "evento": "Eleição de Nelson Mandela na África do Sul"
+        },
+        {
+            "ano": "1998",
+            "evento": "Impeachment de Bill Clinton é aprovado pela Câmara"
+        },
+        {
+            "ano": "1999",
+            "evento": "Portugal devolve Macau à China"
+        },
+        {
+            "ano": "2001",
+            "evento": "Atentados de 11 de setembro"
+        },
+        {
+            "ano": "2003",
+            "evento": "Invasão do Iraque pelos EUA"
+        },
+        {
+            "ano": "2004",
+            "evento": "Tsunami no sudeste asiático mata mais de 230 mil pessoas"
+        },
+        {
+            "ano": "2008",
+            "evento": "Crise financeira global"
+        },
+        {
+            "ano": "2009",
+            "evento": "Barack Obama toma posse como presidente dos EUA"
+        },
+        {
+            "ano": "2011",
+            "evento": "Primavera Árabe"
+        },
+        {
+            "ano": "2013",
+            "evento": "Eleição do Papa Francisco"
+        },
+        {
+            "ano": "2014",
+            "evento": "Início da guerra na Ucrânia (Crimeia)"
+        },
+        {
+            "ano": "2016",
+            "evento": "Impeachment de Dilma Rousseff"
+        },
+        {
+            "ano": "2019",
+            "evento": "Incêndio na Catedral de Notre-Dame"
+        },
+        {
+            "ano": "2020",
+            "evento": "Início da pandemia de COVID-19"
+        },
+        {
+            "ano": "2021",
+            "evento": "Vacinação global contra COVID-19"
+        },
+        {
+            "ano": "2022",
+            "evento": "Início da invasão da Ucrânia pela Rússia"
+        },
+        {
+            "ano": "2023",
+            "evento": "ChatGPT se torna febre mundial"
+        },
+        {
+            "ano": "2023",
+            "evento": "Terremoto mortal na Turquia e Síria"
+        },
+        {
+            "ano": "2024",
+            "evento": "Eclipse solar total visível nos EUA"
+        },
+        {
+            "ano": "2024",
+            "evento": "Jogos Olímpicos de Paris"
+        },
+        {
+            "ano": "2025",
+            "evento": "Previsão de estreia da missão Artemis II da NASA (retorno à Lua)"
+        },
+        {
+            "ano": "1859",
+            "evento": "Publicação de A Origem das Espécies por Darwin"
+        },
+        {
+            "ano": "1920",
+            "evento": "Fundação da Liga das Nações"
+        },
+        {
+            "ano": "1947",
+            "evento": "Independência da Índia"
+        },
+        {
+            "ano": "1986",
+            "evento": "Desastre nuclear de Chernobyl"
+        },
+        {
+            "ano": "1990",
+            "evento": "Reunificação da Alemanha"
+        },
+        {
+            "ano": "2007",
+            "evento": "Lançamento do primeiro iPhone"
+        },
+        {
+            "ano": "2010",
+            "evento": "Primavera Árabe começa na Tunísia"
+        },
+        {
+            "ano": "2012",
+            "evento": "Descoberta do bóson de Higgs"
+        },
+        {
+            "ano": "2015",
+            "evento": "Acordo de Paris sobre o clima"
+        },
+        {
+            "ano": "2016",
+            "evento": "Brexit: Reino Unido vota pela saída da UE"
+        },
+        {
+            "ano": "2018",
+            "evento": "Resgate dos garotos presos em caverna na Tailândia"
+        },
+        {
+            "ano": "2021",
+            "evento": "Capitólio dos EUA é invadido"
+        },
+        {
+            "ano": "2022",
+            "evento": "Morte da Rainha Elizabeth II"
+        },
+        {
+            "ano": "1274 a.C.",
+            "evento": "Batalha de Kadesh entre egípcios e hititas"
+        },
+        {
+            "ano": "1000 a.C.",
+            "evento": "Fundação mítica de Jerusalém por Davi"
+        },
+        {
+            "ano": "539 a.C.",
+            "evento": "Ciro, o Grande conquista a Babilônia"
+        },
+        {
+            "ano": "27 a.C.",
+            "evento": "Início do Império Romano com Augusto"
+        },
+        {
+            "ano": "70",
+            "evento": "Destruição do Segundo Templo de Jerusalém"
+        },
+        {
+            "ano": "212",
+            "evento": "Edito de Caracala concede cidadania romana a todos os homens livres do Império"
+        },
+        {
+            "ano": "410",
+            "evento": "Saque de Roma pelos visigodos"
+        },
+        {
+            "ano": "732",
+            "evento": "Carlos Martel derrota os mouros na Batalha de Tours"
+        },
+        {
+            "ano": "793",
+            "evento": "Invasão viking ao monastério de Lindisfarne"
+        },
+        {
+            "ano": "1095",
+            "evento": "Papa Urbano II convoca a Primeira Cruzada"
+        },
+        {
+            "ano": "1440",
+            "evento": "Gutenberg inventa a imprensa com tipos móveis"
+        },
+        {
+            "ano": "1488",
+            "evento": "Bartolomeu Dias contorna o Cabo da Boa Esperança"
+        },
+        {
+            "ano": "1498",
+            "evento": "Vasco da Gama chega à Índia"
+        },
+        {
+            "ano": "1500",
+            "evento": "Descobrimento do Brasil por Pedro Álvares Cabral"
+        },
+        {
+            "ano": "1519",
+            "evento": "Início da circunavegação por Fernão de Magalhães"
+        },
+        {
+            "ano": "1532",
+            "evento": "Fundação de São Vicente, primeira vila do Brasil"
+        },
+        {
+            "ano": "1536",
+            "evento": "Início da Inquisição Portuguesa"
+        },
+        {
+            "ano": "1555",
+            "evento": "Paz de Augsburgo reconhece o luteranismo no Sacro Império"
+        },
+        {
+            "ano": "1580",
+            "evento": "União Ibérica entre Portugal e Espanha"
+        },
+        {
+            "ano": "1607",
+            "evento": "Fundação da colônia de Jamestown (EUA)"
+        },
+        {
+            "ano": "1640",
+            "evento": "Restauração da independência de Portugal"
+        },
+        {
+            "ano": "1648",
+            "evento": "Tratado de Vestfália põe fim à Guerra dos Trinta Anos"
+        },
+        {
+            "ano": "1666",
+            "evento": "Grande Incêndio de Londres"
+        },
+        {
+            "ano": "1687",
+            "evento": "Isaac Newton publica Principia Mathematica"
+        },
+        {
+            "ano": "1703",
+            "evento": "Fundação de São Petersburgo"
+        },
+        {
+            "ano": "1756",
+            "evento": "Início da Guerra dos Sete Anos"
+        },
+        {
+            "ano": "1769",
+            "evento": "Invenção da máquina a vapor por James Watt"
+        },
+        {
+            "ano": "1770",
+            "evento": "Assassinato de um grupo de colonos em Boston (Massacre de Boston)"
+        },
+        {
+            "ano": "1781",
+            "evento": "Vitória americana na Batalha de Yorktown"
+        },
+        {
+            "ano": "1787",
+            "evento": "Constituição dos Estados Unidos é escrita"
+        },
+        {
+            "ano": "1807",
+            "evento": "Fuga da família real portuguesa para o Brasil"
+        },
+        {
+            "ano": "1810",
+            "evento": "Início da independência da América Latina"
+        },
+        {
+            "ano": "1824",
+            "evento": "Primeira Constituição brasileira"
+        },
+        {
+            "ano": "1831",
+            "evento": "Abdicação de D. Pedro I"
+        },
+        {
+            "ano": "1840",
+            "evento": "Início da Era Vitoriana"
+        },
+        {
+            "ano": "1844",
+            "evento": "Invenção do telégrafo por Samuel Morse"
+        },
+        {
+            "ano": "1853",
+            "evento": "Guerra da Crimeia"
+        },
+        {
+            "ano": "1859",
+            "evento": "Início da unificação italiana"
+        },
+        {
+            "ano": "1863",
+            "evento": "Proclamação da Emancipação nos EUA"
+        },
+        {
+            "ano": "1885",
+            "evento": "Conferência de Berlim (partilha da África)"
+        },
+        {
+            "ano": 1903,
+            "evento": "Irmãos Wright fazem o primeiro voo."
+        },
+        {
+            "ano": 1905,
+            "evento": "Teoria da Relatividade Restrita de Einstein."
+        },
+        {
+            "ano": 1912,
+            "evento": "Naufrágio do Titanic."
+        },
+        {
+            "ano": 1917,
+            "evento": "Declaração Balfour (apoio à criação de um Estado judeu)."
+        },
+        {
+            "ano": 1920,
+            "evento": "Primeira transmissão de rádio comercial."
+        },
+        {
+            "ano": 1928,
+            "evento": "Alexander Fleming descobre a penicilina."
+        },
+        {
+            "ano": 1930,
+            "evento": "Revolução de 1930 no Brasil."
+        },
+        {
+            "ano": 1937,
+            "evento": "Bombardeio de Guernica na Guerra Civil Espanhola."
+        },
+        {
+            "ano": 1944,
+            "evento": "Dia D: desembarque na Normandia."
+        },
+        {
+            "ano": 1949,
+            "evento": "Criação da OTAN."
+        },
+        {
+            "ano": 1950,
+            "evento": "Início da Guerra da Coreia."
+        },
+        {
+            "ano": 1955,
+            "evento": "Criação do Pacto de Varsóvia."
+        },
+        {
+            "ano": 1957,
+            "evento": "Lançamento do Sputnik pela URSS."
+        },
+        {
+            "ano": 1959,
+            "evento": "Lançamento da boneca Barbie."
+        },
+        {
+            "ano": 1962,
+            "evento": "Crise dos mísseis em Cuba."
+        },
+        {
+            "ano": 1967,
+            "evento": "Guerra dos Seis Dias."
+        },
+        {
+            "ano": 1968,
+            "evento": "Movimento estudantil de maio na França."
+        },
+        {
+            "ano": 1971,
+            "evento": "Criação do e-mail."
+        },
+        {
+            "ano": 1972,
+            "evento": "Início do escândalo de Watergate."
+        },
+        {
+            "ano": 1979,
+            "evento": "Revolução Islâmica no Irã."
+        },
+        {
+            "ano": 1981,
+            "evento": "Primeiro caso documentado de AIDS."
+        },
+        {
+            "ano": 1982,
+            "evento": "Guerra das Malvinas."
+        },
+        {
+            "ano": 1984,
+            "evento": "Apple lança o Macintosh."
+        },
+        {
+            "ano": 1989,
+            "evento": "Massacre da Praça da Paz Celestial na China."
+        },
+        {
+            "ano": 1990,
+            "evento": "Nelson Mandela é libertado."
+        },
+        {
+            "ano": 1992,
+            "evento": "Conferência da ONU sobre o clima no Rio (ECO-92)."
+        },
+        {
+            "ano": 1993,
+            "evento": "Acordo de Oslo entre Israel e Palestina."
+        },
+        {
+            "ano": 1997,
+            "evento": "Morte da princesa Diana."
+        },
+        {
+            "ano": 1999,
+            "evento": "Criação do euro."
+        },
+        {
+            "ano": 2000,
+            "evento": "Início da era digital em massa (internet popularizada)."
+        },
+        {
+            "ano": 2005,
+            "evento": "YouTube é lançado."
+        },
+        {
+            "ano": 2007,
+            "evento": "Estouro do mercado imobiliário nos EUA."
+        },
+        {
+            "ano": 2010,
+            "evento": "Terremoto no Haiti mata mais de 200 mil pessoas."
+        },
+        {
+            "ano": 2011,
+            "evento": "Morte de Osama Bin Laden."
+        },
+        {
+            "ano": 2012,
+            "evento": "Curiosity pousa em Marte."
+        },
+        {
+            "ano": 2013,
+            "evento": "Protestos de junho no Brasil."
+        },
+        {
+            "ano": 2015,
+            "evento": "Acordo nuclear com o Irã."
+        },
+        {
+            "ano": 2017,
+            "evento": "Escândalo Cambridge Analytica."
+        },
+        {
+            "ano": 2018,
+            "evento": "Jair Bolsonaro é eleito presidente do Brasil."
+        },
+        {
+            "ano": 2020,
+            "evento": "Morte de George Floyd e protestos Black Lives Matter."
+        },
+        {
+            "ano": 1901,
+            "evento": "Primeira transmissão de rádio transatlântica."
+        },
+        {
+            "ano": 1927,
+            "evento": "Primeiro filme falado: The Jazz Singer."
+        },
+        {
+            "ano": 1936,
+            "evento": "Jesse Owens desafia o nazismo nas Olimpíadas."
+        },
+        {
+            "ano": 1960,
+            "evento": "Início da OPEP."
+        },
+        {
+            "ano": 1970,
+            "evento": "Criação do Greenpeace."
+        },
+        {
+            "ano": 1995,
+            "evento": "Lançamento do Windows 95."
+        },
+        {
+            "ano": 2001,
+            "evento": "Lançamento da Wikipedia."
+        },
+        {
+            "ano": 2006,
+            "evento": "Twitter é fundado."
+        },
+        {
+            "ano": 2016,
+            "evento": "Impeachment de Dilma Rousseff."
+        },
+        {
+            "ano": 2021,
+            "evento": "Missões privadas ao espaço (SpaceX)."
+        },
+        {
+            "ano": 1891,
+            "evento": "Primeira Constituição republicana do Brasil."
+        },
+        {
+            "ano": 1932,
+            "evento": "Revolução Constitucionalista em São Paulo."
+        },
+        {
+            "ano": 1942,
+            "evento": "Entrada do Brasil na Segunda Guerra Mundial."
+        },
+        {
+            "ano": 1956,
+            "evento": "Início da construção de Brasília."
+        },
+        {
+            "ano": 1960,
+            "evento": "Inauguração de Brasília."
+        },
+        {
+            "ano": 1985,
+            "evento": "Fim da ditadura militar no Brasil."
+        },
+        {
+            "ano": 1988,
+            "evento": "Constituição Federal é promulgada."
+        },
+        {
+            "ano": 1992,
+            "evento": "Impeachment de Fernando Collor."
+        },
+        {
+            "ano": 2002,
+            "evento": "Lula é eleito presidente."
+        },
+        {
+            "ano": 2022,
+            "evento": "Eleição de Luiz Inácio Lula da Silva para 3º mandato."
+        },
+        {
+            "ano": 509,
+            "evento": "Fim da monarquia em Roma e início da República Romana."
+        },
+        {
+            "ano": 490,
+            "evento": "Batalha de Maratona."
+        },
+        {
+            "ano": 480,
+            "evento": "Batalha das Termópilas."
+        },
+        {
+            "ano": 323,
+            "evento": "Morte de Alexandre, o Grande."
+        },
+        {
+            "ano": 146,
+            "evento": "Roma destrói Cartago (fim das Guerras Púnicas)."
+        },
+        {
+            "ano": 44,
+            "evento": "Assassinato de Júlio César."
+        },
+        {
+            "ano": 27,
+            "evento": "Início do Império com Otávio Augusto."
+        },
+        {
+            "ano": 64,
+            "evento": "Grande incêndio de Roma."
+        },
+        {
+            "ano": 79,
+            "evento": "Erupção do Vesúvio destrói Pompeia."
+        },
+        {
+            "ano": 117,
+            "evento": "Apogeu territorial do Império Romano sob Trajano."
+        },
+        {
+            "ano": 284,
+            "evento": "Diocleciano divide o Império Romano."
+        },
+        {
+            "ano": 313,
+            "evento": "Édito de Milão legaliza o cristianismo."
+        },
+        {
+            "ano": 380,
+            "evento": "Cristianismo se torna religião oficial de Roma."
+        },
+        {
+            "ano": 395,
+            "evento": "Divisão definitiva do Império Romano (Ocidente e Oriente)."
+        },
+        {
+            "ano": 476,
+            "evento": "Queda do Império Romano do Ocidente."
+        },
+        {
+            "ano": 622,
+            "evento": "Hégira: fuga de Maomé para Medina (início do calendário islâmico)."
+        },
+        {
+            "ano": 711,
+            "evento": "Invasão muçulmana da Península Ibérica."
+        },
+        {
+            "ano": 800,
+            "evento": "Coroação de Carlos Magno como imperador."
+        },
+        {
+            "ano": 962,
+            "evento": "Fundação do Sacro Império Romano-Germânico."
+        },
+        {
+            "ano": 1066,
+            "evento": "Batalha de Hastings (invasão normanda na Inglaterra)."
+        },
+        {
+            "ano": 1300,
+            "evento": "Início do Renascimento na Itália."
+        },
+        {
+            "ano": 1347,
+            "evento": "Peste Negra chega à Europa."
+        },
+        {
+            "ano": 1378,
+            "evento": "Início do Cisma do Ocidente (dois papas simultâneos)."
+        },
+        {
+            "ano": 1415,
+            "evento": "Conquista de Ceuta pelos portugueses."
+        },
+        {
+            "ano": 1431,
+            "evento": "Joana d’Arc é queimada viva."
+        },
+        {
+            "ano": 1453,
+            "evento": "Tomada de Constantinopla pelos turcos otomanos."
+        },
+        {
+            "ano": 1492,
+            "evento": "Cristóvão Colombo chega à América."
+        },
+        {
+            "ano": 1501,
+            "evento": "Início da dinastia safávida na Pérsia."
+        },
+        {
+            "ano": 1517,
+            "evento": "Martinho Lutero fixa as 95 teses."
+        },
+        {
+            "ano": 1534,
+            "evento": "Atos de Supremacia (Henrique VIII rompe com a Igreja Católica)."
+        },
+        {
+            "ano": 1543,
+            "evento": "Publicação da teoria heliocêntrica de Copérnico."
+        },
+        {
+            "ano": 1492,
+            "evento": "Cristóvão Colombo chega à América."
+        },
+        {
+            "ano": 1498,
+            "evento": "Vasco da Gama chega à Índia."
+        },
+        {
+            "ano": 1513,
+            "evento": "Vasco Núñez de Balboa avista o Oceano Pacífico."
+        },
+        {
+            "ano": 1519,
+            "evento": "Início da circum-navegação de Fernão de Magalhães."
+        },
+        {
+            "ano": 1521,
+            "evento": "Hernán Cortés conquista o Império Asteca."
+        },
+        {
+            "ano": 1533,
+            "evento": "Francisco Pizarro conquista o Império Inca."
+        },
+        {
+            "ano": 1577,
+            "evento": "Francis Drake inicia volta ao mundo."
+        },
+        {
+            "ano": 1606,
+            "evento": "Descoberta da Austrália por Willem Janszoon."
+        },
+        {
+            "ano": 1642,
+            "evento": "Abel Tasman descobre a Nova Zelândia."
+        },
+        {
+            "ano": 1770,
+            "evento": "James Cook chega à costa leste da Austrália."
+        },
+        {
+            "ano": 1820,
+            "evento": "Descoberta da Antártida."
+        },
+        {
+            "ano": 1909,
+            "evento": "Robert Peary atinge o Polo Norte."
+        },
+        {
+            "ano": 1911,
+            "evento": "Roald Amundsen alcança o Polo Sul."
+        },
+        {
+            "ano": 1953,
+            "evento": "Edmund Hillary e Tenzing Norgay escalam o Everest."
+        },
+        {
+            "ano": 1969,
+            "evento": "Neil Armstrong pisa na Lua."
+        },
+        {
+            "ano": 1971,
+            "evento": "Lançamento da estação espacial Salyut 1."
+        },
+        {
+            "ano": 1997,
+            "evento": "Mars Pathfinder pousa em Marte."
+        },
+        {
+            "ano": 2004,
+            "evento": "Sonda Cassini entra na órbita de Saturno."
+        },
+        {
+            "ano": 2012,
+            "evento": "Curiosity pousa em Marte."
+        },
+        {
+            "ano": 2021,
+            "evento": "China envia sonda para Marte com sucesso."
+        },
+        {
+            "ano": 1602,
+            "evento": "Criação da Companhia das Índias Orientais (Holanda)."
+        },
+        {
+            "ano": 1776,
+            "evento": "Adam Smith publica A Riqueza das Nações."
+        },
+        {
+            "ano": 1792,
+            "evento": "Fundação da Bolsa de Valores de Nova York."
+        },
+        {
+            "ano": 1865,
+            "evento": "Criação do primeiro banco central (Suécia)."
+        },
+        {
+            "ano": 1929,
+            "evento": "Quebra da Bolsa de Nova York (Grande Depressão)."
+        },
+        {
+            "ano": 1944,
+            "evento": "Conferência de Bretton Woods."
+        },
+        {
+            "ano": 1971,
+            "evento": "Fim do padrão ouro nos EUA."
+        },
+        {
+            "ano": 1989,
+            "evento": "Queda do Muro de Berlim impulsiona abertura de mercados."
+        },
+        {
+            "ano": 2001,
+            "evento": "Criação do termo BRICS."
+        },
+        {
+            "ano": 2008,
+            "evento": "Quebra do Lehman Brothers inicia crise financeira."
+        },
+        {
+            "ano": 2010,
+            "evento": "Criação da moeda digital Bitcoin atinge popularidade."
+        },
+        {
+            "ano": 2013,
+            "evento": "Início do uso de PIX na China (via QR Code)."
+        },
+        {
+            "ano": 2020,
+            "evento": "PIX é lançado no Brasil."
+        },
+        {
+            "ano": 2021,
+            "evento": "Criptomoeda Ethereum atinge recorde de valor."
+        },
+        {
+            "ano": 2022,
+            "evento": "Inflação global afeta economia pós-pandemia."
+        },
+        {
+            "ano": 2023,
+            "evento": "Inteligência artificial começa a impactar o mercado de trabalho."
+        },
+        {
+            "ano": 2023,
+            "evento": "Ações da Nvidia disparam com boom da IA."
+        },
+        {
+            "ano": 2024,
+            "evento": "Apple se torna a primeira empresa a ultrapassar US$ 4 trilhões em valor de mercado."
+        },
+        {
+            "ano": 2025,
+            "evento": "Previsão de adoção global de moedas digitais estatais (CBDCs)."
+        },
+        {
+            "ano": 2025,
+            "evento": "Brasil avança com o Drex, real digital."
+        },
+        {
+            "ano": 1973,
+            "evento": "Criação do primeiro celular (Motorola)."
+        },
+        {
+            "ano": 1983,
+            "evento": "Criação do protocolo TCP/IP."
+        },
+        {
+            "ano": 1989,
+            "evento": "Tim Berners-Lee propõe a World Wide Web."
+        },
+        {
+            "ano": 1991,
+            "evento": "Primeiro website entra no ar."
+        },
+        {
+            "ano": 1995,
+            "evento": "Lançamento do Windows 95."
+        },
+        {
+            "ano": 1997,
+            "evento": "Lançamento do Google."
+        },
+        {
+            "ano": 2004,
+            "evento": "Criação do Facebook."
+        },
+        {
+            "ano": 2005,
+            "evento": "Criação do YouTube."
+        },
+        {
+            "ano": 2007,
+            "evento": "Lançamento do primeiro iPhone."
+        },
+        {
+            "ano": 2009,
+            "evento": "Bitcoin entra em circulação."
+        },
+        {
+            "ano": 2010,
+            "evento": "Instagram é lançado."
+        },
+        {
+            "ano": 2011,
+            "evento": "Watson (IBM) vence humanos no Jeopardy!."
+        },
+        {
+            "ano": 2014,
+            "evento": "Lançamento do Alexa (Amazon)."
+        },
+        {
+            "ano": 2015,
+            "evento": "Google lança a IA TensorFlow."
+        },
+        {
+            "ano": 2016,
+            "evento": "AlphaGo vence campeão mundial de Go."
+        },
+        {
+            "ano": 2018,
+            "evento": "GDPR entra em vigor na União Europeia."
+        },
+        {
+            "ano": 2020,
+            "evento": "Zoom e plataformas online explodem com a pandemia."
+        },
+        {
+            "ano": 2021,
+            "evento": "OpenAI lança GPT-3 ao público."
+        },
+        {
+            "ano": 2022,
+            "evento": "ChatGPT viraliza como IA generativa."
+        },
+        {
+            "ano": 2023,
+            "evento": "Google lança o Gemini, IA multimodal."
+        },
+        {
+            "ano": 1776,
+            "evento": "Revolução Americana."
+        },
+        {
+            "ano": 1789,
+            "evento": "Revolução Francesa."
+        },
+        {
+            "ano": 1804,
+            "evento": "Revolução Haitiana consagra a 1ª república negra."
+        },
+        {
+            "ano": 1830,
+            "evento": "Revolução de Julho na França."
+        },
+        {
+            "ano": 1848,
+            "evento": "Revoluções liberais na Europa."
+        },
+        {
+            "ano": 1861,
+            "evento": "Guerra Civil Americana."
+        },
+        {
+            "ano": 1871,
+            "evento": "Comuna de Paris."
+        },
+        {
+            "ano": 1917,
+            "evento": "Revolução Russa."
+        },
+        {
+            "ano": 1922,
+            "evento": "Revolução Turca de Atatürk."
+        },
+        {
+            "ano": 1936,
+            "evento": "Guerra Civil Espanhola."
+        },
+        {
+            "ano": 1949,
+            "evento": "Revolução Comunista na China."
+        },
+        {
+            "ano": 1959,
+            "evento": "Revolução Cubana."
+        },
+        {
+            "ano": 1966,
+            "evento": "Revolução Cultural Chinesa."
+        },
+        {
+            "ano": 1979,
+            "evento": "Revolução Islâmica no Irã."
+        },
+        {
+            "ano": 1989,
+            "evento": "Queda do Muro de Berlim."
+        },
+        {
+            "ano": 1991,
+            "evento": "Dissolução da URSS."
+        },
+        {
+            "ano": 2003,
+            "evento": "Invasão do Iraque pelos EUA."
+        },
+        {
+            "ano": 2010,
+            "evento": "Primavera Árabe."
+        },
+        {
+            "ano": 2014,
+            "evento": "Conflito na Ucrânia começa (anexação da Crimeia)."
+        },
+        {
+            "ano": 2022,
+            "evento": "Rússia invade a Ucrânia (guerra em curso)."
+        },
+        {
+            "ano": 1854,
+            "evento": "Publicação de Walden, de Thoreau, referência ecológica."
+        },
+        {
+            "ano": 1962,
+            "evento": "Primavera Silenciosa de Rachel Carson inicia o ambientalismo moderno."
+        },
+        {
+            "ano": 1972,
+            "evento": "Primeira conferência da ONU sobre o meio ambiente."
+        },
+        {
+            "ano": 1987,
+            "evento": "Protocolo de Montreal para a proteção da camada de ozônio."
+        },
+        {
+            "ano": 1992,
+            "evento": "ECO-92 (Rio de Janeiro)."
+        },
+        {
+            "ano": 1997,
+            "evento": "Protocolo de Kyoto sobre mudanças climáticas."
+        },
+        {
+            "ano": 2000,
+            "evento": "Criação dos Objetivos do Milênio da ONU."
+        },
+        {
+            "ano": 2006,
+            "evento": "Al Gore lança Uma Verdade Inconveniente."
+        },
+        {
+            "ano": 2015,
+            "evento": "Acordo de Paris é assinado."
+        },
+        {
+            "ano": 2019,
+            "evento": "Greta Thunberg discursa na ONU."
+        },
+        {
+            "ano": 2020,
+            "evento": "Pandemia de COVID-19 reduz temporariamente emissões globais."
+        },
+        {
+            "ano": 2021,
+            "evento": "Crise global de fornecimento de energia e aquecimento."
+        },
+        {
+            "ano": 2022,
+            "evento": "ONU declara acesso à água limpa como direito humano."
+        },
+        {
+            "ano": 2023,
+            "evento": "COP28 discute transição energética com metas globais."
+        },
+        {
+            "ano": 2024,
+            "evento": "Brasil bate recorde de geração de energia solar."
+        },
+        {
+            "ano": 2025,
+            "evento": "ONU projeta escassez crítica de água em 60 países."
+        },
+        {
+            "ano": 2025,
+            "evento": "Nova cúpula global sobre IA e sustentabilidade."
+        },
+        {
+            "ano": 2025,
+            "evento": "Amazônia ultrapassa ponto de inflexão em áreas isoladas."
+        },
+        {
+            "ano": 2025,
+            "evento": "Criação de moeda carbono digital entre países da América do Sul."
+        },
+        {
+            "ano": 2025,
+            "evento": "Primeira cidade do mundo com neutralidade total de carbono (Helsinque, projetada)."
+        }
     ];
 
     const btnAntes = document.querySelector('.btn-antes');
@@ -1395,65 +1395,65 @@
     let respostaCorreta;
 
     function gerarPergunta() {
-      if (fatos.length < 2) return;
+        if (fatos.length < 2) return;
 
-      let tentativa = 0;
-      do {
-        fatoBase = fatos[Math.floor(Math.random() * fatos.length)];
-        fatoComparado = fatos[Math.floor(Math.random() * fatos.length)];
-        tentativa++;
-      } while ((fatoBase.evento === fatoComparado.evento || fatoBase.ano === fatoComparado.ano) && tentativa < 10);
+        let tentativa = 0;
+        do {
+            fatoBase = fatos[Math.floor(Math.random() * fatos.length)];
+            fatoComparado = fatos[Math.floor(Math.random() * fatos.length)];
+            tentativa++;
+        } while ((fatoBase.evento === fatoComparado.evento || fatoBase.ano === fatoComparado.ano) && tentativa < 10);
 
-      document.getElementById("questionAntesOuDepois").innerHTML =
-        `"${fatoComparado.evento}" aconteceu ANTES ou DEPOIS de "${fatoBase.evento}"?`;
+        document.getElementById("questionAntesOuDepois").innerHTML =
+            `"${fatoComparado.evento}" aconteceu ANTES ou DEPOIS de "${fatoBase.evento}"?`;
 
-      respostaCorreta = (fatoComparado.ano < fatoBase.ano) ? "antes" : "depois";
+        respostaCorreta = (fatoComparado.ano < fatoBase.ano) ? "antes" : "depois";
 
-      document.getElementById("result").innerHTML = "";
+        document.getElementById("result").innerHTML = "";
 
-      // Habilita os botões para a nova pergunta
-      btnAntes.disabled = false;
-      btnDepois.disabled = false;
+        // Habilita os botões para a nova pergunta
+        btnAntes.disabled = false;
+        btnDepois.disabled = false;
     }
 
     function antes() {
-      verificarResposta("antes");
+        verificarResposta("antes");
     }
 
     function depois() {
-      verificarResposta("depois");
+        verificarResposta("depois");
     }
 
     function verificarResposta(respostaUsuario) {
-      const result = document.getElementById("result");
-      if (respostaUsuario === respostaCorreta) {
-        result.innerHTML = "✅ Acertou! Parabéns!";
-      } else {
-        result.innerHTML = "❌ Errou! Beba uma dose 🍻";
-      }
+        const result = document.getElementById("result");
+        if (respostaUsuario === respostaCorreta) {
+            result.innerHTML = "✅ Acertou! Parabéns!";
+        } else {
+            result.innerHTML = "❌ Errou! Beba uma dose 🍻";
+        }
 
-      // Desabilita os botões para evitar múltiplos cliques até a próxima pergunta
-      btnAntes.disabled = true;
-      btnDepois.disabled = true;
+        // Desabilita os botões para evitar múltiplos cliques até a próxima pergunta
+        btnAntes.disabled = true;
+        btnDepois.disabled = true;
 
-      setTimeout(gerarPergunta, 3000);
+        setTimeout(gerarPergunta, 3000);
     }
 
     // Abertura e fechamento do popup
     function openPopup() {
-      document.getElementById("popup").style.display = "block";
+        document.getElementById("popup").style.display = "block";
     }
 
     function closePopup() {
-      document.getElementById("popup").style.display = "none";
+        document.getElementById("popup").style.display = "none";
     }
 
     // Fechar popup clicando fora dele
     window.onclick = function (event) {
-      const popup = document.getElementById("popup");
-      if (event.target === popup) {
-        popup.style.display = "none";
-      }
+        const popup = document.getElementById("popup");
+        if (event.target === popup) {
+            popup.style.display = "none";
+        }
     };
 
     // Inicia o jogo ao carregar a página

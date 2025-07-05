@@ -1,29 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" type="text/css" href="../../stylesCards.css" />
     <title>To Tak About</title>
 </head>
+
 <body>
 
 <div class="game-container">
     <!-- Menu -->
-<nav class="menu">
-    <a href="../menuEn.html" class="menu-title" style="position: relative;">
-        <div class="voltar-container" onclick="window.location.href='../menuPtBr.html'">
-            &#8678; <!-- Isso é ← -->
-        </div>
-        <img class="logo-bebedeira" src="../images/logo.png" alt="Logo Bebedeira" />
-    </a>
-</nav>
+    <nav class="menu">
+        <a href="../menuEn.html" class="menu-title" style="position: relative;">
+            <div class="voltar-container" onclick="window.location.href='../menuPtBr.html'">
+                &#8678; <!-- Isso é ← -->
+            </div>
+            <img class="logo-bebedeira" src="../images/logo.png" alt="Logo Bebedeira" />
+        </a>
+    </nav>
 
     <!-- Game Content -->
-    <h1>To Tak About</h1>
     <div>
+        <h1>To Tak About</h1>
+
         <a href="#" onclick="openPopup()"><br />
-        <img class="img-regras" src="../images/regras.png" alt="Regras" />
+            <img class="img-regras" src="../images/regras.png" alt="Regras" />
         </a>
         <h4>Rules</h4>
     </div>
@@ -40,16 +43,18 @@
 <!-- Pop-up -->
 <div id="popup" class="popup">
     <div class="popup-content">
-        <span class="close" onclick="closePopup()">&times;</span>
-        <h3>Game Rules</h3>
-        <h5>To Tak About</h5>
+        <div class="popup-header">
+            <h2>Game Rules</h2>
+            <span class="close" onclick="closePopup()">&times;</span>
+        </div>
         <ul>
             <li>This game can be played in groups or as a couple.</li>
             <li>One person will read a question and the other(s) will answer.</li>
             <li>After answering, another person reads a new question and the cycle continues.</li>
             <li><strong>Variant:</strong></li>
             <li>If participants' answers match, the players who answered the same must drink a shot.</li>
-            <li>In this game, drinking is not mandatory; it is a lighter game aimed at getting to know each other with light and varied questions.</li>
+            <li>In this game, drinking is not mandatory; it is a lighter game aimed at getting to know each other
+                with light and varied questions.</li>
             <li>Have fun! 🍻</li>
         </ul>
     </div>
@@ -199,7 +204,7 @@
             "What was your favorite thing to do when you were 10 years old?",
             "If you could eat only one thing for the rest of your life, what would it be?",
             "What do you find very impressive?",
-                "Was there any rule at your home during childhood that was very strict?",
+            "Was there any rule at your home during childhood that was very strict?",
             "Do you still print photos you take to put in frames or albums?",
             "If you could add an extra month to the calendar, what would you call it?",
             "What do you think your parents would answer if asked what was the craziest thing you did as a child?",
@@ -293,181 +298,182 @@
             "If you had a time machine, would you prefer to travel to the future or to the past?",
             "What expensive activity would you like to try or do if you could afford it?",
             "In your opinion, what is a good age to retire?",
-               "Is there any talent that seems to have been inherited in your family?",
-        "Why do you think so many people live alone today, more than before?",
-        "How many languages do you know to say 'I love you'?",
-        "Of the people you know personally, who has the most interesting life and why?",
-        "Tell about something from your past that makes you think 'I can't believe I was afraid of that.'",
-        "What is the strangest thing you have ever eaten?",
-        "What are you looking forward to happening in the next twelve months?",
-        "Do you think all shopping will be done online in 20 years?",
-        "What has been the best decade of your life so far?",
-        "Do you check the expiration date of food before buying it?",
-        "Who has been the biggest role model in your life?",
-        "For which movie would you like a sequel to be made?",
-        "If you had to choose one, which of your friends are you jealous of?",
-        "How do you define intelligence?",
-        "What was the longest line you have ever waited in and what were you waiting for?",
-        "Would you say the people you get along with best share your sense of humor?",
-        "What was your worst vacation experience?",
-        "What quality do you most appreciate in a friend?",
-        "What is the worst thing about getting older?",
-        "If you had to choose, would you prefer to sit or stand for the rest of your life?",
-        "Mention a time when you felt very proud of yourself?",
-        "Which of your relatives do you think you have the least in common with?",
-        "Do you believe criminals can really be rehabilitated in prison?",
-        "Describe a time when you felt very nervous.",
-        "Would you get a tattoo with your partner's name?",
-        "Did you used to skip classes at school?",
-        "Which emotion is stronger: love or hate?",
-        "If you could predict the future, how far ahead would you want to see?",
-        "What is the least important subject in school?",
-        "If you could give advice based on your experience over the last few years, what would it be?",
-        "Do you like buying and using second-hand items?",
-        "If you could take a week-long vacation anywhere in the world alone, where would you go?",
-        "Should governments pay ransoms to free hostages even if it risks encouraging more future hostage situations?",
-        "Have you done something that few people in the world have done?",
-        "What do you think will be the biggest change in your life in five years?",
-        "If someone from the year 3000 could see how we live today, what would surprise them the most?",
-        "Describe an opportunity you declined but now wish you had accepted.",
-        "Have you ever committed or come close to committing a crime?",
-        "At what age is a person considered an adult?",
-        "What has been the best day of your life so far?",
-        "Do you think actors and professional athletes are overpaid?",
-        "Do you have any irrational phobias?",
-        "How long should people be together before getting married?",
-        "Would you move with your partner to the other side of the world?",
-        "What was the name of your first serious crush?",
-        "Do you think it’s okay to lie to avoid hurting someone’s feelings?",
-        "Who is the most interesting person you have ever met?",
-        "What can we learn from children?",
-        "Should parents introduce a religion to their children or let them discover it on their own?",
-        "Have you ever become best friends with one of your enemies?",
-        "Who was your biggest idol in childhood?",
-        "What place should everyone visit before they die?",
-        "Describe a person who is exactly the opposite of you in three words.",
-        "Have you ever had your heart broken?",
-        "Besides your partner or family, who in your life has been the kindest to you?",
-        "In which foreign language would you like to be fluent?",
-        "If you were hiring someone, what would be the three most important criteria?",
-        "Should people receiving social assistance be required to find a job?",
-        "Which movie has the best soundtrack?",
-        "If you had to say one thing that you think others envy about you, what would it be?",
-        "What is your favorite animal at the zoo?",
-        "What is the best movie ever made?",
-        "Which of your friends would do best on a game show?",
-        "Do you believe in good luck charms?",
-        "What is the most delicious meal you have ever eaten?",
-        "Does your opinion of people change when you realize they have tattoos?",
-        "Which deceased relative do you miss the most?",
-        "Do you think people can really change?",
-        "What invention has had the greatest impact on human culture and civilization?",
-        "If you could change your age, would you choose to be younger, older, or stay the same?",
-        "Do you know how your maternal and paternal grandparents met?",
-        "What candy do you most remember from your childhood?",
-        "Describe the perfect man or woman in three words.",
-        "You get a free car of your choice: which car will you drive?",
-        "What advantage do only children have compared to a child with one or more siblings?",
-        "What are the two most important things for people to be happy?",
-        "Would you be willing to work hard to learn a foreign language if it doubled your salary?",
-        "What was the best party you have ever been to?",
-        "Besides a house or car, what is the most expensive thing you have ever bought?",
-        "For which childhood incident do you probably owe your parents an apology?",
-        "Have you ever bought something you were embarrassed to buy? What was it?",
-        "Would you like to know when and how you will die?",
-        "How important is a clean and tidy house to you?",
-        "What is the longest time you have gone without sleeping?",
-        "Do genius and madness go hand in hand?",
-        "Researchers say it’s impossible to change your happiness level: even if you win the lottery, you’ll soon return to the same happiness level as before. Do you think this is true?",
-        "If you could play the main character in any movie, which one would it be?",
-        "Are you happy to live in modern times or would you like to have lived in another era?",
-        "What is your favorite memory from last year?",
-        "Apart from appearance, what is the biggest difference between men and women?",
-        "Is there any photo of you in a family album you would prefer to see destroyed?",
-        "In your opinion, who is the most famous person in the world?",
-        "What is the most fun way to spend 300 reais?",
-        "What is probably the most common reason couples fight?",
-        "What would you do if you won the lottery?",
-        "When you were a child, what did you want to be when you grew up?",
-        "How far back can you trace your family tree?",
-        "If you could go back and relive one day of your life, which day would it be?",
-        "What song makes you cry every time you hear it?",
-        "What are the two things you would grab if your house was on fire?",
-        "Do you think violent movies and video games make people violent?",
-        "Would you rather be stuck forever on a desert island with your mother or your father? Why?",
-        "Should Brazil have voluntary voting?",
-        "Describe a time when you did something really kind for someone else?",
-        "If you could live anywhere, where would it be and why?",
-        "Did you ever hide something from your parents as a child? What did you hide?",
-        "Who in your family is the most successful?",
-        "Do you think it would be possible to meet and become close friends with a celebrity?",
-        "Which brand are you loyal to simply out of habit and not because of quality?",
-        "Have you ever tried a fad diet?",
-        "Did you have a nickname as a child?",
-        "What does the phrase 'living a good life' mean to you?",
-        "Do you think the use of physical money will end?"
+            "Is there any talent that seems to have been inherited in your family?",
+            "Why do you think so many people live alone today, more than before?",
+            "How many languages do you know to say 'I love you'?",
+            "Of the people you know personally, who has the most interesting life and why?",
+            "Tell about something from your past that makes you think 'I can't believe I was afraid of that.'",
+            "What is the strangest thing you have ever eaten?",
+            "What are you looking forward to happening in the next twelve months?",
+            "Do you think all shopping will be done online in 20 years?",
+            "What has been the best decade of your life so far?",
+            "Do you check the expiration date of food before buying it?",
+            "Who has been the biggest role model in your life?",
+            "For which movie would you like a sequel to be made?",
+            "If you had to choose one, which of your friends are you jealous of?",
+            "How do you define intelligence?",
+            "What was the longest line you have ever waited in and what were you waiting for?",
+            "Would you say the people you get along with best share your sense of humor?",
+            "What was your worst vacation experience?",
+            "What quality do you most appreciate in a friend?",
+            "What is the worst thing about getting older?",
+            "If you had to choose, would you prefer to sit or stand for the rest of your life?",
+            "Mention a time when you felt very proud of yourself?",
+            "Which of your relatives do you think you have the least in common with?",
+            "Do you believe criminals can really be rehabilitated in prison?",
+            "Describe a time when you felt very nervous.",
+            "Would you get a tattoo with your partner's name?",
+            "Did you used to skip classes at school?",
+            "Which emotion is stronger: love or hate?",
+            "If you could predict the future, how far ahead would you want to see?",
+            "What is the least important subject in school?",
+            "If you could give advice based on your experience over the last few years, what would it be?",
+            "Do you like buying and using second-hand items?",
+            "If you could take a week-long vacation anywhere in the world alone, where would you go?",
+            "Should governments pay ransoms to free hostages even if it risks encouraging more future hostage situations?",
+            "Have you done something that few people in the world have done?",
+            "What do you think will be the biggest change in your life in five years?",
+            "If someone from the year 3000 could see how we live today, what would surprise them the most?",
+            "Describe an opportunity you declined but now wish you had accepted.",
+            "Have you ever committed or come close to committing a crime?",
+            "At what age is a person considered an adult?",
+            "What has been the best day of your life so far?",
+            "Do you think actors and professional athletes are overpaid?",
+            "Do you have any irrational phobias?",
+            "How long should people be together before getting married?",
+            "Would you move with your partner to the other side of the world?",
+            "What was the name of your first serious crush?",
+            "Do you think it’s okay to lie to avoid hurting someone’s feelings?",
+            "Who is the most interesting person you have ever met?",
+            "What can we learn from children?",
+            "Should parents introduce a religion to their children or let them discover it on their own?",
+            "Have you ever become best friends with one of your enemies?",
+            "Who was your biggest idol in childhood?",
+            "What place should everyone visit before they die?",
+            "Describe a person who is exactly the opposite of you in three words.",
+            "Have you ever had your heart broken?",
+            "Besides your partner or family, who in your life has been the kindest to you?",
+            "In which foreign language would you like to be fluent?",
+            "If you were hiring someone, what would be the three most important criteria?",
+            "Should people receiving social assistance be required to find a job?",
+            "Which movie has the best soundtrack?",
+            "If you had to say one thing that you think others envy about you, what would it be?",
+            "What is your favorite animal at the zoo?",
+            "What is the best movie ever made?",
+            "Which of your friends would do best on a game show?",
+            "Do you believe in good luck charms?",
+            "What is the most delicious meal you have ever eaten?",
+            "Does your opinion of people change when you realize they have tattoos?",
+            "Which deceased relative do you miss the most?",
+            "Do you think people can really change?",
+            "What invention has had the greatest impact on human culture and civilization?",
+            "If you could change your age, would you choose to be younger, older, or stay the same?",
+            "Do you know how your maternal and paternal grandparents met?",
+            "What candy do you most remember from your childhood?",
+            "Describe the perfect man or woman in three words.",
+            "You get a free car of your choice: which car will you drive?",
+            "What advantage do only children have compared to a child with one or more siblings?",
+            "What are the two most important things for people to be happy?",
+            "Would you be willing to work hard to learn a foreign language if it doubled your salary?",
+            "What was the best party you have ever been to?",
+            "Besides a house or car, what is the most expensive thing you have ever bought?",
+            "For which childhood incident do you probably owe your parents an apology?",
+            "Have you ever bought something you were embarrassed to buy? What was it?",
+            "Would you like to know when and how you will die?",
+            "How important is a clean and tidy house to you?",
+            "What is the longest time you have gone without sleeping?",
+            "Do genius and madness go hand in hand?",
+            "Researchers say it’s impossible to change your happiness level: even if you win the lottery, you’ll soon return to the same happiness level as before. Do you think this is true?",
+            "If you could play the main character in any movie, which one would it be?",
+            "Are you happy to live in modern times or would you like to have lived in another era?",
+            "What is your favorite memory from last year?",
+            "Apart from appearance, what is the biggest difference between men and women?",
+            "Is there any photo of you in a family album you would prefer to see destroyed?",
+            "In your opinion, who is the most famous person in the world?",
+            "What is the most fun way to spend 300 reais?",
+            "What is probably the most common reason couples fight?",
+            "What would you do if you won the lottery?",
+            "When you were a child, what did you want to be when you grew up?",
+            "How far back can you trace your family tree?",
+            "If you could go back and relive one day of your life, which day would it be?",
+            "What song makes you cry every time you hear it?",
+            "What are the two things you would grab if your house was on fire?",
+            "Do you think violent movies and video games make people violent?",
+            "Would you rather be stuck forever on a desert island with your mother or your father? Why?",
+            "Should Brazil have voluntary voting?",
+            "Describe a time when you did something really kind for someone else?",
+            "If you could live anywhere, where would it be and why?",
+            "Did you ever hide something from your parents as a child? What did you hide?",
+            "Who in your family is the most successful?",
+            "Do you think it would be possible to meet and become close friends with a celebrity?",
+            "Which brand are you loyal to simply out of habit and not because of quality?",
+            "Have you ever tried a fad diet?",
+            "Did you have a nickname as a child?",
+            "What does the phrase 'living a good life' mean to you?",
+            "Do you think the use of physical money will end?"
         ]
     };
 
     // Game variables
-let questions = [];
-let currentQuestion = 0;
+    let questions = [];
+    let currentQuestion = 0;
 
-// Function to shuffle an array (Fisher-Yates Shuffle)
-function shuffleArray(array) {
-    for (let i = array.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [array[i], array[j]] = [array[j], array[i]];
-    }
-    return array;
-}
-
-// Function to load the questions
-function loadQuestions() {
-    questions = shuffleArray([...gameData.questions]);
-    nextQuestion();
-}
-
-// Function to show the next question
-function nextQuestion() {
-    if (questions.length === 0) {
-        document.getElementById("questionParaConversar").textContent = "Loading questions...";
-        loadQuestions();
-        return;
+    // Function to shuffle an array (Fisher-Yates Shuffle)
+    function shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array;
     }
 
-    if (currentQuestion < questions.length) {
-        document.getElementById("questionParaConversar").textContent = questions[currentQuestion];
-        document.getElementById("result").textContent = "";
-        currentQuestion++;
-    } else {
-        document.getElementById("questionParaConversar").textContent = "End of the Game! Hope you are having fun! Want to play again?";
-        document.getElementById("result").textContent = "";
-        currentQuestion = 0;
+    // Function to load the questions
+    function loadQuestions() {
         questions = shuffleArray([...gameData.questions]);
+        nextQuestion();
     }
-}
 
-// Pop-up functions
-function openPopup() {
-    document.getElementById("popup").style.display = "block";
-}
+    // Function to show the next question
+    function nextQuestion() {
+        if (questions.length === 0) {
+            document.getElementById("questionParaConversar").textContent = "Loading questions...";
+            loadQuestions();
+            return;
+        }
 
-function closePopup() {
-    document.getElementById("popup").style.display = "none";
-}
-
-// Close the pop-up when clicking outside of it
-window.onclick = function(event) {
-    let popup = document.getElementById("popup");
-    if (event.target === popup) {
-        popup.style.display = "none";
+        if (currentQuestion < questions.length) {
+            document.getElementById("questionParaConversar").textContent = questions[currentQuestion];
+            document.getElementById("result").textContent = "";
+            currentQuestion++;
+        } else {
+            document.getElementById("questionParaConversar").textContent = "End of the Game! Hope you are having fun! Want to play again?";
+            document.getElementById("result").textContent = "";
+            currentQuestion = 0;
+            questions = shuffleArray([...gameData.questions]);
+        }
     }
-};
 
-// Load questions on start
-window.onload = loadQuestions;
+    // Pop-up functions
+    function openPopup() {
+        document.getElementById("popup").style.display = "block";
+    }
+
+    function closePopup() {
+        document.getElementById("popup").style.display = "none";
+    }
+
+    // Close the pop-up when clicking outside of it
+    window.onclick = function (event) {
+        let popup = document.getElementById("popup");
+        if (event.target === popup) {
+            popup.style.display = "none";
+        }
+    };
+
+    // Load questions on start
+    window.onload = loadQuestions;
 
 </script>
 </body>
+
 </html>

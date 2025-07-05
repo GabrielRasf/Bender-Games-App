@@ -1,4 +1,6 @@
-/* Reset e estilos base */
+/* =========================== */
+/*        RESET E BASE         */
+/* =========================== */
 * {
     margin: 0;
     padding: 0;
@@ -6,7 +8,6 @@
     text-decoration: none;
     color: white;
     -webkit-tap-highlight-color: transparent;
-    /* list-style: none; */
     border: none;
 }
 
@@ -29,14 +30,15 @@ p {
     color: white;
 }
 
-/* Logo */
+/* =========================== */
+/*     COMPONENTES GERAIS      */
+/* =========================== */
 .logo-bebedeira {
     width: 270px;
     margin: 15px auto;
     display: block;
 }
 
-/* Container principal */
 .game-container {
     width: 100%;
     max-width: 450px;
@@ -47,7 +49,17 @@ p {
     flex: 1;
 }
 
-/* Estilo dos blocos de jogo */
+.center-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2rem;
+    flex-direction: column;
+}
+
+/* =========================== */
+/*     COMPONENTES DE JOGO     */
+/* =========================== */
 .game-box {
     width: 300px;
     max-width: 450px;
@@ -66,15 +78,6 @@ p {
     overflow: hidden;
 }
 
-/* Texto de escolha */
-.escolha-texto {
-    color: #F1F1F1;
-    font-size: 1.1rem;
-    margin: 15px 0;
-    text-align: center;
-}
-
-/* Cartão com frase */
 .card-frase {
     background-color: #010b13;
     border-radius: 12px;
@@ -97,13 +100,10 @@ p {
     display: none;
 }
 
-/* Títulos e links */
-a,
-h1,
-h2,
-h3,
-h4,
-h5 {
+/* =========================== */
+/*        TIPOGRAFIA           */
+/* =========================== */
+a, h1, h2, h3, h4, h5 {
     color: #facc15;
     text-decoration: none;
     margin-bottom: 15px;
@@ -111,6 +111,10 @@ h5 {
 
 h1 {
     font-size: 1.5rem;
+}
+
+.h1-eu-nunca {
+    margin-bottom: 0.9375rem;
 }
 
 h3 {
@@ -132,12 +136,13 @@ h5 {
     display: block;
 }
 
-ul, ol {
-    list-style-position: inside;
-    padding-left: 0;
+.escolha-texto {
+    color: #F1F1F1;
+    font-size: 1.1rem;
+    margin: 15px 0;
+    text-align: center;
 }
 
-/* Texto principal */
 #question {
     font-size: 1.1rem;
     margin-bottom: 0.9375rem;
@@ -147,27 +152,12 @@ ul, ol {
     flex-grow: 1;
 }
 
-/* Respostas charadas */
-.answer-container {
-    display: none;
-    margin-top: 2rem;
-    padding: 1.5rem;
-    background-color: #f8f8f8;
-    border-radius: 8px;
-    text-align: center;
-    font-size: 1.1em;
-    color: #333;
-    min-height: 60vh;
-}
-
-.pergunta-e-resposta {
-    transition: transform 0.3s;
-    width: 1.5rem;
-    height: 1.5rem;
-}
-
-.pergunta-e-resposta:hover {
-    transform: scale(1.1);
+/* =========================== */
+/*     COMPONENTES DE LISTA    */
+/* =========================== */
+ul, ol {
+    list-style-position: inside;
+    padding-left: 0;
 }
 
 #optionsList li {
@@ -177,28 +167,25 @@ ul, ol {
     font-size: 1rem;
 }
 
-.center-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: 2rem;
-    flex-direction: column;
-}
-
-.game-box-content p {
-    font-size: 1.1rem;
-}
-
-.game-box-vdd-cons p {
+.popup ul li {
     font-size: 1rem;
+    margin-top: 8px;
+    color: white;
+    line-height: 1.2;
 }
 
-/* Especificações Eu Nunca */
-.h1-eu-nunca {
-    margin-bottom: 0.9375rem;
+.popup-content li::marker {
+    font-size: 0.5rem;
+    vertical-align: middle;
 }
 
-/* Botões */
+ol {
+    line-height: 1.4;
+}
+
+/* =========================== */
+/*      COMPONENTES DE UI      */
+/* =========================== */
 .button-container,
 .button-container-vdd-conseq,
 .button-container-fato-falso,
@@ -244,6 +231,14 @@ ul, ol {
     width: 45%;
 }
 
+.button-randomizador {
+    font-size: 1.1rem;
+    border: none;
+    background: linear-gradient(135deg, #facc15, #9333ea);
+    color: white;
+    border-radius: 8px;
+}
+
 .voltar-container {
     position: absolute;
     left: 18px;
@@ -257,57 +252,19 @@ ul, ol {
     user-select: none;
 }
 
-/* Escala (pulsar) */
-@keyframes pulsarSeta {
-    0%   { transform: scale(1); }
-    50%  { transform: scale(1.2); }
-    100% { transform: scale(1); }
+.pergunta-e-resposta {
+    transition: transform 0.3s;
+    width: 1.5rem;
+    height: 1.5rem;
 }
 
-/* Cores */
-@keyframes mudarCorSeta {
-    0%   { color: #ffff00; }
-    20%  { color: #ff00ff; }
-    40%  { color: #00ffff; }
-    60%  { color: #ff69b4; }
-    80%  { color: #ffffff; }
+.pergunta-e-resposta:hover {
+    transform: scale(1.1);
 }
 
-/* Resultado */
-#result {
-    margin-top: 1.25rem;
-    font-size: 1.1rem;
-    font-weight: bold;
-    color: #facc15;
-}
-
-/* Estilo para o botão e resultado randomizador */
-.container-randomizador {
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1rem;
-    height: 7rem;
-    justify-content: center;
-}
-
-.button-randomizador {
-    font-size: 1.1rem;
-    border: none;
-    background: linear-gradient(135deg, #facc15, #9333ea);
-    color: white;
-    border-radius: 8px;
-}
-
-.resultado-randomizador,
-#resultado-randomizador {
-    font-size: 3rem;
-    font-weight: bold;
-    color: #facc15;
-}
-
-/* Popup principal */
+/* =========================== */
+/*        POPUPS/MODAIS        */
+/* =========================== */
 .popup {
     display: none;
     position: fixed;
@@ -315,40 +272,75 @@ ul, ol {
     top: 0;
     left: 0;
     width: 100vw;
-    height: 70vh;
+    height: 100vh;
     background-color: rgba(0, 0, 0, 0.5);
+    padding: 1rem;
+    align-items: center;
+    justify-content: center;
 }
 
 .popup.active {
     display: flex;
     justify-content: center;
     align-items: center;
+    opacity: 1;
 }
 
-/* Conteúdo do popup */
 .popup-content {
     display: flex;
-    align-items: center;
-    justify-content: center;
+    align-items: flex-start;
+    justify-content: flex-start;;
     flex-direction: column;
-    margin: 0 auto;
+    margin: 1rem auto;
     background-color: rgba(1, 11, 19, 0.9);
     border-radius: 12px;
     border: 1px solid #04223b;
     padding: 20px;
     width: 90vw;
     max-width: 400px;
+    height: 45rem;
     overflow-y: auto;
+    min-height: auto;
     position: relative;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 4px 20px rgba(150, 150, 150, 0.2);
+    transition: opacity 0.3s ease;
 }
 
-/* Estilo específico para o popup de resposta */
+.popup-header {
+    position: relative;
+    width: 100%;
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.popup-header h2 {
+    font-size: 1.5rem;
+    color: #facc15;
+    margin: 0;
+}
+
+.popup .close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    color: #facc15;
+    font-size: 2rem;
+    font-weight: bold;
+    cursor: pointer;
+}
+
 #answerPopup .popup-content {
     min-height: 50rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    text-align: center;
+    padding-top: 20px;
+    max-height: 80vh;
+    overflow-y: auto;
 }
 
-/* Conteúdo da resposta */
 #answer {
     color: white;
     font-size: 1.8rem;
@@ -359,7 +351,26 @@ ul, ol {
     line-height: 1.4;
 }
 
-/* Botão de fechar */
+#answerText {
+    width: 90vw;
+    text-align: center;
+    background-color: transparent;
+    padding: 0 15px;
+}
+
+#answerText ul {
+    list-style-position: inside;
+    padding-left: 0;
+    width: 100%;
+    text-align: center;
+}
+
+#answerText li {
+    text-align: center;
+    margin: 8px 0;
+    padding: 0;
+}
+
 .close {
     position: absolute;
     top: 10px;
@@ -369,40 +380,71 @@ ul, ol {
     font-weight: bold;
 }
 
-.espacamento-h1-intimidade {
-    padding-bottom: 30px;
-}
-
-/* Popup Regras */
-.popup ul li {
-    font-size: 1rem;
-    margin-top: 8px;
-    color: white;
-    line-height: 1.2;
-}
-
-/* Ícones ou imagens pequenas */
+/* =========================== */
+/*      ELEMENTOS VISUAIS      */
+/* =========================== */
 .img-regras {
     width: 1.75rem;
     align-items: center;
     margin-top: 0.625rem;
 }
 
-.popup-content li::marker {
-    font-size: 0.5rem;
-    vertical-align: middle;
+.answer-container {
+    display: none;
+    margin-top: 2rem;
+    padding: 1.5rem;
+    background-color: #f8f8f8;
+    border-radius: 8px;
+    text-align: center;
+    font-size: 1.1em;
+    color: #333;
+    min-height: 60vh;
 }
 
-ol {
-    line-height: 1.4;
+.resultado-randomizador,
+#resultado-randomizador {
+    font-size: 3rem;
+    font-weight: bold;
+    color: #facc15;
 }
 
-/* Estilização do link de respostas do Tiro ao alvo */
-.tiro-ao-alvo-respostas {
-    bottom: 0;
+.container-randomizador {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    height: 7rem;
+    justify-content: center;
 }
 
-/* Responsividade adicional */
+#result {
+    margin-top: 1.25rem;
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #facc15;
+}
+
+/* =========================== */
+/*        ANIMAÇÕES            */
+/* =========================== */
+@keyframes pulsarSeta {
+    0%   { transform: scale(1); }
+    50%  { transform: scale(1.2); }
+    100% { transform: scale(1); }
+}
+
+@keyframes mudarCorSeta {
+    0%   { color: #ffff00; }
+    20%  { color: #ff00ff; }
+    40%  { color: #00ffff; }
+    60%  { color: #ff69b4; }
+    80%  { color: #ffffff; }
+}
+
+/* =========================== */
+/*      RESPONSIVIDADE         */
+/* =========================== */
 @media (max-width: 480px) {
     .popup-content {
         width: 95%;

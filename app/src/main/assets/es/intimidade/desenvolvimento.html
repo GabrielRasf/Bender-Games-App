@@ -11,14 +11,14 @@
 <body>
 <div class="game-container">
     <!-- Menú -->
-<nav class="menu">
-    <a href="../menuEs.html" class="menu-title" style="position: relative;">
-        <div class="voltar-container" onclick="window.location.href='../menuPtBr.html'">
-            &#8678; <!-- Isso é ← -->
-        </div>
-        <img class="logo-bebedeira" src="../images/logo.png" alt="Logo Bebedeira" />
-    </a>
-</nav>
+    <nav class="menu">
+        <a href="../menuEs.html" class="menu-title" style="position: relative;">
+            <div class="voltar-container" onclick="window.location.href='../menuPtBr.html'">
+                &#8678; <!-- Isso é ← -->
+            </div>
+            <img class="logo-bebedeira" src="../images/logo.png" alt="Logo Bebedeira" />
+        </a>
+    </nav>
 
     <!-- Contenido del juego -->
     <h1>
@@ -26,19 +26,21 @@
     </h1>
     <h3>Desarollo</h3>
     <div>
-    <a href="#" onclick="openPopup()"><br />
-        <img class="img-regras" src="../images/regras.png" alt="Reglas" />
-    </a>
-    <h4>Reglas</h4>
+        <a href="#" onclick="openPopup()"><br />
+            <img class="img-regras" src="../images/regras.png" alt="Reglas" />
+        </a>
+        <h4>Reglas</h4>
     </div>
 
 
     <!-- Pop-up reglas -->
     <div id="popup" class="popup">
         <div class="popup-content">
-            <span class="close" onclick="closePopup()">&times;</span>
-            <h3>Reglas del Juego</h3>
-            <h5>intimidad <br> Desarollo</h5>
+            <div class="popup-header">
+                <h2>Reglas del Juego</h2>
+                <span class="close" onclick="closePopup()">&times;</span>
+                <h5>Intimidad <br> Desarollo</h5>
+            </div>
             <ul>
                 <li>Esta vez, después de leer la pregunta, ambos responderán</li>
                 <li>Esta etapa es para conocerse un poco más</li>
@@ -72,223 +74,223 @@
 <script>
 
     const data = {
-questions: [
-    "¿Qué pareja consideras tu 'meta de relación'? ¿Qué es lo que más te llama la atención de ellos?",
-    "¿Has renunciado a algo que antes no imaginabas dejar ir antes de conocerme?",
-    "¿Cuál ha sido nuestro momento más íntimo que más te ha gustado hasta hoy?",
-    "¿Qué más podríamos crear juntos con nuestros talentos?",
-    "¿En qué momento desde que nos conocimos te sentiste más orgulloso(a) de mí?",
-    "¿Con quién de tu familia crees que más me parezco? ¿Qué me hace parecerme a esa persona?",
-    "¿Cuándo supiste que yo era la persona indicada?",
-    "¿Cómo te imaginas a nosotros dentro de 5 años?",
-    "¿Qué te gustaría hacer más veces solo(a)? ¿Cómo puedes agregar eso a tu rutina y qué puedo hacer yo para ayudarte?",
-    "¿Qué es lo que más te gusta hacer conmigo?",
-    "De cero a diez, ¿cuánto sientes que te apoyo en tus planes? ¿Qué podría hacer para mejorar?",
-    "¿Cuáles son las actitudes/momentos en los que te hago sentir más amado(a)? ¿Hay algo más que podría hacer y que sientes que falta?",
-    "¿Qué fue lo que más te llamó la atención en mí la primera vez que nos vimos?",
-    "¿Qué tenemos de nuestro inicio de noviazgo que no quieres que se pierda con el tiempo? (Si ya se perdió, ¿hay algo que podamos hacer para recuperarlo?)",
-    "¿Has considerado tener una relación abierta? Si es así, ¿por qué?",
-    "¿Qué aprendiste de tus padres sobre el amor? ¿Hay algo que no quieras repetir en nuestra relación? ¿Estamos en el camino correcto para ello?",
-    "¿Cuál fue la última cosa que hice que te hizo muy feliz?",
-    "¿Qué crees que más cambió en tu vida (o en ti) después de que nos conocimos?",
-    "¿Cuál fue el mayor aprendizaje que tuviste en tu relación anterior a la nuestra?",
-    "¿Alguna vez sentiste envidia de mí y no me lo contaste? Comparte si te sientes cómodo(a).",
-    "¿Cuál es la parte más difícil de relacionarte conmigo?",
-    "¿Qué parte de mí ves que no suelo demostrar públicamente?",
-    "¿Qué actitudes mías te provocan deseo?",
-    "¿Cuál es la primera palabra que viene a tu mente para describir nuestra relación?",
-    "¿Hay algún tema que tengas miedo o evites hablar conmigo? ¿Qué en mí genera ese temor?",
-    "Escribe lo que no has valorado lo suficiente en tu pareja. 2 minutos para que cada uno escriba y luego conversamos sobre ello.",
-    "Si nuestra relación fuera una película o un libro, ¿cuál sería el nombre?",
-    "Si hicieras una lista de reglas que el 'pareja ideal' debe tener para salir, ¿cuáles serían las reglas más importantes?",
-    "¿Hay algo en nuestra relación que te haga sentir inseguro o con miedo? Pon una nota del nivel de confianza que tienes en mí del 1 al 10.",
-    "¿Hay alguna persona en mi vida que sientas que interfiere en nuestra relación? ¿Por qué?",
-    "¿Cuál es tu mayor miedo cuando piensas en nuestro futuro juntos?",
-    "¿En qué momentos sientes que te entiendo sin que tengas que decir nada?",
-    "Si pudieras revivir un solo día nuestro, ¿cuál sería y por qué?",
-    "¿Qué crees que solo nosotros tenemos en nuestra relación?",
-    "¿Cuándo fue la última vez que te sentiste completamente seguro(a) a mi lado?",
-    "¿Hay algo que te gustaría escuchar más de mí?",
-    "¿Cuál ha sido la mayor prueba de amor que crees que te he dado?",
-    "¿Qué extrañas hacer juntos y que podríamos retomar?",
-    "¿Qué hábito mío crees que sería difícil vivir sin él?",
-    "¿Qué piensas cuando imaginas nuestra vejez juntos?",
-    "¿Qué parte de tu vida sientes que ayudé a transformar?",
-    "Si nuestro amor tuviera una banda sonora, ¿qué canción no podría faltar?",
-    "¿Qué crees que todavía necesitamos mejorar como pareja?",
-    "¿En qué momentos te sientes más visto(a) por mí?",
-    "¿Qué actitud mía te hizo enamorarte aún más?",
-    "Si pudieras agradecerme algo que hago a diario, ¿qué sería?",
-    "¿Cuál fue el momento en el que más te sentiste valorado(a) por mí?",
-    "¿Qué te gustaría hacer conmigo que aún no hemos tenido oportunidad?",
-    "¿Cómo describirías nuestro amor en tres palabras?",
-    "¿Qué parte de nuestra rutina aprecias más?",
-    "¿Hay algo que haces por mí en silencio, sin que yo lo note?",
-    "¿Qué es lo que más te da paz en nuestra relación?",
-    "¿Qué sientes que aún no me has contado, pero te gustaría que supiera?",
-    "¿Qué crees que nos hace más fuertes juntos que separados?",
-    "¿En qué momento te diste cuenta de que confiabas en mí de verdad?",
-    "¿Cómo crees que podemos crecer juntos en los próximos años?",
-    "¿Hay algo que te gustaría desapegarte del pasado para vivir mejor a mi lado?",
-    "¿Cuál es el gesto más simple que hago y que te hace sentir amado(a)?",
-    "Si pudiéramos pasar un mes viviendo fuera de la rutina, ¿qué te gustaría que hiciéramos?",
-    "¿Cómo puedo amarte mejor en los días en que no te sientes bien?",
-    "¿Qué pensaría el niño o niña que fuiste sobre la persona que eres hoy?",
-    "¿Cuál es la mayor dificultad que enfrentas en tu vida hoy?",
-    "¿Qué te pone en éxtasis?",
-    "¿Estás satisfecho(a) con tu vida hoy?",
-    "¿Qué momento te gustaría revivir?",
-    "¿Qué es lo que más te gusta de ti?",
-    "¿Cómo te gustaría ser recordado(a) después de morir?",
-    "¿Crees que la imagen que tienes de ti es la misma que las personas tienen?",
-    "¿Crees que las personas pueden amar a más de una persona al mismo tiempo?",
-    "¿Cuál es la manera que encuentras para escapar de lo que te cuesta manejar?",
-    "¿Cuál es tu mayor miedo hoy?",
-    "¿Cuál ha sido el mayor dolor emocional que has sentido?",
-    "Si pudieras cambiar algo en la forma en que fuiste criado(a), ¿qué cambiarías?",
-    "¿Alguna vez dijiste 'te amo' sin amar a la persona?",
-    "¿Cuál ha sido la mayor locura de amor que has hecho?",
-    "¿Hay alguna sensación y/o sentimiento que extrañas sentir hoy en tu vida?",
-    "¿Alguna vez has engañado a alguien? ¿Perdonarías una infidelidad?",
-    "Encuentra 3 palabras que crees que me describen.",
-    "¿En cuántas relaciones largas has estado? ¿Te entregaste por completo en todas?",
-    "¿Qué le dirías a la última persona con la que tuviste una relación amorosa?",
-    "Di 3 cosas que crees que tenemos en común.",
-    "¿Cuál es el nombre de tu primer amor y por qué te enamoraste de ella?",
-    "¿Qué es madurez para ti? ¿En qué momentos no te sientes maduro(a)?",
-    "¿Estás bien contigo mismo(a)?",
-    "Escriban las 3 cosas que más admira cada uno en el otro y, cuando estén listos, léanlas.",
-    "¿Cargas algún sentimiento de culpa? ¿Por qué?",
-    "Elige en mi feed de Instagram la foto que crees que más representa mi esencia. Explica por qué elegiste esa imagen.",
-    "Habla de una persona que conociste y que te enseñó a ser mejor persona hoy.",
-    "¿Cuál es tu mayor inseguridad?",
-    "Cuenta cuál es la parte más difícil de relacionarte conmigo.",
-    "¿Crees que todo el mundo tiene una misión? Si es así, ¿crees que encontraste la tuya?",
-    "¿Estás peleado(a) con alguien? ¿Qué te impide dar el paso hacia el perdón?",
-    "¿Qué has hecho (o dejado de hacer) para ser aceptado(a)? ¿Cómo te sientes al respecto?",
-    "¿Qué cumplido te gustaría recibir más veces?",
-    "¿Qué significa la soledad para ti? ¿Cómo te sientes?",
-    "Si pudieras darme un consejo, ¿cuál sería?",
-    "Desafíame a hacer algo diferente este mes. Algo que no estoy acostumbrado a hacer.",
-    "¿Por qué crees que nuestros caminos se cruzaron?",
-    "¿Qué te gustaría poder decir a tu familia y no dices?",
-    "¿Cuál ha sido la mejor decisión que has tomado en la vida?",
-    "Di algo que nunca tuviste el valor de decirle a nadie.",
-    "Habla de algún amigo que ya no está en tu vida pero que extrañas y cuenta por qué se alejaron.",
-    "¿Qué no has estado valorando últimamente?",
-    "¿Hay alguna creencia o patrón en tu familia que quisieras resignificar?",
-    "¿Hay algo en tu vida que sabes que no te hace bien pero igual sigues haciendo?",
-    "Confiesa un prejuicio.",
-    "Cuenta cómo me describirías a un extraño.",
-    "¿Tienes miedo a la muerte? ¿Qué crees que pasa cuando morimos?",
-    "¿Qué te hace sentir más conectado(a) conmigo hoy?",
-    "Para ti, ¿qué hace que la vida valga la pena ser vivida?",
-    "¿Cuál es el nombre de tu madre y qué es lo que más te gusta de ella?",
-    "¿Cuál es la cosa más importante que crees que has hecho por ti mismo(a)?",
-    "¿Qué te gustaba hacer más cuando eras niño(a)? ¿Es posible adaptar eso para hacerlo hoy también?",
-    "¿Cuál es tu lugar favorito en el mundo?",
-    "Si supieras que te queda solo un año de vida, ¿cambiarías algo en tu forma de vivir? ¿Qué te impide hacerlo hoy?",
-    "¿Qué te quita la paz?",
-    "¿En qué momentos sientes más vergüenza?",
-    "¿Qué canción te recuerda un momento muy feliz? ¿Escucharon la letra con atención?",
-    "Si pudieras hacer cualquier cosa ahora, ¿qué harías?",
-    "Si tu vida fuera una serie de Netflix, ¿cómo se llamaría?",
-    "¿Cuándo fue la última vez que hiciste algo por primera vez?",
-    "Cuenta un gran aprendizaje que tuviste con tu padre.",
-    "¿Cuál es tu mayor nostalgia?",
-    "¿Qué nunca cambiarías de ti?",
-    "¿Por qué vale la pena conocerte?",
-    "Si pudieras conocer a alguien más profundamente, ¿quién sería?",
-    "Comparte un consejo que te hizo cambiar de alguna forma.",
-    "¿Crees que existe el alma gemela?",
-    "¿Cuál ha sido tu mejor recuerdo de este año hasta ahora?",
-    "Di una gran razón por la que estés agradecido(a) hoy.",
-    "Los pequeños placeres de la vida son...",
-    "¿Qué es lo que más te incomoda de los patrones sociales de nuestra cultura?",
-    "Cuenta sobre un día en el que hiciste la diferencia en la vida de alguien.",
-    "¿Quién es tu mayor inspiración?",
-    "¿Cómo te sientes hoy?",
-    "¿Cuándo fue la última vez que lloraste?",
-    "Comparte tu frase favorita.",
-    "¿Cuál ha sido la mejor sorpresa que has recibido?",
-    "¿Quién te gustaría ser por un día?"
-]
-};
+        questions: [
+            "¿Qué pareja consideras tu 'meta de relación'? ¿Qué es lo que más te llama la atención de ellos?",
+            "¿Has renunciado a algo que antes no imaginabas dejar ir antes de conocerme?",
+            "¿Cuál ha sido nuestro momento más íntimo que más te ha gustado hasta hoy?",
+            "¿Qué más podríamos crear juntos con nuestros talentos?",
+            "¿En qué momento desde que nos conocimos te sentiste más orgulloso(a) de mí?",
+            "¿Con quién de tu familia crees que más me parezco? ¿Qué me hace parecerme a esa persona?",
+            "¿Cuándo supiste que yo era la persona indicada?",
+            "¿Cómo te imaginas a nosotros dentro de 5 años?",
+            "¿Qué te gustaría hacer más veces solo(a)? ¿Cómo puedes agregar eso a tu rutina y qué puedo hacer yo para ayudarte?",
+            "¿Qué es lo que más te gusta hacer conmigo?",
+            "De cero a diez, ¿cuánto sientes que te apoyo en tus planes? ¿Qué podría hacer para mejorar?",
+            "¿Cuáles son las actitudes/momentos en los que te hago sentir más amado(a)? ¿Hay algo más que podría hacer y que sientes que falta?",
+            "¿Qué fue lo que más te llamó la atención en mí la primera vez que nos vimos?",
+            "¿Qué tenemos de nuestro inicio de noviazgo que no quieres que se pierda con el tiempo? (Si ya se perdió, ¿hay algo que podamos hacer para recuperarlo?)",
+            "¿Has considerado tener una relación abierta? Si es así, ¿por qué?",
+            "¿Qué aprendiste de tus padres sobre el amor? ¿Hay algo que no quieras repetir en nuestra relación? ¿Estamos en el camino correcto para ello?",
+            "¿Cuál fue la última cosa que hice que te hizo muy feliz?",
+            "¿Qué crees que más cambió en tu vida (o en ti) después de que nos conocimos?",
+            "¿Cuál fue el mayor aprendizaje que tuviste en tu relación anterior a la nuestra?",
+            "¿Alguna vez sentiste envidia de mí y no me lo contaste? Comparte si te sientes cómodo(a).",
+            "¿Cuál es la parte más difícil de relacionarte conmigo?",
+            "¿Qué parte de mí ves que no suelo demostrar públicamente?",
+            "¿Qué actitudes mías te provocan deseo?",
+            "¿Cuál es la primera palabra que viene a tu mente para describir nuestra relación?",
+            "¿Hay algún tema que tengas miedo o evites hablar conmigo? ¿Qué en mí genera ese temor?",
+            "Escribe lo que no has valorado lo suficiente en tu pareja. 2 minutos para que cada uno escriba y luego conversamos sobre ello.",
+            "Si nuestra relación fuera una película o un libro, ¿cuál sería el nombre?",
+            "Si hicieras una lista de reglas que el 'pareja ideal' debe tener para salir, ¿cuáles serían las reglas más importantes?",
+            "¿Hay algo en nuestra relación que te haga sentir inseguro o con miedo? Pon una nota del nivel de confianza que tienes en mí del 1 al 10.",
+            "¿Hay alguna persona en mi vida que sientas que interfiere en nuestra relación? ¿Por qué?",
+            "¿Cuál es tu mayor miedo cuando piensas en nuestro futuro juntos?",
+            "¿En qué momentos sientes que te entiendo sin que tengas que decir nada?",
+            "Si pudieras revivir un solo día nuestro, ¿cuál sería y por qué?",
+            "¿Qué crees que solo nosotros tenemos en nuestra relación?",
+            "¿Cuándo fue la última vez que te sentiste completamente seguro(a) a mi lado?",
+            "¿Hay algo que te gustaría escuchar más de mí?",
+            "¿Cuál ha sido la mayor prueba de amor que crees que te he dado?",
+            "¿Qué extrañas hacer juntos y que podríamos retomar?",
+            "¿Qué hábito mío crees que sería difícil vivir sin él?",
+            "¿Qué piensas cuando imaginas nuestra vejez juntos?",
+            "¿Qué parte de tu vida sientes que ayudé a transformar?",
+            "Si nuestro amor tuviera una banda sonora, ¿qué canción no podría faltar?",
+            "¿Qué crees que todavía necesitamos mejorar como pareja?",
+            "¿En qué momentos te sientes más visto(a) por mí?",
+            "¿Qué actitud mía te hizo enamorarte aún más?",
+            "Si pudieras agradecerme algo que hago a diario, ¿qué sería?",
+            "¿Cuál fue el momento en el que más te sentiste valorado(a) por mí?",
+            "¿Qué te gustaría hacer conmigo que aún no hemos tenido oportunidad?",
+            "¿Cómo describirías nuestro amor en tres palabras?",
+            "¿Qué parte de nuestra rutina aprecias más?",
+            "¿Hay algo que haces por mí en silencio, sin que yo lo note?",
+            "¿Qué es lo que más te da paz en nuestra relación?",
+            "¿Qué sientes que aún no me has contado, pero te gustaría que supiera?",
+            "¿Qué crees que nos hace más fuertes juntos que separados?",
+            "¿En qué momento te diste cuenta de que confiabas en mí de verdad?",
+            "¿Cómo crees que podemos crecer juntos en los próximos años?",
+            "¿Hay algo que te gustaría desapegarte del pasado para vivir mejor a mi lado?",
+            "¿Cuál es el gesto más simple que hago y que te hace sentir amado(a)?",
+            "Si pudiéramos pasar un mes viviendo fuera de la rutina, ¿qué te gustaría que hiciéramos?",
+            "¿Cómo puedo amarte mejor en los días en que no te sientes bien?",
+            "¿Qué pensaría el niño o niña que fuiste sobre la persona que eres hoy?",
+            "¿Cuál es la mayor dificultad que enfrentas en tu vida hoy?",
+            "¿Qué te pone en éxtasis?",
+            "¿Estás satisfecho(a) con tu vida hoy?",
+            "¿Qué momento te gustaría revivir?",
+            "¿Qué es lo que más te gusta de ti?",
+            "¿Cómo te gustaría ser recordado(a) después de morir?",
+            "¿Crees que la imagen que tienes de ti es la misma que las personas tienen?",
+            "¿Crees que las personas pueden amar a más de una persona al mismo tiempo?",
+            "¿Cuál es la manera que encuentras para escapar de lo que te cuesta manejar?",
+            "¿Cuál es tu mayor miedo hoy?",
+            "¿Cuál ha sido el mayor dolor emocional que has sentido?",
+            "Si pudieras cambiar algo en la forma en que fuiste criado(a), ¿qué cambiarías?",
+            "¿Alguna vez dijiste 'te amo' sin amar a la persona?",
+            "¿Cuál ha sido la mayor locura de amor que has hecho?",
+            "¿Hay alguna sensación y/o sentimiento que extrañas sentir hoy en tu vida?",
+            "¿Alguna vez has engañado a alguien? ¿Perdonarías una infidelidad?",
+            "Encuentra 3 palabras que crees que me describen.",
+            "¿En cuántas relaciones largas has estado? ¿Te entregaste por completo en todas?",
+            "¿Qué le dirías a la última persona con la que tuviste una relación amorosa?",
+            "Di 3 cosas que crees que tenemos en común.",
+            "¿Cuál es el nombre de tu primer amor y por qué te enamoraste de ella?",
+            "¿Qué es madurez para ti? ¿En qué momentos no te sientes maduro(a)?",
+            "¿Estás bien contigo mismo(a)?",
+            "Escriban las 3 cosas que más admira cada uno en el otro y, cuando estén listos, léanlas.",
+            "¿Cargas algún sentimiento de culpa? ¿Por qué?",
+            "Elige en mi feed de Instagram la foto que crees que más representa mi esencia. Explica por qué elegiste esa imagen.",
+            "Habla de una persona que conociste y que te enseñó a ser mejor persona hoy.",
+            "¿Cuál es tu mayor inseguridad?",
+            "Cuenta cuál es la parte más difícil de relacionarte conmigo.",
+            "¿Crees que todo el mundo tiene una misión? Si es así, ¿crees que encontraste la tuya?",
+            "¿Estás peleado(a) con alguien? ¿Qué te impide dar el paso hacia el perdón?",
+            "¿Qué has hecho (o dejado de hacer) para ser aceptado(a)? ¿Cómo te sientes al respecto?",
+            "¿Qué cumplido te gustaría recibir más veces?",
+            "¿Qué significa la soledad para ti? ¿Cómo te sientes?",
+            "Si pudieras darme un consejo, ¿cuál sería?",
+            "Desafíame a hacer algo diferente este mes. Algo que no estoy acostumbrado a hacer.",
+            "¿Por qué crees que nuestros caminos se cruzaron?",
+            "¿Qué te gustaría poder decir a tu familia y no dices?",
+            "¿Cuál ha sido la mejor decisión que has tomado en la vida?",
+            "Di algo que nunca tuviste el valor de decirle a nadie.",
+            "Habla de algún amigo que ya no está en tu vida pero que extrañas y cuenta por qué se alejaron.",
+            "¿Qué no has estado valorando últimamente?",
+            "¿Hay alguna creencia o patrón en tu familia que quisieras resignificar?",
+            "¿Hay algo en tu vida que sabes que no te hace bien pero igual sigues haciendo?",
+            "Confiesa un prejuicio.",
+            "Cuenta cómo me describirías a un extraño.",
+            "¿Tienes miedo a la muerte? ¿Qué crees que pasa cuando morimos?",
+            "¿Qué te hace sentir más conectado(a) conmigo hoy?",
+            "Para ti, ¿qué hace que la vida valga la pena ser vivida?",
+            "¿Cuál es el nombre de tu madre y qué es lo que más te gusta de ella?",
+            "¿Cuál es la cosa más importante que crees que has hecho por ti mismo(a)?",
+            "¿Qué te gustaba hacer más cuando eras niño(a)? ¿Es posible adaptar eso para hacerlo hoy también?",
+            "¿Cuál es tu lugar favorito en el mundo?",
+            "Si supieras que te queda solo un año de vida, ¿cambiarías algo en tu forma de vivir? ¿Qué te impide hacerlo hoy?",
+            "¿Qué te quita la paz?",
+            "¿En qué momentos sientes más vergüenza?",
+            "¿Qué canción te recuerda un momento muy feliz? ¿Escucharon la letra con atención?",
+            "Si pudieras hacer cualquier cosa ahora, ¿qué harías?",
+            "Si tu vida fuera una serie de Netflix, ¿cómo se llamaría?",
+            "¿Cuándo fue la última vez que hiciste algo por primera vez?",
+            "Cuenta un gran aprendizaje que tuviste con tu padre.",
+            "¿Cuál es tu mayor nostalgia?",
+            "¿Qué nunca cambiarías de ti?",
+            "¿Por qué vale la pena conocerte?",
+            "Si pudieras conocer a alguien más profundamente, ¿quién sería?",
+            "Comparte un consejo que te hizo cambiar de alguna forma.",
+            "¿Crees que existe el alma gemela?",
+            "¿Cuál ha sido tu mejor recuerdo de este año hasta ahora?",
+            "Di una gran razón por la que estés agradecido(a) hoy.",
+            "Los pequeños placeres de la vida son...",
+            "¿Qué es lo que más te incomoda de los patrones sociales de nuestra cultura?",
+            "Cuenta sobre un día en el que hiciste la diferencia en la vida de alguien.",
+            "¿Quién es tu mayor inspiración?",
+            "¿Cómo te sientes hoy?",
+            "¿Cuándo fue la última vez que lloraste?",
+            "Comparte tu frase favorita.",
+            "¿Cuál ha sido la mejor sorpresa que has recibido?",
+            "¿Quién te gustaría ser por un día?"
+        ]
+    };
 
 
-const questions = data.questions;  // array de perguntas
+    const questions = data.questions;  // array de perguntas
 
-let currentIndex = 0;
+    let currentIndex = 0;
 
-// Elementos do DOM
-const questionElement = document.getElementById('questionDesenvolvimento');
-const optionsList = document.getElementById('optionsList');
-const resultDiv = document.getElementById('result');
+    // Elementos do DOM
+    const questionElement = document.getElementById('questionDesenvolvimento');
+    const optionsList = document.getElementById('optionsList');
+    const resultDiv = document.getElementById('result');
 
-function loadQuestion(index) {
-    if (index < 0 || index >= questions.length) {
-        questionElement.textContent = "Você chegou ao fim das perguntas!";
-        optionsList.innerHTML = "";
-        return;
+    function loadQuestion(index) {
+        if (index < 0 || index >= questions.length) {
+            questionElement.textContent = "Você chegou ao fim das perguntas!";
+            optionsList.innerHTML = "";
+            return;
+        }
+        questionElement.textContent = questions[index];
+        optionsList.innerHTML = ""; // Por enquanto, não há opções
+        resultDiv.textContent = ""; // limpa resultado
     }
-    questionElement.textContent = questions[index];
-    optionsList.innerHTML = ""; // Por enquanto, não há opções
-    resultDiv.textContent = ""; // limpa resultado
-}
 
-function nextQuestion() {
-    currentIndex++;
-    if (currentIndex >= questions.length) {
-        currentIndex = 0; // ou você pode parar no fim
-        alert("Você chegou ao fim das perguntas. Voltando ao início.");
+    function nextQuestion() {
+        currentIndex++;
+        if (currentIndex >= questions.length) {
+            currentIndex = 0; // ou você pode parar no fim
+            alert("Você chegou ao fim das perguntas. Voltando ao início.");
+        }
+        loadQuestion(currentIndex);
     }
-    loadQuestion(currentIndex);
-}
 
-// Funções para abrir e fechar o popup das regras
-function openPopup() {
-    document.getElementById('popup').style.display = 'block';
-}
-
-function closePopup() {
-    document.getElementById('popup').style.display = 'none';
-}
-
-// Funções para abrir e fechar o popup da resposta
-function openAnswerPopup(answerText) {
-    document.getElementById('answerText').textContent = answerText;
-    document.getElementById('answerPopup').style.display = 'block';
-}
-
-function closeAnswerPopup() {
-    document.getElementById('answerPopup').style.display = 'none';
-}
-
-// Carregar a primeira pergunta assim que a página carregar
-window.onload = function () {
-    loadQuestion(currentIndex);
-};
-
-
-// Pop-up regras
-function openPopup() {
-    document.getElementById("popup").style.display = "block";
-}
-
-function closePopup() {
-    document.getElementById("popup").style.display = "none";
-}
-
-// Fechar o pop-up ao clicar fora dele
-window.onclick = function (event) {
-    let popup = document.getElementById("popup");
-    if (event.target === popup) {
-        popup.style.display = "none";
+    // Funções para abrir e fechar o popup das regras
+    function openPopup() {
+        document.getElementById('popup').style.display = 'block';
     }
-};
 
-// Inicializa o carregamento das perguntas quando a página carrega
-window.onload = loadQuestions;
+    function closePopup() {
+        document.getElementById('popup').style.display = 'none';
+    }
+
+    // Funções para abrir e fechar o popup da resposta
+    function openAnswerPopup(answerText) {
+        document.getElementById('answerText').textContent = answerText;
+        document.getElementById('answerPopup').style.display = 'block';
+    }
+
+    function closeAnswerPopup() {
+        document.getElementById('answerPopup').style.display = 'none';
+    }
+
+    // Carregar a primeira pergunta assim que a página carregar
+    window.onload = function () {
+        loadQuestion(currentIndex);
+    };
+
+
+    // Pop-up regras
+    function openPopup() {
+        document.getElementById("popup").style.display = "block";
+    }
+
+    function closePopup() {
+        document.getElementById("popup").style.display = "none";
+    }
+
+    // Fechar o pop-up ao clicar fora dele
+    window.onclick = function (event) {
+        let popup = document.getElementById("popup");
+        if (event.target === popup) {
+            popup.style.display = "none";
+        }
+    };
+
+    // Inicializa o carregamento das perguntas quando a página carrega
+    window.onload = loadQuestions;
 </script>
 </body>
 

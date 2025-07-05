@@ -1,29 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="../../stylesCards.css">
     <title>Secrets</title>
 </head>
+
 <body>
 
 <div class="game-container">
     <!-- Menu -->
-<nav class="menu">
-    <a href="../menuEn.html" class="menu-title" style="position: relative;">
-        <div class="voltar-container" onclick="window.location.href='../menuPtBr.html'">
-            &#8678; <!-- Isso é ← -->
-        </div>
-        <img class="logo-bebedeira" src="../images/logo.png" alt="Logo Bebedeira" />
-    </a>
-</nav>
+    <nav class="menu">
+        <a href="../menuEn.html" class="menu-title" style="position: relative;">
+            <div class="voltar-container" onclick="window.location.href='../menuPtBr.html'">
+                &#8678; <!-- Isso é ← -->
+            </div>
+            <img class="logo-bebedeira" src="../images/logo.png" alt="Logo Bebedeira" />
+        </a>
+    </nav>
 
     <!-- Game content -->
-    <h1>Secrets</h1>
     <div>
+        <h1>Secrets</h1>
+
         <a href="#" onclick="openPopup()"><br />
-        <img class="img-regras" src="../images/regras.png" alt="Regras" />
+            <img class="img-regras" src="../images/regras.png" alt="Regras" />
         </a>
         <h4>Rules</h4>
     </div>
@@ -31,9 +34,10 @@
     <!-- Pop-up -->
     <div id="popup" class="popup">
         <div class="popup-content">
-            <span class="close" onclick="closePopup()">&times;</span>
-            <h3>Game Rules</h3>
-            <h5>Secrets</h5>
+            <div class="popup-header">
+                <h2>Game Rules</h2>
+                <span class="close" onclick="closePopup()">&times;</span>
+            </div>
             <ul>
                 <li>The most "shameless" player starts</li>
                 <li>Grab the phone and read a message out loud</li>
@@ -48,13 +52,13 @@
     </div>
 </div>
 
-    <div class="card-frase">
-        <p id="questionSegredos"></p>
-    </div>
-    <div class="button-container">
-        <button onclick="nextQuestion()">Next question</button>
-    </div>
-    <div id="result"></div>
+<div class="card-frase">
+    <p id="questionSegredos"></p>
+</div>
+<div class="button-container">
+    <button onclick="nextQuestion()">Next question</button>
+</div>
+<div id="result"></div>
 
 <script>
     let questions = [];
@@ -62,203 +66,203 @@
 
     // JSON data embedded directly in the file
     const questionsData = {
-    "questions": [
-        "Once I broke...",
-        "My biggest fear is...",
-        "Once I vomited...",
-        "The secret to being so attractive is...",
-        "If I could have any superpower, I would have",
-        "I won't say I was bullied at school, but some kids called me...",
-        "I'm very open to trying new things for the first time, even...",
-        "The most quarrelsome person in this room is...",
-        "When I have sex, I make this sound...",
-        "If I could cure one thing in the world, I would cure...",
-        "I love the smell of...",
-        "The last time I cried a lot was when...",
-        "I thought about moving to...",
-        "In high school, I...",
-        "I lost my virginity...",
-        "The most extreme sport I've done was...",
-        "If I could choose how to die, it would be...",
-        "Once I fought...",
-        "I've made someone...",
-        "Sometimes I dream about...",
-        "My all-time favorite movie is...",
-        "I have problems with...",
-        "Best gift I have ever received...",
-        "I'm a big fan of...",
-        "My perfect day would be...",
-        "When I was a teenager...",
-        "I wish I had the courage to...",
-        "My addiction is...",
-        "At Christmas, I once received...",
-        "My guilty pleasure is...",
-        "It's embarrassing to admit, but I like laughing at...",
-        "Once I stole...",
-        "People have told me I'm...",
-        "My favorite swear word is...",
-        "Once my cousin...",
-        "The weirdest thing I've ever done was...",
-        "I still find it very exciting when...",
-        "Once I sniffed my fingers and...",
-        "I once felt really bad for killing...",
-        "When I'm alone, I like to...",
-        "My mom once caught me...",
-        "People say I look like...",
-        "I've been drunk and...",
-        "The strangest place I've ever had sex was...",
-        "The most shocking photo on my phone is...",
-        "I've faked...",
-        "If I knew I wouldn't get caught, I would...",
-        "I'm very flexible, I can...",
-        "If I had only one wish, it would be...",
-        "I've been teased by...",
-        "For sex, once I...",
-        "I've never watched...",
-        "A boring sport is...",
-        "Once I lost my patience and...",
-        "My biggest mistake was...",
-        "I've done something so clueless that I still can't believe it...",
-        "What really annoys me is...",
-        "If I could go back in time, I would...",
-        "I've tried... but it didn't work.",
-        "When I'm nervous, my reaction is...",
-        "Something I would love to learn but never tried is...",
-        "I consider myself a person who...",
-        "I've fought with someone over something as simple as...",
-        "When I'm angry, I usually...",
-        "The most embarrassing moment of my life was when...",
-        "The best advice I've ever received was...",
-        "Once I did something so cool that everyone was shocked when they found out...",
-        "I'm afraid of... but I try to face it.",
-        "As a child, I dreamed of being...",
-        "I once got so lost that...",
-        "When I'm sad, I usually...",
-        "I've regretted a decision so much that...",
-        "Something that makes me very happy is...",
-        "I've been so confused that...",
-        "Once I tried something I thought I'd hate, but I liked it because...",
-        "I would love to do something extreme like...",
-        "I've escaped a situation because...",
-        "If I were invisible, the first thing I'd do would be...",
-        "The most romantic place I've ever visited was...",
-        "I've done something so meaningless that...",
-        "Once, my worst nightmare happened when...",
-        "I always forget to...",
-        "When I have free time, I like to...",
-        "I've done something so crazy that no one believes it until today...",
-        "My biggest dream is...",
-        "Once I tried something so difficult that I almost gave up, but...",
-        "If I had to choose a place to live, it would be...",
-        "I'll never forget the day when...",
-        "When I'm in an uncomfortable situation, my first reaction is...",
-        "Once I was so bold that...",
-        "My biggest secret desire is...",
-        "I've made such a big surprise that... nobody expected it.",
-        "I've lied to protect someone, and the lie was...",
-        "When I was a kid, my favorite superhero was...",
-        "The worst gift I've ever received was...",
-        "I never knew how to deal with... until I learned...",
-        "I've always wanted to do something radical, like...",
-        "I've had a nightmare so real that...",
-        "Once, I was so nervous that...",
-        "I would love to move to... just to live that experience.",
-        "I've done something so embarrassing that I still don't talk about it.",
-        "If I were rich, the first thing I would do is...",
-        "When I'm at a boring event, my solution is...",
-        "I always forget... and then regret it.",
-        "I never understood why people...",
-        "My biggest flaw is... but I'm trying to change.",
-        "I've gotten into such a big mess that...",
-        "If I had a superpower, it would be... because...",
-        "My biggest regret was...",
-        "I love eating... at any time of the day.",
-        "The coolest thing I've done for someone was...",
-        "I've been surprised by something that...",
-        "Once, I tried to learn... and it was a disaster.",
-        "I've done something so unexpected that no one has understood it until today...",
-        "If I could change one thing in my past, it would be...",
-        "Once I was so brave that...",
-        "I can never say no when someone asks me to...",
-        "The craziest thing I've ever done was...",
-        "If I could have any animal as a pet, I would choose...",
-        "Once I did something so ridiculous that... no one believed it.",
-        "My biggest chill was when...",
-        "I would love to spend a week in... to completely relax.",
-        "The biggest lesson of my life was...",
-        "I've tried something so exotic that I'm still surprised by the taste...",
-        "If I had to live in a movie, I would choose... because...",
-        "I've always run away from... but one day I will face it.",
-        "I've had an idea so crazy that I thought about doing it, but I gave up because...",
-        "When I'm in a dilemma, my first reaction is...",
-        "If I were famous for a day, I would...",
-        "I will never forget the moment when...",
-        "I've been in such a funny situation that... no one stopped laughing.",
-        "If I could travel through time, I would go to...",
-        "I've done something so unpredictable that no one expected it...",
-        "My biggest childhood fear was...",
-        "I never imagined I would do... until one day I tried.",
-        "I've done something so weird that I even wondered why I did it...",
-        "If I were invisible for a day, I would use this power to...",
-        "The biggest surprise I've ever received was when...",
-        "I've been so excited about something that I couldn't stop talking about it for days.",
-        "When I'm in a quiet place, my biggest fear is...",
-        "I've done something so impulsive that I immediately regretted it...",
-        "I've always wanted to learn to do... but never tried.",
-        "When I'm in doubt, I usually... to help me decide.",
-        "If I had to live in a different city, I would choose...",
-        "The most dangerous thing I've ever done was...",
-        "I've pretended to know... when I actually had no idea.",
-        "My weirdest secret about my body is...",
-        "I've lied about... just to impress someone.",
-        "If I could erase a memory, it would be...",
-        "I've cried for... but never told anyone.",
-        "My strangest habit is...",
-        "I've stolen... and felt terrible afterward.",
-        "If I could switch lives with someone for a day, it would be...",
-        "I've had a secret crush on...",
-        "The worst lie I've told my boss was...",
-        "I've gotten lost in... and it was an unforgettable adventure.",
-        "My biggest secret addiction is...",
-        "I've been caught doing... and made up a terrible excuse.",
-        "If I could eat only one food forever, it would be...",
-        "I've broken... and blamed someone else.",
-        "My biggest silly fantasy is...",
-        "I've been stuck in... and it was hilarious.",
-        "If I had to live without one sense, I would choose to lose...",
-        "I've pretended to be an expert in... to fit in.",
-        "The grossest thing I've ever eaten was...",
-        "I've been afraid of... until I realized it was nonsense.",
-        "My useless secret talent is...",
-        "I've been fired from... and never told my family.",
-        "If I could make a new law, it would be...",
-        "I've fallen in love with... and deeply regretted it.",
-        "My biggest secondhand embarrassment was when...",
-        "I've been kicked out of... and made up a different story.",
-        "If I could have lived in another era, it would be...",
-        "I've been caught doing... and denied it until the end.",
-        "The weirdest dream I've had involved...",
-        "I've had a nasty fight with... because of...",
-        "My favorite secret place is...",
-        "I've instantly regretted...",
-        "If I could know an absolute truth, it would be about...",
-        "I've gotten sick from eating...",
-        "My biggest childhood obsession was...",
-        "I've been abandoned in... and had to fend for myself.",
-        "If I could have a conversation with my past self, I would say...",
-        "I've been stopped by the police for...",
-        "The strangest habit I got from my family is...",
-        "I've hurt myself badly trying to...",
-        "If I could eliminate one invention from humanity, it would be...",
-        "I've stopped talking to... for a ridiculous reason.",
-        "My biggest heartbreak was...",
-        "I've been publicly humiliated when...",
-        "If I had to live without technology, I would only take...",
-        "I've been betrayed in an unexpected way by...",
-        "My biggest physical insecurity is...",
-        "I've saved a situation with a creative lie about..."
-    ]
-};
+        "questions": [
+            "Once I broke...",
+            "My biggest fear is...",
+            "Once I vomited...",
+            "The secret to being so attractive is...",
+            "If I could have any superpower, I would have",
+            "I won't say I was bullied at school, but some kids called me...",
+            "I'm very open to trying new things for the first time, even...",
+            "The most quarrelsome person in this room is...",
+            "When I have sex, I make this sound...",
+            "If I could cure one thing in the world, I would cure...",
+            "I love the smell of...",
+            "The last time I cried a lot was when...",
+            "I thought about moving to...",
+            "In high school, I...",
+            "I lost my virginity...",
+            "The most extreme sport I've done was...",
+            "If I could choose how to die, it would be...",
+            "Once I fought...",
+            "I've made someone...",
+            "Sometimes I dream about...",
+            "My all-time favorite movie is...",
+            "I have problems with...",
+            "Best gift I have ever received...",
+            "I'm a big fan of...",
+            "My perfect day would be...",
+            "When I was a teenager...",
+            "I wish I had the courage to...",
+            "My addiction is...",
+            "At Christmas, I once received...",
+            "My guilty pleasure is...",
+            "It's embarrassing to admit, but I like laughing at...",
+            "Once I stole...",
+            "People have told me I'm...",
+            "My favorite swear word is...",
+            "Once my cousin...",
+            "The weirdest thing I've ever done was...",
+            "I still find it very exciting when...",
+            "Once I sniffed my fingers and...",
+            "I once felt really bad for killing...",
+            "When I'm alone, I like to...",
+            "My mom once caught me...",
+            "People say I look like...",
+            "I've been drunk and...",
+            "The strangest place I've ever had sex was...",
+            "The most shocking photo on my phone is...",
+            "I've faked...",
+            "If I knew I wouldn't get caught, I would...",
+            "I'm very flexible, I can...",
+            "If I had only one wish, it would be...",
+            "I've been teased by...",
+            "For sex, once I...",
+            "I've never watched...",
+            "A boring sport is...",
+            "Once I lost my patience and...",
+            "My biggest mistake was...",
+            "I've done something so clueless that I still can't believe it...",
+            "What really annoys me is...",
+            "If I could go back in time, I would...",
+            "I've tried... but it didn't work.",
+            "When I'm nervous, my reaction is...",
+            "Something I would love to learn but never tried is...",
+            "I consider myself a person who...",
+            "I've fought with someone over something as simple as...",
+            "When I'm angry, I usually...",
+            "The most embarrassing moment of my life was when...",
+            "The best advice I've ever received was...",
+            "Once I did something so cool that everyone was shocked when they found out...",
+            "I'm afraid of... but I try to face it.",
+            "As a child, I dreamed of being...",
+            "I once got so lost that...",
+            "When I'm sad, I usually...",
+            "I've regretted a decision so much that...",
+            "Something that makes me very happy is...",
+            "I've been so confused that...",
+            "Once I tried something I thought I'd hate, but I liked it because...",
+            "I would love to do something extreme like...",
+            "I've escaped a situation because...",
+            "If I were invisible, the first thing I'd do would be...",
+            "The most romantic place I've ever visited was...",
+            "I've done something so meaningless that...",
+            "Once, my worst nightmare happened when...",
+            "I always forget to...",
+            "When I have free time, I like to...",
+            "I've done something so crazy that no one believes it until today...",
+            "My biggest dream is...",
+            "Once I tried something so difficult that I almost gave up, but...",
+            "If I had to choose a place to live, it would be...",
+            "I'll never forget the day when...",
+            "When I'm in an uncomfortable situation, my first reaction is...",
+            "Once I was so bold that...",
+            "My biggest secret desire is...",
+            "I've made such a big surprise that... nobody expected it.",
+            "I've lied to protect someone, and the lie was...",
+            "When I was a kid, my favorite superhero was...",
+            "The worst gift I've ever received was...",
+            "I never knew how to deal with... until I learned...",
+            "I've always wanted to do something radical, like...",
+            "I've had a nightmare so real that...",
+            "Once, I was so nervous that...",
+            "I would love to move to... just to live that experience.",
+            "I've done something so embarrassing that I still don't talk about it.",
+            "If I were rich, the first thing I would do is...",
+            "When I'm at a boring event, my solution is...",
+            "I always forget... and then regret it.",
+            "I never understood why people...",
+            "My biggest flaw is... but I'm trying to change.",
+            "I've gotten into such a big mess that...",
+            "If I had a superpower, it would be... because...",
+            "My biggest regret was...",
+            "I love eating... at any time of the day.",
+            "The coolest thing I've done for someone was...",
+            "I've been surprised by something that...",
+            "Once, I tried to learn... and it was a disaster.",
+            "I've done something so unexpected that no one has understood it until today...",
+            "If I could change one thing in my past, it would be...",
+            "Once I was so brave that...",
+            "I can never say no when someone asks me to...",
+            "The craziest thing I've ever done was...",
+            "If I could have any animal as a pet, I would choose...",
+            "Once I did something so ridiculous that... no one believed it.",
+            "My biggest chill was when...",
+            "I would love to spend a week in... to completely relax.",
+            "The biggest lesson of my life was...",
+            "I've tried something so exotic that I'm still surprised by the taste...",
+            "If I had to live in a movie, I would choose... because...",
+            "I've always run away from... but one day I will face it.",
+            "I've had an idea so crazy that I thought about doing it, but I gave up because...",
+            "When I'm in a dilemma, my first reaction is...",
+            "If I were famous for a day, I would...",
+            "I will never forget the moment when...",
+            "I've been in such a funny situation that... no one stopped laughing.",
+            "If I could travel through time, I would go to...",
+            "I've done something so unpredictable that no one expected it...",
+            "My biggest childhood fear was...",
+            "I never imagined I would do... until one day I tried.",
+            "I've done something so weird that I even wondered why I did it...",
+            "If I were invisible for a day, I would use this power to...",
+            "The biggest surprise I've ever received was when...",
+            "I've been so excited about something that I couldn't stop talking about it for days.",
+            "When I'm in a quiet place, my biggest fear is...",
+            "I've done something so impulsive that I immediately regretted it...",
+            "I've always wanted to learn to do... but never tried.",
+            "When I'm in doubt, I usually... to help me decide.",
+            "If I had to live in a different city, I would choose...",
+            "The most dangerous thing I've ever done was...",
+            "I've pretended to know... when I actually had no idea.",
+            "My weirdest secret about my body is...",
+            "I've lied about... just to impress someone.",
+            "If I could erase a memory, it would be...",
+            "I've cried for... but never told anyone.",
+            "My strangest habit is...",
+            "I've stolen... and felt terrible afterward.",
+            "If I could switch lives with someone for a day, it would be...",
+            "I've had a secret crush on...",
+            "The worst lie I've told my boss was...",
+            "I've gotten lost in... and it was an unforgettable adventure.",
+            "My biggest secret addiction is...",
+            "I've been caught doing... and made up a terrible excuse.",
+            "If I could eat only one food forever, it would be...",
+            "I've broken... and blamed someone else.",
+            "My biggest silly fantasy is...",
+            "I've been stuck in... and it was hilarious.",
+            "If I had to live without one sense, I would choose to lose...",
+            "I've pretended to be an expert in... to fit in.",
+            "The grossest thing I've ever eaten was...",
+            "I've been afraid of... until I realized it was nonsense.",
+            "My useless secret talent is...",
+            "I've been fired from... and never told my family.",
+            "If I could make a new law, it would be...",
+            "I've fallen in love with... and deeply regretted it.",
+            "My biggest secondhand embarrassment was when...",
+            "I've been kicked out of... and made up a different story.",
+            "If I could have lived in another era, it would be...",
+            "I've been caught doing... and denied it until the end.",
+            "The weirdest dream I've had involved...",
+            "I've had a nasty fight with... because of...",
+            "My favorite secret place is...",
+            "I've instantly regretted...",
+            "If I could know an absolute truth, it would be about...",
+            "I've gotten sick from eating...",
+            "My biggest childhood obsession was...",
+            "I've been abandoned in... and had to fend for myself.",
+            "If I could have a conversation with my past self, I would say...",
+            "I've been stopped by the police for...",
+            "The strangest habit I got from my family is...",
+            "I've hurt myself badly trying to...",
+            "If I could eliminate one invention from humanity, it would be...",
+            "I've stopped talking to... for a ridiculous reason.",
+            "My biggest heartbreak was...",
+            "I've been publicly humiliated when...",
+            "If I had to live without technology, I would only take...",
+            "I've been betrayed in an unexpected way by...",
+            "My biggest physical insecurity is...",
+            "I've saved a situation with a creative lie about..."
+        ]
+    };
 
 
     // Função para carregar as perguntas
@@ -308,7 +312,7 @@
     }
 
     // Fechar o pop-up ao clicar fora dele
-    window.onclick = function(event) {
+    window.onclick = function (event) {
         let popup = document.getElementById("popup");
         if (event.target === popup) {
             popup.style.display = "none";
@@ -317,4 +321,5 @@
 </script>
 
 </body>
+
 </html>

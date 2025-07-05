@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt">
+
 <head>
     <meta charset="UTF-8" />
     <link rel="manifest" href="../manifest.json">
@@ -77,15 +78,16 @@
 
 <script>
     if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.getRegistrations().then(registrations => {
-        for (let registration of registrations) {
-          registration.unregister().then(() => {
-            console.log('Service Worker removido');
-          });
-        }
-      });
+        navigator.serviceWorker.getRegistrations().then(registrations => {
+            for (let registration of registrations) {
+                registration.unregister().then(() => {
+                    console.log('Service Worker removido');
+                });
+            }
+        });
     }
 
 </script>
 </body>
+
 </html>

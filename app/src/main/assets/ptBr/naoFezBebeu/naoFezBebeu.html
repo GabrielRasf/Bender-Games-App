@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,34 +8,36 @@
     <title>Não fez? Bebeu</title>
 
 </head>
+
 <body>
 
 <div class="game-container">
     <!-- Menu -->
-<nav class="menu">
-    <a href="../menuPtBr.html" class="menu-title" style="position: relative;">
-        <div class="voltar-container" onclick="window.location.href='../menuPtBr.html'">
-            &#8678; <!-- Isso é ← -->
-        </div>
-        <img class="logo-bebedeira" src="../images/logo.png" alt="Logo Bebedeira" />
-    </a>
-</nav>
+    <nav class="menu">
+        <a href="../menuPtBr.html" class="menu-title" style="position: relative;">
+            <div class="voltar-container" onclick="window.location.href='../menuPtBr.html'">
+                &#8678; <!-- Isso é ← -->
+            </div>
+            <img class="logo-bebedeira" src="../images/logo.png" alt="Logo Bebedeira" />
+        </a>
+    </nav>
 
     <!-- Conteúdo do jogo -->
-    <h1>Não fez? Bebeu</h1>
-<div>
-            <a href="#" onclick="openPopup()">
+    <div>
+        <h1>Não fez? Bebeu</h1>
+        <a href="#" onclick="openPopup()">
             <img class="img-regras" src="../images/regras.png" alt="Regras" />
-            </a>
-            <h4>Regras</h4>
-        </div>
+        </a>
+        <h4>Regras</h4>
+    </div>
 
     <!-- Pop-up -->
     <div id="popup" class="popup">
         <div class="popup-content">
-            <span class="close" onclick="closePopup()">&times;</span>
-            <h3>Regras do Jogo</h3>
-            <h5>Não fez? Bebeu</h5>
+            <div class="popup-header">
+                <h2>Regras do Jogo</h2>
+                <span class="close" onclick="closePopup()">&times;</span>
+            </div>
             <ul>
                 <li>Um dos jogadores pega o celular e lê uma carta em voz alta.</li>
                 <li>Se o jogador fizer o desafio corretamente, ele ganha pontos. Se não fizer, tem que beber.</li>
@@ -274,8 +277,8 @@
             "Imite o Mr. Catra para o grupo.",
             "BEBA SE: Beba se você tem alguma tatuagem.",
             "REINADO: Você é um rei / rainha. Escolha uma pessoa para te servir durante 3 rodadas."
-            ]
-        };
+        ]
+    };
 
     let questions = [];
     let currentQuestion = 0;
@@ -324,7 +327,7 @@
     }
 
     // Fechar o pop-up ao clicar fora dele
-    window.onclick = function(event) {
+    window.onclick = function (event) {
         let popup = document.getElementById("popup");
         if (event.target === popup) {
             popup.style.display = "none";
@@ -335,4 +338,5 @@
     window.onload = loadQuestions;
 </script>
 </body>
+
 </html>
