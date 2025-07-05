@@ -375,7 +375,7 @@ ul, ol {
 
 /* Popup Regras */
 .popup ul li {
-    font-size: 1.2rem; /* corrigido de font-ize */
+    font-size: 1rem;
     margin-top: 8px;
     color: white;
     line-height: 1.2;
