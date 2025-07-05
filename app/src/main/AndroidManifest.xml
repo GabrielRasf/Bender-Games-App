@@ -2,12 +2,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <!-- Coloque as permissões AQUI, fora da tag <application> -->
+    <!-- Permissões necessárias para o AdMob -->
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 
     <application
-
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -18,9 +17,17 @@
         android:theme="@style/Theme.BebedeiraGames"
         tools:targetApi="31">
 
+        <!-- AdMob TESTE -->
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-3940256099942544~3347511713" />
+
+        <!-- AdMob REAL (comentado) -->
+        <!--
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
             android:value="ca-app-pub-4356165451655513~8744526693"/>
+        -->
 
         <activity
             android:name=".MainActivity"

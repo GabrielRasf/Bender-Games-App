@@ -12,7 +12,7 @@
 
 body {
     font-family: Arial, sans-serif;
-    background-color: #010B13;
+    background-color: #010b13;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
@@ -106,7 +106,7 @@ h4,
 h5 {
     color: #facc15;
     text-decoration: none;
-    margin-bottom: 15px; /* corrigido de margin-botton */
+    margin-bottom: 15px;
 }
 
 h1 {
@@ -247,20 +247,14 @@ ul, ol {
 .voltar-container {
     position: absolute;
     left: 18px;
-    top: 12%;
-    transform: translateY(-50%);
+    top: 0px;
     cursor: pointer;
     font-size: 63px;
     font-weight: 600;
     animation: pulsarSeta 2.4s infinite ease-in-out,
-               mudarCorSeta 14s infinite linear,
-               moverEsquerda 1.8s infinite ease-in-out;
+               mudarCorSeta 14s infinite linear;
     transition: transform 0.4s ease;
     user-select: none;
-}
-
-.seta {
-    /* caso queira aplicar algo separado, pode usar aqui */
 }
 
 /* Escala (pulsar) */
@@ -370,8 +364,8 @@ ul, ol {
     position: absolute;
     top: 10px;
     right: 15px;
-    color: #ffffff;
-    font-size: 36px;
+    color: #facc15;
+    font-size: 42px;
     font-weight: bold;
 }
 
@@ -453,7 +447,7 @@ ol {
     }
 
     .pergunta-e-resposta {
-        width: 16px;
-        height: 16px;
+        width: 32px;
+        height: 32px;
     }
 }

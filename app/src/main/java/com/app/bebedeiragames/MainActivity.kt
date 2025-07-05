@@ -37,7 +37,7 @@ class MainActivity : ComponentActivity() {
         // Mantém a tela ligada (opcional)
         window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
 
-        // Pré-carrega os anúncios ANTES de setar o conteúdo
+        // Pré-carrega os anúncios ANTES der o conteúdo
         MobileAds.initialize(this) {
             // Carrega os anúncios imediatamente após inicialização
             loadInitialAds()
@@ -74,7 +74,7 @@ class MainActivity : ComponentActivity() {
                         .wrapContentHeight(),
                     factory = { ctx ->
                         AdView(ctx).apply {
-                            setAdSize(AdSize.BANNER)
+                           setAdSize(AdSize.BANNER)
                             adUnitId = "ca-app-pub-3940256099942544/6300978111" // Teste
                             loadAd(AdRequest.Builder().build())
                         }
@@ -112,7 +112,7 @@ class MainActivity : ComponentActivity() {
                         .wrapContentHeight(),
                     factory = { ctx ->
                         AdView(ctx).apply {
-                            setAdSize(AdSize.BANNER)
+                           setAdSize(AdSize.BANNER)
                             adUnitId = "ca-app-pub-3940256099942544/6300978111" // Teste
                             loadAd(AdRequest.Builder().build())
                         }
