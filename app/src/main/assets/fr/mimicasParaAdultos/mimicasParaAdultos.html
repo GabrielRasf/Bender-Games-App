@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="../../stylesCards.css">
+    <link rel="stylesheet" type="text/css" href="../../cronometro.css">
+    <title>Mime pour Adultes</title>
+</head>
+
+<body>
+
+<div class="game-container">
+    <!-- Menu -->
+    <nav class="menu">
+        <a href="../menuFr.html" class="menu-title" style="position: relative;">
+            <div class="voltar-container" onclick="window.location.href='../menuPtBr.html'">
+                &#8678; <!-- Ceci est ← -->
+            </div>
+            <img class="logo-bebedeira" src="../images/logo.png" alt="Logo Bebedeira" />
+        </a>
+    </nav>
+
+    <!-- Contenu du jeu -->
+    <div>
+        <h1>Mime pour Adultes</h1>
+        <a href="#" onclick="openPopup()">
+            <img class="img-regras" src="../images/regras.png" alt="Règles" />
+        </a>
+        <h4>Règles</h4>
+    </div>
+
+    <div class="card-frase">
+        <p id="questionMimicasParaAdultos"></p>
+    </div>
+    <div class="button-container">
+        <button onclick="nextQuestion()">Question suivante</button>
+    </div>
+    <div id="result"></div>
+</div>
+
+<!-- Pop-up -->
+<div id="popup" class="popup">
+    <div class="popup-content">
+        <div class="popup-header">
+            <h2>Règles du Jeu</h2>
+            <span class="close" onclick="closePopup()">&times;</span>
+        </div>
+        <ul>
+            <li>Divisez les joueurs en deux équipes.</li>
+            <li>À chaque tour, une équipe choisit un joueur pour faire le mime.</li>
+            <li>Cette personne lira une carte et imitera pour son équipe.</li>
+            <li>Activez le chronomètre de 60 secondes et commencez à mimer.</li>
+            <li>L'équipe de ce joueur doit deviner le contenu de la carte.</li>
+            <li>Si l'équipe devine correctement, elle gagne un point.</li>
+            <li>Si l'équipe échoue, un des joueurs boit une dose.</li>
+            <li>Au tour suivant, c’est à l’autre équipe de jouer.</li>
+            <li>L'équipe avec le plus de points gagne.</li>
+            <li><strong>VARIATION</strong></li>
+            <li>Le joueur qui fait le mime doit le faire pour toute la table.</li>
+            <li>Les joueurs qui auront le moins de bonnes réponses pendant un certain nombre de tours, boivent une
+                dose.</li>
+            <li>Amusez-vous bien ! 🍻</li>
+        </ul>
+    </div>
+</div>
+
+<!-- Chronomètre -->
+
+<button id="timer" onclick="handleTimerClick()">⏳</button>
+
+<script>
+    const gameData = {
+    "questions": [
+    "Toilettes chimiques",
+    "Crêpes",
+    "Soudeur",
+    "Spray au poivre",
+    "Lapin boiteux",
+    "Ventilateur de plafond",
+    "Ping-pong",
+    "Flocon de neige",
+    "Bouche à bouche",
+    "Camion de carnaval",
+    "Gynécologue",
+    "Macarena",
+    "Bateau à moteur",
+    "Mauvais trou",
+    "Comérage",
+    "Peigner",
+    "Honte",
+    "Orgasme",
+    "Camion-citerne",
+    "Arroser les plantes",
+    "Accouchement naturel",
+    "Changer une couche",
+    "Promenade à cheval",
+    "Usurier",
+    "Limace",
+    "Chiropracteur",
+    "Mouiller le biscuit",
+    "Manger une baguette",
+    "Exorcisme",
+    "Sniffer de la cocaïne",
+    "Fouet",
+    "Plug anal",
+    "Char de combat",
+    "Futevôlei",
+    "Cigarette électronique",
+    "Photo de pénis",
+    "Pierre, papier, ciseaux",
+    "Pelé",
+    "Inhalateur d'asthme",
+    "Joelma",
+    "Sexe anal",
+    "Tambour",
+    "Clitoris",
+    "Natation synchronisée",
+    "Contraceptif",
+    "Neymar",
+    "Micro pénis",
+    "Lancer du poids",
+    "Christ Rédempteur",
+    "Roue de pagode",
+    "Bouquet de mariée",
+    "Manchot",
+    "Alok",
+    "Poulpe",
+    "Barbecue",
+    "Glacière",
+    "Brûler la paille",
+    "Sexe au téléphone",
+    "Ballet",
+    "Dauphin",
+    "Pêche avec paiement à la prise",
+    "Licorne",
+    "Tarzan",
+    "Sexe dans la voiture",
+    "Anneau pénien",
+    "Gangnam Style (danse)",
+    "Mono-sourcil",
+    "69",
+    "Tireur d'élite",
+    "Vibromasseur",
+    "Escrime",
+    "Sucette qui colore la langue",
+    "Minions",
+    "Jeu de la bouteille",
+    "Hélicoptère",
+    "Bouilloire",
+    "Machine à laver",
+    "Barons de la pisadinha",
+    "Gâteau de mariage",
+    "Vergetures",
+    "Luciole",
+    "Maïs au beurre",
+    "Payer une facture",
+    "Friteuse à air",
+    "Promener le chien",
+    "Péter",
+    "Brise-roche",
+    "Pulvérisation agricole",
+    "Michael Jackson",
+    "Quad",
+    "Harry Potter",
+    "Faire du café",
+    "Seau de glace",
+    "Falaise",
+    "Cheminée",
+    "Vautour",
+    "Pédicure",
+    "Karaoké",
+    "Fellation",
+    "Fétichisme des pieds",
+    "Fête de révélation du sexe",
+    "Beatbox",
+    "Liposuccion",
+    "Louro José",
+    "À quatre pattes",
+    "Sucer le doigt de pied",
+    "Bâton",
+    "Sachet de thé",
+    "Point G",
+    "Chariot élévateur",
+    "Saut en parachute",
+    "Impôt sur le revenu",
+    "Danse du ver de terre",
+    "Klaxon de camion",
+    "Curling (sport)",
+    "Big Brother Brésil",
+    "Abdominaux dessinés",
+    "Cookies",
+    "Test d'alcoolémie",
+    "Viagra",
+    "Tour Eiffel",
+    "Chauve",
+    "Triangle amoureux",
+    "Rideau de douche",
+    "Faire des sushis",
+    "Arc-en-ciel",
+    "Patinage sur glace",
+    "Baleine",
+    "Café au lit",
+    "Jeune marié",
+    "Bodybuilder",
+    "Tiktokeur",
+    "Caméra au ralenti",
+    "Zèbre",
+    "Corbeau",
+    "Diarrhée",
+    "Décoiffer le clown",
+    "Mauvaise haleine",
+    "Piercing au mamelon",
+    "Noyer le canard",
+    "Poupée gonflable",
+    "Clé anglaise",
+    "Enceinte acoustique",
+    "Concierge",
+    "Épilation intime",
+    "Slip en cuir",
+    "Graine",
+    "Chien caramel",
+    "Marijuana",
+    "Tondre la pelouse",
+    "Examen des seins",
+    "Conduite en état d'ivresse",
+    "Titanic",
+    "Grue",
+    "Bière noire",
+    "Père Noël",
+    "Préservatif",
+    "Toilettes féminines",
+    "Vendeur ambulant",
+    "Gel lubrifiant",
+    "Colle chaude",
+    "Paix de l'esprit",
+    "Chirurgien plastique",
+    "Trampoline",
+    "Yoga",
+    "Police fédérale",
+    "Gâteau à la carotte",
+    "Serpent",
+    "Mona Lisa",
+    "Sculpture de glace",
+    "Beach tennis",
+    "Botox",
+    "Hernie discale",
+    "Karate",
+    "Plat du jour",
+    "Baiser grec",
+    "Cours de poterie",
+    "Tremblement de terre",
+    "Travesti",
+    "Course à obstacles",
+    "Homard",
+    "Allaiter",
+    "Prêtre du ballon",
+    "Bolsonaro",
+    "Internet",
+    "Iron Maiden",
+    "Traîneau",
+    "Aveugle chauve",
+    "Sexe sous la douche",
+    "Amant",
+    "Sirène",
+    "Cacahuète",
+    "Bain dans la baignoire",
+    "Strip-teaseuse",
+    "Aumône au feu rouge",
+    "Rhinocéros",
+    "Ouvre-bouteille",
+    "Combat de coqs",
+    "Chenille",
+    "Décoiffer le clown",
+    "Jouer avec la chatte",
+    "S'asseoir avec envie",
+    "Pirocoptère"
+    ]
+    };
+
+    let questions = [];
+let currentQuestion = 0;
+let timeLeft = 60;
+let timerInterval = null;
+let isRunning = false;
+
+function loadQuestions() {
+    questions = shuffleArray([...gameData.questions]);
+    nextQuestion();
+}
+
+function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+}
+
+function nextQuestion() {
+    if (questions.length === 0) {
+        document.getElementById("questionMimicasParaAdultos").textContent = "Chargement des questions...";
+        loadQuestions();
+        return;
+    }
+
+    if (currentQuestion < questions.length) {
+        document.getElementById("questionMimicasParaAdultos").textContent = questions[currentQuestion];
+        document.getElementById("result").textContent = "";
+        currentQuestion++;
+    } else {
+        document.getElementById("questionMimicasParaAdultos").textContent = "Fin du jeu ! J’espère que vous vous amusez ! Voulez-vous rejouer ?";
+        document.getElementById("result").textContent = "";
+        currentQuestion = 0;
+        questions = shuffleArray([...gameData.questions]);
+    }
+}
+
+function openPopup() {
+    document.getElementById("popup").style.display = "block";
+}
+
+function closePopup() {
+    document.getElementById("popup").style.display = "none";
+}
+
+window.onclick = function (event) {
+    let popup = document.getElementById("popup");
+    if (event.target === popup) {
+        popup.style.display = "none";
+    }
+};
+
+function updateDisplay() {
+    const timerButton = document.getElementById('timer');
+    if (isRunning) {
+        timerButton.textContent = timeLeft;
+    } else {
+        timerButton.innerHTML = '⏳';
+    }
+}
+
+function handleTimerClick() {
+    if (isRunning) {
+        clearInterval(timerInterval);
+        timerInterval = null;
+        timeLeft = 60;
+        isRunning = false;
+        updateDisplay(); // Reveals the hourglass
+    } else {
+        isRunning = true;
+        updateDisplay();
+        timerInterval = setInterval(() => {
+            timeLeft--;
+            updateDisplay();
+
+            if (timeLeft <= 0) {
+                clearInterval(timerInterval);
+                timerInterval = null;
+                isRunning = false;
+                timeLeft = 60;
+                updateDisplay();
+            }
+        }, 1000);
+    }
+}
+
+// Carrega as perguntas e o cronômetro ao iniciar
+window.onload = function () {
+    loadQuestions();
+    updateDisplay();
+}
+
+
+</script>
+
+</body>
+
+</html>

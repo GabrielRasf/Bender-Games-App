@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="../../stylesCards.css">
+    <title>Pas fait? Buvez</title>
+</head>
+
+<body>
+
+<div class="game-container">
+    <!-- Menu -->
+    <nav class="menu">
+        <a href="../menuFr.html" class="menu-title" style="position: relative;">
+            <div class="voltar-container" onclick="window.location.href='../menuPtBr.html'">
+                &#8678; <!-- Ceci est ← -->
+            </div>
+            <img class="logo-bebedeira" src="../images/logo.png" alt="Logo Bebedeira" />
+        </a>
+    </nav>
+
+    <!-- Contenu du jeu -->
+    <div>
+        <h1>Pas fait? Buvez</h1>
+        <a href="#" onclick="openPopup()">
+            <img class="img-regras" src="../images/regras.png" alt="Règles" />
+        </a>
+        <h4>Règles</h4>
+    </div>
+
+    <!-- Pop-up -->
+    <div id="popup" class="popup">
+        <div class="popup-content">
+            <div class="popup-header">
+                <h2>Règles du jeu</h2>
+                <span class="close" onclick="closePopup()">&times;</span>
+            </div>
+            <ul>
+                <li>Un joueur prend le téléphone et lit une carte à voix haute.</li>
+                <li>Si le joueur réussit le défi, il gagne des points. Sinon, il doit boire.</li>
+                <li>Le gagnant est celui qui a le plus de points ou qui est sobre.</li>
+                <li>Chaque défi réussi vaut 1 point.</li>
+                <li>Chaque défi ABSURDE réussi vaut 2 points.</li>
+                <li>Certaines cartes n'offrent pas de choix. Buvez simplement !</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="card-frase">
+        <p id="questionNaoFezBebeu">Chargement des questions...</p>
+    </div>
+    <div class="button-container">
+        <button onclick="nextQuestion()">Question suivante</button>
+    </div>
+    <div id="result"></div>
+</div>
+
+<script>
+    // Données du jeu intégrées directement dans le HTML
+    const gameData = {
+        "questions": [
+            "Boire 1 shot sans utiliser les mains",
+            "Imiter un animal pendant 10 secondes",
+            "Faire 10 sauts en étoile",
+            "Danser pendant 15 secondes sans musique",
+            "Dire un virelangue sans erreur",
+            "Faire une grimace drôle",
+            "Raconter une blague qui fait rire quelqu'un",
+            "Faire 5 pompes",
+            "Chanter un extrait d'une chanson dans une autre langue",
+            "Équilibrer une cuillère sur le nez pendant 10 secondes",
+            "Faire une imitation de célébrité",
+            "Dire l'alphabet à l'envers",
+            "Rester sur un pied pendant 30 secondes",
+            "Faire une déclaration d'amour à un objet dans la pièce",
+            "Dire 5 mots difficiles en 10 secondes",
+            "Faire un discours de 30 secondes sur un sujet aléatoire",
+            "Boire un shot les yeux bandés",
+            "Faire une mimique pour que les autres devinent",
+            "Compter jusqu'à 20 dans une autre langue",
+            "Faire une pose de yoga pendant 15 secondes",
+            "Réciter un poème ou une chanson par cœur",
+            "Improviser un rap pendant 10 secondes",
+            "Dire 3 vérités et 1 mensonge sur vous",
+            "Faire un tour de magie (peut être simple)",
+            "Dessiner quelque chose les yeux fermés",
+            "Faire une acrobatie simple (roulade, étoile, etc.)",
+            "Parler avec un accent pendant 1 minute",
+            "Faire une publicité improvisée sur un produit dans la pièce",
+            "Équilibrer 3 objets les uns sur les autres",
+            "Faire une performance dramatique de 15 secondes",
+            "Faire un discours motivant pour le groupe",
+            "Faire un bruit drôle pendant 5 secondes",
+            "Parler d'un sujet aléatoire pendant 30 secondes sans s'arrêter",
+            "Faire une recette imaginaire à voix haute",
+            "Faire un serment d'amitié avec quelqu'un du groupe",
+            "Faire un mini-podcast de 30 secondes sur un sujet aléatoire",
+            "Faire une prédiction pour chaque personne du groupe",
+            "Faire une interview improvisée avec quelqu'un du groupe",
+            "Faire une publicité d'infopublicité pour un produit bizarre",
+            "Faire un discours de remise des diplômes improvisé",
+            "Faire un doublage dramatique d'un film imaginaire",
+            "Faire un tutoriel de maquillage avec des objets aléatoires",
+            "Faire un commentaire sportif sur une action courante",
+            "Faire un rapport météo comme un présentateur",
+            "Faire une narration documentaire sur le groupe",
+            "Faire un stand-up comedy de 30 secondes",
+            "Faire un discours politique improvisé",
+            "Faire une séance de thérapie pour un objet inanimé",
+            "Faire une annonce de mariage faux avec quelqu'un du groupe",
+            "Faire une séance questions-réponses comme un expert en gynécologie",
+            "FAITES le mouvement de gymnastique le plus impressionnant que vous pouvez OU buvez un shot.",
+            "DÉFI: Défiez un autre joueur au 'Jeu des Insultes'. Le premier qui rit OU pleure doit boire un shot.",
+            "BUVEZ SI vous avez un piercing autre que des boucles d'oreilles.",
+            "Regardez un joueur dans les yeux pendant 30 secondes en mangeant une banane de manière sensuelle. Sinon, buvez un shot.",
+            "Faites un tour complet de Mort OU Vif. Le premier éliminé boit un shot. Vous êtes le juge.",
+            "Asseyez-vous sur les genoux de la personne à votre droite jusqu'au prochain tour OU buvez un shot.",
+            "ABSURDE: Appelez votre ex et dites que vous voulez revenir, puis buvez un shot OU quittez le jeu.",
+            "DÉFI: Défiez un autre joueur à 'Pierre, Papier OU Ciseaux'. Le perdant boit un shot.",
+            "RECEVEZ: Félicitations, vous êtes sélectionné! Buvez toute votre boisson et recevez un PIX de 2 R$ de chaque joueur.",
+            "ABSURDE: Mettez un glaçon dans votre bouche et passez-le à la personne à votre droite, puis buvez un shot OU quittez le jeu.",
+            "Dites l'alphabet à l'envers : 'Z, Y, X, W...'. Si vous vous trompez, buvez un shot.",
+            "ABSURDE: Appelez une pizzeria et demandez une saucisse extra-large, buvez un shot OU quittez le jeu.",
+            "Tenez votre langue avec deux doigts et chantez une chanson OU buvez un shot.",
+            "MEMOIRE: Racontez l'histoire de votre premier baiser.",
+            "BUVEZ SI vous êtes hétérosexuel.",
+            "Faites la danse de la bouteille OU buvez un shot.",
+            "Envoyez un message à votre patron pour le remercier des vacances surprises de 30 jours OU buvez un shot.",
+            "Faites un strip-tease aux joueurs en ne gardant que vos sous-vêtements et buvez un shot OU quittez le jeu.",
+            "Révélez au groupe avec combien de personnes vous avez couché OU buvez 3 shots. Si quelqu'un dit que c'est faux et prouve, buvez un shot de plus.",
+            "ÉCHANGE: écrivez sur un papier pour vous rappeler que vous pouvez transférer ce que vous devez boire à quelqu'un d'autre à tout moment",
+            "Appelez quelqu'un en disant qu'une vache a été renversée et invitez la personne à un barbecue OU buvez un shot.",
+            "DÉFI: Virelangue: 'Erreur, buvez! Dites : 'Trente-trois truites traitées et apportez trois des trente-trois truites traitées'.",
+            "Allongez-vous par terre et laissez quelqu'un faire des squats sur votre visage pendant 10 secondes OU buvez un shot.",
+            "Faites une fellation à quelque chose de phallique OU buvez un shot.",
+            "Laissez le groupe vous chatouiller pendant 15 secondes OU buvez un shot.",
+            "Envoyez un message à votre mère OU père avec ce message : 'J'ai 2 grammes pour 300 R$' OU buvez un shot.",
+            "Faites un massage dans le dos de la personne à votre droite pendant 30 secondes en chuchotant des choses sensuelles à son oreille OU buvez un shot.",
+            "Choisissez quelqu'un pour jouer une position sexuelle avec vous OU vous buvez tous les deux un shot.",
+            "ABSURDE: Lèche l'oreille de la personne à votre droite puis buvez un shot OU quittez le jeu.",
+            "Le groupe choisit quelqu'un pour jouer une position sexuelle avec vous OU vous buvez tous les deux un shot.",
+            "BUVEZ SI vous êtes le joueur le plus petit.",
+            "Prenez un selfie embarrassant et postez-le en story Instagram OU buvez un shot.",
+            "ABSURDE: Lèche le mamelon de la personne à votre droite et buvez un shot OU quittez le jeu.",
+            "DISCOURS: Vous êtes diplômé ! Faites un discours de remerciement dans une autre langue OU buvez un shot.",
+            "Laissez quelqu'un dessiner une moustache sur votre avant-bras OU votre cou OU buvez un shot.",
+            "BLONDES: Toutes les blondes doivent boire.",
+            "Appelez votre mère OU père et dites que vous avez besoin qu'ils paient votre caution pour sortir de prison OU terminez votre boisson.",
+            "Révélez un fantasme sexuel au groupe OU buvez un shot.",
+            "Enlevez 3 pièces de vêtements OU buvez un shot.",
+            "Laissez le groupe voir votre historique Instagram OU buvez un shot.",
+            "Posez une question à quelqu'un à propos de vous, si la personne devine bien, vous buvez un shot et enlevez un vêtement. Sinon, la personne boit un shot et enlève un vêtement.",
+            "ABSURDE: Ouvrez la porte d'entrée et criez: 'J'adore l'anal!' et buvez un shot OU quittez le jeu.",
+            "Devinez quel joueur a déjà fait une fellation dans une voiture. Si vous avez raison, il boit un shot. Sinon, vous buvez un shot.",
+            "Mettez la plus petite personne du groupe sur vos genoux et donnez-lui à boire comme un bébé. Sinon, buvez un shot.",
+            "Mouillez le doigt de la troisième personne à votre droite dans votre boisson et sucez son doigt OU buvez toute votre boisson.",
+            "Dessinez une moustache sur votre visage avec un stylo OU buvez un shot.",
+            "Faites semblant de vous masturber pendant 15 secondes OU buvez un shot.",
+            "Prenez un selfie et postez sur Instagram: 'Envoyez-moi un direct pour faire la fête ce soir' OU buvez un shot.",
+            "BUVEZ SI vous êtes le joueur le plus âgé.",
+            "Faites une partie de Vérité OU Défi.",
+            "Posez une question vrai OU faux à un autre joueur. S'il se trompe, il boit un shot. S'il a raison, vous buvez un shot.",
+            "Ouvrez Instagram et entrez dans le premier profil que vous voyez et likez les 20 premières photos OU buvez un shot.",
+            "ABSURDE: Envoyez 'Ici il n'y a que des idiots' dans votre groupe familial et buvez un shot OU quittez le groupe.",
+            "Le groupe choisit quelqu'un pour jouer une scène sexuelle avec vous OU vous buvez tous les deux un shot.",
+            "Dites trois positions sexuelles OU buvez un shot.",
+            "Envoyez un direct à votre crush '👀' OU buvez un shot.",
+            "ABSURDE: Allez sur Instagram de quelqu'un en couple, likez 10 publications et buvez un shot OU quittez le jeu.",
+            "Appelez une pizzeria et demandez s'ils peuvent faire une pizza en forme de pénis OU terminez votre boisson.",
+            "Montrez vos fesses au groupe OU buvez un shot.",
+            "Essayez de deviner le parfum de la personne à votre droite, si vous vous trompez buvez un shot.",
+            "Laissez quelqu'un vous filmer en mettant un doigt dans votre nombril en faisant semblant d'avoir un orgasme OU buvez votre boisson.",
+            "Faites un freestyle rap de 15 secondes sur une personne âgée OU terminez votre boisson.",
+            "SANTÉ: Tous les joueurs doivent boire un shot. Santé!",
+            "Ouvrez Instagram et laissez la personne à votre gauche choisir quelqu'un que vous suivez. Likez les 10 dernières photos de cette personne.",
+            "Faites une démonstration de comment faire un french kiss sur une bouteille vide OU buvez un shot.",
+            "Laissez le groupe choisir quelqu'un pour que vous frottez contre lui pendant 15 secondes OU vous buvez tous les deux un shot.",
+            "Choisissez une personne pour vous embrasser, elle choisit où OU buvez un shot.",
+            "Essayez de faire la danse du ver de terre OU buvez un shot.",
+            "Reniflez l'aisselle de la personne à votre gauche OU buvez un shot.",
+            "ABSURDE: Créez un groupe WhatsApp appelé orgie, ajoutez 10 personnes et quittez-le, puis buvez un shot OU quittez le jeu.",
+            "BUVEZ SI vous avez un iPhone.",
+            "SECRET: Commencez une dispute sur un sujet que quelqu'un vous a confié en secret OU buvez un shot.",
+            "Décrivez la chose la plus humiliante que vous ayez faite pendant le sexe OU buvez un shot.",
+            "Buvez une cuillère de ketchup OU buvez un shot. S'il n'y a pas de ketchup, le propriétaire doit boire un shot.",
+            "Envoyez un message à un collègue en disant que vous avez couché avec votre patron OU buvez un shot.",
+            "SANTÉ: Tous les joueurs doivent boire un shot. Santé!",
+            "Montrez à tous votre solde bancaire OU buvez un shot.",
+            "Restez torse nu pendant un tour OU buvez un shot.",
+            "CULTURE: Choisissez une catégorie, par exemple: équipes de foot, fruits, films, etc. Ensuite, chacun doit dire un mot dans la catégorie dans le sens des aiguilles d'une montre. Le premier qui se trompe boit une fois.",
+            "CHANTEZ: Faites une sérénade à genoux pour un joueur.",
+            "ABSURDE: Choisissez quelqu'un dans le groupe pour que vous ouvriez sa fermeture éclair avec vos dents et buvez un shot OU quittez le jeu.",
+            "Nommez au moins 3 jouets sexuels OU buvez un shot.",
+            "Dansez avec enthousiasme pour votre chaise OU buvez un shot.",
+            "Postez une photo de vous faisant semblant de boire de l'eau des toilettes avec le hashtag #comsede OU buvez un shot.",
+            "BLAGUEUR: Racontez une blague. Si personne ne rit, vous devez boire un shot.",
+            "DÉCONSIDÉRATION: Restez trois tours sans jouer OU buvez un shot.",
+            "Choisissez deux joueurs pour faire une pyramide humaine avec vous. Si vous ne réussissez pas, les trois boivent un shot.",
+            "Choisissez deux personnes pour s'embrasser, sinon les trois boivent un shot.",
+            "Mettez deux glaçons sous votre bras et laissez-les fondre complètement OU buvez un shot.",
+            "Dites au groupe où vous avez eu votre rapport sexuel le plus insolite OU terminez votre boisson.",
+            "Donnez votre téléphone à la personne à votre droite et laissez-la envoyer un message à n'importe quel de vos contacts OU buvez un shot.",
+            "Faites le chien chaque fois que quelqu'un parle pendant un tour OU buvez un shot.",
+            "HOMMES: Tous les hommes doivent boire un shot.",
+            "DÉFI: Le groupe doit faire trois tours de 'Je n'ai jamais'.",
+            "Mettez la main dans l'aine de la personne à votre droite pendant un tour et buvez un shot OU quittez le jeu.",
+            "Faites un origami d'un animal ou buvez un shot.",
+            "Laissez le groupe vous mettre dans n'importe quelle position jusqu'au prochain tour OU buvez un shot.",
+            "SERVEUR: Servez un shot à quelqu'un.",
+            "Laissez la personne à votre droite vous toucher les mamelons ou buvez un shot.",
+            "Demandez des nudes au frère ou à la sœur d'un autre joueur ou buvez un shot.",
+            "Choisissez une personne du groupe que vous emmèneriez sur une île déserte et une autre que vous emmèneriez pour coucher OU buvez un shot.",
+            "Bougez la tête à l'envers sur le mur pendant 15 secondes OU buvez un shot.",
+            "Appelez votre mère et dites-lui que vous l'aimez OU buvez un shot.",
+            "ABSURDE: Posez votre visage sur la poitrine de la personne à votre droite et faites le bruit d'un train en buvant un shot OU quittez le jeu.",
+            "DÉFI: Défiez un autre joueur au 'Jeu de rester sérieux'. Celui qui rit en premier boit un shot.",
+            "BUVEZ SI: Buvez si vous êtes le joueur le plus grand.",
+            "Donnez votre téléphone à la personne en face de vous et laissez-la poster une photo de votre galerie Instagram OU buvez un shot.",
+            "La personne à votre gauche est votre Maître. Faites ce que cette personne vous ordonne pendant un tour.",
+            "Envoyez un direct à votre ex 'Tu me manques'. Puis envoyez 'Je ne te manque plus'.",
+            "Enlevez un vêtement pour chaque juron que vous dites jusqu'à la fin du jeu OU buvez 3 shots.",
+            "Jouez à 'ne pas cligner des yeux' avec la personne à votre gauche. Celui qui cligne en premier boit un shot.",
+            "Dites la caractéristique la plus sexy de la personne à votre droite.",
+            "Prenez une photo de vous en faisant une grimace et envoyez-la au dernier contact dans votre liste.",
+            "Si vous avez déjà menti à votre partenaire, buvez un shot.",
+            "Si vous êtes célibataire, buvez un shot.",
+            "Si vous êtes en couple, buvez deux shots.",
+            "Faites un strip-tease pendant 15 secondes OU buvez un shot.",
+            "Laissez la personne à votre gauche vous embrasser sur la joue.",
+            "Donnez un surnom coquin à la personne à votre droite.",
+            "Faites une danse sexy sur place OU buvez un shot.",
+            "Montrez votre photo de profil sur votre téléphone à tout le monde.",
+            "Buvez un shot si vous avez un tatouage.",
+            "Buvez un shot si vous avez des piercings autres que les oreilles.",
+            "Laissez la personne à votre droite choisir un défi pour vous.",
+            "Faites une déclaration d'amour à un objet dans la pièce.",
+            "Faites un compliment sincère à chaque joueur.",
+            "Chantez votre chanson préférée OU buvez un shot.",
+            "Faites une imitation d'un animal OU buvez un shot.",
+            "Faites une blague et si personne ne rit, buvez un shot.",
+            "Faites 10 pompes OU buvez un shot.",
+            "Dansez pendant 30 secondes OU buvez un shot.",
+            "Faites une grimace et maintenez-la pendant 15 secondes OU buvez un shot.",
+            "Donnez un surnom drôle à la personne à votre gauche.",
+            "Faites un selfie avec tout le groupe et envoyez-le dans votre story Instagram.",
+            "Faites un tour de table en disant une qualité de chaque joueur.",
+            "Si vous n'avez jamais fait de sport, buvez un shot.",
+            "Si vous avez un animal de compagnie, buvez un shot.",
+            "Si vous aimez cuisiner, buvez un shot.",
+            "Faites une déclaration d'amour à un joueur au hasard.",
+            "Faites semblant d'être un robot pendant 30 secondes.",
+            "Faites une danse de la victoire OU buvez un shot.",
+            "Faites un compliment à vous-même.",
+            "Racontez une anecdote embarrassante.",
+            "Faites un bruit d'animal drôle.",
+            "Dites une phrase en langue étrangère.",
+            "Faites un geste de victoire.",
+            "Donnez un surnom affectueux au groupe.",
+            "Faites un clin d'œil à la personne à votre droite.",
+            "Faites une révérence comme un roi OU une reine.",
+            "Chantez un air d'opéra OU buvez un shot."
+        ]
+    };
+
+    let currentQuestionIndex = 0;
+
+    function nextQuestion() {
+        const questionElement = document.getElementById("questionNaoFezBebeu");
+        if (currentQuestionIndex >= gameData.questions.length) {
+            questionElement.textContent = "Fin des questions. Merci d'avoir joué !";
+            return;
+        }
+        questionElement.textContent = gameData.questions[currentQuestionIndex];
+        currentQuestionIndex++;
+    }
+
+    function openPopup() {
+        document.getElementById("popup").style.display = "block";
+    }
+
+    function closePopup() {
+        document.getElementById("popup").style.display = "none";
+    }
+
+    // Initialisation
+    window.onload = () => {
+        nextQuestion();
+    }
+</script>
+
+</body>
+
+</html>

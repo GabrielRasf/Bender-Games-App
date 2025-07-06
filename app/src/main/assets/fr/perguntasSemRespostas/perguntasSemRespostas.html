@@ -1,0 +1,2452 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="../../stylesCards.css">
+    <title>Questions Sans Réponses</title>
+</head>
+
+<body>
+
+<div class="game-container">
+    <!-- Menu -->
+    <nav class="menu">
+        <a href="../menuFr.html" class="menu-title" style="position: relative;">
+            <div class="voltar-container" onclick="window.location.href='../menuPtBr.html'">
+                &#8678; <!-- C'est ← -->
+            </div>
+            <img class="logo-bebedeira" src="../images/logo.png" alt="Logo Bebedeira" />
+        </a>
+    </nav>
+
+    <!-- Contenu du jeu -->
+    <div>
+        <h1>Questions Sans Réponses</h1>
+        <a href="#" onclick="openPopup()">
+            <img class="img-regras" src="../images/regras.png" alt="Règles" />
+        </a>
+        <h4>Règles</h4>
+    </div>
+
+    <div id="popup" class="popup">
+        <div class="popup-content">
+            <div class="popup-header">
+                <h2>Règles du Jeu</h2>
+                <span class="close" onclick="closePopup()">&times;</span>
+            </div>
+            <ul>
+                <li>Ce jeu est idéal pour les couples</li>
+                <li>Les deux joueurs boiront une gorgée s’ils choisissent la même option.</li>
+                <li>Cette gorgée célèbre l'harmonie entre les deux personnes.</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="card-frase">
+        <p id="questionPerguntasSemRespostas"></p>
+    </div>
+    <div class="button-container">
+        <button onclick="nextQuestion()">Question suivante</button>
+    </div>
+    <div id="result"></div>
+</div>
+
+<script>
+    // Dados do jogo embutidos
+    const gameData = {
+        "questions": [
+            {
+                "text": "Si vous pouviez choisir entre :",
+                "or": "ou",
+                "text2": "Être riche et malheureux ou pauvre et heureux ?"
+            },
+            {
+                "text": "Vous préférez :",
+                "or": "ou",
+                "text2": "Vivre sans musique ou sans télévision/films ?"
+            },
+            {
+                "text": "Que choisiriez-vous :",
+                "or": "ou",
+                "text2": "Tout savoir sur le passé ou sur le futur ?"
+            },
+            {
+                "text": "Parmi ces options :",
+                "or": "ou",
+                "text2": "Avoir beaucoup d'argent ou beaucoup de temps libre ?"
+            },
+            {
+                "text": "Vous préféreriez :",
+                "or": "ou",
+                "text2": "Être très intelligent ou très beau/belle ?"
+            },
+            {
+                "text": "Qu'est-ce qui vaut plus :",
+                "or": "ou",
+                "text2": "Une grande amitié ou un grand amour ?"
+            },
+            {
+                "text": "Si vous deviez choisir :",
+                "or": "ou",
+                "text2": "Rester sans internet ou sans voiture pendant un mois ?"
+            },
+            {
+                "text": "Parmi ces possibilités :",
+                "or": "ou",
+                "text2": "Voyager dans le temps ou lire dans les pensées ?"
+            },
+            {
+                "text": "Vous choisiriez :",
+                "or": "ou",
+                "text2": "Vivre 200 ans dans le futur ou 200 ans dans le passé ?"
+            },
+            {
+                "text": "Qu'est-ce qui serait pire :",
+                "or": "ou",
+                "text2": "Ne plus jamais pouvoir mentir ou toujours entendre la vérité ?"
+            },
+            {
+                "text": "L'amour peut finir",
+                "or": "OU",
+                "text2": "s'il a fini, c'est parce que ce n'était jamais de l'amour"
+            },
+            {
+                "text": "Ne plus jamais aimer",
+                "or": "OU",
+                "text2": "ne plus jamais être aimé"
+            },
+            {
+                "text": "Sortir avec une personne exactement comme vous est le match parfait",
+                "or": "OU",
+                "text2": "le pire cauchemar"
+            },
+            {
+                "text": "Dans une relation amoureuse, il est idéal que votre partenaire vous accompagne dans vos activités personnelles",
+                "or": "OU",
+                "text2": "que le couple garde ses individualités"
+            },
+            {
+                "text": "Qu'est-ce qui est pire : une rupture intensément douloureuse et inattendue",
+                "or": "OU",
+                "text2": "une rupture qui traîne et ronge peu à peu"
+            },
+            {
+                "text": "L'amour peut finir",
+                "or": "OU",
+                "text2": "s'il a fini, c'est parce que ce n'était jamais de l'amour ?"
+            },
+            {
+                "text": "Ne plus jamais aimer",
+                "or": "OU",
+                "text2": "ne plus jamais être aimé ?"
+            },
+            {
+                "text": "Sortir avec une personne exactement comme vous est le match parfait",
+                "or": "OU",
+                "text2": "le pire cauchemar ?"
+            },
+            {
+                "text": "Dans une relation amoureuse, il est idéal que votre partenaire vous accompagne dans vos activités personnelles",
+                "or": "OU",
+                "text2": "que le couple garde ses individualités ?"
+            },
+            {
+                "text": "Qu'est-ce qui est pire : une rupture intensément douloureuse et inattendue",
+                "or": "OU",
+                "text2": "une rupture qui traîne et ronge peu à peu ?"
+            },
+            {
+                "text": "Il est plus facile de gérer un partenaire dont l'estime de soi est très basse (auto-dépréciative)",
+                "or": "OU",
+                "text2": "avec une estime de soi extrêmement élevée (arrogant) ?"
+            },
+            {
+                "text": "Croyez-vous aux âmes sœurs",
+                "or": "OU",
+                "text2": "ce sont des personnes qui font quotidiennement des efforts et choisissent de rester ensemble ?"
+            },
+            {
+                "text": "Être complètement seul au monde",
+                "or": "OU",
+                "text2": "vivre éternellement avec quelqu'un que vous n'aimez pas ?"
+            },
+            {
+                "text": "Ne plus jamais ressentir l'amour",
+                "or": "OU",
+                "text2": "revivre votre pire rupture ?"
+            },
+            {
+                "text": "Dans une relation amoureuse, vous préférez un partenaire : EXTRÊMEMENT sensible",
+                "or": "OU",
+                "text2": "COMPLÈTEMENT insensible ?"
+            },
+            {
+                "text": "Les gens ont commencé à abandonner les relations trop facilement",
+                "or": "OU",
+                "text2": "ils ont juste arrêté d'accepter moins que ce qu'ils méritent ?"
+            },
+            {
+                "text": "Faire confiance trop facilement",
+                "or": "OU",
+                "text2": "ne jamais réussir à faire confiance à personne ?"
+            },
+            {
+                "text": "Êtes-vous le genre de personne qui se déclare et expose ses sentiments",
+                "or": "OU",
+                "text2": "qui garde tout pour soi ?"
+            },
+            {
+                "text": "Les applications de rencontre sont le summum de la superficialité",
+                "or": "OU",
+                "text2": "elles sont parfaites parce qu'elles peuvent réunir des gens qui ne se rencontreraient jamais dans la vie réelle ?"
+            },
+            {
+                "text": "Il est possible de maintenir une relation où les deux sont des 'leaders'",
+                "or": "OU",
+                "text2": "pour garder l'harmonie, il faut que quelqu'un soit moins autoritaire ?"
+            },
+            {
+                "text": "Vous aimez quelqu'un",
+                "or": "OU",
+                "text2": "vous aimez la sensation que cette personne vous procure ?"
+            },
+            {
+                "text": "Vous avez envie de vous marier avec cérémonie et fête à l'ancienne",
+                "or": "OU",
+                "text2": "vivre ensemble est déjà le nouveau concept du mariage ?"
+            },
+            {
+                "text": "Vous préférez blesser les autres mais être content de vous-même",
+                "or": "OU",
+                "text2": "rendre les autres heureux, même si cela vous fait du mal ?"
+            },
+            {
+                "text": "Dans une relation exclusive, vous aimeriez savoir si quelqu'un a flirté avec votre partenaire",
+                "or": "OU",
+                "text2": "ce que les yeux ne voient pas, le cœur ne ressent pas ?"
+            },
+            {
+                "text": "Il est possible d'aimer quelqu'un que vous n'avez jamais vu en personne",
+                "or": "OU",
+                "text2": "le contact/la cohabitation sont essentiels pour vraiment aimer quelqu'un ?"
+            },
+            {
+                "text": "Les démonstrations d'affection en public vous rendent heureux",
+                "or": "OU",
+                "text2": "mal à l'aise ?"
+            },
+            {
+                "text": "La jalousie est plutôt : une démonstration d'attention/d'affection",
+                "or": "OU",
+                "text2": "un sentiment lié à la possession/insécurité ?"
+            },
+            {
+                "text": "L'amour idéal est : intense et rempli d'émotions, comme des montagnes russes",
+                "or": "OU",
+                "text2": "calme et tranquille, sans beaucoup de hauts et de bas ?"
+            },
+            {
+                "text": "Quelle sensation est pire : décevoir/blesser",
+                "or": "OU",
+                "text2": "être déçu/blessé ?"
+            },
+            {
+                "text": "Le manque est un reflet de la dépendance émotionnelle",
+                "or": "OU",
+                "text2": "une preuve d'amour, de préoccupation et d'affection ?"
+            },
+            {
+                "text": "Vivre des amours intenses avec la possibilité de se blesser",
+                "or": "OU",
+                "text2": "ne jamais réussir à s'ouvrir vraiment, mais éviter les douleurs et les ruptures ?"
+            },
+            {
+                "text": "Vous êtes d'accord avec la phrase 'la bonne personne, au mauvais moment'",
+                "or": "OU",
+                "text2": "il n'y a pas de mauvais moment quand il s'agit de la bonne personne ?"
+            },
+            {
+                "text": "Le mariage est encore une célébration de l'amour",
+                "or": "OU",
+                "text2": "il est devenu une institution défaillante ?"
+            },
+            {
+                "text": "Ne plus jamais voyager",
+                "or": "OU",
+                "text2": "ne plus jamais tomber amoureux ?"
+            },
+            {
+                "text": "Qu'est-ce qui est considéré pire dans une relation : la trahison physique/carnelle",
+                "or": "OU",
+                "text2": "émotionnelle/affective ?"
+            },
+            {
+                "text": "En tenant compte de facteurs comme l'employabilité, les cercles sociaux et votre propre personnalité, vous choisiriez d'avoir :",
+                "or": "OU",
+                "text2": "la beauté ?"
+            },
+            {
+                "text": "Vous vous considérez comme une personne sensible",
+                "or": "OU",
+                "text2": "plus objective quand il s'agit des situations de votre vie ?"
+            },
+            {
+                "text": "Qu'est-ce qui pèse le plus dans la balance : la célébrité, l'argent, les opportunités et les expériences",
+                "or": "OU",
+                "text2": "une vie simple, mais avec luxe et intimité ?"
+            },
+            {
+                "text": "Vivre avec la certitude que quelque chose de mauvais va arriver",
+                "or": "OU",
+                "text2": "gérer le doute face à une probabilité de 50 % pour oui ou non ?"
+            },
+            {
+                "text": "Faire et courir le risque de regretter",
+                "or": "OU",
+                "text2": "ne pas faire et rester dans le doute éternel ?"
+            },
+            {
+                "text": "Êtes-vous le genre de personne qui préfère faire 9876 activités en même temps",
+                "or": "OU",
+                "text2": "fonctionne mieux en réalisant une tâche à la fois ?"
+            },
+            {
+                "text": "La plupart du temps, vous cherchez à voir le bon côté des choses",
+                "or": "OU",
+                "text2": "vous attendez déjà le pire ?"
+            },
+            {
+                "text": "Quand vous allez mal physiquement/émotionnellement, penser qu'il y a des personnes dans une situation pire que la vôtre est quelque chose qui atténue",
+                "or": "OU",
+                "text2": "n'atténue en rien votre douleur ?"
+            },
+            {
+                "text": "Vous avez envie d'accomplir de grandes choses, d'être rappelé comme quelqu'un d'important pour la société",
+                "or": "OU",
+                "text2": "vous voyez la grandeur dans les petites choses de la vie ?"
+            },
+            {
+                "text": "Être la personne la plus drôle",
+                "or": "OU",
+                "text2": "la plus intelligente dans les lieux ?"
+            },
+            {
+                "text": "Êtes-vous le genre de personne qui se met trop de pression",
+                "or": "OU",
+                "text2": "qui devrait se mettre plus de pression ?"
+            },
+            {
+                "text": "Si vous pouviez choisir de toujours garder un type d'estime de soi élevée, vous opteriez pour une estime de soi : physique",
+                "or": "OU",
+                "text2": "intellectuelle ?"
+            },
+            {
+                "text": "Être une personne considérée comme 'culottée', mais toujours obtenir ce que l'on veut",
+                "or": "OU",
+                "text2": "opter pour le bon sens et renoncer à vivre des expériences/saisir des opportunités ?"
+            },
+            {
+                "text": "Vivre sans savoir ce qui va arriver est excitant",
+                "or": "OU",
+                "text2": "angoissant ?"
+            },
+            {
+                "text": "Être toujours au centre de l'attention",
+                "or": "OU",
+                "text2": "ne jamais être remarqué dans aucune situation ?"
+            },
+            {
+                "text": "Actuellement, vous avez la même croyance religieuse/similaire à celle des personnes qui vous ont élevé",
+                "or": "OU",
+                "text2": "vous êtes allé dans une direction complètement différente ?"
+            },
+            {
+                "text": "Toujours agir d'un point de vue rationnel",
+                "or": "OU",
+                "text2": "faire confiance à ses émotions ?"
+            },
+            {
+                "text": "Vous préférez vivre une vie avec stabilité et routine",
+                "or": "OU",
+                "text2": "une vie avec constance et pleine de surprises ?"
+            },
+            {
+                "text": "Ne plus jamais ressentir aucun type de sentiment",
+                "or": "OU",
+                "text2": "continuer à tout ressentir, mais de manière extrêmement intense ?"
+            },
+            {
+                "text": "Vous avez l'habitude de séparer l'artiste de l'art",
+                "or": "OU",
+                "text2": "vous croyez qu'ils sont inévitablement liés ?"
+            },
+            {
+                "text": "Selon vous, qu'est-ce qui est capable de provoquer plus de changements et de mobiliser les gens : la colère et la haine",
+                "or": "OU",
+                "text2": "l'espoir et l'amour ?"
+            },
+            {
+                "text": "Pour atteindre vos désirs et objectifs dans la vie, quelle caractéristique est la plus importante à avoir : la passion",
+                "or": "OU",
+                "text2": "la discipline ?"
+            },
+            {
+                "text": "À la fin de la journée, être égoïste peut être considéré comme quelque chose de positif/nécessaire",
+                "or": "OU",
+                "text2": "c'est une caractéristique indiscutablement négative ?"
+            },
+            {
+                "text": "Les personnes politiquement correctes tout le temps réussissent dans la vie",
+                "or": "OU",
+                "text2": "il est inévitable de 'trouver un moyen' dans certaines situations ?"
+            },
+            {
+                "text": "Pour connaître le caractère d'une personne, qu'est-ce qui est le plus important : ses actions",
+                "or": "OU",
+                "text2": "ses intentions ?"
+            },
+            {
+                "text": "L'être humain a le libre arbitre",
+                "or": "OU",
+                "text2": "il naît avec des facteurs prédéterminés ?"
+            },
+            {
+                "text": "Faire de votre profil Instagram une autobiographie est : intéressant/créatif",
+                "or": "OU",
+                "text2": "problématique/effrayant ?"
+            },
+            {
+                "text": "Faire de votre hobby votre principale source de revenus",
+                "or": "OU",
+                "text2": "travailler dans quelque chose que vous n'aimez pas pour pouvoir financer vos hobbies ?"
+            },
+            {
+                "text": "Dans la vie, pensez-vous que l'absence de but est une situation libératrice",
+                "or": "OU",
+                "text2": "angoissante ?"
+            },
+            {
+                "text": "Tout le monde mérite une seconde chance",
+                "or": "OU",
+                "text2": "certains actes sont impardonnables ?"
+            },
+            {
+                "text": "De manière générale, vous croyez que les religions sauvent",
+                "or": "OU",
+                "text2": "aliènent la population ?"
+            },
+            {
+                "text": "Il est plus viable de provoquer des changements dans la société via la politique/l'éducation/les ONG",
+                "or": "OU",
+                "text2": "seules les manifestations/révolutions sont vraiment efficaces ?"
+            },
+            {
+                "text": "Pensez-vous que le bonheur est vraiment un état d'esprit constant",
+                "or": "OU",
+                "text2": "il y a des moments ponctuellement heureux ?"
+            },
+            {
+                "text": "Pensez-vous que certaines choses dans la vie ne sont que des coïncidences",
+                "or": "OU",
+                "text2": "tout arrive pour une raison ?"
+            },
+            {
+                "text": "Croyez-vous que tout ce qui va, revient",
+                "or": "OU",
+                "text2": "le karma n'existe pas ?"
+            },
+            {
+                "text": "Vous préférez être le genre de personne qui sait beaucoup de choses sur peu de sujets",
+                "or": "OU",
+                "text2": "peu sur beaucoup de domaines ?"
+            },
+            {
+                "text": "Vous vous éloigneriez des personnes proches ayant des opinions politiques très différentes des vôtres",
+                "or": "OU",
+                "text2": "vous arrivez à séparer vos relations de vos valeurs et morales ?"
+            },
+            {
+                "text": "Vous croyez que tout arrive pour une raison",
+                "or": "OU",
+                "text2": "nous trouvons des raisons pour lesquelles les choses sont arrivées ?"
+            },
+            {
+                "text": "Pensez-vous qu'il vaut mieux trouver quelque chose d'incroyable et le perdre",
+                "or": "OU",
+                "text2": "ne jamais vivre cette expérience ?"
+            },
+            {
+                "text": "Pensez-vous que notre essence est immuable",
+                "or": "OU",
+                "text2": "les gens peuvent devenir d'autres personnes au fil de la vie ?"
+            },
+            {
+                "text": "Est-il possible de se connaître en étant en couple",
+                "or": "OU",
+                "text2": "faut-il être seul pour se découvrir?"
+            },
+            {
+                "text": "Il vaut mieux dire la vérité même si elle fait mal",
+                "or": "OU",
+                "text2": "il vaut mieux mentir pour éviter de blesser?"
+            },
+            {
+                "text": "La fidélité est essentielle dans une relation",
+                "or": "OU",
+                "text2": "la confiance peut remplacer la fidélité?"
+            },
+            {
+                "text": "Il est préférable d'avoir un partenaire très passionné",
+                "or": "OU",
+                "text2": "un partenaire calme et rationnel?"
+            },
+            {
+                "text": "L'amour est une question de hasard",
+                "or": "OU",
+                "text2": "c'est une question de choix?"
+            },
+            {
+                "text": "Les réseaux sociaux rapprochent les gens",
+                "or": "OU",
+                "text2": "ils créent plus de distance?"
+            },
+            {
+                "text": "Il vaut mieux pardonner et oublier",
+                "or": "OU",
+                "text2": "il vaut mieux se souvenir pour ne pas refaire les mêmes erreurs?"
+            },
+            {
+                "text": "La jalousie est une preuve d'amour",
+                "or": "OU",
+                "text2": "c'est un signe d'insécurité?"
+            },
+            {
+                "text": "On peut aimer quelqu'un à distance",
+                "or": "OU",
+                "text2": "le contact physique est indispensable?"
+            },
+            {
+                "text": "Mieux vaut vivre une vie courte mais intense",
+                "or": "OU",
+                "text2": "une vie longue et tranquille?"
+            },
+            {
+                "text": "La communication est la clé d'une relation réussie",
+                "or": "OU",
+                "text2": "les actions comptent plus que les paroles?"
+            },
+            {
+                "text": "L'argent fait le bonheur",
+                "or": "OU",
+                "text2": "le bonheur dépend d'autres choses?"
+            },
+            {
+                "text": "Le travail doit être une passion",
+                "or": "OU",
+                "text2": "c'est normal de travailler juste pour gagner sa vie?"
+            },
+            {
+                "text": "Il vaut mieux suivre la raison",
+                "or": "OU",
+                "text2": "écouter son cœur?"
+            },
+            {
+                "text": "On peut changer sa personnalité",
+                "or": "OU",
+                "text2": "on reste fondamentalement le même toute sa vie?"
+            },
+            {
+                "text": "La famille est ce qu'il y a de plus important",
+                "or": "OU",
+                "text2": "les amis peuvent être plus importants?"
+            },
+            {
+                "text": "On doit toujours aider les autres",
+                "or": "OU",
+                "text2": "il faut d'abord penser à soi?"
+            },
+            {
+                "text": "Le bonheur se trouve dans les petites choses",
+                "or": "OU",
+                "text2": "il faut viser de grandes choses pour être heureux?"
+            },
+            {
+                "text": "Le temps guérit toutes les blessures",
+                "or": "OU",
+                "text2": "certaines blessures restent à vie?"
+            },
+            {
+                "text": "Il est important d'avoir des objectifs clairs",
+                "or": "OU",
+                "text2": "il vaut mieux vivre au jour le jour?"
+            },
+            {
+                "text": "L'éducation est la clé du succès",
+                "or": "OU",
+                "text2": "l'expérience compte plus que les diplômes?"
+            },
+            {
+                "text": "Le pardon est une force",
+                "or": "OU",
+                "text2": "parfois, il vaut mieux garder rancune?"
+            },
+            {
+                "text": "L'honnêteté est toujours la meilleure politique",
+                "or": "OU",
+                "text2": "il y a des moments où il vaut mieux mentir?"
+            },
+            {
+                "text": "Le destin est déjà écrit",
+                "or": "OU",
+                "text2": "nous contrôlons notre propre destin?"
+            },
+            {
+                "text": "Les erreurs sont des leçons de vie",
+                "or": "OU",
+                "text2": "les erreurs doivent être évitées à tout prix?"
+            },
+            {
+                "text": "L'être humain a le libre arbitre",
+                "or": "OU",
+                "text2": "il naît déjà avec des facteurs pré-déterminés ?"
+            },
+            {
+                "text": "Faire de son profil Instagram une autobiographie est : intéressant/créatif",
+                "or": "OU",
+                "text2": "problématique/effrayant ?"
+            },
+            {
+                "text": "Faire de son hobby sa principale source de revenus",
+                "or": "OU",
+                "text2": "travailler dans quelque chose qui ne vous passionne pas pour pouvoir financer vos hobbies ?"
+            },
+            {
+                "text": "Dans la vie, pensez-vous que l'absence de but est une situation libératrice",
+                "or": "OU",
+                "text2": "angoissante ?"
+            },
+            {
+                "text": "Tout le monde mérite une seconde chance",
+                "or": "OU",
+                "text2": "certains actes sont-ils impardonnables ?"
+            },
+            {
+                "text": "En général, vous croyez que les religions sauvent",
+                "or": "OU",
+                "text2": "qu'elles aliènent la population ?"
+            },
+            {
+                "text": "Il est plus viable de provoquer des changements dans la société via la politique/l'éducation/les ONG",
+                "or": "OU",
+                "text2": "seulement les manifestations/révolutions sont-elles vraiment efficaces ?"
+            },
+            {
+                "text": "Pensez-vous que le bonheur est vraiment un état d'esprit constant",
+                "or": "OU",
+                "text2": "il y a des moments ponctuellement heureux ?"
+            },
+            {
+                "text": "Pensez-vous que certaines choses dans la vie ne sont que de simples coïncidences",
+                "or": "OU",
+                "text2": "tout arrive pour une raison ?"
+            },
+            {
+                "text": "Vous croyez que tout ce qui part, revient",
+                "or": "OU",
+                "text2": "le karma n'existe pas ?"
+            },
+            {
+                "text": "Vous préférez être le genre de personne qui sait beaucoup sur peu de sujets",
+                "or": "OU",
+                "text2": "peu sur de nombreux domaines ?"
+            },
+            {
+                "text": "Vous vous éloigneriez de personnes proches avec des opinions politiques très différentes des vôtres",
+                "or": "OU",
+                "text2": "vous pouvez séparer vos relations de vos valeurs et morales ?"
+            },
+            {
+                "text": "Vous croyez que tout arrive pour une raison",
+                "or": "OU",
+                "text2": "nous trouvons des raisons pour lesquelles les choses sont arrivées ?"
+            },
+            {
+                "text": "Pensez-vous qu'il vaut mieux trouver quelque chose d'incroyable et le perdre",
+                "or": "OU",
+                "text2": "ne jamais vivre cette expérience ?"
+            },
+            {
+                "text": "Pensez-vous que notre essence est immuable",
+                "or": "OU",
+                "text2": "les gens peuvent-ils devenir d'autres au fil de la vie ?"
+            },
+            {
+                "text": "L'ambition est synonyme de cupidité",
+                "or": "OU",
+                "text2": "de courage et de détermination ?"
+            },
+            {
+                "text": "Une œuvre d'art peut avoir pour seule fonction le divertissement",
+                "or": "OU",
+                "text2": "pour être considérée comme de l'art, elle doit impérativement être intellectuelle ?"
+            },
+            {
+                "text": "La mondialisation provoque l'homogénéisation, où tout et tous deviennent pareils/se ressemblent",
+                "or": "OU",
+                "text2": "la diversité, car tout le monde a plus accès à des références et cultures différentes ?"
+            },
+            {
+                "text": "Les programmes 'guilty pleasures' (téléréalités, séries d'ados) peuvent être considérés comme culture",
+                "or": "OU",
+                "text2": "sont purement commerciaux ?"
+            },
+            {
+                "text": "Peut-on affirmer qu'on est heureux à tout moment",
+                "or": "OU",
+                "text2": "on ne peut confirmer une vie heureuse qu'à la fin ?"
+            },
+            {
+                "text": "Internet est vraiment un lieu démocratique",
+                "or": "OU",
+                "text2": "ce n'est qu'une apparence où existent aussi dictateurs et autoritaires ?"
+            },
+            {
+                "text": "Qui fait plus d'effort physique contre un vent fort : une personne à vélo",
+                "or": "OU",
+                "text2": "un oiseau en vol ?"
+            },
+            {
+                "text": "Arriver chez soi tard après une longue journée, affamé et très fatigué, vous préférez : manger",
+                "or": "OU",
+                "text2": "dormir ?"
+            },
+            {
+                "text": "Vous préférez vivre dans un endroit où il fait toujours jour",
+                "or": "OU",
+                "text2": "dans un endroit où il fait toujours nuit ?"
+            },
+            {
+                "text": "Dire tout ce qui vous passe par la tête sans filtre",
+                "or": "OU",
+                "text2": "ne plus jamais pouvoir parler ?"
+            },
+            {
+                "text": "Avoir des enfants demain",
+                "or": "OU",
+                "text2": "ne jamais en avoir ?"
+            },
+            {
+                "text": "Vous entreriez dans une téléréalité",
+                "or": "OU",
+                "text2": "aucun argent au monde ne vaut une telle exposition ?"
+            },
+            {
+                "text": "Supposons que deux voyages arrivent à la même destination, vous préférez que le trajet soit : 8 heures en voiture sans interruption",
+                "or": "OU",
+                "text2": "20 heures en avion ?"
+            },
+            {
+                "text": "Vous préférez que votre revenu total soit de 5 000 reais/mois pour toute votre vie",
+                "or": "OU",
+                "text2": "1 000 reais/mois mais gagner 10 millions dans 20 ans ?"
+            },
+            {
+                "text": "Vous boiriez un shot de votre propre urine pour 5 000 reais",
+                "or": "OU",
+                "text2": "vous n'êtes pas aussi dans le besoin d'argent ?"
+            },
+            {
+                "text": "Vous êtes le genre de personne à faire ses propres playlists",
+                "or": "OU",
+                "text2": "préférez un 'top 100 hits mondial' et écouter les playlists des autres ?"
+            },
+            {
+                "text": "L'état physique de la glace est : liquide",
+                "or": "OU",
+                "text2": "solide ?"
+            },
+            {
+                "text": "Ne plus jamais écouter de la musique",
+                "or": "OU",
+                "text2": "ne plus jamais regarder quoi que ce soit lié à l'audiovisuel (films, séries, TV) ?"
+            },
+            {
+                "text": "Ne plus jamais parler",
+                "or": "OU",
+                "text2": "ne plus jamais avoir de relations sexuelles ?"
+            },
+            {
+                "text": "En mettant de côté les questions financières/sécurité, vous préféreriez aller dans l'espace",
+                "or": "OU",
+                "text2": "visiter les profondeurs de l'océan ?"
+            },
+            {
+                "text": "Vous flirtez habituellement avec des personnes dans des environnements atypiques",
+                "or": "OU",
+                "text2": "préfériez interagir sur les réseaux sociaux/lieux 'faits pour ça' ?"
+            },
+            {
+                "text": "Dans votre routine, vous avez des moments où vous ne faites rien d'autre que d'écouter de la musique",
+                "or": "OU",
+                "text2": "pour vous, la musique est un fond sonore pour d'autres activités ?"
+            },
+            {
+                "text": "Ne plus jamais sentir le goût de votre dessert préféré",
+                "or": "OU",
+                "text2": "ne plus jamais manger un plat de votre cuisine préférée ?"
+            },
+            {
+                "text": "Le premier rendez-vous idéal est de s'asseoir dans un bar pour discuter et boire",
+                "or": "OU",
+                "text2": "avoir une activité secondaire derrière ? (exposition, événements, parc d'attractions, bar à jeux, etc.)"
+            },
+            {
+                "text": "Qui avait raison dans l'affaire de la gifle lors de la cérémonie des Oscars en 2022 : Chris Rock",
+                "or": "OU",
+                "text2": "Will Smith"
+            },
+            {
+                "text": "Vous mangeriez une grosse cuillère de caca pour 25 000 reais",
+                "or": "OU",
+                "text2": "vous gardez encore un dernier soupçon de dignité en vous ?"
+            },
+            {
+                "text": "Pour maintenir l'ordre social, il faut mentir",
+                "or": "OU",
+                "text2": "il vaut mieux une vérité qui fait mal qu'un mensonge qui console ?"
+            },
+            {
+                "text": "Vous aimeriez vivre pour toujours",
+                "or": "OU",
+                "text2": "vous croyez qu'on profite de la vie parce qu'un jour elle se termine ?"
+            },
+            {
+                "text": "Vous êtes sensible aux situations tristes/injustes du quotidien",
+                "or": "OU",
+                "text2": "vous êtes devenu si habitué que vous êtes devenu indifférent, normal ?"
+            },
+            {
+                "text": "La vulnérabilité est considérée comme un symbole de force",
+                "or": "OU",
+                "text2": "de faiblesse ?"
+            },
+            {
+                "text": "Vous changeriez quelque chose dans votre passé en sachant que cela influencerait votre présent",
+                "or": "OU",
+                "text2": "vous garderiez tout comme c'est, avec toutes les erreurs et réussites ?"
+            },
+            {
+                "text": "Le contraire de l'amour est la haine",
+                "or": "OU",
+                "text2": "ces sentiments sont-ils plus proches qu'on ne le pense ?"
+            },
+            {
+                "text": "Qu'est-ce qui motive le plus les gens : des paroles d'encouragement (à base d'amour)",
+                "or": "OU",
+                "text2": "du mépris ? (à base de haine)"
+            },
+            {
+                "text": "Est-il acceptable de passer sur les autres pour obtenir ce que vous voulez",
+                "or": "OU",
+                "text2": "on va plus loin collectivement ?"
+            },
+            {
+                "text": "Diriez-vous que l'ambition est une qualité",
+                "or": "OU",
+                "text2": "un défaut ?"
+            },
+            {
+                "text": "Vous croyez qu'il existe des univers parallèles/réalités alternatives",
+                "or": "OU",
+                "text2": "la réalité de la vie est une seule ?"
+            },
+            {
+                "text": "Vous accepteriez de traverser une souffrance qui, à l'avenir, aurait un impact positif sur le monde",
+                "or": "OU",
+                "text2": "vous prioriseriez vous-même, puisque vous ne profiteriez pas des conséquences ?"
+            },
+            {
+                "text": "Déclarer votre amour à quelqu'un déjà engagé est un acte égoïste",
+                "or": "OU",
+                "text2": "romantique ?"
+            },
+            {
+                "text": "Ce qui détermine les actions d'une personne est son caractère",
+                "or": "OU",
+                "text2": "le contexte dans lequel elle se trouve ?"
+            },
+            {
+                "text": "Il est possible d'être ami avec l'ennemi de son ami",
+                "or": "OU",
+                "text2": "qui est ami avec tout le monde n'est en fait ami avec personne ?"
+            },
+            {
+                "text": "Il existe des limites à l'humour",
+                "or": "OU",
+                "text2": "en comédie, tout est permis ?"
+            },
+            {
+                "text": "Il existe des relations sans sexe",
+                "or": "OU",
+                "text2": "l'amour sans sexe est de l'amitié ?"
+            },
+            {
+                "text": "Vous êtes plutôt du genre 'laisse la vie me porter'",
+                "or": "OU",
+                "text2": "êtes-vous le genre de personne qui planifie chaque pas ?"
+            },
+            {
+                "text": "Vous sortiriez avec quelqu'un dont les hobbies ne vous intéressent pas ?",
+                "or": "OU",
+                "text2": "vous préférez avoir des styles de vie similaires ?"
+            },
+            {
+                "text": "Vous croyez qu'il existe des hasards et coïncidences",
+                "or": "OU",
+                "text2": "tout est pré-destiné ?"
+            },
+            {
+                "text": "Est-il possible de se connaître soi-même en étant en couple",
+                "or": "OU",
+                "text2": "faut-il être seul pour se découvrir ?"
+            },
+            {
+                "text": "Vous préféreriez revivre votre pire souvenir",
+                "or": "OU",
+                "text2": "effacer votre meilleur souvenir ?"
+            },
+            {
+                "text": "Qui n'est pas prêt à faire des sacrifices n'aime pas vraiment",
+                "or": "OU",
+                "text2": "privilégie juste son individualité et ses désirs ?"
+            },
+            {
+                "text": "Passer sur les autres pour réussir est mal",
+                "or": "OU",
+                "text2": "nécessaire ?"
+            },
+            {
+                "text": "Les artistes doivent céder aux pressions des tendances pour pouvoir s'insérer sur le marché",
+                "or": "OU",
+                "text2": "un vrai artiste n'en a pas besoin ?"
+            },
+            {
+                "text": "La recherche constante de ce qui manque dans nos vies nous sort de notre zone de confort",
+                "or": "OU",
+                "text2": "nous cause une insatisfaction éternelle ?"
+            },
+            {
+                "text": "Vous aimeriez connaître toute la vérité du monde – le bon et le mauvais",
+                "or": "OU",
+                "text2": "vous préféreriez vivre éternellement dans l'ignorance ?"
+            },
+            {
+                "text": "Si c'était possible, bloqueriez-vous des personnes dans la vie réelle",
+                "or": "OU",
+                "text2": "pensez-vous que ce serait dépasser les limites de la réalité ?"
+            },
+            {
+                "text": "Revivre le même jour en boucle pendant un an",
+                "or": "OU",
+                "text2": "sauter une année entière de votre vie ?"
+            },
+            {
+                "text": "Effacer la mémoire que votre ex-partenaire a de vous",
+                "or": "OU",
+                "text2": "la mémoire que vous avez de lui/elle ?"
+            },
+            {
+                "text": "Vous échangeriez vos repas contre une pilule nutritive",
+                "or": "OU",
+                "text2": "préférez prendre du temps pour vivre le plaisir de manger ?"
+            },
+            {
+                "text": "Revivre la pire année de votre vie",
+                "or": "OU",
+                "text2": "effacer la meilleure année de votre vie ?"
+            },
+            {
+                "text": "Si vous pouviez vivre à une époque différente, vous choisiriez il y a 100 ans",
+                "or": "OU",
+                "text2": "dans 100 ans ?"
+            },
+            {
+                "text": "Sachant que vous atteindrez votre objectif dans le futur, vous passeriez par des années de frustrations",
+                "or": "OU",
+                "text2": "renonceriez à votre désir pour une vie avec plus de qualité ?"
+            },
+            {
+                "text": "Ressentir la douleur de tous ceux que vous avez blessés",
+                "or": "OU",
+                "text2": "faire en sorte que les autres ressentent la douleur qu'ils vous ont causée ?"
+            },
+            {
+                "text": "Oublier toutes les personnes que vous avez connues",
+                "or": "OU",
+                "text2": "être oublié par toutes les personnes que vous connaissez ?"
+            },
+            {
+                "text": "Vous préférez perdre tous vos souvenirs",
+                "or": "OU",
+                "text2": "ne plus jamais pouvoir en créer de nouveaux ?"
+            },
+            {
+                "text": "Vivre une vie d'échecs professionnels mais être reconnu après 65 ans",
+                "or": "OU",
+                "text2": "être éternellement une personne moyenne ?"
+            },
+            {
+                "text": "Vous préférez revivre le meilleur jour de votre vie",
+                "or": "OU",
+                "text2": "gagner 10 000 reais ?"
+            },
+            {
+                "text": "Vous préféreriez perdre votre mémoire à court terme",
+                "or": "OU",
+                "text2": "à long terme ?"
+            },
+            {
+                "text": "Vous préférez une vie remplie de petits plaisirs constants (manger dehors chaque week-end, regarder des films et séries dès que possible, etc.)",
+                "or": "OU",
+                "text2": "des grands plaisirs peu fréquents ? (manger à la maison et économiser pour voyager)"
+            },
+            {
+                "text": "Perdre votre meilleur ami",
+                "or": "OU",
+                "text2": "perdre tous vos amis sauf le plus proche ?"
+            },
+            {
+                "text": "Momentanément, vous préféreriez voir le monde à travers les yeux de vos parents",
+                "or": "OU",
+                "text2": "leur faire voir le monde à travers vos yeux ?"
+            },
+            {
+                "text": "Si vous n'aviez qu'un jour à vivre, vous le raconteriez à quelqu'un",
+                "or": "OU",
+                "text2": "mourriez avec ce dernier secret ?"
+            },
+            {
+                "text": "Renonceriez-vous à tout ce que vous avez vécu/toutes les personnes que vous connaissez pour avoir la vie que vous désirez",
+                "or": "OU",
+                "text2": "abandonneriez-vous votre rêve pour garder tout ce que vous avez construit ?"
+            },
+            {
+                "text": "À quelle phase de votre vie resteriez-vous coincé éternellement : l'actuelle",
+                "or": "OU",
+                "text2": "une autre de votre passé ?"
+            },
+            {
+                "text": "Avoir une mauvaise situation financière mais être accompagné de l'amour de votre vie",
+                "or": "OU",
+                "text2": "vivre bien financièrement et ne plus jamais avoir de relation amoureuse ?"
+            },
+            {
+                "text": "Vous préférez perdre 10 ans de souvenirs",
+                "or": "OU",
+                "text2": "perdre 10 ans de vie ?"
+            },
+            {
+                "text": "Sauver la vie d'une personne",
+                "or": "OU",
+                "text2": "gagner un million de reais ?"
+            },
+            {
+                "text": "Si vous pouviez, effaceriez-vous de votre mémoire une personne qui vous a blessé",
+                "or": "OU",
+                "text2": "croyez-vous qu'elle fait partie de ce que vous êtes devenu ?"
+            },
+            {
+                "text": "Être trompé et ne jamais le découvrir",
+                "or": "OU",
+                "text2": "tromper quelqu'un et ne jamais être découvert mais vivre sans culpabilité ?"
+            },
+            {
+                "text": "Vous préféreriez vivre avec stabilité et ennui",
+                "or": "OU",
+                "text2": "vivre intensément avec des incertitudes constantes ?"
+            },
+            {
+                "text": "Il est plus important d'être fidèle à soi-même",
+                "or": "OU",
+                "text2": "de s'adapter à ce qu'on attend de vous ?"
+            },
+            {
+                "text": "Être aimé sans être compris",
+                "or": "OU",
+                "text2": "être compris sans être aimé ?"
+            },
+            {
+                "text": "Pensez-vous que le pardon libère celui qui pardonne",
+                "or": "OU",
+                "text2": "seulement celui qui est pardonné ?"
+            },
+            {
+                "text": "Il est plus courageux d'aller de l'avant",
+                "or": "OU",
+                "text2": "de reconnaître qu'il faut s'arrêter ?"
+            },
+            {
+                "text": "Vous préféreriez ne rien ressentir",
+                "or": "OU",
+                "text2": "tout ressentir intensément, jusqu'à avoir mal ?"
+            },
+            {
+                "text": "Vous pensez que la fin justifie les moyens",
+                "or": "OU",
+                "text2": "que les moyens définissent qui nous sommes ?"
+            },
+            {
+                "text": "Il vaut mieux échouer en essayant quelque chose de grand",
+                "or": "OU",
+                "text2": "réussir toujours dans de petites zones de confort ?"
+            },
+            {
+                "text": "Vous abandonneriez tout pour un amour",
+                "or": "OU",
+                "text2": "croyez-vous que le véritable amour ne demande pas de sacrifices extrêmes ?"
+            },
+            {
+                "text": "Vous vous sentez plus libre en prenant des décisions seul",
+                "or": "OU",
+                "text2": "en partageant les décisions avec quelqu'un en qui vous avez confiance ?"
+            },
+            {
+                "text": "Il est plus sage de suivre la raison",
+                "or": "OU",
+                "text2": "d'écouter son intuition ?"
+            },
+            {
+                "text": "Vous préférez une vérité qui vous détruit",
+                "or": "OU",
+                "text2": "un mensonge qui vous rend heureux un temps ?"
+            },
+            {
+                "text": "Être le protagoniste de sa propre vie",
+                "or": "OU",
+                "text2": "un personnage secondaire dans l'histoire de quelqu'un que vous aimez ?"
+            },
+            {
+                "text": "Vous pensez que la vie a un but défini",
+                "or": "OU",
+                "text2": "que c'est nous qui lui donnons un sens ?"
+            },
+            {
+                "text": "Il est pire de perdre quelqu'un qui vous aime",
+                "or": "OU",
+                "text2": "de réaliser qu'il ne vous a jamais vraiment aimé ?"
+            },
+            {
+                "text": "Le temps guérit tout",
+                "or": "OU",
+                "text2": "il apprend seulement à vivre avec la douleur ?"
+            },
+            {
+                "text": "Vous croyez que les gens changent vraiment",
+                "or": "OU",
+                "text2": "qu'ils ajustent seulement leur comportement ?"
+            },
+            {
+                "text": "La justice doit être impartiale",
+                "or": "OU",
+                "text2": "prendre en compte les intentions derrière les actes ?"
+            },
+            {
+                "text": "Il est plus facile de gérer le silence",
+                "or": "OU",
+                "text2": "des paroles mal dites ?"
+            },
+            {
+                "text": "Vous préférez vivre avec des doutes",
+                "or": "OU",
+                "text2": "croire en quelque chose juste pour avoir la paix ?"
+            },
+            {
+                "text": "Il est plus difficile de pardonner aux autres",
+                "or": "OU",
+                "text2": "de se pardonner pour quelque chose qu'on a fait ?"
+            },
+            {
+                "text": "Vous préférez vivre une vérité solitaire",
+                "or": "OU",
+                "text2": "une illusion partagée ?"
+            },
+            {
+                "text": "Il est pire d'être oublié",
+                "or": "OU",
+                "text2": "d'être rappelé pour quelque chose que vous n'êtes plus ?"
+            },
+            {
+                "text": "Vous croyez plus au destin",
+                "or": "OU",
+                "text2": "aux choix que nous faisons ?"
+            },
+            {
+                "text": "Aimer quelqu'un qui ne vous aime pas",
+                "or": "OU",
+                "text2": "être aimé par quelqu'un que vous ne pouvez pas aimer ?"
+            },
+            {
+                "text": "Vous donneriez tout pour un rêve",
+                "or": "OU",
+                "text2": "vous en passeriez pour quelqu'un d'important ?"
+            },
+            {
+                "text": "Vivre mille vies en rêves",
+                "or": "OU",
+                "text2": "une vie intense et réelle ?"
+            },
+            {
+                "text": "Vous préférez perdre la mémoire",
+                "or": "OU",
+                "text2": "vous souvenir de tout sans pouvoir avancer ?"
+            },
+            {
+                "text": "Il est plus cruel une absence",
+                "or": "OU",
+                "text2": "une présence qui ne ressent plus rien ?"
+            },
+            {
+                "text": "Vous vivez en attendant le bon moment",
+                "or": "OU",
+                "text2": "croyez que le bon moment est celui que l'on crée ?"
+            },
+            {
+                "text": "Être toujours sincère et blesser",
+                "or": "OU",
+                "text2": "mentir pour protéger ?"
+            },
+            {
+                "text": "Vous donneriez une seconde chance à quelqu'un qui vous a brisé",
+                "or": "OU",
+                "text2": "croyez que le passé doit rester le passé ?"
+            },
+            {
+                "text": "Vous préfériez ne jamais avoir rencontré quelqu'un qui vous a marqué",
+                "or": "OU",
+                "text2": "revivre tout même en sachant que cela aurait une fin ?"
+            },
+            {
+                "text": "Vous croyez plus en ce que vous voyez",
+                "or": "OU",
+                "text2": "en ce que vous ressentez ?"
+            },
+            {
+                "text": "Il est plus facile de fuir que d'affronter",
+                "or": "OU",
+                "text2": "affronter en sachant que ça va faire mal ?"
+            },
+            {
+                "text": "Avoir tout mais se sentir vide",
+                "or": "OU",
+                "text2": "avoir peu mais se sentir en paix ?"
+            },
+            {
+                "text": "Vous changeriez votre passé",
+                "or": "OU",
+                "text2": "acceptez qu'il ait façonné qui vous êtes ?"
+            },
+            {
+                "text": "Faire confiance aveuglément",
+                "or": "OU",
+                "text2": "douter de tout ?"
+            },
+            {
+                "text": "Attendre que quelqu'un change",
+                "or": "OU",
+                "text2": "aller de l'avant avec la douleur ?"
+            },
+            {
+                "text": "Vous vous donnez facilement",
+                "or": "OU",
+                "text2": "gardez tout pour peur de vous perdre ?"
+            },
+            {
+                "text": "Celui qui ressent trop est plus fort",
+                "or": "OU",
+                "text2": "celui qui ne ressent rien ?"
+            },
+            {
+                "text": "Vivre sous contrôle",
+                "or": "OU",
+                "text2": "prendre des risques et perdre l'équilibre ?"
+            },
+            {
+                "text": "Vous croyez que l'amour est un choix",
+                "or": "OU",
+                "text2": "qu'il arrive simplement ?"
+            },
+            {
+                "text": "Vous préférez être nécessaire",
+                "or": "OU",
+                "text2": "être désiré ?"
+            },
+            {
+                "text": "Vous vous adapteriez à une vie ordinaire pour la sécurité",
+                "or": "OU",
+                "text2": "affronteriez le chaos pour la liberté ?"
+            },
+            {
+                "text": "Il est plus difficile de commencer",
+                "or": "OU",
+                "text2": "de savoir quand s'arrêter ?"
+            },
+            {
+                "text": "Être courageux, c'est ne pas avoir peur",
+                "or": "OU",
+                "text2": "agir même en ayant peur ?"
+            },
+            {
+                "text": "Vous choisiriez de tout savoir du futur",
+                "or": "OU",
+                "text2": "de découvrir les choses au bon moment ?"
+            },
+            {
+                "text": "Perdre quelqu'un pour la vie",
+                "or": "OU",
+                "text2": "avoir cette personne près mais distante ?"
+            },
+            {
+                "text": "Vous préférez lutter pour quelque chose d'incertain",
+                "or": "OU",
+                "text2": "rester immobile et ne jamais savoir ce qui aurait pu être ?"
+            },
+            {
+                "text": "Avoir une carte cadeau illimitée pour votre restaurant préféré",
+                "or": "OU",
+                "text2": "Avoir une carte cadeau illimitée pour votre magasin préféré"
+            },
+            {
+                "text": "Ne pas savoir ce que vous ferez demain pendant les 10 prochaines années",
+                "or": "OU",
+                "text2": "Savoir exactement ce que vous ferez chaque jour pendant les 10 prochaines années"
+            },
+            {
+                "text": "Ne plus jamais voir votre meilleur ami",
+                "or": "OU",
+                "text2": "Ne plus jamais pouvoir parler à votre meilleur ami"
+            },
+            {
+                "text": "Être riche",
+                "or": "OU",
+                "text2": "Être célèbre"
+            },
+            {
+                "text": "Avoir le corps couvert de tatouages du cou aux pieds",
+                "or": "OU",
+                "text2": "Avoir un grand tatouage sur le visage"
+            },
+            {
+                "text": "Se laver les mains toutes les cinq minutes",
+                "or": "OU",
+                "text2": "Ne plus jamais pouvoir se laver les cheveux"
+            },
+            {
+                "text": "Marcher en sautillant (hop) partout",
+                "or": "OU",
+                "text2": "Marcher en gambadant (skip) partout"
+            },
+            {
+                "text": "Avoir un approvisionnement illimité en maquillage et soins de la peau de vos marques préférées",
+                "or": "OU",
+                "text2": "Avoir votre propre maison à 30 ans"
+            },
+            {
+                "text": "Devenir ami avec votre crush célèbre",
+                "or": "OU",
+                "text2": "Sortir avec lui/elle"
+            },
+            {
+                "text": "Ne plus jamais avoir à se déplacer pour aller au travail",
+                "or": "OU",
+                "text2": "Avoir des week-ends de trois jours"
+            },
+            {
+                "text": "Avoir Kim Kardashian comme mère",
+                "or": "OU",
+                "text2": "Avoir Kris Jenner comme mère"
+            },
+            {
+                "text": "Faire un poirier (handstand) après chaque repas",
+                "or": "OU",
+                "text2": "Faire une roue (cartwheel) après chaque repas"
+            },
+            {
+                "text": "Avoir une connexion Internet très lente",
+                "or": "OU",
+                "text2": "Avoir toujours peu de batterie sur son téléphone"
+            },
+            {
+                "text": "N'écouter que 'Baby' de Justin Bieber pour le reste de votre vie",
+                "or": "OU",
+                "text2": "N'écouter que 'Red' de Taylor Swift pour le reste de votre vie"
+            },
+            {
+                "text": "Être un personnage de votre série préférée",
+                "or": "OU",
+                "text2": "Que cette série n'ait jamais existé"
+            },
+            {
+                "text": "Ne plus jamais pouvoir utiliser des moteurs de recherche (comme Google)",
+                "or": "OU",
+                "text2": "Ne plus jamais pouvoir utiliser les réseaux sociaux"
+            },
+            {
+                "text": "Être une célébrité célèbre",
+                "or": "OU",
+                "text2": "Être marié à une célébrité célèbre (et être inconnu)"
+            },
+            {
+                "text": "Vivre dans votre film d'enfance préféré",
+                "or": "OU",
+                "text2": "Vivre dans votre livre d'enfance préféré"
+            },
+            {
+                "text": "Savoir faire un smoky eyes parfait",
+                "or": "OU",
+                "text2": "Savoir faire un contouring parfait"
+            },
+            {
+                "text": "Voyager dans l'espace et découvrir une nouvelle planète",
+                "or": "OU",
+                "text2": "Faire une aventure sous-marine et découvrir un nouveau royaume aquatique"
+            },
+            {
+                "text": "Vivre sur une île tropicale tranquille",
+                "or": "OU",
+                "text2": "Vivre dans une grande ville animée"
+            },
+            {
+                "text": "Devenir célèbre pour chanter",
+                "or": "OU",
+                "text2": "Devenir célèbre pour jouer, danser, être artiste ou influenceur"
+            },
+            {
+                "text": "Changer d'emploi chaque année jusqu'à la retraite",
+                "or": "OU",
+                "text2": "Avoir le même emploi toute sa carrière"
+            },
+            {
+                "text": "Vivre dans une péniche sur un canal",
+                "or": "OU",
+                "text2": "Vivre dans un camping-car (RV)"
+            },
+            {
+                "text": "Faire des traitements capillaires professionnels pour toujours",
+                "or": "OU",
+                "text2": "Faire les ongles professionnellement pour toujours"
+            },
+            {
+                "text": "Être un athlète olympique",
+                "or": "OU",
+                "text2": "Être un scientifique célèbre pour avoir guéri une maladie"
+            },
+            {
+                "text": "Dépenser votre argent en voyageant autour du monde avec peu de biens personnels",
+                "or": "OU",
+                "text2": "Avoir une maison incroyable mais ne jamais quitter votre ville natale"
+            },
+            {
+                "text": "Tu préférerais toujours partir en vacances à la plage",
+                "or": "OU",
+                "text2": "toujours partir en vacances en ville ?"
+            },
+            {
+                "text": "Avoir la garde-robe de Dolly Parton",
+                "or": "OU",
+                "text2": "avoir la garde-robe de Billie Eilish ?"
+            },
+            {
+                "text": "Porter uniquement du noir tous les jours pour toujours",
+                "or": "OU",
+                "text2": "mélanger toutes les couleurs de l’arc-en-ciel dans tes vêtements tous les jours ?"
+            },
+            {
+                "text": "Habiter près du travail ou de l'université",
+                "or": "OU",
+                "text2": "habiter loin mais avoir un chauffeur privé ?"
+            },
+            {
+                "text": "Manger uniquement des plats épicés pour le reste de ta vie",
+                "or": "OU",
+                "text2": "ne plus jamais manger de nourriture épicée ?"
+            },
+            {
+                "text": "Écrire ton propre livre de recettes",
+                "or": "OU",
+                "text2": "écrire ton propre roman ?"
+            },
+            {
+                "text": "Avoir des étés toujours très chauds et des hivers glacials",
+                "or": "OU",
+                "text2": "avoir des étés imprévisibles et des hivers modérés ?"
+            },
+            {
+                "text": "Vivre dans une escape room",
+                "or": "OU",
+                "text2": "vivre dans un jeu de Cluedo ?"
+            },
+            {
+                "text": "Ne plus jamais sentir l’odeur de ta bougie préférée",
+                "or": "OU",
+                "text2": "ne plus jamais goûter des biscuits tout juste sortis du four ?"
+            },
+            {
+                "text": "Pouvoir parler aux animaux",
+                "or": "OU",
+                "text2": "parler toutes les langues du monde ?"
+            },
+            {
+                "text": "Faire un road trip aux États-Unis",
+                "or": "OU",
+                "text2": "faire un road trip en Australie ?"
+            },
+            {
+                "text": "Vivre dans l’univers du Seigneur des Anneaux",
+                "or": "OU",
+                "text2": "vivre dans l’univers de Star Wars ?"
+            },
+            {
+                "text": "Être toujours en retard d'une heure pour tout",
+                "or": "OU",
+                "text2": "être toujours en avance d'une heure pour tout ?"
+            },
+            {
+                "text": "Être le manager de la plus grande équipe de foot du monde",
+                "or": "OU",
+                "text2": "être le manager du meilleur groupe de musique du monde ?"
+            },
+            {
+                "text": "Ne plus jamais écouter ta chanson préférée mais être ami avec l’artiste",
+                "or": "OU",
+                "text2": "avoir toujours une place au premier rang de ses concerts, mais il/elle ne te connaît pas ?"
+            },
+            {
+                "text": "Avoir tous les appareils de cuisine en noir",
+                "or": "OU",
+                "text2": "avoir tous les appareils de cuisine en rose ?"
+            },
+            {
+                "text": "Être connu pour tes bons cadeaux",
+                "or": "OU",
+                "text2": "être connu pour tes bons conseils ?"
+            },
+            {
+                "text": "Être reconnu pour ton bon goût en cinéma",
+                "or": "OU",
+                "text2": "être reconnu pour ton bon goût en art ?"
+            },
+            {
+                "text": "Pouvoir seulement aimer des posts sur Instagram, mais ne pas recevoir de likes",
+                "or": "OU",
+                "text2": "recevoir des likes, mais ne pouvoir aimer aucun post ?"
+            },
+            {
+                "text": "Être un Kardashian",
+                "or": "OU",
+                "text2": "être un Hilton ?"
+            },
+            {
+                "text": "Être Kourtney, Kim, Khloé, ou Kendall",
+                "or": "OU",
+                "text2": "être Kylie ?"
+            },
+            {
+                "text": "Vivre dans un penthouse de luxe",
+                "or": "OU",
+                "text2": "vivre dans un immense manoir ?"
+            },
+            {
+                "text": "Être mannequin",
+                "or": "OU",
+                "text2": "être photographe ?"
+            },
+            {
+                "text": "Être un(e) caricaturiste incroyable",
+                "or": "OU",
+                "text2": "être un(e) portraitiste incroyable ?"
+            },
+            {
+                "text": "Ne plus jamais partir en vacances,",
+                "or": "OU",
+                "text2": "ne jamais rencontrer l’amour de ta vie ?"
+            },
+            {
+                "text": "Avoir seulement une paire de chaussures,",
+                "or": "OU",
+                "text2": "avoir seulement un manteau ?"
+            },
+            {
+                "text": "Manger uniquement du yaourt,",
+                "or": "OU",
+                "text2": "manger uniquement du beurre de cacahuète ?"
+            },
+            {
+                "text": "Être suivi par un chat toute la journée,",
+                "or": "OU",
+                "text2": "être suivi par un chien toute la journée ?"
+            },
+            {
+                "text": "Vivre avec ton meilleur ami,",
+                "or": "OU",
+                "text2": "vivre avec ton/ta partenaire ?"
+            },
+            {
+                "text": "Vivre uniquement de Cheese Strings,",
+                "or": "OU",
+                "text2": "vivre uniquement de Babybels ?"
+            },
+            {
+                "text": "Faire tes courses uniquement chez Lidl,",
+                "or": "OU",
+                "text2": "faire tes courses uniquement chez Aldi ?"
+            },
+            {
+                "text": "Ne plus jamais manger de dîner de Noël mais passer Noël en famille,",
+                "or": "OU",
+                "text2": "avoir le meilleur dîner de Noël, mais le passer seul ?"
+            },
+            {
+                "text": "Abandonner les bains en baignoire mais avoir une douche puissante,",
+                "or": "OU",
+                "text2": "pouvoir prendre des bains en baignoire, mais avoir une douche faible ?"
+            },
+            {
+                "text": "Raser tes sourcils,",
+                "or": "OU",
+                "text2": "raser la moitié de tes cheveux ?"
+            },
+            {
+                "text": "Manger un insecte,",
+                "or": "OU",
+                "text2": "manger un chocolat couvert de terre ?"
+            },
+            {
+                "text": "Transpirer du sirop d’érable,",
+                "or": "OU",
+                "text2": "pleurer de la gelée de fraise ?"
+            },
+            {
+                "text": "Porter tous les jours des bottes Ugg roses,",
+                "or": "OU",
+                "text2": "des Crocs roses ?"
+            },
+            {
+                "text": "Si tu vivais dans un film Disney, tu préférerais vivre sous la mer comme dans ‘La Petite Sirène’,",
+                "or": "OU",
+                "text2": "dans le monde d’Aladdin ?"
+            },
+            {
+                "text": "Préférerais avoir des sourcils qui ne cessent jamais de pousser,",
+                "or": "OU",
+                "text2": "des poils sur les doigts qui poussent sans arrêt ?"
+            },
+            {
+                "text": "Préférerais que tous tes rêves soient diffusés en direct sur Snapchat,",
+                "or": "OU",
+                "text2": "que tous tes moments les plus gênants deviennent viraux sur TikTok ?"
+            },
+            {
+                "text": "Préférerais mâcher la bouche ouverte pour toujours,",
+                "or": "OU",
+                "text2": "mettre toujours tes appels en haut-parleur dans les transports publics ?"
+            },
+            {
+                "text": "Préférerais devoir dormir en talons aiguilles,",
+                "or": "OU",
+                "text2": "porter des pantoufles partout où tu vas ?"
+            },
+            {
+                "text": "Préférerais devoir porter une robe de mariée tous les jours,",
+                "or": "OU",
+                "text2": "porter un bikini tous les jours ?"
+            },
+            {
+                "text": "Si tu devais participer à une émission de télé-réalité, tu préférerais ‘Je suis une célébrité’,",
+                "or": "OU",
+                "text2": "‘SAS: Qui ose gagne’ ?"
+            },
+            {
+                "text": "Préférerais porter un sweat tous les jours,",
+                "or": "OU",
+                "text2": "ne plus jamais pouvoir porter de sweat de ta vie ?"
+            },
+            {
+                "text": "Préférerais envoyer un message sexy par erreur à un membre de ta famille,",
+                "or": "OU",
+                "text2": "à ton patron ?"
+            },
+            {
+                "text": "Préférerais avoir des doigts en forme de carottes,",
+                "or": "OU",
+                "text2": "des pieds en forme d’aubergines ?"
+            },
+            {
+                "text": "Préférerais boucher les toilettes lors de ton premier jour de travail,",
+                "or": "OU",
+                "text2": "lors de ton premier rendez-vous ?"
+            },
+            {
+                "text": "Préférerais que des films d’horreur passent en boucle chaque fois que tu fermes les yeux,",
+                "or": "OU",
+                "text2": "avoir la chanson ‘Macarena’ coincée dans la tête chaque fois que tu es réveillé ?"
+            },
+            {
+                "text": "Préférerais chanter ‘Bootylicious’ à chaque nouvelle rencontre,",
+                "or": "OU",
+                "text2": "danser sur place chaque fois que tu parles en réunion ?"
+            },
+            {
+                "text": "Préférerais que tous tes sous-vêtements soient légèrement irritants,",
+                "or": "OU",
+                "text2": "que tous tes maillots de bain soient un peu trop petits ?"
+            },
+            {
+                "text": "Préférerais vivre dans une maison entièrement tapissée de fleurs,",
+                "or": "OU",
+                "text2": "avec des murs peints en couleurs très vives ?"
+            },
+            {
+                "text": "Préférerais avoir des gants de four comme bras,",
+                "or": "OU",
+                "text2": "des poteaux d’éclairage comme jambes ?"
+            },
+            {
+                "text": "Préférerais ne pouvoir te déplacer qu’en rollers,",
+                "or": "OU",
+                "text2": "qu’en skis ?"
+            },
+            {
+                "text": "Préférerais vivre dans un monde où il pleut des marshmallows,",
+                "or": "OU",
+                "text2": "où il neige de la barbe à papa ?"
+            },
+            {
+                "text": "Préférerais faire un tatouage sur le visage choisi par toi-même,",
+                "or": "OU",
+                "text2": "un petit tatouage sur la poitrine choisi par quelqu’un d’autre ?"
+            },
+            {
+                "text": "Préférerais avoir une coupe mulet,",
+                "or": "OU",
+                "text2": "une queue de cheval pour toujours ?"
+            },
+            {
+                "text": "Préférerais ne plus jamais utiliser de shampoing,",
+                "or": "OU",
+                "text2": "ne plus jamais utiliser de dentifrice ?"
+            },
+            {
+                "text": "Préférerais devoir toujours parler en rimes,",
+                "or": "OU",
+                "text2": "toujours parler en énigmes ?"
+            },
+            {
+                "text": "Préférerais sauter à cloche-pied tout le temps,",
+                "or": "OU",
+                "text2": "marcher toujours accroupi ?"
+            },
+            {
+                "text": "Préférerais manger avec des baguettes toute ta vie,",
+                "or": "OU",
+                "text2": "ne plus jamais pouvoir utiliser de couteau ?"
+            },
+            {
+                "text": "Préférerais entendre un rire énervant toute la journée,",
+                "or": "OU",
+                "text2": "être chatouillé pendant une heure ?"
+            },
+            {
+                "text": "Préférerais porter des vêtements qui changent tout le temps,",
+                "or": "OU",
+                "text2": "avoir des cheveux qui changent tout le temps ?"
+            },
+            {
+                "text": "Préférerais te déguiser en supermarché Aldi pour Halloween,",
+                "or": "OU",
+                "text2": "en supermarché Lidl ?"
+            },
+            {
+                "text": "Préférerais être la personne la plus drôle du monde,",
+                "or": "OU",
+                "text2": "la plus belle ?"
+            },
+            {
+                "text": "Préférerais faire pipi chaque fois que tu ris,",
+                "or": "OU",
+                "text2": "avoir plein de morve chaque fois que tu ris ?"
+            },
+            {
+                "text": "Préférerais faire un peu pipi chaque fois que tu parles,",
+                "or": "OU",
+                "text2": "laisser la porte des toilettes ouverte à chaque fois que tu y vas ?"
+            },
+            {
+                "text": "Préférerais porter toujours des vêtements trop larges,",
+                "or": "OU",
+                "text2": "toujours des vêtements trop serrés ?"
+            },
+            {
+                "text": "Préférerais manger de la pizza tous les jours pendant un an,",
+                "or": "OU",
+                "text2": "ne plus jamais pouvoir manger de pizza ?"
+            },
+            {
+                "text": "Préférerais être poursuivi par une poule géante,",
+                "or": "OU",
+                "text2": "par 20 poules de taille normale ?"
+            },
+            {
+                "text": "Préférerais avoir des olives à la place des yeux,",
+                "or": "OU",
+                "text2": "un nez en forme de pomme de terre ?"
+            },
+            {
+                "text": "Préférerais vomir des paillettes,",
+                "or": "OU",
+                "text2": "pleurer de la sauce piquante ?"
+            },
+            {
+                "text": "Préférerais avoir le hoquet pendant 10 minutes chaque fois que tu ris,",
+                "or": "OU",
+                "text2": "ne plus jamais rire ?"
+            },
+            {
+                "text": "Préférerais avoir la pire gueule de bois de ta vie mais la nuit la plus drôle de toutes,",
+                "or": "OU",
+                "text2": "ne plus jamais avoir la gueule de bois, mais ne plus jamais avoir une nuit amusante ?"
+            },
+            {
+                "text": "Préférerais manger un sandwich au sable,",
+                "or": "OU",
+                "text2": "boire un verre de boue ?"
+            },
+            {
+                "text": "Préférerais être la grande cuillère,",
+                "or": "OU",
+                "text2": "la petite cuillère ?"
+            },
+            {
+                "text": "Préférerais faire l’amour le matin,",
+                "or": "OU",
+                "text2": "faire l’amour tard le soir ?"
+            },
+            {
+                "text": "Préférerais recevoir des bisous sur la joue,",
+                "or": "OU",
+                "text2": "des bisous sur le front ?"
+            },
+            {
+                "text": "Préférerais faire l’amour dans une voiture,",
+                "or": "OU",
+                "text2": "sous la douche ?"
+            },
+            {
+                "text": "Préférerais plus de jeux de rôle,",
+                "or": "OU",
+                "text2": "plus de préliminaires ?"
+            },
+            {
+                "text": "Préférerais te marier, avoir une maison et un enfant,",
+                "or": "OU",
+                "text2": "ne jamais avoir tout ça, mais voyager dans le monde entier ensemble ?"
+            },
+            {
+                "text": "Préférerais une playlist sexuelle avec de la musique classique,",
+                "or": "OU",
+                "text2": "avec du heavy metal ?"
+            },
+            {
+                "text": "Préférerais ne plus jamais porter de sous-vêtements,",
+                "or": "OU",
+                "text2": "ne plus jamais porter de chaussettes ?"
+            },
+            {
+                "text": "Préférerais ne jamais te marier, mais avoir la maison de tes rêves,",
+                "or": "OU",
+                "text2": "te marier, mais ne jamais vivre dans la maison de tes rêves ?"
+            },
+
+            {
+                "text": "Préférerais-tu connaître la date de ta mort",
+                "or": "OU",
+                "text2": "ou la cause de ta mort ?"
+            },
+            {
+                "text": "Préférerais-tu recevoir un cadeau attentionné",
+                "or": "OU",
+                "text2": "un cadeau coûteux de ton partenaire ?"
+            },
+            {
+                "text": "Préférerais-tu ne recevoir que des messages de 'bonjour'",
+                "or": "OU",
+                "text2": "ou seulement des messages de 'bonne nuit' ?"
+            },
+            {
+                "text": "Préférerais-tu rendre ton partenaire heureux avec un petit mensonge blanc",
+                "or": "OU",
+                "text2": "ou dire la vérité de manière directe ?"
+            },
+            {
+                "text": "Préférerais-tu avoir plus d'argent et moins de temps de qualité ensemble",
+                "or": "OU",
+                "text2": "ou moins d'argent et plus de temps de qualité ensemble ?"
+            },
+            {
+                "text": "Préférerais-tu être plus épanoui personnellement",
+                "or": "OU",
+                "text2": "ou plus épanoui professionnellement ?"
+            },
+            {
+                "text": "Préférerais-tu maintenir une relation monogame",
+                "or": "OU",
+                "text2": "ou expérimenter le polyamour ?"
+            },
+            {
+                "text": "Préférerais-tu participer à Love Island",
+                "or": "OU",
+                "text2": "ou à Love is Blind ?"
+            },
+            {
+                "text": "Préférerais-tu faire l’amour uniquement au lit pour le reste de ta vie",
+                "or": "OU",
+                "text2": "ou ne plus jamais pouvoir faire l’amour au lit ?"
+            },
+            {
+                "text": "Préférerais-tu rencontrer ton âme sœur sans pouvoir vivre avec elle",
+                "or": "OU",
+                "text2": "ou être avec quelqu’un de normal avec qui tu peux vivre ?"
+            },
+            {
+                "text": "Préférerais-tu cuisiner tous les soirs et que ton partenaire fasse la vaisselle",
+                "or": "OU",
+                "text2": "ou l’inverse ?"
+            },
+            {
+                "text": "Préférerais-tu dormir dans des lits séparés tous les soirs mais avoir des relations sexuelles",
+                "or": "OU",
+                "text2": "ou dormir dans le même lit mais ne plus jamais faire l’amour ?"
+            },
+            {
+                "text": "Préférerais-tu avoir le mariage de tes rêves",
+                "or": "OU",
+                "text2": "ou la lune de miel de tes rêves ?"
+            },
+            {
+                "text": "Préférerais-tu que quelqu’un gâche ton mariage, mais que tu te maries quand même",
+                "or": "OU",
+                "text2": "ou ne jamais pouvoir te marier ?"
+            },
+            {
+                "text": "Préférerais-tu ne plus jamais pouvoir parler à l’autre mais continuer à vivre ensemble",
+                "or": "OU",
+                "text2": "ou ne plus jamais vous voir ?"
+            },
+            {
+                "text": "Préférerais-tu avoir une entreprise à succès ensemble mais finir séparés",
+                "or": "OU",
+                "text2": "ou vivre avec moins qu’un salaire minimum mais rester ensemble ?"
+            },
+            {
+                "text": "Préférerais-tu être bloqué sur une île déserte ensemble",
+                "or": "OU",
+                "text2": "ou dans une ville animée mais séparés ?"
+            },
+            {
+                "text": "Préférerais-tu avoir un grand mariage",
+                "or": "OU",
+                "text2": "ou fuir et te marier en secret ?"
+            },
+            {
+                "text": "Préférerais-tu passer une journée pluvieuse enlacés à la maison",
+                "or": "OU",
+                "text2": "ou explorer la ville ensemble ?"
+            },
+            {
+                "text": "Préférerais-tu partager un loisir",
+                "or": "OU",
+                "text2": "ou avoir des loisirs séparés pour vous les enseigner ?"
+            },
+            {
+                "text": "Préférerais-tu perdre tout l’argent gagné cette année",
+                "or": "OU",
+                "text2": "ou perdre tous les souvenirs créés cette année ?"
+            },
+            {
+                "text": "Préférerais-tu ne pas avoir de goût",
+                "or": "OU",
+                "text2": "ou ne pas avoir d’odorat ?"
+            },
+            {
+                "text": "Préférerais-tu toujours tomber sur un feu rouge pour le reste de ta vie",
+                "or": "OU",
+                "text2": "ou avoir une connexion internet lente en permanence ?"
+            },
+            {
+                "text": "Préférerais-tu gagner 25 000 R$",
+                "or": "OU",
+                "text2": "ou que ton meilleur ami gagne 250 000 R$ ?"
+            },
+            {
+                "text": "Préférerais-tu te réveiller en sous-vêtements au travail",
+                "or": "OU",
+                "text2": "ou te réveiller nu au milieu de la forêt, loin de chez toi ?"
+            },
+            {
+                "text": "Préférerais-tu voir l’historique de recherches de ta mère",
+                "or": "OU",
+                "text2": "ou celui de ton père ?"
+            },
+            {
+                "text": "Préférerais-tu trouver un cadavre",
+                "or": "OU",
+                "text2": "ou être témoin d’un meurtre ?"
+            },
+            {
+                "text": "Préférerais-tu que des bulles de pensée apparaissent au-dessus de ta tête pour montrer ce que tu penses",
+                "or": "OU",
+                "text2": "ou que ton journal intime d’adolescent soit publié sur internet ?"
+            },
+            {
+                "text": "Préférerais-tu avoir 4 ans pour toujours",
+                "or": "OU",
+                "text2": "ou avoir 90 ans pour toujours ?"
+            },
+            {
+                "text": "Préférerais-tu rougir à chaque fois que quelqu’un dit ‘bonjour’",
+                "or": "OU",
+                "text2": "ou te mettre très en colère à chaque fois qu’on te dit ‘au revoir’ ?"
+            },
+            {
+                "text": "Préférerais-tu être célèbre dans les livres d’histoire",
+                "or": "OU",
+                "text2": "ou être oublié après ta mort ?"
+            },
+            {
+                "text": "Préférerais-tu être la personne la plus forte du monde",
+                "or": "OU",
+                "text2": "ou la personne la plus intelligente du monde ?"
+            },
+            {
+                "text": "Préférerais-tu avoir une imagination très vive",
+                "or": "OU",
+                "text2": "ou une mémoire photographique ?"
+            },
+            {
+                "text": "Préférerais-tu vivre le reste de ta vie dans la nature sauvage",
+                "or": "OU",
+                "text2": "ou en prison ?"
+            },
+            {
+                "text": "Préférerais-tu vivre dans un pays où le gouvernement fait toujours ce qu’il faut",
+                "or": "OU",
+                "text2": "ou vivre dans un pays où tu es le dirigeant ?"
+            },
+            {
+                "text": "Préférerais-tu vivre dans un monde sans crimes",
+                "or": "OU",
+                "text2": "ou dans un monde sans intimité ?"
+            },
+            {
+                "text": "Préférerais-tu vivre 100 ans de plus avec un corps en parfaite santé",
+                "or": "OU",
+                "text2": "ou vieillir normalement ?"
+            },
+            {
+                "text": "Préférerais-tu renoncer à toute la technologie (téléphones, ordinateurs, etc.)",
+                "or": "OU",
+                "text2": "ou renoncer à tous les films, séries et livres ?"
+            },
+            {
+                "text": "Préférerais-tu vivre dans un futur où tout le monde prend tout trop au sérieux",
+                "or": "OU",
+                "text2": "ou dans un futur où personne ne prend rien au sérieux ?"
+            },
+            {
+                "text": "Préférerais-tu être le centre de l’attention",
+                "or": "OU",
+                "text2": "ou passer inaperçu ?"
+            },
+            {
+                "text": "Préférerais-tu communiquer par télépathie",
+                "or": "OU",
+                "text2": "ou connaître toutes les langues du monde ?"
+            },
+            {
+                "text": "Préférerais-tu avoir une conversation d’une minute avec ton moi du passé",
+                "or": "OU",
+                "text2": "ou avec ton moi du futur ?"
+            },
+            {
+                "text": "Préférerais-tu échanger de corps avec ton ex",
+                "or": "OU",
+                "text2": "échanger de corps avec ta grand-mère ?"
+            },
+            {
+                "text": "Préférerais-tu ramener un être cher à la vie et qu’il soit malheureux",
+                "or": "OU",
+                "text2": "ou souffrir de la perte mais garder les meilleurs souvenirs ?"
+            },
+            {
+                "text": "Préférerais-tu pleurer de manière incontrôlable quand tu es triste",
+                "or": "OU",
+                "text2": "ou crier de manière incontrôlable ?"
+            },
+            {
+                "text": "Préférerais-tu éradiquer la pauvreté",
+                "or": "OU",
+                "text2": "ou apporter la paix dans le monde ?"
+            },
+            {
+                "text": "Préférerais-tu vivre à Narnia",
+                "or": "OU",
+                "text2": "ou à Westeros ?"
+            },
+            {
+                "text": "Préférerais-tu que ton musicien préféré te fasse un concert privé",
+                "or": "OU",
+                "text2": "ou qu’il dîne avec toi ?"
+            },
+            {
+                "text": "Préférerais-tu rencontrer Barack Obama",
+                "or": "OU",
+                "text2": "ou Albert Einstein ?"
+            },
+            {
+                "text": "Avoir constamment la sensation d’uriner",
+                "or": "OU",
+                "text2": "ou avoir constamment l’impression de tomber d’une falaise ?"
+            },
+            {
+                "text": "Apparaître invisible sur les photos",
+                "or": "OU",
+                "text2": "ou ne pas pouvoir parler à tes amis pendant les soirées ?"
+            },
+            {
+                "text": "Sortir avec quelqu’un de banal qui habite près et qui se lave et se brosse les dents",
+                "or": "OU",
+                "text2": "ou devoir prendre deux bus et un métro pour voir l’amour de ta vie ?"
+            },
+            {
+                "text": "Avoir deux bouches",
+                "or": "OU",
+                "text2": "ou deux anus ?"
+            },
+            {
+                "text": "Vivre dans un monde sans pornographie",
+                "or": "OU",
+                "text2": "ou dans un monde où il y a une purge une fois par an ?"
+            },
+            {
+                "text": "Être un salarié très bien payé mais sans reconnaissance et avec beaucoup d’humiliation",
+                "or": "OU",
+                "text2": "ou un professionnel bénévole qui sauve la planète d’une catastrophe mondiale ?"
+            },
+            {
+                "text": "Pleurer à chaque orgasme",
+                "or": "OU",
+                "text2": "ou avoir un orgasme à chaque fois que tu pleures ?"
+            },
+            {
+                "text": "Être malchanceux sans que personne ne le sache",
+                "or": "OU",
+                "text2": "ou que tout le monde pense que tu es malchanceux, même si ce n’est pas vrai ?"
+            },
+            {
+                "text": "Que ta mère écrive des histoires érotiques en te mettant comme personnage principal",
+                "or": "OU",
+                "text2": "ou que tes beaux-parents aient un tableau de toi dans leur salle à manger ?"
+            },
+            {
+                "text": "Être l’esclave d’un milliardaire sympa",
+                "or": "OU",
+                "text2": "ou être partenaire de quelqu’un de vraiment horrible ?"
+            },
+            {
+                "text": "Qu’un de tes beaux-parents te déteste profondément",
+                "or": "OU",
+                "text2": "ou qu’un de tes beaux-parents ressente une forte attirance sexuelle pour toi ?"
+            },
+            {
+                "text": "Te réincarner comme l’enfant de ton ex",
+                "or": "OU",
+                "text2": "ou être l’animal de compagnie le plus heureux du monde ?"
+            },
+            {
+                "text": "Ne pas pouvoir plier les coudes",
+                "or": "OU",
+                "text2": "ou devoir saluer les gens en remuant les hanches tout en envoyant des bisous ?"
+            },
+            {
+                "text": "Ne plus jamais prendre de douche",
+                "or": "OU",
+                "text2": "ou ne plus jamais te masturber ?"
+            },
+            {
+                "text": "Faire pipi par la bouche",
+                "or": "OU",
+                "text2": "ou manger par l’anus ?"
+            },
+            {
+                "text": "Préférerais-tu que tout le monde sache que tu es bête",
+                "or": "OU",
+                "text2": "ou que tu es nul au lit ?"
+            },
+            {
+                "text": "Savoir comment tu vas mourir",
+                "or": "OU",
+                "text2": "ou savoir en quelle année tu vas mourir ?"
+            },
+            {
+                "text": "Toujours entendre les problèmes des autres (sans être psy)",
+                "or": "OU",
+                "text2": "ou toujours recevoir la pire fellation possible ?"
+            },
+            {
+                "text": "Être obligé de manger ce que tu détestes le plus",
+                "or": "OU",
+                "text2": "ou avoir les yeux toujours collés et les narines pleines de poils impossibles à enlever ?"
+            },
+            {
+                "text": "Trouver plusieurs kilos de drogue dans ta valise à l’aéroport",
+                "or": "OU",
+                "text2": "ou que la police trouve un cadavre dans ton coffre ?"
+            },
+            {
+                "text": "Que ta mère te promène dans la rue en laisse",
+                "or": "OU",
+                "text2": "ou qu’elle te pousse dans une poussette ?"
+            },
+            {
+                "text": "Voir tes amis tout le temps mais avoir un salaire horrible",
+                "or": "OU",
+                "text2": "ou avoir un excellent salaire mais ne les voir qu’une fois par an ?"
+            },
+            {
+                "text": "Vivre dans une société contrôlée par des caméras et des puces",
+                "or": "OU",
+                "text2": "ou dans une société d’anarchie totale ?"
+            },
+            {
+                "text": "Te réveiller dans ton placard sans savoir comment tu y es arrivé",
+                "or": "OU",
+                "text2": "ou trouver quelqu’un endormi dans ta chambre ?"
+            },
+            {
+                "text": "Découvrir que ton meilleur ami est imaginaire",
+                "or": "OU",
+                "text2": "ou que ton surnom est ‘le gros looser’ ?"
+            },
+            {
+                "text": "Ne jamais pouvoir répondre dans une dispute",
+                "or": "OU",
+                "text2": "ou qu’un drone filme et publie chaque dispute en ligne ?"
+            },
+            {
+                "text": "Ne pouvoir te déplacer qu’à pied",
+                "or": "OU",
+                "text2": "ou te réveiller tous les jours avec des feux d’artifice ?"
+            },
+            {
+                "text": "Commencer à puer une heure après la douche",
+                "or": "OU",
+                "text2": "ou ne pouvoir prendre de douche que devant des caméras en direct pour tout le pays ?"
+            },
+            {
+                "text": "Que ta seule distraction soit une chaîne de téléachat",
+                "or": "OU",
+                "text2": "ou que toutes les chansons diffusées soient celles que tu détestes le plus ?"
+            },
+            {
+                "text": "Toujours choisir la file d’attente la plus lente",
+                "or": "OU",
+                "text2": "ou qu’il y ait toujours une file quand tu veux aller aux toilettes ?"
+            },
+            {
+                "text": "Que ton père ou ta mère et ton/ta partenaire échangent de corps et que tu doives coucher avec un des deux pour inverser",
+                "or": "OU",
+                "text2": "ou que chaque fois que tu fais l’amour avec ton/ta partenaire tu voies le visage de ton père ou de ta mère ?"
+            },
+            {
+                "text": "Toujours faire pipi dans ton pantalon",
+                "or": "OU",
+                "text2": "ou devoir faire une file de notaire à chaque fois que tu veux faire l’amour ?"
+            },
+            {
+                "text": "Aller chez le dentiste une fois par semaine",
+                "or": "OU",
+                "text2": "ou chez le gynécologue/proctologue une fois par mois ?"
+            },
+            {
+                "text": "N’utiliser que des feuilles d’arbres comme papier toilette",
+                "or": "OU",
+                "text2": "ou devoir regarder trois heures d’émissions de potins par jour ?"
+            },
+            {
+                "text": "Être un artiste célèbre accro à la drogue",
+                "or": "OU",
+                "text2": "ou un inconnu avec une santé de fer ?"
+            },
+            {
+                "text": "Préférerais-tu avoir une abeille qui te tourne autour en permanence",
+                "or": "OU",
+                "text2": "ou qu’à chaque fois que tu prends tes clés de maison, elles soient dans l’anus d’un cheval ?"
+            },
+            {
+                "text": "Préférerais-tu repasser tous les examens du lycée",
+                "or": "OU",
+                "text2": "ou devoir porter une couche tous les jours pendant la durée de tes années lycée ?"
+            },
+            {
+                "text": "Préférerais-tu faire l’amour tout le temps sans jamais jouir",
+                "or": "OU",
+                "text2": "ou faire l’amour une fois par mois avec orgasme garanti ?"
+            },
+            {
+                "text": "Préférerais-tu que ton partenaire t’appelle 'mon petit coco' devant tout le monde tout le temps",
+                "or": "OU",
+                "text2": "ou recevoir une piqûre chaque fois que vous vous disputez ?"
+            },
+            {
+                "text": "Préférerais-tu mourir en souffrant énormément mais que ta famille pense que tu es parti en paix",
+                "or": "OU",
+                "text2": "ou mourir en paix mais que ta famille pense que tu as beaucoup souffert ?"
+            },
+            {
+                "text": "Préférerais-tu toujours sentir que tu es observé en te masturbant",
+                "or": "OU",
+                "text2": "ou avoir toujours quelqu’un qui t’observe quand tu vas aux toilettes ?"
+            },
+            {
+                "text": "Préférerais-tu que chaque pet fasse le bruit d’un klaxon de camion",
+                "or": "OU",
+                "text2": "ou que chaque rot ait le cri de Tarzan ?"
+            },
+            {
+                "text": "Préférerais-tu ne manger que de la bouillie d’avoine sans saveur pendant un an",
+                "or": "OU",
+                "text2": "ou te cogner l’orteil contre un coin de mur trois fois par semaine pendant trois mois ?"
+            },
+            {
+                "text": "Préférerais-tu devoir accompagner ton patron aux toilettes et lui dire des phrases motivantes",
+                "or": "OU",
+                "text2": "ou accompagner celui qui retire la couche des lutteurs de sumo après leurs combats ?"
+            },
+            {
+                "text": "Préférerais-tu nettoyer les toilettes d’une prison pendant un an",
+                "or": "OU",
+                "text2": "ou passer trois mois dans un hôpital psychiatrique ?"
+            },
+            {
+                "text": "Préférerais-tu tuer le chiot de John Wick",
+                "or": "OU",
+                "text2": "ou kidnapper la fille de Liam Neeson ?"
+            },
+            {
+                "text": "Préférerais-tu ne marcher qu’en dansant",
+                "or": "OU",
+                "text2": "ou ne parler qu’en chantant ?"
+            },
+            {
+                "text": "Préférerais-tu que tous tes contenus publiés aient zéro vue",
+                "or": "OU",
+                "text2": "ou qu’ils fassent des millions de vues mais qu’un hater connaisse tous tes pires secrets ?"
+            },
+            {
+                "text": "Préférerais-tu ne boire que de l’eau toute ta vie",
+                "or": "OU",
+                "text2": "ou pouvoir boire ce que tu veux mais avec une goutte d’urine étrangère dans chaque boisson ?"
+            },
+            {
+                "text": "Préférerais-tu ne plus jamais tomber amoureux",
+                "or": "OU",
+                "text2": "ou ne plus jamais sentir le goût des aliments ?"
+            },
+            {
+                "text": "Préférerais-tu t’appeler Adolf Hitler",
+                "or": "OU",
+                "text2": "ou avoir le visage d’Adolf Hitler ?"
+            },
+            {
+                "text": "Préférerais-tu vivre dans un monde rempli de platistes",
+                "or": "OU",
+                "text2": "ou dans un monde où tout le monde mâche la bouche ouverte ?"
+            },
+            {
+                "text": "Préférerais-tu entendre tes pensées avec la voix de Galvão Bueno",
+                "or": "OU",
+                "text2": "ou avoir la voix de Mickey ?"
+            },
+            {
+                "text": "Préférerais-tu rater le dernier penalty en finale de Coupe du Monde",
+                "or": "OU",
+                "text2": "ou travailler à dire aux enfants que le Père Noël n’existe pas ?"
+            },
+            {
+                "text": "Préférerais-tu manger cinq cuillères à soupe de farofa sèche par jour sans rien boire",
+                "or": "OU",
+                "text2": "ou plier parfaitement dix draps-housses chaque jour ?"
+            }
+        ]
+    };
+
+    let questions = [];
+    let currentQuestion = 0;
+
+    // Função para embaralhar um array (Fisher-Yates Shuffle)
+    function shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array;
+    }
+
+    // Função para carregar as perguntas
+    function loadQuestions() {
+        questions = shuffleArray([...gameData.questions]);
+        nextQuestion();
+    }
+
+    // Função para exibir a próxima pergunta
+    function nextQuestion() {
+        if (questions.length === 0) {
+            document.getElementById("questionPerguntasSemRespostas").textContent = "Carregando perguntas...";
+            return;
+        }
+
+        if (currentQuestion < questions.length) {
+            const question = questions[currentQuestion];
+            const fullText = `${question.text}<br>${question.or}<br>${question.text2}`;
+            document.getElementById("questionPerguntasSemRespostas").innerHTML = fullText;
+            document.getElementById("result").textContent = "";
+            currentQuestion++;
+        } else {
+            document.getElementById("questionPerguntasSemRespostas").textContent = "Fim do Jogo! Espero que estejam se divertindo! Quer jogar novamente?";
+            document.getElementById("result").textContent = "";
+            currentQuestion = 0;
+            questions = shuffleArray(questions);
+        }
+    }
+
+    // Pop-up functions
+    function openPopup() {
+        document.getElementById("popup").style.display = "block";
+    }
+
+    function closePopup() {
+        document.getElementById("popup").style.display = "none";
+    }
+
+    // Fechar o pop-up ao clicar fora dele
+    window.onclick = function (event) {
+        let popup = document.getElementById("popup");
+        if (event.target === popup) {
+            popup.style.display = "none";
+        }
+    };
+
+    window.onload = loadQuestions;
+
+</script>

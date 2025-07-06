@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Malchance ou Chance</title>
+    <link rel="stylesheet" type="text/css" href="../../stylesCards.css" />
+</head>
+
+<body>
+
+<div class="game-container">
+    <!-- Menu -->
+    <nav class="menu">
+        <a href="../menuFr.html" class="menu-title" style="position: relative;">
+            <div class="voltar-container" onclick="window.location.href='../menuFr.html'">
+                &#8678; <!-- Isso é ← -->
+            </div>
+            <img class="logo-bebedeira" src="../images/logo.png" alt="Logo Bebedeira" />
+        </a>
+    </nav>
+</div>
+
+<!-- Conteúdo do jogo -->
+<div>
+    <h1>Malchance ou Chance</h1>
+    <a href="#" onclick="openPopup()">
+        <img class="img-regras" src="../images/regras.png" alt="Règles" />
+    </a>
+    <h4>Règles</h4>
+</div>
+
+<!-- Zone de jeu -->
+<div class="container-randomizador popup-content">
+    <div class="resultado-randomizador" id="resultado-randomizador"></div>
+</div>
+<div class="button-container">
+    <button class="button-randomizador" onclick="sortearNumero()">Tirer un numéro</button>
+</div>
+
+<!-- Pop-up des règles -->
+<div id="popup" class="popup">
+    <div class="popup-content">
+        <div class="popup-header">
+            <h2>Règles du Jeu</h2>
+            <span class="close" onclick="closePopup()">&times;</span>
+        </div>
+        <ul>
+            <li>Chaque joueur doit choisir un numéro entre 1 et 6</li>
+            <li>Ensuite, activez le générateur de numéro</li>
+            <li>Celui qui trouve le bon numéro boit</li>
+            <li>Est-ce de la malchance ou de la chance ?</li>
+            <li><strong>VARIANTE</strong></li>
+            <li>Vous pouvez choisir 2, 3 ou 4 numéros par tour</li>
+            <li>Le risque de tomber juste devient alors plus grand</li>
+            <li>Amusez-vous bien ! 🍻</li>
+        </ul>
+    </div>
+</div>
+
+<!-- Script JS embutido -->
+<script>
+    // Générateur de numéro aléatoire avec effet de roulette
+    function sortearNumero() {
+        const resultado = document.getElementById("resultado-randomizador");
+        let contador = 0;
+        let intervalo = setInterval(() => {
+            const numeroAleatorio = Math.floor(Math.random() * 6) + 1;
+            resultado.innerHTML = `<strong>${numeroAleatorio}</strong>`;
+            contador++;
+            if (contador >= 20) {
+                clearInterval(intervalo);
+            }
+        }, 100);
+    }
+
+    // Ouverture et fermeture du popup
+    function openPopup() {
+        document.getElementById("popup").style.display = "block";
+    }
+
+    function closePopup() {
+        document.getElementById("popup").style.display = "none";
+    }
+
+    // Fermer le popup en cliquant à l'extérieur
+    window.onclick = function (event) {
+        const popup = document.getElementById("popup");
+        if (event.target === popup) {
+            popup.style.display = "none";
+        }
+    };
+</script>
+</body>
+
+</html>

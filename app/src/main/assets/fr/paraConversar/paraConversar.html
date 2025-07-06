@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="../../stylesCards.css">
+    <title>Pour discuter</title>
+
+</head>
+
+<body>
+
+<div class="game-container">
+    <!-- Menu -->
+    <nav class="menu">
+        <a href="../menuFr.html" class="menu-title" style="position: relative;">
+            <div class="voltar-container" onclick="window.location.href='../menuPtBr.html'">
+                &#8678; <!-- Isso é ← -->
+            </div>
+            <img class="logo-bebedeira" src="../images/logo.png" alt="Logo Bebedeira" />
+        </a>
+    </nav>
+
+    <!-- Conteúdo do jogo -->
+    <div>
+        <h1>Pour discuter</h1>
+        <a href="#" onclick="openPopup()">
+            <img class="img-regras" src="../images/regras.png" alt="Règles" />
+        </a>
+        <h4>Règles</h4>
+    </div>
+
+    <div class="card-frase">
+        <p id="questionParaConversar">Chargement des questions...</p>
+    </div>
+
+    <div class="button-container">
+        <button onclick="nextQuestion()">Question suivante</button>
+    </div>
+    <div id="result"></div>
+</div>
+
+<!-- Pop-up -->
+<div id="popup" class="popup">
+    <div class="popup-content">
+        <div class="popup-header">
+            <h2>Règles du jeu</h2>
+            <span class="close" onclick="closePopup()">&times;</span>
+        </div>
+        <ul>
+            <li>Ce jeu peut être joué en groupe ou en couple.</li>
+            <li>Une personne lira une question et l(es) autre(s) y répondront.</li>
+            <li>Après les réponses, une autre personne lit une nouvelle question et le cycle continue.</li>
+            <li><strong>Variante :</strong></li>
+            <li>Si les réponses des participants correspondent, les joueurs ayant répondu la même chose boivent une
+                dose.</li>
+            <li>Dans ce jeu, il n'est pas nécessaire de boire, c'est un jeu plus léger destiné à mieux se connaître
+                avec des questions variées et légères.</li>
+            <li>Amusez-vous bien ! 🍻</li>
+        </ul>
+    </div>
+</div>
+
+
+<script>
+    // Dados do jogo embutidos
+    const gameData = {
+        "questions": [
+            "Si tu pouvais dîner avec n'importe quelle personne, vivante ou morte, qui serait-ce et pourquoi ?",
+            "Quelle est la chose la plus drôle qui te soit jamais arrivée ?",
+            "Si tu pouvais avoir un super pouvoir, lequel serait-ce et comment l'utiliserais-tu ?",
+            "Quel est ton souvenir d'enfance le plus heureux ?",
+            "Si tu pouvais voyager n'importe où dans le monde maintenant, où irais-tu ?",
+            "Quelle est ta plus grande peur et pourquoi ?",
+            "Si tu pouvais changer une chose à propos de toi, qu'est-ce que ce serait ?",
+            "Quel a été le moment le plus embarrassant de ta vie ?",
+            "Si tu gagnais à la loterie, quelles seraient les trois premières choses que tu ferais ?",
+            "Quel est ton film préféré et pourquoi l'aimes-tu autant ?",
+            "Si tu pouvais vivre à n'importe quelle époque de l'histoire, laquelle serait-ce et pourquoi ?",
+            "Quelle est la chose la plus courageuse que tu aies jamais faite ?",
+            "Si tu pouvais apprendre instantanément une compétence, laquelle serait-ce ?",
+            "Quel est ton plus grand regret dans la vie ?",
+            "Si tu pouvais avoir un animal exotique comme animal de compagnie, lequel serait-ce ?",
+            "Quel est ton plat préféré et quel souvenir y associes-tu ?",
+            "Si tu pouvais être célèbre pour quelque chose, que serait-ce ?",
+            "Quelle est la chose la plus étrange que tu aies jamais mangée ?",
+            "Si tu pouvais avoir une conversation avec ton toi plus jeune, que lui dirais-tu ?",
+            "Quel est ton rêve le plus étrange ou récurrent ?",
+            "Si tu devais passer le reste de ta vie sur une île déserte, quels trois objets emmènerais-tu ?",
+            "Quelle est ta blague préférée ?",
+            "Si tu pouvais éliminer une mauvaise habitude que tu as, laquelle serait-ce ?",
+            "Quel a été le cadeau le plus significatif que tu aies reçu ou offert ?",
+            "Si tu pouvais résoudre un problème mondial, lequel serait-ce ?",
+            "Quelle est ta chanson préférée et pourquoi est-elle spéciale pour toi ?",
+            "Si tu pouvais vivre dans n'importe quel univers fictif, lequel serait-ce ?",
+            "Quelle est la chose la plus impressionnante que tu aies jamais vue ?",
+            "Si tu pouvais poser une question à n'importe qui et recevoir une réponse honnête, que demanderais-tu et à qui ?",
+            "Quelle est ta saison préférée et pourquoi ?",
+            "Si tu pouvais avoir un emploi dans n'importe quel domaine, sans te soucier de l'argent ou des qualifications, lequel serait-ce ?",
+            "Quel est ton livre préféré et pourquoi t'a-t-il marqué ?",
+            "Si tu pouvais parler avec n'importe quel animal, lequel serait-ce et de quoi parleriez-vous ?",
+            "Quelle est ta tradition familiale préférée ?",
+            "Si tu pouvais inventer un nouveau jour férié, comment serait-il et comment les gens le célèbreraient-ils ?",
+            "Qui dans ta famille a une personnalité la moins similaire à celle des autres ?",
+            "Parmi toutes les célébrités vivantes aujourd'hui, qui penses-tu qu'on parlera encore dans 500 ans ?",
+            "As-tu déjà eu un voisin ou un colocataire vraiment étrange ou mémorable ?",
+            "Si tu devais choisir un autre prénom, lequel choisirais-tu ?",
+            "Vingt ans, c’est trop jeune pour se marier ?",
+            "Que ferais-tu si tu découvrais que ton fils ou ta fille est victime d'intimidation à l'école ?",
+            "Quelle est la dernière chose que tu as perdue ou que tu pensais avoir perdue ?",
+            "Y aurait-il plus ou moins de divorces si les gens pouvaient lire dans les pensées des autres ?",
+            "Si tu devais être sur une île déserte avec un de tes voisins ou colocataires, lequel choisirais-tu ?",
+            "Quel pays considères-tu comme le plus moderne et avancé du monde ?",
+            "Décris comment tu imagines ta vie dans 10 ans.",
+            "Sans essayer d'abord, penses-tu pouvoir te lécher le coude ?",
+            "Quelle est la meilleure qualité que tu as héritée de ta mère et la meilleure que tu as héritée de ton père ?",
+            "Si tu pouvais remonter le temps et rencontrer ton toi d'il y a 10 ans, quel conseil lui donnerais-tu ?",
+            "À quoi ressemblerait une journée normale si tu étais milliardaire ?",
+            "As-tu déjà choisi d'être honnête alors que cela t'a coûté de l'argent ?",
+            "Lequel de tes parents est le plus sympathique ?",
+            "Si tu pouvais échanger ta vie avec quelqu'un d'autre, qui choisirais-tu ?",
+            "Complète la phrase : Je n'ai jamais été aussi en colère que quand...",
+            "Aimerais-tu partager un repas avec ton clone ?",
+            "Est-il mieux de grandir dans une grande famille ou une petite ?",
+            "Quel compliment as-tu reçu et que tu n'as jamais oublié ?",
+            "Jusqu'à quel âge les jeunes devraient-ils rester chez leurs parents ?",
+            "Si tu pouvais choisir le sexe de ton bébé, le ferais-tu ?",
+            "Quels sont les plus intelligents, les chats ou les chiens ?",
+            "Si tu pouvais être une personne célèbre pour un jour, qui serais-tu et pourquoi ?",
+            "Te souviens-tu d'un moment où tu étais vraiment au bon endroit au bon moment ?",
+            "As-tu déjà été surpris en train de faire quelque chose que tu ne devais pas faire ?",
+            "Comment serait le monde s'il était gouverné par des femmes ?",
+            "Penses-tu avoir une belle écriture ?",
+            "As-tu déjà eu un béguin pour une célébrité ? Qui ?",
+            "Sais-tu quel serait ton nom si tu étais du sexe opposé ?",
+            "Quel est le travail le plus ennuyeux du monde ?",
+            "Préférerais-tu perdre tous tes souvenirs passés ou perdre la capacité de former de nouveaux souvenirs ?",
+            "Les humains sont-ils bons ou mauvais par nature ?",
+            "Cite trois chansons que tu connais par cœur.",
+            "Quand as-tu ressenti la dernière fois une vraie fierté pour un membre de ta famille ?",
+            "Quelle partie de ton corps préfères-tu ?",
+            "Comment te décrirais-tu sur une application de rencontres en seulement trois mots ?",
+            "Quel est ton plus grand souhait pour l'année prochaine ?",
+            "As-tu déjà coupé tes propres cheveux ?",
+            "Aimes-tu parler avec des inconnus ?",
+            "Si tu pouvais changer une chose dans ton corps, qu'est-ce que ce serait ?",
+            "Y avait-il quelque chose que tu voulais avoir enfant mais que tu n'as jamais eu ?",
+            "Quelles sont selon toi les meilleures et les pires choses chez tes parents ?",
+            "Si tu avais l'attention de tout le monde pendant 30 secondes, que dirais-tu ou ferais-tu ?",
+            "Dors-tu sur le côté, sur le ventre ou sur le dos ?",
+            "Quelle matière scolaire a toujours été facile pour toi ?",
+            "Décris une fois où tu as aidé un inconnu.",
+            "Si tu étais un arbre et pouvais être planté n'importe où, où choisirais-tu ?",
+            "Où étais-tu quand tu as entendu parler du 11 septembre pour la première fois ?",
+            "Que dirais-tu que tu as en trop ?",
+            "Y a-t-il un endroit où tu es allé et où tu ne veux jamais retourner ?",
+            "Quel est le cadeau de Saint-Valentin le plus romantique que tu aies jamais reçu ?",
+            "Y aurait-il un avantage à être en prison ?",
+            "Tes parents ont-ils essayé de t'orienter vers une carrière particulière ?",
+            "Quel est le seul facteur constant qui relie tes amis, malgré leurs différences ?",
+            "Avec quelle personne célèbre les gens disent-ils que tu ressembles ?",
+            "Penses-tu que tu agis de plus en plus comme tes parents en vieillissant ?",
+            "Quel est le cadeau le plus significatif que tu aies jamais reçu ?",
+            "Jouerais-tu à la roulette russe avec 80% de chances de survie si tu pouvais être avec la personne la plus riche du monde si tu survivais ?",
+            "Penses-tu qu'internet rend les gens plus ou moins sociables ?",
+            "Quels sites visites-tu plusieurs fois par jour ?",
+            "Avec quel membre de ta famille ressembles-tu le plus ?",
+            "Qu'as-tu appris à l'école qui ne t'a jamais servi dans la vie réelle ?",
+            "Quel était ton jouet préféré dans ton enfance ?",
+            "Envisagerais-tu d'avoir des enfants avec quelqu'un dont tu n'es pas amoureux(se) ?",
+            "Veux-tu que tes organes soient donnés à ta mort ?",
+            "Connais-tu le nom de tous tes arrière-grands-parents ? Et ceux de leurs parents ?",
+            "Quand as-tu été le plus en colère contre tes parents ?",
+            "Quelle est selon toi l'heure la plus productive de la journée ?",
+            "Les femmes ou les hommes sont-ils plus intelligents ?",
+            "Parmi tes amis et collègues, qui penses-tu a eu le plus de succès et qui en a eu le moins ?",
+            "Si tu pouvais passer une journée avec n'importe qui, qui serait-ce ?",
+            "Si tu devais montrer un lieu touristique de ta région à un touriste, où l'emmènerais-tu ?",
+            "Pour quelle cause serais-tu prêt à sacrifier ta vie personnelle ?",
+            "Qu'est-ce que tu fais différemment de la majorité des gens ?",
+
+            "Si tu avais de l'argent pour prendre ta retraite demain, que ferais-tu pour le reste de ta vie ?",
+            "Si tu pouvais avoir un million de n'importe quoi, sauf de l'argent, que choisirais-tu ?",
+            "Décris ton souvenir le plus heureux avec un ou plusieurs de tes meilleurs amis.",
+            "Si tu pouvais te réincarner en n'importe quel animal, lequel choisirais-tu ?",
+            "Quelle est la pièce la plus importante d'une maison ?",
+            "Si tu devais choisir entre être plus attirant(e) ou plus intelligent(e), que choisirais-tu ?",
+            "Que regardes-tu en arrière en te disant 'Je ne referais jamais ça' ?",
+            "Penses-tu que le meilleur moment de ta vie est passé, présent ou futur ?",
+            "De quelle manière améliores-tu la qualité de vie des autres ?",
+            "Penses-tu qu'on peut beaucoup juger une personne à son apparence ?",
+            "Si tu pouvais garantir une réponse honnête, que demanderais-tu et à qui ?",
+            "Fais ta meilleure imitation de Donald Duck.",
+            "Le stéréotype selon lequel les personnes en surpoids sont plus drôles que les personnes maigres est-il vrai ?",
+            "Aimes-tu quand des amis arrivent chez toi à l'improviste ?",
+            "Que sais-tu faire ou construire de tes mains ?",
+            "As-tu déjà gagné un concours ou une compétition ?",
+            "Es-tu indulgent(e) dans les jeux ou sports quand tu sais que tu es plus fort(e) que les autres ?",
+            "Quel est, selon toi, le but de la vie ?",
+            "Quel livre a changé ta vie ?",
+            "De quoi le monde a-t-il le plus besoin ?",
+            "Y a-t-il quelque chose que tes parents ne t'ont pas permis de faire enfant et que tu laisserais faire à tes propres enfants ?",
+            "Si tu avais une somme illimitée d'argent, comment imaginerais-tu ta maison ?",
+            "Crois-tu au coup de foudre ?",
+            "Penses-tu que les tests de QI mesurent vraiment l'intelligence ?",
+            "Es-tu encore en contact avec ton premier amour ?",
+            "Quelle était ta chose préférée à faire à 10 ans ?",
+            "Si tu ne pouvais manger qu'une seule chose pour le reste de ta vie, que choisirais-tu ?",
+            "Qu'est-ce que tu trouves très impressionnant ?",
+            "Aviez-vous des règles strictes à la maison pendant ton enfance ?",
+            "Imprimes-tu encore des photos pour les mettre dans des cadres ou albums ?",
+            "Si tu pouvais ajouter un mois au calendrier, comment l'appellerais-tu ?",
+            "Que penses-tu que tes parents diraient si on leur demandait quelle est la chose la plus folle que tu aies faite enfant ?",
+            "Quelle est la plus grande qualité des hommes par rapport aux femmes, et inversement ?",
+            "Quelle qualité personnelle les gens apprécient-ils le plus chez toi ?",
+            "Penses-tu que les guerres ont conduit à certains des plus grands progrès scientifiques ?",
+            "Quelle musique dirais-tu être la bande-son de ta génération ?",
+            "L'argent peut-il acheter l'amour ? Pourquoi oui ou pourquoi non ?",
+            "Comment tes meilleurs amis te décriraient-ils en trois mots ?",
+            "Est-ce que 'on trouve l'amour' ou 'l'amour nous trouve' ?",
+            "Décris une fois où tu t'es senti(e) une mauvaise personne.",
+            "Décris une fois où ta première impression sur quelqu'un était complètement fausse.",
+            "Dirais-tu que le temps passé sur les réseaux sociaux est un temps bien investi ?",
+            "Penses-tu recevoir assez en retour du gouvernement pour les impôts que tu paies ?",
+            "Quel est le film le plus surestimé ?",
+            "Préféres-tu travailler à la maison ?",
+            "Quel est le paysage le plus cinématographique que tu aies visité ?",
+            "Dans quoi aimerais-tu t'améliorer ?",
+            "Quand as-tu pleuré pour la dernière fois ?",
+            "Penses-tu que la lecture de la paume de la main peut prédire l'avenir ?",
+            "À quel âge dirais-tu que les gens sont les plus heureux ?",
+            "Peux-tu citer deux choses positives et deux négatives du 'jeitinho brésilien' ?",
+            "Si on pouvait enregistrer tes rêves en vidéo, les regarderais-tu ?",
+            "Parle de quelque chose de ton passé qui te fait dire 'Je n'arrive pas à croire que j'ai fait ça'.",
+            "Quelle est la plus grande différence entre tes parents ?",
+            "Quelle serait la première chose que tu ferais si tu pouvais changer de sexe pour un jour ?",
+            "Quel est le son le plus agaçant ?",
+            "Es-tu plus ou moins romantique que la plupart des gens ?",
+            "Quel nom ne donnerais-tu jamais à ton enfant ?",
+            "Y a-t-il des choses qui ne doivent jamais être un sujet de plaisanterie ?",
+            "Si c'était possible, choisirais-tu l'instruction à domicile pour tes enfants ?",
+            "Quel produit penses-tu que les gens utiliseront encore dans 500 ans ?",
+            "Penses-tu que les hommes sont aussi sensibles que les femmes ou qu'ils ne le montrent juste pas ?",
+            "Peux-tu citer quelque chose que tu as essayé pour la première fois l'année dernière ?",
+            "Penses-tu que les uniformes scolaires sont une bonne ou mauvaise idée ?",
+            "Quelle est la chose la plus gentille que quelqu'un ait jamais faite pour toi ?",
+            "As-tu déjà dit 'je t'aime' sans le penser ?",
+            "Quand as-tu ressenti la dernière fois l'envie d'abandonner quelque chose ?",
+            "Si tu pouvais inviter n'importe qui, vivant ou mort, pour un duo de karaoké, qui choisirais-tu ?",
+            "Es-tu un traditionaliste ou un briseur de règles ?",
+            "À quoi ressemblerait une journée parfaite pour toi ?",
+            "Dis quelque chose que la plupart des gens ne savent pas sur toi.",
+            "Quelle a été ta première adresse e-mail ?",
+            "As-tu quelque chose sans valeur monétaire mais si sentimental que tu ne le vendrais pas même pour 10 000 R$ ?",
+            "Y a-t-il un thème récurrent dans tes rêves ?",
+            "Penses-tu qu'il y aurait moins de conflits si tout le monde parlait la même langue ?",
+            "Dors-tu toujours du même côté du lit ?",
+            "Qu'est-ce qui est mieux : l'amour ou l'argent ?",
+            "Si tu pouvais faire une loi que tout le monde devrait suivre, laquelle serait-ce ?",
+            "Si tu pouvais être n'importe où dans le monde, où serais-tu ?",
+            "Qu'est-ce qui te met vraiment en colère ?",
+            "Y a-t-il eu une période difficile dans ta vie qui t'a rendu(e) plus fort(e) ou meilleur(e) ?",
+            "Dans quel groupe étais-tu au lycée ?",
+            "Quels sont les avantages d'être en couple et ceux d'être célibataire ?",
+            "Y avait-il quelque chose dans lequel tu étais exceptionnel quand tu étais plus jeune ?",
+            "À ton avis, quelle est la caractéristique principale qui rend les gens réussis ?",
+            "Est-il acceptable de quitter un restaurant sans payer si tu as demandé la note plusieurs fois et attendu 20 minutes ?",
+            "As-tu assez de plaisir et d'aventure dans ta vie ?",
+            "Les parents devraient-ils avoir le droit de donner à leur enfant n'importe quel prénom, même bizarre ou inapproprié ?",
+            "Quel élément de ta liste de tâches à long terme ne finit jamais ?",
+            "La vie est-elle généralement plus facile pour les enfants ou les adultes ?",
+            "Qu'aimerais-tu refaire pour la première fois ?",
+            "Dis quelque chose dont tu as honte d'aimer.",
+            "Si tu ne pouvais avoir qu'une seule application sur ton téléphone, laquelle serait-ce ?",
+            "Si tu pouvais voyager en 1800 avec un objet moderne pour impressionner, que prendrais-tu ?",
+            "Si tu pouvais poser une question à Dieu, laquelle serait-ce ?",
+            "Quel vêtement ou accessoire de ton passé trouvais-tu le plus cool ?",
+            "Les femmes sont-elles génétiquement mieux adaptées pour s'occuper des enfants ?",
+            "Les élèves devraient-ils évaluer leurs professeurs ?",
+            "Quelle ville t'a le plus surpris lors de ta première visite ?",
+            "La publicité pour enfants devrait-elle être autorisée ?",
+            "Quel est ton premier souvenir d'enfance ?",
+            "Penses-tu que tu serais une personne différente avec d'autres parents ?",
+            "Quelle a été ta meilleure dépense de 500,00 ?",
+            "Quel type de personne admires-tu le plus ?",
+            "Y a-t-il encore une valeur à acheter des dictionnaires papier aujourd'hui ?",
+            "Quelle est la meilleure chanson jamais écrite ?",
+            "Y a-t-il quelque chose auquel tu ne renoncerais jamais dans une relation ?",
+            "Si tu avais une pièce supplémentaire chez toi, à quoi servirait-elle ?",
+            "Décris une fois où tu as fait quelque chose de risqué et audacieux.",
+            "Préféres-tu les livres papier ou les e-books ?",
+            "Si les calories n'existaient pas et que tout était sain, que mangerais-tu le plus ?",
+            "As-tu déjà fréquenté quelqu'un que tes parents détestaient ?",
+            "Ta famille a-t-elle beaucoup de blagues internes ?",
+            "Si tu étais invisible, quelle serait la première chose que tu ferais ?",
+            "Que penses-tu que la plupart des personnes âgées regrettent en regardant leur vie ?",
+            "T'entends-tu bien avec les enfants ?",
+            "Pourquoi tant de mariages finissent-ils en divorce, à ton avis ?",
+            "Selon toi, quelle est la matière scolaire la plus importante ?",
+            "À quoi penses-tu avant de dormir ?",
+            "Si tu avais une machine à remonter le temps, préférerais-tu aller dans le futur ou dans le passé ?",
+            "Quelle activité coûteuse aimerais-tu essayer si tu pouvais te le permettre ?",
+            "À quel âge est-il bon de prendre sa retraite, selon toi ?",
+            "Y a-t-il un talent qui semble héréditaire dans ta famille ?",
+            "Pourquoi penses-tu que plus de gens vivent seuls aujourd'hui qu'avant ?",
+            "Dans combien de langues sais-tu dire 'je t'aime' ?",
+            "Parmi les gens que tu connais, qui a la vie la plus intéressante et pourquoi ?",
+            "Parle de quelque chose de ton passé qui te fait dire 'Je ne crois pas que j'avais peur de ça'.",
+            "Quelle est la chose la plus étrange que tu aies mangée ?",
+            "Qu'attends-tu avec impatience dans les 12 prochains mois ?",
+            "Penses-tu que tous les achats se feront en ligne dans 20 ans ?",
+            "Quelle a été la meilleure décennie de ta vie jusqu'à présent ?",
+            "Vérifies-tu la date de péremption avant d'acheter des aliments ?",
+            "Qui a été le plus grand exemple dans ta vie ?",
+            "Pour quel film aimerais-tu qu'une suite soit faite ?",
+            "Si tu devais choisir, de quel ami serais-tu jaloux ?",
+            "Comment définis-tu l'intelligence ?",
+            "Quelle a été la plus longue file d'attente que tu aies faite et pour quoi ?",
+            "Dirais-tu que tes amis partagent ton sens de l'humour ?",
+            "Quelle a été ta pire expérience de vacances ?",
+            "Quelle qualité apprécies-tu le plus chez un ami ?",
+            "Quelle est la pire chose à propos du vieillissement ?",
+            "Si tu devais choisir, préférerais-tu t'asseoir ou rester debout toute ta vie ?",
+            "Cite une fois où tu as été très fier(e) de toi.",
+            "Avec quel membre de ta famille as-tu le moins en commun ?",
+            "Crois-tu que les criminels peuvent vraiment être réhabilités en prison ?",
+            "Décris une fois où tu t'es senti(e) très nerveux(se).",
+            "Ferais-tu un tatouage avec le nom de ton partenaire ?",
+            "As-tu déjà séché les cours à l'école ?",
+            "Quelle émotion est la plus forte : l'amour ou la haine ?",
+            "Si tu pouvais prédire l'avenir, jusqu'où voudrais-tu voir ?",
+            "Quelle est la matière la moins importante à l'école ?",
+            "Quel conseil donnerais-tu basé sur ton expérience ces dernières années ?",
+            "Aimes-tu acheter et utiliser des articles d'occasion ?",
+            "Si tu pouvais prendre une semaine de vacances seul(e) n'importe où, où irais-tu ?",
+            "Les gouvernements devraient-ils payer les rançons pour libérer les otages même si cela encourage plus de prises d'otages ?",
+            "As-tu déjà fait quelque chose que peu de personnes au monde ont fait ?",
+            "Quelle sera, selon toi, la plus grande changement dans ta vie dans cinq ans ?",
+            "Si quelqu'un de l'an 3000 pouvait voir comment nous vivons aujourd'hui, qu'est-ce qui le surprendrait le plus ?",
+            "Décris une opportunité que tu as refusée mais que tu regrettes maintenant.",
+            "As-tu déjà commis ou été proche de commettre un crime ?",
+            "À quel âge une personne est-elle considérée adulte ?",
+            "Quel a été le meilleur jour de ta vie jusqu'à présent ?",
+            "Penses-tu que les acteurs et athlètes professionnels sont trop payés ?",
+            "As-tu une phobie irrationnelle ?",
+            "Combien de temps un couple devrait-il rester ensemble avant de se marier ?",
+            "Te déplacerais-tu avec ton partenaire à l'autre bout du monde ?",
+            "Quel est le nom de ta première grande histoire d'amour ?",
+            "Penses-tu qu'il est juste de mentir pour ne pas blesser quelqu'un ?",
+            "Qui est la personne la plus intéressante que tu aies jamais rencontrée ?",
+            "Que pouvons-nous apprendre des enfants ?",
+            "Les parents devraient-ils imposer une religion à leurs enfants ou les laisser découvrir seuls ?",
+            "Es-tu déjà devenu ami proche avec un de tes ennemis ?",
+            "Qui était ton plus grand idole dans ton enfance ?",
+            "Quel endroit tout le monde devrait visiter avant de mourir ?",
+            "Décris une personne qui est complètement l'opposé de toi en trois mots.",
+            "As-tu déjà eu le cœur brisé ?",
+            "En dehors de ton partenaire ou ta famille, qui a été la personne la plus gentille avec toi ?",
+            "Dans quelle langue étrangère aimerais-tu être fluide ?",
+            "Si tu recrutais quelqu'un, quels seraient les trois critères les plus importants ?",
+            "Les personnes qui reçoivent l'aide sociale devraient-elles être obligées de trouver un emploi ?",
+            "Quel film a la meilleure bande sonore ?",
+            "Si tu devais dire une chose que les autres t'envient, que serait-ce ?",
+            "Quel est ton animal préféré au zoo ?",
+            "Quel est le meilleur film jamais réalisé ?",
+            "Lequel de tes amis réussirait le mieux à un quiz télévisé ?",
+            "Crois-tu aux porte-bonheurs ?",
+            "Quel est le repas le plus délicieux que tu aies jamais mangé ?",
+            "Ton opinion sur les gens change-t-elle quand tu vois qu'ils ont des tatouages ?",
+            "De quel parent décédé as-tu le plus de nostalgie ?",
+            "Penses-tu que les gens peuvent vraiment changer ?",
+            "Quelle invention a eu le plus grand impact sur la culture et la civilisation humaines ?",
+            "Si tu pouvais changer ton âge, choisirais-tu d'être plus jeune, plus vieux ou rester le même ?",
+            "Sais-tu comment tes grands-parents maternels et paternels se sont rencontrés ?",
+            "Quel bonbon te rappelle le plus ton enfance ?",
+            "Décris l'homme ou la femme parfaite en trois mots.",
+            "Tu gagnes une voiture gratuite de ton choix : laquelle conduirais-tu ?",
+            "Quels avantages ont les enfants uniques par rapport à ceux avec frères et sœurs ?",
+            "Quelles sont les deux choses les plus importantes pour que les gens soient heureux ?",
+            "Serais-tu prêt à travailler dur pour apprendre une langue étrangère si cela doublait ton salaire ?",
+            "Quelle a été la meilleure fête à laquelle tu as assisté ?",
+            "À part une maison ou une voiture, quelle est la chose la plus chère que tu aies achetée ?",
+            "Pour quel incident de ton enfance devrais-tu probablement t'excuser auprès de tes parents ?",
+            "As-tu déjà acheté quelque chose dont tu avais honte ? Quoi ?",
+            "Aimerais-tu savoir quand et comment tu vas mourir ?",
+            "Quelle est l'importance d'une maison propre et bien rangée pour toi ?",
+            "Quel est le plus long temps que tu as passé sans dormir ?",
+            "Le génie et la folie vont-ils de pair ?",
+            "Les chercheurs disent qu'il est impossible de changer ton niveau de bonheur : même si tu gagnes à la loterie, tu reviendras vite à ton niveau de bonheur d'avant. Penses-tu que c'est vrai ?",
+            "Si tu pouvais jouer le rôle principal dans un film, lequel serait-ce ?",
+            "Es-tu heureux de vivre à l'époque moderne ou aimerais-tu avoir vécu à une autre époque ?",
+            "Quel est ton souvenir préféré de l'année dernière ?",
+            "Mis à part l'apparence, quelle est la plus grande différence entre hommes et femmes ?",
+            "Y a-t-il une photo de toi dans un album de famille que tu préférerais voir détruite ?",
+            "Selon toi, qui est la personne la plus célèbre au monde ?",
+            "Quelle est la manière la plus amusante de dépenser 300 reais ?",
+            "Quelle est probablement la raison la plus commune pour laquelle les couples se disputent ?",
+            "Que ferais-tu si tu gagnais à la loterie ?",
+            "Quand tu étais enfant, que voulais-tu devenir quand tu serais grand ?",
+            "Jusqu'où peux-tu retracer ton arbre généalogique ?",
+            "Si tu pouvais revivre un jour de ta vie, lequel serait-ce ?",
+            "Quelle chanson te fait pleurer à chaque fois que tu l'écoutes ?",
+            "Quelles sont les deux choses que tu prendrais si ta maison prenait feu ?",
+            "Penses-tu que les films et jeux vidéo violents rendent les gens violents ?",
+            "Préférerais-tu être coincé sur une île déserte avec ta mère ou ton père ? Pourquoi ?",
+            "Le Brésil devrait-il avoir le vote obligatoire ?",
+            "Décris une fois où tu as fait quelque chose de vraiment gentil pour quelqu'un d'autre.",
+            "Si tu pouvais vivre n'importe où, où serais-tu et pourquoi ?",
+            "As-tu déjà caché quelque chose à tes parents dans ton enfance ? Quoi ?",
+            "Qui dans ta famille a le plus de succès ?",
+            "Penses-tu qu'il serait possible de devenir ami proche avec une célébrité ?",
+            "À quelle marque es-tu fidèle simplement par habitude et non par qualité ?",
+            "As-tu déjà suivi un régime à la mode ?",
+            "As-tu déjà eu un surnom enfant ?",
+            "Que signifie 'vivre une bonne vie' pour toi ?",
+            "Penses-tu que l'argent liquide va disparaître ?"
+        ]
+    };
+
+    // Variables du jeu
+    let questions = [];
+    let questionActuelle = 0;
+
+    // Fonction pour mélanger un tableau (Fisher-Yates Shuffle)
+    function melangerTableau(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array;
+    }
+
+    // Fonction pour charger les questions
+    function chargerQuestions() {
+        questions = melangerTableau([...gameData.questions]);
+        questionSuivante();
+    }
+
+    // Fonction pour afficher la question suivante
+    function questionSuivante() {
+        if (questions.length === 0) {
+            document.getElementById("questionParaConversar").textContent = "Chargement des questions...";
+            chargerQuestions();
+            return;
+        }
+
+        if (questionActuelle < questions.length) {
+            document.getElementById("questionParaConversar").textContent = questions[questionActuelle];
+            document.getElementById("result").textContent = "";
+            questionActuelle++;
+        } else {
+            document.getElementById("questionParaConversar").textContent = "Fin du jeu ! J'espère que vous vous êtes amusés ! Voulez-vous rejouer ?";
+            document.getElementById("result").textContent = "";
+            questionActuelle = 0;
+            questions = melangerTableau([...gameData.questions]);
+        }
+    }
+
+    // Fonctions pour la popup
+    function ouvrirPopup() {
+        document.getElementById("popup").style.display = "block";
+    }
+
+    function fermerPopup() {
+        document.getElementById("popup").style.display = "none";
+    }
+
+    // Fermer la popup en cliquant en dehors
+    window.onclick = function (event) {
+        let popup = document.getElementById("popup");
+        if (event.target === popup) {
+            popup.style.display = "none";
+        }
+    };
+
+    // Charger les questions au démarrage
+    window.onload = chargerQuestions;
+</script>
+</body>
+
+</html>

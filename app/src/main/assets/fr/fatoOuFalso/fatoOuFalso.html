@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" type="text/css" href="../../stylesCards.css" />
+    <title>Vrai ou Faux</title>
+</head>
+
+<body>
+
+<div class="game-container">
+    <!-- Menu -->
+    <nav class="menu">
+        <a href="../menuFr.html" class="menu-title" style="position: relative;">
+            <div class="voltar-container" onclick="window.location.href='../menuPtBr.html'">
+                &#8678; <!-- C'est ← -->
+            </div>
+            <img class="logo-bebedeira" src="../images/logo.png" alt="Logo Bebedeira" />
+        </a>
+    </nav>
+
+    <!-- Contenu du jeu -->
+    <div>
+        <h1>Vrai ou Faux</h1>
+        <a href="#" onclick="openPopup()">
+            <img class="img-regras" src="../images/regras.png" alt="Règles" />
+        </a>
+        <h4>Règles</h4>
+    </div>
+
+    <!-- Pop-up -->
+    <div id="popup" class="popup">
+        <div class="popup-content">
+            <div class="popup-header">
+                <h2>Règles du Jeu</h2>
+                <span class="close" onclick="closePopup()">&times;</span>
+            </div>
+            <ul>
+                <li>Un joueur lit une frase</li>
+                <li>Le joueur à sa droite répond si c'est « vrai » ou « faux »</li>
+                <li>Puis cliquez sur le bouton « Vrai » ou « Faux »</li>
+                <li>Si le joueur a raison, félicitations</li>
+                <li>Sinon, il doit boire un verre</li>
+                <li>Maintenant, le joueur qui vient de répondre lit pour le joueur suivant à sa droite</li>
+                <li>Le cycle continue</li>
+                <li>Amusez-vous bien ! 🍻</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="card-frase">
+        <p id="questionFatoOuFalso">Chargement des questions...</p>
+    </div>
+    <div class="button-container-fato-falso">
+        <button id="btnFato" class="btn-fato">Vrai</button>
+        <button id="btnFalso" class="btn-falso">Faux</button>
+    </div>
+
+    <div id="result"></div>
+</div>
+
+<script>
+    // Dados do jogo embutidos
+    const gameData = {
+        "questions": [
+            {
+                "frase": "Le sang des crabes fer à cheval est bleu car il contient du cuivre au lieu du fer, et il est utilisé pour détecter les toxines dans les vaccins.",
+                "correta": "Fait",
+                "explicacao": "Le sang des crabes fer à cheval contient de l'hémocyanine, qui utilise le cuivre pour transporter l'oxygène, ce qui le rend bleu. Il est réellement utilisé pour tester la stérilité des vaccins et des médicaments."
+            },
+            {
+                "frase": "Le Soleil représente 99,86 % de la masse totale du système solaire — tous les planètes réunis ne représentent qu'une fraction de son poids.",
+                "correta": "Fait",
+                "explicacao": "Exact ! Le Soleil concentre environ 99,86 % de la masse totale du système solaire, les planètes et autres corps ne représentant qu'une petite partie."
+            },
+            {
+                "frase": "La Terre est la seule planète qui ne porte pas le nom d'un dieu romain ou grec.",
+                "correta": "Fait",
+                "explicacao": "Tous les autres planètes du système solaire ont des noms dérivés de la mythologie gréco-romaine. La Terre est l'exception, son nom venant de l'ancien anglais et de l'allemand ('Erda', 'Earth'), signifiant 'sol'."
+            },
+            {
+                "frase": "Les abeilles peuvent reconnaître les visages humains, comme nous reconnaissons d'autres visages.",
+                "correta": "Fait",
+                "explicacao": "Des recherches ont montré que les abeilles utilisent un processus similaire au nôtre appelé « traitement configurationnel » pour reconnaître les visages humains."
+            },
+            {
+                "frase": "Votre estomac se renouvelle tous les 3 à 4 jours pour ne pas se digérer lui-même.",
+                "correta": "Fait",
+                "explicacao": "Les cellules de la muqueuse de l'estomac sont constamment renouvelées pour résister à l'acidité des sucs gastriques, empêchant ainsi l'autodigestion."
+            },
+            {
+                "frase": "Google s'appelait à l'origine « BackRub ».",
+                "correta": "Fait",
+                "explicacao": "En 1996, Larry Page et Sergey Brin ont développé le moteur de recherche appelé 'BackRub' avant de le renommer Google."
+            },
+            {
+                "frase": "Les calmars géants ont des yeux de la taille de ballons de basket.",
+                "correta": "Fait",
+                "explicacao": "Les calmars géants peuvent avoir des yeux jusqu'à 30 cm de diamètre, les plus grands connus dans le règne animal — comparables à la taille de ballons de basket."
+            },
+            {
+                "frase": "L'ADN humain et l'ADN de la banane sont similaires à 60%.",
+                "correta": "Fait",
+                "explicacao": "Les humains partagent environ 60 % de similarité génétique avec les bananes, car ce sont tous deux des organismes vivants avec de nombreuses fonctions cellulaires communes."
+            },
+            {
+                "frase": "L'espace n'est pas complètement silencieux — il existe des ondes radio et des sons captables avec des équipements spécifiques.",
+                "correta": "Fait",
+                "explicacao": "Bien que le son ne se propage pas dans le vide comme sur Terre, des instruments peuvent capter des vibrations et des ondes radio converties en sons audibles."
+            },
+            {
+                "frase": "Le Japon a plus d'animaux de compagnie que d'enfants.",
+                "correta": "Fait",
+                "explicacao": "Les données indiquent qu'au Japon, il y a plus d'animaux de compagnie enregistrés que d'enfants de moins de 15 ans, reflétant des changements démographiques et culturels."
+            },
+            {
+                "frase": "Le cerveau humain génère environ 20 watts d'énergie — assez pour allumer une ampoule.",
+                "correta": "Fait",
+                "explicacao": "Le cerveau humain, au repos, consomme environ 20 watts d'énergie, suffisant pour allumer une petite ampoule."
+            },
+            {
+                "frase": "Les arbres communiquent entre eux via des signaux chimiques dans les racines et dans l'air.",
+                "correta": "Fait",
+                "explicacao": "Les arbres échangent des signaux chimiques par le biais de réseaux fongiques souterrains et de composés volatils libérés dans l'air pour alerter les autres d'éventuelles menaces."
+            },
+            {
+                "frase": "Le plus grand organe du corps humain est la peau.",
+                "correta": "Fait",
+                "explicacao": "La peau est le plus grand organe du corps humain en surface et en poids, agissant comme une barrière protectrice et un régulateur thermique."
+            },
+            {
+                "frase": "Le premier e-mail de l'histoire a été envoyé par Ray Tomlinson à lui-même, en 1971.",
+                "correta": "Fait",
+                "explicacao": "Ray Tomlinson a créé le système de courriels et a envoyé le premier message à lui-même comme test en 1971."
+            },
+            {
+                "frase": "Les flamants roses sont naturellement gris ; ils deviennent roses à cause de leur alimentation riche en bêta-carotène.",
+                "correta": "Fait",
+                "explicacao": "La coloration rose des flamants provient de leur alimentation en algues et crustacés riches en pigments caroténoïdes."
+            },
+            {
+                "frase": "Dans l'Égypte ancienne, les chats étaient considérés comme sacrés et tuer un chat pouvait être puni de mort.",
+                "correta": "Fait",
+                "explicacao": "Les Égyptiens considéraient les chats comme des animaux sacrés, associés à la déesse Bastet. Tuer un chat était un crime grave."
+            },
+            {
+                "frase": "La pieuvre a trois cœurs et du sang bleu.",
+                "correta": "Fait",
+                "explicacao": "Les pieuvres possèdent trois cœurs : deux pompent le sang vers les branchies et un vers le reste du corps. Leur sang est bleu car il contient de l'hémocyanine."
+            },
+            {
+                "frase": "Il y a plus d'étoiles dans l'univers observable que de grains de sable sur toutes les plages de la Terre.",
+                "correta": "Fait",
+                "explicacao": "On estime qu'il y a plus de 100 billions de galaxies, chacune contenant des milliards d'étoiles — dépassant largement le nombre de grains de sable sur Terre."
+            },
+            {
+                "frase": "Dans la Rome antique, l'urine était utilisée comme produit de nettoyage et même pour se brosser les dents.",
+                "correta": "Fait",
+                "explicacao": "Dans la Rome antique, l'urine était appréciée pour son ammoniac, utile pour nettoyer les vêtements et même utilisée pour l'hygiène buccale."
+            },
+            {
+                "frase": "Le code-barres a été breveté avant la souris d'ordinateur.",
+                "correta": "Fait",
+                "explicacao": "Le code-barres a été breveté en 1952, tandis que la souris d'ordinateur n'a été inventée que dans les années 1960."
+            },
+            {
+                "frase": "Les manchots ont des genoux ! Ils sont cachés sous une couche de plumes et de graisse.",
+                "correta": "Fait",
+                "explicacao": "Les manchots ont des genoux internes. Leurs jambes sont repliées à l'intérieur du corps, sous des plumes denses, ce qui donne l'impression qu'ils n'en ont pas."
+            },
+            {
+                "frase": "Le son ne peut pas se propager dans le vide de l'espace, c'est pourquoi les films de science-fiction exagèrent les explosions bruyantes.",
+                "correta": "Fait",
+                "explicacao": "Dans l'espace, étant un vide, il n'y a pas de milieu pour la propagation du son. Les explosions bruyantes dans les films sont une licence artistique."
+            },
+            {
+                "frase": "Le premier site internet est toujours en ligne : info.cern.ch.",
+                "correta": "Fait",
+                "explicacao": "Le site info.cern.ch, créé par Tim Berners-Lee en 1991, fut le premier site web et reste actif en tant que partie de l'histoire d'internet."
+            },
+            {
+                "frase": "Shakespeare a inventé plus de 1 700 mots en anglais, dont beaucoup sont encore utilisés aujourd'hui.",
+                "correta": "Fait",
+                "explicacao": "Shakespeare a créé des centaines de nouveaux mots en anglais, dont beaucoup sont encore utilisés, comme 'lonely', 'bedroom' et 'swagger'."
+            },
+            {
+                "frase": "Les vaches ont des meilleures amies et deviennent stressées lorsqu'elles sont séparées.",
+                "correta": "Fait",
+                "explicacao": "Des études montrent que les vaches créent des liens sociaux forts avec d'autres vaches et peuvent souffrir de stress lorsqu'elles sont séparées de leurs compagnes préférées."
+            },
+            {
+                "frase": "Les imprimantes 3D ont déjà été utilisées pour imprimer des organes humains artificiels (comme des oreilles et des tissus).",
+                "correta": "Fait",
+                "explicacao": "La biotechnologie permet déjà d'utiliser des imprimantes 3D pour créer des structures telles que des oreilles, du cartilage et des tissus, avec un potentiel pour des applications médicales futures."
+            },
+            {
+                "frase": "Le chocolat peut être mortel pour les chiens car ils ne peuvent pas métaboliser la théobromine.",
+                "correta": "Fait",
+                "explicacao": "La théobromine, présente dans le chocolat, est toxique pour les chiens car ils la métabolisent très lentement, ce qui peut provoquer une intoxication ou la mort."
+            },
+            {
+                "frase": "Les fourmis ne dorment pas, mais font des pauses régulières d'inactivité.",
+                "correta": "Fait",
+                "explicacao": "Les fourmis ne dorment pas comme les humains, mais ont des cycles d'inactivité qui fonctionnent comme du repos, essentiels à leur survie."
+            },
+            {
+                "frase": "La lune s'éloigne de la Terre d'environ 3,8 cm par an.",
+                "correta": "Fait",
+                "explicacao": "La Lune s'éloigne de la Terre en raison de l'interaction gravitationnelle entre les deux corps, surtout à cause de l'influence des marées."
+            },
+            {
+                "frase": "Le miel ne périme jamais — des archéologues ont trouvé des pots comestibles dans des tombes égyptiennes.",
+                "correta": "Fait",
+                "explicacao": "Le miel est naturellement antimicrobien et très stable, ce qui lui permet de durer des milliers d'années sans se gâter."
+            },
+            {
+                "frase": "Votre nez peut se souvenir jusqu'à 50 000 odeurs différentes.",
+                "correta": "Fait",
+                "explicacao": "L'odorat humain est extrêmement sensible, et des études montrent que nous pouvons distinguer des dizaines de milliers d'odeurs différentes."
+            },
+            {
+                "frase": "La méduse Turritopsis dohrnii est biologiquement immortelle.",
+                "correta": "Fait",
+                "explicacao": "Cette espèce peut inverser son cycle de vie, revenant au stade juvénile après avoir atteint la maturité, ce qui la rend théoriquement immortelle."
+            },
+            {
+                "frase": "Les chats ont 32 muscles dans chaque oreille.",
+                "correta": "Fait",
+                "explicacao": "Les chats possèdent des muscles très développés dans leurs oreilles, leur permettant de faire des mouvements indépendants pour localiser les sons avec précision."
+            },
+            {
+                "frase": "Seulement 5 % des océans de la planète ont été explorés.",
+                "correta": "Fait",
+                "explicacao": "La majeure partie de l'océan reste inexplorée en raison des limitations technologiques et de l'immensité et profondeur des mers."
+            },
+            {
+                "frase": "Il y a plus d'arbres sur Terre que d'étoiles dans la Voie lactée.",
+                "correta": "Fait",
+                "explicacao": "On estime qu'il y a environ 3 billions d'arbres sur Terre, plus que les 100 à 400 milliards d'étoiles dans la Voie lactée."
+            },
+            {
+                "frase": "Les pommes de terre ont été la première nourriture cultivée dans l'espace.",
+                "correta": "Fait",
+                "explicacao": "La NASA et l'Université du Wisconsin ont cultivé des pommes de terre en environnement spatial comme expérience d'agriculture hors de la Terre."
+            },
+            {
+                "frase": "Les humains partagent environ 50 % de leur ADN avec la mouche du vinaigre.",
+                "correta": "Fait",
+                "explicacao": "Malgré les différences, de nombreux gènes fondamentaux sont similaires entre les humains et la mouche du vinaigre, ce qui en fait un organisme utile pour la recherche génétique."
+            },
+            {
+                "frase": "Votre corps brille dans le noir — à des niveaux très faibles pour que l'œil humain puisse percevoir.",
+                "correta": "Fait",
+                "explicacao": "Le corps humain émet une petite quantité de lumière visible due à des réactions chimiques naturelles, mais elle est invisible sans équipement spécial."
+            },
+            {
+                "frase": "Le mont Everest grandit d'environ 4 mm par an à cause du mouvement des plaques tectoniques.",
+                "correta": "Fait",
+                "explicacao": "La collision entre les plaques tectoniques de l'Inde et de l'Asie fait que l'Himalaya continue de s'élever lentement chaque année."
+            },
+            {
+                "frase": "La première webcam de l'histoire a été utilisée pour surveiller une cafetière.",
+                "correta": "Fait",
+                "explicacao": "Des chercheurs de l'Université de Cambridge ont créé la première webcam pour éviter des déplacements inutiles à la salle de café lorsque le récipient était vide."
+            },
+            {
+                "frase": "La tour Eiffel peut grandir jusqu'à 15 cm en été, à cause de la dilatation thermique du fer.",
+                "correta": "Fait",
+                "explicacao": "Le fer se dilate avec la chaleur, ce qui fait que la tour Eiffel augmente en hauteur lors des journées chaudes."
+            },
+            {
+                "frase": "Votre cœur bat environ 100 000 fois par jour.",
+                "correta": "Fait",
+                "explicacao": "En moyenne, un cœur humain bat environ 100 000 fois par jour, pompant environ 7 500 litres de sang."
+            },
+            {
+                "frase": "Il y a plus de façons de mélanger un jeu de 52 cartes que d'atomes sur Terre.",
+                "correta": "Fait",
+                "explicacao": "Il y a 52! (factorielle de 52) façons possibles d'organiser un jeu de cartes — un nombre plus grand que le nombre d'atomes estimés sur Terre."
+            },
+            {
+                "frase": "Certains poulpes « marchent » sur deux jambes au fond de la mer.",
+                "correta": "Fait",
+                "explicacao": "Certains poulpes utilisent deux de leurs tentacules arrière pour se déplacer sur le fond marin, imitant le mouvement bipède."
+            },
+            {
+                "frase": "L'œil d'une autruche est plus grand que son cerveau.",
+                "correta": "Fait",
+                "explicacao": "L'œil de l'autruche mesure environ 5 cm de diamètre, plus grand que son cerveau, ce qui contribue à sa vision excellente."
+            },
+            {
+                "frase": "Les oignons vous font pleurer parce qu'ils libèrent des composés sulfurés qui réagissent avec l'humidité des yeux.",
+                "correta": "Fait",
+                "explicacao": "En coupant les oignons, des composés sulfurés sont libérés, formant de l'acide sulfénique qui réagit avec l'humidité des yeux, provoquant irritation et larmes."
+            },
+            {
+                "frase": "Les chants des baleines à bosse peuvent parcourir des milliers de kilomètres sous l'eau.",
+                "correta": "Fait",
+                "explicacao": "Les vocalisations des baleines à bosse peuvent se propager sur de longues distances dans l'eau, grâce à l'efficacité de la propagation du son dans ce milieu."
+            },
+            {
+                "frase": "La Terre a déjà eu deux \"lunes\" pendant de courtes périodes dans son histoire.",
+                "correta": "Fait",
+                "explicacao": "De petits objets, comme des astéroïdes temporairement capturés par la gravité terrestre, peuvent orbiter la planète un temps avant de s'échapper ou de tomber."
+            },
+            {
+                "frase": "Les dinosaures ont vécu sur Terre pendant plus de 160 millions d'années — les humains sont là depuis environ 300 000 ans.",
+                "correta": "Fait",
+                "explicacao": "Les dinosaures ont dominé la Terre pendant environ 160 millions d'années, tandis que l'espèce humaine moderne existe depuis seulement 300 000 ans."
+            },
+            {
+                "frase": "Une cuillère à café de matière d'une étoile à neutrons pèse plus d'un milliard de tonnes.",
+                "correta": "Fait",
+                "explicacao": "La densité d'une étoile à neutrons est tellement extrême qu'une cuillère à café de sa matière pèserait des milliards de tonnes sur Terre."
+            },
+            {
+                "frase": "Le poulpe peut s'échapper par n'importe quel trou plus grand que son bec, la seule partie rigide de son corps.",
+                "correta": "Fait",
+                "explicacao": "Le bec est la seule structure rigide du corps du poulpe ; si l'ouverture est plus grande que lui, l'animal peut passer à travers."
+            },
+            {
+                "frase": "Les zèbres ont des rayures uniques comme des empreintes digitales.",
+                "correta": "Fait",
+                "explicacao": "Chaque zèbre a un motif de rayures unique, comme des empreintes digitales, ce qui permet leur identification individuelle."
+            },
+            {
+                "frase": "L'Antarctique est le seul continent sans reptiles.",
+                "correta": "Fait",
+                "explicacao": "L'Antarctique est un continent très froid et isolé, sans conditions adaptées à la survie des reptiles."
+            },
+            {
+                "frase": "L'œil humain peut distinguer environ 10 millions de couleurs.",
+                "correta": "Fait",
+                "explicacao": "L'œil humain est capable de percevoir une vaste gamme de couleurs grâce à la présence de cônes sensibles à la lumière dans la rétine."
+            },
+            {
+                "frase": "La plupart des crayons ne sont pas faits de plomb, mais de graphite.",
+                "correta": "Fait",
+                "explicacao": "Le « plomb » mentionné est en réalité du graphite, un minéral utilisé dans la fabrication des crayons."
+            },
+            {
+                "frase": "Le plus grand organe interne du corps humain est le foie.",
+                "correta": "Fait",
+                "explicacao": "Le foie est le plus grand organe interne du corps humain, responsable de fonctions comme la désintoxication et la production de bile."
+            },
+            {
+                "frase": "Le bruit de craquement des doigts ne vient pas de l'os, mais de l'effondrement des bulles de gaz dans les articulations.",
+                "correta": "Fait",
+                "explicacao": "Le craquement se produit en raison de l'effondrement de petites bulles de gaz qui se forment dans les articulations lorsqu'elles sont étirées."
+            },
+            {
+                "frase": "La vitesse d'un éternuement peut dépasser 160 km/h.",
+                "correta": "Fait",
+                "explicacao": "L'éternuement est une explosion d'air qui peut atteindre des vitesses très élevées, dépassant parfois 160 km/h."
+            },
+            {
+                "frase": "Les ordinateurs de la NASA utilisés pour la mission Apollo étaient moins puissants qu'un smartphone actuel.",
+                "correta": "Fait",
+                "explicacao": "Les ordinateurs utilisés lors de la mission Apollo étaient extrêmement limités en termes de puissance de traitement et de mémoire, comparés aux smartphones modernes."
+            },
+            {
+                "frase": "Le corps humain est composé d'environ 37 billions de cellules.",
+                "correta": "Fait",
+                "explicacao": "Le corps humain est composé d'environ 37 billions de cellules, chacune avec sa fonction spécifique."
+            },
+            {
+                "frase": "Les dauphins s'appellent par des noms uniques (sifflements distincts).",
+                "correta": "Fait",
+                "explicacao": "Les dauphins ont un système de communication avancé et chacun possède un sifflement unique pour être identifié par les autres."
+            },
+            {
+                "frase": "Les nuages peuvent peser plus d'un million de kilos.",
+                "correta": "Fait",
+                "explicacao": "Les nuages sont formés de gouttes d'eau ou de cristaux de glace, et ces particules peuvent s'accumuler pour atteindre un poids significatif."
+            },
+            {
+                "frase": "Le cerveau consomme environ 20 % de l'énergie du corps humain.",
+                "correta": "Fait",
+                "explicacao": "Bien qu'il ne représente que 2 % du poids total du corps, le cerveau utilise environ 20 % de l'énergie consommée par le corps humain."
+            },
+            {
+                "frase": "La lumière du soleil met 8 minutes et 20 secondes pour atteindre la Terre.",
+                "correta": "Fait",
+                "explicacao": "La lumière du Soleil parcourt une distance d'environ 150 millions de kilomètres pour atteindre la Terre, prenant environ 8 minutes et 20 secondes."
+            },
+            {
+                "frase": "Un jour sur Vénus est plus long qu'une année sur Vénus.",
+                "correta": "Fait",
+                "explicacao": "Vénus met plus de temps à effectuer une rotation sur son axe (un jour) qu'à orbiter autour du Soleil (une année)."
+            },
+            {
+                "frase": "Les caméléons ne changent pas de couleur uniquement pour se camoufler, mais aussi pour communiquer.",
+                "correta": "Fait",
+                "explicacao": "Les caméléons changent de couleur comme moyen de communication, pour montrer leurs émotions ou interagir avec d'autres caméléons."
+            },
+            {
+                "frase": "Les cafards peuvent vivre plusieurs semaines sans tête, jusqu'à mourir de faim.",
+                "correta": "Fait",
+                "explicacao": "Les cafards peuvent survivre plusieurs jours ou semaines sans tête grâce à leur physiologie, mais finissent par mourir de déshydratation ou de faim."
+            },
+            {
+                "frase": "Les larmes émotionnelles ont une composition chimique différente des larmes causées par une irritation.",
+                "correta": "Fait",
+                "explicacao": "Les larmes émotionnelles contiennent différents composés chimiques, comme des hormones du stress, comparées aux larmes provoquées par une irritation."
+            },
+            {
+                "frase": "Il existe des champignons qui contrôlent le comportement des insectes, comme le célèbre « champignon zombie » des fourmis.",
+                "correta": "Fait",
+                "explicacao": "Le champignon Ophiocordyceps modifie le comportement des fourmis, contrôlant leurs mouvements jusqu'à leur mort et la propagation du champignon."
+            },
+            {
+                "frase": "Les chauves-souris tournent toujours à gauche en sortant d'une grotte.",
+                "correta": "Fait",
+                "explicacao": "Les chauves-souris, en raison de leur comportement de vol et d'orientation, ont tendance à toujours tourner à gauche en sortant d'une grotte."
+            },
+            {
+                "frase": "Le cœur d'une baleine bleue est de la taille d'une petite voiture.",
+                "correta": "Fait",
+                "explicacao": "Le cœur de la baleine bleue est le plus grand de tous les animaux et peut atteindre la taille d'une petite voiture."
+            },
+            {
+                "frase": "Le premier jeu vidéo de l'histoire fut le « Tennis for Two », créé en 1958.",
+                "correta": "Fait",
+                "explicacao": "« Tennis for Two » a été créé en 1958 par William Higinbotham et est considéré comme le précurseur des jeux vidéo modernes."
+            },
+            {
+                "frase": "La gravité terrestre n'est pas parfaitement uniforme, c'est pourquoi certains endroits ont une gravité légèrement plus forte ou plus faible.",
+                "correta": "Fait",
+                "explicacao": "La gravité sur Terre varie en raison de facteurs comme la forme irrégulière de la planète et la composition de son intérieur."
+            },
+            {
+                "frase": "Les manchots proposent le mariage avec des pierres — les mâles offrent la meilleure pierre à la femelle.",
+                "correta": "Fait",
+                "explicacao": "Les manchots mâles offrent des pierres comme forme de séduction, et la femelle choisit le meilleur cadeau comme symbole d'engagement."
+            },
+            {
+                "frase": "Les vaches ont des accents différents selon la région.",
+                "correta": "Fait",
+                "explicacao": "Les vaches, tout comme les humains, peuvent avoir des variations dans les sons qu'elles produisent, selon leur environnement et leur localisation."
+            },
+            {
+                "frase": "Le papier peut être plié en deux au maximum 7 fois avec la force humaine.",
+                "correta": "Fait",
+                "explicacao": "En raison de la résistance et de l'épaisseur du papier, la plupart des gens ne peuvent pas le plier plus de sept fois."
+            },
+            {
+                "frase": "La lettre « J » a été la dernière ajoutée à l'alphabet latin.",
+                "correta": "Fait",
+                "explicacao": "La lettre « J » a été ajoutée à l'alphabet latin au XVIe siècle, initialement comme une variation de la lettre « I »."
+            },
+            {
+                "frase": "Il y a plus de combinaisons possibles dans un Rubik's Cube que d'atomes dans l'univers observable.",
+                "correta": "Fait",
+                "explicacao": "Un Rubik's Cube a 43 quintillions de combinaisons possibles, bien plus que le nombre d'atomes dans l'univers."
+            },
+            {
+                "frase": "Certaines tortues respirent par la cavité cloacale lorsqu'elles hibernent.",
+                "correta": "Fait",
+                "explicacao": "Lorsqu'elles hibernent, certaines tortues peuvent respirer par la cavité cloacale, ce qui leur permet de survivre sans air pendant de longues périodes."
+            },
+            {
+                "frase": "Le nom complet de Donald Duck est Donald Fauntleroy Duck.",
+                "correta": "Fait",
+                "explicacao": "Le personnage de Donald Duck a un nom complet incluant 'Fauntleroy', en hommage au personnage 'Little Lord Fauntleroy'."
+            },
+            {
+                "frase": "Les hippocampes sont les seuls animaux dont les mâles tombent enceintes.",
+                "correta": "Fait",
+                "explicacao": "Chez les hippocampes, c'est le mâle qui porte les œufs fécondés et s'en occupe jusqu'à leur naissance."
+            },
+            {
+                "frase": "Le corps humain possède environ 96 000 km de vaisseaux sanguins.",
+                "correta": "Fait",
+                "explicacao": "Le système circulatoire humain est complexe et étendu, avec des vaisseaux sanguins s'étendant sur environ 96 000 km."
+            },
+            {
+                "frase": "Les bananes sont légèrement radioactives à cause du potassium-40.",
+                "correta": "Fait",
+                "explicacao": "Les bananes contiennent du potassium-40, un isotope radioactif naturel, mais à des niveaux extrêmement faibles."
+            },
+            {
+                "frase": "La langue la plus parlée dans le monde est l’anglais, mais la langue avec le plus de locuteurs natifs est le mandarin.",
+                "correta": "Fait",
+                "explicacao": "L’anglais est la langue la plus parlée dans le monde, mais le mandarin a plus de locuteurs natifs en raison de la grande population de la Chine."
+            },
+            {
+                "frase": "Certains kangourous ne peuvent pas marcher en arrière.",
+                "correta": "Fait",
+                "explicacao": "Les kangourous ont une anatomie particulière qui les empêche de marcher en arrière à cause de la forme de leurs pattes et de leur queue."
+            },
+            {
+                "frase": "Il existe plus de combinaisons possibles aux échecs que d’atomes dans l’univers observable.",
+                "correta": "Fait",
+                "explicacao": "Le nombre de parties possibles aux échecs dépasse largement celui des atomes dans l’univers."
+            },
+            {
+                "frase": "Les bébés naissent avec environ 300 os, mais beaucoup fusionnent pour en avoir 206 à l’âge adulte.",
+                "correta": "Fait",
+                "explicacao": "Les bébés naissent avec plus d’os en raison de cartilages qui fusionnent au fil du temps."
+            },
+            {
+                "frase": "Google traite plus de 8 milliards de recherches par jour.",
+                "correta": "Fait",
+                "explicacao": "Google gère des milliards de recherches quotidiennement, en étant l’un des moteurs de recherche les plus utilisés dans le monde."
+            },
+            {
+                "frase": "La lumière peut se courber en passant par des champs gravitationnels intenses — c’est ce qu’Einstein a prédit avec la théorie de la relativité.",
+                "correta": "Fait",
+                "explicacao": "La théorie de la relativité d’Einstein prévoit que la lumière est courbée par les champs gravitationnels puissants, ce qui a été démontré par des observations astronomiques."
+            },
+            {
+                "frase": "Certaines araignées font semblant d’être mortes pour tromper les prédateurs.",
+                "correta": "Fait",
+                "explicacao": "Certaines araignées simulent la mort comme tactique pour échapper à leurs prédateurs."
+            },
+            {
+                "frase": "Le son le plus fort jamais enregistré sur Terre a été causé par l’éruption du volcan Krakatoa en 1883.",
+                "correta": "Fait",
+                "explicacao": "L’éruption du Krakatoa a produit le son le plus fort jamais enregistré, avec des ondes sonores qui ont fait le tour du globe."
+            },
+            {
+                "frase": "Le premier appareil photo a été inventé en 1816.",
+                "correta": "Fait",
+                "explicacao": "Le premier appareil photo a été inventé par Joseph Nicéphore Niépce en 1816, révolutionnant la capture d’images."
+            },
+            {
+                "frase": "L’esprit conscient contrôle les actions du corps.",
+                "correta": "Faux",
+                "explicacao": "En réalité, de nombreuses actions sont régies par des processus automatiques et inconscients."
+            },
+            {
+                "frase": "Les opposés s’attirent.",
+                "correta": "Faux",
+                "explicacao": "Des études montrent que les similarités entre deux personnes sont plus importantes pour une relation réussie que les différences."
+            },
+            {
+                "frase": "Le cerveau gauche est logique, le droit est créatif.",
+                "correta": "Faux",
+                "explicacao": "Les deux hémisphères du cerveau participent aux activités de raisonnement et de créativité."
+            },
+            {
+                "frase": "Les hommes ne savent pas demander leur chemin.",
+                "correta": "Faux",
+                "explicacao": "Les études montrent que les hommes et les femmes demandent de l’aide en proportion similaire, mais de façons différentes."
+            },
+            {
+                "frase": "On peut apprendre à être 100 % heureux.",
+                "correta": "Faux",
+                "explicacao": "Le bonheur est une expérience complexe influencée par de nombreux facteurs internes et externes, et ne peut être atteint en permanence."
+            },
+            {
+                "frase": "Les abeilles piquent toujours et meurent.",
+                "correta": "Faux",
+                "explicacao": "Seules les abeilles ouvrières meurent après avoir piqué, car leur dard reste accroché. Les reines et les mâles peuvent piquer plusieurs fois."
+            },
+            {
+                "frase": "Les pingouins vivent tout le temps dans le froid.",
+                "correta": "Faux",
+                "explicacao": "Bien que les pingouins soient associés au froid, certaines espèces vivent dans des climats tempérés comme en Nouvelle-Zélande et en Australie."
+            },
+            {
+                "frase": "La pluie acide détruit immédiatement tout ce qu’elle touche.",
+                "correta": "Faux",
+                "explicacao": "La pluie acide peut endommager les structures et les écosystèmes avec le temps, mais ses effets ne sont pas instantanés."
+            },
+            {
+                "frase": "La déforestation est la seule cause du changement climatique.",
+                "correta": "Faux",
+                "explicacao": "Bien que la déforestation soit un facteur important, les changements climatiques sont également causés par les émissions de gaz à effet de serre issues des combustibles fossiles."
+            },
+            {
+                "frase": "Les antivirus protègent contre toutes les menaces numériques.",
+                "correta": "Faux",
+                "explicacao": "Les antivirus offrent une protection importante, mais ne peuvent détecter toutes les menaces, surtout les plus sophistiquées."
+            },
+            {
+                "frase": "Plus il y a de mégapixels, meilleure est la caméra.",
+                "correta": "Faux",
+                "explicacao": "La qualité de l’image dépend de plusieurs facteurs, comme la taille du capteur et l’objectif, et non seulement des mégapixels."
+            },
+            {
+                "frase": "L’énergie solaire est chère et inefficace.",
+                "correta": "Faux",
+                "explicacao": "Le coût des panneaux solaires a considérablement baissé, et de nombreuses technologies solaires sont désormais efficaces et abordables."
+            },
+            {
+                "frase": "La batterie du téléphone dure plus lorsqu’on la charge à 100 %.",
+                "correta": "Faux",
+                "explicacao": "Les batteries au lithium, couramment utilisées, fonctionnent mieux lorsqu’elles ne sont ni complètement déchargées ni toujours chargées à 100 %."
+            },
+            {
+                "frase": "On peut perdre de la graisse de manière localisée.",
+                "correta": "Faux",
+                "explicacao": "Il n’est pas possible de réduire la graisse dans une zone spécifique simplement avec des exercices ciblés. La perte de graisse est globale."
+            },
+            {
+                "frase": "Faire de l’exercice intensément fait grossir.",
+                "correta": "Faux",
+                "explicacao": "L’exercice intense peut aider à brûler des calories et améliorer la composition corporelle, surtout avec une alimentation équilibrée."
+            },
+            {
+                "frase": "Il faut prendre des compléments pour gagner du muscle.",
+                "correta": "Faux",
+                "explicacao": "Une alimentation équilibrée est essentielle pour développer les muscles. Les compléments ne sont pas indispensables pour tout le monde."
+            },
+            {
+                "frase": "Il faut transpirer pour brûler de la graisse.",
+                "correta": "Faux",
+                "explicacao": "La sueur est une réponse au chaud et n’indique pas directement une combustion de graisse. La perte de poids dépend de la dépense énergétique."
+            },
+            {
+                "frase": "Manger des graisses fait grossir.",
+                "correta": "Faux",
+                "explicacao": "Toutes les graisses ne sont pas mauvaises. Les graisses saines, comme celles de l’avocat ou de l’huile d’olive, sont essentielles et peuvent même aider à perdre du poids."
+            },
+            {
+                "frase": "Les scientifiques savent tout sur le corps humain.",
+                "correta": "Faux",
+                "explicacao": "Malgré les grands progrès, de nombreux aspects du corps et de l’esprit humain restent encore mystérieux."
+            },
+            {
+                "frase": "Il faut attendre 24 heures avant de signaler une personne disparue.",
+                "correta": "Faux",
+                "explicacao": "Il n’existe aucune loi imposant un délai d’attente pour signaler une disparition. Le plus tôt est le mieux."
+            },
+            {
+                "frase": "On ne peut pas boire d’alcool puis conduire, même après quelques heures.",
+                "correta": "Faux",
+                "explicacao": "L’alcool affecte chaque personne différemment, et seul le temps permet d’éliminer l’alcool du sang."
+            },
+            {
+                "frase": "Si vous n’utilisez pas votre cerveau, il s’atrophie.",
+                "correta": "Faux",
+                "explicacao": "Bien que le cerveau ait besoin de stimulation pour rester actif, il ne s’atrophie pas dramatiquement en l’absence temporaire d’activités mentales."
+            },
+            {
+                "frase": "Vous n’utilisez que 10 % de votre cerveau.",
+                "correta": "Faux",
+                "explicacao": "Nous utilisons en réalité presque toutes les parties du cerveau, même pendant le sommeil."
+            },
+            {
+                "frase": "Les souvenirs peuvent être effacés du cerveau.",
+                "correta": "Faux",
+                "explicacao": "Les souvenirs ne sont pas « effacés », mais peuvent être modifiés ou oubliés avec le temps. Le cerveau peut aussi créer de faux souvenirs."
+            },
+            {
+                "frase": "Les cerveaux des hommes et des femmes sont fondamentalement différents.",
+                "correta": "Faux",
+                "explicacao": "Bien qu’il existe quelques différences moyennes, elles sont minimes et ne déterminent pas les capacités cognitives."
+            },
+            {
+                "frase": "L’intelligence est génétique.",
+                "correta": "Faux",
+                "explicacao": "L’intelligence est influencée par la génétique et par l’environnement. L’éducation et les expériences de vie ont un grand impact."
+            },
+            {
+                "frase": "Faire plusieurs tâches à la fois augmente la productivité.",
+                "correta": "Faux",
+                "explicacao": "En réalité, le multitâche peut réduire la productivité car le cerveau doit constamment changer de tâche, ce qui consomme plus d’énergie et de temps."
+            },
+            {
+                "frase": "L’alcool tue les cellules cérébrales.",
+                "correta": "Faux",
+                "explicacao": "L’alcool ne tue pas les cellules cérébrales, mais peut endommager les dendrites, affectant la communication entre les neurones."
+            },
+            {
+                "frase": "Boire du café aide à soigner la gueule de bois.",
+                "correta": "Faux",
+                "explicacao": "Le café peut aggraver la déshydratation causée par l’alcool, ce qui empire la gueule de bois."
+            },
+            {
+                "frase": "Le foie peut traiter environ une dose d’alcool par heure.",
+                "correta": "Fait",
+                "explicacao": "En moyenne, le foie métabolise environ 10 à 15 ml d’alcool pur par heure."
+            },
+            {
+                "frase": "Boire de l’alcool réchauffe le corps.",
+                "correta": "Faux",
+                "explicacao": "L’alcool dilate les vaisseaux sanguins, donnant une sensation de chaleur, mais en réalité il diminue la température corporelle."
+            },
+            {
+                "frase": "La bière était considérée comme un aliment au Moyen Âge.",
+                "correta": "Fait",
+                "explicacao": "Au Moyen Âge, la bière était une source importante de nutriments et de calories."
+            },
+            {
+                "frase": "Le vin rouge est plus sain que le vin blanc.",
+                "correta": "Fait",
+                "explicacao": "Le vin rouge contient plus d’antioxydants, comme le resvératrol, qui peuvent apporter des bienfaits pour la santé."
+            },
+            {
+                "frase": "Boire de l’alcool améliore le sommeil.",
+                "correta": "Faux",
+                "explicacao": "L’alcool peut faciliter l’endormissement, mais nuit à la qualité du sommeil, notamment au sommeil paradoxal (REM)."
+            },
+            {
+                "frase": "La vodka a été inventée en Pologne.",
+                "correta": "Fait",
+                "explicacao": "La vodka a des origines partagées entre la Pologne et la Russie, mais les premiers enregistrements viennent de la Pologne au VIIIe siècle."
+            },
+            {
+                "frase": "Le champagne ne peut être produit qu’en France.",
+                "correta": "Fait",
+                "explicacao": "Selon la loi, seuls les vins mousseux produits dans la région de Champagne en France peuvent être appelés champagne."
+            },
+            {
+                "frase": "L’alcool s’évapore complètement pendant la cuisson.",
+                "correta": "Faux",
+                "explicacao": "Même après plusieurs heures de cuisson, environ 5 à 10 % de l’alcool peut rester dans le plat."
+            }
+
+        ]
+    };
+
+    // Variables du jeu
+    let question = [];
+    let currentQuestionIndex = 0;
+
+    // Éléments du DOM
+    const questionText = document.getElementById('questionFatoOuFalso');
+    const resultDiv = document.getElementById('result');
+    const btnFato = document.getElementById('btnFato');
+    const btnFalso = document.getElementById('btnFalso');
+
+    // Fonction de mélange Fisher-Yates
+    function shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array;
+    }
+
+    // Charger les questions
+    function loadQuestions() {
+        questions = shuffleArray([...gameData.questions]);
+        showQuestion();
+    }
+
+    // Afficher la question actuelle
+    function showQuestion() {
+        const question = questions[currentQuestionIndex];
+        questionText.textContent = question.frase;
+        resultDiv.innerHTML = '';
+
+        // Réactive les boutons pour la nouvelle question
+        btnFato.disabled = false;
+        btnFalso.disabled = false;
+    }
+
+    // Vérifier la réponse
+    function checkAnswer(reponse) {
+        const question = questions[currentQuestionIndex];
+
+        // Désactive les boutons dès que l'utilisateur répond
+        btnFato.disabled = true;
+        btnFalso.disabled = true;
+
+        if (reponse === question.correta) {
+            resultDiv.innerHTML = `<p style="color: green;">✅ Correct ! ${question.explicacao}</p>`;
+        } else {
+            resultDiv.innerHTML = `<p style="color: red;">❌ Faux ! ${question.explicacao}</p>`;
+        }
+
+        setTimeout(() => {
+            currentQuestionIndex = (currentQuestionIndex + 1) % questions.length;
+            showQuestion();
+        }, 5000);
+    }
+
+    // Événements des boutons
+    btnFato.addEventListener('click', () => checkAnswer('Fato'));
+    btnFalso.addEventListener('click', () => checkAnswer('Falso'));
+
+    // Pop-up
+    function openPopup() {
+        document.getElementById("popup").style.display = "block";
+    }
+
+    function closePopup() {
+        document.getElementById("popup").style.display = "none";
+    }
+
+    // Fermer le pop-up en cliquant en dehors
+    window.onclick = function (event) {
+        let popup = document.getElementById("popup");
+        if (event.target === popup) {
+            popup.style.display = "none";
+        }
+    };
+
+    // Démarrer le jeu au chargement de la page
+    window.onload = loadQuestions;
+
+</script>
+</body>
+
+</html>

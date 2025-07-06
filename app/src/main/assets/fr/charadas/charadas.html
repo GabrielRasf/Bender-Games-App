@@ -1,0 +1,1074 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="../../stylesCards.css">
+    <link rel="stylesheet" type="text/css" href="../../cronometro.css">
+    <title>Charades</title>
+</head>
+
+<body>
+
+<div class="game-container">
+    <!-- Menu -->
+    <nav class="menu">
+        <a href="../menuFr.html" class="menu-title" style="position: relative;">
+            <div class="voltar-container" onclick="window.location.href='../menuPtBr.html'">
+                &#8678;
+            </div>
+            <img class="logo-bebedeira" src="../images/logo.png" alt="Logo Bebedeira" />
+        </a>
+    </nav>
+
+    <!-- Conteúdo do jogo -->
+    <div>
+        <h1>Charades</h1>
+        <a href="#" onclick="openPopup()"><br />
+            <img class="img-regras" src="../images/regras.png" alt="Règles" />
+        </a>
+        <h4>Voir les règles</h4>
+    </div>
+
+    <!-- Pop-up de regras -->
+    <div id="popup" class="popup">
+        <div class="popup-content">
+            <div class="popup-header">
+                <h2>Règles du Jeu</h2>
+                <span class="close" onclick="closePopup()">&times;</span>
+            </div>
+            <ul>
+                <li>Un jeu classique de devinettes !</li>
+                <li>Tout le monde doit discuter pour trouver la réponse en 60 secondes</li>
+                <li>S’il n’y a pas de consensus, il peut y avoir plus d’une réponse</li>
+                <li>Tous les joueurs qui se trompent doivent boire !</li>
+                <li>Amusez-vous bien ! 🍻</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Pergunta -->
+    <div class="card-frase">
+        <p id="questionCharadas"></p>
+        <div class="center-container">
+            <img class="pergunta-e-resposta" src="../images/pergunta-e-resposta.png" onclick="showAnswerPopup()"
+                 alt="Réponse">
+            <h4>Réponse</h4>
+        </div>
+    </div>
+
+    <div class="button-container">
+        <button onclick="nextQuestion()">Prochaine question</button>
+    </div>
+
+    <div id="result"></div>
+
+    <!-- Pop-up da Resposta -->
+    <div id="answerPopup" class="popup">
+        <div class="popup-content">
+            <span class="close" onclick="closeAnswerPopup()">&times;</span>
+            <h3>Réponse</h3>
+            <p id="answer">Cliquez d'abord sur une question !</p>
+        </div>
+    </div>
+</div>
+
+<!-- Cronômetro -->
+<button id="timer" onclick="handleTimerClick()">⏳</button>
+
+<script>
+
+
+    document.addEventListener('DOMContentLoaded', function () {
+        closeAllPopups();
+
+        nextQuestion();
+
+    });
+
+    // Embedded JSON data
+    const questionsData = {
+        "questions": [
+            {
+                "question": "Qu'est-ce qui devient plus mouillé quand on le sèche ?",
+                "answer": "La serviette."
+            },
+            {
+                "question": "Qu'est-ce qui a quatre pieds le jour et six pieds la nuit ?",
+                "answer": "Le lit."
+            },
+            {
+                "question": "Comment les médecins savent-ils que la carotte est bonne pour les yeux ?",
+                "answer": "Ils n'ont jamais vu de lapin avec des lunettes."
+            },
+            {
+                "question": "Quel est le contraire d'une serrure ?",
+                "answer": "Une ouvremolle."
+            },
+            {
+                "question": "Qu’est-ce qui te permet de traverser les murs ?",
+                "answer": "Les portes."
+            },
+            {
+                "question": "Qu’est-ce qui a cinq doigts mais pas d’ongles ?",
+                "answer": "Le gant."
+            },
+            {
+                "question": "Quelle est la différence entre un pantalon et une botte ?",
+                "answer": "La botte, on l'enfile, et le pantalon, on le botte !"
+            },
+            {
+                "question": "Que dit le crayon au taille-crayon ?",
+                "answer": "Je suis dé-taillé !"
+            },
+            {
+                "question": "Comment tout se termine ?",
+                "answer": "Par la lettre E (en français, tout mot se termine souvent par 'e')."
+            },
+            {
+                "question": "Quel opérateur est toujours d’accord ?",
+                "answer": "Bien sûr. (Jeu de mot avec 'SFR', mais ici traduit librement)"
+            },
+            {
+                "question": "Quelle est la bonne forme : les pingouins peuvent-ils voler ?",
+                "answer": "Aucune. Les pingouins ne volent pas."
+            },
+            {
+                "question": "Qu’est-ce que la fourmi a de plus que le lion ?",
+                "answer": "Le nom plus long."
+            },
+            {
+                "question": "Comment s’appelle la plante qui ne voit rien ?",
+                "answer": "La céleri aveugle. (jeu de mots impossible de traduzir literalmente, aqui adaptado)"
+            },
+            {
+                "question": "Que tous les mois ont sauf avril ?",
+                "answer": "La lettre R. (en français, c'est R qui manque en avril)"
+            },
+            {
+                "question": "Combien d’animaux Moïse a-t-il emmenés dans l’arche ?",
+                "answer": "Aucun, c’était Noé."
+            },
+            {
+                "question": "Que dit l’açaí à ses enfants ?",
+                "answer": "Le dernier ferme la porte."
+            },
+            {
+                "question": "Combien de côtés a un cercle ?",
+                "answer": "Deux : l’intérieur et l’extérieur."
+            },
+            {
+                "question": "Dix oiseaux sont dans un arbre. Un chasseur en abat un. Combien en reste-t-il ?",
+                "answer": "Aucun, tous se sont envolés."
+            },
+            {
+                "question": "Que dit le chimiste en rencontrant deux atomes d’hélium ?",
+                "answer": "He He !"
+            },
+            {
+                "question": "Quelle heure est-il quand un éléphant s’assoit sur une clôture ?",
+                "answer": "L’heure de changer la clôture."
+            },
+            {
+                "question": "Quelle est la capitale du Brésil présente dans toutes les fêtes d’anniversaire ?",
+                "answer": "Palmas. (Conserve le jeu de mots du portugais)"
+            },
+            {
+                "question": "Que se passe-t-il si un éléphant écrase un canard ?",
+                "answer": "Le canard devient veuf."
+            },
+            {
+                "question": "Qu’est-ce qui a des centaines de roues mais ne bouge pas ?",
+                "answer": "Le parking."
+            },
+            {
+                "question": "Quel mois a 28 jours ?",
+                "answer": "Tous."
+            },
+            {
+                "question": "Si un coq pond un œuf sur le toit, de quel côté roule-t-il ?",
+                "answer": "D’aucun côté. Les coqs ne pondent pas d’œufs."
+            },
+            {
+                "question": "Que se passe-t-il quand un fer tombe au sol ?",
+                "answer": "Il devient malade. (jeu de mots difficile, adaptado librement)"
+            },
+            {
+                "question": "C’est à moi, mais tout le monde l’utilise plus que moi ?",
+                "answer": "Mon nom."
+            },
+            {
+                "question": "Qu’est-ce qu’on peut attraper mais jamais lancer ?",
+                "answer": "Un rhume."
+            },
+            {
+                "question": "Quelles sont les deux choses qu’on ne peut pas manger au petit-déjeuner ?",
+                "answer": "Le déjeuner et le dîner."
+            },
+            {
+                "question": "Quel mot contient 8 lettres, mais en enlevant 4, il en reste 8 ?",
+                "answer": "Biscotte. (jeu intraduisible, adapté)"
+            },
+            {
+                "question": "Pourquoi la photo est-elle allée en prison ?",
+                "answer": "Parce qu’elle a été encadrée."
+            },
+            {
+                "question": "Que disent les mathématiciens à l’inventeur du zéro ?",
+                "answer": "Merci pour rien."
+            },
+            {
+                "question": "Pourquoi l’homme a-t-il été renvoyé de l’usine de calendriers ?",
+                "answer": "Il a pris un jour de congé."
+            },
+            {
+                "question": "Pourquoi les fantômes mentent-ils mal ?",
+                "answer": "Parce qu’ils sont trop transparents."
+            },
+            {
+                "question": "Comment une femme peut-elle passer 8 jours sans dormir ?",
+                "answer": "En dormant la nuit."
+            },
+            {
+                "question": "Que dit un mur à l’autre ?",
+                "answer": "On se retrouve au coin."
+            },
+            {
+                "question": "Pourquoi les œufs ne racontent-ils pas de blagues ?",
+                "answer": "Pour ne pas éclater de rire."
+            },
+            {
+                "question": "Que dit la plage à la mer ?",
+                "answer": "Arrête avec tes vagues."
+            },
+            {
+                "question": "Pourquoi le cheval a-t-il grimpé la montagne ?",
+                "answer": "Parce qu’il ne pouvait pas passer en dessous."
+            },
+            {
+                "question": "Qu’est-ce qui devient plus blanc quand il est sale ?",
+                "answer": "Le tableau noir."
+            },
+            {
+                "question": "Qu’est-ce qui est sourd et muet mais raconte tout ?",
+                "answer": "Le livre."
+            },
+            {
+                "question": "Qui a toujours besoin d'un coup de main pour travailler ?",
+                "answer": "La manucure."
+            },
+            {
+                "question": "Qu'est-ce qui commence par changer et finit par danser ?",
+                "answer": "Le changement."
+            },
+            {
+                "question": "Quel est le nom le plus mouillé au monde ?",
+                "answer": "Omar (eau-mar)."
+            },
+            {
+                "question": "Qui est le plus fort : l'escargot ou l'éléphant ?",
+                "answer": "L'escargot, car il porte sa maison sur le dos."
+            },
+            {
+                "question": "Pourquoi la grippe ferait-elle un mauvais criminel ?",
+                "answer": "Parce qu'elle est facile à attraper."
+            },
+            {
+                "question": "Qu'est-ce qui est petit à Lisbonne et grand au Brésil ?",
+                "answer": "La lettre B."
+            },
+            {
+                "question": "Quelle est la partie du corps qui démange le plus ?",
+                "answer": "L'ongle."
+            },
+            {
+                "question": "Que reçoit-on deux fois, mais qu'il faut acheter la troisième fois si on le perd ?",
+                "answer": "Les dents."
+            },
+            {
+                "question": "Que dit une aiguille d'horloge à une autre ?",
+                "answer": "On se retrouve à midi !"
+            },
+            {
+                "question": "Ouvert, il protège tout. Fermé, il ne protège rien. Qu'est-ce que c'est ?",
+                "answer": "Le parapluie."
+            },
+            {
+                "question": "Qu'est-ce qui est au coin de l'œil ?",
+                "answer": "La lettre Œ."
+            },
+            {
+                "question": "Pourquoi l’homme invisible a-t-il refusé un emploi ?",
+                "answer": "Parce qu’il ne se voyait pas faire ça."
+            },
+            {
+                "question": "Pourquoi les cochons ne se font jamais repérer dans les arbres ?",
+                "answer": "Parce qu’ils sont très bons à se cacher."
+            },
+            {
+                "question": "Comment s'appelle un grand mammifère africain aux cheveux longs et sandales ?",
+                "answer": "Un hippie-potame."
+            },
+            {
+                "question": "Quel prix reçoit le meilleur dentiste ?",
+                "answer": "Une plaque."
+            },
+            {
+                "question": "Pourquoi Jean a-t-il abandonné sa blague sur la chimie ?",
+                "answer": "Il pensait que ça ne provoquerait aucune réaction."
+            },
+            {
+                "question": "Pourquoi le livre de maths est-il triste ?",
+                "answer": "Parce qu’il a trop de problèmes."
+            },
+            {
+                "question": "Un homme voit trois portes : or, argent et bronze. Laquelle ouvre-t-il en premier ?",
+                "answer": "La porte de la voiture."
+            },
+            {
+                "question": "Qui parle mal : Cebolinha ou Mônica ?",
+                "answer": "Mônica. Cebolinha parle 'elado'."
+            },
+            {
+                "question": "Rond, un trou au milieu, deux lettres, commence par C ?",
+                "answer": "Le CD."
+            },
+            {
+                "question": "Quelle est la race du chien de Harry Potter ?",
+                "answer": "Labracadabrador."
+            },
+            {
+                "question": "Comment une poule offre-t-elle un café à une autre ?",
+                "answer": "Pou pou pou ?"
+            },
+            {
+                "question": "Quelle est la différence entre une bicyclette et des toilettes ?",
+                "answer": "Sur la bicyclette, on s’assoit pour courir. Aux toilettes, on court pour s’asseoir."
+            },
+            {
+                "question": "Un point rouge dans un arbre ?",
+                "answer": "Un fraimorang (morangotango)."
+            },
+            {
+                "question": "Quelle est la casserole la plus triste ?",
+                "answer": "La casserole de-pression."
+            },
+            {
+                "question": "Quel est le site le plus propre d’internet ?",
+                "answer": "Savon.net"
+            },
+            {
+                "question": "Quel est le problème si un homme épouse la sœur de sa veuve ?",
+                "answer": "Le problème est qu’il est mort."
+            },
+            {
+                "question": "Qu’est-ce qu’il y a à la fin de l’arc-en-ciel ?",
+                "answer": "La lettre L (en français, « arc-en-ciel » finit par L)."
+            },
+            {
+                "question": "Comment dire trois jours de suite sans utiliser mercredi, vendredi ou dimanche ?",
+                "answer": "Hier, aujourd’hui, demain."
+            },
+            {
+                "question": "Cela arrive une fois par minute, deux fois par moment, jamais en deux cents ans ?",
+                "answer": "La lettre M."
+            },
+            {
+                "question": "Pourquoi les personnes petites ne font pas de boxe ?",
+                "answer": "Parce qu’elles frappent trop bas."
+            },
+            {
+                "question": "Que dit le marteau au clou ?",
+                "answer": "Tu vas voir, je vais te clouer !"
+            },
+            {
+                "question": "Si tu lances une pierre rouge dans une mer verte, comment revient-elle ?",
+                "answer": "Mouillée."
+            },
+            {
+                "question": "Avant qu’Everest soit découvert, quelle était la plus haute montagne du monde ?",
+                "answer": "Le mont Everest, on ne l’avait juste pas découvert."
+            },
+            {
+                "question": "Quel moyen de transport peut avoir deux ou quatre roues ?",
+                "answer": "Le vélo, avec ou sans petites roues."
+            },
+            {
+                "question": "Dans les cheveux, sur la dent, dans la plante, que cache le même mot ?",
+                "answer": "La racine."
+            },
+            {
+                "question": "Il est au sommet, il habite en haut, tout le monde l’entend mais personne ne l’adore ?",
+                "answer": "La cloche."
+            },
+            {
+                "question": "Quel animal a toutes les voyelles dans son nom ?",
+                "answer": "La taupe."
+            },
+            {
+                "question": "Peut blesser sans bouger, peut donner raison ou l’enlever ?",
+                "answer": "Le mot."
+            },
+            {
+                "question": "Plus je suis lavée, plus je deviens sale ?",
+                "answer": "L’eau."
+            },
+            {
+                "question": "Qui sont des collègues qui passent la journée à se taper dessus sans se faire mal ?",
+                "answer": "Les dents."
+            },
+            {
+                "question": "Marche allongé et dort debout ?",
+                "answer": "Le pied."
+            },
+            {
+                "question": "C’est de l’eau qui ne vient pas de la mer, ne tombe pas du ciel, et tout le monde l’a déjà léchée ?",
+                "answer": "La larme."
+            },
+            {
+                "question": "Quelle partie du corps a des cordes ?",
+                "answer": "La gorge."
+            },
+            {
+                "question": "Ce n’est ni un lit ni un lion, et ça disparaît dans chaque recoin ?",
+                "answer": "Le caméléon."
+            },
+            {
+                "question": "Quel moyen de transport a deux courbes dans le dos ?",
+                "answer": "Le chameau."
+            },
+            {
+                "question": "Fait beaucoup de mouvements alors qu’il est assis ?",
+                "answer": "Le joueur d’échecs."
+            },
+            {
+                "question": "Il est entre la terre et le ciel ; plus on s’en approche, plus on s’en éloigne ?",
+                "answer": "L’horizon."
+            },
+            {
+                "question": "Quel animal traverse la rivière avec un bœuf dans la bouche ?",
+                "answer": "La tique."
+            },
+            {
+                "question": "Attirant mais pas humain ?",
+                "answer": "L’aimant."
+            },
+            {
+                "question": "Monte et descend toute la journée sans se fatiguer ?",
+                "answer": "L’ascenseur."
+            },
+            {
+                "question": "Il parle sans bouche, chante sans voix ?",
+                "answer": "La radio."
+            },
+            {
+                "question": "Même coupé, il garde toujours la même taille ?",
+                "answer": "Le paquet de cartes."
+            },
+            {
+                "question": "A la tête dure et adore recevoir des coups ?",
+                "answer": "Le clou."
+            },
+            {
+                "question": "Deux éventails qui bougent toute la journée, mais se taisent la nuit ?",
+                "answer": "Les cils."
+            },
+            {
+                "question": "Ça ressemble à de l’or, ce n’est pas de l’argent, qui ne devine pas est un idiot ?",
+                "answer": "La banane."
+            },
+            {
+                "question": "Je suis allé au marché et ai acheté un beau truc. Je suis rentré chez moi et j’ai commencé à pleurer avec ça ?",
+                "answer": "L’oignon."
+            },
+            {
+                "question": "C’est sur le sol, mais jamais en dessous ?",
+                "answer": "L’accent circonflexe (le tilde n’existe pas en français)."
+            },
+            {
+                "question": "Il porte le nom d'une danse tropicale, et donne du goût à la cuisine traditionnelle ?",
+                "answer": "La salsa."
+            },
+
+            {
+                "question": "C’est un trou, mais on peut en faire une maison. Ça rime avec lanterne : qu’est-ce que c'est ?",
+                "answer": "La caverne."
+            },
+            {
+                "question": "C’est une pierre que beaucoup aiment et qui flotte dans l’eau ?",
+                "answer": "Glace."
+            },
+            {
+                "question": "Elle te suit toute ta vie, mais disparaît dans l’obscurité ?",
+                "answer": "L’ombre."
+            },
+            {
+                "question": "Il n’a que 6 lettres, mais contient 36 sièges ?",
+                "answer": "Le bus."
+            },
+            {
+                "question": "Il est juste devant toi, mais tu ne peux pas le voir ?",
+                "answer": "Le futur."
+            },
+            {
+                "question": "Il vole sans ailes, siffle sans bouche ?",
+                "answer": "Le vent."
+            },
+            {
+                "question": "Quelle voyelle est renversée (pieds en l’air) ?",
+                "answer": "La lettre U."
+            },
+            {
+                "question": "Sept frères très unis : les six premiers travaillent, le septième est paresseux ?",
+                "answer": "Les jours de la semaine."
+            },
+            {
+                "question": "Il a un pied mais ne marche pas, il a à manger mais ne mange pas, il a de l’eau mais ne boit pas ?",
+                "answer": "Le cocotier."
+            },
+            {
+                "question": "Quand il travaille, tout le monde a la bouche ouverte ?",
+                "answer": "Le dentiste."
+            },
+            {
+                "question": "Il n’est ni à l’intérieur ni à l’extérieur de la maison, mais la maison n’est pas complète sans lui ?",
+                "answer": "La fenêtre."
+            },
+            {
+                "question": "Il a un centre, mais pas de début ni de fin ?",
+                "answer": "Le cercle."
+            },
+            {
+                "question": "Haut dans une maison pour former un couple ?",
+                "answer": "La lettre L."
+            },
+            {
+                "question": "L’homme qui se rase plus de trois fois par jour ?",
+                "answer": "Le barbier."
+            },
+            {
+                "question": "Quel cheval adore prendre son bain ?",
+                "answer": "Le cheval marin."
+            },
+            {
+                "question": "Il a des villes, des rues, des magasins, des maisons : tout le monde l’utilise mais personne n’y habite ?",
+                "answer": "La carte."
+            },
+            {
+                "question": "Avec la tête on devient plus bas et sans elle on devient plus haut ?",
+                "answer": "L’oreiller."
+            },
+            {
+                "question": "Sans yeux, il cligne ; sans bouche, il commande ?",
+                "answer": "Le feu tricolore."
+            },
+            {
+                "question": "Changez la première lettre et ça devient un autre animal, qui est son chasseur principal ?",
+                "answer": "Le rat."
+            },
+            {
+                "question": "Il a queue de cochon, oreille de cochon, mais ce n’est pas un cochon. Avec du haricot et du chou, on en mange beaucoup ?",
+                "answer": "La feijoada."
+            },
+            {
+                "question": "Sans cheveux ni tête, mais en vieillissant, il devient chauve ?",
+                "answer": "Le pneu."
+            },
+            {
+                "question": "Il a une queue mais n’est pas un animal, pas d’ailes mais vole. Si on le lâche en hauteur, les rafales peuvent le faire danser ?",
+                "answer": "Le cerf-volant."
+            },
+            {
+                "question": "Il tourne beaucoup mais reste à sa place.",
+                "answer": "L’horloge."
+            },
+            {
+                "question": "On ne le mange pas, mais il sert à manger.",
+                "answer": "Les couverts."
+            },
+            {
+                "question": "Le taureau peut passer, mais le moustique reste coincé.",
+                "answer": "La toile d’araignée."
+            },
+            {
+                "question": "On le déteste à la plage et l’adore dans la casserole ?",
+                "answer": "Le bouillon."
+            },
+            {
+                "question": "Il ne revient jamais, bien qu’il ne soit jamais parti.",
+                "answer": "Le passé."
+            },
+            {
+                "question": "Le chirurgien et le mathématicien ont quoi en commun ?",
+                "answer": "Tous deux font des opérations."
+            },
+            {
+                "question": "Il marche avec les pieds sur la tête.",
+                "answer": "Le pou."
+            },
+            {
+                "question": "Plusieurs petits points jaunes sur le mur.",
+                "answer": "Des fantassins grimpeurs."
+            },
+            {
+                "question": "Il est au milieu du mot ‘ovule’ ?",
+                "answer": "La lettre V."
+            },
+            {
+                "question": "Il est au début de la rue, à la fin de la mer et au milieu du visage.",
+                "answer": "La lettre R."
+            },
+            {
+                "question": "Il peut passer devant le soleil sans faire d’ombre.",
+                "answer": "Le vent."
+            },
+            {
+                "question": "Il saute et s’habille en mariée ?",
+                "answer": "Le pop-corn."
+            },
+            {
+                "question": "Plus il grandit, moins on y voit.",
+                "answer": "L’obscurité."
+            },
+            {
+                "question": "Une allumette dit à une bougie d’anniversaire.",
+                "answer": "C’est toujours pour toi que je me consume."
+            },
+            {
+                "question": "Il vole sans ailes et pleure sans yeux.",
+                "answer": "Le nuage."
+            },
+            {
+                "question": "Il monte quand la pluie descend.",
+                "answer": "Le parapluie."
+            },
+            {
+                "question": "L’animal le plus vieux du monde ?",
+                "answer": "Le zèbre. Il est toujours en noir et blanc."
+            },
+            {
+                "question": "L’endroit le plus certain du Brésil.",
+                "answer": "Le sertão."
+            },
+            {
+                "question": "Il monte mais ne descend jamais.",
+                "answer": "L’âge."
+            },
+            {
+                "question": "Une lettre A qui adore sauter ?",
+                "answer": "C’est un ‘assaut-tant’."
+            },
+            {
+                "question": "On doit la lécher pour la mettre plus facilement dans le trou ?",
+                "answer": "Le fil à coudre."
+            },
+            {
+                "question": "Léger comme une plume, mais même l’homme le plus fort ne peut le tenir longtemps ?",
+                "answer": "Le souffle."
+            },
+            {
+                "question": "La serrure dit à la clé :",
+                "answer": "Allons faire un tour."
+            },
+            {
+                "question": "Dieu l’a, mais pas la reine. Le duc l’a au début, le roi Midas l’a au milieu.",
+                "answer": "La lettre D."
+            },
+            {
+                "question": "Le roi du potager ?",
+                "answer": "Le roi-potage."
+            },
+            {
+                "question": "Sans bouger de ta place, tu peux voyager dans le monde ?",
+                "answer": "Le timbre."
+            },
+            {
+                "question": "Plus elle est sèche, plus elle devient humide.",
+                "answer": "La serviette."
+            },
+            {
+                "question": "Naît vert, vit noir, meurt rouge ?",
+                "answer": "Le café."
+            },
+            {
+                "question": "Plus on enlève, plus ça devient grand ?",
+                "answer": "Le trou."
+            },
+            {
+                "question": "Plein le jour, vide la nuit ?",
+                "answer": "La chaussure."
+            },
+            {
+                "question": "Plus il grandit, plus il rétrécit ?",
+                "answer": "La queue du cheval."
+            },
+            {
+                "question": "Traverse la rivière, sans jamais se mouiller ?",
+                "answer": "Le pont."
+            },
+            {
+                "question": "On le pose sur la table, on le partage, mais on ne le mange pas ?",
+                "answer": "Le jeu de cartes."
+            },
+            {
+                "question": "Quand on est debout, il est couché ; quand on est couché, il est debout ?",
+                "answer": "Les pieds."
+            },
+            {
+                "question": "Il a plus de dix têtes et ne sait pas penser ?",
+                "answer": "Une boîte d’allumettes."
+            },
+            {
+                "question": "Il remplit une maison, mais pas une main ?",
+                "answer": "Un bouton."
+            },
+            {
+                "question": "Il est gros avant d’être petit et pleure toujours quand il brûle ?",
+                "answer": "La bougie."
+            },
+            {
+                "question": "Il a dents et tête, mais n’est ni animal ni humain ?",
+                "answer": "L’ail."
+            },
+            {
+                "question": "Tout nez a ça au bout.",
+                "answer": "La lettre Z."
+            },
+            {
+                "question": "Il tombe debout et coule allongé ?",
+                "answer": "La pluie."
+            },
+            {
+                "question": "Plus il a de rides, plus il est jeune ?",
+                "answer": "Le pneu."
+            },
+            {
+                "question": "Il a quatre pieds le jour et six la nuit ?",
+                "answer": "Le lit."
+            },
+            {
+                "question": "Il y a un verger dans ta veste ?",
+                "answer": "Le manche (ou 'manga' en portugais adaptatif)."
+            },
+            {
+                "question": "Il n’a pas de pied mais court, a un lit mais ne dort pas, quand il s’arrête meurt ?",
+                "answer": "La rivière."
+            },
+            {
+                "question": "Il se brise en un instant quand on prononce son nom ?",
+                "answer": "Le silence."
+            },
+            {
+                "question": "Marche avec le ventre en arrière ?",
+                "answer": "Notre jambe."
+            },
+            {
+                "question": "Il y a quoi au milieu du mot ‘cœur’ ?",
+                "answer": "La lettre ‘œ’."
+            },
+            {
+                "question": "Tous les mois l’ont, sauf avril ?",
+                "answer": "La lettre ‘o’."
+            },
+            {
+                "question": "A une queue mais n’est pas un chien; pas d’ailes mais sait voler. On le lâche, il ne monte pas, il vire autour ?",
+                "answer": "Le cerf-volant."
+            },
+            {
+                "question": "Il a 5 doigts, mais pas d’ongle.",
+                "answer": "Le gant."
+            },
+            {
+                "question": "Il est fait pour marcher et ne marche pas ?",
+                "answer": "La rue."
+            },
+            {
+                "question": "Quel endroit où tout le monde peut s’asseoir sauf toi ?",
+                "answer": "Ton genou."
+            },
+            {
+                "question": "Qu’est-ce qu’une imprimante dit à une autre ?",
+                "answer": "Cette feuille est à toi ou c’est mon impression ?"
+            },
+            {
+                "question": "Que dit le 4 au 40 ?",
+                "answer": "Passe le ballon."
+            },
+            {
+                "question": "Dans une église il y avait 4 bougies. Deux voleurs sont entrés et chacun a pris une bougie. Combien en reste-t-il ?",
+                "answer": "6 bougies."
+            },
+            {
+                "question": "Pourquoi le pétrole est allé chez le psy ?",
+                "answer": "Parce qu’il était au fond du puits."
+            },
+            {
+                "question": "Où est allé le papaye en vacances ?",
+                "answer": "À la pa-paye (jeu de mots ‘papaya’/‘pa-paye’)."
+            },
+            {
+                "question": "Quelle céréale aime la vache ?",
+                "answer": "Mu-céréal."
+            },
+            {
+                "question": "Pourquoi le cheval est allé dans la cabine téléphonique ?",
+                "answer": "Pour passer un coup."
+            },
+            {
+                "question": "Quel est l'opposé de danseur ?",
+                "answer": "Danse-retour."
+            },
+            {
+                "question": "Pourquoi le dinosaure n’applaudit-il pas ?",
+                "answer": "Parce qu’il est déjà éteint."
+            },
+            {
+                "question": "Quel animal ne vaut plus rien ?",
+                "answer": "Le sanglier."
+            },
+            {
+                "question": "Quel animal a des yeux mais ne voit pas ?",
+                "answer": "Mon chien quand il dort."
+            },
+            {
+                "question": "Quelle est la différence entre le ruban adhésif et l’avion ?",
+                "answer": "Le ruban colle et l’avion décolle."
+            },
+            {
+                "question": "Pourquoi la tomate est-elle allée à la banque ?",
+                "answer": "Pour retirer un extrait."
+            },
+            {
+                "question": "Qu’est-ce que le zéro a dit au huit ?",
+                "answer": "Joli coup de ceinture !"
+            },
+            {
+                "question": "Que fait un bon navigateur quand le bateau coule ?",
+                "answer": "Il nage (ou : il fait rien – jeu de mots avec 'nada' en portugais = 'rien')."
+            },
+            {
+                "question": "Quelle ville mouille les ivrognes quand il pleut ?",
+                "answer": "Bar-sem-lona (jeu de mots sur Barcelone et bar sans loi)."
+            },
+            {
+                "question": "Quelle est la montagne qui a des roues ?",
+                "answer": "La montagne russe."
+            },
+            {
+                "question": "Quel est l’animal le plus bavard ?",
+                "answer": "Le potin-singe (jeu avec 'commérage')."
+            },
+            {
+                "question": "Quel est le nom d’un animal qui vit aussi dans l’âme des gens ?",
+                "answer": "La paresse."
+            },
+            {
+                "question": "Quel État aime creuser des trous ?",
+                "answer": "Ama-trou (jeu avec Amapá)."
+            },
+            {
+                "question": "Pourquoi le squelette est allé chez le coiffeur ?",
+                "answer": "Pour ses favoris."
+            },
+            {
+                "question": "Quelle est la voix la plus désagréable ?",
+                "answer": "La voix d’arrestation (jeu de mots avec ‘voix de prison’)."
+            },
+            {
+                "question": "Comment s’appelle la plante qui ne voit rien ?",
+                "answer": "Aveugle-a (jeu de mots avec ‘acelga’)."
+            },
+            {
+                "question": "Quel est le mois de l’année qui a 28 jours ?",
+                "answer": "Tous les mois ont au moins 28 jours."
+            },
+            {
+                "question": "Pourquoi le bœuf monte la colline ?",
+                "answer": "Parce qu’il ne peut pas passer en dessous."
+            },
+            {
+                "question": "Pourquoi certaines personnes mettent le réveil sous l’oreiller ?",
+                "answer": "Pour se réveiller juste à temps (sur l’heure)."
+            },
+            {
+                "question": "J’ai une houe, une pelle et une faucille. Combien d’outils ai-je ?",
+                "answer": "Deux, car la faucille s’en est allée (jeu de mots : ‘foice’ = ‘fui-se’)."
+            },
+            {
+                "question": "Pourquoi le chien est-il entré dans l’église ?",
+                "answer": "Parce que c’est un berger allemand."
+            },
+            {
+                "question": "Cinq grenouilles sont sur un pont, trois pensent sauter. Combien restent sur le pont ?",
+                "answer": "Cinq. Elles ont juste pensé sauter."
+            },
+            {
+                "question": "Quel pick-up ne vient qu’avec un acteur ?",
+                "answer": "Vin Diesel (jeu de mots ‘Vem Diesel’)."
+            },
+            {
+                "question": "Si tu regardes mon visage, tu ne trouveras jamais treize. Qui suis-je ?",
+                "answer": "Une horloge."
+            },
+            {
+                "question": "Combien d’animaux Moïse a-t-il pris dans l’arche ?",
+                "answer": "Aucun. C’était Noé, pas Moïse."
+            },
+            {
+                "question": "Comment un écrivain met-il fin à une histoire d’amour ?",
+                "answer": "Avec un point final."
+            },
+            {
+                "question": "Pourquoi les oiseaux migrent-ils d’un pays à l’autre ?",
+                "answer": "Parce que c’est trop fatigant à pied."
+            },
+            {
+                "question": "Quelle machine peut arrêter le temps ?",
+                "answer": "L’appareil photo."
+            },
+            {
+                "question": "Qu’est-ce qui n’est utile que quand c’est cassé ?",
+                "answer": "L’œuf."
+            },
+            {
+                "question": "Quel animal ressemble le plus à un GPS ?",
+                "answer": "Le chien-guide."
+            },
+            {
+                "question": "Qui est le fils de ton père qui n’est pas ton frère ?",
+                "answer": "Toi-même."
+            },
+            {
+                "question": "Quel mois les gens dorment-ils le moins ?",
+                "answer": "Février, car il est le plus court."
+            },
+            {
+                "question": "Que fait Cebolinha (personnage qui échange le R par L) quand il dort ?",
+                "answer": "Il ‘lonque’ (jeu avec ‘ronca’ = ronfle)."
+            },
+            {
+                "question": "Qu’est-ce qui détruit tout en trois lettres ?",
+                "answer": "Fin."
+            },
+            {
+                "question": "Qu’y a-t-il au-dessus du roi ?",
+                "answer": "La couronne."
+            },
+            {
+                "question": "Quelle est la boisson préférée des animaux ?",
+                "answer": "Celle en bouteille PET."
+            },
+            {
+                "question": "Quel est le fromage qui souffre le plus ?",
+                "answer": "Le fromage râpé (jeu de mot sur 'ralado')."
+            },
+            {
+                "question": "Comment transformer un jus en serpent ?",
+                "answer": "Fais-lui des chatouilles : il devient ‘suco-ri’ (sucuri)."
+            },
+            {
+                "question": "Quel côté du chat a le plus de poils ?",
+                "answer": "L’extérieur."
+            },
+            {
+                "question": "Pourquoi le MC ne veut-il pas de bière ?",
+                "answer": "Parce qu’il Ke-vin (jeu avec ‘Kevinho’ et ‘vin’)."
+            }
+        ]
+    }
+
+
+    const questions = questionsData.questions;
+    let currentQuestionIndex = -1;
+    let timerInterval = null;
+    let timeLeft = 60;
+    let isRunning = false;
+
+    function showAnswerPopup() {
+        if (currentQuestionIndex >= 0 && questions[currentQuestionIndex]) {
+            const answer = questions[currentQuestionIndex].answer;
+            document.getElementById("answer").textContent = answer;
+            document.getElementById("answerPopup").style.display = "block";
+        }
+    }
+
+    function closeAllPopups() {
+        document.getElementById("popup").style.display = "none";
+        document.getElementById("answerPopup").style.display = "none";
+    }
+
+    function closePopup() {
+        document.getElementById("popup").style.display = "none";
+    }
+
+    function openPopup() {
+        document.getElementById("popup").style.display = "block";
+    }
+
+    function closeAnswerPopup() {
+        document.getElementById("answerPopup").style.display = "none";
+    }
+
+    function updateDisplay() {
+        const timerButton = document.getElementById('timer');
+        timerButton.textContent = isRunning ? timeLeft : '⏳';
+    }
+
+    function handleTimerClick() {
+        if (isRunning) {
+            clearInterval(timerInterval);
+            timerInterval = null;
+            isRunning = false;
+            timeLeft = 60;
+            updateDisplay();
+        } else {
+            isRunning = true;
+            updateDisplay();
+            timerInterval = setInterval(() => {
+                timeLeft--;
+                updateDisplay();
+                if (timeLeft <= 0) {
+                    clearInterval(timerInterval);
+                    timerInterval = null;
+                    isRunning = false;
+                    timeLeft = 60;
+                    updateDisplay();
+                }
+            }, 1000);
+        }
+    }
+
+    function stopTimer() {
+        clearInterval(timerInterval);
+        timerInterval = null;
+        isRunning = false;
+        timeLeft = 60;
+    }
+
+    function nextQuestion() {
+        currentQuestionIndex = Math.floor(Math.random() * questions.length);
+        const question = questions[currentQuestionIndex];
+        document.getElementById("questionCharadas").textContent = question.question;
+        document.getElementById("answer").textContent = "Click on a question first!";
+        stopTimer();
+        updateDisplay();
+    }
+
+    window.addEventListener('load', function () {
+        closeAllPopups();
+        nextQuestion();
+        updateDisplay();
+    });
+
+    // Fecha os popups ao clicar fora deles
+    window.onclick = function (event) {
+        if (event.target.classList.contains("popup")) {
+            closePopup();
+            closeAnswerPopup();
+        }
+    };
+</script>
+</body>
+
+</html>

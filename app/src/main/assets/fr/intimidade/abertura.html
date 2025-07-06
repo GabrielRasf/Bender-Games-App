@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" type="text/css" href="../../stylesCards.css">
+
+    <title>Intimité - Ouverture</title>
+
+</head>
+
+<body>
+<div class="game-container">
+    <!-- Menu -->
+    <nav class="menu">
+        <a href="../menuFr.html" class="menu-title" style="position: relative;">
+            <div class="voltar-container" onclick="window.location.href='../menuPtBr.html'">
+                &#8678; <!-- Isso é ← -->
+            </div>
+            <img class="logo-bebedeira" src="../images/logo.png" alt="Logo Bebedeira" />
+        </a>
+    </nav>
+
+    <!-- Conteúdo do jogo -->
+    <h1>
+        <a href="intimidade.html">Intimité</a>
+    </h1>
+    <h3>Ouverture</h3>
+    <div>
+        <a href="#" onclick="openPopup()">
+            <img class="img-regras" src="../images/regras.png" alt="Règles" />
+        </a>
+        <h4>Règles</h4>
+    </div>
+
+    <!-- Pop-up de regras -->
+    <div id="popup" class="popup">
+        <div class="popup-content">
+            <div class="popup-header">
+                <h2>Règles du jeu</h2>
+                <span class="close" onclick="closePopup()">&times;</span>
+                <h5>Ouverture <br> Intimité</h5>
+            </div>
+            <ul>
+                <li>Un excellent jeu pour les couples !</li>
+                <li>À chaque tour, le couple lit une phrase à voix haute</li>
+                <li>L’un essaie de deviner la réponse de l’autre</li>
+                <li>Puis c’est au tour de l’autre personne de deviner</li>
+                <li>Le but est de se mettre à la place de l’autre</li>
+                <li>Et bien sûr, vous pouvez en discuter après avoir répondu !</li>
+                <li>Si l’un des deux devine correctement, les deux boivent 🍷</li>
+                <li>Amusez-vous bien ! 🍻</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="card-frase">
+        <p id="questionAbertura">Chargement des questions...</p>
+        <!-- Liste d’options (si souhaité) -->
+        <ul id="optionsList" class="options-list"></ul>
+    </div>
+
+    <div class="button-container">
+        <button onclick="nextQuestion()">Question suivante</button>
+    </div>
+
+    <div id="result"></div>
+</div>
+<script>
+    const data = {
+        "questions": [
+            "Quel a été le moment le plus marquant que nous avons eu ensemble ?",
+            "Qu'est-ce que tu apprécies le plus chez moi ?",
+            "Quel est ton plus grand rêve que tu aimerais partager avec moi ?",
+            "Si tu pouvais changer quelque chose dans notre relation, que serait-ce ?",
+            "Quelle est ta plus grande peur dans notre relation ?",
+            "Qu'est-ce qui te fait te sentir aimé(e) ?",
+            "Quel est le souvenir le plus heureux que nous avons ensemble ?",
+            "Qu'est-ce que tu penses que nous pouvons améliorer dans notre communication ?",
+            "Qu'est-ce que tu penses que j'aime le plus chez toi physiquement ?",
+            "Si je devais choisir un autre métier, lequel penses-tu que ce serait ?",
+            "Quelle est ma chanson préférée de toute ma vie ?",
+            "Quel moment penses-tu m'avoir le plus marqué au cours de notre relation ?",
+            "Si j'étais une personne publique, qui penses-tu que je choisirais d'être ?",
+            "Qu'est-ce que tu fais qui m'énerve le plus ?",
+            "À quoi ressemblerait une journée parfaite pour moi ?",
+            "Actuellement, quel penses-tu être mon plus grand rêve ?",
+            "Quel animal penses-tu que je suis le plus identifié à ?",
+            "Si je ne pouvais dire qu'un seul mot pour le reste de ma vie, lequel serait-ce ?",
+            "Quelle partie de mon corps penses-tu que j'aime le plus ?",
+            "Qu'est-ce que tu penses que je valorise le plus dans une relation ?",
+            "Quel a été le premier détail chez moi qui a attiré ton attention ?",
+            "Si j'étais triste maintenant, que ferais-tu pour me remonter le moral ?",
+            "Qu'est-ce que tu penses que je pense quand je suis silencieux(se) ?",
+            "Quel a été le moment le plus drôle que nous avons vécu ensemble ?",
+            "Si nous devions fuir quelque part dans le monde, où penses-tu que je choisirais ?",
+            "Quelle habitude mienne trouves-tu la plus mignonne ?",
+            "Si je devais te décrire en un mot, lequel serait-ce ?",
+            "Quelle a été la plus grande surprise que tu penses que je t'ai faite ?",
+            "Qu'est-ce que tu penses me rend le plus insécure ?",
+            "Quel souvenir de nous penses-tu que j'aime le plus revivre ?",
+            "Si j'avais un superpouvoir, lequel penses-tu qu'il serait ?",
+            "Qu'est-ce en moi qui te donne le plus envie de prendre soin ?",
+            "Penses-tu que je suis plus raison ou émotion ?",
+            "Quelle partie de notre intimité penses-tu que j'apprécie le plus ?",
+            "Quelle serait la fantaisie romantique que tu penses que je voudrais réaliser ?",
+            "Quand je suis en colère, que penses-tu qu'il est préférable de faire ?",
+            "Quel compliment m'as-tu fait que je n'ai jamais oublié ?",
+            "Quel a été notre baiser le plus inoubliable, selon toi ?",
+            "Si je pouvais changer quelque chose en moi, que penses-tu que ce serait ?",
+            "Quelle odeur te rappelle instantanément moi ?",
+            "À quel moment as-tu réalisé que tu étais amoureux(se) de moi ?",
+            "Quelle chanson penses-tu définit notre histoire ?",
+            "Quel de tes touchers me calme le plus ?",
+            "Si je pouvais revivre une journée avec toi, laquelle serait-ce ?",
+            "Quelle manie mienne trouves-tu irrésistible ?",
+            "Si j'avais le mal du pays, que penses-tu que je ferais ?",
+            "Quelle est la plus grande folie que tu penses que je ferais par amour ?",
+            "Qu'est-ce qui t'impressionne le plus chez moi jusqu'à aujourd'hui ?",
+            "Qu'est-ce que tu penses que je pense quand je te regarde en silence ?",
+            "Si je devais t'écrire une lettre d'amour, que penses-tu que j'écrirais en premier ?",
+            "Quel détail dans ma façon d'être considères-tu comme le plus unique ?",
+            "Penses-tu que je suis plus dépendant(e) affectivement ou indépendant(e) ?",
+            "Quel souvenir de nous penses-tu que je garde avec le plus d'affection ?",
+            "Quelle est la plus grande leçon que tu penses que j'ai apprise de notre relation ?",
+            "Qu'est-ce en moi qui réveille ton côté le plus tendre ?",
+            "Si je pouvais t'emmener n'importe où maintenant, où penses-tu que je choisirais ?",
+            "Qu'est-ce que tu penses m'excite le plus en dehors du contact physique ?",
+            "Quel geste d'affection penses-tu que je ne me lasserais jamais ?",
+            "Si je pouvais arrêter le temps à un moment avec toi, lequel serait-ce ?",
+            "Quelle est la première chose que tu remarques chez moi quand on se réveille ensemble ?",
+            "Penses-tu que je suis plus jaloux(se) ou calme ?",
+            "Quel surnom affectueux me correspondrait le mieux ?",
+            "Si j'étais une saison, laquelle serais-je et pourquoi ?",
+            "Quelle partie de notre relation te surprend le plus jusqu'à aujourd'hui ?",
+            "Qu'est-ce que tu penses que je cache le plus par peur d'être blessé(e) ?",
+            "Quel compliment m'as-tu fait qui m'a le plus touché, selon toi ?",
+            "Si j'étais une chanson, laquelle penses-tu que je serais ?",
+            "Qu'est-ce en moi qui te fait te sentir chez toi ?",
+            "Quel moment intime de nous t'a le plus marqué ?",
+            "Penses-tu que je suis plus intense ou équilibré(e) ?",
+            "Si je devais écrire un poème sur toi, quel serait le thème, d'après toi ?",
+            "Qu'est-ce que tu penses me fait me sentir le plus aimé(e) ?",
+            "Crois-tu que je me suis vraiment donné à toi depuis le début ?",
+            "Quelle question as-tu peur que je te pose ?",
+            "Si notre amour était un film, quel serait son titre ?",
+            "Quelle est ma plus grande peur en amour ?",
+            "Que ferais-tu si tu savais que c'était notre dernier jour ensemble ?",
+            "Quelle partie de toi ai-je transformée pour le mieux ?",
+            "Quel a été le moment le plus inattendu où tu t'es senti(e) profondément connecté(e) à moi ?",
+            "Si notre histoire était un livre, quel serait le titre du prochain chapitre ?",
+            "Qu'est-ce en moi qui te fait te sentir le plus en sécurité émotionnellement ?",
+            "Quel est ton plus grand désir non exprimé concernant notre avenir ensemble ?",
+            "Si je pouvais te donner n'importe quel cadeau au monde, que voudrais-tu que ce soit ?",
+            "Quel geste de ma part t'a fait te sentir le plus aimé(e) récemment ?",
+            "Si nous pouvions revivre une journée de notre relation, laquelle serait-ce et pourquoi ?",
+            "Qu'est-ce que tu penses que nous avons appris ensemble qui a changé notre vision de l'amour ?",
+            "Quel est le souvenir le plus marquant de notre premier mois ensemble ?",
+            "Si nous devions créer une tradition qui nous est propre, que serait-elle ?",
+            "Quelle est ta plus grande espérance pour nous dans les cinq prochaines années ?",
+            "Qu'est-ce en moi qui t'inspire à être une meilleure personne ?",
+            "Si j'étais une chanson, laquelle serais-je et pourquoi ?",
+            "Quel a été le moment le plus drôle que nous avons partagé et que tu n'as jamais oublié ?",
+            "Si nous pouvions voyager maintenant, où irions-nous et que ferions-nous là-bas ?",
+            "Qu'est-ce que tu penses être notre plus grande force en tant que couple ?",
+            "Quelle est ta plus grande peur concernant notre relation ?",
+            "Si je pouvais changer une chose en moi pour te rendre plus heureux(se), que serait-ce ?",
+            "Quelle est la petite chose du quotidien qui te fait penser à moi ?",
+            "Si notre histoire était adaptée au cinéma, qui nous interpréterait ?",
+            "Quel est ton souvenir préféré d'un moment simple que nous avons passé ensemble ?",
+            "Qu'est-ce que tu penses rend notre relation unique ?",
+            "Si nous devions écrire nos vœux de mariage maintenant, que comprendrais-tu ?",
+            "Quelle est la chose la plus courageuse que nous ayons faite ensemble ?",
+            "Qu'est-ce que tu penses que nous pouvons encore découvrir l'un sur l'autre ?",
+            "Si j'étais une saveur, laquelle serais-je et pourquoi ?",
+            "Quel est ton souvenir le plus doux du début de notre relation ?",
+            "Si nous avions une devise en couple, quelle serait-elle ?",
+            "Qu'est-ce que tu penses être essentiel pour que notre connexion reste forte ?",
+            "Si je pouvais t'emmener dans un lieu du passé, lequel serait-ce et pourquoi ?",
+            "Un personnage de télévision que je pourrais être.",
+            "Ai-je l'air d'intimider les gens ?",
+            "Penses-tu que je voudrais être célèbre ?",
+            "Que penses-tu que mon fond d'écran de téléphone dit de moi ?",
+            "Penses-tu que j'ai déjà fait quelque chose d'illégal ? Si oui, que penses-tu que c'était ?",
+            "Donne une valeur que tu penses être très importante pour moi.",
+            "Penses-tu que je tombe amoureux(se) rapidement ?",
+            "Penses-tu que je déménagerais dans un autre pays ? Si oui, lequel ?",
+            "Quelle profession me correspondrait ?",
+            "Penses-tu que j'ai déjà eu le cœur brisé ?",
+            "Active la caméra de ton téléphone et prends une photo spontanée de la personne qui joue avec toi. Gardez ces souvenirs pour les revoir dans une semaine.",
+            "Imaginez que vous avez le mot de passe de l'autre sur Instagram, comment écrirais-tu la bio de cette personne ? Écris-la sur un papier.",
+            "Que penses-tu que je veux communiquer avec les vêtements que je porte aujourd'hui ?",
+            "Un défaut que je semble avoir.",
+            "Quelle est la première chose que tu penses que je remarque chez quelqu'un ?",
+            "Que dirais-tu être essentiel dans ma vie ?",
+            "Quel type d'élève penses-tu que j'étais à l'école ?",
+            "Quel groupe penses-tu que j'aime le plus ?",
+            "Qu'est-ce que tu penses que je trouve sexy chez une personne ?",
+            "Quelle tatouage penses-tu que je ferais ? Dessine-le avec un stylo sur moi.",
+            "Quelle a été ta première impression sur moi ?",
+            "Quelle est la première chose que tu penses que je fais au réveil ?",
+            "Que penses-tu que je ferais si je gagnais à la loterie ?",
+            "Sur une échelle de 1 à 10, à quel point penses-tu que ma maison (ma chambre) est en désordre ? Explique."
+        ]
+    };
+
+    let questions = [];
+    let currentQuestion = 0;
+
+    // Função para embaralhar array (Fisher-Yates)
+    function shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array;
+    }
+
+    function loadQuestions() {
+        questions = shuffleArray(data.questions.slice()); // copia e embaralha
+        currentQuestion = 0;
+        nextQuestion();
+    }
+
+    function nextQuestion() {
+        const questionElem = document.getElementById("questionAbertura");
+        const resultElem = document.getElementById("result");
+
+        if (questions.length === 0) {
+            questionElem.textContent = "Nenhuma pergunta disponível.";
+            return;
+        }
+
+        if (currentQuestion < questions.length) {
+            questionElem.textContent = questions[currentQuestion];
+            resultElem.textContent = "";
+            currentQuestion++;
+        } else {
+            questionElem.textContent = "Fin du jeu ! J'espère que vous vous êtes amusés ! Voulez-vous rejouer ?";
+            resultElem.textContent = "";
+            currentQuestion = 0;
+            questions = shuffleArray(data.questions.slice());
+        }
+    }
+
+    // Pop-up de regras
+    function openPopup() {
+        document.getElementById("popup").style.display = "block";
+    }
+
+    function closePopup() {
+        document.getElementById("popup").style.display = "none";
+    }
+
+    // Fechar pop-up clicando fora da caixa
+    window.onclick = function (event) {
+        let popup = document.getElementById("popup");
+        if (event.target === popup) {
+            closePopup();
+        }
+    };
+
+    // Inicia carregamento
+    loadQuestions();
+</script>
+</body>
+
+</html>

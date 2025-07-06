@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="../../stylesCards.css">
+    <title>Pires Amis</title>
+</head>
+
+<body>
+
+<div class="game-container">
+    <!-- Menu -->
+    <nav class="menu">
+        <a href="../menuFr.html" class="menu-title" style="position: relative;">
+            <div class="voltar-container" onclick="window.location.href='../menuPtBr.html'">
+                &#8678; <!-- Cela est ← -->
+            </div>
+            <img class="logo-bebedeira" src="../images/logo.png" alt="Logo Bebedeira" />
+        </a>
+    </nav>
+
+    <!-- Contenu du jeu -->
+    <div>
+        <h1>Pires amis</h1>
+        <a href="#" onclick="openPopup()">
+            <img class="img-regras" src="../images/regras.png" alt="Règles" />
+        </a>
+        <h4>Règles</h4>
+    </div>
+
+
+    <div class="card-frase">
+        <p id="questionPioresAmigos"></p>
+    </div>
+
+    <div class="button-container">
+        <button onclick="nextQuestion()">Question suivante</button>
+    </div>
+
+    <div id="result">
+    </div>
+</div>
+
+<!-- Pop-up -->
+<div id="popup" class="popup">
+    <div class="popup-content">
+        <div class="popup-header">
+            <h2>Règles du jeu</h2>
+            <span class="close" onclick="closePopup()">&times;</span>
+        </div>
+        <ul>
+            <li>Choisissez un maître de la manche.</li>
+            <li>Le maître lit une carte de l'application.</li>
+            <li>Les joueurs comptent jusqu'à 3 et pointent vers un des amis.</li>
+            <li>Le joueur qui reçoit le plus de votes est le "pire ami" de la manche et marque un point.</li>
+            <li>En cas d'égalité, le maître est responsable du départage.</li>
+            <li>Le joueur le plus voté doit boire une dose.</li>
+            <li>Amusez-vous bien ! 🍻</li>
+        </ul>
+    </div>
+</div>
+
+
+<script>
+    // Dados do jogo embutidos no HTML
+    const gameData = {
+        questions: [
+            "Qui tergiverse avant de prendre une décision ?",
+            "Lequel d'entre nous se saoule toujours et gâche la soirée de tout le monde ?",
+            "L'un d'entre nous est un hypocrite qui critique tout et tout le monde, mais fait la même chose. Qui est-ce ?",
+            "L'un d'entre nous est le type de personne qui promet toujours de commencer la salle de sport ou un régime, mais ne le fait jamais. Qui ?",
+            "Qui a le plus de chances d'avoir une relation incestueuse avec un(e) parent(e) ?",
+            "Lequel d'entre nous est beaucoup plus raciste qu'il ne le pense vraiment ?",
+            "Qui rit quand il regarde les Jeux paralympiques ?",
+            "Qui est le plus gros perdant du groupe ?",
+            "L'un d'entre nous ne croit pas au réchauffement climatique. Qui ?",
+            "Qui a réussi plus grâce à son physique que grâce à son talent ?",
+            "L'un d'entre nous, on sait tous qui, a presque toujours tort ?",
+            "INTERVENTION ! Nous sommes tous d'accord que _____ devrait consommer moins de drogue.",
+            "Aujourd'hui (ou récemment) je me suis masturbé(e) en pensant à l'un d'entre vous. Qui ?",
+            "Qui a un jouet sexuel extrêmement dérangeant ?",
+            "Qui ici aimerait réunir le groupe sur une plage de nudistes juste pour voir tout le monde nu ?",
+            "Si nous devions tous raconter ce qui nous excite sexuellement, qui raconterait quelque chose de terrifiant, grave, et qui nous empêcherait de dormir ?",
+            "L'un d'entre nous n'aime vraiment pas le sexe. Qui ?",
+            "Qui pense à une autre personne à chaque fois qu'il/elle fait l'amour ?",
+            "Je présente mille excuses, mais je ne coucherais pas avec _____ même si l'avenir de l'humanité en dépendait.",
+            "Lequel d'entre nous pleure à chaque orgasme ?",
+            "Qui fait l'amour mal ?",
+            "Lequel d'entre nous rit aux blagues même sans les comprendre ?",
+            "Lequel d'entre nous est un(e) grand(e) candidat(e) à la maladie d'Alzheimer ?",
+            "Qui est le/la radin(e), fainéant(e), qui prend toujours la nourriture et les boissons des autres ?",
+            "L'un d'entre nous est absolument incapable de reconnaître ses propres erreurs. Qui ?",
+            "En général, nous passons de bons moments ensemble, sauf quand _____ gâche nos rencontres.",
+            "Qui croit être plus cool qu'il ne l'est en réalité ?",
+            "Toutes nos conversations sur l'application ont fuité. Le premier à être annulé est...",
+            "Lequel d'entre nous fait semblant d'avoir un orgasme ?",
+            "Qui raconte à tout le monde l'intimité sexuelle de la vie à deux, en exposant ce qui ne devrait pas être raconté ?",
+            "Chaque groupe a quelqu'un qui ne se rend pas compte à quel point il/elle est bizarre. Dans notre groupe, cette personne est ?",
+            "Au moment de commander un repas livré, lequel d'entre nous met une éternité à choisir ?",
+            "Parfois, j'ai honte pour le/la ?",
+            "Qui devient une personne complètement différente quand il/elle est avec son/sa partenaire ?",
+            "L'un d'entre nous, parfois, exagère quand on parle de politique. Qui ?",
+            "Qui se sent toujours visé(e) dans les disputes ?",
+            "Qui espionne le téléphone de son/sa partenaire ?",
+            "La dernière personne avec qui j'échangerais ma vie serait ?",
+            "Qui perd facilement raison ?",
+            "Nous sommes dans une célèbre télé-réalité brésilienne. Qui est éliminé avec le plus de rejet du public ?",
+            "Qui prendrait l'avion pour faire un saut en parachute et regretterait à la dernière minute ?",
+            "Qui sera le dernier d'entre nous à refaire l'amour ?",
+            "L'un d'entre nous est un peu plus 'sensible' qu'on ne le voudrait. Qui ?",
+            "Au compte de trois, nous pointons tous vers qui, sûrement, a volé de l'argent à ses parents quand il/elle était enfant. Un, deux, trois.",
+            "L'un d'entre nous a toujours une excuse. Qui ?",
+            "L'un d'entre nous pense tout le temps qu'il/elle est irrésistible. Qui ?",
+            "Et le prix du plus prétentieux (arrogant ou excessivement confiant) du groupe revient à...",
+            "Qui se vexe pour des choses insignifiantes ?",
+            "Lequel d'entre nous paierait secrètement un coach ?",
+            "Lequel d'entre nous célèbrerait le 4 juillet au lieu du jour de l'indépendance du Brésil ?",
+            "Lequel d'entre nous a le pire prénom ?",
+            "L'un d'entre nous croit toujours et partage des fake news. Qui ?",
+            "L'un d'entre nous perd toujours les pédales quand il est critiqué. Qui ?",
+            "Qui est en couple avec quelqu'un que nous détestons ?",
+            "Qui parle toujours de ses propres problèmes et n'écoute pas les autres quand ils parlent des leurs ?",
+            "Qui est une machine à mentir ?",
+            "L'un d'entre nous est très radin pour offrir des cadeaux d'anniversaire. Qui ?",
+            "Qui semble être très limité au lit ?",
+            "Lequel d'entre nous battra ou a battu ses propres enfants ?",
+            "L'un d'entre nous devrait arrêter de parler autant de son/sa ex. Qui ?",
+            "Comme il est facile de manipuler _____.",
+            "Qui nous manipule toujours pour que son propre plan réussisse ?",
+            "Qui passe tout son temps à se comparer au reste d'entre nous ?",
+            "Lequel d'entre nous cache une terrible addiction au jeu ?",
+            "L'un d'entre nous cache un aspect de sa vie parce que, s'il/elle dévoilait tout, on arrêterait de lui parler. Qui ?",
+            "Lequel d'entre nous a une vie extrêmement futile ?",
+            "Qui est absolument incapable de partager le bonheur des autres ?",
+            "Qui serait content si je ne faisais plus partie de ce groupe d'amis ?",
+            "Et le prix du pire goût musical revient à...",
+            "Qui ne devrait jamais avoir un animal de compagnie (pour le bien de l'animal lui-même) ?",
+            "Lequel d'entre nous souhaite interdire le football féminin ?",
+            "Qui réussirait bien dans le service militaire obligatoire ?",
+            "Si je dis 'idiot, têtu ou obstiné', je parle clairement de qui ?",
+            "Nous commençons un nouveau travail. Qui ne peut pas attendre une journée avant de critiquer le patron ?",
+            "À l'enterrement de qui, il n'y aura pratiquement personne ?",
+            "Parfois je me demande pourquoi l'ami(e) de...",
+            "L'un d'entre nous a plus honte que le reste du groupe quand il s'agit de parler de sexe. Qui ?",
+            "L'un d'entre nous a dépensé une petite fortune sur OnlyFans. Qui ?",
+            "Le Dalaï Lama est passé ici et nous a dit de passer moins de temps avec...",
+            "Chaque fois que _____ nous raconte ses rêves, au fond on sait qu'ils ne se réaliseront jamais.",
+            "Pour l'amour de Dieu, je ne veux plus entendre aucune histoire du voyage de...",
+            "Qui pourrait être beaucoup plus heureux qu'il ne l'est ?",
+            "Qui lit des livres de développement personnel ?",
+            "Lequel d'entre nous sait exactement combien de followers il a sur les réseaux sociaux ?",
+            "Lequel d'entre nous est un zéro à gauche au travail ?",
+            "Qui ici se soucie plus de l'argent que de toute autre chose dans la vie ?",
+            "L'un d'entre nous s'en fout complètement de tout et de tout le monde. Qui ?",
+            "Qui se moque complètement de ce groupe ?",
+            "J'ai une excellente nouvelle à annoncer à mes amis. La dernière personne à qui je la dirai est ?",
+            "L'un d'entre nous insiste pour faire la même merde. Qui ?",
+            "L'un d'entre nous pense que prêter c'est offrir et ne rend jamais rien. Qui ?",
+            "Qui est un(e) ingrat(e) de merde ?",
+            "Qui exagère absolument tout quand il raconte quelque chose ?",
+            "De qui ai-je eu une très mauvaise première impression ?",
+            "L'un d'entre nous raconte toujours les mêmes blagues. Qui ?",
+            "L'un d'entre nous regarde des émissions avec des prêtres brésiliens. Qui ?",
+            "Lequel d'entre nous devrait réfléchir un peu plus avant d'ouvrir la bouche ?",
+            "Qui ai-je mis en sourdine sur Instagram ?",
+            "L'un d'entre nous voit toujours le côté négatif des choses, sans mentionner qu'il est un pessimiste de merde. Qui ?",
+            "Qui gâche toujours Noël en famille ?",
+            "Qui vit sa vie et agit comme s'il avait 20 ans de plus qu'il n'en a ?",
+            "Qui vit sa vie et agit comme s'il avait 20 ans ?",
+            "L'un d'entre nous se moque des pauvres. Qui ?",
+            "Disons juste : 'L'un d'entre nous ressemble à un cochon quand il mange.' Qui ?",
+            "Qui pleure chaque fois qu'il voit Titanic ?",
+            "Lequel d'entre nous pense qu'il déchire en dansant mais fait honte ?",
+            "Lequel d'entre nous est toujours en retard et n'admet jamais que c'est de sa faute ?",
+            "Qui a déjà fait semblant d'être malade juste pour ne pas sortir avec le groupe ?",
+            "Qui s'implique toujours dans des disputes en ligne inutiles ?",
+            "Qui a un secret si absurde que, si on le découvrait, on ne le regarderait plus jamais de la même façon ?",
+            "Lequel d'entre nous fait des commérages puis agit comme s'il n'avait rien dit ?",
+            "Qui adore donner des conseils sur les relations, mais sa propre vie amoureuse est un désastre ?",
+            "Lequel d'entre nous a déjà envoyé un message bourré et l'a regretté le lendemain ?",
+            "Qui dit toujours qu'il va partir tôt de la fête et est le dernier à partir ?",
+            "Qui est incapable de regarder un film sans spoiler ?",
+            "Lequel d'entre nous ressemble le plus à un PNJ dans la vie réelle ?",
+            "Qui s'est déjà impliqué dans des embrouilles inutiles avec des voisins ?",
+            "Lequel d'entre nous semble toujours être dans une télé-réalité, vivant des drames exagérés ?",
+            "Qui est le plus susceptible de devenir un mème à cause de quelque chose de ridicule ?",
+            "Lequel d'entre nous a une addiction secrète que personne n'imagine ?",
+            "Qui a déjà perdu quelque chose d'important et a blâmé quelqu'un d'autre juste pour ne pas assumer ?",
+            "Qui fait semblant d'aimer un cadeau juste pour ne pas blesser celui qui l'a donné ?",
+            "Qui est la personne la plus oublieuse du groupe et perd toujours ses affaires ?",
+            "Qui a déjà inventé une excuse absurde juste pour sortir d'une situation ennuyeuse ?",
+            "Qui n'est jamais satisfait(e) de rien et trouve toujours quelque chose à critiquer ?",
+            "Qui pense commander dans le groupe, mais en fait personne ne le prend au sérieux ?",
+            "Lequel d'entre nous fait un drame pour un rien ?",
+            "Qui a déjà eu un crush secret sur quelqu'un du groupe ?",
+            "Lequel d'entre nous disparaît quand il trouve un(e) petit(e) ami(e) ?",
+            "Qui prend toujours la voiture gratuitement et n'offre jamais d'essence ?",
+            "Qui a déjà inventé une excuse ridicule pour ne pas prêter de l'argent ?",
+            "Lequel d'entre nous a déjà utilisé l'excuse 'Je viens de prendre une douche' pour ne pas sortir ?",
+            "Qui annule toujours les plans à la dernière minute ?",
+            "Qui a déjà fait semblant de ne pas voir un message pour ne pas répondre ?",
+            "Qui ne paie jamais toute la facture et 'oublie' toujours de rembourser ensuite ?",
+            "Qui s'est déjà mis dans des ennuis pour avoir trop parlé ?",
+            "Qui tient absolument à corriger tout le monde, même quand il a tort ?",
+            "Lequel d'entre nous se croit le plus grand influenceur du monde, mais personne ne fait attention ?",
+            "Qui exagère toujours quand il raconte une histoire ?",
+            "Qui est le premier à disparaître quand il faut aider quelqu'un ?",
+            "Qui a déjà offert un cadeau recyclé à quelqu'un ?",
+            "Lequel d'entre nous a le rire le plus agaçant du groupe ?",
+            "Qui est déjà parti en rendez-vous et a envoyé un message pour qu'on vienne le chercher ?",
+            "Qui promet toujours que 'cette fois ça va changer' et ne change jamais ?",
+            "Qui se fait ami avec tout le monde à une fête, mais le lendemain fait comme s'il ne connaissait personne ?",
+            "Lequel d'entre nous est le plus susceptible d'être arrêté pour une raison stupide ?",
+            "Qui a déjà perdu quelque chose d'important par pur oubli ?",
+            "Qui achète toujours des choses chères puis regrette ?",
+            "Qui a déjà fait une scène inutile par jalousie ?",
+            "Qui a déjà regretté un tatouage qu'il a fait ?",
+            "Lequel d'entre nous devrait avoir sa propre télé-réalité ?",
+            "Qui a l'historique de recherche le plus bizarre du groupe ?",
+            "Qui a déjà fait semblant d'aimer une chanson ou une série juste pour faire plaisir à quelqu'un ?",
+            "Lequel d'entre nous est le plus grand accumulatore et ne jette jamais rien ?",
+            "Qui perd toujours les paris et continue à parier ?",
+            "Qui a déjà fait semblant d'être occupé juste pour ne pas aider à un déménagement ?",
+            "Lequel d'entre nous serait le premier éliminé d'une télé-réalité de survie ?",
+            "Qui adore donner son avis sur tout, même quand il ne comprend rien au sujet ?",
+            "Qui a déjà été vu dans une sortie qu'il avait juré de ne jamais faire ?",
+            "Qui change toujours d'avis pour plaire aux autres ?",
+            "Qui a déjà eu honte dans un karaoké alors qu'il pensait tout déchirer ?",
+            "Qui se croit drôle, mais personne ne rit à ses blagues ?",
+            "Qui est toujours impliqué dans des commérages sans même s'en rendre compte ?",
+            "Lequel d'entre nous a les pires goûts en films et séries ?",
+            "Qui serait le premier à perdre patience lors d'un long voyage en voiture ?",
+            "Qui a déjà pleuré en regardant une publicité à la télé ?",
+            "Qui est le plus susceptible de disparaître au milieu de la fête sans prévenir personne ?",
+            "Qui a la plus grande collection d'excuses bidons ?",
+            "Qui a déjà acheté quelque chose d'inutile et a fait semblant que ça valait le coup ?",
+            "Lequel d'entre nous essaie toujours d'être le centre d'attention ?",
+            "Qui est le premier à se plaindre de la chaleur et du froid dans la même conversation ?",
+            "Qui s'est déjà bagarré sans même savoir pourquoi ?",
+            "Qui ne finit jamais ce qu'il commence ?",
+            "Qui est le plus susceptible d'être refusé à l'entrée d'un événement ?",
+            "Lequel d'entre nous met le plus de temps à répondre aux messages ?",
+            "Qui a déjà fait semblant de dormir pour ne pas répondre à un appel ?",
+            "Qui oublie toujours de rendre ce qu'il emprunte ?",
+            "Qui a déjà révélé un secret qu'il avait juré de garder ?",
+            "Qui a les pires excuses pour manquer des rendez-vous ?",
+            "Qui a déjà fait semblant au travail ou à la fac ?",
+            "Qui a le plus de chances de rire au mauvais moment ?",
+            "Qui a déjà eu un rendez-vous catastrophique et ne l'a jamais raconté ?",
+            "Qui a les pires mots de passe (comme '1234' ou 'motdepasse') ?",
+            "Qui écrit toujours des pavés dans les groupes, mais personne ne les lit ?",
+            "Qui a déjà dépensé de l'argent dans quelque chose de totalement inutile ?",
+            "Lequel d'entre nous est le plus grand commère déguisé ?",
+            "Qui a déjà pris un Uber juste pour aller quelque part où il aurait pu aller à pied ?",
+            "Qui a le plus de chances de devenir viral sur internet à cause d'un fail ?",
+            "Qui a déjà envoyé un message au mauvais destinataire ?",
+            "Lequel d'entre nous invente toujours qu'il est malade pour ne pas sortir ?",
+            "Qui a le pire goût musical du groupe ?",
+            "Qui s'est déjà endormi en plein milieu d'une conversation importante ?",
+            "Qui a déjà fait une promesse qu'il n'a jamais tenue ?",
+            "Qui a le plus de chances d'oublier son propre anniversaire ?",
+            "Qui s'est déjà disputé avec quelqu'un et a oublié pourquoi ?",
+            "Qui a commencé une dispute et a fait semblant que rien ne s'était passé ?",
+            "Lequel d'entre nous est le plus dramatique ?",
+            "Qui a déjà essayé de cuisiner quelque chose et a fini par mettre le feu à la cuisine ?",
+            "Qui oublie toujours les anniversaires et les dates importantes ?",
+            "Qui a le plus de chances de poser un lapin à quelqu'un ?",
+            "Qui est tombé amoureux en moins de 5 minutes ?",
+            "Lequel d'entre nous passe plus de temps sur son téléphone qu'il ne devrait ?",
+            "Qui promet toujours d'aller dormir tôt mais ne dort jamais ?",
+            "Qui a déjà matché sur Tinder avec quelqu'un qu'il connaît et a fait semblant de ne pas voir ?",
+            "Qui a déjà fait un achat en ligne et l'a regretté dès la réception ?",
+            "Qui a déjà perdu le contrôle de sa carte de crédit ?",
+            "Qui a le plus de chances de se tromper de chemin en utilisant le GPS ?",
+            "Qui a déjà été confondu avec une autre personne et a fait semblant d'être elle ?",
+            "Qui a déjà fait semblant de savoir quelque chose juste pour ne pas paraître idiot(e) ?",
+            "Lequel d'entre nous serait un excellent détective de la vie des autres ?",
+            "Qui a déjà laissé tomber son téléphone sur son visage en étant allongé(e) ?",
+            "Qui a le plus de chances de devenir un mème malgré lui ?",
+            "Qui est déjà parti d'une soirée sans prévenir personne ?",
+            "Lequel d'entre nous a le plus d'histoires embarrassantes à raconter ?"
+        ]
+    };
+
+    let questions = [];
+    let currentQuestion = 0;
+
+    // Mélange Fisher-Yates
+    function shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array;
+    }
+
+    // Fonction pour afficher la question suivante
+    function nextQuestion() {
+        if (questions.length === 0) {
+            // Si les questions sont terminées, recommencer
+            questions = shuffleArray([...gameData.questions]);
+            currentQuestion = 0;
+        }
+
+        if (currentQuestion < questions.length) {
+            document.getElementById("questionPioresAmigos").textContent = questions[currentQuestion];
+            document.getElementById("result").textContent = "";
+            currentQuestion++;
+        } else {
+            // Si arrivé à la fin, recommencer
+            questions = shuffleArray([...gameData.questions]);
+            currentQuestion = 0;
+            document.getElementById("questionPioresAmigos").textContent = questions[currentQuestion];
+            currentQuestion++;
+        }
+    }
+
+    // Initialiser le jeu
+    function initGame() {
+        questions = shuffleArray([...gameData.questions]);
+        nextQuestion();
+    }
+
+    // Fonctions pour la fenêtre pop-up
+    function openPopup() {
+        document.getElementById("popup").style.display = "block";
+    }
+
+    function closePopup() {
+        document.getElementById("popup").style.display = "none";
+    }
+
+    // Fermer la pop-up en cliquant en dehors
+    window.onclick = function (event) {
+        let popup = document.getElementById("popup");
+        if (event.target === popup) {
+            popup.style.display = "none";
+        }
+    };
+
+    // Initialiser le jeu quand la page charge
+    window.onload = initGame;
+
+</script>
+</body>
+
+</html>

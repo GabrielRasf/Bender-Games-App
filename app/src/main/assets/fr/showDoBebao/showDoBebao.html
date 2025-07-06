@@ -1,0 +1,5482 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" type="text/css" href="../../stylesCards.css" />
+    <title>Show du Gros Soûlard</title>
+</head>
+
+<body>
+
+<div class="game-container">
+    <!-- Menu -->
+    <nav class="menu">
+        <a href="../menuFr.html" class="menu-title" style="position: relative;">
+            <div class="voltar-container" onclick="window.location.href='../menuPtBr.html'">
+                &#8678; <!-- Ceci est ← -->
+            </div>
+            <img class="logo-bebedeira" src="../images/logo.png" alt="Logo Bebedeira" />
+        </a>
+    </nav>
+
+    <!-- Contenu du jeu -->
+    <div>
+        <h1>Show du Gros Soûlard</h1>
+
+        <a href="#" onclick="openPopup()">
+            <img class="img-regras" src="../images/regras.png" alt="Règles" />
+        </a>
+        <h4>Règles</h4>
+    </div>
+
+    <!-- Pop-up Règles -->
+    <div id="popup" class="popup">
+        <div class="popup-content">
+            <div class="popup-header">
+                <h2>Règles du Jeu</h2>
+                <span class="close" onclick="closePopup()">&times;</span>
+            </div>
+            <ul>
+                <li>Une question, quatre options, une bonne réponse</li>
+                <li>Un joueur devient le présentateur et lit une question avec 4 options.</li>
+                <li>Le joueur suivant dans le cercle répond.</li>
+                <li>Si la réponse est correcte : passe le tour.</li>
+                <li>Si la réponse est fausse : boit un shot.</li>
+                <li>Ensuite, le rôle du présentateur passe au joueur suivant (sens horaire).</li>
+                <li><strong>VARIATION</strong></li>
+                <li>Le joueur peut, une fois, demander de l’aide aux autres participants</li>
+                <li>Le joueur peut, une fois, sauter une réponse</li>
+                <li>Le joueur peut, une fois, demander de retirer deux options</li>
+                <li>Amusez-vous bien ! 🍻</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="card-frase">
+        <p id="questionShowDoBebao"></p>
+        <ul id="optionsList" class="options-list"></ul>
+        <div class="center-container">
+            <img class="pergunta-e-resposta" src="../images/pergunta-e-resposta.png" onclick="showAnswerPopup()"
+                 style="cursor: pointer;" alt="Afficher la réponse" />
+        </div>
+    </div>
+
+    <div class="button-container">
+        <button onclick="nextQuestion()">Question suivante</button>
+    </div>
+    <div id="result"></div>
+</div>
+
+<!-- Pop-up de la Réponse -->
+<div id="answerPopup" class="popup" style="display:none;">
+    <div class="popup-content">
+        <span class="close" onclick="closeAnswerPopup()">&times;</span>
+        <h3>Réponse</h3>
+        <h5>Show du Gros Soûlard</h5>
+        <p id="answerText">Cliquez d'abord sur une question !</p>
+    </div>
+</div>
+
+<script>
+    const data = {
+        "questions": [
+            {
+                "question": "Quel est le nom de l'archipel situé à l'extrême nord du Brésil, près de la frontière avec la Guyane française ?",
+                "options": [
+                    "Îles Maldives",
+                    "Îles Galápagos",
+                    "Îles Bahamas",
+                    "Îles de Marajó"
+                ],
+                "answer": [
+                    "Îles de Marajó"
+                ]
+            },
+            {
+                "question": "Quelle capitale brésilienne est célèbre pour son plan pilote en forme d'avion ?",
+                "options": [
+                    "Rio de Janeiro",
+                    "São Paulo",
+                    "Brasília",
+                    "Belo Horizonte"
+                ],
+                "answer": [
+                    "Brasília"
+                ]
+            },
+            {
+                "question": "Quel est le nom du célèbre jeu de puzzle où il faut compléter des lignes horizontales ?",
+                "options": [
+                    "Candy Crush",
+                    "Tetris",
+                    "Minecraft",
+                    "Angry Birds"
+                ],
+                "answer": [
+                    "Tetris"
+                ]
+            },
+            {
+                "question": "Quelle boisson est distillée à partir de l'agave bleue ?",
+                "options": [
+                    "Vodka",
+                    "Rhum",
+                    "Tequila",
+                    "Whisky"
+                ],
+                "answer": [
+                    "Tequila"
+                ]
+            },
+            {
+                "question": "Quel film de 2022, suite d’un film iconique des années 80, met en vedette Tom Cruise en pilote de chasse ?",
+                "options": [
+                    "Le Batman",
+                    "Mission Impossible",
+                    "Fast and Furious",
+                    "Top Gun : Maverick"
+                ],
+                "answer": [
+                    "Top Gun : Maverick"
+                ]
+            },
+            {
+                "question": "Quelle est la boisson alcoolisée la plus consommée dans le monde ?",
+                "options": [
+                    "Vin",
+                    "Vodka",
+                    "Bière",
+                    "Tequila"
+                ],
+                "answer": [
+                    "Bière"
+                ]
+            },
+            {
+                "question": "Quel état brésilien est connu comme la 'terre de la bruine' ?",
+                "options": [
+                    "São Paulo",
+                    "Rio de Janeiro",
+                    "Minas Gerais",
+                    "Paraná"
+                ],
+                "answer": [
+                    "São Paulo"
+                ]
+            },
+            {
+                "question": "Quel est le nom de l'actrice qui a joué le personnage Hermione dans la série de films Harry Potter ?",
+                "options": [
+                    "Emma Thompson",
+                    "Emma Stone",
+                    "Emma Roberts",
+                    "Emma Watson"
+                ],
+                "answer": [
+                    "Emma Watson"
+                ]
+            },
+            {
+                "question": "Quelle chanteuse est devenue célèbre avec l'album 'Teenage Dream' ?",
+                "options": [
+                    "Taylor Swift",
+                    "Katy Perry",
+                    "Lady Gaga",
+                    "Ariana Grande"
+                ],
+                "answer": [
+                    "Katy Perry"
+                ]
+            },
+            {
+                "question": "Quel est le nom de la plus haute montagne d'Europe située en Russie ?",
+                "options": [
+                    "Mont Elbrouz",
+                    "Mont Cervin",
+                    "Mont Blanc",
+                    "Mont Olympe"
+                ],
+                "answer": [
+                    "Mont Elbrouz"
+                ]
+            },
+            {
+                "question": "Quel film a remporté l'Oscar du meilleur film en 2020 ?",
+                "options": [
+                    "Once Upon a Time in... Hollywood",
+                    "1917",
+                    "Joker",
+                    "Parasite"
+                ],
+                "answer": [
+                    "Parasite"
+                ]
+            },
+            {
+                "question": "Le festival de musique et d'art 'Burning Man' a lieu dans quel désert ?",
+                "options": [
+                    "Désert du Sahara",
+                    "Désert de Mojave",
+                    "Désert de Black Rock",
+                    "Désert d'Atacama"
+                ],
+                "answer": [
+                    "Désert de Black Rock"
+                ]
+            },
+            {
+                "question": "Quel est le nom du célèbre compositeur brésilien connu comme 'Le maître souverain' ?",
+                "options": [
+                    "Tom Jobim",
+                    "Chico Buarque",
+                    "Villa-Lobos",
+                    "Milton Nascimento"
+                ],
+                "answer": [
+                    "Tom Jobim"
+                ]
+            },
+            {
+                "question": "Quel est le nom complet du chanteur Gusttavo Lima ?",
+                "options": [
+                    "Nivaldo Lima",
+                    "Emival Lima",
+                    "Sebastião Lima",
+                    "Claucirlei Lima"
+                ],
+                "answer": [
+                    "Nivaldo Lima"
+                ]
+            },
+            {
+                "question": "Où a lieu la plus grande Oktoberfest du Brésil, la deuxième plus grande au monde ?",
+                "options": [
+                    "Blumenau",
+                    "Valeu Europa",
+                    "Nouvelle Munich",
+                    "Santa Cruz do Sul"
+                ],
+                "answer": [
+                    "Blumenau"
+                ]
+            },
+            {
+                "question": "Dans quelle ville américaine a lieu le célèbre festival de musique électronique 'Ultra Music Festival' ?",
+                "options": [
+                    "Los Angeles",
+                    "Miami",
+                    "Las Vegas",
+                    "New York"
+                ],
+                "answer": [
+                    "Miami"
+                ]
+            },
+            {
+                "question": "Quel état brésilien est connu pour ses plages paradisiaques, comme Fernando de Noronha ?",
+                "options": [
+                    "Rio de Janeiro",
+                    "Santa Catarina",
+                    "Bahia",
+                    "Pernambuco"
+                ],
+                "answer": [
+                    "Pernambuco"
+                ]
+            },
+            {
+                "question": "Quel est le nom complet de la chanteuse Anitta ?",
+                "options": [
+                    "Larissa de Antunes Nóbrega",
+                    "Larissa de Jesus Andrade",
+                    "Larissa de Sousa Pinheiro",
+                    "Larissa de Macedo Machado"
+                ],
+                "answer": [
+                    "Larissa de Macedo Machado"
+                ]
+            },
+            {
+                "question": "En quelle année a été fondée la première brasserie au Brésil ?",
+                "options": [
+                    "1492",
+                    "1822",
+                    "1853",
+                    "1923"
+                ],
+                "answer": [
+                    "1853"
+                ]
+            },
+            {
+                "question": "Où se trouve la 'Rue Bourbon', célèbre pour sa vie nocturne animée ?",
+                "options": [
+                    "La Nouvelle-Orléans",
+                    "Las Vegas",
+                    "New York",
+                    "Miami"
+                ],
+                "answer": [
+                    "La Nouvelle-Orléans"
+                ]
+            },
+            {
+                "question": "Qui était le président du Brésil lors de la Proclamation de la République, en 1889 ?",
+                "options": [
+                    "Dom Pedro II",
+                    "Getúlio Vargas",
+                    "Maréchal Deodoro da Fonseca",
+                    "Juscelino Kubitschek"
+                ],
+                "answer": [
+                    "Maréchal Deodoro da Fonseca"
+                ]
+            },
+            {
+                "question": "Quel est le nom complet du chanteur Cazuza ?",
+                "options": [
+                    "Pedro Alex de Souza",
+                    "Tulio Agnes Bispo",
+                    "Agenor de Miranda Araújo Neto",
+                    "Edilson Machado Vieira"
+                ],
+                "answer": [
+                    "Agenor de Miranda Araújo Neto"
+                ]
+            },
+            {
+                "question": "Dans quel état se déroule la plus grande fête junina du Brésil, connue comme le 'Plus grand São João du monde' ?",
+                "options": [
+                    "Ceará",
+                    "Piauí",
+                    "Pernambuco",
+                    "Paraíba"
+                ],
+                "answer": [
+                    "Paraíba"
+                ]
+            },
+            {
+                "question": "Quelle est la couleur traditionnelle du cocktail 'Cosmopolitan' ?",
+                "options": [
+                    "Bleu",
+                    "Vert",
+                    "Rouge",
+                    "Jaune"
+                ],
+                "answer": [
+                    "Rouge"
+                ]
+            },
+            {
+                "question": "En quelle année le Brésil a-t-il accueilli la Coupe du Monde de football pour la première fois ?",
+                "options": [
+                    "1950",
+                    "1962",
+                    "1970",
+                    "2014"
+                ],
+                "answer": [
+                    "1950"
+                ]
+            },
+            {
+                "question": "En 2020, qui a remporté le Prix Nobel de littérature, devenant la 16ème femme à recevoir ce prix ?",
+                "options": [
+                    "Virginia Woolf",
+                    "Wislawa Szymborska",
+                    "Louise Glück",
+                    "Olga Tokarczuk"
+                ],
+                "answer": [
+                    "Louise Glück"
+                ]
+            },
+            {
+                "question": "Quel DJ brésilien a été classé parmi les 10 premiers dans la liste DJ Mag ?",
+                "options": [
+                    "Alok",
+                    "Vintage Culture",
+                    "Gui Boratto",
+                    "Felguk"
+                ],
+                "answer": [
+                    "Alok"
+                ]
+            },
+            {
+                "question": "Quel DJ néerlandais est célèbre pour ses performances énergiques et a souvent été dans le top 10 de DJ Mag ?",
+                "options": [
+                    "Calvin Harris",
+                    "Skrillex",
+                    "Tiesto",
+                    "Diplo"
+                ],
+                "answer": [
+                    "Tiesto"
+                ]
+            },
+            {
+                "question": "Quel est l'élément chimique le plus abondant dans l'atmosphère terrestre ?",
+                "options": [
+                    "Oxygène",
+                    "Azote",
+                    "Carbone",
+                    "Hydrogène"
+                ],
+                "answer": [
+                    "Azote"
+                ]
+            },
+            {
+                "question": "Quelle ville est célèbre pour ses cafés et ses 'coffee shops', attirant des jeunes du monde entier ?",
+                "options": [
+                    "Paris",
+                    "Rome",
+                    "Vienne",
+                    "Amsterdam"
+                ],
+                "answer": [
+                    "Amsterdam"
+                ]
+            },
+            {
+                "question": "Quelle chanteuse a sorti l'album 'folklore' en 2020 ?",
+                "options": [
+                    "Rihanna",
+                    "Beyoncé",
+                    "Ariana Grande",
+                    "Taylor Swift"
+                ],
+                "answer": [
+                    "Taylor Swift"
+                ]
+            },
+            {
+                "question": "D'où vient l'invention de la douche électrique ?",
+                "options": [
+                    "Brésil",
+                    "Angleterre",
+                    "France",
+                    "Australie"
+                ],
+                "answer": [
+                    "Brésil"
+                ]
+            }, {
+                "question": "Quel quartier est célèbre pour ses fêtes et sa vie nocturne à São Paulo ?",
+                "options": [
+                    "Liberdade",
+                    "Vila Madalena",
+                    "Bela Vista",
+                    "Moema"
+                ],
+                "answer": [
+                    "Vila Madalena"
+                ]
+            },
+            {
+                "question": "Quel itinéraire est populaire parmi les jeunes qui cherchent des aventures en sac à dos en Europe ?",
+                "options": [
+                    "Itinéraire des châteaux en France",
+                    "Itinéraire des plages en Grèce",
+                    "Itinéraire Interrail à travers l'Europe",
+                    "Itinéraire de ski en Suisse"
+                ],
+                "answer": [
+                    "Itinéraire Interrail à travers l'Europe"
+                ]
+            },
+            {
+                "question": "Que signifie le mot 'legend' en portugais ?",
+                "options": [
+                    "Légende",
+                    "Histoire",
+                    "Conte",
+                    "Légende (mythe)"
+                ],
+                "answer": [
+                    "Légende (mythe)"
+                ]
+            },
+            {
+                "question": "Quelle a été la première grande chanson à succès de la chanteuse Anitta ?",
+                "options": [
+                    "Bang",
+                    "Show das poderosas",
+                    "Meiga e abusada",
+                    "Essa mina é louca"
+                ],
+                "answer": [
+                    "Show das poderosas"
+                ]
+            },
+            {
+                "question": "Le festival 'Tomorrowland' a lieu dans quel pays ?",
+                "options": [
+                    "Pays-Bas",
+                    "Espagne",
+                    "Belgique",
+                    "Allemagne"
+                ],
+                "answer": [
+                    "Belgique"
+                ]
+            },
+            {
+                "question": "Quel est le nom complet de Pablo Vittar ?",
+                "options": [
+                    "Pablo Luís de Souza Barros",
+                    "Pablo Victor de Almeida",
+                    "Phelipe Alves Vitoriano",
+                    "Phabullo Rodrigues da Silva"
+                ],
+                "answer": [
+                    "Phabullo Rodrigues da Silva"
+                ]
+            },
+            {
+                "question": "Quel est le célèbre complexe de temples au Cambodge, classé au patrimoine mondial de l'UNESCO ?",
+                "options": [
+                    "Temple de Borobudur",
+                    "Temple de Batu Caves",
+                    "Temple d'Angkor Wat",
+                    "Temple de Biriaubiriau"
+                ],
+                "answer": [
+                    "Temple d'Angkor Wat"
+                ]
+            },
+            {
+                "question": "Lequel de ces films brésiliens a eu le plus grand succès au box-office au Brésil ?",
+                "options": [
+                    "Minha mãe é uma peça 3",
+                    "Tropa de Elite 2",
+                    "Carandiru",
+                    "Dois filhos de Francisco"
+                ],
+                "answer": [
+                    "Minha mãe é uma peça 3"
+                ]
+            },
+            {
+                "question": "Pour les jeunes à la recherche d'une expérience de festival unique, quelle destination est connue pour son 'Festival de montgolfières' ?",
+                "options": [
+                    "Albuquerque, États-Unis",
+                    "Cappadoce, Turquie",
+                    "Bristol, Royaume-Uni",
+                    "Chiang Mai, Thaïlande"
+                ],
+                "answer": [
+                    "Cappadoce, Turquie"
+                ]
+            },
+            {
+                "question": "Quel joueur de football a remporté le Ballon d'Or en 1997 ?",
+                "options": [
+                    "Rivaldo",
+                    "Figo",
+                    "Zidane",
+                    "Ronaldo"
+                ],
+                "answer": [
+                    "Ronaldo"
+                ]
+            },
+            {
+                "question": "Dans quel endroit d'Asie le portugais est-il langue officielle ?",
+                "options": [
+                    "Portugal",
+                    "Philippines",
+                    "Mozambique",
+                    "Macau"
+                ],
+                "answer": [
+                    "Macau"
+                ]
+            },
+            {
+                "question": "Dans quel pays se trouve la ville de Pétra, un important site archéologique ?",
+                "options": [
+                    "Turquie",
+                    "Égypte",
+                    "Liban",
+                    "Jordanie"
+                ],
+                "answer": [
+                    "Jordanie"
+                ]
+            },
+            {
+                "question": "Quel pays est connu comme le berceau du tennis de table ?",
+                "options": [
+                    "Japon",
+                    "Chine",
+                    "Angleterre",
+                    "États-Unis"
+                ],
+                "answer": [
+                    "Angleterre"
+                ]
+            },
+            {
+                "question": "Le 'Festival de Cannes' a lieu dans quel pays ?",
+                "options": [
+                    "États-Unis",
+                    "Italie",
+                    "France",
+                    "Allemagne"
+                ],
+                "answer": [
+                    "France"
+                ]
+            },
+            {
+                "question": "Quel est le nom du robot jaune dans les films 'Transformers' ?",
+                "options": [
+                    "Optimus Prime",
+                    "Bumblebee",
+                    "Megatron",
+                    "Starscream"
+                ],
+                "answer": [
+                    "Bumblebee"
+                ]
+            },
+            {
+                "question": "Quel est le nom d'artiste du MC qui a lancé la chanson 'Dança do Créu' ?",
+                "options": [
+                    "MC Sapão",
+                    "MC Créu",
+                    "MC Marcinho",
+                    "MC Gorilla"
+                ],
+                "answer": [
+                    "MC Créu"
+                ]
+            },
+            {
+                "question": "Quel est le jeu à boire le plus célèbre au Brésil ?",
+                "options": [
+                    "Bataille Flipcup",
+                    "Confissões proibidas",
+                    "Faz ou bebe",
+                    "Je n'ai jamais"
+                ],
+                "answer": [
+                    "Faz ou bebe"
+                ]
+            },
+            {
+                "question": "En quelle année le premier iPhone a-t-il été lancé ?",
+                "options": [
+                    "2005",
+                    "2007",
+                    "2009",
+                    "2010"
+                ],
+                "answer": [
+                    "2007"
+                ]
+            },
+            {
+                "question": "Quel est le nom de l'héroïne de la franchise cinématographique 'Hunger Games' ?",
+                "options": [
+                    "Katniss Everdeen",
+                    "Bella Swan",
+                    "Hermione Granger",
+                    "Rey Skywalker"
+                ],
+                "answer": [
+                    "Katniss Everdeen"
+                ]
+            },
+            {
+                "question": "Qui est connu comme le 'Roi du rock brésilien' ?",
+                "options": [
+                    "Roberto Carlos",
+                    "Raul Seixas",
+                    "Lulu Santos",
+                    "Chorão"
+                ],
+                "answer": [
+                    "Raul Seixas"
+                ]
+            },
+            {
+                "question": "Quel est le point le plus élevé du Brésil ?",
+                "options": [
+                    "Pico da Bandeira",
+                    "Pico da Neblina",
+                    "Mont Roraima",
+                    "Morro da Pedra da Gávea"
+                ],
+                "answer": [
+                    "Pico da Neblina"
+                ]
+            },
+            {
+                "question": "Quelle ville brésilienne est connue comme la 'Capitale nationale du Forró' ?",
+                "options": [
+                    "Itaúnas",
+                    "Caruaru",
+                    "São Luís",
+                    "Mossoró"
+                ],
+                "answer": [
+                    "Itaúnas"
+                ]
+            },
+            {
+                "question": "Quel est le plus grand fleuve du Brésil ?",
+                "options": [
+                    "Amazone",
+                    "São Francisco",
+                    "Paraná",
+                    "Tietê"
+                ],
+                "answer": [
+                    "Amazone"
+                ]
+            },
+            {
+                "question": "Où se trouve le 'marché nocturne de Shilin', célèbre pour sa nourriture de rue ?",
+                "options": [
+                    "Pékin",
+                    "Séoul",
+                    "Tokyo",
+                    "Taipei"
+                ],
+                "answer": [
+                    "Taipei"
+                ]
+            },
+            {
+                "question": "Dans quelle ville se trouve la Mosquée Bleue, un important monument historique et religieux ?",
+                "options": [
+                    "Téhéran",
+                    "Istanbul",
+                    "Bagdad",
+                    "Dubaï"
+                ],
+                "answer": [
+                    "Istanbul"
+                ]
+            },
+            {
+                "question": "Quelle destination européenne est célèbre parmi les jeunes pour ses fêtes exclusives sur des yachts et ses plages ?",
+                "options": [
+                    "Miami, États-Unis",
+                    "Mykonos, Grèce",
+                    "Paris, France",
+                    "Londres, Angleterre"
+                ],
+                "answer": [
+                    "Mykonos, Grèce"
+                ]
+            },
+            {
+                "question": "Quelle équipe de football a le plus de titres de la Copa Libertadores d'Amérique ?",
+                "options": [
+                    "Boca Juniors",
+                    "Independiente",
+                    "São Paulo",
+                    "Santos"
+                ],
+                "answer": [
+                    "Independiente"
+                ]
+            },
+            {
+                "question": "Quel film a remporté l'Oscar du meilleur film en 2021 ?",
+                "options": [
+                    "Promising Young Woman",
+                    "Minari",
+                    "The Trial of the Chicago 7",
+                    "Nomadland"
+                ],
+                "answer": [
+                    "Nomadland"
+                ]
+            },
+            {
+                "question": "Quels sont les noms des frères célèbres pour le mème brésilien 'Para nossa alegria' ?",
+                "options": [
+                    "Alexandre et Giovana",
+                    "Marcos et Jéssica",
+                    "Wesley et Marina",
+                    "Jefferson et Suellen"
+                ],
+                "answer": [
+                    "Jefferson et Suellen"
+                ]
+            },
+            {
+                "question": "Quelle est la langue la plus parlée dans le monde ?",
+                "options": [
+                    "Anglais",
+                    "Mandarin",
+                    "Espagnol",
+                    "Français"
+                ],
+                "answer": [
+                    "Anglais"
+                ]
+            },
+            {
+                "question": "Quel genre musical est souvent associé à la vie nocturne d'Ibiza ?",
+                "options": [
+                    "Rock",
+                    "Jazz",
+                    "Musique classique",
+                    "Musique électronique"
+                ],
+                "answer": [
+                    "Musique électronique"
+                ]
+            },
+            {
+                "question": "Quel athlète détient le record du nombre de médailles olympiques ?",
+                "options": [
+                    "Mark Spitz",
+                    "Michael Phelps",
+                    "Usain Bolt",
+                    "Carl Lewis"
+                ],
+                "answer": [
+                    "Michael Phelps"
+                ]
+            },
+            {
+                "question": "Quel artiste brésilien est le plus écouté dans l'histoire de YouTube ?",
+                "options": [
+                    "Gusttavo Lima",
+                    "Anitta",
+                    "Marília Mendonça",
+                    "Luan Santana"
+                ],
+                "answer": [
+                    "Marília Mendonça"
+                ]
+            },
+            {
+                "question": "Quelle équipe de rugby a remporté la Coupe du Monde de Rugby en 2019 ?",
+                "options": [
+                    "Afrique du Sud",
+                    "Nouvelle-Zélande",
+                    "Australie",
+                    "Angleterre"
+                ],
+                "answer": [
+                    "Afrique du Sud"
+                ]
+            },
+            {
+                "question": "Quel est l'album le plus vendu de tous les temps ?",
+                "options": [
+                    "Abbey Road - The Beatles",
+                    "Back in Black - AC/DC",
+                    "The Dark Side of the Moon - Pink Floyd",
+                    "Thriller - Michael Jackson"
+                ],
+                "answer": [
+                    "Thriller - Michael Jackson"
+                ]
+            },
+            {
+                "question": "Quel est le nom de la célèbre série de livres jeunesse écrite par J.K. Rowling ?",
+                "options": [
+                    "Les Chroniques de Narnia",
+                    "Percy Jackson",
+                    "Le Seigneur des Anneaux",
+                    "Harry Potter"
+                ],
+                "answer": [
+                    "Harry Potter"
+                ]
+            },
+            {
+                "question": "D'où vient le célèbre cocktail Mojito ?",
+                "options": [
+                    "Mexique",
+                    "Cuba",
+                    "Espagne",
+                    "Colombie"
+                ],
+                "answer": [
+                    "Cuba"
+                ]
+            },
+            {
+                "question": "Quel est le genre musical le plus écouté au Brésil ?",
+                "options": [
+                    "MPB",
+                    "Funk",
+                    "Sertanejo",
+                    "Arrocha"
+                ],
+                "answer": [
+                    "Sertanejo"
+                ]
+            },
+            {
+                "question": "Lequel de ces festivals est un célèbre festival de musique électronique ?",
+                "options": [
+                    "Lollapalooza",
+                    "Tomorrowland",
+                    "Glastonbury",
+                    "Coachella"
+                ],
+                "answer": [
+                    "Tomorrowland"
+                ]
+            },
+            {
+                "question": "Qui est le chanteur du groupe Coldplay ?",
+                "options": [
+                    "Chris Martin",
+                    "Dave Grohl",
+                    "Eddie Vedder",
+                    "Brandon Flowers"
+                ],
+                "answer": [
+                    "Chris Martin"
+                ]
+            },
+            {
+                "question": "Lequel de ces films ne fait pas partie de l'univers Marvel ?",
+                "options": [
+                    "Iron Man",
+                    "Thor",
+                    "Justice League",
+                    "Captain America"
+                ],
+                "answer": [
+                    "Justice League"
+                ]
+            },
+            {
+                "question": "Le 'Festival Holi', connu comme le 'Festival des couleurs', est traditionnellement célébré dans quel pays ?",
+                "options": [
+                    "Japon",
+                    "Brésil",
+                    "Inde",
+                    "Thaïlande"
+                ],
+                "answer": [
+                    "Inde"
+                ]
+            },
+            {
+                "question": "Quelle série télé est basée sur les livres de George R.R. Martin ?",
+                "options": [
+                    "Breaking Bad",
+                    "Game of Thrones",
+                    "Le Seigneur des Anneaux",
+                    "The Big Bang Theory"
+                ],
+                "answer": [
+                    "Game of Thrones"
+                ]
+            },
+            {
+                "question": "En quelle année a eu lieu la première transplantation d'organe au Brésil ?",
+                "options": [
+                    "1953",
+                    "1958",
+                    "1988",
+                    "1957"
+                ],
+                "answer": [
+                    "1958"
+                ]
+            },
+            {
+                "question": "Qui est la star principale des films 'Mission Impossible' ?",
+                "options": [
+                    "Brad Pitt",
+                    "Tom Cruise",
+                    "Matt Damon",
+                    "Leonardo DiCaprio"
+                ],
+                "answer": [
+                    "Tom Cruise"
+                ]
+            },
+            {
+                "question": "Lequel de ces célèbres est connu comme le 'homme à tout faire' ?",
+                "options": [
+                    "Rodrigo Hilbert",
+                    "Luciano Hulk",
+                    "Caio Castro",
+                    "Thiago Lacerda"
+                ],
+                "answer": [
+                    "Rodrigo Hilbert"
+                ]
+            },
+            {
+                "question": "Dans quel océan se trouve Madagascar ?",
+                "options": [
+                    "Océan Indien",
+                    "Océan Arctique",
+                    "Océan Atlantique",
+                    "Océan Pacifique"
+                ],
+                "answer": [
+                    "Océan Indien"
+                ]
+            },
+            {
+                "question": "Quel pays a accueilli la Coupe du Monde en 2018 ?",
+                "options": [
+                    "Russie",
+                    "Brésil",
+                    "France",
+                    "Allemagne"
+                ],
+                "answer": [
+                    "Russie"
+                ]
+            },
+            {
+                "question": "Quel est le nom du réalisateur responsable de la trilogie 'Le Seigneur des Anneaux' ?",
+                "options": [
+                    "Martin Scorsese",
+                    "Quentin Tarantino",
+                    "Christopher Nolan",
+                    "Peter Jackson"
+                ],
+                "answer": [
+                    "Peter Jackson"
+                ]
+            },
+            {
+                "question": "Quel est le nom du traité qui a établi la création de l'Union européenne ?",
+                "options": [
+                    "Traité de Maastricht",
+                    "Traité de Lisbonne",
+                    "Traité de Versailles",
+                    "Traité européen"
+                ],
+                "answer": [
+                    "Traité de Maastricht"
+                ]
+            },
+            {
+                "question": "Quelle suite d'un film de super-héros populaire, avec Gal Gadot, est sortie en 2020 ?",
+                "options": [
+                    "Wonder Woman 1984",
+                    "Captain Marvel",
+                    "Black Widow",
+                    "Barbie"
+                ],
+                "answer": [
+                    "Wonder Woman 1984"
+                ]
+            },
+            {
+                "question": "Quel est le nom de la rivière qui traverse la ville de Londres et est l'une des plus importantes d'Angleterre ?",
+                "options": [
+                    "Tamise",
+                    "Seine",
+                    "Danube",
+                    "Rhin"
+                ],
+                "answer": [
+                    "Tamise"
+                ]
+            },
+            {
+                "question": "Quel est le plus grand État du Brésil en termes de superficie ?",
+                "options": [
+                    "Mato Grosso",
+                    "Minas Gerais",
+                    "Bahia",
+                    "Amazonas"
+                ],
+                "answer": [
+                    "Amazonas"
+                ]
+            },
+            {
+                "question": "Quel cocktail est traditionnellement fait avec du gingembre, de la vodka et du jus de citron ?",
+                "options": [
+                    "Moscow Mule",
+                    "Martini",
+                    "Old Fashioned",
+                    "Molotov"
+                ],
+                "answer": [
+                    "Moscow Mule"
+                ]
+            },
+            {
+                "question": "Quel état brésilien est connu comme la 'Terre du Soleil' ?",
+                "options": [
+                    "Rio Grande do Norte",
+                    "Bahia",
+                    "Alagoas",
+                    "Ceará"
+                ],
+                "answer": [
+                    "Ceará"
+                ]
+            },
+            {
+                "question": "Quelle destination est populaire parmi les jeunes pour ses plages et sa vie nocturne animée en Asie ?",
+                "options": [
+                    "Maldives",
+                    "Bali",
+                    "Sri Lanka",
+                    "Vietnam"
+                ],
+                "answer": [
+                    "Bali"
+                ]
+            },
+            {
+                "question": "Qui a été la première femme élue présidente d’un pays ?",
+                "options": [
+                    "Dilma Rousseff (Brésil)",
+                    "Jacinda Ardern (Nouvelle-Zélande)",
+                    "Vigdís Finnbogadóttir (Islande)",
+                    "Margaret Thatcher (Royaume-Uni)"
+                ],
+                "answer": [
+                    "Vigdís Finnbogadóttir (Islande)"
+                ]
+            },
+            {
+                "question": "Quels sont les principaux ingrédients de la boisson traditionnelle brésilienne appelée 'capeta' ?",
+                "options": [
+                    "Cachaça et lait concentré sucré",
+                    "Whisky et sirop de sucre",
+                    "Vodka et lait concentré sucré",
+                    "Pinga et miel"
+                ],
+                "answer": [
+                    "Vodka et lait concentré sucré"
+                ]
+            },
+            {
+                "question": "Quel film de 2021, réalisé par Jon Watts, est devenu l'un des plus grands succès au box-office de l'Univers Cinématographique Marvel ?",
+                "options": [
+                    "Les Éternels",
+                    "Black Widow",
+                    "Captain America",
+                    "Spider-Man : No Way Home"
+                ],
+                "answer": [
+                    "Spider-Man : No Way Home"
+                ]
+            },
+            {
+                "question": "Quel est le nom du réalisateur responsable de la trilogie de films 'Le Parrain' ?",
+                "options": [
+                    "Francis Ford Coppola",
+                    "Martin Scorsese",
+                    "Quentin Tarantino",
+                    "Steven Spielberg"
+                ],
+                "answer": [
+                    "Francis Ford Coppola"
+                ]
+            },
+            {
+                "question": "Quelle série Netflix, lancée en 2016, se déroule dans une ville fictive appelée Hawkins ?",
+                "options": [
+                    "Black Mirror",
+                    "Stranger Things",
+                    "The Crown",
+                    "Dark"
+                ],
+                "answer": [
+                    "Stranger Things"
+                ]
+            },
+            {
+                "question": "Dans quelle ville italienne les touristes visitent-ils fréquemment le célèbre 'Pont des Soupirs' ?",
+                "options": [
+                    "Rome",
+                    "Milan",
+                    "Florence",
+                    "Venise"
+                ],
+                "answer": [
+                    "Venise"
+                ]
+            },
+            {
+                "question": "Le Lollapalooza est un festival qui a lieu annuellement dans quelle ville brésilienne ?",
+                "options": [
+                    "Rio de Janeiro",
+                    "São Paulo",
+                    "Salvador",
+                    "Fortaleza"
+                ],
+                "answer": [
+                    "São Paulo"
+                ]
+            },
+            {
+                "question": "Lesquelles de ces maladies sont sexuellement transmissibles ?",
+                "options": [
+                    "Sida, trichomonase et Ebola",
+                    "Chikungunya, sida et herpès",
+                    "Gonorrhée, chlamydia et syphilis",
+                    "Botulisme, cystite et gonorrhée"
+                ],
+                "answer": [
+                    "Gonorrhée, chlamydia et syphilis"
+                ]
+            },
+            {
+                "question": "Quel est le sport le plus populaire aux États-Unis ?",
+                "options": [
+                    "Football américain",
+                    "Basket-ball",
+                    "Baseball",
+                    "Hockey sur glace"
+                ],
+                "answer": [
+                    "Football américain"
+                ]
+            },
+            {
+                "question": "Quelle chanteuse est la protagoniste de la série mexicaine 'Deseo Sombrío' ?",
+                "options": [
+                    "Pety Cantú",
+                    "Maite Perroni",
+                    "Dulce Maria",
+                    "Becky G"
+                ],
+                "answer": [
+                    "Maite Perroni"
+                ]
+            },
+            {
+                "question": "Quelle actrice hollywoodienne porte le même nom que l'épouse de Shakespeare ?",
+                "options": [
+                    "Natalie Portman",
+                    "Julia Roberts",
+                    "Anne Hathaway",
+                    "Cate Blanchett"
+                ],
+                "answer": [
+                    "Anne Hathaway"
+                ]
+            },
+            {
+                "question": "Comment s'appelle la première épouse de Ragnar dans la série 'Vikings' ?",
+                "options": [
+                    "Porunn",
+                    "Daenerys",
+                    "Elizabeth",
+                    "Lagertha"
+                ],
+                "answer": [
+                    "Lagertha"
+                ]
+            },
+            {
+                "question": "Quel personnage est obsédé par la propreté dans 'Friends' ?",
+                "options": [
+                    "Monica",
+                    "Chandler",
+                    "Ross",
+                    "Joey"
+                ],
+                "answer": [
+                    "Monica"
+                ]
+            },
+            {
+                "question": "Comment s'appelle la communauté secrète dans la série 'Dark' ?",
+                "options": [
+                    "Sic Mundus",
+                    "Kappa Delta",
+                    "Eternity",
+                    "Sic Tempus"
+                ],
+                "answer": [
+                    "Sic Mundus"
+                ]
+            },
+            {
+                "question": "Dans quel pays est née l'actrice Emma Watson ?",
+                "options": [
+                    "France",
+                    "Royaume-Uni",
+                    "Canada",
+                    "Brésil"
+                ],
+                "answer": [
+                    "France"
+                ]
+            },
+            {
+                "question": "À qui appartient la chanson 'Mamma Mia' ?",
+                "options": [
+                    "Maroon 5",
+                    "Roxette",
+                    "Madonna",
+                    "ABBA"
+                ],
+                "answer": [
+                    "ABBA"
+                ]
+            },
+            {
+                "question": "Quel est le nom du protagoniste de la série animée 'Les Chevaliers du Zodiaque' ?",
+                "options": [
+                    "Aphrodite des Poissons",
+                    "Saga des Gémeaux",
+                    "Seiya du Pégase",
+                    "Mu du Bélier"
+                ],
+                "answer": [
+                    "Seiya du Pégase"
+                ]
+            },
+            {
+                "question": "Qui est Robert Pattinson ?",
+                "options": [
+                    "Un acteur",
+                    "Un danseur",
+                    "Un joueur de football",
+                    "Un écrivain"
+                ],
+                "answer": [
+                    "Un acteur"
+                ]
+            },
+            {
+                "question": "Quel a été le premier film de l'histoire à rapporter plus de 100 millions de dollars aux États-Unis ?",
+                "options": [
+                    "Avatar",
+                    "Dracula",
+                    "Une nuit de folie",
+                    "Les Dents de la mer"
+                ],
+                "answer": [
+                    "Les Dents de la mer"
+                ]
+            },
+            {
+                "question": "Comment Buzz l'Éclair, dans Toy Story, découvre-t-il qu'il est un jouet ?",
+                "options": [
+                    "Par une publicité à la télévision",
+                    "Parce que quelqu'un le lui a dit",
+                    "Il a trouvé sa boîte",
+                    "Il est apparu dans une vitrine"
+                ],
+                "answer": [
+                    "Par une publicité à la télévision"
+                ]
+            },
+            {
+                "question": "Quel scientifique a inspiré la création du visage de Yoda ?",
+                "options": [
+                    "Isaac Newton",
+                    "Charles Darwin",
+                    "Alexander Fleming",
+                    "Albert Einstein"
+                ],
+                "answer": [
+                    "Albert Einstein"
+                ]
+            },
+            {
+                "question": "À qui le rôle de Neo dans le film 'Matrix' a-t-il été d'abord proposé ?",
+                "options": [
+                    "Will Smith",
+                    "Val Kilmer",
+                    "Laurence Fishburne",
+                    "Keanu Reeves"
+                ],
+                "answer": [
+                    "Keanu Reeves"
+                ]
+            },
+            {
+                "question": "En quelle année la série 'Black Mirror' a-t-elle été lancée ?",
+                "options": [
+                    "2009",
+                    "2011",
+                    "2013",
+                    "2016"
+                ],
+                "answer": [
+                    "2011"
+                ]
+            },
+            {
+                "question": "Quel est le nom du chat dans la série 'Sabrina, l'apprentie sorcière' ?",
+                "options": [
+                    "Salem",
+                    "Milo",
+                    "Fluffy",
+                    "Morgan"
+                ],
+                "answer": [
+                    "Salem"
+                ]
+            },
+            {
+                "question": "Dans laquelle de ces séries le terme 'Google' a-t-il été utilisé comme verbe pour la première fois ?",
+                "options": [
+                    "Sherlock",
+                    "American Horror Story",
+                    "Buffy contre les vampires",
+                    "Friends"
+                ],
+                "answer": [
+                    "Buffy contre les vampires"
+                ]
+            },
+            {
+                "question": "Qui est interprété par Sylvester Stallone dans les films 'Rocky' ?",
+                "options": [
+                    "Rocky Marciano",
+                    "Rocky Balboa",
+                    "Rocky Creed",
+                    "Rocky Ali"
+                ],
+                "answer": [
+                    "Rocky Balboa"
+                ]
+            },
+            {
+                "question": "Avec quel groupe le guitariste Slash est-il devenu célèbre ?",
+                "options": [
+                    "Guns N' Roses",
+                    "Iron Maiden",
+                    "Metallica",
+                    "AC/DC"
+                ],
+                "answer": [
+                    "Guns N' Roses"
+                ]
+            },
+            {
+                "question": "À qui appartient la chanson 'Don't Start Now' ?",
+                "options": [
+                    "Britney Spears",
+                    "Doja Cat",
+                    "Billie Eilish",
+                    "Dua Lipa"
+                ],
+                "answer": [
+                    "Dua Lipa"
+                ]
+            },
+            {
+                "question": "Quel musicien était inscrit à la naissance sous le nom de 'Robert Allen Zimmerman' ?",
+                "options": [
+                    "Bob Dylan",
+                    "Maluma",
+                    "Bon Jovi",
+                    "Bob Marley"
+                ],
+                "answer": [
+                    "Bob Dylan"
+                ]
+            },
+            {
+                "question": "Quel animal est le serviteur de Maléfique ?",
+                "options": [
+                    "Ver de terre",
+                    "Corbeau",
+                    "Loup",
+                    "Chat"
+                ],
+                "answer": [
+                    "Corbeau"
+                ]
+            },
+            {
+                "question": "De quel groupe de rock est la chanson principale du film 'Armageddon' ?",
+                "options": [
+                    "U2",
+                    "Guns N' Roses",
+                    "Aerosmith",
+                    "The Rolling Stones"
+                ],
+                "answer": [
+                    "Aerosmith"
+                ]
+            },
+            {
+                "question": "Quel personnage N'APPARAÎT PAS dans le film de 2012 'The Avengers' ?",
+                "options": [
+                    "Captain America",
+                    "Wolverine",
+                    "Hulk",
+                    "Thor"
+                ],
+                "answer": [
+                    "Wolverine"
+                ]
+            },
+            {
+                "question": "Qui est le créateur de la série animée 'Les Simpson' ?",
+                "options": [
+                    "Steve Jobs",
+                    "Matt Groening",
+                    "Seth MacFarlane",
+                    "Hank Azaria"
+                ],
+                "answer": [
+                    "Matt Groening"
+                ]
+            },
+            {
+                "question": "Sur quelle fête est basé le film 'Coco' (titre brésilien 'Viva : la vie est une fête') ?",
+                "options": [
+                    "La fête de la Chandeleur",
+                    "Cinco de Mayo",
+                    "Le Jour des Morts",
+                    "Le Festival des Ombres"
+                ],
+                "answer": [
+                    "Le Jour des Morts"
+                ]
+            },
+            {
+                "question": "Quelle était la couleur originale de Hulk ?",
+                "options": [
+                    "Vert",
+                    "Gris",
+                    "Violet",
+                    "Rouge"
+                ],
+                "answer": [
+                    "Gris"
+                ]
+            },
+            {
+                "question": "De quel pays vient la série 'Elite' ?",
+                "options": [
+                    "Mexique",
+                    "Espagne",
+                    "Colombie",
+                    "Norvège"
+                ],
+                "answer": [
+                    "Espagne"
+                ]
+            },
+            {
+                "question": "Quelle est la nationalité du YouTuber PewDiePie ?",
+                "options": [
+                    "Américaine",
+                    "Suédoise",
+                    "Russe",
+                    "Italienne"
+                ],
+                "answer": [
+                    "Suédoise"
+                ]
+            },
+            {
+                "question": "Qui a développé le jeu vidéo 'Mario Bros' ?",
+                "options": [
+                    "Masahiro Sakurai",
+                    "Michel Ancel",
+                    "Ken Sugimori",
+                    "Shigeru Miyamoto"
+                ],
+                "answer": [
+                    "Shigeru Miyamoto"
+                ]
+            },
+            {
+                "question": "Quelle chaîne TV produit la série 'Game of Thrones' ?",
+                "options": [
+                    "HBO",
+                    "FOX",
+                    "The CW",
+                    "Netflix"
+                ],
+                "answer": [
+                    "HBO"
+                ]
+            },
+            {
+                "question": "Quel est le numéro de la porte de Quico dans la série 'Chaves' ?",
+                "options": [
+                    "14",
+                    "8",
+                    "72",
+                    "22"
+                ],
+                "answer": [
+                    "14"
+                ]
+            },
+            {
+                "question": "Lequel de ces noms N'APPARTIENT PAS à une Kardashian ?",
+                "options": [
+                    "Kim",
+                    "Khloe",
+                    "Kourtney",
+                    "Kendra"
+                ],
+                "answer": [
+                    "Kendra"
+                ]
+            },
+            {
+                "question": "À qui appartient la chanson 'Bad Guy' ?",
+                "options": [
+                    "Billie Eilish",
+                    "Halsey",
+                    "Lorde",
+                    "Cardi B"
+                ],
+                "answer": [
+                    "Billie Eilish"
+                ]
+            },
+            {
+                "question": "De quel groupe de K-Pop est la chanson 'Dynamite' ?",
+                "options": [
+                    "EXO",
+                    "Blackpink",
+                    "BigBang",
+                    "BTS"
+                ],
+                "answer": [
+                    "BTS"
+                ]
+            },
+            {
+                "question": "Quel acteur interprète Freddie Mercury dans le film 'Bohemian Rhapsody' ?",
+                "options": [
+                    "Rami Malek",
+                    "Jared Leto",
+                    "Sacha Baron Cohen",
+                    "Adam Lambert"
+                ],
+                "answer": [
+                    "Rami Malek"
+                ]
+            },
+            {
+                "question": "Qui joue le rôle d'Ernesto 'Che' Guevara dans le film 'Diarios de Motocicleta' ?",
+                "options": [
+                    "Diego Luna",
+                    "Ricardo Darín",
+                    "Rodrigo de la Serna",
+                    "Gael García Bernal"
+                ],
+                "answer": [
+                    "Gael García Bernal"
+                ]
+            },
+            {
+                "question": "Quel animal est Sonic, le protagoniste du célèbre jeu de Sega ?",
+                "options": [
+                    "Un hérisson",
+                    "Un écureuil",
+                    "Un porc-épic",
+                    "Un chat"
+                ],
+                "answer": [
+                    "Un hérisson"
+                ]
+            },
+            {
+                "question": "Quel est le nom du protagoniste de la série 'Peaky Blinders' ?",
+                "options": [
+                    "Arthur Shelby",
+                    "Michael Gray",
+                    "John Shelby",
+                    "Thomas Shelby"
+                ],
+                "answer": [
+                    "Thomas Shelby"
+                ]
+            },
+            {
+                "question": "Lequel de ces acteurs n'a pas incarné le Joker ?",
+                "options": [
+                    "Jack Nicholson",
+                    "Orlando Bloom",
+                    "Heath Ledger",
+                    "Joaquin Phoenix"
+                ],
+                "answer": [
+                    "Orlando Bloom"
+                ]
+            },
+            {
+                "question": "Qui joue Jake Peralta dans la série 'Brooklyn Nine-Nine' ?",
+                "options": [
+                    "Pete Davidson",
+                    "Andy Samberg",
+                    "Terry Crews",
+                    "Jonah Hill"
+                ],
+                "answer": [
+                    "Andy Samberg"
+                ]
+            },
+            {
+                "question": "Laquelle de ces séries a pour protagoniste un publicitaire ?",
+                "options": [
+                    "Mad Men",
+                    "Shameless",
+                    "The Umbrella Academy",
+                    "Downton Abbey"
+                ],
+                "answer": [
+                    "Mad Men"
+                ]
+            },
+            {
+                "question": "Quelle actrice joue Catwoman dans le film 'Batman : Le Défi' ?",
+                "options": [
+                    "Reese Witherspoon",
+                    "Michelle Pfeiffer",
+                    "Meg Ryan",
+                    "Alicia Silverstone"
+                ],
+                "answer": [
+                    "Michelle Pfeiffer"
+                ]
+            },
+            {
+                "question": "Qui a été le premier à incarner un super-héros au cinéma ?",
+                "options": [
+                    "Chris Hemsworth",
+                    "Chris Pratt",
+                    "Chris Evans",
+                    "Chris Pine"
+                ],
+                "answer": [
+                    "Chris Evans"
+                ]
+            },
+            {
+                "question": "Quel a été le premier film produit par Pixar ?",
+                "options": [
+                    "Toy Story",
+                    "Le Monde de Nemo",
+                    "1001 Pattes",
+                    "Monstres & Cie"
+                ],
+                "answer": [
+                    "Toy Story"
+                ]
+            },
+            {
+                "question": "Quel super-héros habite à Gotham ?",
+                "options": [
+                    "Batman",
+                    "Superman",
+                    "Green Lantern",
+                    "Spider-Man"
+                ],
+                "answer": [
+                    "Batman"
+                ]
+            },
+            {
+                "question": "Quel a été le prédécesseur du jeu mobile 'Clash Royale' ?",
+                "options": [
+                    "FarmVille",
+                    "Castle Crush",
+                    "Best Friends",
+                    "Clash of Clans"
+                ],
+                "answer": [
+                    "Clash of Clans"
+                ]
+            },
+            {
+                "question": "Qui est le frère du super-héros Thor ?",
+                "options": [
+                    "Thanos",
+                    "Loki",
+                    "Star-Lord",
+                    "Silver Surfer"
+                ],
+                "answer": [
+                    "Loki"
+                ]
+            },
+            {
+                "question": "Comment Jack a-t-il obtenu un billet pour monter sur le bateau dans le film 'Titanic' ?",
+                "options": [
+                    "En jouant au tennis",
+                    "Il l'a acheté en promotion",
+                    "Il a gagné un pari au poker",
+                    "Il l'a trouvé à la poubelle"
+                ],
+                "answer": [
+                    "Il a gagné un pari au poker"
+                ]
+            },
+            {
+                "question": "Qui est l'acteur principal de la série 'You' ?",
+                "options": [
+                    "Penn Badgley",
+                    "Ed Westwick",
+                    "Adam Brody",
+                    "Hayden Christensen"
+                ],
+                "answer": [
+                    "Penn Badgley"
+                ]
+            },
+            {
+                "question": "Où la série 'Breaking Bad' a-t-elle été filmée ?",
+                "options": [
+                    "Nouveau Texas",
+                    "Texas",
+                    "Ohio",
+                    "Kentucky"
+                ],
+                "answer": [
+                    "Nouveau Texas"
+                ]
+            },
+            {
+                "question": "En quelle année la chanson 'Joyeux Anniversaire' est-elle devenue domaine public ?",
+                "options": [
+                    "1915",
+                    "1999",
+                    "2015",
+                    "2019"
+                ],
+                "answer": [
+                    "2015"
+                ]
+            },
+            {
+                "question": "Quelle est l'autre profession de Brian May, guitariste du groupe britannique Queen ?",
+                "options": [
+                    "Dentiste",
+                    "Astrophysicien",
+                    "Architecte",
+                    "Chef cuisinier"
+                ],
+                "answer": [
+                    "Astrophysicien"
+                ]
+            },
+            {
+                "question": "Qui a joué dans la série 'Le Jeu de la Dame' ?",
+                "options": [
+                    "Anya Taylor-Joy",
+                    "Emma Roberts",
+                    "Ester Expósito",
+                    "Anne Hathaway"
+                ],
+                "answer": [
+                    "Anya Taylor-Joy"
+                ]
+            },
+            {
+                "question": "Quelle est la profession du protagoniste de la série 'Lupin' ?",
+                "options": [
+                    "Policier",
+                    "Voleur",
+                    "Professeur",
+                    "Acteur"
+                ],
+                "answer": [
+                    "Voleur"
+                ]
+            },
+            {
+                "question": "Quel pseudonyme Walter White adopte-t-il dans la série 'Breaking Bad' ?",
+                "options": [
+                    "Gutenberg",
+                    "Heisenberg",
+                    "Rosenfeld",
+                    "Le Chacal"
+                ],
+                "answer": [
+                    "Heisenberg"
+                ]
+            },
+            {
+                "question": "Dans quelle ville, renommée en 1995, se trouve l'industrie cinématographique de Bollywood ?",
+                "options": [
+                    "Mumbai",
+                    "Jaipur",
+                    "Hyderabad",
+                    "Bangalore"
+                ],
+                "answer": [
+                    "Mumbai"
+                ]
+            },
+            {
+                "question": "À quelle entreprise appartient le jeu 'FIFA' ?",
+                "options": [
+                    "Konami",
+                    "Niantic",
+                    "Rio Games",
+                    "Electronic Arts"
+                ],
+                "answer": [
+                    "Electronic Arts"
+                ]
+            },
+            {
+                "question": "Quel est le seul groupe à avoir joué sur tous les continents en l'espace d'un an ?",
+                "options": [
+                    "Metallica",
+                    "The Beatles",
+                    "AC/DC",
+                    "Aerosmith"
+                ],
+                "answer": [
+                    "Metallica"
+                ]
+            },
+            {
+                "question": "Qui a écrit 'Le Comte de Monte-Cristo' ?",
+                "options": [
+                    "Jules Verne",
+                    "Mary Shelley",
+                    "Alexandre Dumas",
+                    "Charles Dickens"
+                ],
+                "answer": [
+                    "Alexandre Dumas"
+                ]
+            },
+            {
+                "question": "Combien de temps se déroule le roman 'Ulysse' de James Joyce ?",
+                "options": [
+                    "Une semaine",
+                    "Un jour",
+                    "Douze heures",
+                    "Trois mois"
+                ],
+                "answer": [
+                    "Un jour"
+                ]
+            },
+            {
+                "question": "Où est né l'artiste visuel 'Cildo Meireles' ?",
+                "options": [
+                    "Goiânia",
+                    "Manaus",
+                    "São Paulo",
+                    "Rio de Janeiro"
+                ],
+                "answer": [
+                    "Rio de Janeiro"
+                ]
+            },
+            {
+                "question": "Qui a écrit le Manifeste Antropophage ?",
+                "options": [
+                    "Mário de Andrade",
+                    "Oswald de Andrade",
+                    "Clarice Lispector",
+                    "Rachel de Queiroz"
+                ],
+                "answer": [
+                    "Oswald de Andrade"
+                ]
+            },
+            {
+                "question": "Qui a composé la Symphonie n°9 ?",
+                "options": [
+                    "Giuseppe Verdi",
+                    "Wolfgang Amadeus Mozart",
+                    "Ludwig van Beethoven",
+                    "Antonio Vivaldi"
+                ],
+                "answer": [
+                    "Ludwig van Beethoven"
+                ]
+            },
+            {
+                "question": "Dans quelle ville peut-on voir 'Le Baiser', du peintre Gustav Klimt ?",
+                "options": [
+                    "Bruxelles",
+                    "Vienne",
+                    "Berlin",
+                    "Venise"
+                ],
+                "answer": [
+                    "Vienne"
+                ]
+            },
+            {
+                "question": "Lequel de ces noms est un hétéronyme de Fernando Pessoa ?",
+                "options": [
+                    "Álvaro Sousa",
+                    "Álvaro Caieiro",
+                    "Álvaro Reis",
+                    "Álvaro de Campos"
+                ],
+                "answer": [
+                    "Álvaro de Campos"
+                ]
+            },
+            {
+                "question": "À quelle école littéraire appartient l'écrivain Machado de Assis ?",
+                "options": [
+                    "Naturalisme",
+                    "Réalisme",
+                    "Parnassianisme",
+                    "Symbolisme"
+                ],
+                "answer": [
+                    "Réalisme"
+                ]
+            },
+            {
+                "question": "Où est né le poète Cruz e Sousa ?",
+                "options": [
+                    "Porto Alegre",
+                    "Rio de Janeiro",
+                    "São Paulo",
+                    "Florianópolis"
+                ],
+                "answer": [
+                    "Florianópolis"
+                ]
+            },
+            {
+                "question": "Qui a écrit 'Capitães da Areia' ?",
+                "options": [
+                    "João Guimarães Rosa",
+                    "Machado de Assis",
+                    "João Cabral de Melo Neto",
+                    "Jorge Amado"
+                ],
+                "answer": [
+                    "Jorge Amado"
+                ]
+            },
+            {
+                "question": "Laquelle de ces princesses utilise ses cheveux pour faire grimper le prince à la tour ?",
+                "options": [
+                    "Pocahontas",
+                    "Cendrillon",
+                    "Ariel",
+                    "Raiponce"
+                ],
+                "answer": [
+                    "Raiponce"
+                ]
+            },
+            {
+                "question": "Quel est le nom des baguettes utilisées pour jouer de la batterie ?",
+                "options": [
+                    "Baguettes",
+                    "Poteaux",
+                    "Cordes",
+                    "Battements"
+                ],
+                "answer": [
+                    "Baguettes"
+                ]
+            },
+            {
+                "question": "Quelle était la nationalité de l'écrivain Horacio Quiroga ?",
+                "options": [
+                    "Uruguayen",
+                    "Chilien",
+                    "Italien",
+                    "Argentin"
+                ],
+                "answer": [
+                    "Uruguayen"
+                ]
+            },
+            {
+                "question": "Où croit-on que l'artiste Banksy est né ?",
+                "options": [
+                    "Grèce",
+                    "Canada",
+                    "Royaume-Uni",
+                    "Irlande"
+                ],
+                "answer": [
+                    "Royaume-Uni"
+                ]
+            },
+            {
+                "question": "Où est né Edgar Allan Poe ?",
+                "options": [
+                    "France",
+                    "Angleterre",
+                    "Espagne",
+                    "États-Unis"
+                ],
+                "answer": [
+                    "États-Unis"
+                ]
+            },
+            {
+                "question": "Où l'écrivaine Clarice Lispector a-t-elle passé son enfance ?",
+                "options": [
+                    "São Paulo",
+                    "Recife",
+                    "Bahia",
+                    "Rio de Janeiro"
+                ],
+                "answer": [
+                    "Recife"
+                ]
+            },
+            {
+                "question": "À quelle œuvre littéraire brésilienne appartient le personnage Rita Baiana ?",
+                "options": [
+                    "Quincas Borba",
+                    "Macunaíma",
+                    "Le Troupeau",
+                    "La Moreninha"
+                ],
+                "answer": [
+                    "Le Troupeau"
+                ]
+            },
+            {
+                "question": "Qui a écrit Moby Dick ?",
+                "options": [
+                    "James Joyce",
+                    "Mark Twain",
+                    "Herman Melville",
+                    "Charles Dickens"
+                ],
+                "answer": [
+                    "Herman Melville"
+                ]
+            },
+            {
+                "question": "À quel mouvement artistique Salvador Dalí appartenait-il ?",
+                "options": [
+                    "Dadaïsme",
+                    "Futurisme",
+                    "Surréalisme",
+                    "Réalisme"
+                ],
+                "answer": [
+                    "Surréalisme"
+                ]
+            },
+            {
+                "question": "Combien de syllabes un haïku contient-il ?",
+                "options": [
+                    "21",
+                    "17",
+                    "15",
+                    "23"
+                ],
+                "answer": [
+                    "17"
+                ]
+            },
+            {
+                "question": "L'une des œuvres suivantes n'a pas été écrite par Jane Austen",
+                "options": [
+                    "Decline and Fall",
+                    "Emma",
+                    "Sense and Sensibility",
+                    "Pride and Prejudice"
+                ],
+                "answer": [
+                    "Decline and Fall"
+                ]
+            },
+            {
+                "question": "Quel est le nom de la minisérie diffusée par Globo inspirée de 'Dom Casmurro' ?",
+                "options": [
+                    "Capitu",
+                    "Dom Casmurro",
+                    "La Gitane",
+                    "Casmurro"
+                ],
+                "answer": [
+                    "Capitu"
+                ]
+            },
+            {
+                "question": "À quelle famille appartient la trompette dans l'orchestre symphonique ?",
+                "options": [
+                    "Cordes",
+                    "Percussions",
+                    "Cuivres",
+                    "Bois"
+                ],
+                "answer": [
+                    "Cuivres"
+                ]
+            },
+            {
+                "question": "Qui a peint la célèbre œuvre 'Le Cri' ?",
+                "options": [
+                    "Edvard Munch",
+                    "Juan Miró",
+                    "Picasso",
+                    "Paul Cézanne"
+                ],
+                "answer": [
+                    "Edvard Munch"
+                ]
+            },
+            {
+                "question": "Dans quel pays est né José Saramago ?",
+                "options": [
+                    "Il n'était pas brésilien",
+                    "São Paulo",
+                    "Minas Gerais",
+                    "Bahia"
+                ],
+                "answer": [
+                    "Il n'était pas brésilien"
+                ]
+            },
+            {
+                "question": "Où se déroule 'Les Misérables' ?",
+                "options": [
+                    "Angleterre",
+                    "États-Unis",
+                    "Belgique",
+                    "France"
+                ],
+                "answer": [
+                    "France"
+                ]
+            },
+            {
+                "question": "Lequel de ces livres n'appartient pas à Jules Verne ?",
+                "options": [
+                    "Un billet de loterie",
+                    "Le Portrait de Dorian Gray",
+                    "De la Terre à la Lune",
+                    "L'Île mystérieuse"
+                ],
+                "answer": [
+                    "Le Portrait de Dorian Gray"
+                ]
+            },
+            {
+                "question": "Quel est l'auteur du livre 'Trainspotting' ?",
+                "options": [
+                    "Charles Bukowski",
+                    "Irvine Welsh",
+                    "Donato Carrisi",
+                    "Dan Brown"
+                ],
+                "answer": [
+                    "Irvine Welsh"
+                ]
+            },
+            {
+                "question": "Qui sont les protagonistes du roman 'Dom Casmurro' ?",
+                "options": [
+                    "Doralice et Bentinho",
+                    "Bentinho et Capitu",
+                    "Capitu et Escobar",
+                    "Escobar et Bentinho"
+                ],
+                "answer": [
+                    "Bentinho et Capitu"
+                ]
+            },
+            {
+                "question": "Quelle est la phrase célèbre de Bartleby, le copiste ?",
+                "options": [
+                    "Peut-être demain",
+                    "Je préférerais ne pas faire",
+                    "Je n'aime pas ça",
+                    "Je ne sais pas"
+                ],
+                "answer": [
+                    "Je préférerais ne pas faire"
+                ]
+            },
+            {
+                "question": "Où est né Manuel Bandeira ?",
+                "options": [
+                    "Belo Horizonte",
+                    "Bahia",
+                    "Recife",
+                    "Curitiba"
+                ],
+                "answer": [
+                    "Recife"
+                ]
+            },
+            {
+                "question": "Qui a écrit 'Grande Sertão: Veredas' ?",
+                "options": [
+                    "Machado de Assis",
+                    "Fernando Pessoa",
+                    "Júlia Lopes de Almeida",
+                    "Guimarães Rosa"
+                ],
+                "answer": [
+                    "Guimarães Rosa"
+                ]
+            },
+            {
+                "question": "Quel célèbre peintre a été suspecté du vol de la Joconde ?",
+                "options": [
+                    "Pablo Picasso",
+                    "Michel-Ange",
+                    "Vincent Van Gogh",
+                    "Gustav Klimt"
+                ],
+                "answer": [
+                    "Pablo Picasso"
+                ]
+            },
+            {
+                "question": "Pendant combien de temps un tableau de Matisse est-il resté accroché à l'envers dans un musée de New York ?",
+                "options": [
+                    "8 heures",
+                    "47 jours",
+                    "6 jours",
+                    "Cela n'est jamais arrivé"
+                ],
+                "answer": [
+                    "47 jours"
+                ]
+            },
+            {
+                "question": "Lequel des livres ci-dessous n'a pas été écrit par Ziraldo ?",
+                "options": [
+                    "La planète lilas",
+                    "Le garçon de la Lune",
+                    "Marcelo, marmelo, marteau",
+                    "Le journal de Julieta"
+                ],
+                "answer": [
+                    "Marcelo, marmelo, marteau"
+                ]
+            },
+            {
+                "question": "Quel était l'adjectif gentilé de Paulo Leminski ?",
+                "options": [
+                    "Gaúcho",
+                    "Carioca",
+                    "Paranaense",
+                    "Mineiro"
+                ],
+                "answer": [
+                    "Paranaense"
+                ]
+            },
+            {
+                "question": "Lequel de ces livres n'est pas de Saramago ?",
+                "options": [
+                    "L'essai sur la cécité",
+                    "L'Évangile selon Jésus-Christ",
+                    "L'Aleph",
+                    "Le mémorial du couvent"
+                ],
+                "answer": [
+                    "L'Aleph"
+                ]
+            },
+            {
+                "question": "Quel roman de José Saramago a été adapté au cinéma ?",
+                "options": [
+                    "Le mémorial du couvent",
+                    "L'essai sur la cécité",
+                    "L'essai sur la lucidité",
+                    "Le voyage de l'éléphant"
+                ],
+                "answer": [
+                    "L'essai sur la cécité"
+                ]
+            },
+            {
+                "question": "Quelle marque de magasin a un faux magasin dans le désert du Texas, aux États-Unis ?",
+                "options": [
+                    "Prada",
+                    "Chanel",
+                    "Versace",
+                    "Dior"
+                ],
+                "answer": [
+                    "Prada"
+                ]
+            },
+            {
+                "question": "Qui a peint l'œuvre latino-américaine la plus chère de l'histoire ?",
+                "options": [
+                    "Remedios Varo",
+                    "Frida Kahlo",
+                    "Diego Rivera",
+                    "Claude Monet"
+                ],
+                "answer": [
+                    "Diego Rivera"
+                ]
+            },
+            {
+                "question": "Qu'est-ce qui dure le plus longtemps ?",
+                "options": [
+                    "Une scène",
+                    "Un plan",
+                    "Une prise",
+                    "Ils durent tous la même durée"
+                ],
+                "answer": [
+                    "Une scène"
+                ]
+            },
+            {
+                "question": "À qui appartient la pièce musicale 'Les Quatre Saisons' ?",
+                "options": [
+                    "Amadeus Mozart",
+                    "Ludwig van Beethoven",
+                    "Antonio Vivaldi",
+                    "Frédéric Chopin"
+                ],
+                "answer": [
+                    "Antonio Vivaldi"
+                ]
+            },
+            {
+                "question": "Quel est le pays d'origine de l'écrivaine Clarice Lispector ?",
+                "options": [
+                    "Angleterre",
+                    "Brésil",
+                    "Ukraine",
+                    "Pays-Bas"
+                ],
+                "answer": [
+                    "Ukraine"
+                ]
+            },
+            {
+                "question": "Qui a écrit 'L'Heure de l'Étoile' ?",
+                "options": [
+                    "Paulo Coelho",
+                    "Clarice Lispector",
+                    "Paula Pimenta",
+                    "Jorge Amado"
+                ],
+                "answer": [
+                    "Clarice Lispector"
+                ]
+            },
+            {
+                "question": "Laquelle des œuvres suivantes N'A PAS été écrite par Federico García Lorca ?",
+                "options": [
+                    "Le Jeu de la Marelle",
+                    "La Maison de Bernarda Alba",
+                    "Noces de Sang",
+                    "Yerma"
+                ],
+                "answer": [
+                    "Le Jeu de la Marelle"
+                ]
+            },
+            {
+                "question": "Dans quel pays se trouve le Musée du Prado ?",
+                "options": [
+                    "Russie",
+                    "États-Unis",
+                    "France",
+                    "Espagne"
+                ],
+                "answer": [
+                    "Espagne"
+                ]
+            },
+            {
+                "question": "Qui fut le dernier roi de Troie ?",
+                "options": [
+                    "Achille",
+                    "Priam",
+                    "Agamemnon",
+                    "Ménélas"
+                ],
+                "answer": [
+                    "Priam"
+                ]
+            },
+            {
+                "question": "Quel est le nom du démon qui suit Faust, de Goethe ?",
+                "options": [
+                    "Satan",
+                    "Balthazar",
+                    "Méphistophélès",
+                    "Léviathan"
+                ],
+                "answer": [
+                    "Méphistophélès"
+                ]
+            },
+            {
+                "question": "Dans quel roman de Stephen King y a-t-il un clown meurtrier ?",
+                "options": [
+                    "La Zone morte",
+                    "Ça",
+                    "Désespoir",
+                    "Misery"
+                ],
+                "answer": [
+                    "Ça"
+                ]
+            },
+            {
+                "question": "Quel est le personnage le plus célèbre des livres d'Agatha Christie ?",
+                "options": [
+                    "Gabriel Allon",
+                    "Sherlock Holmes",
+                    "Poirot",
+                    "Dr Watson"
+                ],
+                "answer": [
+                    "Poirot"
+                ]
+            },
+            {
+                "question": "En quelle année a eu lieu la Semaine d'Art Moderne ?",
+                "options": [
+                    "1914",
+                    "1922",
+                    "1932",
+                    "Aucune des réponses"
+                ],
+                "answer": [
+                    "1922"
+                ]
+            },
+            {
+                "question": "Lequel de ces écrivains portugais est l'auteur de 'Le cousin Basílio' ?",
+                "options": [
+                    "Fernando Pessoa",
+                    "Camilo Castelo Branco",
+                    "José Saramago",
+                    "Eça de Queiroz"
+                ],
+                "answer": [
+                    "Eça de Queiroz"
+                ]
+            },
+            {
+                "question": "Quel est le nom du cygne noir du ballet 'Le Lac des cygnes' ?",
+                "options": [
+                    "Odile",
+                    "Siegfried",
+                    "Odette",
+                    "Il n'a pas de nom"
+                ],
+                "answer": [
+                    "Odile"
+                ]
+            },
+            {
+                "question": "Dans quelle ville a eu lieu la première représentation du ballet 'Casse-Noisette' ?",
+                "options": [
+                    "Saint-Pétersbourg",
+                    "Vienne",
+                    "New York",
+                    "Moscou"
+                ],
+                "answer": [
+                    "Saint-Pétersbourg"
+                ]
+            },
+            {
+                "question": "Où se trouve Inhotim ?",
+                "options": [
+                    "São Paulo",
+                    "Rio de Janeiro",
+                    "Minas Gerais",
+                    "Paraná"
+                ],
+                "answer": [
+                    "Minas Gerais"
+                ]
+            },
+            {
+                "question": "Qui a peint 'Abaporu' ?",
+                "options": [
+                    "Anita Malfatti",
+                    "Tarsila do Amaral",
+                    "Di Cavalcanti",
+                    "Romero Britto"
+                ],
+                "answer": [
+                    "Tarsila do Amaral"
+                ]
+            },
+            {
+                "question": "Quelle planète a la température moyenne la plus basse du système solaire ?",
+                "options": [
+                    "Vénus",
+                    "Saturne",
+                    "Neptune",
+                    "Mercure"
+                ],
+                "answer": [
+                    "Neptune"
+                ]
+            },
+            {
+                "question": "Laquelle de ces îles est habitée par des tortues géantes ?",
+                "options": [
+                    "Madagascar",
+                    "Les îles Galápagos",
+                    "Les îles Canaries",
+                    "L'île de Margarita"
+                ],
+                "answer": [
+                    "Les îles Galápagos"
+                ]
+            },
+            {
+                "question": "Quelle race de chien a la langue bleue ou violette ?",
+                "options": [
+                    "Boxer",
+                    "Bouledogue",
+                    "Chow Chow",
+                    "Caniche"
+                ],
+                "answer": [
+                    "Chow Chow"
+                ]
+            },
+            {
+                "question": "Comment s'appelle la phobie d'avaler de la nourriture ?",
+                "options": [
+                    "Sitophobie",
+                    "Photophobie",
+                    "Digestophobie",
+                    "Arachnophobie"
+                ],
+                "answer": [
+                    "Sitophobie"
+                ]
+            },
+            {
+                "question": "Qu'est-ce que le sternocléidomastoïdien ?",
+                "options": [
+                    "Un muscle",
+                    "Un tendon",
+                    "Un ligament",
+                    "Un os"
+                ],
+                "answer": [
+                    "Un muscle"
+                ]
+            },
+            {
+                "question": "En quelle année les processeurs AMD Ryzen ont-ils été lancés ?",
+                "options": [
+                    "2014",
+                    "2016",
+                    "2017",
+                    "2019"
+                ],
+                "answer": [
+                    "2017"
+                ]
+            },
+            {
+                "question": "À quoi sert le test au carbone 14 ?",
+                "options": [
+                    "Calculer les carats de l'or",
+                    "Dater la matière organique",
+                    "Calculer les protons d'un atome",
+                    "Galvaniser une bague"
+                ],
+                "answer": [
+                    "Dater la matière organique"
+                ]
+            },
+            {
+                "question": "Quelle est la durée de vie moyenne d'un cochon ?",
+                "options": [
+                    "10 à 20 ans",
+                    "25 à 45 ans",
+                    "35 à 45 ans",
+                    "70 à 90 ans"
+                ],
+                "answer": [
+                    "10 à 20 ans"
+                ]
+            },
+            {
+                "question": "Dans quelle ville se trouve le planétarium d'Ibirapuera ?",
+                "options": [
+                    "Rio de Janeiro",
+                    "São Paulo",
+                    "Ouro Preto",
+                    "Porto Alegre"
+                ],
+                "answer": [
+                    "São Paulo"
+                ]
+            },
+            {
+                "question": "Quels éléments chimiques sont présents dans le sel ?",
+                "options": [
+                    "Sodium et potassium",
+                    "Sodium et chlore",
+                    "Sodium et hydrogène",
+                    "Sodium et azote"
+                ],
+                "answer": [
+                    "Sodium et chlore"
+                ]
+            },
+            {
+                "question": "De quel arbre vient l'olive ?",
+                "options": [
+                    "Ipê",
+                    "Olivier",
+                    "Olivier européen",
+                    "Cèdre"
+                ],
+                "answer": [
+                    "Olivier"
+                ]
+            },
+            {
+                "question": "Qu'est-ce que le cholestérol ?",
+                "options": [
+                    "Une protéine",
+                    "Un glucide",
+                    "Un acide nucléique",
+                    "Un lipide"
+                ],
+                "answer": [
+                    "Un lipide"
+                ]
+            },
+            {
+                "question": "Que utilise le traitement par cryothérapie ?",
+                "options": [
+                    "Le froid",
+                    "La chaleur",
+                    "L'électricité",
+                    "La terre"
+                ],
+                "answer": [
+                    "Le froid"
+                ]
+            },
+            {
+                "question": "Quel changement d'état se produit lors de la sublimation ?",
+                "options": [
+                    "Solide vers liquide",
+                    "Solide vers gazeux",
+                    "Gazeux vers liquide",
+                    "Liquide vers solide"
+                ],
+                "answer": [
+                    "Solide vers gazeux"
+                ]
+            },
+            {
+                "question": "Quelle est la racine carrée de 144 ?",
+                "options": [
+                    "12",
+                    "19",
+                    "24",
+                    "9"
+                ],
+                "answer": [
+                    "12"
+                ]
+            },
+            {
+                "question": "Quel est le nom de l'assistante virtuelle de Microsoft ?",
+                "options": [
+                    "Cortana",
+                    "Siri",
+                    "Alexa",
+                    "Bixby"
+                ],
+                "answer": [
+                    "Cortana"
+                ]
+            },
+            {
+                "question": "Lequel de ces métaux est liquide à température ambiante ?",
+                "options": [
+                    "Tungstène",
+                    "Bore",
+                    "Mercure",
+                    "Platine"
+                ],
+                "answer": [
+                    "Mercure"
+                ]
+            },
+            {
+                "question": "Quel animal est cité dans l'expérience de Schrödinger ?",
+                "options": [
+                    "Un chat",
+                    "Un canari",
+                    "Un chien",
+                    "Un rat"
+                ],
+                "answer": [
+                    "Un chat"
+                ]
+            },
+            {
+                "question": "Quel est le plus petit os du corps humain ?",
+                "options": [
+                    "L'enclume",
+                    "La phalange",
+                    "L'étrier",
+                    "Le fémur"
+                ],
+                "answer": [
+                    "L'étrier"
+                ]
+            },
+            {
+                "question": "Quelle maladie est causée par le bacille de Hansen ?",
+                "options": [
+                    "La tuberculose",
+                    "La syphilis",
+                    "La lèpre",
+                    "La pneumonie"
+                ],
+                "answer": [
+                    "La lèpre"
+                ]
+            },
+            {
+                "question": "Qu'est-ce qui pèse plus, un kilo de plomb ou un kilo d'or ?",
+                "options": [
+                    "Or",
+                    "Plomb",
+                    "Ils ont le même poids",
+                    "Cela dépend du climat"
+                ],
+                "answer": [
+                    "Ils ont le même poids"
+                ]
+            },
+            {
+                "question": "Qui a déclaré la loi de la gravitation universelle ?",
+                "options": [
+                    "Johannes Kepler",
+                    "Isaac Newton",
+                    "Carl Friedrich Gauss",
+                    "Albert Einstein"
+                ],
+                "answer": [
+                    "Isaac Newton"
+                ]
+            },
+            {
+                "question": "Lequel de ces matériaux conduit l'électricité ?",
+                "options": [
+                    "Porcelaine",
+                    "Verre",
+                    "Métal",
+                    "Caoutchouc"
+                ],
+                "answer": [
+                    "Métal"
+                ]
+            },
+            {
+                "question": "Quel est l'ensemble des nombres représentés par la lettre 'Q' ?",
+                "options": [
+                    "Nombres rationnels",
+                    "Nombres réels",
+                    "Nombres irrationnels",
+                    "Parallèles"
+                ],
+                "answer": [
+                    "Nombres rationnels"
+                ]
+            },
+            {
+                "question": "Lequel de ces objets met le plus de temps à se décomposer ?",
+                "options": [
+                    "Un mégot de cigarette",
+                    "Un chewing-gum",
+                    "Une bouteille en plastique",
+                    "Un journal"
+                ],
+                "answer": [
+                    "Une bouteille en plastique"
+                ]
+            },
+            {
+                "question": "Quel phénomène génère de l'ozone dans l'atmosphère ?",
+                "options": [
+                    "Les tonnerres",
+                    "Les éclairs",
+                    "Les tremblements de terre",
+                    "Les tsunamis"
+                ],
+                "answer": [
+                    "Les éclairs"
+                ]
+            },
+            {
+                "question": "Quel est le mammifère le plus mortel d'Afrique pour l'homme ?",
+                "options": [
+                    "L'hippopotame",
+                    "Le zèbre",
+                    "Le lion",
+                    "Le sanglier"
+                ],
+                "answer": [
+                    "L'hippopotame"
+                ]
+            },
+            {
+                "question": "Quel est le nom de la première vidéo mise en ligne sur YouTube ?",
+                "options": [
+                    "Moi au zoo",
+                    "L'arrivée du train",
+                    "À la maison",
+                    "Printemps"
+                ],
+                "answer": [
+                    "Moi au zoo"
+                ]
+            },
+            {
+                "question": "De quels deux facteurs dépend la gravité universelle ?",
+                "options": [
+                    "Masse et volume",
+                    "Masse et poids",
+                    "Distance et poids",
+                    "Distance et masse"
+                ],
+                "answer": [
+                    "Distance et masse"
+                ]
+            },
+            {
+                "question": "Combien de caractères peut-on utiliser dans un Tweet ?",
+                "options": [
+                    "120",
+                    "180",
+                    "280",
+                    "360"
+                ],
+                "answer": [
+                    "280"
+                ]
+            },
+            {
+                "question": "Qui a inspiré la création du moteur de recherche d'images Google ?",
+                "options": [
+                    "Madonna",
+                    "Mariah Carey",
+                    "Britney Spears",
+                    "Jennifer Lopez"
+                ],
+                "answer": [
+                    "Jennifer Lopez"
+                ]
+            },
+            {
+                "question": "Quel est le nom du code composé de traits et de points ?",
+                "options": [
+                    "Braille",
+                    "Morse",
+                    "Raypunt",
+                    "Barres"
+                ],
+                "answer": [
+                    "Morse"
+                ]
+            },
+            {
+                "question": "Que mesure l'échelle de Richter ?",
+                "options": [
+                    "La dureté des minéraux",
+                    "L'intensité d'une tornade",
+                    "La force du vent",
+                    "La magnitude d'un tremblement de terre"
+                ],
+                "answer": [
+                    "La magnitude d'un tremblement de terre"
+                ]
+            },
+            {
+                "question": "Comment s'appelle la cécité transitoire ?",
+                "options": [
+                    "Amaurose fugace",
+                    "Ophtalmie précoce",
+                    "Exophtalmie initiale",
+                    "Anamnèse temporaire"
+                ],
+                "answer": [
+                    "Amaurose fugace"
+                ]
+            },
+            {
+                "question": "Quel animal représente le système d'exploitation Linux ?",
+                "options": [
+                    "Lion",
+                    "Panda",
+                    "Manchot",
+                    "Léopard"
+                ],
+                "answer": [
+                    "Manchot"
+                ]
+            },
+            {
+                "question": "Laquelle de ces voitures est dans l'espace ?",
+                "options": [
+                    "Fiat Uno",
+                    "Chevrolet Corvette",
+                    "Tesla Roadster",
+                    "BMW M8"
+                ],
+                "answer": [
+                    "Tesla Roadster"
+                ]
+            },
+            {
+                "question": "Quelle entreprise a créé le premier smartphone ?",
+                "options": [
+                    "IBM",
+                    "Apple",
+                    "Google",
+                    "Huawei"
+                ],
+                "answer": [
+                    "IBM"
+                ]
+            },
+            {
+                "question": "Lequel de ces animaux est le plus silencieux ?",
+                "options": [
+                    "Girafe",
+                    "Éléphant",
+                    "Lion",
+                    "Zèbre"
+                ],
+                "answer": [
+                    "Girafe"
+                ]
+            },
+            {
+                "question": "Quelle est la durée de vie moyenne d'une orque ?",
+                "options": [
+                    "50 ans",
+                    "85 ans",
+                    "29 ans",
+                    "5 ans"
+                ],
+                "answer": [
+                    "29 ans"
+                ]
+            },
+            {
+                "question": "Lequel de ces animaux peut se noyer ?",
+                "options": [
+                    "Requin",
+                    "Hippocampe",
+                    "Poulpe",
+                    "Dauphin"
+                ],
+                "answer": [
+                    "Dauphin"
+                ]
+            },
+            {
+                "question": "Dans quelle constellation se trouve l'étoile qui indique le nord ?",
+                "options": [
+                    "Grande Ourse",
+                    "Petite Ourse",
+                    "Cassiopeia",
+                    "Persée"
+                ],
+                "answer": [
+                    "Petite Ourse"
+                ]
+            },
+            {
+                "question": "Combien d'arêtes un cube possède-t-il ?",
+                "options": [
+                    "4",
+                    "8",
+                    "12",
+                    "16"
+                ],
+                "answer": [
+                    "12"
+                ]
+            },
+            {
+                "question": "Comment s'appelle la phobie d'Halloween ?",
+                "options": [
+                    "Psychose",
+                    "Hallophobie",
+                    "Samhainophobie",
+                    "Luviofobie"
+                ],
+                "answer": [
+                    "Samhainophobie"
+                ]
+            },
+            {
+                "question": "Quel est le plus grand muscle du corps humain ?",
+                "options": [
+                    "Grand pectoral",
+                    "Triceps",
+                    "Grand fessier",
+                    "Stapédien"
+                ],
+                "answer": [
+                    "Grand fessier"
+                ]
+            },
+            {
+                "question": "Qui a été la première personne à recevoir deux Prix Nobel dans deux domaines scientifiques différents ?",
+                "options": [
+                    "Albert Einstein",
+                    "Marie Curie",
+                    "Stephen Hawking",
+                    "Rosalind Franklin"
+                ],
+                "answer": [
+                    "Marie Curie"
+                ]
+            },
+            {
+                "question": "Quel est l'élément numéro 1 du tableau périodique ?",
+                "options": [
+                    "Baryum",
+                    "Zinc",
+                    "Hydrogène",
+                    "Potassium"
+                ],
+                "answer": [
+                    "Hydrogène"
+                ]
+            },
+            {
+                "question": "Pourquoi la Lune brille-t-elle ?",
+                "options": [
+                    "Elle reflète la lumière du Soleil",
+                    "Elle émet de la lumière",
+                    "Les étoiles l'illuminent",
+                    "Elle reflète la lumière de la Terre"
+                ],
+                "answer": [
+                    "Elle reflète la lumière du Soleil"
+                ]
+            },
+            {
+                "question": "Laquelle de ces entreprises technologiques loue régulièrement des chèvres ?",
+                "options": [
+                    "Google",
+                    "Apple",
+                    "Microsoft",
+                    "Samsung"
+                ],
+                "answer": [
+                    "Google"
+                ]
+            },
+            {
+                "question": "Combien de fois clignons-nous des yeux en moyenne par minute ?",
+                "options": [
+                    "4",
+                    "8",
+                    "20",
+                    "30"
+                ],
+                "answer": [
+                    "20"
+                ]
+            },
+            {
+                "question": "Qu'est-ce qui transforme le lait en yaourt ?",
+                "options": [
+                    "Virus",
+                    "Mousses",
+                    "Le temps",
+                    "Bactéries"
+                ],
+                "answer": [
+                    "Bactéries"
+                ]
+            },
+            {
+                "question": "Dans quelle direction la planète Terre tourne-t-elle ?",
+                "options": [
+                    "D'est en ouest",
+                    "Du nord au sud",
+                    "D'ouest en est",
+                    "Du sud au nord"
+                ],
+                "answer": [
+                    "D'ouest en est"
+                ]
+            },
+            {
+                "question": "Quelle est la planète la plus chaude du système solaire ?",
+                "options": [
+                    "Terre",
+                    "Mercure",
+                    "Vénus",
+                    "Saturne"
+                ],
+                "answer": [
+                    "Vénus"
+                ]
+            },
+            {
+                "question": "Quelle est la plus grande espèce de lézard au monde ?",
+                "options": [
+                    "Dragon de Komodo",
+                    "Monstre de Gila",
+                    "Lézard des murs",
+                    "Gecko commun"
+                ],
+                "answer": [
+                    "Dragon de Komodo"
+                ]
+            },
+            {
+                "question": "Lequel de ces produits chimiques est utilisé dans la préparation du dulce de leche ?",
+                "options": [
+                    "Bicarbonate de sodium",
+                    "Chlorure de sodium",
+                    "Nitrite de sodium",
+                    "Lécithine"
+                ],
+                "answer": [
+                    "Bicarbonate de sodium"
+                ]
+            },
+            {
+                "question": "Combien d'os un bébé humain a-t-il environ ?",
+                "options": [
+                    "140",
+                    "199",
+                    "206",
+                    "300"
+                ],
+                "answer": [
+                    "300"
+                ]
+            },
+            {
+                "question": "Où se trouve le muscle sartorius dans le corps humain ?",
+                "options": [
+                    "Avant-bras",
+                    "Dos",
+                    "Cuisse",
+                    "Mollet"
+                ],
+                "answer": [
+                    "Cuisse"
+                ]
+            },
+            {
+                "question": "Lequel de ces lobes n'est pas un lobe du cerveau ?",
+                "options": [
+                    "Pariétal",
+                    "Frontal",
+                    "Méridional",
+                    "Occipital"
+                ],
+                "answer": [
+                    "Méridional"
+                ]
+            },
+            {
+                "question": "Combien de temps la Station spatiale internationale met-elle pour faire un tour complet de la Terre ?",
+                "options": [
+                    "90 minutes",
+                    "6 heures",
+                    "18 heures",
+                    "6 mois"
+                ],
+                "answer": [
+                    "90 minutes"
+                ]
+            },
+            {
+                "question": "De quel continent est originaire la panthère ?",
+                "options": [
+                    "Europe",
+                    "Amérique",
+                    "Asie",
+                    "Afrique"
+                ],
+                "answer": [
+                    "Amérique"
+                ]
+            },
+            {
+                "question": "Comment s'appelle la ligue anglaise de football ?",
+                "options": [
+                    "La ligue",
+                    "Série A",
+                    "Premier League",
+                    "Ligue 1"
+                ],
+                "answer": [
+                    "Premier League"
+                ]
+            },
+            {
+                "question": "Quelle ville est connue pour accueillir la célèbre course des 24 heures ?",
+                "options": [
+                    "Dakar",
+                    "Dubaï",
+                    "Le Mans",
+                    "Paris"
+                ],
+                "answer": [
+                    "Le Mans"
+                ]
+            },
+            {
+                "question": "Quel a été le premier pays d'Amérique latine à accueillir les Jeux Olympiques ?",
+                "options": [
+                    "Mexique",
+                    "Brésil",
+                    "Pérou",
+                    "Venezuela"
+                ],
+                "answer": [
+                    "Mexique"
+                ]
+            },
+            {
+                "question": "Quel pays a remporté la première Coupe du Monde de football ?",
+                "options": [
+                    "Italie",
+                    "Argentine",
+                    "Angleterre",
+                    "Uruguay"
+                ],
+                "answer": [
+                    "Uruguay"
+                ]
+            },
+            {
+                "question": "Laquelle de ces écuries est italienne en Formule 1 ?",
+                "options": [
+                    "Red Bull",
+                    "McLaren",
+                    "Ferrari",
+                    "Renault"
+                ],
+                "answer": [
+                    "Ferrari"
+                ]
+            },
+            {
+                "question": "À quel sport appartient la compétition Giro d'Italia ?",
+                "options": [
+                    "Rugby",
+                    "Cyclisme",
+                    "Athlétisme",
+                    "Voile"
+                ],
+                "answer": [
+                    "Cyclisme"
+                ]
+            },
+            {
+                "question": "Quel ancien joueur brésilien a été arrêté au Paraguay pour usage de faux passeport ?",
+                "options": [
+                    "Romário",
+                    "Ronaldo",
+                    "Ronaldinho Gaúcho",
+                    "Rivaldo"
+                ],
+                "answer": [
+                    "Ronaldinho Gaúcho"
+                ]
+            },
+            {
+                "question": "Laquelle de ces options N'EST PAS une caractéristique du football ?",
+                "options": [
+                    "But",
+                    "Penalty",
+                    "Dribble",
+                    "Service"
+                ],
+                "answer": [
+                    "Service"
+                ]
+            },
+            {
+                "question": "Qui a débuté le plus jeune en équipe nationale professionnelle ?",
+                "options": [
+                    "Antoine Griezmann",
+                    "Lionel Messi",
+                    "Luis Suárez",
+                    "Luka Modric"
+                ],
+                "answer": [
+                    "Lionel Messi"
+                ]
+            },
+            {
+                "question": "Quel est le premier matériau contenu dans les médailles olympiques d'or ?",
+                "options": [
+                    "Acier",
+                    "Or",
+                    "Argent",
+                    "Fer"
+                ],
+                "answer": [
+                    "Argent"
+                ]
+            },
+            {
+                "question": "Comment s'appelle le service qui commence un set au volley ?",
+                "options": [
+                    "Service",
+                    "Manchette",
+                    "Touche",
+                    "Balle de milieu"
+                ],
+                "answer": [
+                    "Service"
+                ]
+            },
+            {
+                "question": "Quel est le nom de l'athlète brésilien double champion du monde de surf ?",
+                "options": [
+                    "Gabriel Medina",
+                    "Ítalo Ferreira",
+                    "Felipe Toledo",
+                    "Kelly Slater"
+                ],
+                "answer": [
+                    "Gabriel Medina"
+                ]
+            },
+            {
+                "question": "Quelle est la 2ème étape d'un triathlon ?",
+                "options": [
+                    "Natation",
+                    "Athlétisme",
+                    "Cyclisme",
+                    "Escalade"
+                ],
+                "answer": [
+                    "Cyclisme"
+                ]
+            },
+            {
+                "question": "Combien de cases y a-t-il sur un échiquier ?",
+                "options": [
+                    "50",
+                    "55",
+                    "64",
+                    "80"
+                ],
+                "answer": [
+                    "64"
+                ]
+            },
+            {
+                "question": "De quel pays vient l'équipe de football appelée Arsenal ?",
+                "options": [
+                    "Allemagne",
+                    "Espagne",
+                    "Angleterre",
+                    "Italie"
+                ],
+                "answer": [
+                    "Angleterre"
+                ]
+            },
+            {
+                "question": "Quel pays a gagné la Coupe du Monde de 1970 ?",
+                "options": [
+                    "Brésil",
+                    "Italie",
+                    "Allemagne",
+                    "Argentine"
+                ],
+                "answer": [
+                    "Brésil"
+                ]
+            },
+            {
+                "question": "Quelle a été la première équipe européenne pour laquelle Luis Suárez a joué ?",
+                "options": [
+                    "Ajax",
+                    "Barcelona",
+                    "Groningen",
+                    "Liverpool"
+                ],
+                "answer": [
+                    "Groningen"
+                ]
+            },
+            {
+                "question": "Où a été disputée la première Coupe du Monde féminine de football ?",
+                "options": [
+                    "Nouvelle-Zélande",
+                    "Canada",
+                    "Chine",
+                    "France"
+                ],
+                "answer": [
+                    "Chine"
+                ]
+            },
+            {
+                "question": "Dans quel sport est-il nécessaire de porter un bonnet de bain ?",
+                "options": [
+                    "Football",
+                    "Natation",
+                    "Athlétisme",
+                    "Gymnastique"
+                ],
+                "answer": [
+                    "Natation"
+                ]
+            },
+            {
+                "question": "Dans laquelle de ces épreuves court-on la plus longue distance ?",
+                "options": [
+                    "Triathlon olympique",
+                    "Marathon",
+                    "Relais 400 mètres",
+                    "Décathlon"
+                ],
+                "answer": [
+                    "Marathon"
+                ]
+            },
+            {
+                "question": "Qui a été contrôlé positif à la dopage 7 fois au Tour de France ?",
+                "options": [
+                    "Egan Bernal",
+                    "Lance Armstrong",
+                    "Elia Viviani",
+                    "Eddy Merckx"
+                ],
+                "answer": [
+                    "Lance Armstrong"
+                ]
+            },
+            {
+                "question": "Quel est le nom du jeu dont l'objectif est de toucher l'adversaire avec la balle ?",
+                "options": [
+                    "Football",
+                    "Basketball",
+                    "Balle aux prisonniers",
+                    "Volley-ball"
+                ],
+                "answer": [
+                    "Balle aux prisonniers"
+                ]
+            },
+            {
+                "question": "Dans quel sport Muhammad Ali s'est-il illustré ?",
+                "options": [
+                    "Football",
+                    "Volley-ball",
+                    "Boxe",
+                    "Tennis"
+                ],
+                "answer": [
+                    "Boxe"
+                ]
+            },
+            {
+                "question": "En quel mois se joue habituellement le Super Bowl ?",
+                "options": [
+                    "Septembre",
+                    "Février",
+                    "Mars",
+                    "Décembre"
+                ],
+                "answer": [
+                    "Février"
+                ]
+            },
+            {
+                "question": "Quelle discipline demande le plus grand nombre d'athlètes dans une partie ?",
+                "options": [
+                    "Football",
+                    "Volley-ball",
+                    "Handball",
+                    "Basketball"
+                ],
+                "answer": [
+                    "Football"
+                ]
+            },
+            {
+                "question": "Quel joueur a remporté le plus de Coupes du Monde dans l'histoire du football ?",
+                "options": [
+                    "Maradona",
+                    "Pelé",
+                    "George Best",
+                    "Zidane"
+                ],
+                "answer": [
+                    "Pelé"
+                ]
+            },
+            {
+                "question": "En quelle année Diego Maradona a-t-il gagné la Coupe du Monde avec l'Argentine ?",
+                "options": [
+                    "1978",
+                    "1982",
+                    "1986",
+                    "1990"
+                ],
+                "answer": [
+                    "1986"
+                ]
+            },
+            {
+                "question": "Dans quelle équipe NBA Michael Jordan a-t-il pris sa retraite pour la dernière fois ?",
+                "options": [
+                    "Chicago Bulls",
+                    "Washington Wizards",
+                    "Boston Celtics",
+                    "Charlotte Bobcats"
+                ],
+                "answer": [
+                    "Washington Wizards"
+                ]
+            },
+            {
+                "question": "Dans quel sport les joueurs portent-ils des casques ?",
+                "options": [
+                    "Natation",
+                    "Football",
+                    "Cyclisme",
+                    "Volley-ball"
+                ],
+                "answer": [
+                    "Cyclisme"
+                ]
+            },
+            {
+                "question": "Quel joueur était connu sous le nom de 'phénomène' ?",
+                "options": [
+                    "Ronaldo",
+                    "Neymar",
+                    "Rivaldo",
+                    "Gabigol"
+                ],
+                "answer": [
+                    "Ronaldo"
+                ]
+            },
+            {
+                "question": "Quel sport est réglementé par la NHL aux États-Unis ?",
+                "options": [
+                    "Hockey sur glace",
+                    "Basketball",
+                    "Formule 1",
+                    "Curling"
+                ],
+                "answer": [
+                    "Hockey sur glace"
+                ]
+            },
+            {
+                "question": "Quelle médaille est donnée à l'athlète qui termine troisième ?",
+                "options": [
+                    "Bronze",
+                    "Or",
+                    "Argent",
+                    "Aluminium"
+                ],
+                "answer": [
+                    "Bronze"
+                ]
+            },
+            {
+                "question": "Lequel de ces entraîneurs n'a jamais été sélectionneur de l'équipe nationale brésilienne ?",
+                "options": [
+                    "Dunga",
+                    "Ramon Menezes",
+                    "Tite",
+                    "Mano Menezes"
+                ],
+                "answer": [
+                    "Ramon Menezes"
+                ]
+            },
+            {
+                "question": "Où se trouve le stade Maracanã ?",
+                "options": [
+                    "São Paulo",
+                    "Rio de Janeiro",
+                    "Rio Grande do Sul",
+                    "Salvador"
+                ],
+                "answer": [
+                    "Rio de Janeiro"
+                ]
+            },
+            {
+                "question": "Lequel de ces clubs de football n'a pas de rouge sur son maillot ?",
+                "options": [
+                    "Flamengo",
+                    "Vila Nova",
+                    "Arsenal",
+                    "Grêmio"
+                ],
+                "answer": [
+                    "Grêmio"
+                ]
+            },
+            {
+                "question": "Où un joueur de football porte-t-il le brassard de capitaine ?",
+                "options": [
+                    "Genou gauche",
+                    "Bras",
+                    "Intérieur de la chaussure",
+                    "Tête"
+                ],
+                "answer": [
+                    "Bras"
+                ]
+            },
+            {
+                "question": "Lequel de ces pilotes a gagné 4 titres mondiaux consécutifs en Formule 1 ?",
+                "options": [
+                    "Sebastian Vettel",
+                    "Fernando Alonso",
+                    "Felipe Massa",
+                    "Kimi Räikkönen"
+                ],
+                "answer": [
+                    "Sebastian Vettel"
+                ]
+            },
+            {
+                "question": "Dans quelle sélection joue le footballeur Erling Haaland ?",
+                "options": [
+                    "Allemande",
+                    "Suédoise",
+                    "Espagnole",
+                    "Norvégienne"
+                ],
+                "answer": [
+                    "Norvégienne"
+                ]
+            },
+            {
+                "question": "Sur quelle île du Portugal est né Cristiano Ronaldo ?",
+                "options": [
+                    "Braga",
+                    "Madère",
+                    "Foios",
+                    "Lisbonne"
+                ],
+                "answer": [
+                    "Madère"
+                ]
+            },
+            {
+                "question": "À quel âge Maria Sharapova a-t-elle remporté son premier titre du Grand Chelem ?",
+                "options": [
+                    "17 ans",
+                    "18 ans",
+                    "15 ans",
+                    "20 ans"
+                ],
+                "answer": [
+                    "17 ans"
+                ]
+            }, {
+                "question": "Lequel de ces jeux était un sport olympique ?",
+                "options": [
+                    "La marelle",
+                    "Tir à la corde",
+                    "Cache-cache",
+                    "Devine ce que c'est"
+                ],
+                "answer": [
+                    "Tir à la corde"
+                ]
+            },
+            {
+                "question": "Quel était le prix aux Jeux olympiques dans l'Antiquité ?",
+                "options": [
+                    "Une coupe",
+                    "Un tonneau de vin",
+                    "Une couronne d'olivier",
+                    "Une rose avec des épines"
+                ],
+                "answer": [
+                    "Une couronne d'olivier"
+                ]
+            },
+            {
+                "question": "Quelle est la profession de Messi ?",
+                "options": [
+                    "Acteur",
+                    "Médecin",
+                    "Joueur de football",
+                    "Politicien"
+                ],
+                "answer": [
+                    "Joueur de football"
+                ]
+            },
+            {
+                "question": "Quel terme est utilisé lorsque le combat se termine après un compte de 10 secondes ?",
+                "options": [
+                    "Knockdown",
+                    "K.-O.",
+                    "Finalisation",
+                    "Étranglement"
+                ],
+                "answer": [
+                    "K.-O."
+                ]
+            },
+            {
+                "question": "Quel club a eu son stade construit par ses supporters ?",
+                "options": [
+                    "Corinthians",
+                    "Flamengo",
+                    "Vasco da Gama",
+                    "Cruzeiro"
+                ],
+                "answer": [
+                    "Vasco da Gama"
+                ]
+            },
+            {
+                "question": "Qui a été élue 6 fois meilleure joueuse de football au monde ?",
+                "options": [
+                    "Formiga",
+                    "Marta",
+                    "Hope Solo",
+                    "Megan Rapinoe"
+                ],
+                "answer": [
+                    "Marta"
+                ]
+            },
+            {
+                "question": "Pour quelle raison les championnats d'État du Brésil ont-ils été suspendus en 2020 ?",
+                "options": [
+                    "Fraude des arbitres ?",
+                    "Manipulation des résultats ?",
+                    "Grève des joueurs ?",
+                    "Coronavirus"
+                ],
+                "answer": [
+                    "Coronavirus"
+                ]
+            },
+            {
+                "question": "Quelle équipe a révélé Neymar et Pelé ?",
+                "options": [
+                    "Palmeiras",
+                    "Santos",
+                    "Joinville",
+                    "XV de Jaú"
+                ],
+                "answer": [
+                    "Santos"
+                ]
+            },
+            {
+                "question": "Sur quel continent a eu lieu la plus grande raclée du football ?",
+                "options": [
+                    "Afrique",
+                    "Europe",
+                    "Amérique",
+                    "Océanie"
+                ],
+                "answer": [
+                    "Afrique"
+                ]
+            },
+            {
+                "question": "Quel facteur a influencé la couleur des balles de tennis ?",
+                "options": [
+                    "La radio",
+                    "La télévision",
+                    "L'argent",
+                    "Le climat"
+                ],
+                "answer": [
+                    "La télévision"
+                ]
+            },
+            {
+                "question": "Dans quel sport utilise-t-on le terme « plaquages » ?",
+                "options": [
+                    "Rugby",
+                    "Tennis",
+                    "Football",
+                    "Golf"
+                ],
+                "answer": [
+                    "Rugby"
+                ]
+            },
+            {
+                "question": "Où s'est déroulée la Coupe du Monde 2002 ?",
+                "options": [
+                    "Corée du Nord et Japon",
+                    "Japon",
+                    "Corée du Sud et Japon",
+                    "Corée du Nord"
+                ],
+                "answer": [
+                    "Corée du Sud et Japon"
+                ]
+            },
+            {
+                "question": "Combien de joueurs sont nécessaires pour une partie d'échecs ?",
+                "options": [
+                    "6",
+                    "4",
+                    "2",
+                    "8"
+                ],
+                "answer": [
+                    "2"
+                ]
+            },
+            {
+                "question": "Lequel des sports suivants n'est pas joué en équipe ?",
+                "options": [
+                    "Golf",
+                    "Rugby",
+                    "Basket-ball",
+                    "Baseball"
+                ],
+                "answer": [
+                    "Golf"
+                ]
+            },
+            {
+                "question": "Lequel de ces sports est un sport de combat ?",
+                "options": [
+                    "Jiu-jitsu",
+                    "Golf",
+                    "Natation",
+                    "Football"
+                ],
+                "answer": [
+                    "Jiu-jitsu"
+                ]
+            },
+            {
+                "question": "Lequel de ces sports ne se joue pas sur un terrain ou un court ?",
+                "options": [
+                    "Volley-ball",
+                    "Futsal",
+                    "Plongeon",
+                    "Baseball"
+                ],
+                "answer": [
+                    "Plongeon"
+                ]
+            },
+            {
+                "question": "Dans quel jeu saute-t-on d'abord sur un pied, puis sur les deux pieds ?",
+                "options": [
+                    "Corde à sauter",
+                    "Balle",
+                    "Peteca",
+                    "La marelle"
+                ],
+                "answer": [
+                    "La marelle"
+                ]
+            },
+            {
+                "question": "Quel sport nécessite la plus grande protection pour les athlètes ?",
+                "options": [
+                    "Handball",
+                    "Football américain",
+                    "Basket-ball",
+                    "Judo"
+                ],
+                "answer": [
+                    "Football américain"
+                ]
+            },
+            {
+                "question": "Quel symbole représente la fête irlandaise de la Saint-Patrick ?",
+                "options": [
+                    "Une couronne",
+                    "Une rose",
+                    "Un oiseau",
+                    "Un trèfle"
+                ],
+                "answer": [
+                    "Un trèfle"
+                ]
+            },
+            {
+                "question": "Où faut-il voyager pour visiter le Palais d'Hiver ?",
+                "options": [
+                    "Moscou",
+                    "Saint-Pétersbourg",
+                    "Vladivostok",
+                    "Sotchi"
+                ],
+                "answer": [
+                    "Saint-Pétersbourg"
+                ]
+            },
+            {
+                "question": "À quel pays appartiennent les îles Majorque, Minorque et Ibiza ?",
+                "options": [
+                    "Espagne",
+                    "Grèce",
+                    "Royaume-Uni",
+                    "Portugal"
+                ],
+                "answer": [
+                    "Espagne"
+                ]
+            },
+            {
+                "question": "Lequel de ces pays a la plus grande superficie ?",
+                "options": [
+                    "Mexique",
+                    "Panama",
+                    "Uruguay",
+                    "Canada"
+                ],
+                "answer": [
+                    "Canada"
+                ]
+            },
+            {
+                "question": "À quelle ville des États-Unis correspond le code postal 90210 ?",
+                "options": [
+                    "Hamptons",
+                    "Beverly Hills",
+                    "San Francisco",
+                    "Manhattan"
+                ],
+                "answer": [
+                    "Beverly Hills"
+                ]
+            },
+            {
+                "question": "Lequel de ces pays ne partage pas de frontière avec le Pérou ?",
+                "options": [
+                    "Équateur",
+                    "Bolivie",
+                    "Paraguay",
+                    "Colombie"
+                ],
+                "answer": [
+                    "Paraguay"
+                ]
+            },
+            {
+                "question": "Quelle est la capitale de l'Islande ?",
+                "options": [
+                    "Riga",
+                    "Reykjavik",
+                    "Dublin",
+                    "Helsinki"
+                ],
+                "answer": [
+                    "Reykjavik"
+                ]
+            },
+            {
+                "question": "Sur quel continent y a-t-il le plus de pays ?",
+                "options": [
+                    "Asie",
+                    "Afrique",
+                    "Amérique",
+                    "Europe"
+                ],
+                "answer": [
+                    "Afrique"
+                ]
+            },
+            {
+                "question": "Combien de temps a-t-il fallu pour construire la Tour Eiffel ?",
+                "options": [
+                    "1 an et 2 mois",
+                    "2 ans",
+                    "2 ans, 2 mois et 5 jours",
+                    "1 an et 6 mois"
+                ],
+                "answer": [
+                    "2 ans, 2 mois et 5 jours"
+                ]
+            },
+            {
+                "question": "Quel est le nom du détroit qui sépare l'Espagne du Maroc ?",
+                "options": [
+                    "Bosphore",
+                    "Gibraltar",
+                    "Ormuz",
+                    "Tanger"
+                ],
+                "answer": [
+                    "Gibraltar"
+                ]
+            },
+            {
+                "question": "Lequel de ces mers est la plus froide ?",
+                "options": [
+                    "Mer Blanche",
+                    "Mer Rouge",
+                    "Mer Baltique",
+                    "Mer d'Arabie"
+                ],
+                "answer": [
+                    "Mer Blanche"
+                ]
+            },
+            {
+                "question": "Lequel de ces pays a l'hymne national le plus long ?",
+                "options": [
+                    "Espagne",
+                    "Irlande",
+                    "Suède",
+                    "Grèce"
+                ],
+                "answer": [
+                    "Grèce"
+                ]
+            },
+            {
+                "question": "Où se trouve le volcan Mauna Kea ?",
+                "options": [
+                    "Hawaï",
+                    "Japon",
+                    "Thaïlande",
+                    "Indonésie"
+                ],
+                "answer": [
+                    "Hawaï"
+                ]
+            },
+            {
+                "question": "Quelle est la capitale de l'Australie ?",
+                "options": [
+                    "Sydney",
+                    "Melbourne",
+                    "Canberra",
+                    "Brisbane"
+                ],
+                "answer": [
+                    "Canberra"
+                ]
+            },
+            {
+                "question": "Dans quel océan le Titanic a-t-il coulé ?",
+                "options": [
+                    "Atlantique",
+                    "Pacifique",
+                    "Indien",
+                    "Arctique"
+                ],
+                "answer": [
+                    "Atlantique"
+                ]
+            },
+            {
+                "question": "Quelle est la plus haute montagne du monde ?",
+                "options": [
+                    "Aconcagua",
+                    "Mont Elbrouz",
+                    "Mont Everest",
+                    "Kilimandjaro"
+                ],
+                "answer": [
+                    "Mont Everest"
+                ]
+            },
+            {
+                "question": "Dans quel océan se trouve la plus grande concentration de déchets plastiques ?",
+                "options": [
+                    "Pacifique",
+                    "Indien",
+                    "Atlantique",
+                    "Arctique"
+                ],
+                "answer": [
+                    "Pacifique"
+                ]
+            },
+            {
+                "question": "Dans quelle ville des États-Unis se trouve l'aéroport John F. Kennedy ?",
+                "options": [
+                    "Columbus",
+                    "New York",
+                    "Miami",
+                    "Dallas"
+                ],
+                "answer": [
+                    "New York"
+                ]
+            },
+            {
+                "question": "Lequel de ces pays a le plus de pyramides ?",
+                "options": [
+                    "Russie",
+                    "Égypte",
+                    "Soudan",
+                    "Mexique"
+                ],
+                "answer": [
+                    "Soudan"
+                ]
+            },
+            {
+                "question": "Où faut-il voyager pour vivre la vraie Oktoberfest ?",
+                "options": [
+                    "Munich",
+                    "Berlin",
+                    "Cologne",
+                    "Dresde"
+                ],
+                "answer": [
+                    "Munich"
+                ]
+            },
+            {
+                "question": "Quel est le plat traditionnel du Brésil ?",
+                "options": [
+                    "Churrasco",
+                    "Riz avec haricots",
+                    "Feijoada",
+                    "Beiju"
+                ],
+                "answer": [
+                    "Feijoada"
+                ]
+            },
+            {
+                "question": "Où est produit le fromage Canastra ?",
+                "options": [
+                    "Mato Grosso",
+                    "Minas Gerais",
+                    "Bahia",
+                    "Rio Grande do Sul"
+                ],
+                "answer": [
+                    "Minas Gerais"
+                ]
+            },
+            {
+                "question": "À quel pays appartient Ushuaia ?",
+                "options": [
+                    "Australie",
+                    "Chili",
+                    "Argentine",
+                    "Afrique du Sud"
+                ],
+                "answer": [
+                    "Argentine"
+                ]
+            }, {
+                "question": "Lequel de ces pays européens N'UTILISE PAS l'euro comme monnaie ?",
+                "options": [
+                    "Italie",
+                    "Portugal",
+                    "Danemark",
+                    "France"
+                ],
+                "answer": [
+                    "Danemark"
+                ]
+            },
+            {
+                "question": "Sur les rives de quel fleuve se trouve la ville de Budapest ?",
+                "options": [
+                    "Rhin",
+                    "Seine",
+                    "Nil",
+                    "Danube"
+                ],
+                "answer": [
+                    "Danube"
+                ]
+            },
+            {
+                "question": "Lequel de ces endroits NE DEVRIT PAS être visité si votre but est de voir des ours polaires ?",
+                "options": [
+                    "Russie",
+                    "Alaska",
+                    "Groenland",
+                    "Antarctique"
+                ],
+                "answer": [
+                    "Antarctique"
+                ]
+            },
+            {
+                "question": "Quelle est la langue officielle du Mozambique ?",
+                "options": [
+                    "Portugais",
+                    "Français",
+                    "Anglais",
+                    "Swahili"
+                ],
+                "answer": [
+                    "Portugais"
+                ]
+            },
+            {
+                "question": "Quel canal interocéanique relie la mer des Caraïbes à l'océan Pacifique ?",
+                "options": [
+                    "Canal de la Manche",
+                    "Canal de Panama",
+                    "Canal de Suez",
+                    "Canal d'Acapulco"
+                ],
+                "answer": [
+                    "Canal de Panama"
+                ]
+            },
+            {
+                "question": "Où se trouve la plage de Pipa ?",
+                "options": [
+                    "Rio Grande do Norte",
+                    "São Paulo",
+                    "Ceará",
+                    "Rio de Janeiro"
+                ],
+                "answer": [
+                    "Rio Grande do Norte"
+                ]
+            },
+            {
+                "question": "Quel état brésilien a la plus grande superficie ?",
+                "options": [
+                    "Pará",
+                    "Amazonas",
+                    "Mato Grosso",
+                    "Minas Gerais"
+                ],
+                "answer": [
+                    "Amazonas"
+                ]
+            },
+            {
+                "question": "Combien de fuseaux horaires y a-t-il au Brésil ?",
+                "options": [
+                    "2",
+                    "3",
+                    "4",
+                    "5"
+                ],
+                "answer": [
+                    "4"
+                ]
+            },
+            {
+                "question": "Où se trouve la plus grande population japonaise hors du Japon ?",
+                "options": [
+                    "Chine",
+                    "Malaisie",
+                    "Argentine",
+                    "Brésil"
+                ],
+                "answer": [
+                    "Brésil"
+                ]
+            },
+            {
+                "question": "Laquelle de ces mers se trouve en Europe ?",
+                "options": [
+                    "Mer des Caraïbes",
+                    "Mer du Sud",
+                    "Mer Morte",
+                    "Mer Baltique"
+                ],
+                "answer": [
+                    "Mer Baltique"
+                ]
+            },
+            {
+                "question": "Quelle est la longueur approximative du fleuve Yangtsé, le plus long d'Asie ?",
+                "options": [
+                    "500 km",
+                    "6 300 km",
+                    "2 000 km",
+                    "25 000 km"
+                ],
+                "answer": [
+                    "6 300 km"
+                ]
+            },
+            {
+                "question": "Quelle est la frontière naturelle entre l'Argentine et le Chili ?",
+                "options": [
+                    "Chaîne des Andes",
+                    "Désert d'Atacama",
+                    "Aconcagua",
+                    "Rivière Paraná"
+                ],
+                "answer": [
+                    "Chaîne des Andes"
+                ]
+            },
+            {
+                "question": "Dans quel océan se trouve la fosse des Mariannes ?",
+                "options": [
+                    "Arctique",
+                    "Pacifique",
+                    "Indien",
+                    "Atlantique"
+                ],
+                "answer": [
+                    "Pacifique"
+                ]
+            },
+            {
+                "question": "De quelle région d'Espagne est originaire la paella ?",
+                "options": [
+                    "Séville",
+                    "Valence",
+                    "Murcie",
+                    "Catalogne"
+                ],
+                "answer": [
+                    "Valence"
+                ]
+            },
+            {
+                "question": "Comment s'appelle la partie de Californie célèbre pour ses nombreuses entreprises technologiques ?",
+                "options": [
+                    "Bel-Air",
+                    "Sunset Valley",
+                    "Hidden Hills",
+                    "Silicon Valley"
+                ],
+                "answer": [
+                    "Silicon Valley"
+                ]
+            },
+            {
+                "question": "Quelle est l'avenue la plus large d'Argentine et peut-être du monde ?",
+                "options": [
+                    "Eje Monumental",
+                    "Anchorena",
+                    "Rivadavia",
+                    "9 de Julio"
+                ],
+                "answer": [
+                    "9 de Julio"
+                ]
+            },
+            {
+                "question": "Quelle activité est illégale à Singapour ?",
+                "options": [
+                    "Vendre des chewing-gums",
+                    "Manger de la viande",
+                    "Sauter",
+                    "Avoir un chien"
+                ],
+                "answer": [
+                    "Vendre des chewing-gums"
+                ]
+            },
+            {
+                "question": "Quelle mer sépare le continent européen de l'africain ?",
+                "options": [
+                    "Égée",
+                    "Rouge",
+                    "Méditerranée",
+                    "Indien"
+                ],
+                "answer": [
+                    "Méditerranée"
+                ]
+            },
+            {
+                "question": "Dans quel pays se trouve la plus haute chute d'eau du monde ?",
+                "options": [
+                    "États-Unis",
+                    "Mongolie",
+                    "Bolivie",
+                    "Venezuela"
+                ],
+                "answer": [
+                    "Venezuela"
+                ]
+            },
+            {
+                "question": "Où se trouve la ville de Juiz de Fora ?",
+                "options": [
+                    "Rio de Janeiro",
+                    "Minas Gerais",
+                    "Paraná",
+                    "Paraíba"
+                ],
+                "answer": [
+                    "Minas Gerais"
+                ]
+            },
+            {
+                "question": "Où se trouve la ville de João Pessoa ?",
+                "options": [
+                    "Rio Grande do Sul",
+                    "Rio de Janeiro",
+                    "Acre",
+                    "Paraíba"
+                ],
+                "answer": [
+                    "Paraíba"
+                ]
+            },
+            {
+                "question": "Quelle est la capitale de la Croatie ?",
+                "options": [
+                    "Sofia",
+                    "Oslo",
+                    "Zagreb",
+                    "Valence"
+                ],
+                "answer": [
+                    "Zagreb"
+                ]
+            },
+            {
+                "question": "Dans quel pays se trouvent les ruines du temple d'Angkor Wat ?",
+                "options": [
+                    "Thaïlande",
+                    "Chine",
+                    "Inde",
+                    "Cambodge"
+                ],
+                "answer": [
+                    "Cambodge"
+                ]
+            },
+            {
+                "question": "Quelle est la capitale de la Serbie ?",
+                "options": [
+                    "Bucarest",
+                    "Minsk",
+                    "Belgrade",
+                    "Vienne"
+                ],
+                "answer": [
+                    "Belgrade"
+                ]
+            },
+            {
+                "question": "Dans quelle ville se trouve le réseau de métro le plus étendu d'Amérique latine ?",
+                "options": [
+                    "Lima",
+                    "Caracas",
+                    "Mexico",
+                    "Rio de Janeiro"
+                ],
+                "answer": [
+                    "Mexico"
+                ]
+            },
+            {
+                "question": "Dans quelle ville faut-il aller pour voir le balcon de Roméo et Juliette ?",
+                "options": [
+                    "Bologne",
+                    "Milan",
+                    "Florence",
+                    "Vérone"
+                ],
+                "answer": [
+                    "Vérone"
+                ]
+            },
+            {
+                "question": "Où se trouve le Jardin National Shinjuku Gyoen ?",
+                "options": [
+                    "Corée du Sud",
+                    "Philippines",
+                    "Chine",
+                    "Japon"
+                ],
+                "answer": [
+                    "Japon"
+                ]
+            },
+            {
+                "question": "Dans quelle ville d'Asie se trouvent les tours Petronas ?",
+                "options": [
+                    "Kuala Lumpur",
+                    "Séoul",
+                    "New Delhi",
+                    "Pékin"
+                ],
+                "answer": [
+                    "Kuala Lumpur"
+                ]
+            },
+            {
+                "question": "Avec quels pays le Népal partage-t-il ses frontières ?",
+                "options": [
+                    "Inde et Pakistan",
+                    "Japon et Thaïlande",
+                    "Inde et Chine",
+                    "Chine et Mongolie"
+                ],
+                "answer": [
+                    "Inde et Chine"
+                ]
+            },
+            {
+                "question": "Qu'est-ce qui apparaît sur certaines éditions du dollar néo-zélandais de l'île de Niue ?",
+                "options": [
+                    "Vaches",
+                    "Anciens présidents",
+                    "Burgers",
+                    "Dessins animés"
+                ],
+                "answer": [
+                    "Dessins animés"
+                ]
+            },
+            {
+                "question": "Où vont les pièces jetées dans la fontaine de Trevi ?",
+                "options": [
+                    "Musées",
+                    "Égouts",
+                    "Œuvres caritatives",
+                    "Pour entretenir la fontaine"
+                ],
+                "answer": [
+                    "Œuvres caritatives"
+                ]
+            },
+            {
+                "question": "Laquelle de ces frontières est la plus longue ?",
+                "options": [
+                    "Argentine - Chili",
+                    "États-Unis - Mexique",
+                    "États-Unis - Canada",
+                    "Argentine - Brésil"
+                ],
+                "answer": [
+                    "États-Unis - Canada"
+                ]
+            },
+            {
+                "question": "Où se trouve le désert de Cappadoce ?",
+                "options": [
+                    "Canada",
+                    "Maroc",
+                    "Brésil",
+                    "Turquie"
+                ],
+                "answer": [
+                    "Turquie"
+                ]
+            },
+            {
+                "question": "Quelle est la capitale du Suriname ?",
+                "options": [
+                    "George Town",
+                    "Paramaribo",
+                    "Boa Vista",
+                    "Macapá"
+                ],
+                "answer": [
+                    "Paramaribo"
+                ]
+            },
+            {
+                "question": "Dans quel pays se trouve la ville de Prague ?",
+                "options": [
+                    "République tchèque",
+                    "Autriche",
+                    "Suisse",
+                    "Allemagne"
+                ],
+                "answer": [
+                    "République tchèque"
+                ]
+            },
+            {
+                "question": "En quelle année l'ONU a-t-elle été créée ?",
+                "options": [
+                    "1939",
+                    "1940",
+                    "1945",
+                    "1951"
+                ],
+                "answer": [
+                    "1945"
+                ]
+            },
+            {
+                "question": "Qui a dirigé le fascisme italien ?",
+                "options": [
+                    "Benito Mussolini",
+                    "Augusto Pinochet",
+                    "Joseph Staline",
+                    "Francisco Franco"
+                ],
+                "answer": [
+                    "Benito Mussolini"
+                ]
+            },
+            {
+                "question": "Qui étaient les druides dans la civilisation celtique ?",
+                "options": [
+                    "Forgerons",
+                    "Guerriers",
+                    "Prêtres",
+                    "Chevaliers"
+                ],
+                "answer": [
+                    "Prêtres"
+                ]
+            },
+            {
+                "question": "Laquelle de ces anciennes bibliothèques est encore debout ?",
+                "options": [
+                    "Bibliothèque de Constantinople",
+                    "Bibliothèque Al-Qarawiyin",
+                    "Bibliothèque de Pergame",
+                    "Bibliothèque d'Alexandrie"
+                ],
+                "answer": [
+                    "Bibliothèque Al-Qarawiyin"
+                ]
+            },
+            {
+                "question": "Pourquoi la cour portugaise est-elle arrivée au Brésil en 1808 ?",
+                "options": [
+                    "Ils étaient en vacances",
+                    "Ils cherchaient de l'or",
+                    "Ils n'avaient rien à faire",
+                    "Ils fuyaient Napoléon"
+                ],
+                "answer": [
+                    "Ils fuyaient Napoléon"
+                ]
+            },
+            {
+                "question": "En quelle année l'esclavage a-t-il été aboli au Brésil ?",
+                "options": [
+                    "1888",
+                    "1675",
+                    "1922",
+                    "1810"
+                ],
+                "answer": [
+                    "1888"
+                ]
+            },
+            {
+                "question": "Quelle est la monnaie la plus ancienne du monde encore en circulation ?",
+                "options": [
+                    "Couronne norvégienne",
+                    "Peso chilien",
+                    "Livre sterling",
+                    "Dollar américain"
+                ],
+                "answer": [
+                    "Livre sterling"
+                ]
+            },
+            {
+                "question": "Qu'est-ce qui est apparu en premier ?",
+                "options": [
+                    "Université d'Oxford",
+                    "Empire aztèque",
+                    "Empire inca",
+                    "Université Harvard"
+                ],
+                "answer": [
+                    "Université d'Oxford"
+                ]
+            },
+            {
+                "question": "Quelle civilisation appelait les étrangers « barbares » ?",
+                "options": [
+                    "Romains",
+                    "Mayas",
+                    "Grecs",
+                    "Perses"
+                ],
+                "answer": [
+                    "Grecs"
+                ]
+            }, {
+                "question": "Laquelle de ces épées est une arme traditionnelle utilisée par les guerriers samouraïs ?",
+                "options": [
+                    "Kanshou",
+                    "Shuriken",
+                    "Tantô",
+                    "Katana"
+                ],
+                "answer": [
+                    "Katana"
+                ]
+            },
+            {
+                "question": "À quelle période historique appartiennent les Croisades ?",
+                "options": [
+                    "Moyen Âge",
+                    "Époque moderne",
+                    "Antiquité",
+                    "Époque contemporaine"
+                ],
+                "answer": [
+                    "Moyen Âge"
+                ]
+            },
+            {
+                "question": "De quelle culture la fête d'Halloween est-elle supposée être originaire ?",
+                "options": [
+                    "Maya",
+                    "Maorie",
+                    "Celte",
+                    "Viking"
+                ],
+                "answer": [
+                    "Celte"
+                ]
+            },
+            {
+                "question": "Qui commandait l'armée française lors de la bataille de Waterloo ?",
+                "options": [
+                    "Alexandre le Grand",
+                    "Erwin Rommel",
+                    "William Wallace",
+                    "Napoléon Bonaparte"
+                ],
+                "answer": [
+                    "Napoléon Bonaparte"
+                ]
+            },
+            {
+                "question": "Quel était le nom de l'une des bombes atomiques larguées sur Hiroshima ?",
+                "options": [
+                    "Little Boy",
+                    "Fat Boy",
+                    "Slim Boy",
+                    "Big Boy"
+                ],
+                "answer": [
+                    "Little Boy"
+                ]
+            },
+            {
+                "question": "Laquelle de ces villes est la plus ancienne ?",
+                "options": [
+                    "Quito, Équateur",
+                    "Caral, Pérou",
+                    "Montevideo, Uruguay",
+                    "Medellín, Colombie"
+                ],
+                "answer": [
+                    "Caral, Pérou"
+                ]
+            },
+            {
+                "question": "Pourquoi les Égyptiens utilisaient-ils le soufre ?",
+                "options": [
+                    "Pour manger",
+                    "Pour se maquiller",
+                    "Pour purifier les temples",
+                    "Pour invoquer des esprits"
+                ],
+                "answer": [
+                    "Pour purifier les temples"
+                ]
+            },
+            {
+                "question": "Laquelle de ces épidémies a vraiment eu lieu au Moyen Âge ?",
+                "options": [
+                    "Épidémie de la danse",
+                    "Grippe des lézards",
+                    "Grippe rose",
+                    "Épidémie du chant"
+                ],
+                "answer": [
+                    "Épidémie de la danse"
+                ]
+            },
+            {
+                "question": "Où est né Karl Marx ?",
+                "options": [
+                    "Angleterre",
+                    "France",
+                    "Autriche",
+                    "Royaume de Prusse"
+                ],
+                "answer": [
+                    "Royaume de Prusse"
+                ]
+            },
+            {
+                "question": "Comment s'appelle le statut fondateur de la Cour pénale internationale ?",
+                "options": [
+                    "Statut de La Haye",
+                    "Statut des droits de l'homme",
+                    "Statut des Nations Unies",
+                    "Statut de Rome"
+                ],
+                "answer": [
+                    "Statut de Rome"
+                ]
+            },
+            {
+                "question": "Laquelle des caravelles de Christophe Colomb n'est PAS revenue en Espagne ?",
+                "options": [
+                    "Pinta",
+                    "Santa Maria",
+                    "Niña",
+                    "Toutes sont revenues"
+                ],
+                "answer": [
+                    "Santa Maria"
+                ]
+            },
+            {
+                "question": "De quel matériau étaient faites les statuettes des Oscars pendant la Seconde Guerre mondiale ?",
+                "options": [
+                    "Plâtre",
+                    "Métal",
+                    "Plastique",
+                    "Acier"
+                ],
+                "answer": [
+                    "Plâtre"
+                ]
+            },
+            {
+                "question": "Lequel de ces pays N'a PAS fait partie de l'Union soviétique ?",
+                "options": [
+                    "Kazakhstan",
+                    "Turkménistan",
+                    "Afghanistan",
+                    "Tadjikistan"
+                ],
+                "answer": [
+                    "Afghanistan"
+                ]
+            },
+            {
+                "question": "Où les Spartiates peignaient-ils leur emblème ?",
+                "options": [
+                    "Sur les lances",
+                    "Sur les épées",
+                    "Sur les armures",
+                    "Sur les boucliers"
+                ],
+                "answer": [
+                    "Sur les boucliers"
+                ]
+            },
+            {
+                "question": "Quel a été le premier pays d'Amérique latine à légaliser le mariage homosexuel ?",
+                "options": [
+                    "Argentine",
+                    "Chili",
+                    "Uruguay",
+                    "Brésil"
+                ],
+                "answer": [
+                    "Argentine"
+                ]
+            },
+            {
+                "question": "Quel était le nom de la première chienne soviétique à orbiter autour de la Terre ?",
+                "options": [
+                    "Lassie",
+                    "Daria",
+                    "Laïka",
+                    "Moushka"
+                ],
+                "answer": [
+                    "Laïka"
+                ]
+            },
+            {
+                "question": "Quelle a été la première capitale du Brésil ?",
+                "options": [
+                    "Salvador",
+                    "Rio de Janeiro",
+                    "Brasília",
+                    "São Paulo"
+                ],
+                "answer": [
+                    "Salvador"
+                ]
+            },
+            {
+                "question": "Combien a duré la guerre la plus courte de l'histoire ?",
+                "options": [
+                    "Moins de 45 minutes",
+                    "Un peu plus de 2 heures",
+                    "1 jour",
+                    "3 jours"
+                ],
+                "answer": [
+                    "Moins de 45 minutes"
+                ]
+            },
+            {
+                "question": "Quelle forme avait Cusco, la capitale de l'empire Inca ?",
+                "options": [
+                    "Tomate",
+                    "Botte",
+                    "Circulaire",
+                    "Jaguar"
+                ],
+                "answer": [
+                    "Jaguar"
+                ]
+            },
+            {
+                "question": "Pourquoi Carlota Joaquina est-elle arrivée au Brésil avec la tête rasée ?",
+                "options": [
+                    "C'était à la mode",
+                    "Son coiffeur l'a trahie",
+                    "Elle avait des poux",
+                    "Elle trouvait ça joli"
+                ],
+                "answer": [
+                    "Elle avait des poux"
+                ]
+            },
+            {
+                "question": "Quel président du Brésil était surnommé « le père des pauvres » ?",
+                "options": [
+                    "Fernando Collor",
+                    "Getúlio Vargas",
+                    "João Goulart",
+                    "Ernesto Geisel"
+                ],
+                "answer": [
+                    "Getúlio Vargas"
+                ]
+            },
+            {
+                "question": "Qui a perdu le plus de territoire à la fin de la Triple Alliance ?",
+                "options": [
+                    "Argentine",
+                    "Paraguay",
+                    "Chili",
+                    "Bolivie"
+                ],
+                "answer": [
+                    "Paraguay"
+                ]
+            },
+            {
+                "question": "En quelle année a eu lieu le Grito do Ipiranga ?",
+                "options": [
+                    "1789",
+                    "1914",
+                    "1833",
+                    "1822"
+                ],
+                "answer": [
+                    "1822"
+                ]
+            },
+            {
+                "question": "Combien d'urnes électroniques ont été utilisées lors de l'élection présidentielle brésilienne de 2022 ?",
+                "options": [
+                    "577 000 urnes",
+                    "124 000 urnes",
+                    "1 021 365 urnes",
+                    "311 012 urnes"
+                ],
+                "answer": [
+                    "577 000 urnes"
+                ]
+            },
+            {
+                "question": "En 2011, le plus grand ananas a été récolté en Australie. Quel était son poids ?",
+                "options": [
+                    "8,28 kg",
+                    "3,85 kg",
+                    "18,45 kg",
+                    "24,12 kg"
+                ],
+                "answer": [
+                    "8,28 kg"
+                ]
+            },
+            {
+                "question": "Le Pantanal couvre une superficie de 195 000 km². Quelle partie de cette superficie appartient au Brésil ?",
+                "options": [
+                    "151 000 km²",
+                    "69 000 km²",
+                    "38 210 km²",
+                    "Le Pantanal n'existe pas au Brésil"
+                ],
+                "answer": [
+                    "151 000 km²"
+                ]
+            },
+            {
+                "question": "Le nageur Michael Phelps est l'athlète ayant remporté le plus de médailles d'or aux Jeux Olympiques. Combien d'or a-t-il gagné ?",
+                "options": [
+                    "23 médailles",
+                    "11 médailles",
+                    "41 médailles",
+                    "Il n'est pas le nageur avec le plus de médailles olympiques"
+                ],
+                "answer": [
+                    "23 médailles"
+                ]
+            },
+            {
+                "question": "Selon les recherches, quel pourcentage d'Américains ont du ketchup dans leur réfrigérateur ?",
+                "options": [
+                    "13%",
+                    "97%",
+                    "51%",
+                    "69%"
+                ],
+                "answer": [
+                    "97%"
+                ]
+            },
+            {
+                "question": "Combien de temps le sang met-il pour sortir du cœur, circuler dans tout le corps et revenir au cœur ?",
+                "options": [
+                    "45 secondes",
+                    "3 minutes",
+                    "5 minutes",
+                    "1 minute 30 secondes"
+                ],
+                "answer": [
+                    "45 secondes"
+                ]
+            },
+            {
+                "question": "Combien de minutes dure le film 'Le Parrain' de 1972 ?",
+                "options": [
+                    "190 minutes",
+                    "160 minutes",
+                    "120 minutes",
+                    "175 minutes"
+                ],
+                "answer": [
+                    "175 minutes"
+                ]
+            },
+            {
+                "question": "Un gorille adulte pèse environ 200 kg. Combien pèse un gorille nouveau-né ?",
+                "options": [
+                    "5 kg",
+                    "3 kg",
+                    "2,5 kg",
+                    "1,6 kg"
+                ],
+                "answer": [
+                    "1,6 kg"
+                ]
+            },
+            {
+                "question": "Selon les études, combien de mots et de signes un chien peut-il apprendre en moyenne ?",
+                "options": [
+                    "165",
+                    "100",
+                    "250",
+                    "200"
+                ],
+                "answer": [
+                    "165"
+                ]
+            },
+            {
+                "question": "Quelle est la plus longue distance possible à parcourir à pied partant du Cap, en Afrique du Sud, jusqu'à Magadan, en Russie ?",
+                "options": [
+                    "23 068 km",
+                    "20 300 km",
+                    "24 000 km",
+                    "21 500 km"
+                ],
+                "answer": [
+                    "23 068 km"
+                ]
+            },
+            {
+                "question": "Combien pèse la statuette des Oscars ?",
+                "options": [
+                    "5 kg",
+                    "2,75 kg",
+                    "3,85 kg",
+                    "4,5 kg"
+                ],
+                "answer": [
+                    "3,85 kg"
+                ]
+            },
+            {
+                "question": "Combien d'habitants compte la Belgique ?",
+                "options": [
+                    "10 millions",
+                    "11 millions",
+                    "Environ 11 753 427",
+                    "12 millions"
+                ],
+                "answer": [
+                    "Environ 11 753 427"
+                ]
+            },
+            {
+                "question": "Le lac Baïkal, en Russie, est le lac le plus profond du monde. Quelle est sa profondeur ?",
+                "options": [
+                    "1 500 mètres",
+                    "1 700 mètres",
+                    "1 642 mètres",
+                    "2 000 mètres"
+                ],
+                "answer": [
+                    "1 642 mètres"
+                ]
+            },
+            {
+                "question": "En quelle année la Maison Blanche aux États-Unis a-t-elle reçu l'électricité ?",
+                "options": [
+                    "1891",
+                    "1900",
+                    "1889",
+                    "1898"
+                ],
+                "answer": [
+                    "1891"
+                ]
+            },
+            {
+                "question": "Quelle est la longueur du littoral du Brésil ?",
+                "options": [
+                    "7 491 km",
+                    "8 500 km",
+                    "9 200 km",
+                    "7 367 km"
+                ],
+                "answer": [
+                    "7 491 km"
+                ]
+            },
+            {
+                "question": "Combien de marches possède l'escalier coloré et vibrant Selarón, devenu un lieu touristique très visité dans le quartier de Lapa à Rio de Janeiro ?",
+                "options": [
+                    "200",
+                    "215",
+                    "250",
+                    "125"
+                ],
+                "answer": [
+                    "215"
+                ]
+            },
+            {
+                "question": "En quelle année le premier jeu vidéo, Spacewar, a-t-il été lancé ?",
+                "options": [
+                    "1962",
+                    "1970",
+                    "1955",
+                    "1965"
+                ],
+                "answer": [
+                    "1962"
+                ]
+            },
+            {
+                "question": "Combien y a-t-il de planètes dans le système solaire ?",
+                "options": [
+                    "7",
+                    "8",
+                    "9",
+                    "10"
+                ],
+                "answer": [
+                    "8"
+                ]
+            },
+            {
+                "question": "Combien de millions de personnes vivent dans la région métropolitaine de Tokyo ?",
+                "options": [
+                    "30 millions",
+                    "37 millions",
+                    "25 millions",
+                    "40 millions"
+                ],
+                "answer": [
+                    "37 millions"
+                ]
+            },
+            {
+                "question": "Combien de litres d'eau une vache boit-elle par jour ?",
+                "options": [
+                    "50 à 100 litres",
+                    "30 à 50 litres",
+                    "100 à 150 litres",
+                    "20 à 30 litres"
+                ],
+                "answer": [
+                    "50 à 100 litres"
+                ]
+            },
+            {
+                "question": "En quelle année la première caméra Polaroid a-t-elle été lancée ?",
+                "options": [
+                    "1948",
+                    "1952",
+                    "1935",
+                    "1960"
+                ],
+                "answer": [
+                    "1948"
+                ]
+            },
+            {
+                "question": "La plus grande vague jamais mesurée était un tsunami qui a frappé l'Alaska en 1958. Quelle était sa hauteur ?",
+                "options": [
+                    "524 mètres",
+                    "300 mètres",
+                    "450 mètres",
+                    "600 mètres"
+                ],
+                "answer": [
+                    "524 mètres"
+                ]
+            },
+            {
+                "question": "Quelle est la longueur du pont Golden Gate à San Francisco, Californie ?",
+                "options": [
+                    "2 737 mètres",
+                    "2 000 mètres",
+                    "3 200 mètres",
+                    "1 800 mètres"
+                ],
+                "answer": [
+                    "2 737 mètres"
+                ]
+            }
+
+        ]
+    };
+
+    let questions = [];
+    let currentQuestion = 0;
+
+    // Mélange Fisher-Yates pour mélanger le tableau
+    function shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array;
+    }
+
+    // Charge les questions et mélange
+    function loadQuestions() {
+        questions = shuffleArray(data.questions.slice());
+        nextQuestion();
+    }
+
+    // Affiche la question suivante
+    function nextQuestion() {
+        if (questions.length === 0) {
+            document.getElementById("questionShowDoBebao").textContent = "Chargement des questions...";
+            return;
+        }
+
+        if (currentQuestion < questions.length) {
+            const current = questions[currentQuestion];
+            document.getElementById("questionShowDoBebao").textContent = current.question;
+            document.getElementById("result").textContent = "";
+
+            const optionsList = document.getElementById("optionsList");
+            optionsList.innerHTML = "";
+
+            current.options.forEach(option => {
+                const li = document.createElement("li");
+                li.textContent = option;
+                optionsList.appendChild(li);
+            });
+
+            currentQuestion++;
+        } else {
+            document.getElementById("questionShowDoBebao").textContent = "Fin du jeu ! J'espère que vous vous amusez ! Voulez-vous rejouer ?";
+            document.getElementById("optionsList").innerHTML = "";
+            document.getElementById("result").textContent = "";
+            currentQuestion = 0;
+            questions = shuffleArray(data.questions.slice());
+        }
+    }
+
+    // Pop-up des règles
+    function openPopup() {
+        document.getElementById("popup").style.display = "block";
+    }
+
+    function closePopup() {
+        document.getElementById("popup").style.display = "none";
+    }
+
+    // Pop-up de la réponse
+    function showAnswerPopup() {
+        const answerElement = document.getElementById("answerText");
+
+        if (currentQuestion > 0 && currentQuestion <= questions.length) {
+            const answerData = questions[currentQuestion - 1].answer;
+
+            if (Array.isArray(answerData)) {
+                const listHTML = answerData.map(item => `<li>${item}</li>`).join("");
+                answerElement.innerHTML = `<ul>${listHTML}</ul>`;
+            } else {
+                answerElement.textContent = answerData;
+            }
+        } else {
+            answerElement.textContent = "Cliquez d'abord sur une question !";
+        }
+
+        document.getElementById("answerPopup").style.display = "block";
+    }
+
+    // Fermer le pop-up de la réponse
+    function closeAnswerPopup() {
+        document.getElementById("answerPopup").style.display = "none";
+    }
+
+    // Fermer les pop-ups en cliquant en dehors d'eux
+    window.onclick = function (event) {
+        let popup = document.getElementById("popup");
+        let answerPopup = document.getElementById("answerPopup");
+
+        if (event.target === popup) {
+            popup.style.display = "none";
+        }
+
+        if (event.target === answerPopup) {
+            answerPopup.style.display = "none";
+        }
+    };
+
+    // Initialise les questions au chargement de la page
+    loadQuestions();
+
+
+</script>
+
+</body>
+
+</html>

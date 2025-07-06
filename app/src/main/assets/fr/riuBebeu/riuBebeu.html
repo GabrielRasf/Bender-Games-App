@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" type="text/css" href="../../stylesCards.css" />
+    <link rel="stylesheet" type="text/css" href="../../cronometro.css" />
+    <title>Rire ou Boire</title>
+</head>
+
+<body>
+
+<div class="game-container">
+    <!-- Menu -->
+    <nav class="menu">
+        <a href="../menuFr.html" class="menu-title" style="position: relative;">
+            <div class="voltar-container" onclick="window.location.href='../menuPtBr.html'">
+                &#8678; <!-- Cela signifie ← -->
+            </div>
+            <img class="logo-bebedeira" src="../images/logo.png" alt="Logo Rire ou Boire" />
+        </a>
+    </nav>
+
+    <!-- Contenu du jeu -->
+    <div>
+        <h1>Rire ou Boire</h1>
+        <a href="#" onclick="openPopup()">
+            <img class="img-regras" src="../images/regras.png" alt="Règles" />
+        </a>
+        <h4>Règles</h4>
+    </div>
+
+    <div class="card-frase">
+        <p id="questionRiuBebeu"></p>
+    </div>
+    <div class="button-container">
+        <button onclick="nextQuestion()">Question suivante</button>
+    </div>
+    <div id="result"></div>
+</div>
+
+<!-- Pop-up -->
+<div id="popup" class="popup">
+    <div class="popup-content">
+        <div class="popup-header">
+            <h2>Règles du jeu</h2>
+            <span class="close" onclick="closePopup()">&times;</span>
+        </div>
+        <ul>
+            <li>Un joueur sélectionne une carte (les autres joueurs ne doivent pas connaître le contenu)</li>
+            <li>La carte donnera une mission au joueur qui l'a tirée</li>
+            <li>Si le joueur cible rit, il doit boire</li>
+            <li>Si le joueur qui a choisi la mission ne réussit pas à faire rire la cible, il devra boire lui-même
+            </li>
+            <li>Amusez-vous bien ! 🍻</li>
+        </ul>
+    </div>
+</div>
+
+<!-- Chronomètre -->
+
+<button id="timer" onclick="handleTimerClick()">⏳</button>
+
+<script>
+    const gameData = {
+        "questions": [
+            "Regarde ton cible dans les yeux et lèche sensuellement tes lèvres",
+            "Demande sensuellement à l’oreille de la cible : « Tu aimes quand le dentiste met un instrument dans ta bouche ? »",
+            "Fais semblant d’être une assistante virtuelle (Siri ou Alexa) et réponds aux questions des autres joueurs de manière drôle",
+            "Montre à ta cible comment jouer au golf, en te mettant derrière elle et en tenant ses mains",
+            "Toi et ta cible êtes dans un podcast, demande-lui : « Comment on fait pour gagner un Chokito ? » Réponse : « Il faut juste mettre le doigt dans la prise »",
+            "Tu es le Père Noël ivre et tu parles à ton renne (ta cible)",
+            "Chuchote sensuellement à l’oreille de ta cible : « Il y a quelque chose dans le monde qui adore être léché pour entrer dans un trou. Qu’est-ce que c’est ? » Réponse : « Le fil de l’aiguille »",
+            "Tu es Monsieur Chatouille. Attaque ta cible.",
+            "Fais la meilleure imitation d’orgasme de Shrek et Fiona pour ta cible.",
+            "Tourne en rond en criant « Je suis une machine à laver ! »",
+            "Imite les sons d’un rapport sexuel à l’oreille de ta cible",
+            "Tu apprends le ballet, montre aux autres les mouvements que tu as déjà appris",
+            "Avec ta meilleure imitation de Faustão, dis à ta cible : « Oh là là, mec ! Ce monstre, mec ! »",
+            "Imite une conversation avec des gens dans la file d’attente à la banque, joue le rôle d’un journaliste faisant un reportage télé",
+            "Lis la paume de ta cible et dis-lui : « Désolé, mais demain il y aura un terrible accident pendant que tu te laves les aisselles »",
+            "Fais l’imitation d’un manchot glissant sur la glace",
+            "Regarde ta cible dans les yeux et dis : « Aujourd’hui, tu es très drôle. Tu n’as pas peur de finir grillé dans le groupe ? »",
+            "Chuchote à l’oreille de ta cible : « Je suis totalement attiré par toi. Je veux porter tes vêtements. »",
+            "Toi et le joueur à ta droite allez faire un saut en parachute. Il est l’instructeur et suit derrière toi. Fais semblant d’avoir peur de sauter",
+            "Fais semblant d’être un dresseur de cirque et apprends un tour à ton animal (ta cible)",
+            "Fais semblant d’être un DJ célèbre qui anime une fête, utilise des objets proches comme matériel de son et fais des bruits drôles avec ta bouche",
+            "Fais semblant d’être un bébé dramatique qui vient de perdre sa sucette et pleure de manière exagérée en tombant par terre et en roulant autour de ta cible",
+            "Montre comment mettre un préservatif en utilisant la main de ta cible comme outil",
+            "Tu es une star du porno et dois donner des conseils puissants à un débutant (ta cible)",
+            "Tu es un influenceur fitness, montre un entraînement à domicile à ta cible en utilisant des objets de la maison comme poids",
+            "Tu es un cow-boy, apprends à lassoer un bœuf (ta cible)",
+            "Demande à ta cible : « On va prendre un café ? On m’a dit que tu penses que c’est plus fort dans la cafetière »",
+            "Imite quelqu’un qui suce une sucette en regardant ta cible, puis dis : « C’est la meilleure sucette que j’ai jamais sucée »",
+            "Fais un câlin dans la nuque de ta cible tout en donnant des conseils motivants",
+            "Tu apprends le mandarin, montre à ta cible les mots que tu as déjà appris",
+            "Imite un papillon sortant de son cocon",
+            "La carte au trésor perdue montre que le trésor est dans le pantalon de ta cible. Imite un pirate et trouve-le",
+            "Regarde ta cible dans les yeux et dis : « J’ai fait cuire un œuf et il était un peu lourd... il y avait un poussin dedans. Imagine ton cuisinier avec un poussin dedans »",
+            "Imite un dauphin frappant ses nageoires et frotte-toi contre ta cible",
+            "Chuchote sensuellement à l’oreille de ta cible : « J’ai 5 bouteilles de whisky, tu vends 4 et je t’en donne une »",
+            "Apprends à ta cible une danse virale TikTok, fais tous les mouvements nécessaires pour la faire rire",
+            "Ta cible est une chaise, fais les ajustements nécessaires pour pouvoir l’utiliser confortablement",
+            "Va vers ta cible en suçant ton pouce. Avec une voix de bébé, dis : « Bébé veut dormir »",
+            "Chante et danse sur la chanson 'Gangnam Style' pour faire rire ta cible",
+            "Donne un cours de yoga à ta cible, invente des noms drôles pour les postures comme « posture du chat paresseux » et « posture du flamant tordu »",
+            "En regardant ta cible, raconte l’histoire la plus drôle que tu connais à son sujet",
+            "Approche ta cible sans rien dire, renifle rapidement son cou",
+            "Fais semblant d’être un canard extrêmement charmant qui tente de séduire ta cible, en utilisant ton bec et des mouvements sensuels",
+            "Fais un reportage en direct sur « Grand-mère qui a envoyé grand-père balader ». Inclue une interview avec d’autres joueurs.",
+            "Tu es une petite souris, essaie d’entrer dans le pantalon de ta cible et rends-la mal à l’aise",
+            "Fais semblant d’être un coiffeur en train de couper les cheveux de ta cible",
+            "Tu es un vendeur de voitures d’occasion, essaie de vendre une voiture imaginaire à un autre joueur",
+            "Chuchote sensuellement à l’oreille de ta cible : « Entre dur et sec. Et ça sort doux et humide. J’adore le chewing-gum »",
+            "Tu es un colibri. Bat des ailes et bois un peu de nectar de la fleur la plus succulente (ta cible)",
+            "Masse les oreilles de ta cible tout en regardant directement dans ses yeux",
+            "Imite un mannequin marchant sur le podium, touche ta cible et chuchote-lui à l’oreille : « Aaaaiiiiinnnn »",
+            "Fais une présentation inspirante de tes positions sexuelles préférées, comme si tu donnais une conférence",
+            "Demande à ta cible de se mettre à quatre pattes. Fais semblant de tirer du lait d’elle, en expliquant la qualité du lait",
+            "Fais semblant d’être un agent secret et passe un message codé à ta cible sans utiliser de mots",
+            "Fais une danse bizarre et dis que c’est le rythme officiel de ta ville natale",
+            "Raconte un mensonge absurde sur ta cible et convaincs les autres que c’est vrai",
+            "Imite un zombie affamé qui essaie de dévorer ta cible sans trop l’effrayer",
+            "Fais une sérénade improvisée pour ta cible en n’utilisant que des bruits d’animaux",
+            "Fais semblant d’être pris dans une tempête et demande désespérément de l’aide à ta cible",
+            "Crée une publicité drôle pour vendre un produit imaginaire en utilisant ta cible comme témoin",
+            "Fais semblant que ta cible est ton professeur et pose-lui une question difficile à répondre",
+            "Fais une présentation de magie sans révéler le tour à ta cible",
+            "Imite un personnage célèbre d’un film en faisant une scène romantique avec ta cible",
+            "Fais semblant d’être à un entretien d’embauche et que ta cible est l’intervieweur — réponds de manière exagérée",
+            "Chante une chanson pour enfants pour calmer ta cible comme si c’était un bébé",
+            "Fais semblant que ta cible est un chien et mime ses réactions aux ordres de base",
+            "Invente une insulte drôle et inoffensive à dire à ta cible",
+            "Fais une prédiction du futur pour ta cible en utilisant des objets aléatoires comme indices",
+            "Fais semblant d’avoir un super-pouvoir étrange et montre comment l’utiliser avec l’aide de ta cible",
+            "Raconte une blague nulle et essaie de faire rire ta cible coûte que coûte",
+            "Fais semblant que ta cible est ton coach personnel et demande-lui un entraînement fou pour toi",
+            "Fais une pub pour un film d’horreur avec ta cible comme protagoniste",
+            "Imite une annonce urgente et annonce quelque chose d’absurde qui est arrivé à ta cible",
+            "Fais semblant d’être un reporter d’investigation et pose des questions suspectes à ta cible",
+            "Montre un pas de danse bizarre et demande à ta cible de le répéter",
+            "Fais semblant d’être dans une émission de cuisine et apprends à ta cible une recette folle",
+            "Imite un coach motivationnel et fais un discours exagéré à ta cible",
+            "Raconte une histoire d’horreur impliquant ta cible et un réfrigérateur bruyant",
+            "Fais semblant que ta cible est une célébrité et donne-lui une interview pour la presse",
+            "Fais un tutoriel improvisé pour quelque chose d’inutile en utilisant ta cible comme modèle",
+            "Fais semblant que toi et ta cible êtes des astronautes et décrivez votre mission spatiale",
+            "Imite un chat affamé demandant de la nourriture à ta cible",
+            "Fais semblant d’être un guide touristique et fais une visite exagérée de la pièce où vous êtes"
+        ]
+    };
+
+
+    let questions = [];
+    let currentQuestion = 0;
+    let timeLeft = 30;
+    let timerInterval = null;
+    let isRunning = false;
+
+    // Função para carregar as perguntas
+    function loadQuestions() {
+        questions = shuffleArray([...gameData.questions]);
+        nextQuestion();
+    }
+
+    // Função para embaralhar um array (Fisher-Yates Shuffle)
+    function shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array;
+    }
+
+    // Função para exibir a próxima pergunta
+    function nextQuestion() {
+        if (questions.length === 0) {
+            document.getElementById("questionRiuBebeu").textContent = "Carregando perguntas...";
+            loadQuestions();
+            return;
+        }
+
+        if (currentQuestion < questions.length) {
+            document.getElementById("questionRiuBebeu").textContent = questions[currentQuestion];
+            document.getElementById("result").textContent = "";
+            currentQuestion++;
+        } else {
+            document.getElementById("questionRiuBebeu").textContent = "Fim do Jogo! Espero que estejam se divertindo! Quer jogar novamente?";
+            document.getElementById("result").textContent = "";
+            currentQuestion = 0;
+            questions = shuffleArray([...gameData.questions]);
+        }
+        resetTimer();
+    }
+
+    // Pop-up functions
+    function openPopup() {
+        document.getElementById("popup").style.display = "block";
+    }
+
+    function closePopup() {
+        document.getElementById("popup").style.display = "none";
+    }
+
+    // Fechar o pop-up ao clicar fora dele
+    window.onclick = function (event) {
+        let popup = document.getElementById("popup");
+        if (event.target === popup) {
+            popup.style.display = "none";
+        }
+    };
+
+    // Cronômetro
+    function updateDisplay() {
+        const timerButton = document.getElementById('timer');
+        if (isRunning) {
+            timerButton.textContent = timeLeft;
+        } else {
+            timerButton.textContent = '⏳'; // Ampulheta
+        }
+    }
+
+    function resetTimer() {
+        clearInterval(timerInterval);
+        timerInterval = null;
+        timeLeft = 30;
+        isRunning = false;
+        updateDisplay();
+    }
+
+    function handleTimerClick() {
+        if (isRunning) {
+            // Parar o timer e mostrar ampulheta
+            resetTimer();
+        } else {
+            // Iniciar timer
+            isRunning = true;
+            updateDisplay();
+            timerInterval = setInterval(() => {
+                timeLeft--;
+                updateDisplay();
+
+                if (timeLeft <= 0) {
+                    clearInterval(timerInterval);
+                    timerInterval = null;
+                    isRunning = false;
+                    updateDisplay();
+                    nextQuestion(); // Avança para a próxima pergunta automaticamente
+                }
+            }, 1000);
+        }
+    }
+
+    // Carrega as perguntas e a ampulheta ao iniciar
+    window.onload = function () {
+        loadQuestions();
+        updateDisplay();
+    };
+</script>
+
+</body>
+
+</html>
