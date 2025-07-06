@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt">
+<html lang="pt-BR">
 
 <head>
     <meta charset="UTF-8">
@@ -279,20 +279,17 @@
             "Pirocoptero"
         ]
     };
-
     let questions = [];
     let currentQuestion = 0;
     let timeLeft = 60;
     let timerInterval = null;
     let isRunning = false;
 
-    // Função para carregar as perguntas
     function loadQuestions() {
         questions = shuffleArray([...gameData.questions]);
         nextQuestion();
     }
 
-    // Função para embaralhar um array (Fisher-Yates Shuffle)
     function shuffleArray(array) {
         for (let i = array.length - 1; i > 0; i--) {
             const j = Math.floor(Math.random() * (i + 1));
@@ -301,10 +298,9 @@
         return array;
     }
 
-    // Função para exibir a próxima pergunta
     function nextQuestion() {
         if (questions.length === 0) {
-            document.getElementById("questionMimicasParaAdultos").textContent = "Carregando perguntas...";
+            document.getElementById("questionMimicasParaAdultos").textContent = "Loading questions...";
             loadQuestions();
             return;
         }
@@ -314,14 +310,13 @@
             document.getElementById("result").textContent = "";
             currentQuestion++;
         } else {
-            document.getElementById("questionMimicasParaAdultos").textContent = "Fim do Jogo! Espero que estejam se divertindo! Quer jogar novamente?";
+            document.getElementById("questionMimicasParaAdultos").textContent = "End of the game! Hope you’re having fun! Want to play again?";
             document.getElementById("result").textContent = "";
             currentQuestion = 0;
             questions = shuffleArray([...gameData.questions]);
         }
     }
 
-    // Pop-up functions
     function openPopup() {
         document.getElementById("popup").style.display = "block";
     }
@@ -330,7 +325,6 @@
         document.getElementById("popup").style.display = "none";
     }
 
-    // Fechar o pop-up ao clicar fora dele
     window.onclick = function (event) {
         let popup = document.getElementById("popup");
         if (event.target === popup) {
@@ -338,23 +332,31 @@
         }
     };
 
-    // Cronômetro
     function updateDisplay() {
         const timerButton = document.getElementById('timer');
         timerButton.textContent = timeLeft;
     }
 
-    function handleTimerClick() {
+    // Cronômetro
+    function updateDisplay() {
         const timerButton = document.getElementById('timer');
+        if (isRunning) {
+            timerButton.textContent = timeLeft;
+        } else {
+            timerButton.innerHTML = '⏳';
+        }
+    }
 
+    function handleTimerClick() {
         if (isRunning) {
             clearInterval(timerInterval);
             timerInterval = null;
             timeLeft = 60;
             isRunning = false;
-            updateDisplay();
+            updateDisplay(); // Revela a ampulheta
         } else {
             isRunning = true;
+            updateDisplay();
             timerInterval = setInterval(() => {
                 timeLeft--;
                 updateDisplay();
@@ -363,7 +365,6 @@
                     clearInterval(timerInterval);
                     timerInterval = null;
                     isRunning = false;
-                    alert("⏰ Tempo esgotado!");
                     timeLeft = 60;
                     updateDisplay();
                 }
@@ -371,8 +372,11 @@
         }
     }
 
-    // Carrega as perguntas ao iniciar
-    window.onload = loadQuestions;
+    // Carrega as perguntas e a ampulheta ao iniciar
+    window.onload = function () {
+        loadQuestions();
+        updateDisplay()
+    }
 </script>
 
 </body>

@@ -72,7 +72,7 @@
 
 <!-- Cronômetro -->
 
-<button id="timer" onclick="handleTimerClick()">60</button>
+<button id="timer" onclick="handleTimerClick()">⏳</button>
 
 <script>
     // Datos del juego incrustados en el HTML
@@ -345,20 +345,23 @@
     // Cronômetro
     function updateDisplay() {
         const timerButton = document.getElementById('timer');
-        timerButton.textContent = timeLeft;
+        if (isRunning) {
+            timerButton.textContent = timeLeft;
+        } else {
+            timerButton.innerHTML = '⏳';
+        }
     }
 
     function handleTimerClick() {
-        const timerButton = document.getElementById('timer');
-
         if (isRunning) {
             clearInterval(timerInterval);
             timerInterval = null;
             timeLeft = 60;
             isRunning = false;
-            updateDisplay();
+            updateDisplay(); // Revela a ampulheta
         } else {
             isRunning = true;
+            updateDisplay();
             timerInterval = setInterval(() => {
                 timeLeft--;
                 updateDisplay();
@@ -367,7 +370,6 @@
                     clearInterval(timerInterval);
                     timerInterval = null;
                     isRunning = false;
-                    alert("⏰ Tempo esgotado!");
                     timeLeft = 60;
                     updateDisplay();
                 }
@@ -375,8 +377,11 @@
         }
     }
 
-    // Carrega as perguntas ao iniciar
-    window.onload = loadQuestions;
+    // Carrega as perguntas e a ampulheta ao iniciar
+    window.onload = function () {
+        loadQuestions();
+        updateDisplay()
+    }
 </script>
 
 </body>

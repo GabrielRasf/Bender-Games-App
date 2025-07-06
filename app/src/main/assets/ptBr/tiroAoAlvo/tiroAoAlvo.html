@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt">
+<html lang="pt-BR">
 
 <head>
     <meta charset="UTF-8">
@@ -2496,42 +2496,61 @@
         document.getElementById("questionTiroAoAlvo").textContent = questions[currentQuestionIndex].question;
     }
 
-    function handleTimerClick() {
-        if (!timer) {
-            startTimer();
+    // Cronômetro
+
+    let timerInterval = null;
+    let timeLeft = 60;
+    let isRunning = false;
+
+    function updateDisplay() {
+        const timerButton = document.getElementById('timer');
+        if (isRunning) {
+            timerButton.textContent = timeLeft;
         } else {
-            resetTimer();
+            timerButton.innerHTML = '⏳';
         }
     }
 
-    function startTimer() {
-        timer = setInterval(() => {
-            timeLeft--;
-            document.getElementById("timer").textContent = timeLeft;
-            if (timeLeft <= 0) {
-                clearInterval(timer);
-                timer = null;
-                document.getElementById("timer").textContent = "⏱";
-                alert("Tempo esgotado!");
-            }
-        }, 1000);
+    function stopTimer() {
+        clearInterval(timerInterval);
+        timerInterval = null;
+        isRunning = false;
+        timeLeft = 60;
     }
 
-    function resetTimer() {
-        clearInterval(timer);
-        timer = null;
-        timeLeft = 15;
-        document.getElementById("timer").textContent = timeLeft;
-    }
+    function handleTimerClick() {
+        if (isRunning) {
+            clearInterval(timerInterval);
+            timerInterval = null;
+            isRunning = false;
+            timeLeft = 60;
+            updateDisplay(); // volta à ampulheta
+        } else {
+            isRunning = true;
+            updateDisplay(); // mostra tempo inicial
+            timerInterval = setInterval(() => {
+                timeLeft--;
+                updateDisplay();
 
-    // Fecha popups ao clicar fora deles
-    window.onclick = function (event) {
-        if (event.target.classList.contains("popup")) {
-            closePopup();
-            closeAnswerPopup();
+                if (timeLeft <= 0) {
+                    clearInterval(timerInterval);
+                    timerInterval = null;
+                    isRunning = false;
+                    timeLeft = 60;
+                    updateDisplay(); // volta à ampulheta
+                }
+            }, 1000);
         }
-    };
+    }
+
+    // Inicialização única ao carregar
+    window.addEventListener('DOMContentLoaded', function () {
+        shuffle(questions);
+        nextQuestion();
+        closeAllPopups();
+        updateDisplay(); // mostra ampulheta
+    });
+
 </script>
 </body>
-
 </html>

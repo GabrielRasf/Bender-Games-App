@@ -245,7 +245,7 @@ ol {
     top: 0px;
     cursor: pointer;
     font-size: 63px;
-    font-weight: 600;
+    font-weight: 700;
     animation: pulsarSeta 2.4s infinite ease-in-out,
                mudarCorSeta 14s infinite linear;
     transition: transform 0.4s ease;

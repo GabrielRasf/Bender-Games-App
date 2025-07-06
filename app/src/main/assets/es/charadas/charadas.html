@@ -2,38 +2,36 @@
 <html lang="es">
 
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="../../stylesCards.css">
     <link rel="stylesheet" type="text/css" href="../../cronometro.css">
-    <title>Adivinanzas</title>
-
+    <title>Advinanzas</title>
 </head>
 
 <body>
 
 <div class="game-container">
-
-    <!-- Conteúdo do jogo -->
+    <!-- Menu -->
     <nav class="menu">
         <a href="../menuEs.html" class="menu-title" style="position: relative;">
-            <div class="voltar-container" onclick="window.location.href='../menuPtBr.html'">
-                &#8678; <!-- Isso é ← -->
+            <div class="voltar-container" onclick="window.location.href='../menuEs.html'">
+                &#8678;
             </div>
             <img class="logo-bebedeira" src="../images/logo.png" alt="Logo Bebedeira" />
         </a>
     </nav>
 
+    <!-- Conteúdo do jogo -->
     <div>
-        <h1>Adivinanzas</h1>
-
+        <h1>Riddles</h1>
         <a href="#" onclick="openPopup()"><br />
-            <img class="img-regras" src="../images/regras.png" alt="Reglas" />
+            <img class="img-regras" src="../images/regras.png" alt="Regras" />
         </a>
         <h4>Reglas</h4>
     </div>
 
-    <!-- Pop-up -->
+    <!-- Pop-up de regras -->
     <div id="popup" class="popup">
         <div class="popup-content">
             <div class="popup-header">
@@ -41,26 +39,26 @@
                 <span class="close" onclick="closePopup()">&times;</span>
             </div>
             <ul>
-                <li>¡Un clásico juego de adivinanzas!</li>
-                <li>Todos deben discutir para llegar a la respuesta en 60 segundos</li>
+                <li>¡Un clásico juego de acertijos!</li>
+                <li>Todos deben discutir para encontrar la respuesta en 60 segundos</li>
                 <li>Si no todos están de acuerdo, puede haber más de una respuesta</li>
-                <li>¡Todos los jugadores que se equivoquen beben!</li>
+                <li>¡Todos los jugadores que se equivoquen deben beber!</li>
                 <li>¡Diviértanse! 🍻</li>
             </ul>
         </div>
     </div>
 
+    <!-- Pergunta -->
     <div class="card-frase">
         <p id="questionCharadas"></p>
         <div class="center-container">
-            <img class="pergunta-e-resposta" src="../images/pergunta-e-resposta.png" onclick="showAnswerPopup()"
-                 alt="Respuesta">
-            <h4>Respuestas</h4>
+            <img class="pergunta-e-resposta" src="../images/pergunta-e-resposta.png" onclick="showAnswerPopup()" alt="Answer">
+            <h4>Answer</h4>
         </div>
     </div>
 
     <div class="button-container">
-        <button onclick="nextQuestion()">Siguiente pregunta</button>
+        <button onclick="nextQuestion()">Next question</button>
     </div>
 
     <div id="result"></div>
@@ -68,16 +66,15 @@
     <!-- Pop-up da Resposta -->
     <div id="answerPopup" class="popup">
         <div class="popup-content">
-            <span class="close" onclick="closeAnswerPopup(); popup()">&times;</span>
-            <h3>Respuesta</h3>
-            <p id="answer">¡Haz clic en una pregunta primero!</p>
+            <span class="close" onclick="closeAnswerPopup()">&times;</span>
+            <h3>Answer</h3>
+            <p id="answer">Click on a question first!</p>
         </div>
     </div>
 </div>
 
-<!--Cronômetro-->
-<button id="timer" onclick="handleTimerClick()">60</button>
-
+<!-- Cronômetro -->
+<button id="timer" onclick="handleTimerClick()">⏳</button>
 
 <script>
 
@@ -85,21 +82,6 @@
         closeAllPopups();
 
         nextQuestion();
-
-        function closeAllPopups() {
-            document.getElementById("popup").style.display = "none";
-            document.getElementById("answerPopup").style.display = "none";
-        }
-
-        // Modifique a função showAnswerPopup para ter mais controle
-        function showAnswerPopup() {
-            // Verifica se há uma pergunta ativa antes de mostrar o popup
-            if (currentQuestionIndex >= 0 && questions[currentQuestionIndex]) {
-                const answer = questions[currentQuestionIndex].answer;
-                document.getElementById("answer").textContent = answer;
-                document.getElementById("answerPopup").style.display = "block";
-            }
-        }
 
     });
 
@@ -679,74 +661,93 @@
 
     const questions = questionsData.questions;
     let currentQuestionIndex = -1;
-    let timer;
+    let timerInterval = null;
     let timeLeft = 60;
-
-    function nextQuestion() {
-        currentQuestionIndex = Math.floor(Math.random() * questions.length);
-        const question = questions[currentQuestionIndex];
-        document.getElementById("questionCharadas").textContent = question.question;
-        document.getElementById("answer").textContent = "¡Selecciona una pregunta primero!";
-        resetTimer();
-    }
+    let isRunning = false;
 
     function showAnswerPopup() {
-        if (currentQuestionIndex >= 0) {
+        if (currentQuestionIndex >= 0 && questions[currentQuestionIndex]) {
             const answer = questions[currentQuestionIndex].answer;
             document.getElementById("answer").textContent = answer;
+            document.getElementById("answerPopup").style.display = "block";
         }
-        document.getElementById("answerPopup").style.display = "block";
     }
 
-    function closeAnswerPopup() {
+    function closeAllPopups() {
+        document.getElementById("popup").style.display = "none";
         document.getElementById("answerPopup").style.display = "none";
-    }
-
-    function openPopup() {
-        document.getElementById("popup").style.display = "block";
     }
 
     function closePopup() {
         document.getElementById("popup").style.display = "none";
     }
 
+    function openPopup() {
+        document.getElementById("popup").style.display = "block";
+    }
+
+    function closeAnswerPopup() {
+        document.getElementById("answerPopup").style.display = "none";
+    }
+
+    function updateDisplay() {
+        const timerButton = document.getElementById('timer');
+        timerButton.textContent = isRunning ? timeLeft : '⏳';
+    }
+
     function handleTimerClick() {
-        if (!timer) {
-            startTimer();
+        if (isRunning) {
+            clearInterval(timerInterval);
+            timerInterval = null;
+            isRunning = false;
+            timeLeft = 60;
+            updateDisplay();
         } else {
-            resetTimer();
+            isRunning = true;
+            updateDisplay();
+            timerInterval = setInterval(() => {
+                timeLeft--;
+                updateDisplay();
+                if (timeLeft <= 0) {
+                    clearInterval(timerInterval);
+                    timerInterval = null;
+                    isRunning = false;
+                    timeLeft = 60;
+                    updateDisplay();
+                }
+            }, 1000);
         }
     }
 
-    function startTimer() {
-        timer = setInterval(() => {
-            timeLeft--;
-            document.getElementById("timer").textContent = timeLeft;
-            if (timeLeft <= 0) {
-                clearInterval(timer);
-                timer = null;
-                document.getElementById("timer").textContent = "⏱";
-                alert("Tempo esgotado!");
-            }
-        }, 1000);
-    }
-
-    function resetTimer() {
-        clearInterval(timer);
-        timer = null;
+    function stopTimer() {
+        clearInterval(timerInterval);
+        timerInterval = null;
+        isRunning = false;
         timeLeft = 60;
-        document.getElementById("timer").textContent = timeLeft;
     }
 
-    // Fecha popups ao clicar fora deles
+    function nextQuestion() {
+        currentQuestionIndex = Math.floor(Math.random() * questions.length);
+        const question = questions[currentQuestionIndex];
+        document.getElementById("questionCharadas").textContent = question.question;
+        document.getElementById("answer").textContent = "Click on a question first!";
+        stopTimer();
+        updateDisplay();
+    }
+
+    window.addEventListener('load', function () {
+        closeAllPopups();
+        nextQuestion();
+        updateDisplay();
+    });
+
+    // Fecha os popups ao clicar fora deles
     window.onclick = function (event) {
         if (event.target.classList.contains("popup")) {
             closePopup();
             closeAnswerPopup();
         }
     };
-
-
 </script>
 </body>
 
