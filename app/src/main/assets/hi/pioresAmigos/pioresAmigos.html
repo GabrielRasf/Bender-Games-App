@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="hi">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="../../stylesCards.css" />
+    <title>Bebedeira Games</title>
+</head>
+
+<body>
+
+<div class="game-container">
+    <!-- Menu -->
+    <nav class="menu">
+        <a href="../menuHi.html" class="menu-title" style="position: relative;">
+            <div class="voltar-container" onclick="window.location.href='../menuPtBr.html'">
+                &#8678; <!-- यह ← है -->
+            </div>
+            <img class="logo-bebedeira" src="../images/logo.png" alt="Logo Bebedeira" />
+        </a>
+    </nav>
+
+    <!-- गेम कंटेंट -->
+    <div>
+        <h1>Sabse Bure Dost</h1>
+        <a href="#" onclick="openPopup()">
+            <img class="img-regras" src="../images/regras.png" alt="Rules" />
+        </a>
+        <h4>Rules</h4>
+    </div>
+
+    <div class="card-frase">
+        <p id="questionPioresAmigos"></p>
+    </div>
+
+    <div class="button-container">
+        <button onclick="nextQuestion()">Agla Sawal</button>
+    </div>
+
+    <div id="result"></div>
+</div>
+
+<!-- Pop-up -->
+<div id="popup" class="popup">
+    <div class="popup-content">
+        <div class="popup-header">
+            <h2>Game Ki Rules</h2>
+            <span class="close" onclick="closePopup()">&times;</span>
+        </div>
+        <ul>
+            <li>Ek round ka master chuno.</li>
+            <li>Master app se ek card padhta hai.</li>
+            <li>Sab players 3 tak ginte hain aur ek dost ki taraf point karte hain.</li>
+            <li>Jis player ko sabse zyada vote mile, woh "sabse bura dost" hota hai aur usse ek point milta hai.
+            </li>
+            <li>Agar tie ho to master decide karega.</li>
+            <li>Jo player sabse zyada vote mile, usse ek drink leni padegi.</li>
+            <li>Enjoy karo! 🍻</li>
+        </ul>
+    </div>
+</div>
+
+<script>
+    // Game data questions (a few sample questions translated)
+    const gameData = {
+        questions: [
+            "Kaun decision lene se pehle hamesha late karta hai?",
+            "Kaun humme se hamesha full drunk ho jata hai aur party kharaab kar deta hai?",
+            "Ek humme se hypocrite hai jo sabko criticize karta hai lekin wahi bhi wahi karta hai. Kaun hai?",
+            "Kaun humme se hamesha gym join karne ya diet start karne ka promise karta hai, par kabhi nahi karta?",
+            "Kaun sabse zyada chances rakhta hai apne rishtedaar ke saath incest relation ka?",
+            "Kaun humme se zyada racist hai bina khud ko pata chale?",
+            "Kaun paraolympic games dekhke hasta hai?",
+            "Kaun sabse bada loser hai group mein?",
+            "Ek humme se global warming pe believe nahi karta. Kaun hai?",
+            "Kaun zyada apne body ki wajah se successful hua hai talent ke bajaye?",
+            "Ek humme se, jise sab jaante hain, aksar galat rehta hai?",
+            "INTERVENTION! Hum sab agree karte hain ki _____ ko drugs kam use karni chahiye.",
+            "Aaj ya recently maine masturbation kiya sochte hue kisi ek ka. Kaun?",
+            "Kaun ke paas ek bahut hi disturbing sex toy hai?",
+            "Kaun chahta hai ki hum sab ko nudist beach par le jaye sirf sabko nude dekhne ke liye?",
+            "Agar hum sab apni sexual fantasies batayenge, to kaun aisi baat kahega jo sabko darayegi aur neend kharaab karegi?",
+            "Ek humme se sach me sex pasand nahi karta. Kaun hai?",
+            "Kaun har baar sex karte waqt kisi aur ke baare mein sochta hai?",
+            "Bahut maafi chahata hoon, par main _____ ke saath kabhi sex nahi karunga, chahe future of humanity depend kare uspar.",
+            "Kaun humme se har orgasm par rota hai?",
+            "Kaun sex mein acha nahi hai?",
+            "Kaun jokes par hasta hai bina samjhe?",
+            "Kaun humme se Alzheimer ke liye best candidate hai?",
+            "Kaun food aur drinks sabse zyada uthata hai dusron se, bilkul selfish hai?",
+            "Ek humme se apni galti kabhi accept nahi karta. Kaun hai?",
+            "Generally hum sab milke acha time bitate hain, except jab _____ hamare plans kharaab karta hai.",
+            "Kaun apne aap ko reality se zyada cool samajhta hai?",
+            "Hamari saari chats leak ho gayi hain. Sabse pehla cancel hone wala kaun hai?",
+            "Kaun fake orgasm karta hai?",
+            "Kaun apni private sexual life sabko bata deta hai, jo nahi batana chahiye?",
+            "Har group mein koi aisa hota hai jo apni weirdness ko nahi samajhta. Hamare group mein kaun hai wo?",
+            "Jab delivery order karna hota hai, to kaun sabse zyada time leta hai decide karne mein?",
+            "Kabhi kabhi mujhe sharam aati hai uske liye. Kaun hai?",
+            "Kaun apne partner ke saamne bilkul alag insan ban jata hai?",
+            "Ek humme se kabhi kabhi politics mein bahut zyada extreme ho jata hai. Kaun hai?",
+            "Kaun hamesha arguments mein apne aap ko blame karta hai?",
+            "Kaun apne partner ke phone spy karta hai?",
+            "Akhri banda jiske saath main life exchange karna chahta hoon, wo kaun hai?",
+            "Kaun bahut jaldi apni reasoning lose kar deta hai?",
+            "Hum ek famous Brazilian reality show mein hain. Sabse zyada reject hone wala kaun hai?",
+            "Kaun plane se parachute jump karega aur last minute regret karega?",
+            "Kaun sabme se sabse aakhir mein phir se sex karega?",
+            "Ek humme se thoda zyada sensitive hai. Kaun hai?",
+            "3 tak ginte hue, hum sab point karenge us par jisne bachpan mein apne parents se paise chori kiye the. Ek, do, teen.",
+            "Ek humme se hamesha excuse banata hai. Kaun hai?",
+            "Kaun sochta hai ki woh irresistible hai poora time?",
+            "Sabse bada arrogant (petulant) banda group mein kaun hai?",
+            "Kaun choti choti baaton par easily hurt ho jata hai?",
+            "Kaun secretly coach hire karega?",
+            "Kaun 4th July celebrate karega instead of Brazil Independence Day?",
+            "Kaun humme se sabse badnaam naam rakhta hai?",
+            "Ek humme se hamesha fake news believe karta hai aur share karta hai. Kaun hai?",
+            "Kaun easily lose temper karta hai jab criticize kiya jata hai?",
+            "Kaun aise relationship mein hai jisko hum sab hate karte hain?",
+            "Kaun apne problems hi itna bolta hai ki dusron ki problems ignore karta hai?",
+            "Kaun sabse bada jhootha hai?",
+            "Kaun birthday gifts mein bahut tight hai?",
+            "Kaun bed mein kaafi limited lagta hai?",
+            "Kaun apne bachon ko maarne wala hai ya marega?",
+            "Kaun ex ke baare mein zyada bolna band kar de?",
+            "Kitna asaani se manipulate hota hai woh.",
+            "Kaun hamesha apne plans ko successful banane ke liye hum sab ko manipulate karta hai?",
+            "Kaun apne aap ko hum sab se compare karta rehta hai?",
+            "Kaun secretly gambling addiction chhupa raha hai?",
+            "Ek humme se apni life ka kuch aisa hissa chhupata hai ki agar pata chal gaya to hum baat karna band kar denge. Kaun?",
+            "Kaun sabse zyada futil life jeeta hai?",
+            "Kaun apni khushi dusron ke saath share karna bilkul nahi jaanta?",
+            "Kaun khush hoga agar main is group ka hissa nahi raha?",
+            "Sabse kharab music taste ka prize kaun jeetega?",
+            "Kaun pet kabhi nahi rakhna chahiye (apne animal ke liye)?",
+            "Kaun humme se female football ban karna chahta hai?",
+            "Kaun army mein acha karega?",
+            "Agar main kehta hoon 'idiot, stubborn, ya headstrong', clearly main kiski baat kar raha hoon?",
+            "Naya job start kiya hai. Kaun ek din bhi nahi wait karta boss ko bash karne ke liye?",
+            "Kiski funeral mein koi nahi aayega?",
+            "Kabhi kabhi sochta hoon kyu mera dost ____ hai?",
+            "Ek humme se sex ke baare mein sabse zyada sharminda hota hai. Kaun hai?",
+            "Ek humme se OnlyFans mein bohot paise kharch kar chuka hai. Kaun hai?",
+            "DalaiLama yahan se guzar ke bola ki humein kam time bitana chahiye ____ ke saath.",
+            "Jab bhi ____ apne sapne batata hai, humein pata hota hai ki wo kabhi pure nahi honge.",
+            "Please, ab uski trip wali kahani sunna band karo, woh ____ hai.",
+            "Kaun sach mein zyada khush ho sakta tha lekin nahi hai?",
+            "Kaun self-help books padhta hai?",
+            "Kaun humme se exactly jaanta hai apne social media followers kitne hain?",
+            "Kaun humme se work mein zero hai?",
+            "Kaun zyada paisa important samajhta hai life mein sabse zyada?",
+            "Ek humme se sab kuch aur sabko bilkul ignore karta hai. Kaun hai?",
+            "Kaun is group ko bilkul bhi care nahi karta?",
+            "Mere paas ek badi khabar hai doston ko batane ke liye. Sabse aakhir mein jisko bataunga wo kaun hai?",
+            "Ek humme se baar baar wahi galti karta hai. Kaun hai?",
+            "Ek humme se samajhta hai loan dena matlab gift dena aur kabhi wapas nahi karta. Kaun hai?",
+            "Kaun bilkul ungrateful hai?",
+            "Kaun har baat ko over-exaggerate karta hai?",
+            "Jiske baare mein meri pehli impression bilkul kharab thi, wo kaun hai?",
+            "Ek humme se hamesha wahi jokes repeat karta hai. Kaun hai?",
+            "Ek humme se Brazilian priest wale shows dekhta hai. Kaun hai?",
+            "Kaun zyada sochta nahi aur bina soche bol deta hai?",
+            "Kaun maine Instagram par mute kiya hai?",
+            "Ek humme se hamesha negative hota hai, bilkul pessimist. Kaun hai?",
+            "Kaun family ka Christmas party ruin karta hai?",
+            "Kaun apni age se 20 saal bada behave karta hai?",
+            "Kaun apni age se 20 saal chhota behave karta hai?",
+            "Kaun gareebon ko bilkul care nahi karta?",
+            "'Ek humme se khana khate waqt bilkul pig jaisa lagta hai.' Kaun hai?",
+            "Kaun Titanic dekh ke har baar rota hai?",
+            "Kaun sochta hai wo dance mein best hai lekin actually embarrassing hai?",
+            "Kaun hamesha late aata hai aur apni galti nahi maanta?",
+            "Kaun fake bimar hua sirf group se bachne ke liye?",
+            "Kaun online fights mein unnecessarily phas jata hai?",
+            "Kaun itna bada secret chhupata hai ki agar pata chale to sabki nazar badal jayegi?",
+            "Kaun gossip karta hai aur fir pretend karta hai ki kuch nahi bola?",
+            "Kaun relationship advice deta hai par khud ka love life kharab hai?",
+            "Kaun drunk message bhej ke agle din regret karta hai?",
+            "Kaun hamesha kehta hai party se jaldi jayega lekin sabse aakhir mein nikalta hai?",
+            "Kaun movies mein spoilers de deta hai?",
+            "Kaun real life mein ekdam NPC lagta hai?",
+            "Kaun neighbours se fights mein phasa hai?",
+            "Kaun drama karta hai jaise reality show mein ho?",
+            "Kaun meme banne wala hai kisi bekaar baat se?",
+            "Kaun chhupa hua addiction rakhta hai?",
+            "Kaun apni galti accept nahi karta aur dusron ko blame karta hai?",
+            "Kaun gift pasand nahi karta lekin fake khushi dikhata hai?",
+            "Kaun sabse zyada bhoolne wala banda hai group mein?",
+            "Kaun ajeebo gareeb excuse bana ke situation se nikalta hai?",
+            "Kaun kabhi khush nahi rehta aur hamesha complain karta hai?",
+            "Kaun sochta hai ki wo group ka boss hai par koi seriously nahi leta?",
+            "Kaun choti choti baaton par drama karta hai?",
+            "Kaun group mein secret crush rakhta hai?",
+            "Kaun boyfriend/girlfriend banate hi disappear ho jata hai?",
+            "Kaun hamesha free ride leta hai aur kabhi fuel nahi deta?",
+            "Kaun loan dene se excuse bana leta hai?",
+            "Kaun bahana banata hai ki abhi nahan ke nikla ho isliye nahi jaa raha?",
+            "Kaun hamesha last minute plans cancel karta hai?",
+            "Kaun message ignore karta hai jiske jawab dene ka mann nahi hota?",
+            "Kaun bill kabhi pura pay nahi karta aur transfer karna bhool jata hai?",
+            "Kaun apni zyada baat karne ki wajah se problems mein phasa hai?",
+            "Kaun hamesha sabko galat batata hai chahe reason uske paas ho ya na ho?",
+            "Kaun sabse bada influencer samajhta hai apne aap ko par koi dhyaan nahi deta?",
+            "Kaun har kahani ko over-exaggerate karta hai?",
+            "Kaun sabse pehle help karne se gaayab ho jata hai?",
+            "Kaun recycled gift deta hai?",
+            "Kaun sabse irritating laugh karta hai group mein?",
+            "Kaun date pe gaya tha aur rescue message bheja tha?",
+            "Kaun hamesha kehta hai 'is baar change hoga' par kabhi nahi hota?",
+            "Kaun party mein sabse zyada logon se dosti karta hai par agle din pretend karta hai ki nahi jaanta?",
+            "Kaun sabse zyada stupid reason se jail ja sakta hai?",
+            "Kaun important cheez bhool gaya aur pareshaan ho gaya?",
+            "Kaun mehnga saman kharid ke regret karta hai?",
+            "Kaun unnecessary jealousy ka scene banata hai?",
+            "Kaun tattoo banwane ke baad regret karta hai?",
+            "Kaun apna reality show deserve karta hai?",
+            "Kaun sabse ajeeb search history rakhta hai?",
+            "Kaun fake pasand karta hai koi music ya show sirf impress karne ke liye?",
+            "Kaun sabse bada hoarder hai aur kuch bhi nahi fenkta?",
+            "Kaun hamesha bets harata hai phir bhi lagata rehta hai?",
+            "Kaun busy hone ka bahana banata hai madad na karne ke liye?",
+            "Kaun survival reality show mein sabse pehle eliminate hoga?",
+            "Kaun sab par opinion deta hai bina samjhe?",
+            "Kaun aise jagah gaya jahan nahi jaana chahiye tha aur pakda gaya?",
+            "Kaun doosron ko khush karne ke liye apni opinion badalta rehta hai?",
+            "Kaun karaoke mein fail hua par samjha ki star hai?",
+            "Kaun apni jokes mein itna confident hai par koi nahi hasta?",
+            "Kaun hamesha gossip mein phasa rehta hai bina samjhe?",
+            "Kaun sabse kharab movie aur show taste rakhta hai?",
+            "Kaun sabse jaldi patience lose karega long car trip mein?",
+            "Kaun TV commercial dekh ke rota hai?",
+            "Kaun party mein chupke se bina bataye chala jata hai?",
+            "Kaun sabse zyada ajeebo gareeb excuses banata hai?",
+            "Kaun bekaar cheez kharid ke justify karta hai?",
+            "Kaun hamesha attention grab karna chahta hai?",
+            "Kaun sabse pehle heat complain karega weather ko lekar?",
+            "Kaun bina reason ladai mein phas jata hai?",
+            "Kaun kabhi apna kaam finish nahi karta?",
+            "Kaun event mein entry nahi mil paayega?",
+            "Kaun sabse der se messages ka reply karta hai?",
+            "Kaun phone uthana nahi chahta aur so raha dikhata hai?",
+            "Kaun borrowed cheeze return karna bhool jata hai?",
+            "Kaun secret tod deta hai?",
+            "Kaun sabse ajeeb excuses banata hai absence ke liye?",
+            "Kaun kaam ya college mein migu karta hai?",
+            "Kaun galat waqt par hasta hai?",
+            "Kaun disastrous date rakhta hai par kisi ko nahi batata?",
+            "Kaun sabse weak password use karta hai?",
+            "Kaun lambi lambi messages bhejta hai group mein par koi nahi padta?",
+            "Kaun bekaar cheeze kharid ke paise barbaad karta hai?",
+            "Kaun sabse bada fake gossip karta hai?",
+            "Kaun Uber leta hai jahan chalke jaa sakta hai?",
+            "Kaun viral hone wala hai kisi embarrassing wajah se?",
+            "Kaun galat banda ko message bhej deta hai?",
+            "Kaun hamesha fake bimaar banta hai nahi jaana hota?",
+            "Kaun sabse kharab music taste rakhta hai?",
+            "Kaun important baat ke beech mein so jata hai?",
+            "Kaun kabhi promise todta hai?",
+            "Kaun apna birthday bhool sakta hai?",
+            "Kaun ladai karta hai aur reason bhool jata hai?",
+            "Kaun ladai shuru karta hai aur baad mein pretend karta hai ki kuch nahi hua?",
+            "Kaun sabse zyada dramatic hai?",
+            "Kaun cooking mein itna fail hua ki kitchen jal gaya?",
+            "Kaun birthdays aur special dates bhool jata hai?",
+            "Kaun sabse zyada kisi ko date cancel karega?",
+            "Kaun panch minute mein pyaar kar leta hai?",
+            "Kaun phone pe zyada time bitata hai?",
+            "Kaun kehta hai jaldi so jaunga par nahi sota?",
+            "Kaun Tinder pe kisi ko jaanta tha aur ignore karta hai?",
+            "Kaun online shopping karta hai aur regret karta hai?",
+            "Kaun credit card control lose kar deta hai?",
+            "Kaun GPS se raasta galat leta hai?",
+            "Kaun kisi aur samjha gaya tha aur pretend kiya?",
+            "Kaun kuch samajhne ke liye jhootha ban jata hai?",
+            "Kaun sabse acha detective ban sakta hai?",
+            "Kaun phone apne face pe girata hai?",
+            "Kaun bina chahe meme ban jata hai?",
+            "Kaun bina bataye party chala jata hai?",
+            "Kaun sabse zyada embarrassing stories rakhta hai?"
+
+        ]
+    };
+
+    let questions = [];
+    let currentQuestion = 0;
+
+    // Fisher-Yates Shuffle
+    function shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array;
+    }
+
+    // Agla sawal dikhaye
+    function nextQuestion() {
+        if (questions.length === 0) {
+            questions = shuffleArray([...gameData.questions]);
+            currentQuestion = 0;
+        }
+
+        if (currentQuestion < questions.length) {
+            document.getElementById("questionPioresAmigos").textContent = questions[currentQuestion];
+            document.getElementById("result").textContent = "";
+            currentQuestion++;
+        } else {
+            questions = shuffleArray([...gameData.questions]);
+            currentQuestion = 0;
+            document.getElementById("questionPioresAmigos").textContent = questions[currentQuestion];
+            currentQuestion++;
+        }
+    }
+
+    // Game start kare
+    function initGame() {
+        questions = shuffleArray([...gameData.questions]);
+        nextQuestion();
+    }
+
+    // Popup functions
+    function openPopup() {
+        document.getElementById("popup").style.display = "block";
+    }
+
+    function closePopup() {
+        document.getElementById("popup").style.display = "none";
+    }
+
+    // Popup ke bahar click pe band karo
+    window.onclick = function (event) {
+        let popup = document.getElementById("popup");
+        if (event.target === popup) {
+            popup.style.display = "none";
+        }
+    };
+
+    window.onload = initGame;
+</script>
+
+</body>
+
+</html>

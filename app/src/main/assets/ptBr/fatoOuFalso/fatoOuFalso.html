@@ -2,36 +2,34 @@
 <html lang="pt-BR">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="../../stylesCards.css">
-    <title>Fato ou Falso</title>
-
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="../../stylesCards.css" />
+    <title>Bebedeira Games</title>
 </head>
 
 <body>
-
 <div class="game-container">
     <!-- Menu -->
     <nav class="menu">
         <a href="../menuPtBr.html" class="menu-title" style="position: relative;">
             <div class="voltar-container" onclick="window.location.href='../menuPtBr.html'">
-                &#8678; <!-- Isso é ← -->
+                &#8678;
             </div>
             <img class="logo-bebedeira" src="../images/logo.png" alt="Logo Bebedeira" />
         </a>
     </nav>
 
-    <!-- Conteúdo do jogo -->
+    <!-- Cabeçalho -->
     <div>
-        <h1>Fato ou Falso </h1>
+        <h1>Fato ou Falso</h1>
         <a href="#" onclick="openPopup()">
             <img class="img-regras" src="../images/regras.png" alt="Regras" />
         </a>
         <h4>Regras</h4>
     </div>
 
-    <!-- Pop-up -->
+    <!-- Pop-up de regras -->
     <div id="popup" class="popup">
         <div class="popup-content">
             <div class="popup-header">
@@ -40,27 +38,38 @@
             </div>
             <ul>
                 <li>Um jogador lê uma frase</li>
-                <li>Seu jogador a direita responde se é 'fato' ou se é 'falso'</li>
+                <li>Seu jogador à direita responde se é 'fato' ou se é 'falso'</li>
                 <li>Logo em seguida, clique no botão de 'fato' ou 'falso'</li>
                 <li>Caso o jogador acerte, parabéns</li>
                 <li>Caso erre, bebe uma dose</li>
-                <li>Agora, o jogador que acabou de responder pega o celular e lê para o próximo jogador à direita
-                </li>
+                <li>Agora, o jogador que acabou de responder pega o celular e lê para o próximo jogador à direita</li>
                 <li>O ciclo continua</li>
                 <li>Divirta-se! 🍻</li>
             </ul>
         </div>
     </div>
 
+    <!-- Pergunta -->
     <div class="card-frase">
-        <p id="questionFatoOuFalso">Carregando perguntas...</p>
+        <p id="questionFatoOuFalso">Carregando pergunta...</p>
     </div>
+
+    <!-- Botões de resposta -->
     <div class="button-container-fato-falso">
         <button id="btnFato" class="btn-fato">Fato</button>
         <button id="btnFalso" class="btn-falso">Falso</button>
     </div>
 
+    <!-- Resultado -->
     <div id="result"></div>
+
+    <!-- Botão de próxima pergunta -->
+    <div class="button-container">
+        <button id="btnProxima" class="btn-proxima-pergunta" onclick="showNextQuestion()" style="display: none;">
+            Próxima Pergunta
+        </button>
+    </div>
+
 </div>
 
 <script>
@@ -853,84 +862,77 @@
     };
 
     // Variáveis do jogo
-    let questions = [];
+     let questions = [];
     let currentQuestionIndex = 0;
 
-    // Elementos do DOM
     const questionText = document.getElementById('questionFatoOuFalso');
     const resultDiv = document.getElementById('result');
     const btnFato = document.getElementById('btnFato');
     const btnFalso = document.getElementById('btnFalso');
+    const btnProxima = document.getElementById('btnProxima');
 
-    // Função de embaralhamento Fisher-Yates
+    // Embaralhamento aleatório
     function shuffleArray(array) {
-        for (let i = array.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [array[i], array[j]] = [array[j], array[i]];
-        }
-        return array;
+      for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+      }
+      return array;
     }
 
-    // Carregar as perguntas
     function loadQuestions() {
-        questions = shuffleArray([...gameData.questions]);
-        showQuestion();
+      questions = shuffleArray([...gameData.questions]);
+      showQuestion();
     }
 
-    // Exibir a pergunta atual
     function showQuestion() {
-        const question = questions[currentQuestionIndex];
-        questionText.textContent = question.frase;
-        resultDiv.innerHTML = '';
-
-        // Reabilita os botões para a nova pergunta
-        btnFato.disabled = false;
-        btnFalso.disabled = false;
+      const question = questions[currentQuestionIndex];
+      questionText.textContent = question.frase;
+      resultDiv.innerHTML = '';
+      btnFato.disabled = false;
+      btnFalso.disabled = false;
+      btnProxima.style.display = 'none';
     }
 
-
-    // Verificar a resposta
     function checkAnswer(resposta) {
-        const question = questions[currentQuestionIndex];
+      const question = questions[currentQuestionIndex];
+      btnFato.disabled = true;
+      btnFalso.disabled = true;
 
-        // Desabilita os botões assim que o usuário responder
-        btnFato.disabled = true;
-        btnFalso.disabled = true;
+      if (resposta === question.correta) {
+        resultDiv.innerHTML = `<p style="color: green;">✅ Correto! ${question.explicacao}</p>`;
+      } else {
+        resultDiv.innerHTML = `<p style="color: red;">❌ Errado! ${question.explicacao}</p>`;
+      }
 
-        if (resposta === question.correta) {
-            resultDiv.innerHTML = `<p style="color: green;">✅ Correto! ${question.explicacao}</p>`;
-        } else {
-            resultDiv.innerHTML = `<p style="color: red;">❌ Errado! ${question.explicacao}</p>`;
-        }
+      btnProxima.style.display = 'block';
+    }
 
-        setTimeout(() => {
-            currentQuestionIndex = (currentQuestionIndex + 1) % questions.length;
-            showQuestion();
-        }, 5000);
+    function showNextQuestion() {
+      currentQuestionIndex = (currentQuestionIndex + 1) % questions.length;
+      showQuestion();
     }
 
     // Eventos dos botões
     btnFato.addEventListener('click', () => checkAnswer('Fato'));
     btnFalso.addEventListener('click', () => checkAnswer('Falso'));
 
-    // Pop-up
+    // Pop-up de regras
     function openPopup() {
-        document.getElementById("popup").style.display = "block";
+      document.getElementById("popup").style.display = "block";
     }
 
     function closePopup() {
-        document.getElementById("popup").style.display = "none";
+      document.getElementById("popup").style.display = "none";
     }
 
-    // Fechar o pop-up ao clicar fora dele
     window.onclick = function (event) {
-        let popup = document.getElementById("popup");
-        if (event.target === popup) {
-            popup.style.display = "none";
-        }
+      const popup = document.getElementById("popup");
+      if (event.target === popup) {
+        popup.style.display = "none";
+      }
     };
 
-    // Iniciar o jogo quando a página carregar
     window.onload = loadQuestions;
 </script>
 </body>

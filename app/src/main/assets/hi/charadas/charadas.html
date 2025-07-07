@@ -1,0 +1,1280 @@
+<!DOCTYPE html>
+<html lang="hi">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="../../stylesCards.css">
+    <link rel="stylesheet" type="text/css" href="../../cronometro.css">
+    <title>Bebedeira Games</title>
+</head>
+
+<body>
+
+<div class="game-container">
+    <!-- Menu -->
+    <nav class="menu">
+        <a href="../menuHi.html" class="menu-title" style="position: relative;">
+            <div class="voltar-container" onclick="window.location.href='../menuPtBr.html'">
+                &#8678;
+            </div>
+            <img class="logo-bebedeira" src="../images/logo.png" alt="Bebedeira Logo" />
+        </a>
+    </nav>
+
+    <!-- Game Content -->
+    <div>
+        <h1>Paheliyan</h1>
+        <a href="#" onclick="openPopup()"><br />
+            <img class="img-regras" src="../images/regras.png" alt="Rules" />
+        </a>
+        <h4>Rules</h4>
+    </div>
+
+    <!-- Rules Popup -->
+    <div id="popup" class="popup">
+        <div class="popup-content">
+            <div class="popup-header">
+                <h2>Game ki Rules</h2>
+                <span class="close" onclick="closePopup()">&times;</span>
+            </div>
+            <ul>
+                <li>Ek classic paheli game!</li>
+                <li>Sabko milke 60 seconds ke andar answer dhoondhna hai</li>
+                <li>Agar sab agree nahi karein, to ho sakta hai multiple answers valid ho</li>
+                <li>Jo galat answer dega, usko peena padega! 🍻</li>
+                <li>Masti karo aur enjoy karo!</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Question -->
+    <div class="card-frase">
+        <p id="questionCharadas"></p>
+        <div class="center-container">
+            <img class="pergunta-e-resposta" src="../images/pergunta-e-resposta.png" onclick="showAnswerPopup()"
+                 alt="Answer">
+            <h4>Answer</h4>
+        </div>
+    </div>
+
+    <div class="button-container">
+        <button onclick="nextQuestion()">Next Question</button>
+    </div>
+
+    <div id="result"></div>
+
+    <!-- Answer Popup -->
+    <div id="answerPopup" class="popup">
+        <div class="popup-content">
+            <span class="close" onclick="closeAnswerPopup()">&times;</span>
+            <h3>Answer</h3>
+            <p id="answer">Pehle koi question pe click karo!</p>
+        </div>
+    </div>
+</div>
+
+<!-- Timer -->
+<button id="timer" onclick="handleTimerClick()">⏳</button>
+
+
+<script>
+
+    document.addEventListener('DOMContentLoaded', function () {
+        closeAllPopups();
+
+        nextQuestion();
+
+    });
+
+    // Embedded JSON data
+    const questionsData = {
+        "questions": [
+            {
+                "question": "Pyas lage toh pi sakte hai, bhukh lage toh kha sakte hai aur agar thand lage toh use jala bhi sakte hai. Bolo kya hai woh ?",
+                "answer": " उत्तर – नारियल।"
+            },
+            {
+                "question": "Aisi kya chij hai, jise banane mein kafi waqt lagta hai, lekin tutane mein ek Kshan bhi nahi lagta?",
+                "answer": " उत्तर – भरोसा।"
+            },
+            {
+                "question": "Bargad ke vruksh ke niche chaar log baithe hai, lagda, behra, andha, lula, pedh se aam girne par sabse pahle koun uthayega.",
+                "answer": "उत्तर – कोई नहीं। (क्योंकि वे चारो बरगद के पेड़ के निचे बैठे हैं और बरगद के पेड़ से आम नहीं गिर सकता।)"
+            },
+            {
+                "question": "Mahesh ke pita ke 4 bache hai, Suresh, Ramesh, Ganesh. Chouthe bache ka naam bataye ?",
+                "answer": " उत्तर – चौथे का नाम महेश है।"
+            },
+            {
+                "question": "Hara aata, laal paratha, mil-julkar sab sakhiyo ne baata.",
+                "answer": " उत्तर – मेहँदी।"
+            },
+            {
+                "question": "Apno ke hi ghar ye jaaye, Teen akshar ka naam bataye. Shuru ke do ati ho jaaye, Antim do se tithi bataye.",
+                "answer": "उत्तर: अतिथि"
+            },
+            {
+                "question": "Naak par chadhkar kaan pakadkar, logo ko hai padhati.",
+                "answer": " उत्तर - चश्मा।"
+            },
+            {
+                "question": "Wah konsi chij hai, jiska rang kala hai, wah ujale mein toh najar aati hai, parantu andhere mein dikhai nahi padhti, bolo kya hai wo ?",
+                "answer": " उत्तर – परछाई।"
+            },
+            {
+                "question": "Hari jhandi laal kamaan, touba touba kare insaan.",
+                "answer": " उत्तर - मिर्ची।"
+            },
+            {
+                "question": "Bin khaaye, bin piye, sabke ghar mein rehta hu, naa hasta hu, naa rota hu, ghar ki rakhwali karta hu.",
+                "answer": " उत्तर – ताला।"
+            },
+            {
+                "question": "Kaan hai par bahari hun, Muh hai par moun hu, ankhe hai par andhi hun, batao mai koun hu ?",
+                "answer": " उत्तर – गुड़िया।"
+            },
+            {
+                "question": "Kamar bandhe ghar mein rehta, subah-shaam jarurat hai padhti, batao kya ?",
+                "answer": " उत्तर - झाड़ू।"
+            },
+            {
+                "question": "Haath aaye toh sou kaate, jab thake toh pathar chaate",
+                "answer": " उत्तर – चाकू।"
+            },
+            {
+                "question": "Jo karta hai vayu shudh, fal dekar jo pet bhare, manav bana hai uska dushman, phir bhi wah upkaar kare.",
+                "answer": " उत्तर – पेड़।"
+            },
+            {
+                "question": "Wah konsa ful hai, jiske pass koi rang aur mehak nahi hai ?",
+                "answer": " उत्तर – अप्रैल फूल।"
+            },
+            {
+                "question": "Janm diya raat ne, subah ne kiya jawan, din dhalte hi, nikal gayi iski jaan.",
+                "answer": " उत्तर – समाचार-पत्र।"
+            },
+            {
+                "question": "Kala ghoda safed ki sawari, Ek utara toh dusre ki baari.",
+                "answer": "उत्तर – तवा और रोटी।"
+            },
+            {
+                "question": "Aisi kya chij hai, jo June mein hoti hai, December mein nahi, Aag mein hoti hai lekin Pani mein nahi.",
+                "answer": " उत्तर – गर्मी।"
+            },
+            {
+                "question": "Udhta hai, par pakshi nahi, takat hai uske ang, sardi ho ya garmi yah rehta hai sada mast malang.",
+                "answer": "उत्तर – हवाई जहाज।"
+            },
+            {
+                "question": "Mera sir hai, par aankh nahi, Pet hai, par khana nahi. Pair hain, par chal nahi sakta. Main kya hoon?",
+                "answer": "उत्तर: मूर्ति (Statue)"
+            },
+            {
+                "question": "Do akshar ka uska naam, himalaya se wah nikalti, paap sabhi ke dhoti.",
+                "answer": " उत्तर – गंगा।"
+            },
+            {
+                "question": "Ja jode toh 'Japan' amiro ke liye hai yah shaan, Banarasi hai iski pehchaan, dawato mein badhti isaki maan.",
+                "answer": " उत्तर – पान।"
+            },
+            {
+                "question": "Pankh nahi udhti hu par, Hath nahi ladhti hu par.",
+                "answer": " उत्तर – पतंग।"
+            },
+            {
+                "question": "Kaala muh laal sharir, kagaj ko wo khaa jata. Roj shaam ko pet fadhkar koi unhe le jaata.",
+                "answer": " उत्तर – लेटर बॉक्स।"
+            },
+            {
+                "question": "Chouki par baithi ek raani, sir par aag badan me paani.",
+                "answer": " उत्तर – मोमबत्ती।"
+            },
+            {
+                "question": "Kala rang meri hai shaan, sabko mai deta hu gyan. shikshak karte mujh par kaam, naam batakar bano mahan.",
+                "answer": " उत्तर – ब्लैक-बोर्ड।"
+            },
+            {
+                "question": "Chaar kono ka nagar bana, chaar kuwe bin paani, chor 18 usme baithe liye ek raani. Aaya ek daroga, sabko pit-pitkar kuwe mein dala, batao kya?",
+                "answer": " उत्तर – कैरम बोर्ड।"
+            },
+            {
+                "question": "Saat rang ki chatai, barish mein deti dikhlai.",
+                "answer": " उत्तर – इंद्रधनुष।"
+            },
+            {
+                "question": "Jitna nikaalo, utna hi badhta hoon, Sab mujhse darte hain, par main kuch nahi karta. Main kya hoon?",
+                "answer": "उत्तर: अंधेरा"
+            },
+            {
+                "question": "Ek pedh me ek hi patti, wo bhi rang birang, krte sabhi naman hai, man me bhare Umanag?",
+                "answer": " उत्तर – झंडा।"
+            },
+            {
+                "question": "Waise mai kaala, Jalao to Lal, feko toh safed, kholo mera bhed.",
+                "answer": " उत्तर – कोयला।"
+            },
+            {
+                "question": "Katedaar khal ke bhitar ek rasgulla, sabhi prem se khaate usko, kya pandit kya mulla.",
+                "answer": " उत्तर – लीची।"
+            },
+            {
+                "question": "Koi aisa gaane gana bataye, jise duniya gaati hai.",
+                "answer": " उत्तर – हैप्पी बर्थ-डे टू यू।"
+            },
+            {
+                "question": "Safed tan hari puch, na bujhe toh nani se puch.",
+                "answer": " उत्तर –मूली।"
+            },
+            {
+                "question": "Sunder-sunder khwaab dikhati, pass sabhi ke raat me aati, thake mande ko de aaram, jald batao uska naam.",
+                "answer": " उत्तर – नींद।"
+            },
+            {
+                "question": "Sabke hi ghar pe jaaye, teen akshar ka naam bataye, shuru ke do aati ho jaaye, antim do se tithi ban jaye.",
+                "answer": " उत्तर – अतिथि।"
+            },
+            {
+                "question": "Aise kya chij hai, jo sabke pass hoti hai, kintu kisi ke pass kam toh kisi ke pass jyada. jiske pass jyada hota hai, use budhimaan kahte hai.",
+                "answer": " उत्तर – टैलेंट , कला।"
+            },
+            {
+                "question": "Rang hai uska pila, tapaya hai toh dhila, pita hai to faila, kimti hai to chaila.",
+                "answer": " उत्तर – सोना।"
+            },
+            {
+                "question": "Jal se bhara ek matka , jo hai sabse uchaa latka, pee lo paani hai meetha, jara nahi hai khataa.",
+                "answer": " उत्तर – नारियल।"
+            },
+            {
+                "question": "Mera sir hai, par aankh nahi, Pet hai, par khana nahi. Pair hain, par chal nahi sakta. Main kya hoon?",
+                "answer": "उत्तर: मूर्ति (Statue)"
+            },
+            {
+                "question": "Kaunsi cheez deewar ke paar jaane ki shakti deti hai?",
+                "answer": "Darwaze."
+            },
+            {
+                "question": "Woh kaun hai jise doobte dekh koi bachane nahi aata?",
+                "answer": "Suraj"
+            },
+            {
+                "question": "Ek Takli ladki auto me baithkar ja rahi thi, ab batao usko angreji me kya kahenge?",
+                "answer": "Auto mentakli (Auto mein takli)"
+            },
+            {
+                "question": "Woh kaun hai jiske aane par log humein thookne ke liye kehte hain?",
+                "answer": "Gussa"
+            },
+            {
+                "question": "Do kisan ladhte jaye, unke khet badhte jaye.",
+                "answer": "Sweater ki silai"
+            },
+            {
+                "question": "Agar scooty speed se chala rahi mahila ke saamne pati aur bhai khade hai, toh sabse pahale wo kise maregi?",
+                "answer": "Break"
+            },
+            {
+                "question": "Paise ko dogune karne ka sabse aasaan tarika kya hota hai?",
+                "answer": "Paise ko aaine ke samne rakh do, paise dogune ho jayenge"
+            },
+            {
+                "question": "Wah kya chij hai, jo hathi se bhi badhi hoti hai, lekin uska wajan kuch bhi nahi hota hai?",
+                "answer": "Haathi ki parchhai"
+            },
+            {
+                "question": "Aisi konsi chij hai jo gol hai lekin gend nahi hai, kanch hai par darpan nahi hai, roshni deta hai lekin suraj nahi hai?",
+                "answer": "Bulb"
+            },
+            {
+                "question": "Aisa konsa vyakti hai, jo 100 logo ko maar de phir bhi usko saja nahi ho sakti?",
+                "answer": "Jallad"
+            },
+            {
+                "question": "Mata-pita ke baad agar koi humko aage badhne ke liye kahega toh kon kahega?",
+                "answer": "Bus conductor"
+            },
+            {
+                "question": "Pappu ne shadi ke liye ladki se kehta hai, aap apni shikshan ko hindi batayenge? ladki ne kaha- \"Aankh chay ankh\". Papu yah sunkar behosh ho gaya par aap batao ladki ne kya padha hai?",
+                "answer": "ITI"
+            },
+            {
+                "question": "Ek Bachha lahor me paida hua phir bhi wah pakistani nahi hai. batao kaise?",
+                "answer": "Kyoki wah bachha 1947 ke pehle paida hua tha aur tab Pakistan nahi bana tha"
+            },
+            {
+                "question": "Wah kya chij hai, jise aadmi chupa kar aur aurat dikha kar chalti hai?",
+                "answer": "Purse"
+            },
+            {
+                "question": "Konsi chij hai jo agar chalte chalte thak jaaye toh uski gardan katne par wah dobara chalne lag jati hai?",
+                "answer": "Pencil"
+            },
+            {
+                "question": "Yadi aap Laal Sagar mein ek peeli topi giraate hain, to woh kya ban jaati hai?",
+                "answer": "Geeli"
+            },
+            {
+                "question": "Ladkiyo ki aisi konsi chij hai, jo humesha badhti hi rehti hai?",
+                "answer": "Baal"
+            },
+            {
+                "question": "Media aur patni mein kya chij samanata hai?",
+                "answer": "Jab tak ek hi baat ko 100 baar na bata de, tab tak sukoon nahi milta"
+            },
+            {
+                "question": "Aisa kya hai jo humesha aata toh hai, lekin pahuchta kabhi nahi hai?",
+                "answer": "Aane wala kal"
+            },
+            {
+                "question": "Mai hara hu lekin mai patta nahi hu, nakalchi hu lekin mai bander nahi hu, batao kon hu mai?",
+                "answer": "Tota"
+            },
+            {
+                "question": "Do akshar ka mera naam, sar ko dhakana mera kaam.",
+                "answer": "Topi"
+            },
+            {
+                "question": "Ek sellar ne kaha 'Pura pariwar jindgi bhar baith kar khayenge,' batao wah kya bech rha tha?",
+                "answer": "Chatai"
+            },
+            {
+                "question": "Hara ghera, pila makan, usme rehte kale insaan.",
+                "answer": "Sarson"
+            },
+            {
+                "question": "Kisi gane ki wah konsi line hai, jisme hindi, agreji, urdu aur punjabi ke shabd aate hai?",
+                "answer": "Ishq di gali vich no entry"
+            },
+            {
+                "question": "Woh kya hai jo aapke sote hi neeche gir jaati hai aur uthte hi woh bhi uth jaati hai?",
+                "answer": "Aapki palkein"
+            },
+            {
+                "question": "Mere naam se sab darte hai, mere liye parishram karte hai?",
+                "answer": "Pariksha"
+            },
+            {
+                "question": "Khud kabhi wah kuch na khaaye, lekin sab ko khub khilaye.",
+                "answer": "Chammach"
+            },
+            {
+                "question": "Saas ko coffee chahiye aur pati ko chai, toh batao patni pahle kya karegi?",
+                "answer": "Gas chalu karegi"
+            },
+            {
+                "question": "Aisi konsi chij hai, jo sirf bolne se hi tut jati hai?",
+                "answer": "Khamoshi"
+            },
+            {
+                "question": "Woh konsa phool hai, jiske pass koi rang aur mahak nahi hai?",
+                "answer": "April Fool"
+            },
+            {
+                "question": "Wah kya hai, jise hum humesha katate rehte hai, magar kabhi uske tukde nahi kar sakte?",
+                "answer": "Samay"
+            },
+            {
+                "question": "Aisi konsi chij hai, jisko jitna khicha jata hai, woh utni hi choti hoti jati hai?",
+                "answer": "Sigret"
+            },
+            {
+                "question": "Ek janwar rang rangeela, bina mare wah rove, us ke sir par teen tilake, bin bataye sove.",
+                "answer": "Mor"
+            },
+            {
+                "question": "Aisi konsi chij hai, jo pure gaon me ghumti hai, magar mandir me jane se darti hai?",
+                "answer": "Chappal"
+            },
+            {
+                "question": "Aisi konsi jagah hai, jaha par sadak hai par gadi nahi, jangal hai par pedh nahi aur shahar hai par ghar nahi?",
+                "answer": "Naksha"
+            },
+            {
+                "question": "Woh kon hai jiska hai sirf wohi dekh sakta hai, aur sirf ek bar hi dekh sakta hai dubara nahi?",
+                "answer": "Sapna"
+            },
+            {
+                "question": "Wah kya hai, jo hai toh sone ki magar, sone se bahut sasti hai?",
+                "answer": "Charpai"
+            },
+            {
+                "question": "Aisa konsa gate hai, jisme se hum nikal nahi sakte?",
+                "answer": "Colgate"
+            },
+            {
+                "question": "Mor ek aisa pakshi hai, jo ande nahi deta toh uske bache kaise hote hai?",
+                "answer": "Kyunki ande morni deti hai"
+            },
+            {
+                "question": "Ghusa ankho mein mera dhaaga, darji ke ghar se mai bhaga.",
+                "answer": "Button"
+            },
+            {
+                "question": "Pila-pila rang mera, gol matol sharir, badhe-badhe veero ke daant karu khatte Mahaveer.",
+                "answer": "Nimbu"
+            },
+            {
+                "question": "Wah kon hai, jo jitna bhi budha ho jaye, magar phir bhi woh jawan hi rehta hai?",
+                "answer": "Sainik"
+            },
+            {
+                "question": "Aisa konsa shahar hai, jise hum kha sakte hai?",
+                "answer": "Shimla Mirch"
+            },
+            {
+                "question": "Aisa shabd bataiye ki jisase phool, mithai aur phal ban jaye?",
+                "answer": "Gulab Jamun"
+            },
+            {
+                "question": "Ek aadmi ke 6 bhai hai aur har bhai ke 6 bhai hai, toh batao kul kitne bhai hai?",
+                "answer": "7 bhai"
+            },
+            {
+                "question": "Kaan ghumao band ho jau, kaan ghumao khul jau, rakhta hu mai ghar ka khyaal, aata hu mai sab ke kaam, koi bataye mera naam.",
+                "answer": "Tala"
+            },
+            {
+                "question": "Kala muh lal sharir, kagaj ko wah khata, roj shaam ko pet fadhkar koi unhe le jata.",
+                "answer": "Letter Box"
+            },
+            {
+                "question": "Wah konsi chij hai, jo shadi ke pahle sabki hoti hai, par shadi ke bad keval pati ki hoti hai?",
+                "answer": "Galti"
+            },
+            {
+                "question": "A ki biwi B, B ki bhabhi C, C ki beti V, V ke dada G, G ki Biwi K, K ki beti T, to batao A aur T ka kya rishta hua?",
+                "answer": "Jija aur Saali"
+            },
+            {
+                "question": "Main hu ek anokhi chij, mujhko nahi kisi se khijh, par jo koi mujhe chhuye, charo khane chitt gire.",
+                "answer": "Bijli"
+            },
+            {
+                "question": "Aisi konsi chij hai, jise log katate hai, pisate hai aur batate hai, magar khate nahi hai?",
+                "answer": "Taash ke patte"
+            },
+            {
+                "question": "Aisi konsi chij hai, jo ladki ka naam bhi hai aur ladki ka shringar bhi hai?",
+                "answer": "Payal"
+            },
+            {
+                "question": "Raat me hai, din me nahi, diya ke niche, upper nahi, Bujho mera naam sahi?",
+                "answer": "Andhera"
+            },
+            {
+                "question": "Ek maa ke do bete, dono hain mahaan — ek thanda, doosra garam.",
+                "answer": "Chandrama aur Suraj"
+            },
+            {
+                "question": "Ankho me jab bas jati hai, toh bistar par le aati hun, bataye mai kon hu?",
+                "answer": "Neend"
+            },
+            {
+                "question": "Kowa aasmaan me udata hai, Magar rehta kaha hai?",
+                "answer": "Pani me (Magar yani Magarmachchh)"
+            },
+            {
+                "question": "Ek laka aur ek doctor shopping kar rahe the, ladka doctor ka beta tha par doctor ladke ka pita nahi tha, toh doctor kon tha?",
+                "answer": "Ladke ki maa"
+            },
+            {
+                "question": "Woh kya hai jo aapke sote hi neeche gir jaati hai aur uthte hi woh bhi uth jaati hai?",
+                "answer": "Aapki palken"
+            },
+            {
+                "question": "Naa karta ladhai, phir bhi roj hoti meri pitai, koi mera naam toh batao bhai?",
+                "answer": "Dhol"
+            },
+            {
+                "question": "Aisa room, jisaki khidhki naa darwaja to batao kya?",
+                "answer": "Mushroom"
+            },
+            {
+                "question": "Manaa ki ladki ki aayu 18 varsh hai, toh uske baap ka naam kya hoga?",
+                "answer": "Manaa"
+            },
+            {
+                "question": "Doom kato toh kat ke rakh de, kate pet toh falon mein shreshth, sir kato toh hai bhagwaan, thakan mitana mera kaam.",
+                "answer": "Aaram"
+            },
+            {
+                "question": "Ankh mein mere ungli dalo, muh tabhi mai kholu, kagaj kapda sabko khau, naam mera batlao?",
+                "answer": "Kaichi"
+            },
+            {
+                "question": "Shuruaat me wo hara rehata hai, bad mein wo pila ho jaye, bache ho ya budhe use maje se khaaye.",
+                "answer": "Aam"
+            },
+            {
+                "question": "Use din bhar uthate aur rakhate hai, bina uske kahi ja nahi sakte hai.",
+                "answer": "Pair"
+            },
+            {
+                "question": "Naak meri lambi, naak se karta sare kaam, toh batao mera naam?",
+                "answer": "Haathi"
+            },
+            {
+                "question": "Jab bhi aaye hosh udhaye, phir bhi kahte hai ki aaye.",
+                "answer": "Neend"
+            },
+            {
+                "question": "Wah kon hai jo neem aur karele se bhi kadhwa hota hai?",
+                "answer": "Sach"
+            },
+            {
+                "question": "Aise konsi chij hai, jo fatne ke baad bhi awaj nahi karti hai?",
+                "answer": "Doodh"
+            },
+            {
+                "question": "Aisa konsa shabd hai, jise likhte toh hai, par padhte nahi hai?",
+                "answer": "Nahi"
+            },
+            {
+                "question": "Aisi konsi chij hai, jo barish me chahe jitni bhige, wah kabhi gili nahi ho sakti hai?",
+                "answer": "Pani"
+            },
+            {
+                "question": "Wah kya hai, jo aap kisi ko dene ke baad bhi rakh sakte hai?",
+                "answer": "Apna vachan"
+            },
+            {
+                "question": "Aisi kaunsi cheez hai jiske bina ladke ki shaadi nahi ho sakti?",
+                "answer": "Ladki ke bina"
+            },
+            {
+                "question": "Cricket ki pure match mein kis sthan ko do ladkiyo ke naam se pukara jaata hai?",
+                "answer": "Seema aur Rekha"
+            },
+            {
+                "question": "Ek Gufa ke do rakhwale, dono lambe, dono kale.",
+                "answer": "Moonch"
+            },
+            {
+                "question": "Amitabh aur pran busstop par khade hue hai, bas ruki aur us par pran chadh gaya, par Amitabh nahi chadha, kyu?",
+                "answer": "Kyoki bas par likha tha 'Raghukul reet sada chali aayi, pran jaai par bachan na jaayi'"
+            },
+
+            {
+                "question": "Kis cheez ke paanch ungliyaan hain, lekin naakhun nahi?",
+                "answer": "Dastane."
+            },
+            {
+                "question": "Kaunsa vaakya sahi hai: penguin ud sakte hain ya penguin udne ke laayak hain?",
+                "answer": "Dono galat, penguin udte nahi hain."
+            },
+            {
+                "question": "Cheenti ke paas sher se bada kya hai?",
+                "answer": "Naam."
+            },
+            {
+                "question": "Moses ne apni kashti mein kitne jaanwar liye the?",
+                "answer": "Koi nahi, jaanwar Noah le gaya tha."
+            },
+            {
+                "question": "Golakar ke kitne pehlu hote hain?",
+                "answer": "Do."
+            },
+            {
+                "question": "Das chidiyaan ped par baithe the, ek ko shikari ne maara, kitne bache?",
+                "answer": "Koi nahi, sab udd gaye."
+            },
+            {
+                "question": "Rasayanik ne jab do helium ke atom dekhe to kya kaha?",
+                "answer": "He He!"
+            },
+            {
+                "question": "Haathi ne jab batak par pair rakha to kya hua?",
+                "answer": "Batak viyogii ho gaya."
+            },
+            {
+                "question": "Aisi jagah jahan sauon pahiyon hain, par wo hilti nahi?",
+                "answer": "Parking."
+            },
+            {
+                "question": "Kaunsa mahina 28 din ka hota hai?",
+                "answer": "Sabhi."
+            },
+            {
+                "question": "Agar murga chhat par anda de to wo kahan girayega?",
+                "answer": "Kahan nahi, murga anda nahi deta."
+            },
+            {
+                "question": "Loha zameen par girne ke baad kya hua?",
+                "answer": "Wo press karne laga."
+            },
+            {
+                "question": "Mera naam hai, par mere doston ke zyada upyog karte hain?",
+                "answer": "Naam."
+            },
+            {
+                "question": "Aisi cheez jo aap pakad sakte hain, par kabhi nahi fek sakte?",
+                "answer": "Sardi."
+            },
+            {
+                "question": "Subah ke naashta mein kaun si cheezein nahi khayi ja sakti?",
+                "answer": "Dopehar ka khana aur raat ka khana."
+            },
+            {
+                "question": "Tasveer jail kaise gayi?",
+                "answer": "Use frame kiya gaya."
+            },
+            {
+                "question": "Ganitgy ne zero banane wale ko kya kaha?",
+                "answer": "Dhanyavaad kuch nahi ke liye."
+            },
+            {
+                "question": "Calendar factory se aadmi kyun nikala gaya?",
+                "answer": "Kyunki usne chhutti li."
+            },
+            {
+                "question": "Bhoot jhoot kyon kharaab bolte hain?",
+                "answer": "Kyunki wo bahut transparent hote hain."
+            },
+            {
+                "question": "Aurat kaise 8 din bina sone ke reh sakti hai?",
+                "answer": "Raat ko so kar."
+            },
+            {
+                "question": "Ek deewar ne doosri deewar se kya kaha?",
+                "answer": "Milte hain mod par."
+            },
+            {
+                "question": "Ande mazaak kyon nahi karte?",
+                "answer": "Kyunki wo hans hans kar phat sakte hain."
+            },
+            {
+                "question": "Ek saath aaye do bhai, bin unke door shehnai. pito tab wah dete sangat, phir aaye mehfil me rangat.",
+                "answer": " उत्तर – तबला।"
+            },
+            {
+                "question": "Sar hai, Doom hai, magar paaw nahi uske, pet hai ankh hai magar kaan nahi uske.",
+                "answer": " उत्तर – साँप।"
+            },
+            {
+                "question": "Ek mahal mein 40 chor. Muh kala, poonchh safed.",
+                "answer": "Maachis "
+            },
+            {
+                "question": "Oont ki baithak, hiran si tez chaal, wo kaunsa jaanwar jiske poonchh na baal?",
+                "answer": "Mendhak "
+            },
+            {
+                "question": "Hari hai uski kaya, laal makaan mein, kaala shaitaan samaaya.",
+                "answer": "Tarbooz "
+            },
+            {
+                "question": "Hare hare se dikhe pakke ho ya kachche, bhitar se lal malai jaise thande mithe lacche.",
+                "answer": "Tarbooz "
+            },
+            {
+                "question": "Chaar driver ek sawari, uske peeche janta bhaari.",
+                "answer": "Murda "
+            },
+            {
+                "question": "Ek maa ke do putra, dono mahaan alag prakriti. Bhai bhai se alag, ek thanda doosra aag.",
+                "answer": "Chandrama, Sooraj "
+            },
+            {
+                "question": "Dhoop dekh main aa jaun, chhaav dekh sharma jaun. Jab hawa kare mujhe sparsh, main usme sama jaun.",
+                "answer": "Paseena "
+            },
+            {
+                "question": "Na kisi se prem, na kisi se bair, phir bhi log lete meri roz khair. Sabke gaano ki raunak badhti, phir bhi mujh par thappad padti.",
+                "answer": "Dholak "
+            },
+            {
+                "question": "Laal hoon, khaati hoon sukhhi ghaas. Pani pee kar mar jaun, jal jaaye jo aaye mere paas.",
+                "answer": "Aag "
+            },
+            {
+                "question": "Aisi kya cheez hai jo aankhon ke saamne aate hi aankhen band ho jaati hain?",
+                "answer": "Roshni "
+            },
+            {
+                "question": "Subah aata, shaam ko jaata, dinbhar chamak barsata. Srishti ko deta vaibhav, iske bina jeevan asambhav.",
+                "answer": "Sooraj "
+            },
+            {
+                "question": "Poonchh kate to Seeta, sir kate to Mitra, madhya kate to Khopdi. Paheli badi vichitra.",
+                "answer": "Siyar "
+            },
+            {
+                "question": "Raja-maharajaon ke kaam aayi, sandesh pahunchayi subah ya shaam.",
+                "answer": "Kabootar "
+            },
+            {
+                "question": "Kharidte ho to kaala, istemaal karo to laal, aur phenkte ho to safed.",
+                "answer": "Koyla "
+            },
+            {
+                "question": "Chhota hoon par bada kehlata, roj dahi ki nadi mein nahaata.",
+                "answer": "Dahi Bada"
+            },
+            {
+                "question": "Singh hai par bakri nahi, kathi hai par ghodi nahi. Brake hai par car nahi, ghanti hai par kiwad nahi.",
+                "answer": "Cycle"
+            },
+            {
+                "question": "Do sundar ladke, dono ek rang ke. Ek bichhad jaaye toh doosra kaam na aaye.",
+                "answer": "Jootey "
+            },
+            {
+                "question": "Ek kile ke do hi dwar, unme sainik lakdidaari. Takraaye jab deewaron se, khatam ho jaaye unka sansaar.",
+                "answer": "Maachis "
+            },
+            {
+                "question": "Ek thaal motiyon se bhara, sabke sir par ulta dhara. Chaaro aur phire woh thaal, moti usse ek na gire.",
+                "answer": "Aasmaan "
+            },
+            {
+                "question": "Na sikha sangeet kahin, na sikha koi geet. Lekin iski mithi vaani mein bhara hua sangeet. Subah-subah kare riyaz, man ko bhaati iski aawaz.",
+                "answer": "Koyal "
+            },
+            {
+                "question": "Dibba dekha ek nirala, na dhakkan na taala, na penda na kona, band hai usme chandi aur sona.",
+                "answer": "Anda "
+            },
+            {
+                "question": "Pair nahi hain, par chalti rehti. Dono haathon se apna muh pochhti rehti.",
+                "answer": "Ghadi "
+            },
+            {
+                "question": "Chaar taang ki hoon naari, chhalni jaisa mera ched. Peedit ko aaram deti hoon, batao bhaiya yeh bhed.",
+                "answer": "Charpai "
+            },
+            {
+                "question": "Aisi kya cheez hai, jo baantne par badhti jaati hai?",
+                "answer": "Gyaan "
+            },
+            {
+                "question": "Hari thi man bhari thi, laakh moti jadi thi. Raja ji ke baag mein dushala odhe khadi thi.",
+                "answer": "Bhutta "
+            },
+            {
+                "question": "Dhan-daulat se badi hai yeh, sab cheezon se upar hai yeh. Jo paaye pandit ban jaaye, bina paaye moorkh reh jaaye.",
+                "answer": "Vidya "
+            },
+            {
+                "question": "Ek phool yahan khila, ek khila Kolkata. Ajab ajooba humne dekha, patte ke upar patta.",
+                "answer": "Patta-Gobhi "
+            },
+            {
+                "question": "Aise vaahan ka naam batayein, jiska naam aage peeche karne par bhi arth mein koi farq na ho.",
+                "answer": "Jahaj "
+            },
+            {
+                "question": "Bin jiske ho chakka jaam, paani jaisi cheez hai woh. Jhat se batao uska naam.",
+                "answer": "Petrol"
+            },
+            {
+                "question": "Aisi kya cheez hai, jiske paas chehra hai, do haath hain, magar taange nahi hain?",
+                "answer": "Ghadi "
+            },
+
+            {
+                "question": "Kaun bahra aur goonga hai, par sab kuch batata hai?",
+                "answer": "Kitab."
+            },
+            {
+                "question": "Kaun zyada majboot hai: ghughu ya haathi?",
+                "answer": "Ghughu, kyunki wo apna ghar apni peeth par le jaata hai."
+            },
+            {
+                "question": "Flu ek kharaab chor kyu hoga?",
+                "answer": "Kyunki ise pakadna aasaan hai."
+            },
+            {
+                "question": "Shareer ka konsa hissa sabse zyada khujli karta hai?",
+                "answer": "Naakhun."
+            },
+            {
+                "question": "Kya cheez do baar milti hai, par agar teesri baar chahiye to kharidni padti hai?",
+                "answer": "Daant."
+            },
+            {
+                "question": "Ek ghadi ka sui doosre ko kya bola?",
+                "answer": "Dopehar ko milte hain."
+            },
+            {
+                "question": "Kya khula hone par sab kuch rakhta hai, par band hone par kuch nahi?",
+                "answer": "Chhata (umbrella)."
+            },
+            {
+                "question": "Aankh ke kone mein kya hota hai?",
+                "answer": "Aankh ka kona (letter O)."
+            },
+            {
+                "question": "Invisible aadmi naukri kyu nahi leta?",
+                "answer": "Kyunki wo khud ko uss kaam mein nahi dekh sakta."
+            },
+            {
+                "question": "Behtareen dentist ko kya inaam milta hai?",
+                "answer": "Plaque (taqreer ya award)."
+            },
+            {
+                "question": "Math ki kitab itni udaas kyu lagti hai?",
+                "answer": "Kyunki usmein bohot saare problems hote hain solve karne ke liye."
+            },
+            {
+                "question": "Ek aadmi teen darwaze dekhta hai: sone ka, chandi ka, aur tamba ka. Pehla kaunsa kholna chahiye?",
+                "answer": "Gaadi ka darwaza."
+            },
+            {
+                "question": "Gol, beech mein chhed, do letters hain aur C se shuru hota hai?",
+                "answer": "CD."
+            },
+            {
+                "question": "Cycle aur toilet mein kya fark hai?",
+                "answer": "Cycle pe baith kar chalate hain, toilet mein bhaag kar baithte hain."
+            },
+            {
+                "question": "Sabse udaas bartan kaun sa hai?",
+                "answer": "Pressure cooker."
+            },
+            {
+                "question": "Rainbow ke end mein kya hota hai?",
+                "answer": "Letter S."
+            },
+            {
+                "question": "Kaise teen din bolen bina Wednesday, Friday aur Sunday ke naam liye?",
+                "answer": "Kal, aaj, kal."
+            },
+            {
+                "question": "Ek minute mein ek baar, ek moment mein do baar, 200 saal mein kabhi nahi hota kya hai?",
+                "answer": "Letter M."
+            },
+            {
+                "question": "Chhote log boxing kyu nahi kar sakte?",
+                "answer": "Kyunki wo neeche ke blows maarte hain."
+            },
+            {
+                "question": "Lal pathar ko green samundar mein fekho, wo kaise wapas aata hai?",
+                "answer": "Gila (wet)."
+            },
+            {
+                "question": "Mount Everest ke discover hone se pehle sabse uncha pahaad kaunsa tha?",
+                "answer": "Mount Everest, bas discover nahi hua tha."
+            },
+            {
+                "question": "Kaunsa transport do ya chaar pahiyon wala ho sakta hai?",
+                "answer": "Cycle, training wheels ke saath ya bina."
+            },
+            {
+                "question": "Baalo, daanton aur paudhon mein kya chhupa hota hai?",
+                "answer": "Jad (root)."
+            },
+            {
+                "question": "Upar se awaz aati hai, sab sunte hain par koi pasand nahi karta?",
+                "answer": "Ghanti (bell)."
+            },
+            {
+                "question": "Aise shabd jo dard de sakta hai, reason de sakta hai ya le sakta hai?",
+                "answer": "Shabd (word)."
+            },
+            {
+                "question": "Jitna main dhoon, utna hi main ganda hota hoon?",
+                "answer": "Pani (water)."
+            },
+            {
+                "question": "Dant jo din bhar takrate hain par kabhi chot nahi pahunchate?",
+                "answer": "Daant."
+            },
+            {
+                "question": "Swarn jaisa hai naam mera, chaav , daaw se padhe kaam tera, chaar akshar mere naam me aate, dooje me krishn bhi kehlaate.",
+                "answer": "Sona"
+            },
+            {
+                "question": "Aisi konsi chij hai, jise jitna khicho utani hi kam hoti jaati hai?",
+                "answer": "Rassi"
+            },
+            {
+                "question": "Aage 'P' hai, madhya me bhi 'P', ant me 'H' hai, kati patang nahi ye bhaiya. Na billi chuha hai, van me pedho par rehta hai, sur me rehkar kuch kehta hai.",
+                "answer": "Papihah"
+            },
+            {
+                "question": "Kaali hu par koyal nahi, lambi hu par dandi nahi, dor nahi par bandhi jaati, maiya mera naam batati.",
+                "answer": "Choti"
+            },
+            {
+                "question": "Teen akshar ka mera naam, ulta sidha ek samaan",
+                "answer": "Jahaj"
+            },
+            {
+                "question": "Lamba tan aur badan hai gol, meethe rehte mere bol, tan pe mere hote chedh, bhasha ka mai na karu bhed.",
+                "answer": "Bansuri"
+            },
+            {
+                "question": "Topi hai hari meri, lal hai dushaala. pet me ajib lagi dano ki mala.",
+                "answer": "Mirch"
+            },
+            {
+                "question": "Dikhta nahi par pehna hai, yah naari ka gehna hai",
+                "answer": "Sanskriti"
+            },
+            {
+                "question": "Rang biranga badan hai iska, kudrat ka wardaan mila, itni sundarta pakar bhi, do akshar ka naam mila. Ye van mein karta shor, iske charche hai har aur, batao kon?",
+                "answer": "Mor"
+            },
+            {
+                "question": "Fal nahi hai par fal kahau, namak mirchi ke sang suhau, khaane wale ki sehat badhaau, sita maiyya ki yaad dilau.",
+                "answer": "Kachcha Aam"
+            },
+            {
+                "question": "Uchale dhoude kude dinbhar, yah dikhne me badha hi sunder, lekin nahi ye bhaalu bander, apni dhun me mast kalander, iske naam mein judha hai run, ghar hai iske sunder van, batao kon ?",
+                "answer": "Hiran"
+            },
+            {
+                "question": "Kaala handa, safed bhat, Le lo bhai haathon-haath.",
+                "answer": "Chalk aur Slate"
+            },
+
+            {
+                "question": "Ek cheez jo sukhi rahe toh doob jaati hai, Aur geeli ho toh tairti hai. Woh kya hai?",
+                "answer": "Lakdi"
+            },
+            {
+                "question": "Kehalata toh hu mai chulha,par ajab hai mera roop, tel, gas na lakadi mangu, mujhe toh chahiye dhoop?",
+                "answer": "Solar Cooker"
+            },
+            {
+                "question": "Duniya bhar ki karta sair, dharati pe naa rakhta pair. Din me sota raat me jaagta, raat andheri meri bagair, jaldi batao mai kon ?",
+                "answer": "Chaand"
+            },
+            {
+                "question": "Leṭ kar sona, par khade hona?",
+                "answer": "Paaon."
+            },
+            {
+                "question": "Na palang hai na chhota sher, par har kone mein gayab ho jata hai?",
+                "answer": "Chameleon."
+            },
+            {
+                "question": "Baith kar bhi bohot saare movements karta hai?",
+                "answer": "Chess player."
+            },
+            {
+                "question": "Zameen aur aasman ke beech, jitna kareeb jao utna door hota hai?",
+                "answer": "Horizont."
+            },
+            {
+                "question": "Kaun sa jaanwar nadi paar karta hai ox ko mooh mein lekar?",
+                "answer": "Tick."
+            },
+            {
+                "question": "Aakarshit karta hai par insan nahi hai?",
+                "answer": "Magnet."
+            },
+            {
+                "question": "Poora din upar neeche jata hai bina thake?",
+                "answer": "Elevator."
+            },
+            {
+                "question": "Bina muh ke bolta hai, bina awaaz ke gaata hai?",
+                "answer": "Radio."
+            },
+            {
+                "question": "Chahe kitna bhi kaato, size wahi rahta hai?",
+                "answer": "Cards ka deck."
+            },
+            {
+                "question": "Sakht sir hai aur marpeet pasand karta hai?",
+                "answer": "Keel (nail)."
+            },
+            {
+                "question": "Do pankhe jo poora din hilte hain par neend mein chup ho jate hain?",
+                "answer": "Palkein (eyelashes)."
+            },
+            {
+                "question": "Sona lagta hai par chandi nahi, jo na samjhe wo pagal hai?",
+                "answer": "Kela (banana)."
+            },
+            {
+                "question": "Maine bazaar se ek sundar liya, ghar aaya toh aansu aa gaye?",
+                "answer": "Pyaaz (onion)."
+            },
+            {
+                "question": "Zameen par hai par kabhi neeche nahi hota?",
+                "answer": "Tilde (til)."
+            },
+            {
+                "question": "Tropical dance ka naam hai aur khana bhi tasty banata hai?",
+                "answer": "Salsa."
+            },
+            {
+                "question": "Ek chhed hai par ghar bhi ban sakta hai, lantern se rhyme karta hai?",
+                "answer": "Gufa (cave)."
+            },
+            {
+                "question": "Ek pathar jo log pasand karte hain aur paani mein tairta hai?",
+                "answer": "Barf ka tukda (ice cube)."
+            },
+            {
+                "question": "Tumhari zindagi bhar tumhara saath deta hai, par andhere mein chala jata hai?",
+                "answer": "Saaya (shadow)."
+            },
+            {
+                "question": "6 letters hain par 36 seats le jaata hai?",
+                "answer": "Bus."
+            },
+            {
+                "question": "Tumhare samne hai par tum nahi dekh sakte?",
+                "answer": "Bhavishya (future)."
+            },
+            {
+                "question": "Bina pankh ke udta hai, bina muh ke seeti bajata hai?",
+                "answer": "Hawa (wind)."
+            },
+            {
+                "question": "Aisa vowel jo ulti position mein hota hai?",
+                "answer": "Vowel U."
+            },
+            {
+                "question": "Saat bhai ek dusre ke bohot kareeb, pehla bazari, sattva aalsi?",
+                "answer": "Haftay ke din."
+            },
+            {
+                "question": "Paon hai par chal nahi sakta, khana hai par khata nahi, paani hai par peeta nahi?",
+                "answer": "Nariyal ka ped."
+            },
+            {
+                "question": "Kaam karta hai aur sabke muh khula chhod deta hai?",
+                "answer": "Dentist."
+            },
+            {
+                "question": "Ghar ke andar bhi nahi, bahar bhi nahi, par ghar bina uske adhoora hai?",
+                "answer": "Khidki (window)."
+            },
+            {
+                "question": "Center hai par shuruaat ya ant nahi?",
+                "answer": "Gola (circle)."
+            },
+            {
+                "question": "Ek ghar mein lamba ho kar joda banta hai?",
+                "answer": "Letter L."
+            },
+            {
+                "question": "Aadmi jo din mein 3 baar se zyada shaving karta hai?",
+                "answer": "Naihwan (barber)."
+            },
+            {
+                "question": "Ghoda jo nahaana pasand karta hai?",
+                "answer": "Sea horse."
+            },
+            {
+                "question": "Shehar, gali, dukaan aur ghar hain par koi wahan nahi rehta?",
+                "answer": "Map."
+            },
+            {
+                "question": "Sir ke saath chhota ho jata hai, bina sir ke lamba ho jata hai?",
+                "answer": "Takiyya (pillow)."
+            },
+            {
+                "question": "Aankh nahi par blink karta hai, muh nahi par command karta hai?",
+                "answer": "Traffic light."
+            },
+            {
+                "question": "Agar pehla akshar badal do to doosra janwar ban jata hai, jo uska shikar bhi hai?",
+                "answer": "Chuha (rat)."
+            },
+            {
+                "question": "Suar ka poonchh aur kaan hai par suar nahi, rajma aur saag ke saath mushkil se kam khata hai?",
+                "answer": "Feijoada."
+            },
+            {
+                "question": "Na baal hai na sir, par budha hone par ganja ho jata hai?",
+                "answer": "Tyre."
+            },
+            {
+                "question": "Poonchh hai par jaanwar nahi, pankh nahi par ud sakta hai, jab upar jata hai to koi kaat sakta hai?",
+                "answer": "Patang (kite)."
+            },
+            {
+                "question": "Ghoomta hai par chal nahi sakta?",
+                "answer": "Ghadi."
+            },
+            {
+                "question": "Khaate nahi par khane ke saath achha lagta hai?",
+                "answer": "Bartan (cutlery)."
+            },
+            {
+                "question": "Bail nikal jata hai par makkhi phans jati hai?",
+                "answer": "Makdi ka jaal (spider web)."
+            },
+            {
+                "question": "Hum samundar mein nafrat karte hain par bartan mein pyaar karte hain?",
+                "answer": "Shorba (broth)."
+            },
+            {
+                "question": "Kabhi wapas nahi aata, jabki kabhi gaya hi nahi?",
+                "answer": "Beeta hua samay (past)."
+            },
+            {
+                "question": "Surgeon aur mathematician mein kya common hai?",
+                "answer": "Dono operation karte hain."
+            },
+            {
+                "question": "Jo sir ke upar pair rakhta hai?",
+                "answer": "Joo (lice)."
+            },
+            {
+                "question": "Kaun si cheez suraj ke saamne se guzar sakti hai bina chhaya diye?",
+                "answer": "Hawa (wind)."
+            },
+            {
+                "question": "Jo uchhal kar dulhan ka kapda pehenta hai?",
+                "answer": "Popcorn."
+            },
+            {
+                "question": "Jitna bada, utna kam dikhta hai?",
+                "answer": "Andhera (darkness)."
+            },
+            {
+                "question": "Jo bina pankh ke udta hai aur bina aankhon ke rota hai?",
+                "answer": "Baadal (cloud)."
+            },
+            {
+                "question": "Jo baarish girti hai, lekin khidki chhata upar uthta hai?",
+                "answer": "Chhata (umbrella)."
+            },
+            {
+                "question": "Sabse purana jaanwar kaun sa hai?",
+                "answer": "Zebra. Wo abhi bhi black aur white hai."
+            },
+            {
+                "question": "Jo chadhai karta hai lekin kabhi neeche nahi aata?",
+                "answer": "Umar (age)."
+            },
+            {
+                "question": "Kaun si cheez bina chalaye chalti hai?",
+                "answer": "Sadak (road)."
+            },
+            {
+                "question": "Ek patla chhota wala chakkar jo kabhi hilta nahi?",
+                "answer": "Ghadi (clock)."
+            },
+            {
+                "question": "Jo bina sir ke lamba hota hai aur sir ke saath chhota hota hai?",
+                "answer": "Takiya (pillow)."
+            },
+            {
+                "question": "Kaun si cheez bina muhn ke bolti hai aur bina awaaz ke gaati hai?",
+                "answer": "Radio."
+            },
+            {
+                "question": "Jo bina pankh ke udta hai aur bina muh ke seeti bajata hai?",
+                "answer": "Hawa (wind)."
+            },
+            {
+                "question": "Kaun sa prani hai jo aapka guide karta hai jaise GPS?",
+                "answer": "Guide dog."
+            },
+            {
+                "question": "Kaun sa mahina sabse chhota hota hai?",
+                "answer": "February."
+            },
+            {
+                "question": "Kaun sa cheez tootne par hi kaam karti hai?",
+                "answer": "Anda (egg)."
+            },
+            {
+                "question": "Kaun sa janwar hai jo hamesha aapke saath hai, lekin aapke bhai nahi hai?",
+                "answer": "Aap khud (you)."
+            }
+        ]
+    }
+
+
+    const questions = questionsData.questions;
+    let currentQuestionIndex = -1;
+    let timerInterval = null;
+    let timeLeft = 60;
+    let isRunning = false;
+
+    function showAnswerPopup() {
+        if (currentQuestionIndex >= 0 && questions[currentQuestionIndex]) {
+            const answer = questions[currentQuestionIndex].answer;
+            document.getElementById("answer").textContent = answer;
+            document.getElementById("answerPopup").style.display = "block";
+        }
+    }
+
+    function closeAllPopups() {
+        document.getElementById("popup").style.display = "none";
+        document.getElementById("answerPopup").style.display = "none";
+    }
+
+    function closePopup() {
+        document.getElementById("popup").style.display = "none";
+    }
+
+    function openPopup() {
+        document.getElementById("popup").style.display = "block";
+    }
+
+    function closeAnswerPopup() {
+        document.getElementById("answerPopup").style.display = "none";
+    }
+
+    function updateDisplay() {
+        const timerButton = document.getElementById('timer');
+        timerButton.textContent = isRunning ? timeLeft : '⏳';
+    }
+
+    function handleTimerClick() {
+        if (isRunning) {
+            clearInterval(timerInterval);
+            timerInterval = null;
+            isRunning = false;
+            timeLeft = 60;
+            updateDisplay();
+        } else {
+            isRunning = true;
+            updateDisplay();
+            timerInterval = setInterval(() => {
+                timeLeft--;
+                updateDisplay();
+                if (timeLeft <= 0) {
+                    clearInterval(timerInterval);
+                    timerInterval = null;
+                    isRunning = false;
+                    timeLeft = 60;
+                    updateDisplay();
+                }
+            }, 1000);
+        }
+    }
+
+    function stopTimer() {
+        clearInterval(timerInterval);
+        timerInterval = null;
+        isRunning = false;
+        timeLeft = 60;
+    }
+
+    function nextQuestion() {
+        currentQuestionIndex = Math.floor(Math.random() * questions.length);
+        const question = questions[currentQuestionIndex];
+        document.getElementById("questionCharadas").textContent = question.question;
+        document.getElementById("answer").textContent = "Click on a question first!";
+        stopTimer();
+        updateDisplay();
+    }
+
+    window.addEventListener('load', function () {
+        closeAllPopups();
+        nextQuestion();
+        updateDisplay();
+    });
+
+    // Fecha os popups ao clicar fora deles
+    window.onclick = function (event) {
+        if (event.target.classList.contains("popup")) {
+            closePopup();
+            closeAnswerPopup();
+        }
+    };
+</script>
+</body>
+
+</html>

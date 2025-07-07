@@ -5,7 +5,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" type="text/css" href="../../stylesCards.css" />
-    <title>Vrai ou Faux</title>
+    <title>Bebedeira Games</title>
 </head>
 
 <body>
@@ -59,6 +59,14 @@
     </div>
 
     <div id="result"></div>
+
+    <!-- Botão de próxima pergunta -->
+    <div class="button-container">
+        <button id="btnProxima" class="btn-proxima-pergunta" onclick="showNextQuestion()" style="display: none;">
+            Question suivante
+        </button>
+    </div>
+
 </div>
 
 <script>
@@ -714,84 +722,78 @@
         ]
     };
 
-    // Variables du jeu
-    let question = [];
+    // Variáveis do jogo
+     let questions = [];
     let currentQuestionIndex = 0;
 
-    // Éléments du DOM
     const questionText = document.getElementById('questionFatoOuFalso');
     const resultDiv = document.getElementById('result');
     const btnFato = document.getElementById('btnFato');
     const btnFalso = document.getElementById('btnFalso');
+    const btnProxima = document.getElementById('btnProxima');
 
-    // Fonction de mélange Fisher-Yates
+    // Embaralhamento aleatório
     function shuffleArray(array) {
-        for (let i = array.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [array[i], array[j]] = [array[j], array[i]];
-        }
-        return array;
+      for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+      }
+      return array;
     }
 
-    // Charger les questions
     function loadQuestions() {
-        questions = shuffleArray([...gameData.questions]);
-        showQuestion();
+      questions = shuffleArray([...gameData.questions]);
+      showQuestion();
     }
 
-    // Afficher la question actuelle
     function showQuestion() {
-        const question = questions[currentQuestionIndex];
-        questionText.textContent = question.frase;
-        resultDiv.innerHTML = '';
-
-        // Réactive les boutons pour la nouvelle question
-        btnFato.disabled = false;
-        btnFalso.disabled = false;
+      const question = questions[currentQuestionIndex];
+      questionText.textContent = question.frase;
+      resultDiv.innerHTML = '';
+      btnFato.disabled = false;
+      btnFalso.disabled = false;
+      btnProxima.style.display = 'none';
     }
 
-    // Vérifier la réponse
-    function checkAnswer(reponse) {
-        const question = questions[currentQuestionIndex];
+    function checkAnswer(resposta) {
+      const question = questions[currentQuestionIndex];
+      btnFato.disabled = true;
+      btnFalso.disabled = true;
 
-        // Désactive les boutons dès que l'utilisateur répond
-        btnFato.disabled = true;
-        btnFalso.disabled = true;
+      if (resposta === question.correta) {
+        resultDiv.innerHTML = `<p style="color: green;">✅ Correcte! ${question.explicacao}</p>`;
+      } else {
+        resultDiv.innerHTML = `<p style="color: red;">❌ Incorrect! ${question.explicacao}</p>`;
+      }
 
-        if (reponse === question.correta) {
-            resultDiv.innerHTML = `<p style="color: green;">✅ Correct ! ${question.explicacao}</p>`;
-        } else {
-            resultDiv.innerHTML = `<p style="color: red;">❌ Faux ! ${question.explicacao}</p>`;
-        }
-
-        setTimeout(() => {
-            currentQuestionIndex = (currentQuestionIndex + 1) % questions.length;
-            showQuestion();
-        }, 5000);
+      btnProxima.style.display = 'block';
     }
 
-    // Événements des boutons
+    function showNextQuestion() {
+      currentQuestionIndex = (currentQuestionIndex + 1) % questions.length;
+      showQuestion();
+    }
+
+    // Eventos dos botões
     btnFato.addEventListener('click', () => checkAnswer('Fato'));
     btnFalso.addEventListener('click', () => checkAnswer('Falso'));
 
-    // Pop-up
+    // Pop-up de regras
     function openPopup() {
-        document.getElementById("popup").style.display = "block";
+      document.getElementById("popup").style.display = "block";
     }
 
     function closePopup() {
-        document.getElementById("popup").style.display = "none";
+      document.getElementById("popup").style.display = "none";
     }
 
-    // Fermer le pop-up en cliquant en dehors
     window.onclick = function (event) {
-        let popup = document.getElementById("popup");
-        if (event.target === popup) {
-            popup.style.display = "none";
-        }
+      const popup = document.getElementById("popup");
+      if (event.target === popup) {
+        popup.style.display = "none";
+      }
     };
 
-    // Démarrer le jeu au chargement de la page
     window.onload = loadQuestions;
 
 </script>

@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="hi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bebedeira Games</title>
+    <link rel="stylesheet" type="text/css" href="../../stylesCards.css">
+</head>
+
+<body>
+<div class="game-container">
+    <!-- Menu -->
+    <nav class="menu">
+        <a href="../menuHi.html" class="menu-title" style="position: relative;">
+            <div class="voltar-container" onclick="window.location.href='../menuPtBr.html'">
+                &#8678; <!-- Ye hai ← -->
+            </div>
+            <img class="logo-bebedeira" src="../images/logo.png" alt="Bebedeira Logo" />
+        </a>
+    </nav>
+
+    <!-- Game content -->
+    <h1>
+        <a href="intimidade.html">Intimacy</a>
+    </h1>
+    <h3>Dive</h3>
+    <div>
+        <a href="#" onclick="openPopup()">
+            <img class="img-regras" src="../images/regras.png" alt="Rules" />
+        </a>
+        <h4>Rules</h4>
+    </div>
+
+    <!-- Rules popup -->
+    <div id="popup" class="popup">
+        <div class="popup-content">
+            <div class="popup-header">
+                <h2>Game ke Rules</h2>
+                <span class="close" onclick="closePopup()">&times;</span>
+                <h5>Shuruaat <br> Dive</h5>
+            </div>
+            <ul>
+                <li>Is stage mein, chhote challenges hain jo hafte mein ek baar karne hain.</li>
+                <li>Yeh stage 2 ke saath bhi kiya ja sakta hai.</li>
+                <li>Maza karo! 🍻</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="card-frase">
+        <p id="questionMergulho"></p>
+        <ul id="optionsList" class="options-list"></ul>
+    </div>
+
+    <div class="button-container">
+        <button onclick="nextQuestion()">Next Question</button>
+    </div>
+    <div id="result"></div>
+</div>
+
+<!-- Answer popup -->
+<div id="answerPopup" class="popup">
+    <div class="popup-content">
+        <span class="close" onclick="closeAnswerPopup(); popup()">&times;</span>
+        <h2>Answer</h2>
+        <p id="answerText">Pehle kisi sawal pe click karo!</p>
+    </div>
+</div>
+
+<script>
+    // JSON embedded directly
+    const questionData = {
+        questions: [
+            "Agar hum dono milke tattoo banwayein, toh kya banwayenge? Ek doosre pe draw karo.",
+            "'Vale night' waalon ke creators se ab 'vale day' aaya hai. Apne partner ke liye ek surprise day plan banao. Woh din akela bitayega. (Aram se! Yaad aana relationship ke liye acha hota hai).",
+            "Sab kuch rok do aur ek lamba, pyaara, jazbaati kiss do! Roz thoda thoda add karo kiss mein.",
+            "Ek pyaar bhara gaana ya kavita likho aur ek dusre ko sunao/gaao. Tumhare paas 5 minute hain likhne ke liye, fir sunao ya padh ke dikhao.",
+            "Couple playlist banao, apni favorite songs chuno aur creative naam do usko.",
+            "Contemplation exercise: Aankhon mein aankhon daal ke khade ho jao, ek doosre ke body parts ki tareef karo. Chaaho toh haath se touch bhi kar sakte ho.",
+            "Role swap karo: Ek din ke liye ek doosra ka pyaar, affection, attitude express karo jaise wo karta hai.",
+            "Ek challenge banao jo poore hafte complete karna hai. Saath milke prize decide karo.",
+            "Purani batein yaad karo: Whatsapp, Instagram, Facebook ya photo gallery ke purane chats dekho, aur dekho kya badla hai tabse.",
+            "Apna pehla date dubara create karo. Apni creativity dikhayo ki wo din kaisa tha.",
+            "Haath milao ya rassi se baandh lo aur kuch minutes aise hi bitao. Koi kaam karo jaise cooking, khana, ya dance. Teamwork ka maza lo.",
+            "Naya hobby choose karo jo dono milke karen, weekly ya fortnightly. Jaise forro dance, pottery, painting, ek saath kitab padhna ya movie dekhna.",
+            "Ek agreement banao aur likho apne relationship ke sabse important rules. Kahin aise jagah chipka do jo hamesha dikhai de (fridge jaise).",
+            "Ready ho ek doosre ki nazron mein khud ko dekhne ke liye? Mobile lo aur ek doosre ki photo session karo (kam se kam 10 photos). Thoda shy feel karna normal hai. Enjoy karo!",
+            "Poora din bina phone ke bitao. Phir likho ki experience kaisa raha. Apne feelings ko words mein badlo.",
+            "Nazar ki takat: Bas aankhon se ek doosre ko flirt karo.",
+            "Aapas mein face to face baitho, haath pakdo aur aankhon mein aankhon daalo. Gehri saans lo aur relax ho jao. Baad mein baat karo ki experience kaisa tha.",
+            "Teacher aur student ka role play karo. Har ek apni koi skill doosre ko sikhane ki koshish kare.",
+            "Ek series, movie ya show chun ke saath dekho. Apni apni thoughts share karo.",
+            "Alag alag apne future ka drawing banao, ek doosre ke liye. Baad mein apne thoughts discuss karo!"
+        ]
+    };
+
+    let questions = [];
+    let currentQuestion = 0;
+
+    // Shuffle and load questions
+    function loadQuestions() {
+        questions = shuffleArray(questionData.questions);
+        nextQuestion();
+    }
+
+    // Shuffle array helper
+    function shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array;
+    }
+
+    // Show next question
+    function nextQuestion() {
+        if (questions.length === 0) {
+            document.getElementById("questionMergulho").textContent = "Loading questions...";
+            return;
+        }
+
+        if (currentQuestion < questions.length) {
+            document.getElementById("questionMergulho").textContent = questions[currentQuestion];
+            document.getElementById("result").textContent = "";
+            currentQuestion++;
+        } else {
+            document.getElementById("questionMergulho").textContent = "Game over! Hope you enjoyed! Play again?";
+            document.getElementById("result").textContent = "";
+            currentQuestion = 0;
+            questions = shuffleArray(questions);
+        }
+    }
+
+    // Popup functions
+    function openPopup() {
+        document.getElementById("popup").style.display = "block";
+    }
+
+    function closePopup() {
+        document.getElementById("popup").style.display = "none";
+    }
+
+    function closeAnswerPopup() {
+        document.getElementById("answerPopup").style.display = "none";
+    }
+
+    window.onclick = function (event) {
+        const popup = document.getElementById("popup");
+        if (event.target === popup) {
+            popup.style.display = "none";
+        }
+    };
+
+    // Start game on load
+    loadQuestions();
+</script>
+</body>
+
+</html>

@@ -1,0 +1,1462 @@
+<!DOCTYPE html>
+<html lang="hi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="../../stylesCards.css">
+    <title>Bebedeira Games</title>
+</head>
+
+<body>
+
+<div class="game-container">
+    <!-- Menu -->
+    <nav class="menu">
+        <a href="../menuHi.html" class="menu-title" style="position: relative;">
+            <div class="voltar-container" onclick="window.location.href='../menuPtBr.html'">
+                &#8678; <!-- Ye hai ← -->
+            </div>
+            <img class="logo-bebedeira" src="../images/logo.png" alt="bebedeira Logo" />
+        </a>
+    </nav>
+
+    <!-- Game content -->
+
+    <div>
+        <h1>Pehle ya Baad Mein?</h1>
+        <a href="#" onclick="openPopup()">
+            <img class="img-regras" src="../images/regras.png" alt="Rules" />
+        </a>
+        <h4>Rules</h4>
+    </div>
+
+    <!-- Pop-up -->
+    <div id="popup" class="popup">
+        <div class="popup-content">
+            <div class="popup-header">
+                <h2>Game ke Rules</h2>
+                <span class="close" onclick="closePopup()">&times;</span>
+            </div>
+            <ul>
+                <li>Do itihaas ke facts diye jayenge</li>
+                <li>Aapko decide karna hai ki event pehle hua ya baad mein</li>
+                <li>Agar sahi jawab diya, badhai ho!</li>
+                <li>Galat ho gaya, ek shot lo</li>
+                <li>Masti karo! 🍻</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="card-frase">
+        <p id="questionAntesOuDepois"></p>
+    </div>
+    <div class="button-container-antes-ou-depois">
+        <button class="btn-antes" onclick="antes()">Pehle</button>
+        <button class="btn-depois" onclick="depois()">Baad</button>
+    </div>
+
+    <div id="result"></div>
+</div> <!-- Fecha div.game-container -->
+
+<script>
+    // Dados históricos embutidos
+    const fatos = [
+        {
+            "evento": "Misr ki ekta Menes ne ki",
+            "ano": -3100
+        },
+        {
+            "evento": "Giza ki badi pyramid complete hui",
+            "ano": -2560
+        },
+        {
+            "evento": "Babylon mein Hammurabi ka raj shuru hua",
+            "ano": -1792
+        },
+        {
+            "evento": "Greece mein pehli Olympics hui",
+            "ano": -776
+        },
+        {
+            "evento": "Rome ki sthapna (kahani ke mutabik)",
+            "ano": -753
+        },
+        {
+            "evento": "Roman Republic shuru hui",
+            "ano": -509
+        },
+        {
+            "evento": "Greeks aur Persians ki Marathon ki ladai",
+            "ano": -490
+        },
+        {
+            "evento": "Thermopylae ki ladai",
+            "ano": -480
+        },
+        {
+            "evento": "Alexander the Great ne Macedonia ki takht sambhali",
+            "ano": -336
+        },
+        {
+            "evento": "Julius Caesar ki hatya",
+            "ano": -44
+        },
+        {
+            "evento": "Milan ka edict (Roman Empire mein dharmik azaadi)",
+            "ano": 313
+        },
+        {
+            "evento": "Western Roman Empire ka patan",
+            "ano": 476
+        },
+        {
+            "evento": "Muhammad ki Hijra (Islamic calendar ki shuruat)",
+            "ano": 622
+        },
+        {
+            "evento": "Poitiers ki ladai (Charles Martel ne Moors ko haraya)",
+            "ano": 732
+        },
+        {
+            "evento": "Charlemagne ka rajgaddi par baithna",
+            "ano": 800
+        },
+        {
+            "evento": "East-West Church ka split (Catholic aur Orthodox)",
+            "ano": 1054
+        },
+        {
+            "evento": "Hastings ki ladai",
+            "ano": 1066
+        },
+        {
+            "evento": "Pehli Crusade ki shuruat",
+            "ano": 1096
+        },
+        {
+            "evento": "Magna Carta par hastakshar hua",
+            "ano": 1215
+        },
+        {
+            "evento": "Black Death ne Europe ko tabah kiya",
+            "ano": 1347
+        },
+        {
+            "evento": "Constantinople gir gaya",
+            "ano": 1453
+        },
+        {
+            "evento": "Columbus America pohcha",
+            "ano": 1492
+        },
+        {
+            "evento": "Tordesillas ka treaty hua",
+            "ano": 1494
+        },
+        {
+            "evento": "Luther ne Protestant Reformation shuru ki",
+            "ano": 1517
+        },
+        {
+            "evento": "Hernán Cortés ne Aztec Empire ko gira diya",
+            "ano": 1521
+        },
+        {
+            "evento": "Anglican Church bani",
+            "ano": 1534
+        },
+        {
+            "evento": "Jesuits Brazil aaye",
+            "ano": 1549
+        },
+        {
+            "evento": "Spanish Armada ko hara diya gaya",
+            "ano": 1588
+        },
+        {
+            "evento": "Gunpowder Plot ki koshish England mein",
+            "ano": 1605
+        },
+        {
+            "evento": "Thirty Years War shuru hui",
+            "ano": 1618
+        },
+        {
+            "evento": "USA ki azadi mili",
+            "ano": 1776
+        },
+        {
+            "evento": "French Revolution shuru hui",
+            "ano": 1789
+        },
+        {
+            "evento": "Napoleon France ka leader bana",
+            "ano": 1799
+        },
+        {
+            "evento": "Napoleon Emperor bana",
+            "ano": 1804
+        },
+        {
+            "evento": "Waterloo ki ladai",
+            "ano": 1815
+        },
+        {
+            "evento": "Brazil ne azadi hasil ki",
+            "ano": 1822
+        },
+        {
+            "evento": "July Revolution France mein hui",
+            "ano": 1830
+        },
+        {
+            "evento": "Victoria era UK mein shuru hui",
+            "ano": 1837
+        },
+        {
+            "evento": "Springtime of Nations (logon ki kranti)",
+            "ano": 1848
+        },
+        {
+            "evento": "American Civil War shuru hui",
+            "ano": 1861
+        },
+        {
+            "evento": "USA mein slavery khatam hui",
+            "ano": 1865
+        },
+        {
+            "evento": "Germany ek hua",
+            "ano": 1871
+        },
+        {
+            "evento": "Brazil mein slavery khatam hui (Lei Áurea)",
+            "ano": 1888
+        },
+        {
+            "evento": "Lumière brothers ne pehla cinema dikhaya",
+            "ano": 1895
+        }, {
+            "ano": "1914",
+            "evento": "Pehli Vishv Yudh ki shuruat"
+        },
+        {
+            "ano": "1917",
+            "evento": "Russian Kranti"
+        },
+        {
+            "ano": "1918",
+            "evento": "Pehli Vishv Yudh ka ant"
+        },
+        {
+            "ano": "1929",
+            "evento": "New York Stock Market crash"
+        },
+        {
+            "ano": "1933",
+            "evento": "Hitler ne Germany ki sarkar sambhali"
+        },
+        {
+            "ano": "1939",
+            "evento": "Dusri Vishv Yudh ki shuruat"
+        },
+        {
+            "ano": "1941",
+            "evento": "Japan ne Pearl Harbor par hamla kiya"
+        },
+        {
+            "ano": "1945",
+            "evento": "Hiroshima aur Nagasaki par atomic bomb giraayi gayi"
+        },
+        {
+            "ano": "1945",
+            "evento": "United Nations ka sthaapan"
+        },
+        {
+            "ano": "1948",
+            "evento": "Israel desh ki sthaapna"
+        },
+        {
+            "ano": "1953",
+            "evento": "Stalin ki maut"
+        },
+        {
+            "ano": "1959",
+            "evento": "Cuban Kranti"
+        },
+        {
+            "ano": "1961",
+            "evento": "Berlin ki deewar bani"
+        },
+        {
+            "ano": "1963",
+            "evento": "John F. Kennedy ki hatya"
+        },
+        {
+            "ano": "1964",
+            "evento": "Brazil mein military coup"
+        },
+        {
+            "ano": "1969",
+            "evento": "Neil Armstrong chaand par utare"
+        },
+        {
+            "ano": "1973",
+            "evento": "Tel ki sankat"
+        },
+        {
+            "ano": "1975",
+            "evento": "Vietnam Yudh ka ant"
+        },
+        {
+            "ano": "1980",
+            "evento": "John Lennon ki hatya"
+        },
+        {
+            "ano": "1985",
+            "evento": "Gorbachev ne USSR ki sarkar sambhali"
+        },
+        {
+            "ano": "1989",
+            "evento": "Berlin ki deewar gir gayi"
+        },
+        {
+            "ano": "1991",
+            "evento": "Soviet Union ka ant"
+        },
+        {
+            "ano": "1994",
+            "evento": "Nelson Mandela South Africa ke rashtrapati bane"
+        },
+        {
+            "ano": "1998",
+            "evento": "Bill Clinton ka impeachment pass hua"
+        },
+        {
+            "ano": "1999",
+            "evento": "Portugal ne Macau China ko wapas kiya"
+        },
+        {
+            "ano": "2001",
+            "evento": "9/11 attacks"
+        },
+        {
+            "ano": "2003",
+            "evento": "USA ne Iraq par hamla kiya"
+        },
+        {
+            "ano": "2004",
+            "evento": "South East Asia mein tsunami, 2.3 lakh se zyada log mare"
+        },
+        {
+            "ano": "2008",
+            "evento": "Global financial crisis"
+        },
+        {
+            "ano": "2009",
+            "evento": "Barack Obama USA ke rashtrapati bane"
+        },
+        {
+            "ano": "2011",
+            "evento": "Arab Spring"
+        },
+        {
+            "ano": "2013",
+            "evento": "Pope Francis ka election"
+        },
+        {
+            "ano": "2014",
+            "evento": "Ukraine (Crimea) mein yudh shuru"
+        },
+        {
+            "ano": "2016",
+            "evento": "Dilma Rousseff ka impeachment"
+        },
+        {
+            "ano": "2019",
+            "evento": "Notre-Dame Cathedral mein aag lagi"
+        },
+        {
+            "ano": "2020",
+            "evento": "COVID-19 pandemic ki shuruat"
+        },
+        {
+            "ano": "2021",
+            "evento": "Global COVID-19 vaccination campaign"
+        },
+        {
+            "ano": "2022",
+            "evento": "Russia ne Ukraine par hamla kiya"
+        },
+        {
+            "ano": "2023",
+            "evento": "ChatGPT duniya bhar mein famous hua"
+        },
+        {
+            "ano": "2023",
+            "evento": "Turkey aur Syria mein bhayanak bhukamp"
+        },
+        {
+            "ano": "2024",
+            "evento": "USA mein poora solar eclipse"
+        },
+        {
+            "ano": "2024",
+            "evento": "Paris Olympics"
+        },
+        {
+            "ano": "2025",
+            "evento": "NASA ki Artemis II mission, chaand par wapas"
+        },
+        {
+            "ano": "1859",
+            "evento": "Darwin ki 'Origin of Species' publish hui"
+        },
+        {
+            "ano": "1920",
+            "evento": "League of Nations ka sthaapan"
+        },
+        {
+            "ano": "1947",
+            "evento": "India ki azaadi"
+        },
+        {
+            "ano": "1986",
+            "evento": "Chernobyl nuclear disaster"
+        },
+        {
+            "ano": "1990",
+            "evento": "Germany ki reunification"
+        },
+        {
+            "ano": "2007",
+            "evento": "Pehla iPhone launch hua"
+        },
+        {
+            "ano": "2010",
+            "evento": "Tunisia mein Arab Spring shuru hui"
+        },
+        {
+            "ano": "2012",
+            "evento": "Higgs boson ki khoj"
+        },
+        {
+            "ano": "2015",
+            "evento": "Paris climate agreement"
+        },
+        {
+            "ano": "2016",
+            "evento": "Brexit: UK ne EU chhodne ka faisla kiya"
+        },
+        {
+            "ano": "2018",
+            "evento": "Thailand mein cave mein fasa bacchon ka rescue hua"
+        },
+        {
+            "ano": "2021",
+            "evento": "US Capitol par hamla hua"
+        },
+        {
+            "ano": "2022",
+            "evento": "Queen Elizabeth II ki maut"
+        },
+        {
+            "ano": "1274 BCE",
+            "evento": "Kadesh ki ladai: Egypt aur Hittites ke beech"
+        },
+        {
+            "ano": "1000 BCE",
+            "evento": "Jerusalem ki mythic sthapna David ne ki"
+        },
+        {
+            "ano": "539 BCE",
+            "evento": "Cyrus the Great ne Babylon par kabza kiya"
+        },
+        {
+            "ano": "27 BCE",
+            "evento": "Roman Empire ki shuruat Augustus ke saath"
+        },
+        {
+            "ano": "70",
+            "evento": "Jerusalem ka Second Temple destroy hua"
+        },
+        {
+            "ano": "212",
+            "evento": "Caracalla ka edict: sab free aadmiyon ko Roman citizenship mili"
+        },
+        {
+            "ano": "410",
+            "evento": "Rome ko Visigoths ne loot liya"
+        },
+        {
+            "ano": "732",
+            "evento": "Charles Martel ne Moors ko Tours ki ladai mein haraya"
+        },
+        {
+            "ano": "793",
+            "evento": "Vikings ne Lindisfarne monastery par hamla kiya"
+        },
+        {
+            "ano": "1095",
+            "evento": "Pope Urban II ne Pehli Crusade bulayi"
+        },
+        {
+            "ano": "1440",
+            "evento": "Gutenberg ne movable type printing invent kiya"
+        },
+        {
+            "ano": "1488",
+            "evento": "Bartolomeu Dias ne Cape of Good Hope ka chakkar lagaya"
+        },
+        {
+            "ano": "1498",
+            "evento": "Vasco da Gama India pohcha"
+        },
+        {
+            "ano": "1500",
+            "evento": "Pedro Álvares Cabral ne Brazil discover kiya"
+        },
+        {
+            "ano": "1519",
+            "evento": "Fernão de Magalhães ne duniya ka chakkar lagana shuru kiya"
+        },
+        {
+            "ano": "1532",
+            "evento": "São Vicente ki sthapna, Brazil ki pehli colony"
+        },
+        {
+            "ano": "1536",
+            "evento": "Portuguese Inquisition shuru hui"
+        },
+        {
+            "ano": "1555",
+            "evento": "Peace of Augsburg ne Lutheranism ko Holy Roman Empire mein manzoor kiya"
+        },
+        {
+            "ano": "1580",
+            "evento": "Portugal aur Spain ka Iberian Union"
+        },
+        {
+            "ano": "1607",
+            "evento": "Jamestown colony ki sthapna (USA)"
+        },
+        {
+            "ano": "1640",
+            "evento": "Portugal ne apni azadi wapas paayi"
+        },
+        {
+            "ano": "1648",
+            "evento": "Treaty of Westphalia ne Thirty Years War ko khatam kiya"
+        },
+        {
+            "ano": "1666",
+            "evento": "Great Fire of London"
+        },
+        {
+            "ano": "1687",
+            "evento": "Isaac Newton ne Principia Mathematica publish kiya"
+        },
+        {
+            "ano": "1703",
+            "evento": "Saint Petersburg ki sthapna"
+        },
+        {
+            "ano": "1756",
+            "evento": "Seven Years War ki shuruat"
+        },
+        {
+            "ano": "1769",
+            "evento": "James Watt ne steam engine invent kiya"
+        },
+        {
+            "ano": "1770",
+            "evento": "Boston Massacre hua"
+        },
+        {
+            "ano": "1781",
+            "evento": "Yorktown ki ladai mein America ki jeet"
+        },
+        {
+            "ano": "1787",
+            "evento": "US Constitution likhi gayi"
+        },
+        {
+            "ano": "1807",
+            "evento": "Portuguese royal family Brazil bhaagi"
+        },
+        {
+            "ano": "1810",
+            "evento": "Latin America ki azaadi ki shuruat"
+        },
+        {
+            "ano": "1824",
+            "evento": "Brazil ki pehli constitution bani"
+        },
+        {
+            "ano": "1831",
+            "evento": "Dom Pedro I ne rajgaddi chhodi"
+        },
+        {
+            "ano": "1840",
+            "evento": "Victorian era shuru hui"
+        },
+        {
+            "ano": "1844",
+            "evento": "Samuel Morse ne telegraph invent kiya"
+        },
+        {
+            "ano": "1853",
+            "evento": "Crimean War shuru hui"
+        },
+        {
+            "ano": "1859",
+            "evento": "Italian unification ki shuruat"
+        },
+        {
+            "ano": "1863",
+            "evento": "USA mein Emancipation Proclamation jari hui"
+        },
+        {
+            "ano": "1885",
+            "evento": "Berlin Conference hui (Africa ka partition)"
+        },
+        {
+            "ano": 1903,
+            "evento": "Wright brothers ne pehla flight kiya"
+        },
+        {
+            "ano": 1905,
+            "evento": "Einstein ne Special Relativity Theory di"
+        },
+        {
+            "ano": 1912,
+            "evento": "Titanic dooba"
+        },
+        {
+            "ano": 1917,
+            "evento": "Balfour Declaration (Jewish state ke support mein)"
+        },
+        {
+            "ano": 1920,
+            "evento": "Pehli commercial radio broadcast hui"
+        },
+        {
+            "ano": 1928,
+            "evento": "Alexander Fleming ne penicillin dhoondha"
+        },
+        {
+            "ano": 1930,
+            "evento": "Brazil mein 1930 kranti hui"
+        },
+        {
+            "ano": 1937,
+            "evento": "Spanish Civil War mein Guernica bombing hui"
+        },
+        {
+            "ano": 1944,
+            "evento": "D-Day: Normandy mein landings"
+        },
+
+        {
+            "ano": 1949,
+            "evento": "NATO ki sthaapna hui."
+        },
+        {
+            "ano": 1950,
+            "evento": "Korean Jung ka aarambh hua."
+        },
+        {
+            "ano": 1955,
+            "evento": "Warsaw Pact banaya gaya."
+        },
+        {
+            "ano": 1957,
+            "evento": "USSR ne Sputnik launch kiya."
+        },
+        {
+            "ano": 1959,
+            "evento": "Barbie doll launch hui."
+        },
+        {
+            "ano": 1962,
+            "evento": "Cuba missile crisis hui."
+        },
+        {
+            "ano": 1967,
+            "evento": "Six-Day War hui."
+        },
+        {
+            "ano": 1968,
+            "evento": "France mein May student protests hue."
+        },
+        {
+            "ano": 1971,
+            "evento": "Email ka invention hua."
+        },
+        {
+            "ano": 1972,
+            "evento": "Watergate scandal shuru hua."
+        },
+        {
+            "ano": 1979,
+            "evento": "Iran mein Islamic Revolution hui."
+        },
+        {
+            "ano": 1981,
+            "evento": "AIDS ka pehla documented case mila."
+        },
+        {
+            "ano": 1982,
+            "evento": "Falklands War hui."
+        },
+        {
+            "ano": 1984,
+            "evento": "Apple ne Macintosh launch kiya."
+        },
+        {
+            "ano": 1989,
+            "evento": "China mein Tiananmen Square massacre hua."
+        },
+        {
+            "ano": 1990,
+            "evento": "Nelson Mandela ko jail se chhoda gaya."
+        },
+        {
+            "ano": 1992,
+            "evento": "Rio Earth Summit (UN Climate Conference) hui."
+        },
+        {
+            "ano": 1993,
+            "evento": "Oslo Agreement sign hua Israel aur Palestine ke beech."
+        },
+        {
+            "ano": 1997,
+            "evento": "Princess Diana ki maut hui."
+        },
+        {
+            "ano": 1999,
+            "evento": "Euro currency start hui."
+        },
+        {
+            "ano": 2000,
+            "evento": "Digital era shuru hui (internet popular hua)."
+        },
+        {
+            "ano": 2005,
+            "evento": "YouTube launch hua."
+        },
+        {
+            "ano": 2007,
+            "evento": "US housing market crash hua."
+        },
+        {
+            "ano": 2010,
+            "evento": "Haiti earthquake mein 2 lakh se zyada log mare."
+        },
+        {
+            "ano": 2011,
+            "evento": "Osama Bin Laden ki death hui."
+        },
+        {
+            "ano": 2012,
+            "evento": "Curiosity rover Mars par land hua."
+        },
+        {
+            "ano": 2013,
+            "evento": "Brazil mein June protests hue."
+        },
+        {
+            "ano": 2015,
+            "evento": "Iran ke saath nuclear deal hui."
+        },
+        {
+            "ano": 2017,
+            "evento": "Cambridge Analytica scandal expose hua."
+        },
+        {
+            "ano": 2018,
+            "evento": "Jair Bolsonaro Brazil ka president bana."
+        },
+        {
+            "ano": 2020,
+            "evento": "George Floyd ki death hui, Black Lives Matter protests chale."
+        },
+        {
+            "ano": 1901,
+            "evento": "Pehli transatlantic radio transmission hui."
+        },
+        {
+            "ano": 1927,
+            "evento": "Pehla talkie film 'The Jazz Singer' release hua."
+        },
+        {
+            "ano": 1936,
+            "evento": "Jesse Owens ne Nazi Olympics mein dhamaka kiya."
+        },
+        {
+            "ano": 1960,
+            "evento": "OPEC ki sthaapna hui."
+        },
+        {
+            "ano": 1970,
+            "evento": "Greenpeace start hua."
+        },
+        {
+            "ano": 1995,
+            "evento": "Windows 95 launch hua."
+        },
+        {
+            "ano": 2001,
+            "evento": "Wikipedia launch hui."
+        },
+        {
+            "ano": 2006,
+            "evento": "Twitter ka launch hua."
+        },
+        {
+            "ano": 2016,
+            "evento": "Dilma Rousseff ka impeachment hua."
+        },
+        {
+            "ano": 2021,
+            "evento": "Private space missions jaise SpaceX shuru hua."
+        },
+        {
+            "ano": 1891,
+            "evento": "Brazil ki pehli republican constitution bani."
+        },
+        {
+            "ano": 1932,
+            "evento": "São Paulo mein Constitutional Revolution hui."
+        },
+        {
+            "ano": 1942,
+            "evento": "Brazil ne WWII mein hissa liya."
+        },
+        {
+            "ano": 1956,
+            "evento": "Brasília ki construction shuru hui."
+        },
+        {
+            "ano": 1960,
+            "evento": "Brasília officially inaugurate hui."
+        },
+        {
+            "ano": 1985,
+            "evento": "Brazil mein military dictatorship khatam hui."
+        },
+        {
+            "ano": 1988,
+            "evento": "Brazil ki new constitution banayi gayi."
+        },
+        {
+            "ano": 1992,
+            "evento": "Fernando Collor ka impeachment hua."
+        },
+        {
+            "ano": 2002,
+            "evento": "Lula Brazil ka president bana."
+        },
+        {
+            "ano": 2022,
+            "evento": "Lula ne Brazil ka third term jeeta."
+        },
+        {
+            "ano": 509,
+            "evento": "Rome mein monarchy khatam hui, republic start hui."
+        },
+        {
+            "ano": 490,
+            "evento": "Battle of Marathon hui."
+        },
+        {
+            "ano": 480,
+            "evento": "Battle of Thermopylae hui."
+        },
+        {
+            "ano": 323,
+            "evento": "Alexander the Great ki maut hui."
+        },
+        {
+            "ano": 146,
+            "evento": "Rome ne Carthage ko destroy kiya (Punic Wars khatam)."
+        },
+        {
+            "ano": 44,
+            "evento": "Julius Caesar assassinate hua."
+        },
+        {
+            "ano": 27,
+            "evento": "Octavian Augustus ne Roman Empire start kiya."
+        },
+        {
+            "ano": 64,
+            "evento": "Great fire of Rome hua."
+        },
+        {
+            "ano": 79,
+            "evento": "Vesuvius volcano ne Pompeii destroy kiya."
+        },
+        {
+            "ano": 117,
+            "evento": "Roman Empire apne peak par tha under Trajan."
+        },
+        {
+            "ano": 284,
+            "evento": "Diocletian ne Roman Empire ko divide kiya."
+        },
+        {
+            "ano": 313,
+            "evento": "Edict of Milan ne Christianity legal banayi."
+        },
+        {
+            "ano": 380,
+            "evento": "Christianity Rome ki official religion bani."
+        },
+        {
+            "ano": 395,
+            "evento": "Roman Empire permanently divided hua (East aur West)."
+        },
+        {
+            "ano": 476,
+            "evento": "Western Roman Empire collapse hua."
+        },
+        {
+            "ano": 622,
+            "evento": "Hijra hui, Muhammad Medina chale gaye (Islamic calendar start)."
+        },
+        {
+            "ano": 711,
+            "evento": "Muslim invasion of Iberian Peninsula hui."
+        },
+        {
+            "ano": 800,
+            "evento": "Charlemagne ko emperor banaya gaya."
+        },
+        {
+            "ano": 962,
+            "evento": "Holy Roman Empire ki sthaapna hui."
+        },
+        {
+            "ano": 1066,
+            "evento": "Battle of Hastings hui (Norman invasion England mein)."
+        },
+        {
+            "ano": 1300,
+            "evento": "Italy mein Renaissance shuru hua."
+        },
+        {
+            "ano": 1347,
+            "evento": "Black Death Europe pahunchi."
+        },
+        {
+            "ano": 1378,
+            "evento": "Western Schism shuru hua (do papa ek saath)."
+        },
+        {
+            "ano": 1415,
+            "evento": "Portuguese ne Ceuta ko jeeta."
+        },
+        {
+            "ano": 1431,
+            "evento": "Joan of Arc ko jalakar maara gaya."
+        },
+        {
+            "ano": 1453,
+            "evento": "Ottoman Turks ne Constantinople jeeta."
+        },
+        {
+            "ano": 1492,
+            "evento": "Christopher Columbus America pahucha."
+        },
+        {
+            "ano": 1501,
+            "evento": "Safavid dynasty Persia mein shuru hui."
+        },
+        {
+            "ano": 1517,
+            "evento": "Martin Luther ne 95 Theses lagayi."
+        },
+        {
+            "ano": 1534,
+            "evento": "Acts of Supremacy (Henry VIII ne Catholic Church se alag hua)."
+        },
+        {
+            "ano": 1543,
+            "evento": "Copernicus ne heliocentric theory publish ki."
+        },
+        {
+            "ano": 1498,
+            "evento": "Vasco da Gama India pahucha."
+        },
+        {
+            "ano": 1513,
+            "evento": "Vasco Núñez de Balboa ne Pacific Ocean dekha."
+        },
+        {
+            "ano": 1519,
+            "evento": "Ferdinand Magellan ne duniya ka chakkar lagana shuru kiya."
+        },
+        {
+            "ano": 1521,
+            "evento": "Hernán Cortés ne Aztec Empire jeeta."
+        },
+        {
+            "ano": 1533,
+            "evento": "Francisco Pizarro ne Inca Empire jeeta."
+        },
+        {
+            "ano": 1577,
+            "evento": "Francis Drake ne duniya ka safar shuru kiya."
+        },
+        {
+            "ano": 1606,
+            "evento": "Willem Janszoon ne Australia discover kiya."
+        },
+        {
+            "ano": 1642,
+            "evento": "Abel Tasman ne New Zealand discover kiya."
+        },
+        {
+            "ano": 1770,
+            "evento": "James Cook ne Australia ki east coast dekhi."
+        },
+        {
+            "ano": 1820,
+            "evento": "Antarctica discover hua."
+        },
+        {
+            "ano": 1909,
+            "evento": "Robert Peary ne North Pole tak pahunch gaye."
+        },
+        {
+            "ano": 1911,
+            "evento": "Roald Amundsen ne South Pole tak pahunch gaye."
+        },
+        {
+            "ano": 1953,
+            "evento": "Edmund Hillary aur Tenzing Norgay ne Mount Everest chadha."
+        },
+        {
+            "ano": 1969,
+            "evento": "Neil Armstrong ne chandrama par pehla kadam rakha."
+        },
+        {
+            "ano": 1971,
+            "evento": "Salyut 1 space station launch hua."
+        },
+        {
+            "ano": 1997,
+            "evento": "Mars Pathfinder ne Mars par landing ki."
+        },
+        {
+            "ano": 2004,
+            "evento": "Cassini spacecraft Saturn ke orbit mein gaya."
+        },
+        {
+            "ano": 2012,
+            "evento": "Curiosity rover Mars par land hua."
+        },
+        {
+            "ano": 2021,
+            "evento": "China ne Mars mission successfully launch kiya."
+        },
+        {
+            "ano": 1602,
+            "evento": "Dutch East India Company bani."
+        },
+        {
+            "ano": 1776,
+            "evento": "Adam Smith ne 'Wealth of Nations' publish kiya."
+        },
+        {
+            "ano": 1792,
+            "evento": "New York Stock Exchange ki sthapna hui."
+        },
+        {
+            "ano": 1865,
+            "evento": "Sweden mein pehla central bank bana."
+        },
+        {
+            "ano": 1929,
+            "evento": "Wall Street crash hua (Great Depression start)."
+        },
+        {
+            "ano": 1944,
+            "evento": "Bretton Woods conference hui."
+        },
+        {
+            "ano": 1971,
+            "evento": "US ne gold standard chhoda."
+        },
+        {
+            "ano": 1989,
+            "evento": "Berlin Wall gira, market khula."
+        },
+        {
+            "ano": 2001,
+            "evento": "BRICS term banaya gaya."
+        },
+        {
+            "ano": 2008,
+            "evento": "Lehman Brothers collapse, financial crisis shuru."
+        },
+        {
+            "ano": 2010,
+            "evento": "Bitcoin digital currency famous hui."
+        },
+        {
+            "ano": 2013,
+            "evento": "China mein QR code se PIX jaisa payment shuru hua."
+        },
+        {
+            "ano": 2020,
+            "evento": "Brazil mein PIX launch hua."
+        },
+        {
+            "ano": 2021,
+            "evento": "Ethereum crypto ne apna record banaya."
+        },
+        {
+            "ano": 2022,
+            "evento": "Global inflation pandemic ke baad badhi."
+        },
+        {
+            "ano": 2023,
+            "evento": "AI ne job market ko impact karna shuru kiya."
+        },
+        {
+            "ano": 2023,
+            "evento": "Nvidia stocks AI boom ke saath upar gaye."
+        },
+        {
+            "ano": 2024,
+            "evento": "Apple bani pehli company jiska market value 4 trillion USD se upar gaya."
+        },
+        {
+            "ano": 2025,
+            "evento": "Global adoption of CBDCs (digital currencies) expected hai."
+        },
+        {
+            "ano": 2025,
+            "evento": "Brazil ne apna real digital 'Drex' launch karne ki planning ki."
+        },
+        {
+            "ano": 1973,
+            "evento": "Pehela mobile phone (Motorola) bana."
+        },
+        {
+            "ano": 1983,
+            "evento": "TCP/IP protocol develop hua."
+        },
+        {
+            "ano": 1989,
+            "evento": "Tim Berners-Lee ne World Wide Web propose kiya."
+        },
+        {
+            "ano": 1991,
+            "evento": "Pehla website online aaya."
+        },
+        {
+            "ano": 1995,
+            "evento": "Windows 95 launch hua."
+        },
+        {
+            "ano": 1997,
+            "evento": "Google start hua."
+        },
+        {
+            "ano": 2004,
+            "evento": "Facebook launch hua."
+        },
+        {
+            "ano": 2005,
+            "evento": "YouTube start hua."
+        },
+        {
+            "ano": 2007,
+            "evento": "Pehla iPhone launch hua."
+        },
+        {
+            "ano": 2009,
+            "evento": "Bitcoin market mein aya."
+        },
+        {
+            "ano": 2010,
+            "evento": "Instagram launch hua."
+        },
+        {
+            "ano": 2011,
+            "evento": "IBM ka Watson Jeopardy! mein insaano se jeeta."
+        },
+        {
+            "ano": 2014,
+            "evento": "Amazon ne Alexa launch kiya."
+        },
+        {
+            "ano": 2015,
+            "evento": "Google ne TensorFlow AI framework launch kiya."
+        },
+        {
+            "ano": 2016,
+            "evento": "AlphaGo ne Go game ka world champion hara diya."
+        },
+        {
+            "ano": 2018,
+            "evento": "EU mein GDPR lagu hua."
+        },
+        {
+            "ano": 2020,
+            "evento": "Pandemic mein Zoom aur online platforms popular hue."
+        },
+        {
+            "ano": 2021,
+            "evento": "OpenAI ne GPT-3 public ke liye launch kiya."
+        },
+        {
+            "ano": 2022,
+            "evento": "ChatGPT viral hua as generative AI."
+        },
+        {
+            "ano": 2023,
+            "evento": "Google ne Gemini launch kiya, ek multimodal AI."
+        },
+        {
+            "ano": 1776,
+            "evento": "American Revolution hui."
+        },
+        {
+            "ano": 1789,
+            "evento": "French Revolution shuru hui."
+        },
+        {
+            "ano": 1804,
+            "evento": "Haitian Revolution ne pehli black republic banayi."
+        },
+        {
+            "ano": 1830,
+            "evento": "France mein July Revolution hui."
+        },
+        {
+            "ano": 1848,
+            "evento": "Europe mein liberal revolutions hui."
+        },
+        {
+            "ano": 1861,
+            "evento": "American Civil War shuru hua."
+        },
+        {
+            "ano": 1871,
+            "evento": "Paris Commune bani."
+        },
+        {
+            "ano": 1917,
+            "evento": "Russian Revolution hui."
+        },
+        {
+            "ano": 1922,
+            "evento": "Atatürk ki Turkey revolution hui."
+        },
+        {
+            "ano": 1936,
+            "evento": "Spanish Civil War hui."
+        },
+        {
+            "ano": 1949,
+            "evento": "China mein Communist Revolution hui."
+        },
+        {
+            "ano": 1959,
+            "evento": "Cuban Revolution hui."
+        },
+        {
+            "ano": 1966,
+            "evento": "Chinese Cultural Revolution shuru hui."
+        },
+        {
+            "ano": 1979,
+            "evento": "Iran mein Islamic Revolution hui."
+        },
+        {
+            "ano": 1989,
+            "evento": "Berlin Wall gira."
+        },
+        {
+            "ano": 1991,
+            "evento": "USSR dissolve hua."
+        },
+        {
+            "ano": 2003,
+            "evento": "US ne Iraq invade kiya."
+        },
+        {
+            "ano": 2010,
+            "evento": "Arab Spring shuru hui."
+        },
+        {
+            "ano": 2014,
+            "evento": "Ukraine conflict start hua (Crimea annexation)."
+        },
+        {
+            "ano": 2022,
+            "evento": "Russia ne Ukraine invade kiya (ongoing war)."
+        },
+        {
+            "ano": 1854,
+            "evento": "Thoreau ki Walden publish hui, ecology ka reference bani."
+        },
+        {
+            "ano": 1962,
+            "evento": "Rachel Carson ki Silent Spring ne modern environmentalism shuru kiya."
+        },
+        {
+            "ano": 1972,
+            "evento": "UN ki pehli environment conference hui."
+        },
+        {
+            "ano": 1987,
+            "evento": "Montreal Protocol ozone layer protection ke liye."
+        },
+        {
+            "ano": 1992,
+            "evento": "ECO-92 (Rio de Janeiro) hui."
+        },
+        {
+            "ano": 1997,
+            "evento": "Kyoto Protocol climate change ke liye sign hua."
+        },
+        {
+            "ano": 2000,
+            "evento": "UN Millennium Development Goals banaye gaye."
+        },
+        {
+            "ano": 2006,
+            "evento": "Al Gore ne An Inconvenient Truth launch kiya."
+        },
+        {
+            "ano": 2015,
+            "evento": "Paris Agreement sign hua."
+        },
+        {
+            "ano": 2019,
+            "evento": "Greta Thunberg ne UN mein speech di."
+        },
+        {
+            "ano": 2020,
+            "evento": "COVID-19 pandemic ne temporarily global emissions reduce kiye."
+        },
+        {
+            "ano": 2021,
+            "evento": "Global energy supply crisis aur warming hui."
+        },
+        {
+            "ano": 2022,
+            "evento": "UN ne clean water access ko human right declare kiya."
+        },
+        {
+            "ano": 2023,
+            "evento": "COP28 mein energy transition aur global targets discuss huye."
+        },
+        {
+            "ano": 2024,
+            "evento": "Brazil ne solar energy generation ka record tod diya."
+        },
+        {
+            "ano": 2025,
+            "evento": "UN predict karta hai critical water shortage 60 countries mein."
+        },
+        {
+            "ano": 2025,
+            "evento": "Global summit AI aur sustainability par plan hua."
+        },
+        {
+            "ano": 2025,
+            "evento": "Amazon rainforest ne tipping point cross kiya isolated areas mein."
+        },
+        {
+            "ano": 2025,
+            "evento": "South America ke countries carbon digital currency banayenge."
+        },
+        {
+            "ano": 2025,
+            "evento": "Helsinki bani pehli city with full carbon neutrality (planned)."
+        }
+    ];
+
+    const btnAntes = document.querySelector('.btn-antes');
+    const btnDepois = document.querySelector('.btn-depois');
+
+    let fatoBase, fatoComparado;
+    let respostaCorreta;
+
+    function gerarPergunta() {
+        if (fatos.length < 2) return;
+
+        let tentativa = 0;
+        do {
+            fatoBase = fatos[Math.floor(Math.random() * fatos.length)];
+            fatoComparado = fatos[Math.floor(Math.random() * fatos.length)];
+            tentativa++;
+        } while ((fatoBase.evento === fatoComparado.evento || fatoBase.ano === fatoComparado.ano) && tentativa < 10);
+
+        document.getElementById("questionAntesOuDepois").innerHTML =
+            `"${fatoComparado.evento}" hua KYA pehle ya baad mein "${fatoBase.evento}" ke?`;
+
+        respostaCorreta = (fatoComparado.ano < fatoBase.ano) ? "antes" : "depois";
+
+        document.getElementById("result").innerHTML = "";
+
+        // Habilita os botões para a nova pergunta
+        btnAntes.disabled = false;
+        btnDepois.disabled = false;
+    }
+
+    function antes() {
+        verificarResposta("antes");
+    }
+
+    function depois() {
+        verificarResposta("depois");
+    }
+
+    function verificarResposta(respostaUsuario) {
+        const result = document.getElementById("result");
+        if (respostaUsuario === respostaCorreta) {
+            result.innerHTML = "✅ Sahi jawab! Badhaai ho!";
+        } else {
+            result.innerHTML = "❌ Galat jawab! Ek drink pee lo 🍻";
+        }
+
+        // Desabilita os botões para evitar múltiplos cliques até a próxima pergunta
+        btnAntes.disabled = true;
+        btnDepois.disabled = true;
+
+        setTimeout(gerarPergunta, 3000);
+    }
+
+    // Abertura e fechamento do popup
+    function openPopup() {
+        document.getElementById("popup").style.display = "block";
+    }
+
+    function closePopup() {
+        document.getElementById("popup").style.display = "none";
+    }
+
+    // Fechar popup clicando fora dele
+    window.onclick = function (event) {
+        const popup = document.getElementById("popup");
+        if (event.target === popup) {
+            popup.style.display = "none";
+        }
+    };
+
+    // Inicia o jogo ao carregar a página
+    window.onload = gerarPergunta;
+
+</script>
+
+</body>
+
+</html>

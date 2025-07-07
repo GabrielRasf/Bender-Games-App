@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="hi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="../../stylesCards.css">
+    <link rel="stylesheet" type="text/css" href="../../cronometro.css">
+    <title>Bebedeira Games</title>
+</head>
+
+<body>
+
+<div class="game-container">
+    <!-- Menu -->
+    <nav class="menu">
+        <a href="../menuHi.html" class="menu-title" style="position: relative;">
+            <div class="voltar-container" onclick="window.location.href='../menuPtBr.html'">
+                &#8678; <!-- Ye hai ← -->
+            </div>
+            <img class="logo-bebedeira" src="../images/logo.png" alt="Bebedeira Logo" />
+        </a>
+    </nav>
+
+    <!-- Game Content -->
+    <div>
+        <h1>Adults ke liye Mime</h1>
+        <a href="#" onclick="openPopup()">
+            <img class="img-regras" src="../images/regras.png" alt="Rules" />
+        </a>
+        <h4>Rules</h4>
+    </div>
+
+    <div class="card-frase">
+        <p id="questionMimicasParaAdultos"></p>
+    </div>
+    <div class="button-container">
+        <button onclick="nextQuestion()">Next Question</button>
+    </div>
+    <div id="result"></div>
+</div>
+
+<!-- Popup -->
+<div id="popup" class="popup">
+    <div class="popup-content">
+        <div class="popup-header">
+            <h2>Game ke Rules</h2>
+            <span class="close" onclick="closePopup()">&times;</span>
+        </div>
+        <ul>
+            <li>Players ko do teams mein divide karo.</li>
+            <li>Har round mein, ek team apna ek player choose karega jo mimics karega.</li>
+            <li>Wo banda ek mimic padhega aur apni team ke liye act karega.</li>
+            <li>60 seconds ka timer start karo aur mimic karna shuru karo.</li>
+            <li>Us player ki team ko card ka content guess karna hoga.</li>
+            <li>Agar team sahi guess karti hai, toh ek point milega.</li>
+            <li>Agar team galat guess kare, toh ek player ek shot lega.</li>
+            <li>Next round mein dusri team khelti hai.</li>
+            <li>Jo team zyada points leti hai, wo jeetegi.</li>
+            <li><strong>Variation</strong></li>
+            <li>Mimic karne wala player sabke liye karega.</li>
+            <li>Jo players kam se kam sahi jawab denge specified rounds mein, wo ek shot lenge.</li>
+            <li>Mazaa karo! 🍻</li>
+        </ul>
+    </div>
+</div>
+
+<!-- Timer -->
+
+<button id="timer" onclick="handleTimerClick()">60</button>
+
+<script>
+    // Game data embedded in HTML
+    const gameData = {
+        "questions": [
+            "Chemical toilet",
+            "Pancakes",
+            "Welder",
+            "Pepper spray",
+            "Lame rabbit",
+            "Ceiling fan",
+            "Ping pong",
+            "Snowflake",
+            "Mouth to mouth",
+            "Hurricane truck",
+            "Gynecologist",
+            "Macarena",
+            "Motorboat",
+            "Wrong hole",
+            "Gossip",
+            "Combing hair",
+            "Embarrassment",
+            "Orgasm",
+            "Water tanker",
+            "Watering plants",
+            "Normal birth",
+            "Changing diaper",
+            "Horse ride",
+            "Loan shark",
+            "Slug",
+            "Chiropractor",
+            "Dipping the biscuit",
+            "Eating baguette",
+            "Exorcism",
+            "Sniffing cocaine",
+            "Whip",
+            "Anal plug",
+            "War tank",
+            "Foot volleyball",
+            "Electronic cigarette",
+            "Dick pic",
+            "Rock, paper, scissors",
+            "Pelé",
+            "Asthma inhaler",
+            "Joelma",
+            "Anal sex",
+            "Drum",
+            "Clitoris",
+            "Synchronized swimming",
+            "Birth control",
+            "Neymar",
+            "Micro penis",
+            "Shot put",
+            "Christ the Redeemer",
+            "Pagode circle",
+            "Bride’s bouquet",
+            "Penguin",
+            "Alok",
+            "Squid",
+            "Barbecue grill",
+            "Cooler box",
+            "Burn the field",
+            "Phone sex",
+            "Ballet",
+            "Dolphin",
+            "Catch and release fishing",
+            "Unicorn",
+            "Tarzan",
+            "Car sex",
+            "Penis ring",
+            "Gangnam style (dance)",
+            "Unibrow",
+            "69",
+            "Sniper",
+            "Vibrator",
+            "Fencing",
+            "Lollipop painting tongue",
+            "Minions",
+            "Bottle dance",
+            "Helicopter",
+            "Kettle",
+            "Washing machine",
+            "Pisadinha lords",
+            "Wedding cake",
+            "Stretch marks",
+            "Firefly",
+            "Corn with butter",
+            "Paying bills",
+            "Air fryer",
+            "Walking the dog",
+            "Fart",
+            "Jackhammer",
+            "Agricultural spraying",
+            "Michael Jackson",
+            "Quad bike",
+            "Harry Potter",
+            "Making coffee",
+            "Bucket of ice",
+            "Cliff",
+            "Chimney",
+            "Vulture",
+            "Pedicure",
+            "Karaoke",
+            "Blowjob",
+            "Foot fetish",
+            "Gender reveal party",
+            "Beatbox",
+            "Liposuction",
+            "Louro José",
+            "On all fours",
+            "Sucking toe",
+            "Stick",
+            "Tea bag",
+            "G-spot",
+            "Forklift",
+            "Parachute jump",
+            "Income tax",
+            "Worm dance",
+            "Truck horn",
+            "Curling (sport)",
+            "Big Brother Brazil",
+            "Defined abs",
+            "Cookies",
+            "Breathalyzer test",
+            "Viagra",
+            "Eiffel Tower",
+            "Bald",
+            "Love triangle",
+            "Shower curtain",
+            "Making sushi",
+            "Rainbow",
+            "Ice skating",
+            "Whale",
+            "Breakfast in bed",
+            "Newlywed",
+            "Bodybuilder",
+            "Tiktoker",
+            "Slow motion",
+            "Zebra",
+            "Crow",
+            "Diarrhea",
+            "Messing clown’s hair",
+            "Bad breath",
+            "Nipple piercing",
+            "Choking the chicken",
+            "Inflatable doll",
+            "Wrench",
+            "Speaker",
+            "Doorman",
+            "Intimate waxing",
+            "Leather boxer shorts",
+            "Seed",
+            "Caramel dog",
+            "Marijuana",
+            "Cutting grass",
+            "Breast exam",
+            "Drunk driving",
+            "Titanic",
+            "Crane",
+            "Dark beer",
+            "Santa Claus",
+            "Condom",
+            "Women’s restroom",
+            "Street vendor",
+            "Lubricant gel",
+            "Hot glue",
+            "Peace of mind",
+            "Plastic surgeon",
+            "Trampoline",
+            "Yoga",
+            "Federal police",
+            "Carrot cake",
+            "Snake",
+            "Mona Lisa",
+            "Ice sculpture",
+            "Beach tennis",
+            "Botox",
+            "Herniated disc",
+            "Karate",
+            "Set meal",
+            "Greek kiss",
+            "Pottery class",
+            "Earthquake",
+            "Transvestite",
+            "Obstacle race",
+            "Lobster",
+            "Breastfeeding",
+            "Balloon priest",
+            "Bolsonaro",
+            "Internet",
+            "Iron Maiden",
+            "Sled",
+            "Blind bald man",
+            "Shower sex",
+            "Lover",
+            "Mermaid",
+            "Peanut",
+            "Bathtub",
+            "Stripper",
+            "Begging at traffic light",
+            "Rhinoceros",
+            "Bottle opener",
+            "Cockfight",
+            "Caterpillar",
+            "Messing clown’s hair",
+            "Playing with pepeka",
+            "Sitting with urge",
+            "Pirocopter"
+        ]
+    };
+    let questions = [];
+    let currentQuestion = 0;
+    let timeLeft = 60;
+    let timerInterval = null;
+    let isRunning = false;
+
+    function loadQuestions() {
+        questions = shuffleArray([...gameData.questions]);
+        nextQuestion();
+    }
+
+    function shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array;
+    }
+
+    function nextQuestion() {
+        if (questions.length === 0) {
+            document.getElementById("questionMimicasParaAdultos").textContent = "Loading questions...";
+            loadQuestions();
+            return;
+        }
+
+        if (currentQuestion < questions.length) {
+            document.getElementById("questionMimicasParaAdultos").textContent = questions[currentQuestion];
+            document.getElementById("result").textContent = "";
+            currentQuestion++;
+        } else {
+            document.getElementById("questionMimicasParaAdultos").textContent = "Game khatam! Hope aap enjoy kar rahe ho! Dobara khelna chahte ho?";
+            document.getElementById("result").textContent = "";
+            currentQuestion = 0;
+            questions = shuffleArray([...gameData.questions]);
+        }
+    }
+
+    function openPopup() {
+        document.getElementById("popup").style.display = "block";
+    }
+
+    function closePopup() {
+        document.getElementById("popup").style.display = "none";
+    }
+
+    window.onclick = function (event) {
+        let popup = document.getElementById("popup");
+        if (event.target === popup) {
+            popup.style.display = "none";
+        }
+    };
+
+    function updateDisplay() {
+        const timerButton = document.getElementById('timer');
+        if (isRunning) {
+            timerButton.textContent = timeLeft;
+        } else {
+            timerButton.innerHTML = '⏳';
+        }
+    }
+
+    function handleTimerClick() {
+        if (isRunning) {
+            clearInterval(timerInterval);
+            timerInterval = null;
+            timeLeft = 60;
+            isRunning = false;
+            updateDisplay(); // Show hourglass
+        } else {
+            isRunning = true;
+            updateDisplay();
+            timerInterval = setInterval(() => {
+                timeLeft--;
+                updateDisplay();
+
+                if (timeLeft <= 0) {
+                    clearInterval(timerInterval);
+                    timerInterval = null;
+                    isRunning = false;
+                    timeLeft = 60;
+                    updateDisplay();
+                }
+            }, 1000);
+        }
+    }
+
+    window.onload = function () {
+        loadQuestions();
+        updateDisplay();
+    }
+</script>
+
+</body>
+
+</html>

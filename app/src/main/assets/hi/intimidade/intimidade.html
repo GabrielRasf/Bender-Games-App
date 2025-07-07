@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="hi">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" type="text/css" href="../../stylesCards.css">
+    <title>Bebedeira Games</title>
+</head>
+
+<body>
+
+<div class="game-container">
+    <!-- Menu -->
+    <nav class="menu">
+        <a href="../menuHi.html" class="menu-title" style="position: relative;">
+            <div class="voltar-container" onclick="window.location.href='../menuPtBr.html'">
+                &#8678; <!-- Ye hai ← -->
+            </div>
+            <img class="logo-bebedeira" src="../images/logo.png" alt="Bebedeira Logo" />
+        </a>
+    </nav>
+
+    <h1 class="h1-menu espacamento-h1-intimidade">Intimacy</h1>
+    <!-- Game options -->
+    <div class="game-box-content">
+        <a href="abertura.html" class="game-box game-1">
+            <p>01 - Shuruaat</p>
+        </a>
+        <a href="desenvolvimento.html" class="game-box game-2">
+            <p class="break-word">02 - Development</p>
+        </a>
+        <a href="mergulho.html" class="game-box game-3">
+            <p>03 - Dive</p>
+        </a>
+
+    </div>
+</div>
+
+<!-- Rules Popup -->
+<div class="popup" id="popup">
+    <div class="popup-content">
+        <h3>Game ke Rules</h3>
+        <h5>Intimacy</h5>
+        <ul>
+            <li>Is game mein 3 stages hain!</li>
+            <li>Pehla stage mein, ek banda jawab dega aur doosre ka jawab guess karega.</li>
+            <li>Dusra stage mein, dono apne apne sawalon ke jawab denge, dhyaan se suno.</li>
+            <li>Tisra stage chhote challenges hai, jo hafte mein ek baar karne hain. Yeh stage 2 ke saath bhi kar sakte hain.</li>
+            <li>Ye game halka drink ke saath khela ja sakta hai, jaise wine ya koi drink!</li>
+            <li>Maza karo! 🍻</li>
+        </ul>
+    </div>
+</div>
+
+<script>
+    // Popup kholne ki function
+    function openPopup() {
+        document.getElementById("popup").style.display = "flex";
+    }
+
+    // Popup band karne ki function
+    function closePopup() {
+        document.getElementById("popup").style.display = "none";
+    }
+
+    // Popup ke bahar click karne par band ho jaye
+    window.onclick = function (event) {
+        let popup = document.getElementById("popup");
+        if (event.target === popup) {
+            closePopup();
+        }
+    };
+</script>
+
+</body>
+
+</html>

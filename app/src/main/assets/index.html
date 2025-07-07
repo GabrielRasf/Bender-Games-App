@@ -16,18 +16,21 @@
         </a>
     </div>
 
-    <div class="title-container">
-        <h3>Escolha seu idioma</h3>
+<!--
         <h3>Choose your language</h3>
         <h3>Elige tu idioma</h3>
         <h3>Choisis ta langue</h3>
+        <h3>Apni bhasha chuno</h3>
+        <h3>Escolha seu idioma</h3>
+   </div>
+-->
+    <div class="button-center">
+        <button class="button-language" onclick="setLanguage('pt')">🇧🇷 Português</button>
+        <button class="button-language" onclick="setLanguage('en')">🇬🇧 English</button>
+        <button class="button-language" onclick="setLanguage('es')">🇪🇸 Español</button>
+        <button class="button-language" onclick="setLanguage('fr')">🇫🇷 Français</button>
+        <button class="button-language" onclick="setLanguage('hi')">🇮🇳 Hindi</button>
     </div>
-
-    <button class="button-language" onclick="setLanguage('pt')">🇧🇷 Português</button>
-    <button class="button-language" onclick="setLanguage('en')">🇬🇧 English</button>
-    <button class="button-language" onclick="setLanguage('es')">🇪🇸 Español</button>
-    <button class="button-language" onclick="setLanguage('fr')">🇫🇷 Français</button>
-
 
 </div>
 
@@ -42,6 +45,8 @@
             window.location.href = './es/menuEs.html';
         } else if (lang === 'fr') {
             window.location.href = './fr/menuFr.html';
+        } else if (lang === 'hi') {
+            window.location.href = './hi/menuHi.html';
         }
     }
 </script>

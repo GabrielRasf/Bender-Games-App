@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="../../stylesCards.css">
-    <title>Fact or False</title>
+    <title>Bebedeira Games</title>
 </head>
 
 <body>
@@ -62,6 +62,14 @@
     </div>
 
     <div id="result"></div>
+
+    <!-- Botão de próxima pergunta -->
+    <div class="button-container">
+        <button id="btnProxima" class="btn-proxima-pergunta" onclick="showNextQuestion()" style="display: none;">
+            Next Question
+        </button>
+    </div>
+
 </div>
 
 
@@ -858,84 +866,77 @@
     };
 
     // Variáveis do jogo
-    let questions = [];
+     let questions = [];
     let currentQuestionIndex = 0;
 
-    // Elementos do DOM
     const questionText = document.getElementById('questionFatoOuFalso');
     const resultDiv = document.getElementById('result');
     const btnFato = document.getElementById('btnFato');
     const btnFalso = document.getElementById('btnFalso');
+    const btnProxima = document.getElementById('btnProxima');
 
-    // Função de embaralhamento Fisher-Yates
+    // Embaralhamento aleatório
     function shuffleArray(array) {
-        for (let i = array.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [array[i], array[j]] = [array[j], array[i]];
-        }
-        return array;
+      for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+      }
+      return array;
     }
 
-    // Carregar as perguntas
     function loadQuestions() {
-        questions = shuffleArray([...gameData.questions]);
-        showQuestion();
+      questions = shuffleArray([...gameData.questions]);
+      showQuestion();
     }
 
-    // Exibir a pergunta atual
     function showQuestion() {
-        const question = questions[currentQuestionIndex];
-        questionText.textContent = question.frase;
-        resultDiv.innerHTML = '';
-
-        // Reabilita os botões para a nova pergunta
-        btnFato.disabled = false;
-        btnFalso.disabled = false;
+      const question = questions[currentQuestionIndex];
+      questionText.textContent = question.frase;
+      resultDiv.innerHTML = '';
+      btnFato.disabled = false;
+      btnFalso.disabled = false;
+      btnProxima.style.display = 'none';
     }
 
-
-    // Verificar a resposta
     function checkAnswer(resposta) {
-        const question = questions[currentQuestionIndex];
+      const question = questions[currentQuestionIndex];
+      btnFato.disabled = true;
+      btnFalso.disabled = true;
 
-        // Desabilita os botões assim que o usuário responder
-        btnFato.disabled = true;
-        btnFalso.disabled = true;
+      if (resposta === question.correta) {
+        resultDiv.innerHTML = `<p style="color: green;">✅ Correct! ${question.explicacao}</p>`;
+      } else {
+        resultDiv.innerHTML = `<p style="color: red;">❌ Wrong! ${question.explicacao}</p>`;
+      }
 
-        if (resposta === question.correta) {
-            resultDiv.innerHTML = `<p style="color: green;">✅ Correct! ${question.explicacao}</p>`;
-        } else {
-            resultDiv.innerHTML = `<p style="color: red;">❌ Wrong! ${question.explicacao}</p>`;
-        }
+      btnProxima.style.display = 'block';
+    }
 
-        setTimeout(() => {
-            currentQuestionIndex = (currentQuestionIndex + 1) % questions.length;
-            showQuestion();
-        }, 5000);
+    function showNextQuestion() {
+      currentQuestionIndex = (currentQuestionIndex + 1) % questions.length;
+      showQuestion();
     }
 
     // Eventos dos botões
     btnFato.addEventListener('click', () => checkAnswer('Fato'));
     btnFalso.addEventListener('click', () => checkAnswer('Falso'));
 
-    // Pop-up
+    // Pop-up de regras
     function openPopup() {
-        document.getElementById("popup").style.display = "block";
+      document.getElementById("popup").style.display = "block";
     }
 
     function closePopup() {
-        document.getElementById("popup").style.display = "none";
+      document.getElementById("popup").style.display = "none";
     }
 
-    // Fechar o pop-up ao clicar fora dele
     window.onclick = function (event) {
-        let popup = document.getElementById("popup");
-        if (event.target === popup) {
-            popup.style.display = "none";
-        }
+      const popup = document.getElementById("popup");
+      if (event.target === popup) {
+        popup.style.display = "none";
+      }
     };
 
-    // Iniciar o jogo quando a página carregar
     window.onload = loadQuestions;
 </script>
 </body>

@@ -1,0 +1,2109 @@
+<!DOCTYPE html>
+<html lang="hi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="../../stylesCards.css">
+    <title>Bebedeira Games</title>
+</head>
+
+<body>
+
+<div class="game-container">
+    <!-- Menu -->
+    <nav class="menu">
+        <a href="../menuHi.html" class="menu-title" style="position: relative;">
+            <div class="voltar-container" onclick="window.location.href='../menuPtBr.html'">
+                &#8678; <!-- Matlab ← -->
+            </div>
+            <img class="logo-bebedeira" src="../images/logo.png" alt="Logo Bebedeira" />
+        </a>
+    </nav>
+
+    <!-- Game Content -->
+    <div>
+        <h1>Bina Jawab wale Sawal</h1>
+        <a href="#" onclick="openPopup()">
+            <img class="img-regras" src="../images/regras.png" alt="Rules" />
+        </a>
+        <h4>Rules</h4>
+    </div>
+
+    <div id="popup" class="popup">
+        <div class="popup-content">
+            <div class="popup-header">
+                <h2>Game ke Rules</h2>
+                <span class="close" onclick="closePopup()">&times;</span>
+            </div>
+            <ul>
+                <li>Yeh game couples ke liye best hai.</li>
+                <li>Agar dono same option choose karte hain, dono ko ek drink leni hai.</li>
+                <li>Yeh drink unki harmony celebrate karne ke liye hai.</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="card-frase">
+        <p id="questionPerguntasSemRespostas"></p>
+    </div>
+    <div class="button-container">
+        <button onclick="nextQuestion()">Next Question</button>
+    </div>
+    <div id="result"></div>
+</div>
+
+<script>
+    // Dados do jogo embutidos
+    const gameData = {
+        "questions": [
+            {
+                "text": "Agar aapko chunna ho:",
+                "or": "ya",
+                "text2": "Amir lekin unhappy ya garib lekin khush?"
+            },
+            {
+                "text": "Aapko pasand hai:",
+                "or": "ya",
+                "text2": "Bina music ke jeena ya bina TV/movies ke?"
+            },
+            {
+                "text": "Aap kya chunoge:",
+                "or": "ya",
+                "text2": "Past ke baare mein sab kuch janna ya future ke baare mein?"
+            },
+            {
+                "text": "In options mein se:",
+                "or": "ya",
+                "text2": "Zyada paise hona ya zyada free time?"
+            },
+            {
+                "text": "Aap prefer karoge:",
+                "or": "ya",
+                "text2": "Bahut intelligent hona ya bahut handsome/beautiful?"
+            },
+            {
+                "text": "Kya zyada important hai:",
+                "or": "ya",
+                "text2": "Ek badi dosti ya ek bada pyaar?"
+            },
+            {
+                "text": "Agar aapko chunna pade:",
+                "or": "ya",
+                "text2": "Ek mahina bina internet ke ya bina car ke?"
+            },
+            {
+                "text": "In possibilities mein se:",
+                "or": "ya",
+                "text2": "Time travel karna ya mind padhna?"
+            },
+            {
+                "text": "Aap kya chunoge:",
+                "or": "ya",
+                "text2": "200 saal future mein jeena ya 200 saal past mein?"
+            },
+            {
+                "text": "Kya bura hoga:",
+                "or": "ya",
+                "text2": "Kabhi jhoot na bol paana ya hamesha sach sunna?"
+            },
+            {
+                "text": "Pyaar khatam ho sakta hai",
+                "or": "YA",
+                "text2": "Agar khatam hua to wo kabhi pyaar nahi tha"
+            },
+            {
+                "text": "Kabhi pyaar na karna",
+                "or": "YA",
+                "text2": "Kabhi pyaar na paya jana"
+            },
+            {
+                "text": "Aapke jaisa banda hone wala partner perfect match hai",
+                "or": "YA",
+                "text2": "Sabse bada nightmare"
+            },
+            {
+                "text": "Relationship mein partner ko aapke personal activities mein saath dena chahiye",
+                "or": "YA",
+                "text2": "Couple apni individuality banaye rakhe"
+            },
+            {
+                "text": "Kya zyada bura hai: ek painful aur unexpected breakup",
+                "or": "YA",
+                "text2": "A slow aur dardnaak breakup jo dheere dheere hota hai"
+            },
+            {
+                "text": "Pyaar khatam ho sakta hai",
+                "or": "YA",
+                "text2": "Agar khatam hua to wo kabhi pyaar nahi tha?"
+            },
+            {
+                "text": "Kabhi pyaar na karna",
+                "or": "YA",
+                "text2": "Kabhi pyaar na paya jana?"
+            },
+            {
+                "text": "Aapke jaisa banda hone wala partner perfect match hai",
+                "or": "YA",
+                "text2": "Sabse bada nightmare?"
+            },
+            {
+                "text": "Relationship mein partner ko aapke personal activities mein saath dena chahiye",
+                "or": "YA",
+                "text2": "Couple apni individuality banaye rakhe?"
+            },
+            {
+                "text": "Kya zyada bura hai: ek painful aur unexpected breakup",
+                "or": "YA",
+                "text2": "A slow aur dardnaak breakup jo dheere dheere hota hai?"
+            },
+            {
+                "text": "Asaani se deal karna zyada aasan hai: partner jiska self-esteem bahut low hai (self-deprecating)",
+                "or": "YA",
+                "text2": "Ya partner jiska self-esteem bahut high hai (arrogant)?"
+            },
+            {
+                "text": "Kya aap soulmate pe believe karte ho",
+                "or": "YA",
+                "text2": "Ya log roz roz mehnat karke aur choose karke saath rehte hain?"
+            },
+            {
+                "text": "Duniya mein bilkul akela rehna",
+                "or": "YA",
+                "text2": "Kisi aise ke saath hamesha rehna jise aap pyaar nahi karte?"
+            },
+            {
+                "text": "Kabhi phir se pyaar mehsoos na karna",
+                "or": "YA",
+                "text2": "Apna worst breakup dobara jeena?"
+            },
+            {
+                "text": "Relationship mein aap chahte ho partner ho: bahut sensitive",
+                "or": "YA",
+                "text2": "Bilkul insensitive?"
+            },
+            {
+                "text": "Log aaj kal asaani se relationship chod dete hain",
+                "or": "YA",
+                "text2": "Bas wo apne liye kam accept karte hain jo deserve karte hain?"
+            },
+            {
+                "text": "Asaani se trust karna",
+                "or": "YA",
+                "text2": "Kabhi kisi pe trust na kar pana?"
+            },
+            {
+                "text": "Aap wo type ke insaan ho jo apne emotions express karte hain",
+                "or": "YA",
+                "text2": "Jo sab kuch andar hi rakhta hai?"
+            },
+            {
+                "text": "Dating apps sirf superficial hain",
+                "or": "YA",
+                "text2": "Ya perfect hain kyunki wo unhe milate hain jo real life mein kabhi nahi milte?"
+            },
+            {
+                "text": "Kya possible hai ki dono partners 'leaders' hon",
+                "or": "YA",
+                "text2": "Ya harmony ke liye kisi ek ko less authoritative hona chahiye?"
+            },
+            {
+                "text": "Kya aap kisi ko pyaar karte hain",
+                "or": "YA",
+                "text2": "Ya sirf us feeling ko pyaar karte hain jo wo person dete hain?"
+            },
+            {
+                "text": "Kya aap chahte hain shaadi old school ceremony ke saath",
+                "or": "YA",
+                "text2": "Ya sirf saath rehna hi nayi shaadi hai?"
+            },
+            {
+                "text": "Aap prefer karte hain ki aap dusron ko hurt karo par khud khush raho",
+                "or": "YA",
+                "text2": "Ya dusron ko khush karo bhale aapko dard ho?"
+            },
+            {
+                "text": "Closed relationship mein aap chahte ho pata chale ki partner ko koi flirt kar raha hai",
+                "or": "YA",
+                "text2": "Jo aankh nahi dekhti wo dil nahi mehsoos karta?"
+            },
+            {
+                "text": "Kya aap believe karte ho ki bina milaye bhi pyaar ho sakta hai",
+                "or": "YA",
+                "text2": "Ya contact aur time hona zaroori hai pyaar ke liye?"
+            },
+            {
+                "text": "Public mein affection dikhana aapko khushi deta hai",
+                "or": "YA",
+                "text2": "Ya uncomfortable karta hai?"
+            },
+            {
+                "text": "Jealousy zyada hai: care/cariness ka sign",
+                "or": "YA",
+                "text2": "Ya possession/insecurity ka?"
+            },
+            {
+                "text": "Ideal pyaar hona chahiye: intense aur emotional, jaise rollercoaster",
+                "or": "YA",
+                "text2": "Calm aur peaceful bina zyada ups and downs ke?"
+            },
+            {
+                "text": "Kya zyada bura lagta hai: kisi ko hurt karna",
+                "or": "YA",
+                "text2": "Khud hurt hona?"
+            },
+            {
+                "text": "Missing hona emotional dependence ka sign hai",
+                "or": "YA",
+                "text2": "Pyar, concern aur care ka proof hai?"
+            },
+            {
+                "text": "Intense pyaar jeena jisme hurt hone ka risk ho",
+                "or": "YA",
+                "text2": "Kabhi apne emotions ko open na karna par dard se bachna?"
+            },
+            {
+                "text": "Aap agree karte ho ki 'sahi insan, galat time' hota hai",
+                "or": "YA",
+                "text2": "Sahi insan ke liye kabhi galat time nahi hota?"
+            },
+            {
+                "text": "Shaadi ab bhi pyaar ka celebration hai",
+                "or": "YA",
+                "text2": "Ya ek failed institution ban gayi hai?"
+            },
+            {
+                "text": "Kabhi travel na karna",
+                "or": "YA",
+                "text2": "Kabhi pyaar na karna?"
+            },
+            {
+                "text": "Relation mein kya zyada bura hai: physical/carnal cheating",
+                "or": "YA",
+                "text2": "Ya emotional/affective cheating?"
+            },
+            {
+                "text": "Aap apni employability, social circles aur personality ke hisaab se kya choose karoge:",
+                "or": "YA",
+                "text2": "Beauty?"
+            },
+            {
+                "text": "Kya aap sensitive insan ho",
+                "or": "YA",
+                "text2": "Ya zyada objective in life situations?"
+            },
+            {
+                "text": "Kya zyada important hai: fame, paisa, opportunities aur experiences",
+                "or": "YA",
+                "text2": "Simple life with luxury and privacy?"
+            },
+            {
+                "text": "Kya aapko pata chalna pasand hai ki kuch bura hone wala hai",
+                "or": "YA",
+                "text2": "Ya uncertainty ke saath jeena better hai?"
+            },
+            {
+                "text": "Risk lekar kuch karna aur regret karna",
+                "or": "YA",
+                "text2": "Ya kuch na karna aur hamesha doubt mein rehna?"
+            },
+            {
+                "text": "Aap multitask karna pasand karte ho",
+                "or": "YA",
+                "text2": "Ya ek time mein ek kaam karna pasand hai?"
+            },
+            {
+                "text": "Zyada tar waqt aap situation ka positive side dekhte ho",
+                "or": "YA",
+                "text2": "Ya aap worst expect karte ho?"
+            },
+            {
+                "text": "Jab aap emotionally/physically down ho, dusron ki problems dekh ke relief milta hai",
+                "or": "YA",
+                "text2": "Ya apka dard kam nahi hota?"
+            },
+            {
+                "text": "Aap chahte ho bade kaam karna aur society mein yaad rehna",
+                "or": "YA",
+                "text2": "Ya chhoti chhoti cheezon mein happiness dekhte ho?"
+            },
+            {
+                "text": "Aap sabse funny insan banna chahte ho",
+                "or": "YA",
+                "text2": "Ya sabse intelligent?"
+            },
+            {
+                "text": "Aap apne aap se zyada expect karte ho",
+                "or": "YA",
+                "text2": "Ya apne aap ko aur expect karna chahiye?"
+            },
+            {
+                "text": "Agar aapko apni self-esteem ka ek hissa hamesha high rakhna ho, toh aap kya choose karoge: physical ya intellectual?",
+                "or": "YA",
+                "text2": ""
+            },
+            {
+                "text": "Aap wo insaan banna chahte ho jo 'bindaas' ho lekin apni manzil paata hai",
+                "or": "YA",
+                "text2": "Ya samajhdari se decisions leke opportunities miss karta hai?"
+            },
+            {
+                "text": "Pata na hona ki kya hoga exciting hai",
+                "or": "YA",
+                "text2": "Ya stressful hai?"
+            },
+            {
+                "text": "Hamesha sabka focus apne upar chahiye",
+                "or": "YA",
+                "text2": "Ya kabhi notice na hona?"
+            },
+            {
+                "text": "Aapke beliefs aaj kal un logo ke jaise hain jinhone aapko paala",
+                "or": "YA",
+                "text2": "Ya bilkul alag ho gaye hain?"
+            },
+            {
+                "text": "Zyada tar rational decisions lete ho",
+                "or": "YA",
+                "text2": "Ya emotions pe bharosa karte ho?"
+            },
+            {
+                "text": "Aap stable aur routine life pasand karte ho",
+                "or": "YA",
+                "text2": "Ya surprising aur unpredictable life?"
+            },
+            {
+                "text": "Kabhi bhi koi feeling na mehsoos karna",
+                "or": "YA",
+                "text2": "Ya har feeling intensely mehsoos karna?"
+            },
+            {
+                "text": "Kya aap art aur artist ko alag samajhte ho",
+                "or": "YA",
+                "text2": "Ya dono inseparable hain?"
+            },
+            {
+                "text": "Kya zyada logon ko badalne mein madad karta hai: gussa aur nafrat",
+                "or": "YA",
+                "text2": "Ya ummeed aur pyaar?"
+            },
+            {
+                "text": "Apni life goals achieve karne ke liye aapke liye zyada important hai:",
+                "or": "YA",
+                "text2": "Passion ya discipline?"
+            },
+            {
+                "text": "Din ke end mein, selfish hona zaruri hai",
+                "or": "YA",
+                "text2": "Ya selfish hona bura hai?"
+            },
+            {
+                "text": "Politically correct hona success ki guarantee hai",
+                "or": "YA",
+                "text2": "Ya kabhi kabhi situation ke hisaab se adjust karna padta hai?"
+            },
+            {
+                "text": "Kisi ka character samajhne ke liye zyada important hai:",
+                "or": "YA",
+                "text2": "Actions ya intentions?"
+            },
+            {
+                "text": "Kya human ke paas free will hai",
+                "or": "YA",
+                "text2": "Ya sab kuch pehle se fix hai?"
+            },
+            {
+                "text": "Instagram profile autobiographical banana:",
+                "or": "YA",
+                "text2": "Creative ya scary?"
+            },
+            {
+                "text": "Apna hobby main source of income banana",
+                "or": "YA",
+                "text2": "Ya job jo pasand nahi par hobby afford karta hai?"
+            },
+            {
+                "text": "Zindagi mein purpose na hona:",
+                "or": "YA",
+                "text2": "Liberating ya painful?"
+            },
+            {
+                "text": "Sabko second chance milni chahiye",
+                "or": "YA",
+                "text2": "Kuch cheezein maaf nahi ki ja sakti?"
+            },
+            {
+                "text": "Religion zyada helpful hai",
+                "or": "YA",
+                "text2": "Ya bas population ko confuse karta hai?"
+            },
+            {
+                "text": "Society mein change lane ke liye best hai:",
+                "or": "YA",
+                "text2": "Politics/education/NGOs ya revolutions?"
+            },
+            {
+                "text": "Kya happiness constant state hai",
+                "or": "YA",
+                "text2": "Ya kuch pal hi khushi ke hote hain?"
+            },
+            {
+                "text": "Kya kuch bhi coincidences hain",
+                "or": "YA",
+                "text2": "Sab kuch kisi wajah se hota hai?"
+            },
+            {
+                "text": "Kya aap believe karte hain ki jo jaata hai wo wapas aata hai",
+                "or": "YA",
+                "text2": "Ya karma exist nahi karta?"
+            },
+            {
+                "text": "Aap zyada jaante ho thoda subject mein",
+                "or": "YA",
+                "text2": "Ya thoda thoda bahut subjects mein?"
+            },
+            {
+                "text": "Aap apne politics different hone pe door hote ho",
+                "or": "YA",
+                "text2": "Ya relations alag rakhte ho apne morals se?"
+            },
+            {
+                "text": "Sab kuch kisi wajah se hota hai",
+                "or": "YA",
+                "text2": "Hum reasons dhundhte hain kyun hua?"
+            },
+            {
+                "text": "Aapko acha lagta hai kuch amazing milna aur khona",
+                "or": "YA",
+                "text2": "Ya kabhi experience na karna?"
+            },
+            {
+                "text": "Kya aap sochte ho ki asli aap badalta nahi",
+                "or": "YA",
+                "text2": "Log life mein badalte hain?"
+            },
+            {
+                "text": "Ambition matlab greed",
+                "or": "YA",
+                "text2": "Ya determination aur hardwork?"
+            },
+            {
+                "text": "Art ka main purpose entertainment ho sakta hai",
+                "or": "YA",
+                "text2": "Ya art intellectual hona chahiye?"
+            },
+            {
+                "text": "Globalization se sab same ho jaate hain",
+                "or": "YA",
+                "text2": "Ya diversity badhti hai?"
+            },
+            {
+                "text": "Guilty pleasure shows culture hain",
+                "or": "YA",
+                "text2": "Ya bas business hain?"
+            },
+            {
+                "text": "Aap zyada creative ho",
+                "or": "YA",
+                "text2": "Ya analytical?"
+            },
+            {
+                "text": "Zindagi mein sabse important hai:",
+                "or": "YA",
+                "text2": "Family ya career?"
+            },
+            {
+                "text": "Aapko lagta hai ki sach hamesha achha hota hai",
+                "or": "YA",
+                "text2": "Ya kabhi kabhi jhoot behtar hote hain?"
+            },
+            {
+                "text": "Kya aap apni life ko control karte ho",
+                "or": "YA",
+                "text2": "Ya zyada tar circumstances control karte hain?"
+            },
+            {
+                "text": "Aap apne aap se kabhi khush nahi hote",
+                "or": "YA",
+                "text2": "Ya kabhi kabhi?"
+            },
+
+            {
+                "text": "Kya aap dukhi/anyaay bhari situations se emotional ho jaate ho roz ke jeevan mein?",
+                "or": "YA",
+                "text2": "Ya itne aadat ho gaye ho ki indifferent ya normal ho gaye ho?"
+            },
+            {
+                "text": "Kya vulnerability ko taqat ka nishaan maana jaata hai?",
+                "or": "YA",
+                "text2": "Ya kamzori?"
+            },
+            {
+                "text": "Kya aap apne past ko change karoge agar pata ho ki isse aapke present par asar padega?",
+                "or": "YA",
+                "text2": "Ya sab waise hi chhodoge jaise hai, saare galtiyan aur sahi baatein ke saath?"
+            },
+            {
+                "text": "Kya pyaar ka opposite nafrat hai?",
+                "or": "YA",
+                "text2": "Ya dono emotions ek dusre ke kareeb hain jitna lagta hai?"
+            },
+            {
+                "text": "Aapke hisaab se logon ko zyada motivate karta hai:",
+                "or": "YA",
+                "text2": "Pyar bhare shabdon se ya nafrat bhare shabdon se?"
+            },
+            {
+                "text": "Kya apne goal ke liye dusron ko crush karna theek hai?",
+                "or": "YA",
+                "text2": "Ya team work se aage badhna zyada important hai?"
+            },
+            {
+                "text": "Kya aap ambitiouz ko achhi quality mante ho?",
+                "or": "YA",
+                "text2": "Ya ye buri baat hai?"
+            },
+            {
+                "text": "Kya aap believe karte ho parallel universes/alternative realities mein?",
+                "or": "YA",
+                "text2": "Ya zindagi ki sirf ek hi reality hai?"
+            },
+            {
+                "text": "Kya aap koi takleef seh sakte ho jo future mein duniya ke liye acha hoga?",
+                "or": "YA",
+                "text2": "Ya aap khud ko prioritize karoge kyunki aapko uska fayda nahi milega?"
+            },
+            {
+                "text": "Kya kisi committed insan ko impress karna selfish hai?",
+                "or": "YA",
+                "text2": "Ya ye romantic hai?"
+            },
+            {
+                "text": "Kya insaan ke actions uske character pe depend karte hain?",
+                "or": "YA",
+                "text2": "Ya us context pe jisme wo hai?"
+            },
+            {
+                "text": "Kya aap dushman ke dost ke dost ho sakte ho?",
+                "or": "YA",
+                "text2": "Ya jo sabka dost hota hai wo asli mein kisi ka dost nahi hota?"
+            },
+            {
+                "text": "Kya comedy mein limits honi chahiye?",
+                "or": "YA",
+                "text2": "Ya comedy mein sab kuch allowed hai?"
+            },
+            {
+                "text": "Kya relationship bina sex ke ho sakta hai?",
+                "or": "YA",
+                "text2": "Ya pyar bina sex ke sirf dosti hoti hai?"
+            },
+            {
+                "text": "Kya aap zyada ‘chalo jeene do’ wale ho?",
+                "or": "YA",
+                "text2": "Ya har step plan karne wale?"
+            },
+            {
+                "text": "Kya aap kisi aise insan ke saath relationship karoge jinke hobbies aapko pasand nahi?",
+                "or": "YA",
+                "text2": "Ya lifestyle same hona zaruri hai?"
+            },
+            {
+                "text": "Kya aap believe karte ho ki sab kuch coincidences hai?",
+                "or": "YA",
+                "text2": "Ya sab kuch pre-destined hai?"
+            },
+            {
+                "text": "Kya koi apne aap ko relationship mein samajh sakta hai?",
+                "or": "YA",
+                "text2": "Ya khud ko samajhne ke liye akela rehna zaruri hai?"
+            },
+            {
+                "text": "Kya aap apni sabse badi buri yaad ko dobara jeena chahoge?",
+                "or": "YA",
+                "text2": "Ya apni sabse achi yaad mita dena chahoge?"
+            },
+            {
+                "text": "Kya jo sacrifice nahi karta wo sach mein pyaar nahi karta?",
+                "or": "YA",
+                "text2": "Ya wo apni individuality aur chahaton ko priority deta hai?"
+            },
+            {
+                "text": "Kya dusron ko neecha dikhakar safalta pana galat hai?",
+                "or": "YA",
+                "text2": "Ya zaruri bhi hai?"
+            },
+            {
+                "text": "Kya artists ko market mein tikne ke liye trends ke pressure ko accept karna chahiye?",
+                "or": "YA",
+                "text2": "Ya asli artist ko aise pressures ki zarurat nahi?"
+            },
+            {
+                "text": "Kya humari zindagi mein hamesha kuch missing hone ki talaash hi hume comfort zone se bahar nikalti hai?",
+                "or": "YA",
+                "text2": "Ya ye hume hamesha unsatisfied rakhti hai?"
+            },
+            {
+                "text": "Kya aap duniya ki poori sachai jaan na chahoge - achhi ya buri?",
+                "or": "YA",
+                "text2": "Ya ignorance mein zindagi jeena pasand karoge?"
+            },
+            {
+                "text": "Agar possible ho to kya aap real life mein kisi ko block karoge?",
+                "or": "YA",
+                "text2": "Ya ye reality ke limits cross karna hoga?"
+            },
+            {
+                "text": "Kya aap ek hi din ko baar baar ek saal tak jeena pasand karoge?",
+                "or": "YA",
+                "text2": "Ya apni zindagi ka ek saal skip karna?"
+            },
+            {
+                "text": "Kya aap apne ex ke aapke baare mein jo yaad hai usse mitaoge?",
+                "or": "YA",
+                "text2": "Ya apne uski yaad mitaoge?"
+            },
+            {
+                "text": "Kya aap apni meal chhodo ke ek pill le kar nutrition le sakte ho?",
+                "or": "YA",
+                "text2": "Ya jeevan ka maza lena pasand karte ho khana khake?"
+            },
+            {
+                "text": "Kya aap apni zindagi ka sabse bura saal phir se jeena chahoge?",
+                "or": "YA",
+                "text2": "Ya sabse accha saal mita dena?"
+            },
+            {
+                "text": "Agar aap 100 saal pehle ya 100 saal baad jee sakte ho to aap kya chunoge?",
+                "or": "YA",
+                "text2": "100 saal baad?"
+            },
+            {
+                "text": "Agar aapko pata ho ki aap apna goal future mein paa loge to kya aap frustration bhare saal jheloge?",
+                "or": "YA",
+                "text2": "Ya apni quality life ke liye apne goal ko chod doge?"
+            },
+            {
+                "text": "Kya aap wo dard mehsoos karoge jo aapne kisi ko diya hai?",
+                "or": "YA",
+                "text2": "Ya aap chahoge ki wo dard us insaan ko ho jo aapko dard diya hai?"
+            },
+            {
+                "text": "Kya aap sabko bhool jaoge jo aapne jana hai?",
+                "or": "YA",
+                "text2": "Ya sabko bhool jane dena jo aapko jaante hain?"
+            },
+            {
+                "text": "Kya aap apni sari yaadein kho dena pasand karoge?",
+                "or": "YA",
+                "text2": "Ya naye yaadein banane mein asamarth hona?"
+            },
+            {
+                "text": "Kya aap zindagi mein career mein fail hokar 65 ke baad professional recognition paoge?",
+                "or": "YA",
+                "text2": "Ya average insaan banke zindagi bitana pasand karoge?"
+            },
+            {
+                "text": "Kya aap apni zindagi ka sabse accha din dobara jeena chahoge?",
+                "or": "YA",
+                "text2": "Ya 10 hazaar rupaye kamaana?"
+            },
+            {
+                "text": "Kya aap apni short term memory kho dena pasand karoge?",
+                "or": "YA",
+                "text2": "Ya long term memory?"
+            },
+            {
+                "text": "Kya aap chhote chhote pleasures hamesha lena pasand karte ho (har weekend bahar khana, movies dekhna)?",
+                "or": "YA",
+                "text2": "Ya bade pleasures kam baar lena pasand karte ho (ghar khana aur paisa save karke travel karna)?"
+            },
+            {
+                "text": "Kya aap apna best dost kho dena pasand karoge?",
+                "or": "YA",
+                "text2": "Ya sab dost kho dena magar sabse kareeb dost bachana?"
+            },
+            {
+                "text": "Kya aap temporarily apne parents ki nazar se duniya dekhna chahoge?",
+                "or": "YA",
+                "text2": "Ya chahoge ki wo aapki nazar se duniya dekhen?"
+            },
+            {
+                "text": "Agar aapke paas sirf ek din bachaa ho, kya aap kisi ko batayoge apna raaz?",
+                "or": "YA",
+                "text2": "Ya apna raaz leke mar jaoge?"
+            },
+            {
+                "text": "Kya aap apni puri zindagi aur sabko chhod kar apne sapne ke peeche jaoge?",
+                "or": "YA",
+                "text2": "Ya apne sapne ko chod ke apni zindagi ko banaye rakhoge?"
+            },
+            {
+                "text": "Kya aap apni zindagi ke kisi phase mein hamesha ke liye atke rahoge: aaj wala ya apna past ka koi aur?",
+                "or": "YA",
+                "text2": "Apna past ka koi aur?"
+            },
+            {
+                "text": "Kya aap kharab financial situation mein apne pyar ke saath rahna pasand karoge?",
+                "or": "YA",
+                "text2": "Ya financially accha hote hue kabhi pyar nahi karna?"
+            },
+            {
+                "text": "Kya aap 10 saal ki yaadein kho dena pasand karoge?",
+                "or": "YA",
+                "text2": "Ya apni life se 10 saal ghata dena?"
+            },
+            {
+                "text": "Kya aap kisi ki jaan bachana pasand karoge?",
+                "or": "YA",
+                "text2": "Ya 10 lakh rupaye kamaana?"
+            },
+            {
+                "text": "Kya aap apni memory se kisi ko mita doge jo aapko dard diya hai?",
+                "or": "YA",
+                "text2": "Ya aap mante ho ki usne aapko banaya hai jo aap ho?"
+            },
+            {
+                "text": "Kya aapko pata chale ki aapko dhoka diya gaya par kabhi pata na chale?",
+                "or": "YA",
+                "text2": "Ya aapko pata ho ki aap kisi ko dhoka de rahe ho par bina guilty feel kiye?"
+            },
+            {
+                "text": "Kya aap stability aur boredom ke saath jeena pasand karoge?",
+                "or": "YA",
+                "text2": "Ya uncertain aur intense zindagi jeena?"
+            },
+            {
+                "text": "Kya aap apne aap se sachcha rehna zyada pasand karoge?",
+                "or": "YA",
+                "text2": "Ya dusron ke expectations ke hisaab se adjust karoge?"
+            },
+            {
+                "text": "Kya aapko pasand hai ki aap pyaar to mile par samjha na jaaye?",
+                "or": "YA",
+                "text2": "Ya samjha jaaye par pyaar na mile?"
+            },
+            {
+                "text": "Kya aap mante ho ki maafi dena sirf maaf karne wale ko azaad karta hai?",
+                "or": "YA",
+                "text2": "Ya maaf hone wale ko bhi?"
+            },
+            {
+                "text": "Kya aapko lagta hai aage badhna zyada himmat wali baat hai?",
+                "or": "YA",
+                "text2": "Ya rukna aur samajhna ki rukna zaruri hai?"
+            },
+            {
+                "text": "Kya aap prefer karte ho ki kuch mehsoos na karo?",
+                "or": "YA",
+                "text2": "Ya sab kuch intense mehsoos karo, dard tak?"
+            },
+            {
+                "text": "Kya aap mante ho ki ends justify the means?",
+                "or": "YA",
+                "text2": "Ya means hi batate hain ki hum kaun hain?"
+            },
+            {
+                "text": "Kya bada try karna aur fail hona behtar hai?",
+                "or": "YA",
+                "text2": "Ya chhoti chhoti comfort zone mein success paana?"
+            },
+            {
+                "text": "Kya aap sab kuch chhod kar pyaar ke peeche jaoge?",
+                "or": "YA",
+                "text2": "Ya aapko lagta hai asli pyaar bade sacrifices nahi mangta?"
+            },
+            {
+                "text": "Kya aap zyada azad feel karte ho jab decisions akelay lete ho?",
+                "or": "YA",
+                "text2": "Ya jab apne trusted insaan ke saath decisions share karte ho?"
+            },
+            {
+                "text": "Kya aap reason follow karna zyada samajhdari samajhte ho?",
+                "or": "YA",
+                "text2": "Ya intuition ka sunna?"
+            },
+            {
+                "text": "Kya aap sach pasand karte ho jo tod de?",
+                "or": "YA",
+                "text2": "Ya jhoot jo thodi der khushi de?"
+            },
+            {
+                "text": "Kya aap apni life ke hero banna chahte ho?",
+                "or": "YA",
+                "text2": "Ya kisi aur ke story mein side character?"
+            },
+            {
+                "text": "Kya aap mante ho ki life ka koi fixed purpose hai?",
+                "or": "YA",
+                "text2": "Ya hum khud hi uska matlab dete hain?"
+            },
+            {
+                "text": "Kya aapke liye zyada dardnak hai kisi ko khona jo aapko pyaar karta tha?",
+                "or": "YA",
+                "text2": "Ya yeh realize karna ki kabhi sach mein pyaar nahi tha?"
+            },
+            {
+                "text": "Kya waqt sab kuch theek kar deta hai?",
+                "or": "YA",
+                "text2": "Ya sirf dard ke saath jeena sikhaata hai?"
+            },
+            {
+                "text": "Kya aap believe karte ho log sach mein badalte hain?",
+                "or": "YA",
+                "text2": "Ya wo sirf apna behaviour adjust karte hain?"
+            },
+            {
+                "text": "Kya insaaf impartial hona chahiye?",
+                "or": "YA",
+                "text2": "Ya intentions bhi dhyan mein rakhne chahiye?"
+            },
+            {
+                "text": "Kya aapke liye chup rehna zyada aasan hai?",
+                "or": "YA",
+                "text2": "Ya galat baatein bolna?"
+            },
+            {
+                "text": "Kya aap doubts ke saath jeena pasand karte ho?",
+                "or": "YA",
+                "text2": "Ya sirf shanti ke liye kuch bhi believe karna?"
+            },
+            {
+                "text": "Kya doosron ko maaf karna mushkil hai?",
+                "or": "YA",
+                "text2": "Ya apne aap ko maaf karna?"
+            },
+            {
+                "text": "Kya aap akeli sachai jeena pasand karte ho?",
+                "or": "YA",
+                "text2": "Ya milke jhooth jeena?"
+            },
+            {
+                "text": "Kya aapke liye zyada bura hai bhool jana?",
+                "or": "YA",
+                "text2": "Ya kisi cheez ke liye yaad rehna jo aap nahi ho?"
+            },
+            {
+                "text": "Kya aap fate mein zyada believe karte ho?",
+                "or": "YA",
+                "text2": "Ya apne choices mein?"
+            },
+            {
+                "text": "Kya aap pyaar karte ho jo aapko pyaar nahi karta?",
+                "or": "YA",
+                "text2": "Ya pyaar karte ho jise aap pyaar nahi kar pate?"
+            },
+            {
+                "text": "Kya aap apne sapne ke liye sab kuch de doge?",
+                "or": "YA",
+                "text2": "Ya kisi important insan ke liye apna sapna chod doge?"
+            },
+            {
+                "text": "Kya aap sapno mein hazaar zindagi jeena chahte ho?",
+                "or": "YA",
+                "text2": "Ya ek real aur intense zindagi?"
+            },
+            {
+                "text": "Kya aap apni memory kho dena pasand karoge?",
+                "or": "YA",
+                "text2": "Ya sab kuch yaad karke aage nahi badh pana?"
+            },
+            {
+                "text": "Kya aapke liye zyada dardnak hai koi na hona?",
+                "or": "YA",
+                "text2": "Ya koi hona par feelings na hona?"
+            },
+            {
+                "text": "Kya aap moment ka wait karte ho?",
+                "or": "YA",
+                "text2": "Ya moment create karte ho?"
+            },
+            {
+                "text": "Kya aap hamesha sach bol kar kisi ko hurt karoge?",
+                "or": "YA",
+                "text2": "Ya kisi ko protect karne ke liye jhoot bologe?"
+            },
+            {
+                "text": "Kya aap second chance doge usko jinhone aapko hurt kiya?",
+                "or": "YA",
+                "text2": "Ya believe karte ho past ko past mein hi rehna chahiye?"
+            },
+            {
+                "text": "Kya aap prefer karoge ki kabhi kisi aise insan ko nahi mile jiska aap par gehra asar hua ho?",
+                "or": "YA",
+                "text2": "Ya sab kuch dubara jeena chahoge, bhale hi uska end ho?"
+            },
+            {
+                "text": "Kya aap zyada believe karte ho apni aankhon par?",
+                "or": "YA",
+                "text2": "Ya apni feelings par?"
+            },
+            {
+                "text": "Kya aapko lagta hai bhaagna aasan hai?",
+                "or": "YA",
+                "text2": "Ya dard jhelte hue situation face karna?"
+            },
+            {
+                "text": "Kya aapke paas sab kuch hai, par phir bhi khali feel karte ho?",
+                "or": "YA",
+                "text2": "Ya thoda kam hai par shanti mehsoos karte ho?"
+            },
+
+
+
+            {
+                "text": "Kya aap apna past badaloge?",
+                "or": "YA",
+                "text2": "Ya maanoge ki wahi aapko aaj ka insaan banata hai?"
+            },
+            {
+                "text": "Aankh band kar ke bharosa karna",
+                "or": "YA",
+                "text2": "Sab par shak karna?"
+            },
+            {
+                "text": "Kisi ke badalne ka intezaar karna",
+                "or": "YA",
+                "text2": "Dard ke saath aage badhna?"
+            },
+            {
+                "text": "Asaani se apne aap ko dena",
+                "or": "YA",
+                "text2": "Sab kuch chupake rakhna darr se ki aap kho jaoge?"
+            },
+            {
+                "text": "Zyada mehsoos karne wala hi sabse strong hota hai",
+                "or": "YA",
+                "text2": "Ya jo kuch mehsoos nahi karta?"
+            },
+            {
+                "text": "Control mein jeena",
+                "or": "YA",
+                "text2": "Risk lena aur balance kho dena?"
+            },
+            {
+                "text": "Kya pyaar ek choice hai?",
+                "or": "YA",
+                "text2": "Ya wo bas ho jata hai?"
+            },
+            {
+                "text": "Zaroori hona pasand karoge",
+                "or": "YA",
+                "text2": "Chaah jaane wala hona?"
+            },
+            {
+                "text": "Suraksha ke liye aam zindagi mein dhal jaoge",
+                "or": "YA",
+                "text2": "Azadi ke liye chaos ka samna karoge?"
+            },
+            {
+                "text": "Shuru karna sabse mushkil hai",
+                "or": "YA",
+                "text2": "Rukna kab pata chale, wo zyada mushkil hai?"
+            },
+            {
+                "text": "Darr na hona hi bahaduri hai",
+                "or": "YA",
+                "text2": "Darr ke bawajood aage badhna?"
+            },
+            {
+                "text": "Kya aap future ki har baat jaanna pasand karoge?",
+                "or": "YA",
+                "text2": "Ya waqt par baatein khud samajhoge?"
+            },
+            {
+                "text": "Kisi ko zindagi ke liye khona",
+                "or": "YA",
+                "text2": "Ya uske paas hona par door rehna?"
+            },
+            {
+                "text": "Anishchit cheez ke liye ladna pasand karoge",
+                "or": "YA",
+                "text2": "Ya khade rehna aur kabhi nahi jaanna kya ho sakta tha?"
+            },
+            {
+                "text": "Apne favourite restaurant ke liye unlimited gift card",
+                "or": "YA",
+                "text2": "Apni favourite shop ke liye unlimited gift card"
+            },
+            {
+                "text": "Agle 10 saal tak kal kya karoge pata na hona",
+                "or": "YA",
+                "text2": "Agle 10 saal tak har din kya karoge pata hona"
+            },
+            {
+                "text": "Apne best friend ko kabhi na dekhna",
+                "or": "YA",
+                "text2": "Apne best friend se kabhi baat na kar paana"
+            },
+            {
+                "text": "Ameer hona",
+                "or": "YA",
+                "text2": "Famous hona"
+            },
+            {
+                "text": "Gaardaan se pair tak pura tattoo hona",
+                "or": "YA",
+                "text2": "Chehre par bada tattoo hona"
+            },
+            {
+                "text": "Har 5 minute haath dhona",
+                "or": "YA",
+                "text2": "Kabhi baal dhona na paana"
+            },
+            {
+                "text": "Idhar udhar hopping karna",
+                "or": "YA",
+                "text2": "Idhar udhar skipping karna"
+            },
+            {
+                "text": "Apni favourite makeup aur skincare products ki unlimited supply",
+                "or": "YA",
+                "text2": "30 saal ki umar mein apna ghar hona"
+            },
+            {
+                "text": "Apne crush ke dost banna",
+                "or": "YA",
+                "text2": "Uske saath date par jana"
+            },
+            {
+                "text": "Kabhi office jane ki zarurat na hona",
+                "or": "YA",
+                "text2": "3 din ke weekend hona"
+            },
+            {
+                "text": "Kim Kardashian ko maa banana",
+                "or": "YA",
+                "text2": "Kris Jenner ko maa banana"
+            },
+            {
+                "text": "Har khane ke baad handstand karna",
+                "or": "YA",
+                "text2": "Har khane ke baad cartwheel karna"
+            },
+            {
+                "text": "Internet hamesha slow hona",
+                "or": "YA",
+                "text2": "Mobile ki battery hamesha kam rehna"
+            },
+            {
+                "text": "Poore jeevan Justin Bieber ka 'Baby' sunna",
+                "or": "YA",
+                "text2": "Poore jeevan Taylor Swift ka 'Red' sunna"
+            },
+            {
+                "text": "Apni favourite series ka character banna",
+                "or": "YA",
+                "text2": "Wo series kabhi exist na karti"
+            },
+            {
+                "text": "Kabhi Google ya kisi search engine ka istemal na kar paana",
+                "or": "YA",
+                "text2": "Kabhi social media ka istemal na kar paana"
+            },
+            {
+                "text": "Famous celebrity banna",
+                "or": "YA",
+                "text2": "Celebrity se shaadi karna (aur aap unknown rehna)"
+            },
+            {
+                "text": "Apne favourite bachpan ke movie mein jeena",
+                "or": "YA",
+                "text2": "Apne favourite bachpan ke book mein jeena"
+            },
+            {
+                "text": "Perfect smoky eye banana aana",
+                "or": "YA",
+                "text2": "Perfect contour banana aana"
+            },
+            {
+                "text": "Space travel karke naya planet dhoondhna",
+                "or": "YA",
+                "text2": "Underwater adventure karke naya samundari rajya dhoondhna"
+            },
+            {
+                "text": "Shant tropical island mein jeena",
+                "or": "YA",
+                "text2": "Busy bade shehar mein jeena"
+            },
+            {
+                "text": "Gaane ke liye famous hona",
+                "or": "YA",
+                "text2": "Acting, dancing ya influencer ban kar famous hona"
+            },
+            {
+                "text": "Har saal job badalna jab tak retire na ho jao",
+                "or": "YA",
+                "text2": "Poore career mein ek hi job karna"
+            },
+            {
+                "text": "Canal mein houseboat mein jeena",
+                "or": "YA",
+                "text2": "Motorhome mein jeena"
+            },
+            {
+                "text": "Hamesha professional hair treatment karwana",
+                "or": "YA",
+                "text2": "Hamesha professional nail treatment karwana"
+            },
+            {
+                "text": "Olympic athlete banna",
+                "or": "YA",
+                "text2": "Bimari ka ilaaj dhoondhne wala scientist banna"
+            },
+            {
+                "text": "Kam samaan ke saath duniya ghoomna",
+                "or": "YA",
+                "text2": "Apne janm shehar mein rehte hue bada ghar hona"
+            },
+            {
+                "text": "Hamesha beach par chhutti manani",
+                "or": "YA",
+                "text2": "Hamesha shehar mein chhutti manani"
+            },
+            {
+                "text": "Dolly Parton jaisa wardrobe hona",
+                "or": "YA",
+                "text2": "Billie Eilish jaisa wardrobe hona"
+            },
+            {
+                "text": "Roz sirf kaala kapda pehna",
+                "or": "YA",
+                "text2": "Roz rainbow colors mix karke kapde pehna"
+            },
+            {
+                "text": "Kaam ya college ke paas rehna",
+                "or": "YA",
+                "text2": "Door rehna par driver ke saath"
+            },
+            {
+                "text": "Poore jeevan sirf teekha khana khana",
+                "or": "YA",
+                "text2": "Kabhi bhi teekha khana na khana"
+            },
+            {
+                "text": "Apni recipe ki kitaab likhna",
+                "or": "YA",
+                "text2": "Apni kahani ka novel likhna"
+            },
+            {
+                "text": "Garmee bahut zyada aur sardee bahut thandi",
+                "or": "YA",
+                "text2": "Garmee ajeeb aur sardee moderate"
+            },
+            {
+                "text": "Escape room mein rehna",
+                "or": "YA",
+                "text2": "Detective game (Cluedo) mein rehna"
+            },
+            {
+                "text": "Apni favourite candle ka smell kabhi na mehsoos kar pana",
+                "or": "YA",
+                "text2": "Naye bake ki hui cookies ka taste kabhi na mehsoos kar pana"
+            },
+            {
+                "text": "Janwaron se baat karna",
+                "or": "YA",
+                "text2": "Duniya ki sabhi bhashayein bolna"
+            },
+            {
+                "text": "USA mein road trip karna",
+                "or": "YA",
+                "text2": "Australia mein road trip karna"
+            },
+            {
+                "text": "Lord of the Rings ki duniya mein jeena",
+                "or": "YA",
+                "text2": "Star Wars ki duniya mein jeena"
+            },
+            {
+                "text": "Har cheez ke liye hamesha 1 ghanta late hona",
+                "or": "YA",
+                "text2": "Har cheez ke liye hamesha 1 ghanta early hona"
+            },
+            {
+                "text": "Duniya ki sabse badi football team ka manager banna",
+                "or": "YA",
+                "text2": "Duniya ki sabse badi band ka manager banna"
+            },
+            {
+                "text": "Apni favourite music kabhi na sun pana, par artist ka dost banna",
+                "or": "YA",
+                "text2": "Har show ke front row mein rehna, par artist ko pata na hona"
+            },
+            {
+                "text": "Kitchen ke saare appliances kaale hone chahiye",
+                "or": "YA",
+                "text2": "Kitchen ke saare appliances pink hone chahiye"
+            },
+            {
+                "text": "Sabse achhe gifts dena",
+                "or": "YA",
+                "text2": "Sabse achhe advice dena"
+            },
+            {
+                "text": "Movies mein apna accha taste hona",
+                "or": "YA",
+                "text2": "Art mein apna accha taste hona"
+            },
+            {
+                "text": "Sirf Instagram pe like kar sakte ho, par like nahi milta",
+                "or": "YA",
+                "text2": "Sirf like milta hai, par like nahi kar sakte"
+            },
+            {
+                "text": "Kardashian banna",
+                "or": "YA",
+                "text2": "Hilton banna"
+            },
+            {
+                "text": "Kourtney, Kim, Khloé, Kendall banna",
+                "or": "YA",
+                "text2": "Kylie banna"
+            },
+            {
+                "text": "Luxury penthouse mein rehna",
+                "or": "YA",
+                "text2": "Badi mansion mein rehna"
+            },
+            {
+                "text": "Model banna",
+                "or": "YA",
+                "text2": "Photographer banna"
+            },
+            {
+                "text": "Amazing cartoonist banna",
+                "or": "YA",
+                "text2": "Amazing portrait artist banna"
+            },
+            {
+                "text": "Kabhi chhutti na lena",
+                "or": "YA",
+                "text2": "Kabhi apne pyaar se milna na hona"
+            },
+            {
+                "text": "Sirf ek jodi jute hona",
+                "or": "YA",
+                "text2": "Sirf ek coat hona"
+            },
+            {
+                "text": "Sirf dahi khana",
+                "or": "YA",
+                "text2": "Sirf peanut butter khana"
+            },
+            {
+                "text": "Pura din billi ke peeche hona",
+                "or": "YA",
+                "text2": "Pura din kutte ke peeche hona"
+            },
+            {
+                "text": "Apne best friend ke saath rehna",
+                "or": "YA",
+                "text2": "Apne partner ke saath rehna"
+            },
+            {
+                "text": "Sirf Cheese Strings ke saath jeena",
+                "or": "YA",
+                "text2": "Sirf Babybels ke saath jeena"
+            },
+            {
+                "text": "Sirf Lidl se shopping karna",
+                "or": "YA",
+                "text2": "Sirf Aldi se shopping karna"
+            },
+            {
+                "text": "Kabhi Christmas dinner na khana, par family ke saath rehna",
+                "or": "YA",
+                "text2": "Best Christmas dinner lena, par akela rehna"
+            },
+            {
+                "text": "Bathtub ke nahane se chhod dena, par powerful shower lena",
+                "or": "YA",
+                "text2": "Bathtub mein nahaana, par weak shower lena"
+            },
+            {
+                "text": "Apni eyebrows poori tarah shave karna",
+                "or": "YA",
+                "text2": "Apne baalon ka aadha hissa shave karna"
+            },
+            {
+                "text": "Ek keet khana",
+                "or": "YA",
+                "text2": "Mittii se dhake chocolate khana"
+            },
+            {
+                "text": "Kya aap maple syrup pasine ke roop mein bahayenge?",
+                "or": "YA",
+                "text2": "Ya strawberry jelly aansuon ke roop mein?"
+            },
+            {
+                "text": "Zindagi bhar roze roze pink Ugg boots pehna",
+                "or": "YA",
+                "text2": "Pink Crocs pehna?"
+            },
+            {
+                "text": "Disney movie mein rehna, jaise The Little Mermaid ki tarah samundar mein",
+                "or": "YA",
+                "text2": "Ya Aladdin ke duniya mein?"
+            },
+            {
+                "text": "Eyebrows jo kabhi badhna band na karein",
+                "or": "YA",
+                "text2": "Ungliyon ke baal jo kabhi badhna band na karein?"
+            },
+            {
+                "text": "Kya aap chahoge ki aapke sab sapne Snapchat par live dikhaye jaayein?",
+                "or": "YA",
+                "text2": "Ya aapke sab embarrassing moments TikTok par viral ho?"
+            },
+            {
+                "text": "Hamesha muh khol ke khana",
+                "or": "YA",
+                "text2": "Public transport mein calls hamesha speaker par rakhna?"
+            },
+            {
+                "text": "Sone ke liye high heels pehna",
+                "or": "YA",
+                "text2": "Har jagah slippers pehna?"
+            },
+            {
+                "text": "Roz shaadi ka dress pehna",
+                "or": "YA",
+                "text2": "Roz bikini pehna?"
+            },
+            {
+                "text": "Reality show 'I'm a Celeb' mein participate karna",
+                "or": "YA",
+                "text2": "'SAS: Who Dares Wins' mein participate karna?"
+            },
+            {
+                "text": "Roz roz sweatshirt pehna",
+                "or": "YA",
+                "text2": "Kabhi sweatshirt na pehna?"
+            },
+            {
+                "text": "Ghalti se spicy message apne relative ko bhejna",
+                "or": "YA",
+                "text2": "Ya apne boss ko?"
+            },
+            {
+                "text": "Ungliyan gajar ki bani ho",
+                "or": "YA",
+                "text2": "Pair baingan ke bane ho?"
+            },
+            {
+                "text": "First day job pe toilet clog karna",
+                "or": "YA",
+                "text2": "First date pe toilet clog karna?"
+            },
+            {
+                "text": "Jab bhi aankhen band karo horror movie loop ho",
+                "or": "YA",
+                "text2": "Jab bhi jagte raho 'Macarena' song dimaag mein ho?"
+            },
+            {
+                "text": "Naye logo se milte hi 'Bootylicious' gaana",
+                "or": "YA",
+                "text2": "Meeting mein har baar dance karna?"
+            },
+            {
+                "text": "Sab underwear thoda itchy ho",
+                "or": "YA",
+                "text2": "Sab swimsuits thoda tight ho?"
+            },
+            {
+                "text": "Floral wallpaper wali house mein rehna",
+                "or": "YA",
+                "text2": "Bahut bright rang wali paint wali walls wali house mein rehna?"
+            },
+            {
+                "text": "Oven mitts jaise haath hona",
+                "or": "YA",
+                "text2": "Street lamps jaise pair hona?"
+            },
+            {
+                "text": "Sirf roller skates pe chalna",
+                "or": "YA",
+                "text2": "Ski pe chalna?"
+            },
+            {
+                "text": "Marshmallows ki barish wali duniya mein rehna",
+                "or": "YA",
+                "text2": "Cotton candy ki baraf wali duniya mein rehna?"
+            },
+            {
+                "text": "Apne chahne wale tattoo face par banwana",
+                "or": "YA",
+                "text2": "Chhota tattoo chest par dusre ke dwara banwaya hua?"
+            },
+            {
+                "text": "Hamesha mullet haircut rakhna",
+                "or": "YA",
+                "text2": "Hamesha ponytail rakhna?"
+            },
+            {
+                "text": "Kabhi shampoo na use karna",
+                "or": "YA",
+                "text2": "Kabhi toothpaste na use karna?"
+            },
+            {
+                "text": "Hamesha rhyme mein baat karni pade",
+                "or": "YA",
+                "text2": "Hamesha riddles mein baat karni pade?"
+            },
+            {
+                "text": "Hamesha ek paon par koodna",
+                "or": "YA",
+                "text2": "Hamesha crouch karke chalna?"
+            },
+            {
+                "text": "Zindagi bhar chopsticks se khana",
+                "or": "YA",
+                "text2": "Kabhi knife use na kar pana?"
+            },
+            {
+                "text": "Puri din annoying laugh sunna",
+                "or": "YA",
+                "text2": "Ek ghanta tickle hona?"
+            },
+            {
+                "text": "Kapde jo har waqt badalte rahein pehna",
+                "or": "YA",
+                "text2": "Baalo ka colour jo har waqt badalta rahe?"
+            },
+            {
+                "text": "Halloween pe Aldi supermarket ka costume pehna",
+                "or": "YA",
+                "text2": "Lidl supermarket ka costume pehna?"
+            },
+            {
+                "text": "Duniya ka sabse funny insan banna",
+                "or": "YA",
+                "text2": "Sabse handsome/beautiful banna?"
+            },
+            {
+                "text": "Hasne par baar baar pee kar dena",
+                "or": "YA",
+                "text2": "Hasne par zyada mucus nikalna?"
+            },
+            {
+                "text": "Har baar baat karte waqt thoda pee kar dena",
+                "or": "YA",
+                "text2": "Bathroom ki door hamesha khuli chhod dena?"
+            },
+            {
+                "text": "Hamesha loose clothes pehna",
+                "or": "YA",
+                "text2": "Hamesha tight clothes pehna?"
+            },
+            {
+                "text": "Ek saal tak roz pizza khana",
+                "or": "YA",
+                "text2": "Kabhi pizza na khana?"
+            },
+            {
+                "text": "Ek giant chicken se bhaagna",
+                "or": "YA",
+                "text2": "20 normal size chickens se bhaagna?"
+            },
+            {
+                "text": "Aankhon ki jagah olives hona",
+                "or": "YA",
+                "text2": "Naak aloo ki tarah hona?"
+            },
+            {
+                "text": "Glitter vomit karna",
+                "or": "YA",
+                "text2": "Spicy sauce ke aansu bahana?"
+            },
+            {
+                "text": "Hasne par 10 minute tak hiccups hona",
+                "or": "YA",
+                "text2": "Kabhi hasna na?"
+            },
+            {
+                "text": "Sabse badi hangover hona, par sabse mazedar raat guzarna",
+                "or": "YA",
+                "text2": "Kabhi hangover na hona, par kabhi maza na karna?"
+            },
+            {
+                "text": "Ret sand ka sandwich khana",
+                "or": "YA",
+                "text2": "Mitti ka glass peena?"
+            },
+            {
+                "text": "Badi conch hona",
+                "or": "YA",
+                "text2": "Chhoti conch hona?"
+            },
+            {
+                "text": "Subah sex karna",
+                "or": "YA",
+                "text2": "Raat ko late sex karna?"
+            },
+            {
+                "text": "Cheek par kiss lena pasand karoge",
+                "or": "YA",
+                "text2": "Forehead par kiss lena?"
+            },
+            {
+                "text": "Car mein sex karna",
+                "or": "YA",
+                "text2": "Shower mein sex karna?"
+            },
+            {
+                "text": "Zyada foreplay karna pasand karoge",
+                "or": "YA",
+                "text2": "Zyada acting karna?"
+            },
+            {
+                "text": "Shaadi kar ke ghar aur baccha lena pasand karoge",
+                "or": "YA",
+                "text2": "Kabhi bhi ye sab na lena, par saath duniya ghoomna?"
+            },
+            {
+                "text": "Classical music ke saath sexy playlist banana",
+                "or": "YA",
+                "text2": "Heavy metal ke saath?"
+            },
+            {
+                "text": "Kabhi bhi underwear na pehna",
+                "or": "YA",
+                "text2": "Kabhi bhi socks na pehna?"
+            },
+            {
+                "text": "Kabhi shaadi na karna, par apne dream house mein rehna",
+                "or": "YA",
+                "text2": "Shaadi karna, par kabhi apne dream house mein na rehna?"
+            },
+            {
+                "text": "Apni maut ki date pata karna pasand karoge",
+                "or": "YA",
+                "text2": "Maut ka reason pata karna?"
+            },
+            {
+                "text": "Thoughtful gift lena pasand karoge",
+                "or": "YA",
+                "text2": "Apne partner se expensive gift lena?"
+            },
+            {
+                "text": "Sirf 'good morning' ke messages lena pasand karoge",
+                "or": "YA",
+                "text2": "Sirf 'good night' ke messages?"
+            },
+            {
+                "text": "Partner ko white lie se khush rakhna",
+                "or": "YA",
+                "text2": "Seedhi sachai bolna?"
+            },
+            {
+                "text": "Zyada paise ke saath kam quality time bitana",
+                "or": "YA",
+                "text2": "Kam paise ke saath zyada quality time bitana?"
+            },
+            {
+                "text": "Zyada personal satisfaction chahoge",
+                "or": "YA",
+                "text2": "Zyada professional satisfaction chahoge?"
+            },
+            {
+                "text": "Monogamous relationship rakhna pasand karoge",
+                "or": "YA",
+                "text2": "Polyamory try karna?"
+            },
+            {
+                "text": "Love Island mein participate karna",
+                "or": "YA",
+                "text2": "Love is Blind mein?"
+            },
+            {
+                "text": "Sirf bed mein sex karna zindagi bhar",
+                "or": "YA",
+                "text2": "Kabhi bhi bed mein sex na kar pana?"
+            },
+            {
+                "text": "Apni soulmate ko jaana, par saath na reh pana",
+                "or": "YA",
+                "text2": "Kisi normal insan ke saath rehna jo saath reh sakta ho?"
+            },
+            {
+                "text": "Roz raat ko cook karna aur partner clean kare",
+                "or": "YA",
+                "text2": "Ulta?"
+            },
+            {
+                "text": "Roz alag bed mein sona aur sex karna",
+                "or": "YA",
+                "text2": "Ek bed mein sona, par kabhi sex na karna?"
+            },
+            {
+                "text": "Dream wedding chahoge",
+                "or": "YA",
+                "text2": "Dream honeymoon chahoge?"
+            },
+            {
+                "text": "Koi tumhara wedding ruin kare, phir bhi shaadi kar lo",
+                "or": "YA",
+                "text2": "Kabhi shaadi na kar pana?"
+            },
+            {
+                "text": "Kabhi baat na kar pana, par saath rehna",
+                "or": "YA",
+                "text2": "Kabhi mil na pana?"
+            }, {
+                "text": "Kya aap ek successful business saath chalana pasand karoge lekin aakhir mein alag ho jaoge?",
+                "or": "YA",
+                "text2": "Kya aap minimum wage se kam mein jeena pasand karoge par saath hi rahoge?"
+            },
+            {
+                "text": "Kya aap ek desert island mein saath phanse rehna pasand karoge?",
+                "or": "YA",
+                "text2": "Ya ek busy city mein alag alag rehna?"
+            },
+            {
+                "text": "Kya aap ek bada shaadi karna pasand karoge?",
+                "or": "YA",
+                "text2": "Ya chhupke shaadi karna aur bhaagna?"
+            },
+            {
+                "text": "Kya aap baarish wale din ghar par gale lagke bitana pasand karoge?",
+                "or": "YA",
+                "text2": "Ya shehar explore karna saath mein?"
+            },
+            {
+                "text": "Kya aap ek hobby share karna pasand karoge?",
+                "or": "YA",
+                "text2": "Ya alag alag hobbies rakhna aur ek dusre ko sikhana?"
+            },
+            {
+                "text": "Kya aap apni saari kamai iss saal kho dena pasand karoge?",
+                "or": "YA",
+                "text2": "Ya apni saari yaadein iss saal ki kho dena?"
+            },
+            {
+                "text": "Kya aap bina taste ke jeena pasand karoge?",
+                "or": "YA",
+                "text2": "Ya bina smell ke?"
+            },
+            {
+                "text": "Kya aap hamesha red light par rukna pasand karoge?",
+                "or": "YA",
+                "text2": "Ya hamesha slow internet face karna?"
+            },
+            {
+                "text": "Kya aap 25,000 rupaye kamaoge?",
+                "or": "YA",
+                "text2": "Ya aapka best friend 2,50,000 kamaega?"
+            },
+            {
+                "text": "Kya aap office mein undergarments mein uthna pasand karoge?",
+                "or": "YA",
+                "text2": "Ya jungle ke beech nange uthna?"
+            },
+            {
+                "text": "Kya aap apni maa ka search history dekhna pasand karoge?",
+                "or": "YA",
+                "text2": "Ya apne pita ka?"
+            },
+            {
+                "text": "Kya aap ek dead body dekhna pasand karoge?",
+                "or": "YA",
+                "text2": "Ya ek murder ka witness banna?"
+            },
+            {
+                "text": "Kya aapke dimaag ke upar thought balloons aayein jahan sab aapke thoughts dekh sakein?",
+                "or": "YA",
+                "text2": "Ya aapka teenage diary internet pe publish ho jaye?"
+            },
+            {
+                "text": "Kya aap hamesha 4 saal ke rahna pasand karoge?",
+                "or": "YA",
+                "text2": "Ya hamesha 90 saal ke?"
+            },
+            {
+                "text": "Kya aap blush karoge jab koi 'hello' kahe?",
+                "or": "YA",
+                "text2": "Ya gussa ho jaoge jab koi 'bye' kahe?"
+            },
+            {
+                "text": "Kya aap history books mein famous banna pasand karoge?",
+                "or": "YA",
+                "text2": "Ya marne ke baad bhool jana?"
+            },
+            {
+                "text": "Kya aap duniya ke sabse strong insan banna pasand karoge?",
+                "or": "YA",
+                "text2": "Ya sabse intelligent insan?"
+            },
+            {
+                "text": "Kya aapki imagination bahut vivid ho?",
+                "or": "YA",
+                "text2": "Ya photographic memory ho?"
+            },
+            {
+                "text": "Kya aap apni zindagi jungle mein bitana pasand karoge?",
+                "or": "YA",
+                "text2": "Ya jail mein?"
+            },
+            {
+                "text": "Kya aap aise desh mein rehna pasand karoge jahan government hamesha sahi kaam karti ho?",
+                "or": "YA",
+                "text2": "Ya aise desh mein jahan aap hi ruler ho?"
+            },
+            {
+                "text": "Kya aap aise duniya mein jeena pasand karoge jahan koi crime na ho?",
+                "or": "YA",
+                "text2": "Ya jahan privacy na ho?"
+            },
+            {
+                "text": "Kya aap 100 saal aur perfectly healthy body ke sath jeena pasand karoge?",
+                "or": "YA",
+                "text2": "Ya normal ageing ke sath?"
+            },
+            {
+                "text": "Kya aap technology (mobile, computer, etc.) chhod doge?",
+                "or": "YA",
+                "text2": "Ya saare movies, series aur books chhod doge?"
+            },
+            {
+                "text": "Kya aap aise future mein jeena pasand karoge jahan sab bahut serious ho?",
+                "or": "YA",
+                "text2": "Ya jahan koi serious na ho?"
+            },
+            {
+                "text": "Kya aap attention ka center banna pasand karoge?",
+                "or": "YA",
+                "text2": "Ya unnoticed rehna?"
+            },
+            {
+                "text": "Kya aap telepathy se baat karna pasand karoge?",
+                "or": "YA",
+                "text2": "Ya duniya ki sab languages seekhna?"
+            },
+            {
+                "text": "Kya aap apne past self se 1 minute ki baat karna pasand karoge?",
+                "or": "YA",
+                "text2": "Ya apne future self se?"
+            },
+            {
+                "text": "Kya aap apne ex ke body mein rehna pasand karoge?",
+                "or": "YA",
+                "text2": "Ya apni dadi ke body mein?"
+            },
+            {
+                "text": "Kya aap kisi loved one ko wapas lana pasand karoge lekin wo zinda duniya mein unhappy rahe?",
+                "or": "YA",
+                "text2": "Ya uski death ko accept karte hue achi yaadein sambhalna?"
+            },
+            {
+                "text": "Kya aap jab sad ho to uncontrollably rooge?",
+                "or": "YA",
+                "text2": "Ya zor zor se chillaooge?"
+            },
+            {
+                "text": "Kya aap poverty khatam karna pasand karoge?",
+                "or": "YA",
+                "text2": "Ya world peace lana?"
+            },
+            {
+                "text": "Kya aap Narnia mein jeena pasand karoge?",
+                "or": "YA",
+                "text2": "Ya Westeros mein?"
+            },
+            {
+                "text": "Kya aapka favorite musician aapke liye private concert dega?",
+                "or": "YA",
+                "text2": "Ya aapke saath dinner karega?"
+            },
+            {
+                "text": "Kya aap Barack Obama se milna pasand karoge?",
+                "or": "YA",
+                "text2": "Ya Albert Einstein se?"
+            }, {
+                "text": "School ke saare exams dobara dena?",
+                "or": "YA",
+                "text2": "Roz roz diaper pehenna school ke time jitna lambe samay ke liye?"
+            },
+            {
+                "text": "Hamesha sex karna lekin kabhi orgasm na hona?",
+                "or": "YA",
+                "text2": "Mahine mein ek baar sex karna aur hamesha orgasm hona?"
+            },
+            {
+                "text": "Apne partner ke samne sabke saamne hamesha 'docinho de coco' bulaya jana?",
+                "or": "YA",
+                "text2": "Jab bhi jhagda ho, needle se chhuna jana?"
+            },
+            {
+                "text": "Dard me marna lekin family ko lage ki peacefully mara?",
+                "or": "YA",
+                "text2": "Peacefully marna lekin family ko lage ki dard me mara?"
+            },
+            {
+                "text": "Masturbate karte waqt lage ki koi dekh raha hai?",
+                "or": "YA",
+                "text2": "Bathroom jaate waqt hamesha koi dekh raha ho?"
+            },
+            {
+                "text": "Jab bhi fart karo truck horn ki awaaz aaye?",
+                "or": "YA",
+                "text2": "Jab bhi burp karo Tarzan ki cheekh aaye?"
+            },
+            {
+                "text": "Ek saal sirf plain oatmeal khana?",
+                "or": "YA",
+                "text2": "Teen mahine mein haftay mein 3 baar apne chhote toe ko diwar ki kone se takkar dena?"
+            },
+            {
+                "text": "Jab bhi boss bathroom jaaye uske saath jana aur motivational sentences bolna?",
+                "or": "YA",
+                "text2": "Sumo fighters ki diapers utarte waqt unke saath hona?"
+            },
+            {
+                "text": "Ek saal jail ke bathrooms saaf karna?",
+                "or": "YA",
+                "text2": "Teen mahine psychiatric hospital mein rehna?"
+            },
+            {
+                "text": "John Wick ka kutta maarna?",
+                "or": "YA",
+                "text2": "Liam Neeson ki beti ko kidnap karna?"
+            },
+            {
+                "text": "Sirf dance karte hue chalna?",
+                "or": "YA",
+                "text2": "Hamesha gaate hue baat karna?"
+            },
+            {
+                "text": "Social media pe hamesha zero views milna?",
+                "or": "YA",
+                "text2": "Million views milna lekin ek hater jo aapke sab secrets jaanta ho aapko pareshan karta rahe?"
+            },
+            {
+                "text": "Zindagi bhar sirf paani peena?",
+                "or": "YA",
+                "text2": "Kuch bhi peena lekin har drink mein thoda peeche kisi aur ka urine ho?"
+            },
+            {
+                "text": "Kabhi pyar na karna?",
+                "or": "YA",
+                "text2": "Kabhi khana ka taste na mehsoos karna?"
+            },
+            {
+                "text": "Apna naam Adolf Hitler rakhna?",
+                "or": "YA",
+                "text2": "Adolf Hitler jaisa chehra hona?"
+            },
+            {
+                "text": "Aise duniya mein rehna jahan sab log flat earth believers ho?",
+                "or": "YA",
+                "text2": "Aisi duniya jahan sab log khuli muh se chabaate ho?"
+            },
+            {
+                "text": "Apne thoughts Galvão Bueno ki awaaz mein sunna?",
+                "or": "YA",
+                "text2": "Mickey ki awaaz mein?"
+            },
+            {
+                "text": "World Cup final mein last penalty miss karna?",
+                "or": "YA",
+                "text2": "Bachcho ko batana ki Santa Claus exist nahi karta?"
+            },
+            {
+                "text": "Roz 5 spoons farofa bina paani ke khana?",
+                "or": "YA",
+                "text2": "Perfectly 10 elastic bedsheets fold karna?"
+            },
+            {
+                "text": "Har raat ek mosquito ki buzzing sunna?",
+                "or": "YA",
+                "text2": "Jab koi aapse baat kare to Baby Shark song sunna?"
+            },
+            {
+                "text": "Apni puri zindagi CCBB exhibition mein dikhai jana?",
+                "or": "YA",
+                "text2": "Ek mahina pigsty mein sona?"
+            },
+            {
+                "text": "Roz apne parents ko sex karte dekhna?",
+                "or": "YA",
+                "text2": "Ek baar unke saath menage karna?"
+            },
+            {
+                "text": "Sex karte waqt hamesha paper bag pehnna?",
+                "or": "YA",
+                "text2": "Sex ke baad apne performance ka detailed analysis sunna?"
+            },
+            {
+                "text": "Roz office jaate waqt kachre ke puddle mein paon dalna?",
+                "or": "YA",
+                "text2": "Jab bhi kisi ko greet karo ek chhota rapid fart nikalna?"
+            },
+            {
+                "text": "Apna beta porn star ho aur sabko pata ho?",
+                "or": "YA",
+                "text2": "Apne bete ko batana ki aapne uski girlfriend ke saath porn kiya hai?"
+            },
+            {
+                "text": "Partner ka tattoo ex ke naam ka ho aur kabhi remove na kare?",
+                "or": "YA",
+                "text2": "Partner roz kehta rahe ki tumhe uska naam tattoo karna hai?"
+            },
+            {
+                "text": "Agale 3 sardiyo tak thanda paani se nahaana?",
+                "or": "YA",
+                "text2": "Jab bhi aap kisi se pyaar karo erection na ho?"
+            },
+            {
+                "text": "Chahoge ki tumhara partner rote?",
+                "or": "YA",
+                "text2": "Ya ki wo tumhe gaali de?"
+            },
+            {
+                "text": "Sab audio messages 5 minute se lamba ho?",
+                "or": "YA",
+                "text2": "Har hafta Instagram pe tumhari ex aur uski new wali ki photo mile?"
+            },
+            {
+                "text": "50 chhote bulls se ladna?",
+                "or": "YA",
+                "text2": "1 chhihuahua jo bull size ka ho se ladna?"
+            },
+            {
+                "text": "Kisi ko bina daanton ke kiss karna?",
+                "or": "YA",
+                "text2": "Ek shot lena aur gandhe baal wale belly button ko chaatna?"
+            },
+            {
+                "text": "Loan ke liye loan shark se paise maangna risk ke saath?",
+                "or": "YA",
+                "text2": "Kisi ko kidnap kar ke ransom maangna?"
+            },
+            {
+                "text": "Wohi din jeena jab tumhara dil toda gaya tha?",
+                "or": "YA",
+                "text2": "TV pe apni ex ko har baar sex karte dekhna?"
+            },
+            {
+                "text": "Kabhi alcohol na peena?",
+                "or": "YA",
+                "text2": "Sab job interviews mein hamesha drunk rehna?"
+            },
+            {
+                "text": "Shark se sirf pool noodle se defend karna?",
+                "or": "YA",
+                "text2": "Bear se sirf paani ke balloons se defend karna?"
+            },
+            {
+                "text": "Apka partner ek hi mistress ho lekin usse sachcha pyaar kare?",
+                "or": "YA",
+                "text2": "Multiple mistress ho lekin kisi se pyaar na kare?"
+            },
+            {
+                "text": "Professional me average hona?",
+                "or": "YA",
+                "text2": "Lover me average hona?"
+            },
+            {
+                "text": "Boxing gloves pehen ke jeena?",
+                "or": "YA",
+                "text2": "Duck feet pehen ke?"
+            },
+            {
+                "text": "Jab chaho sex karna?",
+                "or": "YA",
+                "text2": "Jab chaho kuch bhi kharidna?"
+            },
+            {
+                "text": "Kaam par sabko nafrat karte hue bhi promotion milna?",
+                "or": "YA",
+                "text2": "Kaam par sabka pyaar paana lekin kabhi promotion na milna?"
+            },
+            {
+                "text": "Slip karte hue chalna?",
+                "or": "YA",
+                "text2": "Raste par raitna?"
+            },
+            {
+                "text": "Desh chodna aur kabhi wapas na aana?",
+                "or": "YA",
+                "text2": "Kabhi desh chodna na paana?"
+            },
+            {
+                "text": "",
+                "or": "YA",
+                "text2": "?"
+            },
+            {
+                "text": "Ek gentle aur fair boss ke liye kaam karna?",
+                "or": "YA",
+                "text2": "Ek strict aur unfair boss banna?"
+            }
+        ]
+    };
+
+    let questions = [];
+    let currentQuestion = 0;
+
+    // Função para embaralhar um array (Fisher-Yates Shuffle)
+    function shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array;
+    }
+
+    // Função para carregar as perguntas e iniciar o jogo
+    function loadQuestions() {
+        // Copia e embaralha as perguntas do gameData
+        questions = shuffleArray([...gameData.questions]);
+        currentQuestion = 0;
+        nextQuestion();
+    }
+
+    // Função para exibir a próxima pergunta
+    function nextQuestion() {
+        if (questions.length === 0) {
+            document.getElementById("questionPerguntasSemRespostas").textContent = "Carregando perguntas...";
+            return;
+        }
+
+        if (currentQuestion < questions.length) {
+            const question = questions[currentQuestion];
+            const fullText = `${question.text}<br>${question.or}<br>${question.text2}`;
+            document.getElementById("questionPerguntasSemRespostas").innerHTML = fullText;
+            document.getElementById("result").textContent = "";
+            currentQuestion++;
+        } else {
+            // Quando acabar as perguntas, mostra mensagem final e reinicia o jogo
+            document.getElementById("questionPerguntasSemRespostas").textContent = "Fim do Jogo! Espero que estejam se divertindo! Quer jogar novamente?";
+            document.getElementById("result").textContent = "";
+
+            // Reinicia as perguntas embaralhando novamente
+            questions = shuffleArray([...gameData.questions]);
+            currentQuestion = 0;
+        }
+    }
+
+    // Funções para abrir e fechar o pop-up
+    function openPopup() {
+        document.getElementById("popup").style.display = "block";
+    }
+
+    function closePopup() {
+        document.getElementById("popup").style.display = "none";
+    }
+
+    // Fechar o pop-up ao clicar fora dele
+    window.onclick = function (event) {
+        let popup = document.getElementById("popup");
+        if (event.target === popup) {
+            popup.style.display = "none";
+        }
+    };
+
+    // Carrega as perguntas ao carregar a página
+    window.onload = loadQuestions;
+
+</script>

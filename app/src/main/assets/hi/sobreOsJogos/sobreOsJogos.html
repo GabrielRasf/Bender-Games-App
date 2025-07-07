@@ -1,0 +1,333 @@
+
+<!DOCTYPE html>
+<html lang="hi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="../../sobreOsJogos.css">
+    <title>Bebedeira Games</title>
+
+</head>
+
+<body>
+<div class="main-container">
+    <div class="logo-container">
+        <a href="../menuHi.html">
+            <img class="logo-bebedeira" src="../images/logo.png" alt="Bebedeira Logo" />
+        </a>
+    </div>
+
+    <div class="title-container">
+        <h1>Kaunsa game choose karein?</h1>
+        <p class="qual-jogo-escolher">18 games sirf 18+ logon ke liye.</p>
+        <p class="qual-jogo-escolher">Har ek ke baare mein zyada jaankari lo.</p>
+        <p class="qual-jogo-escolher">Masti karo!</p>
+    </div>
+
+    <div class="game-box-content">
+        <a href="#" onclick="openPopup('popup-eununca')" class="game-box">
+            <p>Maine Kabhi Nahin</p>
+        </a>
+        <a href="#" onclick="openPopup('popup-topzeira')" class="game-box">
+            <p>Topzeira</p>
+        </a>
+        <a href="#" onclick="openPopup('popup-riubebeu')" class="game-box">
+            <p>Hansa Toh Peena</p>
+        </a>
+        <a href="#" onclick="openPopup('popup-segredos')" class="game-box">
+            <p>Raaz</p>
+        </a>
+        <a href="#" onclick="openPopup('popup-amigodebosta')" class="game-box">
+            <p>Sabse Bure Dost	</p><!--Piores amigos-->
+        </a>
+        <a href="#" onclick="openPopup('popup-mimicas')" class="game-box">
+            <p>Adults ke liye Mimics</p>
+        </a>
+        <a href="#" onclick="openPopup('popup-verdadeconsequencia')" class="game-box">
+            <p>Truth ya Dare</p>
+        </a>
+        <a href="#" onclick="openPopup('popup-quemnogrupo')" class="game-box">
+            <p>Group Mein Kaun?</p><!--Quem no grupo-->
+        </a>
+        <a href="#" onclick="openPopup('popup-paraconversar')" class="game-box">
+            <p>Baat karne ke liye</p><!--Para conversar-->
+        </a>
+        <a href="#" onclick="openPopup('popup-charadas')" class="game-box">
+            <p>Paheliyan</p> <!--Charadas-->
+        </a>
+        <a href="#" onclick="openPopup('popup-perguntassemresposta')" class="game-box">
+            <p>Bina Jawab Ke Sawal</p> <!--Perguntas sem respotas-->
+        </a>
+        <a href="#" onclick="openPopup('popup-naofez')" class="game-box">
+            <p>Nahi Kiya? Peeliya!</p>
+        </a>
+        <a href="#" onclick="openPopup('popup-intimidade')" class="game-box">
+            <p>Intimacy</p>
+        </a>
+        <a href="#" onclick="openPopup('popup-showDoBebao')" class="game-box">
+            <p>The Big Drunk Show</p>
+        </a>
+        <a href="#" onclick="openPopup('popup-tiroAoAlvo')" class="game-box">
+            <p>Target Pe Shot</p> <!--Tiro ao Alvo-->
+        </a>
+        <a href="#" onclick="openPopup('popup-fatoOuFalso')" class="game-box">
+            <p>Fakt ya Jhooth</p>
+        </a>
+        <a href="#" onclick="openPopup('popup-azarOuSorte')" class="game-box">
+            <p>Luck ya BadLuck</p>
+        </a>
+        <a href="#" onclick="openPopup('popup-antesOuDepois')" class="game-box div-antes-ou-depois">
+            <p>Pehle ya Baad Mein?</p>
+        </a>
+    </div>
+</div>
+
+<!-- Pop-up Eu Nunca -->
+<div id="popup-eununca" class="overlay" onclick="closePopup('popup-eununca')">
+    <div class="popup" onclick="event.stopPropagation()">
+        <h3>Eu Nunca</h3>
+        <ul>
+            <li>Har player kahega "Eu nunca..." aur fir kuch aisa jo usne kabhi nahi kiya (ya jo kiya ho, agar peena hai toh).</li>
+            <li>Jo player jo baat kahi gayi hai wo kar chuka hai, use peena padega.</li>
+            <li>Maqsad hai masti karna, mazedar stories share karna aur apne doston ko acche se jaana.</li>
+        </ul>
+    </div>
+</div>
+
+<!-- Pop-up Topzeira -->
+<div id="popup-topzeira" class="overlay" onclick="closePopup('popup-topzeira')">
+    <div class="popup" onclick="event.stopPropagation()">
+        <h3>Topzeira</h3>
+        <ul>
+            <li>Ek aadmi shuruat karta hai ek topic se, jaise "Duniya ke sabse common food allergies".</li>
+            <li>Har player clockwise jawab deta hai. Agar koi answer par doubt karta hai, toh "Not topzeira" bol sakta hai.</li>
+            <li>Phir dono answers ko "star" pe check karte hain. Agar jawab sahi hai toh doubt karne wale ko peena padega; galat jawab dene wale ko peena padega.</li>
+        </ul>
+    </div>
+</div>
+
+<!-- Pop-up Riu, Bebeu -->
+<div id="popup-riubebeu" class="overlay" onclick="closePopup('popup-riubebeu')">
+    <div class="popup" onclick="event.stopPropagation()">
+        <h3>Hansa, Piya</h3>
+        <ul>
+            <li>Ek player karta hai action jo card pe likha hota hai.</li>
+            <li>Maqsad hai kisi ko 30 seconds mein hasana.</li>
+            <li>Agar koi hasta hai, toh wo peeta hai! Agar aap kisi ko nahi hasa pate, toh aapko peena padega.</li>
+            <li>Tayaar ho jao jokes, funny faces aur full masti ke liye!</li>
+        </ul>
+    </div>
+</div>
+
+<!-- Pop-up Segredos -->
+<div id="popup-segredos" class="overlay" onclick="closePopup('popup-segredos')">
+    <div class="popup" onclick="event.stopPropagation()">
+        <h3>Secrets</h3>
+        <ul>
+            <li>Kuch sach bolo aur kuch jhoot bhi. Baaki log guess karenge ki sach kya hai aur jhoot kya.</li>
+            <li>Agar baaki log sach guess kar lein, toh aapko peena padega.</li>
+            <li>Agar galat guess karein, toh active player decide karta hai ki kaun peega.</li>
+            <li>Masti se apne doston ko better jaanein aur secrets share karein.</li>
+        </ul>
+    </div>
+</div>
+
+<!-- Pop-up Amigo de Bosta -->
+<div id="popup-amigodebosta" class="overlay" onclick="closePopup('popup-amigodebosta')">
+    <div class="popup" onclick="event.stopPropagation()">
+        <h3>Worst Friend</h3>
+        <ul>
+            <li>Group mein sabse "worst friend" kaun hai? Doston ko accuse karte hue mazedaar moments.</li>
+            <li>Ye game bahut saare mazedaar secrets aur baatein reveal karega.</li>
+            <li>Dhyaan rahe, dil par mat lena, ye sirf game hai.</li>
+        </ul>
+    </div>
+</div>
+
+<!-- Pop-up Mímicas -->
+<div id="popup-mimicas" class="overlay" onclick="closePopup('popup-mimicas')">
+    <div class="popup" onclick="event.stopPropagation()">
+        <h3>Adult Mimics</h3>
+        <ul>
+            <li>Doston ko guesses dene ke liye bold aur funny mimics karo.</li>
+            <li>Ye game funny challenges deta hai jo aapko full masti karne ka chance deta hai.</li>
+            <li>Ek accha mauka hai masti karne aur funny moments create karne ka!</li>
+        </ul>
+    </div>
+</div>
+
+<!-- Pop-up Verdade ou Consequência -->
+<div id="popup-verdadeconsequencia" class="overlay" onclick="closePopup('popup-verdadeconsequencia')">
+    <div class="popup" onclick="event.stopPropagation()">
+        <h3>Truth or Dare</h3>
+        <ul>
+            <li>Choose: sach bolo ya challenge complete karo.</li>
+            <li>Agar mana karo ya jhoot bolo, toh peena padega.</li>
+        </ul>
+    </div>
+</div>
+
+<!-- Pop-up Quem no Grupo -->
+<div id="popup-quemnogrupo" class="overlay" onclick="closePopup('popup-quemnogrupo')">
+    <div class="popup" onclick="event.stopPropagation()">
+        <h3>Who in the Group</h3>
+        <ul>
+            <li>Example: "Group mein sabse cute kaun hai?" Sab point karenge, jispe sabse zyada votes aayenge wo peega.</li>
+            <li>Ye game group ki opinions funny tareeke se reveal karta hai.</li>
+        </ul>
+    </div>
+</div>
+
+<!-- Pop-up Para Conversar -->
+<div id="popup-paraconversar" class="overlay" onclick="closePopup('popup-paraconversar')">
+    <div class="popup" onclick="event.stopPropagation()">
+        <h3>To Talk</h3>
+        <ul>
+            <li>Deep, random ya funny topics jo ice-break karte hain.</li>
+            <li>Perfect hai conversations start karne ke liye, dost ko achhe se jaan-ne ke liye ya masti ke liye.</li>
+        </ul>
+    </div>
+</div>
+
+<!-- Pop-up Acerta ou Bebe -->
+<div id="popup-acertabebe" class="overlay" onclick="closePopup('popup-acertabebe')">
+    <div class="popup" onclick="event.stopPropagation()">
+        <h3>Hit or Drink</h3>
+        <ul>
+            <li>Jo galat answer dega, use peena padega. Simple!</li>
+            <li>Ye fast-paced game hai jisme sirf ek rule hai: sahi answer do ya peeo!</li>
+        </ul>
+    </div>
+</div>
+
+<!-- Pop-up O que é, o que é? -->
+<div id="popup-charadas" class="overlay" onclick="closePopup('popup-charadas')">
+    <div class="popup" onclick="event.stopPropagation()">
+        <h3>What is it?</h3>
+        <ul>
+            <li>Zoeira se paida hua, masti mein jeeta, haste haste peeta aur koi shikayat nahi karta?</li>
+            <li>Bebedeira Games, aur kya ho sakta hai?</li>
+            <li>Agar koi question ka sahi jawab nahi de paya, sabko peena hai!</li>
+        </ul>
+    </div>
+</div>
+
+<!-- Pop-up Perguntas sem Resposta -->
+<div id="popup-perguntassemresposta" class="overlay" onclick="closePopup('popup-perguntassemresposta')">
+    <div class="popup" onclick="event.stopPropagation()">
+        <h3>Unanswered Questions</h3>
+        <ul>
+            <li>Examples: "Asmaan neela kyun hai?", "Agar time paisa hai toh bank kya hai?"</li>
+            <li>Maqsad hai funny ya philosophical questions uthana jo koi clearly jawab nahi de sakta.</li>
+            <li>Agar koi jawab dene ki koshish kare aur sabko weak lage... peena padega!</li>
+        </ul>
+    </div>
+</div>
+
+<!-- Pop-up Intimidade -->
+<div id="popup-intimidade" class="overlay" onclick="closePopup('popup-intimidade')">
+    <div class="popup" onclick="event.stopPropagation()">
+        <h3>Intimacy</h3>
+        <ul>
+            <li>Deep questions jo secrets aur unusual stories reveal karte hain.</li>
+            <li>Couples ke liye perfect, relationship ko aur strong aur trusting banane ke liye.</li>
+        </ul>
+    </div>
+</div>
+
+<!-- Pop-up Show do Bebão -->
+<div id="popup-showDoBebao" class="overlay" onclick="closePopup('popup-showDoBebao')">
+    <div class="popup" onclick="event.stopPropagation()">
+        <h3>Show of Bebão</h3>
+        <ul>
+            <li>Crazy quiz with weird questions. Jo galat answer dega, wo peega!</li>
+            <li>Tayaar ho jao hasne aur surprised hone ke liye!</li>
+        </ul>
+    </div>
+</div>
+
+<!-- Pop-up Não fez? -->
+<div id="popup-naofez" class="overlay" onclick="closePopup('popup-naofez')">
+    <div class="popup" onclick="event.stopPropagation()">
+        <h3>Nahin kiya? Peena padega</h3>
+        <ul>
+            <li>Challenges ya tasks diye jaate hain.</li>
+            <li>Jo nahi karta, use peena padega. Bas itna simple!</li>
+        </ul>
+    </div>
+</div>
+
+<!-- Pop-up Tiro ao Alvo -->
+<div id="popup-tiroAoAlvo" class="overlay" onclick="closePopup('popup-tiroAoAlvo')">
+    <div class="popup" onclick="event.stopPropagation()">
+        <h3>Target Shot</h3>
+        <ul>
+            <li>4 questions, har question ke liye ek answer.</li>
+            <li>Jo sabse zyada score karega, wo jeetega.</li>
+            <li>Jo sabse kam score karega, wo peega!</li>
+        </ul>
+    </div>
+</div>
+
+<!-- Pop-up Fato ou Falso -->
+<div id="popup-fatoOuFalso" class="overlay" onclick="closePopup('popup-fatoOuFalso')">
+    <div class="popup" onclick="event.stopPropagation()">
+        <h3>Fact or Fake</h3>
+        <ul>
+            <li>Kya aap bata sakte ho ki jo aap jaante ho wo fact hai ya fake?</li>
+            <li>Is game mein, aapko bahut saari cheezein pata chalengi.</li>
+            <li>Agar aap fact aur fake dono sahi pehchaano, toh badhai ho!</li>
+            <li>Agar galat karo, toh... peena padega!</li>
+        </ul>
+    </div>
+</div>
+
+<!-- Pop-up Azar ou Sorte -->
+<div id="popup-azarOuSorte" class="overlay" onclick="closePopup('popup-azarOuSorte')">
+    <div class="popup" onclick="event.stopPropagation()">
+        <h3>Luck or Bad Luck</h3>
+        <ul>
+            <li>Yahan aap 1 se 6 ke beech 1, 2 ya 3 numbers choose karte ho.</li>
+            <li>Button dabao aur agar number aapke chosen numbers mein aaye, toh aapko pata hai na, peena padega.</li>
+            <li>Ek drink lo.</li>
+            <li>Pura luck ka game (ya bad luck)... full laughs guaranteed!</li>
+        </ul>
+    </div>
+</div>
+
+<!-- Pop-up Antes ou Depois -->
+<div id="popup-antesOuDepois" class="overlay" onclick="closePopup('popup-antesOuDepois')">
+    <div class="popup" onclick="event.stopPropagation()">
+        <h3>Before or After</h3>
+        <ul>
+            <li>Do historical facts diye jaate hain.</li>
+            <li>Ek chance hota hai decide karne ka.</li>
+            <li>Agar galat karo, toh peena padega.</li>
+            <li>Agar sahi karo, toh congrats!</li>
+        </ul>
+    </div>
+</div>
+
+
+<script>
+    // Função para abrir o popup
+    function openPopup(popupId) {
+
+        const allPopups = document.querySelectorAll('.overlay');
+        allPopups.forEach(popup => popup.style.display = 'none');
+
+        const popup = document.getElementById(popupId);
+        if (popup) {
+            popup.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+    }
+
+    // Função para fechar o popup
+    function closePopup(popupId) {
+        const popup = document.getElementById(p
+
+</script>
+</body>
+</html>

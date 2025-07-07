@@ -1,0 +1,5502 @@
+<!DOCTYPE html>
+<html lang="hi">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" type="text/css" href="../../stylesCards.css" />
+    <title>Bebedeira Games</title>
+</head>
+
+<body>
+
+<div class="game-container">
+    <!-- Menu -->
+    <nav class="menu">
+        <a href="../menuHi.html" class="menu-title" style="position: relative;">
+            <div class="voltar-container" onclick="window.location.href='../menuPtBr.html'">
+                &#8678; <!-- ये ← है -->
+            </div>
+            <img class="logo-bebedeira" src="../images/logo.png" alt="Logo Bebedeira" />
+        </a>
+    </nav>
+
+    <!-- Game Content -->
+    <div>
+        <h1>The Big Drunk Show</h1>
+        <a href="#" onclick="openPopup()">
+            <img class="img-regras" src="../images/regras.png" alt="Rules" />
+        </a>
+        <h4>Rules</h4>
+    </div>
+
+    <!-- Rules Pop-up -->
+    <div id="popup" class="popup">
+        <div class="popup-content">
+            <div class="popup-header">
+                <h2>Game ke Rules</h2>
+                <span class="close" onclick="closePopup()">&times;</span>
+            </div>
+            <ul>
+                <li>Ek sawal, chaar options, ek sahi jawab</li>
+                <li>Ek player host banta hai aur sawal padhta hai chaar options ke saath.</li>
+                <li>Agla player jawab deta hai.</li>
+                <li>Agar sahi hua: turn pass kar do.</li>
+                <li>Agar galat hua: ek shot peeyo.</li>
+                <li>Phir host ka role agle player ko milta hai (clockwise direction).</li>
+                <li><strong>VARIATION</strong></li>
+                <li>Player ek baar doosron se madad mang sakta hai.</li>
+                <li>Player ek baar ek jawab skip kar sakta hai.</li>
+                <li>Player ek baar do options hataane ko keh sakta hai.</li>
+                <li>Maza karo! 🍻</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="card-frase">
+        <p id="questionShowDoBebao"></p>
+        <ul id="optionsList" class="options-list"></ul>
+        <div class="center-container">
+            <img class="pergunta-e-resposta" src="../images/pergunta-e-resposta.png" onclick="showAnswerPopup()"
+                 style="cursor: pointer;" alt="Answer dikhao" />
+        </div>
+    </div>
+
+    <div class="button-container">
+        <button onclick="nextQuestion()">Agla sawal</button>
+    </div>
+    <div id="result"></div>
+</div>
+
+<!-- Answer Pop-up -->
+<div id="answerPopup" class="popup" style="display:none;">
+    <div class="popup-content">
+        <span class="close" onclick="closeAnswerPopup()">&times;</span>
+        <h3>Jawab</h3>
+        <h5>Show do Bebão</h5>
+        <p id="answerText">Pehle ek sawal pe click karo!</p>
+    </div>
+</div>
+
+<script>
+
+    const data = {
+        "questions": [
+            {
+                "question": "Brazil ke extreme north mein jo archipelago hai, jo French Guiana ke paas hai, uska naam kya hai?",
+                "options": [
+                    "Maldives Islands",
+                    "Galápagos Islands",
+                    "Bahamas Islands",
+                    "Marajó Islands"
+                ],
+                "answer": [
+                    "Marajó Islands"
+                ]
+            },
+            {
+                "question": "Kaunsi Brazilian capital apne plane jaisi design ke liye famous hai?",
+                "options": [
+                    "Rio de Janeiro",
+                    "São Paulo",
+                    "Brasília",
+                    "Belo Horizonte"
+                ],
+                "answer": [
+                    "Brasília"
+                ]
+            },
+            {
+                "question": "Woh famous puzzle game ka naam kya hai jisme horizontally lines complete karni hoti hain?",
+                "options": [
+                    "Candy Crush",
+                    "Tetris",
+                    "Minecraft",
+                    "Angry Birds"
+                ],
+                "answer": [
+                    "Tetris"
+                ]
+            },
+            {
+                "question": "Kaunsi drink agave blue se banayi jati hai?",
+                "options": [
+                    "Vodka",
+                    "Rum",
+                    "Tequila",
+                    "Whiskey"
+                ],
+                "answer": [
+                    "Tequila"
+                ]
+            },
+            {
+                "question": "2022 ki kaunsi movie hai jo 80s ke iconic movie ki sequel hai, jisme Tom Cruise fighter pilot bana hai?",
+                "options": [
+                    "The Batman",
+                    "Mission Impossible",
+                    "Fast & Furious",
+                    "Top Gun: Maverick"
+                ],
+                "answer": [
+                    "Top Gun: Maverick"
+                ]
+            },
+            {
+                "question": "Duniya mein sabse zyada consume hone wali alcoholic drink kaunsi hai?",
+                "options": [
+                    "Wine",
+                    "Vodka",
+                    "Beer",
+                    "Tequila"
+                ],
+                "answer": [
+                    "Beer"
+                ]
+            },
+            {
+                "question": "Kaunsa Brazilian state 'terra da Garoa' ke naam se jaana jata hai?",
+                "options": [
+                    "São Paulo",
+                    "Rio de Janeiro",
+                    "Minas Gerais",
+                    "Paraná"
+                ],
+                "answer": [
+                    "São Paulo"
+                ]
+            },
+            {
+                "question": "Harry Potter movies mein Hermione ka role kis actress ne kiya hai?",
+                "options": [
+                    "Emma Thompson",
+                    "Emma Stone",
+                    "Emma Roberts",
+                    "Emma Watson"
+                ],
+                "answer": [
+                    "Emma Watson"
+                ]
+            },
+            {
+                "question": "Kaunsi female singer famous hui apne album 'Teenage Dream' se?",
+                "options": [
+                    "Taylor Swift",
+                    "Katy Perry",
+                    "Lady Gaga",
+                    "Ariana Grande"
+                ],
+                "answer": [
+                    "Katy Perry"
+                ]
+            },
+            {
+                "question": "Russia mein jo Europe ki sabse highest mountain hai, uska naam kya hai?",
+                "options": [
+                    "Mount Elbrus",
+                    "Mount Matterhorn",
+                    "Mont Blanc",
+                    "Mount Olympus"
+                ],
+                "answer": [
+                    "Mount Elbrus"
+                ]
+            },
+            {
+                "question": "2020 mein Best Picture Oscar kis film ne jeeta tha?",
+                "options": [
+                    "Once Upon a Time in... Hollywood",
+                    "1917",
+                    "Joker",
+                    "Parasite"
+                ],
+                "answer": [
+                    "Parasite"
+                ]
+            },
+            {
+                "question": "'Burning Man' music aur art festival kahan hota hai?",
+                "options": [
+                    "Sahara Desert",
+                    "Mojave Desert",
+                    "Black Rock Desert",
+                    "Atacama Desert"
+                ],
+                "answer": [
+                    "Black Rock Desert"
+                ]
+            },
+            {
+                "question": "Brazil ke famous composer jo 'O mastro soberano' ke naam se jane jate hain, unka naam kya hai?",
+                "options": [
+                    "Tom Jobim",
+                    "Chico Buarque",
+                    "Villa-Lobos",
+                    "Milton Nascimento"
+                ],
+                "answer": [
+                    "Tom Jobim"
+                ]
+            },
+            {
+                "question": "Gusttavo Lima ka full naam kya hai?",
+                "options": [
+                    "Nivaldo Lima",
+                    "Emival Lima",
+                    "Sebastião Lima",
+                    "Claucirlei Lima"
+                ],
+                "answer": [
+                    "Nivaldo Lima"
+                ]
+            },
+            {
+                "question": "Brazil mein sabse bada Oktoberfest kahan hota hai, jo duniya ka doosra sabse bada hai?",
+                "options": [
+                    "Blumenau",
+                    "Valeu Europa",
+                    "Nova Munique",
+                    "Santa Cruz do Sul"
+                ],
+                "answer": [
+                    "Blumenau"
+                ]
+            },
+            {
+                "question": "USA ke kaunsi city mein famous electronic music festival 'Ultra Music Festival' hota hai?",
+                "options": [
+                    "Los Angeles",
+                    "Miami",
+                    "Las Vegas",
+                    "New York"
+                ],
+                "answer": [
+                    "Miami"
+                ]
+            },
+            {
+                "question": "Brazil ke kaunsa state apni paradise jaisi beaches, jaise Fernando de Noronha ke liye famous hai?",
+                "options": [
+                    "Rio de Janeiro",
+                    "Santa Catarina",
+                    "Bahia",
+                    "Pernambuco"
+                ],
+                "answer": [
+                    "Pernambuco"
+                ]
+            },
+            {
+                "question": "Singer Anitta ka full naam kya hai?",
+                "options": [
+                    "Larissa de Antunes Nóbrega",
+                    "Larissa de Jesus Andrade",
+                    "Larissa de Sousa Pinheiro",
+                    "Larissa de Macedo Machado"
+                ],
+                "answer": [
+                    "Larissa de Macedo Machado"
+                ]
+            },
+            {
+                "question": "Brazil mein pehli brewery kab bani thi?",
+                "options": [
+                    "1492",
+                    "1822",
+                    "1853",
+                    "1923"
+                ],
+                "answer": [
+                    "1853"
+                ]
+            },
+            {
+                "question": "'Rua Bourbon' jahan ki nightlife bahut lively hai, woh kahan hai?",
+                "options": [
+                    "New Orleans",
+                    "Las Vegas",
+                    "New York",
+                    "Miami"
+                ],
+                "answer": [
+                    "New Orleans"
+                ]
+            },
+            {
+                "question": "1889 mein Brazil ke president kaun the jab Republic proclaim hua tha?",
+                "options": [
+                    "Dom Pedro II",
+                    "Getúlio Vargas",
+                    "Marshal Deodoro da Fonseca",
+                    "Juscelino Kubitschek"
+                ],
+                "answer": [
+                    "Marshal Deodoro da Fonseca"
+                ]
+            },
+            {
+                "question": "Singer Cazuza ka full naam kya hai?",
+                "options": [
+                    "Pedro Alex de Souza",
+                    "Tulio Agnes Bispo",
+                    "Agenor de Miranda Araújo Neto",
+                    "Edilson Machado Vieira"
+                ],
+                "answer": [
+                    "Agenor de Miranda Araújo Neto"
+                ]
+            },
+            {
+                "question": "Brazil mein sabse bada festa junina kaunse state mein hota hai, jise 'World ka Biggest São João' kehte hain?",
+                "options": [
+                    "Ceará",
+                    "Piauí",
+                    "Pernambuco",
+                    "Paraíba"
+                ],
+                "answer": [
+                    "Paraíba"
+                ]
+            },
+            {
+                "question": "Cosmopolitan cocktail traditionally kis color ki hoti hai?",
+                "options": [
+                    "Blue",
+                    "Green",
+                    "Red",
+                    "Yellow"
+                ],
+                "answer": [
+                    "Red"
+                ]
+            },
+            {
+                "question": "Brazil ne pehli baar FIFA World Cup kab host kiya tha?",
+                "options": [
+                    "1950",
+                    "1962",
+                    "1970",
+                    "2014"
+                ],
+                "answer": [
+                    "1950"
+                ]
+            },
+            {
+                "question": "2020 mein Nobel Literature Prize kisne jeeta, aur wo 16th lady thi jo yeh award paayi?",
+                "options": [
+                    "Virginia Woolf",
+                    "Wislawa Szymborska",
+                    "Louise Glück",
+                    "Olga Tokarczuk"
+                ],
+                "answer": [
+                    "Louise Glück"
+                ]
+            },
+            {
+                "question": "Brazil ke kaunse DJ ne DJ Mag ke top 10 mein jagah banayi hai?",
+                "options": [
+                    "Alok",
+                    "Vintage Culture",
+                    "Gui Boratto",
+                    "Felguk"
+                ],
+                "answer": [
+                    "Alok"
+                ]
+            },
+            {
+                "question": "Dutch DJ jo apni energetic performances ke liye famous hai, aur DJ Mag ke top 10 mein kayi baar aaya hai, kaun hai?",
+                "options": [
+                    "Calvin Harris",
+                    "Skrillex",
+                    "Tiesto",
+                    "Diplo"
+                ],
+                "answer": [
+                    "Tiesto"
+                ]
+            },
+            {
+                "question": "Earth ki atmosphere mein sabse zyada abundant chemical element kaun sa hai?",
+                "options": [
+                    "Oxygen",
+                    "Nitrogen",
+                    "Carbon",
+                    "Hydrogen"
+                ],
+                "answer": [
+                    "Nitrogen"
+                ]
+            },
+
+            {
+                "question": "Kaunsi city apne cafés aur 'coffee shops' ke liye famous hai, jahan duniya bhar ke young log aate hain?",
+                "options": [
+                    "Paris",
+                    "Rome",
+                    "Vienna",
+                    "Amsterdam"
+                ],
+                "answer": [
+                    "Amsterdam"
+                ]
+            },
+            {
+                "question": "Kaunsi female singer ne 2020 mein album 'folklore' release kiya tha?",
+                "options": [
+                    "Rihanna",
+                    "Beyoncé",
+                    "Ariana Grande",
+                    "Taylor Swift"
+                ],
+                "answer": [
+                    "Taylor Swift"
+                ]
+            },
+            {
+                "question": "Electric shower ki invention kis desh mein hui thi?",
+                "options": [
+                    "Brazil",
+                    "England",
+                    "France",
+                    "Australia"
+                ],
+                "answer": [
+                    "Brazil"
+                ]
+            },
+            {
+                "question": "São Paulo ka kaunsa area apni parties aur nightlife ke liye famous hai?",
+                "options": [
+                    "Liberdade",
+                    "Vila Madalena",
+                    "Bela Vista",
+                    "Moema"
+                ],
+                "answer": [
+                    "Vila Madalena"
+                ]
+            },
+            {
+                "question": "Kaunsa route Europe mein backpackers ke beech popular hai for adventure?",
+                "options": [
+                    "Castles route in France",
+                    "Beaches route in Greece",
+                    "Interrail route across Europe",
+                    "Ski route in Switzerland"
+                ],
+                "answer": [
+                    "Interrail route across Europe"
+                ]
+            },
+            {
+                "question": "'Legend' shabd ka Portuguese mein kya matlab hota hai?",
+                "options": [
+                    "Subtitle",
+                    "Story",
+                    "Tale",
+                    "Legend"
+                ],
+                "answer": [
+                    "Legend"
+                ]
+            },
+            {
+                "question": "Anitta ka sabse pehla hit song kaunsa tha?",
+                "options": [
+                    "Bang",
+                    "Show das poderosas",
+                    "Meiga e abusada",
+                    "Essa mina é louca"
+                ],
+                "answer": [
+                    "Show das poderosas"
+                ]
+            },
+            {
+                "question": "'Tomorrowland' festival kaunse desh mein hota hai?",
+                "options": [
+                    "Netherlands",
+                    "Spain",
+                    "Belgium",
+                    "Germany"
+                ],
+                "answer": [
+                    "Belgium"
+                ]
+            },
+            {
+                "question": "Pablo Vittar ka full naam kya hai?",
+                "options": [
+                    "Pablo Luís de Souza Barros",
+                    "Pablo Victor de Almeida",
+                    "Phelipe Alves Vitoriano",
+                    "Phabullo Rodrigues da Silva"
+                ],
+                "answer": [
+                    "Phabullo Rodrigues da Silva"
+                ]
+            },
+            {
+                "question": "Kaunsa famous temple complex Cambodia mein hai jo UNESCO World Heritage hai?",
+                "options": [
+                    "Borobudur Temple",
+                    "Batu Caves Temple",
+                    "Angkor Wat Temple",
+                    "Biriaubiriau Temple"
+                ],
+                "answer": [
+                    "Angkor Wat Temple"
+                ]
+            },
+            {
+                "question": "Kaunsa Brazilian movie Brazil ki history ka highest grossing movie bana?",
+                "options": [
+                    "Minha mãe é uma peça 3",
+                    "Tropa de Elite 2",
+                    "Carandiru",
+                    "Dois filhos de Francisco"
+                ],
+                "answer": [
+                    "Minha mãe é uma peça 3"
+                ]
+            },
+            {
+                "question": "Young logon ke liye ek unique festival experience ke liye, kaunsa destination apne 'Hot Air Balloon Festival' ke liye famous hai?",
+                "options": [
+                    "Albuquerque, USA",
+                    "Cappadocia, Turkey",
+                    "Bristol, UK",
+                    "Chiang Mai, Thailand"
+                ],
+                "answer": [
+                    "Cappadocia, Turkey"
+                ]
+            },
+            {
+                "question": "1997 ka Ballon d'Or jeetne wala football player kaun tha?",
+                "options": [
+                    "Rivaldo",
+                    "Figo",
+                    "Zidane",
+                    "Ronaldo"
+                ],
+                "answer": [
+                    "Ronaldo"
+                ]
+            },
+            {
+                "question": "Asia mein kaunsa jagah hai jahan Portuguese official language hai?",
+                "options": [
+                    "Portugal",
+                    "Philippines",
+                    "Mozambique",
+                    "Macau"
+                ],
+                "answer": [
+                    "Macau"
+                ]
+            },
+            {
+                "question": "Petra city kaunse desh mein hai, jo ek important archaeological site hai?",
+                "options": [
+                    "Turkey",
+                    "Egypt",
+                    "Lebanon",
+                    "Jordan"
+                ],
+                "answer": [
+                    "Jordan"
+                ]
+            },
+            {
+                "question": "Kaunsa desh table tennis ka birthplace maana jata hai?",
+                "options": [
+                    "Japan",
+                    "China",
+                    "England",
+                    "United States"
+                ],
+                "answer": [
+                    "England"
+                ]
+            },
+            {
+                "question": "Cannes Film Festival kaunse desh mein hota hai?",
+                "options": [
+                    "United States",
+                    "Italy",
+                    "France",
+                    "Germany"
+                ],
+                "answer": [
+                    "France"
+                ]
+            },
+            {
+                "question": "'Transformers' movies mein yellow robot ka naam kya hai?",
+                "options": [
+                    "Optimus Prime",
+                    "Bumblebee",
+                    "Megatron",
+                    "Starscream"
+                ],
+                "answer": [
+                    "Bumblebee"
+                ]
+            },
+            {
+                "question": "'Dança do Créu' gaana kis MC ka hai?",
+                "options": [
+                    "MC Sapão",
+                    "MC Créu",
+                    "MC Marcinho",
+                    "MC Gorilla"
+                ],
+                "answer": [
+                    "MC Créu"
+                ]
+            },
+            {
+                "question": "Brazil ka sabse famous drinking game kaun sa hai?",
+                "options": [
+                    "Flipcup Battle",
+                    "Forbidden Confessions",
+                    "Faz ou bebe",
+                    "Never Have I Ever"
+                ],
+                "answer": [
+                    "Faz ou bebe"
+                ]
+            },
+            {
+                "question": "First iPhone kab launch hua tha?",
+                "options": [
+                    "2005",
+                    "2007",
+                    "2009",
+                    "2010"
+                ],
+                "answer": [
+                    "2007"
+                ]
+            },
+            {
+                "question": "'The Hunger Games' movie series ki lead heroine ka naam kya hai?",
+                "options": [
+                    "Katniss Everdeen",
+                    "Bella Swan",
+                    "Hermione Granger",
+                    "Rey Skywalker"
+                ],
+                "answer": [
+                    "Katniss Everdeen"
+                ]
+            },
+            {
+                "question": "Brazil ka 'King of Rock' kisey kaha jata hai?",
+                "options": [
+                    "Roberto Carlos",
+                    "Raul Seixas",
+                    "Lulu Santos",
+                    "Chorão"
+                ],
+                "answer": [
+                    "Raul Seixas"
+                ]
+            },
+            {
+                "question": "Brazil ka highest point kaunsa hai?",
+                "options": [
+                    "Pico da Bandeira",
+                    "Pico da Neblina",
+                    "Monte Roraima",
+                    "Morro da Pedra da Gávea"
+                ],
+                "answer": [
+                    "Pico da Neblina"
+                ]
+            },
+            {
+                "question": "Brazil ki kaunsi city 'National Capital of Forró' ke naam se famous hai?",
+                "options": [
+                    "Itaúnas",
+                    "Caruaru",
+                    "São Luís",
+                    "Mossoró"
+                ],
+                "answer": [
+                    "Itaúnas"
+                ]
+            },
+            {
+                "question": "Brazil ka sabse bada river kaunsa hai?",
+                "options": [
+                    "Amazonas",
+                    "São Francisco",
+                    "Paraná",
+                    "Tietê"
+                ],
+                "answer": [
+                    "Amazonas"
+                ]
+            },
+            {
+                "question": "'Shilin Night Market' famous street food ke liye kahan located hai?",
+                "options": [
+                    "Beijing",
+                    "Seoul",
+                    "Tokyo",
+                    "Taipei"
+                ],
+                "answer": [
+                    "Taipei"
+                ]
+            },
+            {
+                "question": "Blue Mosque jo ek historic religious landmark hai, woh kaunsi city mein hai?",
+                "options": [
+                    "Tehran",
+                    "Istanbul",
+                    "Baghdad",
+                    "Dubai"
+                ],
+                "answer": [
+                    "Istanbul"
+                ]
+            },
+            {
+                "question": "Europe ka kaunsa destination young logon mein famous hai apni exclusive yacht parties aur beaches ke liye?",
+                "options": [
+                    "Miami, USA",
+                    "Mykonos, Greece",
+                    "Paris, France",
+                    "London, England"
+                ],
+                "answer": [
+                    "Mykonos, Greece"
+                ]
+            },
+
+
+
+            {
+                "question": "Kaunsa football team ke paas sabse zyada Copa Libertadores de América ke titles hain?",
+                "options": [
+                    "Boca Juniors",
+                    "Independiente",
+                    "São Paulo",
+                    "Santos"
+                ],
+                "answer": [
+                    "Independiente"
+                ]
+            },
+            {
+                "question": "2021 mein Best Picture Oscar kaunse film ne jeeta tha?",
+                "options": [
+                    "Bela Vingança",
+                    "Minari",
+                    "Os 7 de Chicago",
+                    "NomadLand"
+                ],
+                "answer": [
+                    "NomadLand"
+                ]
+            },
+            {
+                "question": "Brazil ke famous meme 'Para nossa alegria' ke brothers ke naam kya hain?",
+                "options": [
+                    "Alexandre aur Giovana",
+                    "Marcos aur Jéssica",
+                    "Wesley aur Marina",
+                    "Jefferson aur Suellen"
+                ],
+                "answer": [
+                    "Jefferson aur Suellen"
+                ]
+            },
+            {
+                "question": "Duniya ki sabse zyada boli jane wali language kaunsi hai?",
+                "options": [
+                    "English",
+                    "Mandarin",
+                    "Spanish",
+                    "French"
+                ],
+                "answer": [
+                    "English"
+                ]
+            },
+            {
+                "question": "Kaunsa music genre Ibiza ki nightlife ke saath mostly joda jata hai?",
+                "options": [
+                    "Rock",
+                    "Jazz",
+                    "Classical Music",
+                    "Electronic Music"
+                ],
+                "answer": [
+                    "Electronic Music"
+                ]
+            },
+            {
+                "question": "Kaunsa athlete ke paas sabse zyada Olympic medals ka record hai?",
+                "options": [
+                    "Mark Spitz",
+                    "Michael Phelps",
+                    "Usain Bolt",
+                    "Carl Lewis"
+                ],
+                "answer": [
+                    "Michael Phelps"
+                ]
+            },
+            {
+                "question": "Brazil ka sabse zyada suna jane wala artist YouTube par kaun hai?",
+                "options": [
+                    "Gusttavo Lima",
+                    "Anitta",
+                    "Marília Mendonça",
+                    "Luan Santana"
+                ],
+                "answer": [
+                    "Marília Mendonça"
+                ]
+            },
+            {
+                "question": "2019 mein Rugby World Cup kis team ne jeeta tha?",
+                "options": [
+                    "South Africa",
+                    "New Zealand",
+                    "Australia",
+                    "England"
+                ],
+                "answer": [
+                    "South Africa"
+                ]
+            },
+            {
+                "question": "Sabse zyada bikne wala album kaunsa hai?",
+                "options": [
+                    "Abbey Road - The Beatles",
+                    "Back in Black - AC/DC",
+                    "The Dark Side of the Moon - Pink Floyd",
+                    "Thriller - Michael Jackson"
+                ],
+                "answer": [
+                    "Thriller - Michael Jackson"
+                ]
+            },
+            {
+                "question": "J.K. Rowling ke likhe famous children book series ka naam kya hai?",
+                "options": [
+                    "The Chronicles of Narnia",
+                    "Percy Jackson",
+                    "The Lord of the Rings",
+                    "Harry Potter"
+                ],
+                "answer": [
+                    "Harry Potter"
+                ]
+            },
+            {
+                "question": "Famous Mojito cocktail ki origin country kaunsi hai?",
+                "options": [
+                    "Mexico",
+                    "Cuba",
+                    "Spain",
+                    "Colombia"
+                ],
+                "answer": [
+                    "Cuba"
+                ]
+            },
+            {
+                "question": "Brazil mein sabse zyada suna jane wala music genre kaunsa hai?",
+                "options": [
+                    "MPB",
+                    "Funk",
+                    "Sertanejo",
+                    "Arrocha"
+                ],
+                "answer": [
+                    "Sertanejo"
+                ]
+            },
+            {
+                "question": "Kaunsa electronic music festival famous hai?",
+                "options": [
+                    "Lollapalooza",
+                    "Tomorrowland",
+                    "Glastonbury",
+                    "Coachella"
+                ],
+                "answer": [
+                    "Tomorrowland"
+                ]
+            },
+            {
+                "question": "Coldplay band ka lead singer kaun hai?",
+                "options": [
+                    "Chris Martin",
+                    "Dave Grohl",
+                    "Eddie Vedder",
+                    "Brandon Flowers"
+                ],
+                "answer": [
+                    "Chris Martin"
+                ]
+            },
+            {
+                "question": "Inme se kaun Marvel Universe ka part nahi hai?",
+                "options": [
+                    "Iron Man",
+                    "Thor",
+                    "Justice League",
+                    "Captain America"
+                ],
+                "answer": [
+                    "Justice League"
+                ]
+            },
+            {
+                "question": "'Holi Festival', yaani Festival of Colors, traditionally kaunse country ka hai?",
+                "options": [
+                    "Japan",
+                    "Brazil",
+                    "India",
+                    "Thailand"
+                ],
+                "answer": [
+                    "India"
+                ]
+            },
+            {
+                "question": "Kaunsi TV series George R.R. Martin ke books par based hai?",
+                "options": [
+                    "Breaking Bad",
+                    "Game of Thrones",
+                    "Lord of the Rings",
+                    "Big Bang Theory"
+                ],
+                "answer": [
+                    "Game of Thrones"
+                ]
+            },
+            {
+                "question": "Brazil mein pehla organ transplant kab hua tha?",
+                "options": [
+                    "1953",
+                    "1958",
+                    "1988",
+                    "1957"
+                ],
+                "answer": [
+                    "1958"
+                ]
+            },
+            {
+                "question": "'Mission Impossible' movies ka lead actor kaun hai?",
+                "options": [
+                    "Brad Pitt",
+                    "Tom Cruise",
+                    "Matt Damon",
+                    "Leonardo DiCaprio"
+                ],
+                "answer": [
+                    "Tom Cruise"
+                ]
+            },
+            {
+                "question": "In famous logon mein se kaun 'jack of all trades' ke naam se jana jata hai?",
+                "options": [
+                    "Rodrigo Hilbert",
+                    "Luciano Hulk",
+                    "Caio Castro",
+                    "Thiago Lacerda"
+                ],
+                "answer": [
+                    "Rodrigo Hilbert"
+                ]
+            },
+            {
+                "question": "Madagascar kis ocean mein hai?",
+                "options": [
+                    "Indian Ocean",
+                    "Arctic Ocean",
+                    "Atlantic Ocean",
+                    "Pacific Ocean"
+                ],
+                "answer": [
+                    "Indian Ocean"
+                ]
+            },
+            {
+                "question": "2018 FIFA World Cup kis desh ne host kiya tha?",
+                "options": [
+                    "Russia",
+                    "Brazil",
+                    "France",
+                    "Germany"
+                ],
+                "answer": [
+                    "Russia"
+                ]
+            },
+            {
+                "question": "'The Lord of the Rings' trilogy ke director ka naam kya hai?",
+                "options": [
+                    "Martin Scorsese",
+                    "Quentin Tarantino",
+                    "Christopher Nolan",
+                    "Peter Jackson"
+                ],
+                "answer": [
+                    "Peter Jackson"
+                ]
+            },
+            {
+                "question": "Kaunsa treaty European Union ke creation ke liye responsible tha?",
+                "options": [
+                    "Maastricht Treaty",
+                    "Lisbon Treaty",
+                    "Versailles Treaty",
+                    "European Treaty"
+                ],
+                "answer": [
+                    "Maastricht Treaty"
+                ]
+            },
+            {
+                "question": "Kaunsi popular superhero movie ka sequel, jisme Gal Gadot lead hai, 2020 mein release hua tha?",
+                "options": [
+                    "Wonder Woman 1984",
+                    "Captain Marvel",
+                    "Black Widow",
+                    "Barbie"
+                ],
+                "answer": [
+                    "Wonder Woman 1984"
+                ]
+            },
+            {
+                "question": "London city se guzarne wala sabse important river ka naam kya hai?",
+                "options": [
+                    "Thames River",
+                    "Seine River",
+                    "Danube River",
+                    "Rhine River"
+                ],
+                "answer": [
+                    "Thames River"
+                ]
+            },
+            {
+                "question": "Brazil ka sabse bada state area ke hisaab se kaunsa hai?",
+                "options": [
+                    "Mato Grosso",
+                    "Minas Gerais",
+                    "Bahia",
+                    "Amazonas"
+                ],
+                "answer": [
+                    "Amazonas"
+                ]
+            },
+            {
+                "question": "Kaunsa cocktail ginger, vodka aur lemon juice se banta hai?",
+                "options": [
+                    "Moscow Mule",
+                    "Martini",
+                    "Old Fashioned",
+                    "Molotov"
+                ],
+                "answer": [
+                    "Moscow Mule"
+                ]
+            },
+            {
+                "question": "Kaunsa Brazilian state 'Land of the Sun' ke naam se famous hai?",
+                "options": [
+                    "Rio Grande do Norte",
+                    "Bahia",
+                    "Alagoas",
+                    "Ceará"
+                ],
+                "answer": [
+                    "Ceará"
+                ]
+            },
+            {
+                "question": "Asia mein kaunsa destination jawano ke beech popular hai apni beaches aur nightlife ke liye?",
+                "options": [
+                    "Maldives",
+                    "Bali",
+                    "Sri Lanka",
+                    "Vietnam"
+                ],
+                "answer": [
+                    "Bali"
+                ]
+            },
+            {
+                "question": "Pehli aurat kaun thi jo kisi desh ki president bani thi?",
+                "options": [
+                    "Dilma Roussef (Brazil)",
+                    "Jacinda Ardern (New Zealand)",
+                    "Vigdis Finnbogadóttir (Iceland)",
+                    "Margaret Thatcher (UK)"
+                ],
+                "answer": [
+                    "Vigdis Finnbogadóttir (Iceland)"
+                ]
+            },
+            {
+                "question": "Brazil ki traditional drink 'capeta' ke main ingredients kya hain?",
+                "options": [
+                    "Cachaça aur condensed milk",
+                    "Whiskey aur sugar syrup",
+                    "Vodka aur condensed milk",
+                    "Pinga aur honey"
+                ],
+                "answer": [
+                    "Vodka aur condensed milk"
+                ]
+            },
+            {
+                "question": "2021 mein Jon Watts ke direct ki hui Marvel movie kaunsi thi jo box office hit bani?",
+                "options": [
+                    "Eternals",
+                    "Black Widow",
+                    "Captain America",
+                    "Spider-Man: No Way Home"
+                ],
+                "answer": [
+                    "Spider-Man: No Way Home"
+                ]
+            },
+            {
+                "question": "'The Godfather' trilogy ke director ka naam kya hai?",
+                "options": [
+                    "Francis Ford Coppola",
+                    "Martin Scorsese",
+                    "Quentin Tarantino",
+                    "Steven Spielberg"
+                ],
+                "answer": [
+                    "Francis Ford Coppola"
+                ]
+            },
+            {
+                "question": "Netflix ki 2016 mein release hui series jo fictional city Hawkins mein set hai, kya hai?",
+                "options": [
+                    "Black Mirror",
+                    "Stranger Things",
+                    "The Crown",
+                    "Dark"
+                ],
+                "answer": [
+                    "Stranger Things"
+                ]
+            },
+            {
+                "question": "Italy ki kaunsi city famous hai 'Bridge of Sighs' ke liye?",
+                "options": [
+                    "Rome",
+                    "Milan",
+                    "Florence",
+                    "Venice"
+                ],
+                "answer": [
+                    "Venice"
+                ]
+            },
+            {
+                "question": "Lollapalooza festival har saal kaunsi Brazilian city mein hota hai?",
+                "options": [
+                    "Rio de Janeiro",
+                    "São Paulo",
+                    "Salvador",
+                    "Fortaleza"
+                ],
+                "answer": [
+                    "São Paulo"
+                ]
+            },
+            {
+                "question": "In mein se kaunsi diseases sexually transmitted hoti hain?",
+                "options": [
+                    "AIDS, trichomoniasis aur ebola",
+                    "Chikungunya, AIDS aur herpes",
+                    "Gonorrhea, chlamydia aur syphilis",
+                    "Botulism, cystitis aur gonorrhea"
+                ],
+                "answer": [
+                    "Gonorrhea, chlamydia aur syphilis"
+                ]
+            },
+            {
+                "question": "USA mein sabse popular sport kaunsa hai?",
+                "options": [
+                    "American football",
+                    "Basketball",
+                    "Baseball",
+                    "Ice hockey"
+                ],
+                "answer": [
+                    "American football"
+                ]
+            },
+            {
+                "question": "Mexican series 'Dark Desire' mein lead singer kaun hai?",
+                "options": [
+                    "Pety Cantú",
+                    "Maite Perroni",
+                    "Dulce Maria",
+                    "Becky G"
+                ],
+                "answer": [
+                    "Maite Perroni"
+                ]
+            },
+            {
+                "question": "Hollywood actress jiska naam Shakespeare ki wife jaisa hai, kaun hai?",
+                "options": [
+                    "Natalie Portman",
+                    "Julia Roberts",
+                    "Anne Hathaway",
+                    "Cate Blanchett"
+                ],
+                "answer": [
+                    "Anne Hathaway"
+                ]
+            },
+            {
+                "question": "'Vikings' series mein Ragnar ki pehli wife ka naam kya hai?",
+                "options": [
+                    "Porunn",
+                    "Daenerys",
+                    "Elizabeth",
+                    "Lagertha"
+                ],
+                "answer": [
+                    "Lagertha"
+                ]
+            },
+            {
+                "question": "'Friends' mein kaun si character safai ki deewani hai?",
+                "options": [
+                    "Monica",
+                    "Chandler",
+                    "Ross",
+                    "Joey"
+                ],
+                "answer": [
+                    "Monica"
+                ]
+            },
+            {
+                "question": "'Dark' series ki secret community ka naam kya hai?",
+                "options": [
+                    "Sic Mundus",
+                    "Kappa Delta",
+                    "Eternity",
+                    "Sic Tempus"
+                ],
+                "answer": [
+                    "Sic Mundus"
+                ]
+            },
+            {
+                "question": "Emma Watson kis desh mein paida hui thi?",
+                "options": [
+                    "France",
+                    "United Kingdom",
+                    "Canada",
+                    "Brazil"
+                ],
+                "answer": [
+                    "United Kingdom"
+                ]
+            },
+            {
+                "question": "'Mamma Mia' gaana kis artist ka hai?",
+                "options": [
+                    "Maroon 5",
+                    "Roxette",
+                    "Madonna",
+                    "ABBA"
+                ],
+                "answer": [
+                    "ABBA"
+                ]
+            },
+            {
+                "question": "'Saint Seiya' cartoon ka main protagonist kaun hai?",
+                "options": [
+                    "Pisces Aphrodite",
+                    "Gemini Saga",
+                    "Pegasus Seiya",
+                    "Aries Mu"
+                ],
+                "answer": [
+                    "Pegasus Seiya"
+                ]
+            },
+            {
+                "question": "Robert Pattinson kaun hai?",
+                "options": [
+                    "Actor",
+                    "Dancer",
+                    "Football player",
+                    "Writer"
+                ],
+                "answer": [
+                    "Actor"
+                ]
+            },
+            {
+                "question": "America mein sabse pehla film jo 100 million dollar se zyada profit kamaya, kaunsa tha?",
+                "options": [
+                    "Avatar",
+                    "Dracula",
+                    "The First Night of a Man",
+                    "Jaws"
+                ],
+                "answer": [
+                    "Jaws"
+                ]
+            },
+            {
+                "question": "Toy Story ke Buzz Lightyear ko kaise pata chala ki wo ek toy hai?",
+                "options": [
+                    "TV commercial dekh ke",
+                    "Kisi ne bataya",
+                    "Apni box mila",
+                    "Window mein nazar aaya"
+                ],
+                "answer": [
+                    "TV commercial dekh ke"
+                ]
+            },
+            {
+                "question": "Yoda ke face banate waqt kis scientist se inspiration li gayi thi?",
+                "options": [
+                    "Isaac Newton",
+                    "Charles Darwin",
+                    "Alexander Fleming",
+                    "Albert Einstein"
+                ],
+                "answer": [
+                    "Albert Einstein"
+                ]
+            },
+            {
+                "question": "'Matrix' film mein Neo ka role sabse pehle kis actor ko offer hua tha?",
+                "options": [
+                    "Will Smith",
+                    "Val Kilmer",
+                    "Laurence Fishburne",
+                    "Keanu Reeves"
+                ],
+                "answer": [
+                    "Keanu Reeves"
+                ]
+            },
+            {
+                "question": "'Black Mirror' series kab release hui thi?",
+                "options": [
+                    "2009",
+                    "2011",
+                    "2013",
+                    "2016"
+                ],
+                "answer": [
+                    "2011"
+                ]
+            },
+            {
+                "question": "'Sabrina, the Teenage Witch' mein billi ka naam kya hai?",
+                "options": [
+                    "Salem",
+                    "Milo",
+                    "Fluffy",
+                    "Morgan"
+                ],
+                "answer": [
+                    "Salem"
+                ]
+            },
+            {
+                "question": "Kaunsi series mein pehli baar 'Google' ko verb ke roop mein use kiya gaya?",
+                "options": [
+                    "Sherlock",
+                    "American Horror Story",
+                    "Buffy the Vampire Slayer",
+                    "Friends"
+                ],
+                "answer": [
+                    "Buffy the Vampire Slayer"
+                ]
+            },
+            {
+                "question": "Sylvester Stallone 'Rocky' movies mein kisse play karte hain?",
+                "options": [
+                    "Rocky Marciano",
+                    "Rocky Balboa",
+                    "Rocky Creed",
+                    "Rocky Ali"
+                ],
+                "answer": [
+                    "Rocky Balboa"
+                ]
+            },
+            {
+                "question": "Slash kis band ke guitarist hain?",
+                "options": [
+                    "Guns N' Roses",
+                    "Iron Maiden",
+                    "Metallica",
+                    "AC/DC"
+                ],
+                "answer": [
+                    "Guns N' Roses"
+                ]
+            },
+            {
+                "question": "'Don't Start Now' gaana kis ka hai?",
+                "options": [
+                    "Britney Spears",
+                    "Doja Cat",
+                    "Billie Eilish",
+                    "Dua Lipa"
+                ],
+                "answer": [
+                    "Dua Lipa"
+                ]
+            },
+            {
+                "question": "In musicians mein se kis ka asli naam 'Robert Allen Zimmerman' hai?",
+                "options": [
+                    "Bob Dylan",
+                    "Maluma",
+                    "Bon Jovi",
+                    "Bob Marley"
+                ],
+                "answer": [
+                    "Bob Dylan"
+                ]
+            },
+            {
+                "question": "Maleficent ka servant kaunsa animal hai?",
+                "options": [
+                    "Worm",
+                    "Crow",
+                    "Wolf",
+                    "Cat"
+                ],
+                "answer": [
+                    "Crow"
+                ]
+            },
+            {
+                "question": "'Armageddon' film ka main theme song kis rock band ka hai?",
+                "options": [
+                    "U2",
+                    "Guns N' Roses",
+                    "Aerosmith",
+                    "The Rolling Stones"
+                ],
+                "answer": [
+                    "Aerosmith"
+                ]
+            },
+            {
+                "question": "2012 ki 'The Avengers' movie mein kaunsa character nahi hai?",
+                "options": [
+                    "Captain America",
+                    "Wolverine",
+                    "Hulk",
+                    "Thor"
+                ],
+                "answer": [
+                    "Wolverine"
+                ]
+            },
+            {
+                "question": "'The Simpsons' animated series ka creator kaun hai?",
+                "options": [
+                    "Steve Jobs",
+                    "Matt Groening",
+                    "Seth MacFarlane",
+                    "Hank Azaria"
+                ],
+                "answer": [
+                    "Matt Groening"
+                ]
+            },
+            {
+                "question": "'Coco' movie kis festival par based hai?",
+                "options": [
+                    "Candlemas",
+                    "Cinco de Mayo",
+                    "Day of the Dead",
+                    "Festival of Shadows"
+                ],
+                "answer": [
+                    "Day of the Dead"
+                ]
+            },
+            {
+                "question": "Hulk ka original color kya tha?",
+                "options": [
+                    "Green",
+                    "Gray",
+                    "Purple",
+                    "Red"
+                ],
+                "answer": [
+                    "Gray"
+                ]
+            },
+            {
+                "question": "'Elite' series kis country ki hai?",
+                "options": [
+                    "Mexico",
+                    "Spain",
+                    "Colombia",
+                    "Norway"
+                ],
+                "answer": [
+                    "Spain"
+                ]
+            },
+            {
+                "question": "YouTuber PewDiePie ki nationality kya hai?",
+                "options": [
+                    "American",
+                    "Swedish",
+                    "Russian",
+                    "Italian"
+                ],
+                "answer": [
+                    "Swedish"
+                ]
+            },
+            {
+                "question": "'Mario Bros' video game kisne banaya?",
+                "options": [
+                    "Masahiro Sakurai",
+                    "Michel Ancel",
+                    "Ken Sugimori",
+                    "Shigeru Miyamoto"
+                ],
+                "answer": [
+                    "Shigeru Miyamoto"
+                ]
+            },
+            {
+                "question": "'Game of Thrones' series kis TV channel par aayi thi?",
+                "options": [
+                    "HBO",
+                    "FOX",
+                    "The CW",
+                    "Netflix"
+                ],
+                "answer": [
+                    "HBO"
+                ]
+            },
+            {
+                "question": "'Chaves' series mein Quico ke ghar ka door number kya hai?",
+                "options": [
+                    "14",
+                    "8",
+                    "72",
+                    "22"
+                ],
+                "answer": [
+                    "14"
+                ]
+            },
+            {
+                "question": "Inme se kaunsa naam Kardashian family ka nahi hai?",
+                "options": [
+                    "Kim",
+                    "Khloe",
+                    "Kourtney",
+                    "Kendra"
+                ],
+                "answer": [
+                    "Kendra"
+                ]
+            },
+            {
+                "question": "'Bad Guy' song kis artist ka hai?",
+                "options": [
+                    "Billie Eilish",
+                    "Halsey",
+                    "Lorde",
+                    "Cardi B"
+                ],
+                "answer": [
+                    "Billie Eilish"
+                ]
+            },
+            {
+                "question": "'Dynamite' gaana kis K-Pop band ka hai?",
+                "options": [
+                    "EXO",
+                    "Blackpink",
+                    "BigBang",
+                    "BTS"
+                ],
+                "answer": [
+                    "BTS"
+                ]
+            },
+            {
+                "question": "Bohemian Rhapdosy movie mein Freddie Mercury ka role kaun nibhata hai?",
+                "options": [
+                    "Rami Malek",
+                    "Jared Leto",
+                    "Sacha Baron Cohen",
+                    "Adam Lambert"
+                ],
+                "answer": [
+                    "Rami Malek"
+                ]
+            },
+            {
+                "question": "Diários de Motocileta film mein Ernesto 'Che' Guevara ka role kaun karta hai?",
+                "options": [
+                    "Diego Luna",
+                    "Ricardo Darin",
+                    "Rodrigo de la Serna",
+                    "Gael Garcia Bernal"
+                ],
+                "answer": [
+                    "Gael Garcia Bernal"
+                ]
+            },
+            {
+                "question": "Sonic, jo Sega ka famous game ka protagonist hai, woh kaunsa janwar hai?",
+                "options": [
+                    "Ek ouriço (hedgehog)",
+                    "Ek squirrel",
+                    "Ek porco-espinho (porcupine)",
+                    "Ek cat"
+                ],
+                "answer": [
+                    "Ek ouriço (hedgehog)"
+                ]
+            },
+            {
+                "question": "'Peaky Blinders' series ka main character ka naam kya hai?",
+                "options": [
+                    "Arthur Shelby",
+                    "Michael Gray",
+                    "John Shelby",
+                    "Thomas Shelby"
+                ],
+                "answer": [
+                    "Thomas Shelby"
+                ]
+            },
+            {
+                "question": "Inme se kaun actor Joker ka role nahi nibhaya hai?",
+                "options": [
+                    "Jack Nicholson",
+                    "Orlando Bloom",
+                    "Heath Ledger",
+                    "Joaquin Phoenix"
+                ],
+                "answer": [
+                    "Orlando Bloom"
+                ]
+            },
+            {
+                "question": "'Brooklyn 99' series mein Jake Peralta ka role kaun karta hai?",
+                "options": [
+                    "Pete Davidson",
+                    "Andy Samberg",
+                    "Terry Crews",
+                    "Jonah Hill"
+                ],
+                "answer": [
+                    "Andy Samberg"
+                ]
+            },
+            {
+                "question": "Inme se kaunsa TV show ek advertising professional ke upar based hai?",
+                "options": [
+                    "Mad Men",
+                    "Shameless",
+                    "The Umbrella Academy",
+                    "Downton Abbey"
+                ],
+                "answer": [
+                    "Mad Men"
+                ]
+            },
+            {
+                "question": "'Batman: O Retorno' movie mein Catwoman ka role kis actress ne kiya hai?",
+                "options": [
+                    "Reese Witherspoon",
+                    "Michelle Pfeiffer",
+                    "Meg Ryan",
+                    "Alicia Silverstone"
+                ],
+                "answer": [
+                    "Michelle Pfeiffer"
+                ]
+            },
+            {
+                "question": "Sabse pehla superhero kis actor ne play kiya tha?",
+                "options": [
+                    "Chris Hemsworth",
+                    "Chris Pratt",
+                    "Chris Evans",
+                    "Chris Pine"
+                ],
+                "answer": [
+                    "Chris Evans"
+                ]
+            },
+            {
+                "question": "Pixar ki sabse pehli movie kaunsi thi?",
+                "options": [
+                    "Toy Story",
+                    "Finding Nemo",
+                    "A Bug's Life",
+                    "Monsters, Inc."
+                ],
+                "answer": [
+                    "Toy Story"
+                ]
+            },
+            {
+                "question": "Kaunsa superhero Gotham city mein rehta hai?",
+                "options": [
+                    "Batman",
+                    "Superman",
+                    "Green Lantern",
+                    "Spider-Man"
+                ],
+                "answer": [
+                    "Batman"
+                ]
+            },
+            {
+                "question": "'Clash Royale' mobile game ka predecessor kaunsa tha?",
+                "options": [
+                    "FarmVille",
+                    "Castle Crush",
+                    "Best Friends",
+                    "Clash of Clans"
+                ],
+                "answer": [
+                    "Clash of Clans"
+                ]
+            },
+            {
+                "question": "Thor ka bhai kaun hai?",
+                "options": [
+                    "Thanos",
+                    "Loki",
+                    "Star-Lord",
+                    "Silver Surfer"
+                ],
+                "answer": [
+                    "Loki"
+                ]
+            },
+            {
+                "question": "Titanic movie mein Jack ne boat ki ticket kaise jeeti thi?",
+                "options": [
+                    "Tennis khelke",
+                    "Discount mein kharidi",
+                    "Poker ki bet jeet ke",
+                    "Kachre se mili"
+                ],
+                "answer": [
+                    "Poker ki bet jeet ke"
+                ]
+            },
+            {
+                "question": "'You' series ke main actor kaun hai?",
+                "options": [
+                    "Penn Badgley",
+                    "Ed Westwick",
+                    "Adam Brody",
+                    "Hayden Christensen"
+                ],
+                "answer": [
+                    "Penn Badgley"
+                ]
+            },
+            {
+                "question": "'Breaking Bad' series kaha shoot hui thi?",
+                "options": [
+                    "New Mexico",
+                    "Texas",
+                    "Ohio",
+                    "Kentucky"
+                ],
+                "answer": [
+                    "New Mexico"
+                ]
+            },
+            {
+                "question": "'Parabéns pra você' gaana kab public domain mein aaya tha?",
+                "options": [
+                    "1915",
+                    "1999",
+                    "2015",
+                    "2019"
+                ],
+                "answer": [
+                    "2015"
+                ]
+            },
+            {
+                "question": "Brian May, Queen band ka guitarist, ki dusri profession kya hai?",
+                "options": [
+                    "Dentist",
+                    "Astrophysicist",
+                    "Architect",
+                    "Chef"
+                ],
+                "answer": [
+                    "Astrophysicist"
+                ]
+            },
+            {
+                "question": "'The Queen's Gambit' series ka lead actor kaun hai?",
+                "options": [
+                    "Anya Taylor-Joy",
+                    "Emma Roberts",
+                    "Ester Expósito",
+                    "Anne Hathaway"
+                ],
+                "answer": [
+                    "Anya Taylor-Joy"
+                ]
+            },
+            {
+                "question": "'Lupin' series mein main character ki profession kya hai?",
+                "options": [
+                    "Police",
+                    "Chor (Thief)",
+                    "Teacher",
+                    "Actor"
+                ],
+                "answer": [
+                    "Chor (Thief)"
+                ]
+            },
+            {
+                "question": "'Breaking Bad' mein Walter White apna pseudonym kya use karta hai?",
+                "options": [
+                    "Gutenberg",
+                    "Heisenberg",
+                    "Rosenfeld",
+                    "The Jackal"
+                ],
+                "answer": [
+                    "Heisenberg"
+                ]
+            },
+            {
+                "question": "Bollywood film industry kis city mein hai jiska naam 1995 mein badla gaya tha?",
+                "options": [
+                    "Mumbai",
+                    "Jaipur",
+                    "Hyderabad",
+                    "Bangalore"
+                ],
+                "answer": [
+                    "Mumbai"
+                ]
+            },
+            {
+                "question": "'FIFA' game kis company ka hai?",
+                "options": [
+                    "Konami",
+                    "Niantic",
+                    "Rio Games",
+                    "Electronic Arts"
+                ],
+                "answer": [
+                    "Electronic Arts"
+                ]
+            },
+            {
+                "question": "Kaunsi band ne ek saal mein sab continents mein concert diya hai?",
+                "options": [
+                    "Metallica",
+                    "The Beatles",
+                    "AC/DC",
+                    "Aerosmith"
+                ],
+                "answer": [
+                    "Metallica"
+                ]
+            },
+            {
+                "question": "'The Count of Monte Cristo' kitab kisne likhi thi?",
+                "options": [
+                    "Jules Verne",
+                    "Mary Shelley",
+                    "Alexandre Dumas",
+                    "Charles Dickens"
+                ],
+                "answer": [
+                    "Alexandre Dumas"
+                ]
+            },
+            {
+                "question": "James Joyce ke novel 'Ulysses' mein kitna time cover hota hai?",
+                "options": [
+                    "Ek hafta",
+                    "Ek din",
+                    "Barah ghante",
+                    "Teen mahine"
+                ],
+                "answer": [
+                    "Ek din"
+                ]
+            },
+            {
+                "question": "Artist 'Cildo Meireles' kaha paida hua tha?",
+                "options": [
+                    "Goiânia",
+                    "Manaus",
+                    "São Paulo",
+                    "Rio de Janeiro"
+                ],
+                "answer": [
+                    "Rio de Janeiro"
+                ]
+            },
+            {
+                "question": "'Manifesto Antropófago' kisne likha tha?",
+                "options": [
+                    "Mario de Andrade",
+                    "Oswald de Andrade",
+                    "Clarice Lispector",
+                    "Rachel de Queiroz"
+                ],
+                "answer": [
+                    "Oswald de Andrade"
+                ]
+            },
+            {
+                "question": "'Symphony No. 9' kisne compose ki thi?",
+                "options": [
+                    "Giuseppe Verdi",
+                    "Wolfgang Amadeus Mozart",
+                    "Ludwig van Beethoven",
+                    "Antonio Vivaldi"
+                ],
+                "answer": [
+                    "Ludwig van Beethoven"
+                ]
+            },
+            {
+                "question": "Gustav Klimt ki painting 'The Kiss' aap kis city mein dekh sakte hain?",
+                "options": [
+                    "Brussels",
+                    "Vienna",
+                    "Berlin",
+                    "Venice"
+                ],
+                "answer": [
+                    "Vienna"
+                ]
+            },
+            {
+                "question": "Fernando de Pessoa ka heteronym kaun sa hai?",
+                "options": [
+                    "Álvaro Sousa",
+                    "Álvaro Caieiro",
+                    "Álvaro Reis",
+                    "Álvaro de Campos"
+                ],
+                "answer": [
+                    "Álvaro de Campos"
+                ]
+            },
+            {
+                "question": "Machado de Assis kis literary school se belong karte the?",
+                "options": [
+                    "Naturalism",
+                    "Realism",
+                    "Parnassianism",
+                    "Symbolism"
+                ],
+                "answer": [
+                    "Realism"
+                ]
+            },
+            {
+                "question": "Poet Cruz e Sousa kaha paida hua tha?",
+                "options": [
+                    "Porto Alegre",
+                    "Rio de Janeiro",
+                    "São Paulo",
+                    "Florianópolis"
+                ],
+                "answer": [
+                    "Florianópolis"
+                ]
+            },
+            {
+                "question": "'Capitães de Areia' kitab kisne likhi thi?",
+                "options": [
+                    "João Guimarães Rosa",
+                    "Machado de Assis",
+                    "João Cabral de Melo Neto",
+                    "Jorge Amado"
+                ],
+                "answer": [
+                    "Jorge Amado"
+                ]
+            },
+            {
+                "question": "Kaunsi princess apne baal se prince ko tower chadne mein madad karti hai?",
+                "options": [
+                    "Pocahontas",
+                    "Cinderella",
+                    "Ariel",
+                    "Rapunzel"
+                ],
+                "answer": [
+                    "Rapunzel"
+                ]
+            },
+            {
+                "question": "Drum sticks ko kya kehte hain?",
+                "options": [
+                    "Baquetas",
+                    "Postes",
+                    "Cordas",
+                    "Batuques"
+                ],
+                "answer": [
+                    "Baquetas"
+                ]
+            },
+            {
+                "question": "Horacio Quiroga ki nationality kya thi?",
+                "options": [
+                    "Uruguayan",
+                    "Chilean",
+                    "Italian",
+                    "Argentinian"
+                ],
+                "answer": [
+                    "Uruguayan"
+                ]
+            },
+            {
+                "question": "Banksy ka asli janam kaha hua mana jata hai?",
+                "options": [
+                    "Greece",
+                    "Canada",
+                    "United Kingdom",
+                    "Ireland"
+                ],
+                "answer": [
+                    "United Kingdom"
+                ]
+            },
+            {
+                "question": "Edgar Allan Poe kaha paida hua tha?",
+                "options": [
+                    "France",
+                    "England",
+                    "Spain",
+                    "United States"
+                ],
+                "answer": [
+                    "United States"
+                ]
+            },
+            {
+                "question": "Clarice Lispector ne apni childhood kaha bitayi thi?",
+                "options": [
+                    "São Paulo",
+                    "Recife",
+                    "Bahia",
+                    "Rio de Janeiro"
+                ],
+                "answer": [
+                    "Recife"
+                ]
+            },
+            {
+                "question": "Rita Baiana ka character kis Brazilian literary work mein hai?",
+                "options": [
+                    "Quincas Borba",
+                    "Macunaíma",
+                    "O Cortiço",
+                    "A Moreninha"
+                ],
+                "answer": [
+                    "O Cortiço"
+                ]
+            },
+            {
+                "question": "Moby Dick kisne likha tha?",
+                "options": [
+                    "James Joyce",
+                    "Mark Twain",
+                    "Herman Melville",
+                    "Charles Dickens"
+                ],
+                "answer": [
+                    "Herman Melville"
+                ]
+            },
+            {
+                "question": "Salvador Dalí ka artistic movement kya tha?",
+                "options": [
+                    "Dadaism",
+                    "Futurism",
+                    "Surrealism",
+                    "Realism"
+                ],
+                "answer": [
+                    "Surrealism"
+                ]
+            }, {
+                "question": "Haiku kitni syllables se banta hai?",
+                "options": [
+                    "21",
+                    "17",
+                    "15",
+                    "23"
+                ],
+                "answer": [
+                    "17"
+                ]
+            },
+            {
+                "question": "Inme se kaunsi book Jane Austen ne nahi likhi hai?",
+                "options": [
+                    "Declínio e Queda",
+                    "Emma",
+                    "Sensibilidade e Bom Senso",
+                    "Orgulho e Preconceito"
+                ],
+                "answer": [
+                    "Declínio e Queda"
+                ]
+            },
+            {
+                "question": "Globo ki kaunsi miniseries 'Dom Casmurro' se inspired hai?",
+                "options": [
+                    "Capitu",
+                    "Dom Casmurro",
+                    "A Cigana",
+                    "Casmurro"
+                ],
+                "answer": [
+                    "Capitu"
+                ]
+            },
+            {
+                "question": "Symphony orchestra mein trumpet kis family se belong karta hai?",
+                "options": [
+                    "Strings (Cordas)",
+                    "Percussion (Percussão)",
+                    "Brass (Metal)",
+                    "Woodwind (Madeira)"
+                ],
+                "answer": [
+                    "Brass (Metal)"
+                ]
+            },
+            {
+                "question": "'O Grito' famous painting kisne banayi thi?",
+                "options": [
+                    "Edvard Munch",
+                    "Juan Miró",
+                    "Picasso",
+                    "Paul Cézanne"
+                ],
+                "answer": [
+                    "Edvard Munch"
+                ]
+            },
+            {
+                "question": "José Saramago kaunse state mein paida nahi hua kyunki wo Brazilian nahi tha?",
+                "options": [
+                    "Woh Brazilian nahi tha",
+                    "São Paulo",
+                    "Minas Gerais",
+                    "Bahia"
+                ],
+                "answer": [
+                    "Woh Brazilian nahi tha"
+                ]
+            },
+            {
+                "question": "'Os Miseráveis' story kaha set hai?",
+                "options": [
+                    "England",
+                    "USA",
+                    "Belgium",
+                    "France"
+                ],
+                "answer": [
+                    "France"
+                ]
+            },
+            {
+                "question": "Inme se kaunsa book Júlio Verne ka nahi hai?",
+                "options": [
+                    "Um bilhete de loteria",
+                    "O retrato de Dorian Grey",
+                    "Da Terra à Lua",
+                    "A ilha misteriosa"
+                ],
+                "answer": [
+                    "O retrato de Dorian Grey"
+                ]
+            },
+            {
+                "question": "'Trainspotting' book ka author kaun hai?",
+                "options": [
+                    "Charles Bukowski",
+                    "Irvine Welsh",
+                    "Donato Carrisi",
+                    "Dan Brown"
+                ],
+                "answer": [
+                    "Irvine Welsh"
+                ]
+            },
+            {
+                "question": "'Dom Casmurro' novel ke main characters kaun hain?",
+                "options": [
+                    "Doralice and Bentinho",
+                    "Bentinho and Capitu",
+                    "Capitu and Escobar",
+                    "Escobar and Bentinho"
+                ],
+                "answer": [
+                    "Bentinho and Capitu"
+                ]
+            },
+            {
+                "question": "Bartleby, the Scrivener ki famous line kya hai?",
+                "options": [
+                    "Maybe tomorrow",
+                    "I would prefer not to",
+                    "I don't like this",
+                    "I don't know"
+                ],
+                "answer": [
+                    "I would prefer not to"
+                ]
+            },
+            {
+                "question": "Manuel Bandeira kaha paida hua tha?",
+                "options": [
+                    "Belo Horizonte",
+                    "Bahia",
+                    "Recife",
+                    "Curitiba"
+                ],
+                "answer": [
+                    "Recife"
+                ]
+            },
+            {
+                "question": "'Grande Sertão: Veredas' kisne likha hai?",
+                "options": [
+                    "Machado de Assis",
+                    "Fernando Pessoa",
+                    "Júlia Lopes de Almeida",
+                    "Guimarães Rosa"
+                ],
+                "answer": [
+                    "Guimarães Rosa"
+                ]
+            },
+            {
+                "question": "Kaunsa famous painter Mona Lisa chori karne ka suspect tha?",
+                "options": [
+                    "Pablo Picasso",
+                    "Michelangelo",
+                    "Vincent Van Gogh",
+                    "Gustav Klimt"
+                ],
+                "answer": [
+                    "Pablo Picasso"
+                ]
+            },
+            {
+                "question": "Matisse ka ek painting New York museum mein kitne din ulta latka raha?",
+                "options": [
+                    "8 hours",
+                    "47 days",
+                    "6 days",
+                    "Never happened"
+                ],
+                "answer": [
+                    "47 days"
+                ]
+            },
+            {
+                "question": "Neeche se kaunsa book Ziraldo ne nahi likha?",
+                "options": [
+                    "O planeta lilás",
+                    "O menino da Lua",
+                    "Marcelo, Marmelo, Martelo",
+                    "Diário de Julieta"
+                ],
+                "answer": [
+                    "Marcelo, Marmelo, Martelo"
+                ]
+            },
+            {
+                "question": "Paulo Leminski ka gentilic kya tha?",
+                "options": [
+                    "Gaúcho",
+                    "Carioca",
+                    "Paranaense",
+                    "Mineiro"
+                ],
+                "answer": [
+                    "Paranaense"
+                ]
+            },
+            {
+                "question": "Inme se kaunsa book Saramago ka nahi hai?",
+                "options": [
+                    "Ensaio sobre a cegueira",
+                    "O evangelho segundo Jesus Cristo",
+                    "O Aleph",
+                    "Memorial do convento"
+                ],
+                "answer": [
+                    "O Aleph"
+                ]
+            },
+            {
+                "question": "José Saramago ki kaunsi novel movie mein adapt hui thi?",
+                "options": [
+                    "Memorial do convento",
+                    "Ensaio sobre a cegueira",
+                    "Ensaio sobre a lucidez",
+                    "A viagem do elefante"
+                ],
+                "answer": [
+                    "Ensaio sobre a cegueira"
+                ]
+            },
+            {
+                "question": "Texas desert mein kaunsi fake store hai?",
+                "options": [
+                    "Prada",
+                    "Chanel",
+                    "Versace",
+                    "Dior"
+                ],
+                "answer": [
+                    "Prada"
+                ]
+            },
+            {
+                "question": "Sabse mehngi Latin American painting kisne banayi?",
+                "options": [
+                    "Remedios Varo",
+                    "Frida Kahlo",
+                    "Diego Rivera",
+                    "Claude Monet"
+                ],
+                "answer": [
+                    "Diego Rivera"
+                ]
+            },
+            {
+                "question": "Sabse lambi duration kya hai?",
+                "options": [
+                    "Ek scene",
+                    "Ek plan",
+                    "Ek take",
+                    "Sabki duration same hai"
+                ],
+                "answer": [
+                    "Ek scene"
+                ]
+            },
+            {
+                "question": "'The Four Seasons' musical piece kisne banayi hai?",
+                "options": [
+                    "Amadeus Mozart",
+                    "Ludwig van Beethoven",
+                    "Antonio Vivaldi",
+                    "Frederic Chopin"
+                ],
+                "answer": [
+                    "Antonio Vivaldi"
+                ]
+            },
+            {
+                "question": "Clarice Lispector ki asli country kaunsi hai?",
+                "options": [
+                    "England",
+                    "Brazil",
+                    "Ukraine",
+                    "Netherlands"
+                ],
+                "answer": [
+                    "Ukraine"
+                ]
+            },
+            {
+                "question": "'A Hora da Estrela' kisne likhi?",
+                "options": [
+                    "Paulo Coelho",
+                    "Clarice Lispector",
+                    "Paula Pimenta",
+                    "Jorge Amado"
+                ],
+                "answer": [
+                    "Clarice Lispector"
+                ]
+            },
+            {
+                "question": "Neeche se kaunsi Frederico Garcia Lorca ki book nahi hai?",
+                "options": [
+                    "O jogo da amarelinha",
+                    "A casa de Bernarda Alba",
+                    "Bodas de Sangue",
+                    "Yerma"
+                ],
+                "answer": [
+                    "O jogo da amarelinha"
+                ]
+            },
+            {
+                "question": "Museu do Prado kaunsi country mein hai?",
+                "options": [
+                    "Russia",
+                    "USA",
+                    "France",
+                    "Spain"
+                ],
+                "answer": [
+                    "Spain"
+                ]
+            },
+            {
+                "question": "Troy ka last king kaun tha?",
+                "options": [
+                    "Achilles",
+                    "Priam",
+                    "Agamemnon",
+                    "Menelaus"
+                ],
+                "answer": [
+                    "Priam"
+                ]
+            },
+            {
+                "question": "Goethe ke Faust mein demon ka naam kya hai?",
+                "options": [
+                    "Satan",
+                    "Balthazar",
+                    "Mephistopheles",
+                    "Leviathan"
+                ],
+                "answer": [
+                    "Mephistopheles"
+                ]
+            },
+            {
+                "question": "Stephen King ki kaunsi novel mein killer clown hai?",
+                "options": [
+                    "The Dead Zone",
+                    "It",
+                    "Desperation",
+                    "Misery"
+                ],
+                "answer": [
+                    "It"
+                ]
+            },
+            {
+                "question": "Agatha Christie ki sabse famous character kaun si hai?",
+                "options": [
+                    "Gabriel Allon",
+                    "Sherlock Holmes",
+                    "Poirot",
+                    "Dr. Watson"
+                ],
+                "answer": [
+                    "Poirot"
+                ]
+            },
+            {
+                "question": "Semana de Arte Moderna kab hui thi?",
+                "options": [
+                    "1914",
+                    "1922",
+                    "1932",
+                    "None of the above"
+                ],
+                "answer": [
+                    "1922"
+                ]
+            },
+            {
+                "question": "Neeche se kaun Portuguese writer ne 'O primo Basílio' likha?",
+                "options": [
+                    "Fernando Pessoa",
+                    "Camilo Castelo Branco",
+                    "José Saramago",
+                    "Eça de Queiroz"
+                ],
+                "answer": [
+                    "Eça de Queiroz"
+                ]
+            },
+            {
+                "question": "'The Black Swan' ballet ka black swan ka naam kya hai?",
+                "options": [
+                    "Odile",
+                    "Siegfried",
+                    "Odette",
+                    "No name"
+                ],
+                "answer": [
+                    "Odile"
+                ]
+            },
+            {
+                "question": "'The Nutcracker' ballet ki first performance kis city mein hui thi?",
+                "options": [
+                    "Saint Petersburg",
+                    "Vienna",
+                    "New York",
+                    "Moscow"
+                ],
+                "answer": [
+                    "Saint Petersburg"
+                ]
+            },
+            {
+                "question": "Inhotim kahan located hai?",
+                "options": [
+                    "São Paulo",
+                    "Rio de Janeiro",
+                    "Minas Gerais",
+                    "Paraná"
+                ],
+                "answer": [
+                    "Minas Gerais"
+                ]
+            },
+            {
+                "question": "'Abaporu' painting kisne banayi hai?",
+                "options": [
+                    "Anita Malfatti",
+                    "Tarsila do Amaral",
+                    "Di Cavalcanti",
+                    "Romero Britto"
+                ],
+                "answer": [
+                    "Tarsila do Amaral"
+                ]
+            },
+            {
+                "question": "Solar system mein sabse thanda planet kaun sa hai?",
+                "options": [
+                    "Venus",
+                    "Saturn",
+                    "Neptune",
+                    "Mercury"
+                ],
+                "answer": [
+                    "Neptune"
+                ]
+            },
+            {
+                "question": "Kaunsi island giant tortoises se famous hai?",
+                "options": [
+                    "Madagascar",
+                    "Galápagos Islands",
+                    "Canary Islands",
+                    "Isla Margarita"
+                ],
+                "answer": [
+                    "Galápagos Islands"
+                ]
+            },
+            {
+                "question": "Kaunsi dog breed ki tongue blue ya purple color ki hoti hai?",
+                "options": [
+                    "Boxer",
+                    "Bulldog",
+                    "Chow Chow",
+                    "Poodle"
+                ],
+                "answer": [
+                    "Chow Chow"
+                ]
+            },
+            {
+                "question": "Khane ko andar daalne se dar lagne wali phobia ko kya kehte hain?",
+                "options": [
+                    "Sitophobia",
+                    "Photophobia",
+                    "Digestophobia",
+                    "Arachnophobia"
+                ],
+                "answer": [
+                    "Sitophobia"
+                ]
+            },
+            {
+                "question": "Sternocleidomastoid kya hai?",
+                "options": [
+                    "Muscle",
+                    "Tendon",
+                    "Ligament",
+                    "Bone"
+                ],
+                "answer": [
+                    "Muscle"
+                ]
+            },
+            {
+                "question": "AMD Ryzen processors kab launch hue the?",
+                "options": [
+                    "2014",
+                    "2016",
+                    "2017",
+                    "2019"
+                ],
+                "answer": [
+                    "2017"
+                ]
+            },
+            {
+                "question": "Carbon-14 test ka use kya hota hai?",
+                "options": [
+                    "Gold karat measure karna",
+                    "Organic matter ki date nikalna",
+                    "Atom ke proton calculate karna",
+                    "Ring galvanize karna"
+                ],
+                "answer": [
+                    "Organic matter ki date nikalna"
+                ]
+            },
+            {
+                "question": "Suar kitne saal tak jee sakte hain average mein?",
+                "options": [
+                    "10 - 20",
+                    "25 - 45",
+                    "35 - 45",
+                    "70 - 90"
+                ],
+                "answer": [
+                    "10 - 20"
+                ]
+            },
+            {
+                "question": "Ibirapuera ka planetarium kis city mein located hai?",
+                "options": [
+                    "Rio de Janeiro",
+                    "São Paulo",
+                    "Ouro Preto",
+                    "Porto Alegre"
+                ],
+                "answer": [
+                    "São Paulo"
+                ]
+            },
+            {
+                "question": "Salt mein kaunse chemical elements hote hain?",
+                "options": [
+                    "Sodium aur Potassium",
+                    "Sodium aur Chlorine",
+                    "Sodium aur Hydrogen",
+                    "Sodium aur Nitrogen"
+                ],
+                "answer": [
+                    "Sodium aur Chlorine"
+                ]
+            },
+            {
+                "question": "Olive kis tree ka fruit hai?",
+                "options": [
+                    "Ipê",
+                    "Azeitoneiro",
+                    "Oliveira",
+                    "Cedro"
+                ],
+                "answer": [
+                    "Oliveira"
+                ]
+            },
+            {
+                "question": "Cholesterol kya hai?",
+                "options": [
+                    "Ek protein",
+                    "Ek carbohydrate (glúcido)",
+                    "Ek nucleic acid",
+                    "Ek lipid"
+                ],
+                "answer": [
+                    "Ek lipid"
+                ]
+            },
+            {
+                "question": "Cryotherapy treatment mein kya use hota hai?",
+                "options": [
+                    "Cold (Thand)",
+                    "Heat (Garam)",
+                    "Electricity",
+                    "Earth (Zameen)"
+                ],
+                "answer": [
+                    "Cold (Thand)"
+                ]
+            },
+            {
+                "question": "Sublimation mein state change kaunse se kaunse hota hai?",
+                "options": [
+                    "Solid se Liquid",
+                    "Solid se Gas",
+                    "Gas se Liquid",
+                    "Liquid se Solid"
+                ],
+                "answer": [
+                    "Solid se Gas"
+                ]
+            },
+            {
+                "question": "144 ka square root kya hai?",
+                "options": [
+                    "12",
+                    "19",
+                    "24",
+                    "9"
+                ],
+                "answer": [
+                    "12"
+                ]
+            },
+            {
+                "question": "Microsoft ki virtual assistant ka naam kya hai?",
+                "options": [
+                    "Cortana",
+                    "Siri",
+                    "Alexa",
+                    "Bixby"
+                ],
+                "answer": [
+                    "Cortana"
+                ]
+            },
+            {
+                "question": "Kaunse metals room temperature pe liquid hote hain?",
+                "options": [
+                    "Tungsten",
+                    "Boron",
+                    "Mercury",
+                    "Platinum"
+                ],
+                "answer": [
+                    "Mercury"
+                ]
+            },
+            {
+                "question": "Schrödinger ke experiment mein kaunsa animal hai?",
+                "options": [
+                    "Cat",
+                    "Canary",
+                    "Dog",
+                    "Rat"
+                ],
+                "answer": [
+                    "Cat"
+                ]
+            },
+            {
+                "question": "Human body ka sabse chhota bone kaunsa hai?",
+                "options": [
+                    "Anvil (Bigorna)",
+                    "Phalanx (Falange)",
+                    "Stirrup (Estribo)",
+                    "Femur"
+                ],
+                "answer": [
+                    "Stirrup (Estribo)"
+                ]
+            },
+            {
+                "question": "Leprosy kis bacillus se hoti hai?",
+                "options": [
+                    "Tuberculosis",
+                    "Syphilis",
+                    "Leprosy",
+                    "Pneumonia"
+                ],
+                "answer": [
+                    "Leprosy"
+                ]
+            },
+            {
+                "question": "Ek kilo lead aur ek kilo gold mein kaun zyada heavy hota hai?",
+                "options": [
+                    "Gold",
+                    "Lead",
+                    "Same weight dono ka",
+                    "Climate pe depend karta hai"
+                ],
+                "answer": [
+                    "Same weight dono ka"
+                ]
+            },
+            {
+                "question": "Universal gravitation ka law kisne diya?",
+                "options": [
+                    "Johannes Kepler",
+                    "Isaac Newton",
+                    "Carl Friedrich Gauss",
+                    "Albert Einstein"
+                ],
+                "answer": [
+                    "Isaac Newton"
+                ]
+            },
+            {
+                "question": "Kaunse material electricity conduct karta hai?",
+                "options": [
+                    "Porcelain",
+                    "Glass",
+                    "Metal",
+                    "Rubber"
+                ],
+                "answer": [
+                    "Metal"
+                ]
+            },
+            {
+                "question": "'Q' number set kaunsa represent karta hai?",
+                "options": [
+                    "Rational numbers",
+                    "Real numbers",
+                    "Irrational numbers",
+                    "Parallel numbers"
+                ],
+                "answer": [
+                    "Rational numbers"
+                ]
+            },
+            {
+                "question": "Inme se kaunsi cheez sabse der mein degrade hoti hai?",
+                "options": [
+                    "Cigarette butt",
+                    "Chewing gum",
+                    "Plastic bottle",
+                    "Newspaper"
+                ],
+                "answer": [
+                    "Plastic bottle"
+                ]
+            },
+            {
+                "question": "Atmosphere mein ozone kis phenomenon se banta hai?",
+                "options": [
+                    "Thunder",
+                    "Lightning",
+                    "Earthquake",
+                    "Tsunami"
+                ],
+                "answer": [
+                    "Lightning"
+                ]
+            },
+            {
+                "question": "Africa ka sabse deadly mammal humans ke liye kaun sa hai?",
+                "options": [
+                    "Hippopotamus",
+                    "Zebra",
+                    "Lion",
+                    "Wild Boar"
+                ],
+                "answer": [
+                    "Hippopotamus"
+                ]
+            },
+            {
+                "question": "YouTube pe sabse pehla video ka naam kya hai?",
+                "options": [
+                    "Me at the zoo",
+                    "Arrival of a train",
+                    "At home",
+                    "Spring"
+                ],
+                "answer": [
+                    "Me at the zoo"
+                ]
+            },
+            {
+                "question": "Universal gravity kin do factors pe depend karti hai?",
+                "options": [
+                    "Mass aur Volume",
+                    "Mass aur Weight",
+                    "Distance aur Weight",
+                    "Distance aur Mass"
+                ],
+                "answer": [
+                    "Distance aur Mass"
+                ]
+            },
+            {
+                "question": "Twitter mein maximum kitne characters use kar sakte hain?",
+                "options": [
+                    "120",
+                    "180",
+                    "280",
+                    "360"
+                ],
+                "answer": [
+                    "280"
+                ]
+            },
+            {
+                "question": "Google Image Search kis famous celebrity se inspired hai?",
+                "options": [
+                    "Madonna",
+                    "Mariah Carey",
+                    "Britney Spears",
+                    "Jennifer Lopez"
+                ],
+                "answer": [
+                    "Jennifer Lopez"
+                ]
+            },
+            {
+                "question": "Dots aur dashes ka code kya kehte hain?",
+                "options": [
+                    "Braille",
+                    "Morse",
+                    "Raypunt",
+                    "Barcodes"
+                ],
+                "answer": [
+                    "Morse"
+                ]
+            },
+            {
+                "question": "Richter scale kya measure karta hai?",
+                "options": [
+                    "Minerals ki hardness",
+                    "Tornado ki intensity",
+                    "Wind ki force",
+                    "Earthquake ki magnitude"
+                ],
+                "answer": [
+                    "Earthquake ki magnitude"
+                ]
+            },
+            {
+                "question": "Temporary blindness ko kya kehte hain?",
+                "options": [
+                    "Amaurose fugaz",
+                    "Oftalmia precoce",
+                    "Exophthalmia inicial",
+                    "Temporary amnesia"
+                ],
+                "answer": [
+                    "Amaurose fugaz"
+                ]
+            },
+            {
+                "question": "Linux ka mascot kaunsa animal hai?",
+                "options": [
+                    "Lion",
+                    "Panda",
+                    "Penguin",
+                    "Leopard"
+                ],
+                "answer": [
+                    "Penguin"
+                ]
+            },
+            {
+                "question": "Space mein kaunsa car hai?",
+                "options": [
+                    "Fiat Uno",
+                    "Chevrolet Corvette",
+                    "Tesla Roadster",
+                    "BMW M8"
+                ],
+                "answer": [
+                    "Tesla Roadster"
+                ]
+            },
+            {
+                "question": "Sabse pehla smartphone kis company ne banaya?",
+                "options": [
+                    "IBM",
+                    "Apple",
+                    "Google",
+                    "Huawei"
+                ],
+                "answer": [
+                    "IBM"
+                ]
+            },
+            {
+                "question": "Sabse silent animal kaun hai?",
+                "options": [
+                    "Giraffe",
+                    "Elephant",
+                    "Lion",
+                    "Zebra"
+                ],
+                "answer": [
+                    "Giraffe"
+                ]
+            },
+            {
+                "question": "Orca ki average life span kitni hai?",
+                "options": [
+                    "50 years",
+                    "85 years",
+                    "29 years",
+                    "5 years"
+                ],
+                "answer": [
+                    "29 years"
+                ]
+            },
+            {
+                "question": "Kaunse animal drown ho sakte hain?",
+                "options": [
+                    "Shark",
+                    "Seahorse",
+                    "Octopus",
+                    "Dolphin"
+                ],
+                "answer": [
+                    "Dolphin"
+                ]
+            },
+            {
+                "question": "North star kis constellation mein hai?",
+                "options": [
+                    "Big Dipper (Ursa Major)",
+                    "Little Dipper (Ursa Minor)",
+                    "Cassiopeia",
+                    "Perseus"
+                ],
+                "answer": [
+                    "Little Dipper (Ursa Minor)"
+                ]
+            },
+            {
+                "question": "Cube mein kitni edges hoti hain?",
+                "options": [
+                    "4",
+                    "8",
+                    "12",
+                    "16"
+                ],
+                "answer": [
+                    "12"
+                ]
+            },
+            {
+                "question": "Halloween fear ko kya kehte hain?",
+                "options": [
+                    "Psychosis",
+                    "Hallophobia",
+                    "Samhainophobia",
+                    "Luviofobia"
+                ],
+                "answer": [
+                    "Samhainophobia"
+                ]
+            },
+            {
+                "question": "Human body ka sabse bada muscle kaunsa hai?",
+                "options": [
+                    "Pectoralis major",
+                    "Triceps",
+                    "Gluteus maximus",
+                    "Stapedius"
+                ],
+                "answer": [
+                    "Gluteus maximus"
+                ]
+            },
+            {
+                "question": "Jis insaan ne do alag science fields mein Nobel prize jeeta, wo kaun tha?",
+                "options": [
+                    "Albert Einstein",
+                    "Marie Curie",
+                    "Stephen Hawking",
+                    "Rosalind Franklin"
+                ],
+                "answer": [
+                    "Marie Curie"
+                ]
+            },
+            {
+                "question": "Periodic table ka first element kaunsa hai?",
+                "options": [
+                    "Barium",
+                    "Zinc",
+                    "Hydrogen",
+                    "Potassium"
+                ],
+                "answer": [
+                    "Hydrogen"
+                ]
+            },
+            {
+                "question": "Moon kyu shine karta hai?",
+                "options": [
+                    "Sun ki light reflect karta hai",
+                    "Apni light emit karta hai",
+                    "Stars light karta hai",
+                    "Earth ki light reflect karta hai"
+                ],
+                "answer": [
+                    "Sun ki light reflect karta hai"
+                ]
+            },
+            {
+                "question": "Kaunsi tech company goats rent karti hai regularly?",
+                "options": [
+                    "Google",
+                    "Apple",
+                    "Microsoft",
+                    "Samsung"
+                ],
+                "answer": [
+                    "Google"
+                ]
+            },
+            {
+                "question": "Average kitni baar blink karte hain hum per minute?",
+                "options": [
+                    "4",
+                    "8",
+                    "20",
+                    "30"
+                ],
+                "answer": [
+                    "20"
+                ]
+            },
+            {
+                "question": "Milk ko yogurt mein kya convert karta hai?",
+                "options": [
+                    "Virus",
+                    "Moss",
+                    "Time",
+                    "Bacteria"
+                ],
+                "answer": [
+                    "Bacteria"
+                ]
+            },
+            {
+                "question": "Earth kis direction mein rotate karta hai?",
+                "options": [
+                    "East to West",
+                    "North to South",
+                    "West to East",
+                    "South to North"
+                ],
+                "answer": [
+                    "West to East"
+                ]
+            },
+            {
+                "question": "Solar system ka sabse garam planet kaunsa hai?",
+                "options": [
+                    "Earth (Zameen)",
+                    "Mercury",
+                    "Venus",
+                    "Saturn"
+                ],
+                "answer": [
+                    "Venus"
+                ]
+            },
+            {
+                "question": "Duniya ki sabse badi lizard kaunsi hai?",
+                "options": [
+                    "Komodo Dragon",
+                    "Gila Monster",
+                    "Wall Lizard",
+                    "Common Gecko"
+                ],
+                "answer": [
+                    "Komodo Dragon"
+                ]
+            },
+            {
+                "question": "Meetha doodh banane mein kaunse chemical ka use hota hai?",
+                "options": [
+                    "Sodium bicarbonate",
+                    "Sodium chloride",
+                    "Sodium nitrite",
+                    "Lecithin"
+                ],
+                "answer": [
+                    "Sodium bicarbonate"
+                ]
+            },
+            {
+                "question": "Ek baby human ke kitne haddiyan hoti hain approximately?",
+                "options": [
+                    "140",
+                    "199",
+                    "206",
+                    "300"
+                ],
+                "answer": [
+                    "300"
+                ]
+            },
+            {
+                "question": "Human body mein sartorius muscle kahan hota hai?",
+                "options": [
+                    "Forearm (Bazu ka neeche wala hissa)",
+                    "Back (Peechha)",
+                    "Thigh (Jangha)",
+                    "Calf (Pindli)"
+                ],
+                "answer": [
+                    "Thigh (Jangha)"
+                ]
+            },
+            {
+                "question": "Dimaag ke kaunse lobe nahi hai?",
+                "options": [
+                    "Parietal",
+                    "Frontal",
+                    "Meridional",
+                    "Occipital"
+                ],
+                "answer": [
+                    "Meridional"
+                ]
+            },
+            {
+                "question": "International Space Station ko Earth ki ek poori rotation karne mein kitna time lagta hai?",
+                "options": [
+                    "90 minutes",
+                    "6 hours",
+                    "18 hours",
+                    "6 months"
+                ],
+                "answer": [
+                    "90 minutes"
+                ]
+            },
+            {
+                "question": "Jaguar (Onça parda) kis continent ka native hai?",
+                "options": [
+                    "Europe",
+                    "America",
+                    "Asia",
+                    "Africa"
+                ],
+                "answer": [
+                    "America"
+                ]
+            },
+            {
+                "question": "English football league ko kya kehte hain?",
+                "options": [
+                    "The League",
+                    "Serie A",
+                    "Premier League",
+                    "Ligue 1"
+                ],
+                "answer": [
+                    "Premier League"
+                ]
+            },
+            {
+                "question": "Kaunsi city famous hai 24-hour race ke liye?",
+                "options": [
+                    "Dakar",
+                    "Dubai",
+                    "Le Mans",
+                    "Paris"
+                ],
+                "answer": [
+                    "Le Mans"
+                ]
+            },
+            {
+                "question": "Latin America ka pehla country jo Olympic Games ka host bana?",
+                "options": [
+                    "Mexico",
+                    "Brazil",
+                    "Peru",
+                    "Venezuela"
+                ],
+                "answer": [
+                    "Mexico"
+                ]
+            },
+            {
+                "question": "Football World Cup kis country ne pehli baar jeeta tha?",
+                "options": [
+                    "Italy",
+                    "Argentina",
+                    "England",
+                    "Uruguay"
+                ],
+                "answer": [
+                    "Uruguay"
+                ]
+            },
+            {
+                "question": "Kaunsi Italian Formula 1 team hai?",
+                "options": [
+                    "Red Bull",
+                    "McLaren",
+                    "Ferrari",
+                    "Renault"
+                ],
+                "answer": [
+                    "Ferrari"
+                ]
+            },
+            {
+                "question": "Giro d'Italia competition kis sport ka hai?",
+                "options": [
+                    "Rugby",
+                    "Cycling",
+                    "Athletics",
+                    "Sailing"
+                ],
+                "answer": [
+                    "Cycling"
+                ]
+            },
+            {
+                "question": "Kaunsa Brazilian ex-player Paraguay mein fake passport use karne ki wajah se arrest hua tha?",
+                "options": [
+                    "Romário",
+                    "Ronaldo",
+                    "Ronaldinho Gaúcho",
+                    "Rivaldo"
+                ],
+                "answer": [
+                    "Ronaldinho Gaúcho"
+                ]
+            },
+            {
+                "question": "Football mein kaunsi cheez characteristic nahi hai?",
+                "options": [
+                    "Goal",
+                    "Penalty",
+                    "Dribble",
+                    "Serve (Saque)"
+                ],
+                "answer": [
+                    "Serve (Saque)"
+                ]
+            },
+            {
+                "question": "Apni national team mein sabse chhote umar mein debut kisne kiya?",
+                "options": [
+                    "Antoine Griezmann",
+                    "Lionel Messi",
+                    "Luis Suárez",
+                    "Luka Modric"
+                ],
+                "answer": [
+                    "Lionel Messi"
+                ]
+            },
+            {
+                "question": "Olympic gold medals mein sabse pehla material kya hota hai?",
+                "options": [
+                    "Steel",
+                    "Gold",
+                    "Silver",
+                    "Iron"
+                ],
+                "answer": [
+                    "Silver"
+                ]
+            },
+            {
+                "question": "Volleyball mein set start karne ka first move kya hota hai?",
+                "options": [
+                    "Serve (Saque)",
+                    "Forearm pass (Manchete)",
+                    "Touch",
+                    "Middle ball"
+                ],
+                "answer": [
+                    "Serve (Saque)"
+                ]
+            },
+            {
+                "question": "Kaun sa Brazilian athlete surfing mein two-time world champion hai?",
+                "options": [
+                    "Gabriel Medina",
+                    "Ítalo Ferreira",
+                    "Felipe Toledo",
+                    "Kelly Slater"
+                ],
+                "answer": [
+                    "Gabriel Medina"
+                ]
+            },
+            {
+                "question": "Triathlon ka second stage kya hota hai?",
+                "options": [
+                    "Swimming",
+                    "Running",
+                    "Cycling",
+                    "Climbing"
+                ],
+                "answer": [
+                    "Cycling"
+                ]
+            },
+            {
+                "question": "Chess board mein kitne squares hote hain?",
+                "options": [
+                    "50",
+                    "55",
+                    "64",
+                    "80"
+                ],
+                "answer": [
+                    "64"
+                ]
+            },
+            {
+                "question": "Arsenal football team kis country ki hai?",
+                "options": [
+                    "Germany",
+                    "Spain",
+                    "England",
+                    "Italy"
+                ],
+                "answer": [
+                    "England"
+                ]
+            },
+            {
+                "question": "1970 World Cup kis country ne jeeta tha?",
+                "options": [
+                    "Brazil",
+                    "Italy",
+                    "Germany",
+                    "Argentina"
+                ],
+                "answer": [
+                    "Brazil"
+                ]
+            },
+            {
+                "question": "Luis Suarez ne apna pehla European club kaunsa khela tha?",
+                "options": [
+                    "Ajax",
+                    "Barcelona",
+                    "Groningen",
+                    "Liverpool"
+                ],
+                "answer": [
+                    "Groningen"
+                ]
+            },
+            {
+                "question": "Pehla Women's Football World Cup kahan hua tha?",
+                "options": [
+                    "New Zealand",
+                    "Canada",
+                    "China",
+                    "France"
+                ],
+                "answer": [
+                    "China"
+                ]
+            },
+            {
+                "question": "Kaunse sport mein swimming cap pehna hota hai?",
+                "options": [
+                    "Football",
+                    "Swimming",
+                    "Athletics",
+                    "Gymnastics"
+                ],
+                "answer": [
+                    "Swimming"
+                ]
+            },
+            {
+                "question": "Kaunsi race event mein sabse lambi running distance hoti hai?",
+                "options": [
+                    "Olympic triathlon",
+                    "Marathon",
+                    "400m relay",
+                    "Decathlon"
+                ],
+                "answer": [
+                    "Marathon"
+                ]
+            },
+            {
+                "question": "Tour de France mein doping test 7 baar positive kisne diya?",
+                "options": [
+                    "Egan Bernal",
+                    "Lance Armstrong",
+                    "Elia Viviani",
+                    "Eddy Merckx"
+                ],
+                "answer": [
+                    "Lance Armstrong"
+                ]
+            },
+            {
+                "question": "Kaun sa game opponent ko ball se hit karne ka hota hai?",
+                "options": [
+                    "Football",
+                    "Basketball",
+                    "Dodgeball (Queimada)",
+                    "Volleyball"
+                ],
+                "answer": [
+                    "Dodgeball (Queimada)"
+                ]
+            },
+            {
+                "question": "Muhammad Ali ne kaunse sport mein naam banaya?",
+                "options": [
+                    "Football",
+                    "Volleyball",
+                    "Boxing",
+                    "Tennis"
+                ],
+                "answer": [
+                    "Boxing"
+                ]
+            },
+            {
+                "question": "SuperBowl usually kis month mein hota hai?",
+                "options": [
+                    "September",
+                    "February",
+                    "March",
+                    "December"
+                ],
+                "answer": [
+                    "February"
+                ]
+            },
+            {
+                "question": "Kaunse sport mein sabse zyada players ek match mein hote hain?",
+                "options": [
+                    "Football",
+                    "Volleyball",
+                    "Handball",
+                    "Basketball"
+                ],
+                "answer": [
+                    "Football"
+                ]
+            },
+            {
+                "question": "Sabse zyada World Cups jeetne wala football player kaun hai?",
+                "options": [
+                    "Maradona",
+                    "Pelé",
+                    "George Best",
+                    "Zidane"
+                ],
+                "answer": [
+                    "Pelé"
+                ]
+            },
+            {
+                "question": "Diego Maradona ne Argentina ke saath World Cup kaunsa saal jeeta tha?",
+                "options": [
+                    "1978",
+                    "1982",
+                    "1986",
+                    "1990"
+                ],
+                "answer": [
+                    "1986"
+                ]
+            },
+            {
+                "question": "NBA mein Michael Jordan ne apna last retirement kis team se kiya tha?",
+                "options": [
+                    "Chicago Bulls",
+                    "Washington Wizards",
+                    "Boston Celtics",
+                    "Charlotte Bobcats"
+                ],
+                "answer": [
+                    "Washington Wizards"
+                ]
+            },
+            {
+                "question": "Kaunse sport mein players helmet pehente hain?",
+                "options": [
+                    "Swimming",
+                    "Football",
+                    "Cycling",
+                    "Volleyball"
+                ],
+                "answer": [
+                    "Cycling"
+                ]
+            },
+            {
+                "question": "Kon player 'Phenomenon' ke naam se famous tha?",
+                "options": [
+                    "Ronaldo",
+                    "Neymar",
+                    "Rivaldo",
+                    "Gabigol"
+                ],
+                "answer": [
+                    "Ronaldo"
+                ]
+            },
+            {
+                "question": "USA mein NHL kaunse sport ko regulate karta hai?",
+                "options": [
+                    "Ice Hockey",
+                    "Basketball",
+                    "Formula 1",
+                    "Curling"
+                ],
+                "answer": [
+                    "Ice Hockey"
+                ]
+            },
+            {
+                "question": "Third place athlete ko kaunsi medal milti hai?",
+                "options": [
+                    "Bronze",
+                    "Gold",
+                    "Silver",
+                    "Aluminum"
+                ],
+                "answer": [
+                    "Bronze"
+                ]
+            },
+            {
+                "question": "Kaunsa coach kabhi Brazil national team ka head coach nahi tha?",
+                "options": [
+                    "Dunga",
+                    "Ramon Menezes",
+                    "Tite",
+                    "Mano Menezes"
+                ],
+                "answer": [
+                    "Ramon Menezes"
+                ]
+            },
+            {
+                "question": "Maracanã stadium kahan hai?",
+                "options": [
+                    "São Paulo",
+                    "Rio de Janeiro",
+                    "Rio Grande do Sul",
+                    "Salvador"
+                ],
+                "answer": [
+                    "Rio de Janeiro"
+                ]
+            },
+            {
+                "question": "Kaunsi football team ke uniform mein red color nahi hota?",
+                "options": [
+                    "Flamengo",
+                    "Vila Nova",
+                    "Arsenal",
+                    "Grêmio"
+                ],
+                "answer": [
+                    "Grêmio"
+                ]
+            },
+            {
+                "question": "Football player captain armband kahan pe pehenta hai?",
+                "options": [
+                    "Left knee",
+                    "Arm",
+                    "Inside shoe",
+                    "Head"
+                ],
+                "answer": [
+                    "Arm"
+                ]
+            },
+            {
+                "question": "Inme se kaunse F1 driver ne 4 world titles lagataar jeete hain?",
+                "options": [
+                    "Sebastian Vettel",
+                    "Fernando Alonso",
+                    "Felipe Massa",
+                    "Kimi Raikkonen"
+                ],
+                "answer": [
+                    "Sebastian Vettel"
+                ]
+            },
+            {
+                "question": "Football player Erling Haaland kis team ke liye khelta hai?",
+                "options": [
+                    "Germany",
+                    "Sweden",
+                    "Spain",
+                    "Norway"
+                ],
+                "answer": [
+                    "Norway"
+                ]
+            },
+            {
+                "question": "Portugal ki kaunsi island par Cristiano Ronaldo paida hua tha?",
+                "options": [
+                    "Braga",
+                    "Madeira",
+                    "Fóios",
+                    "Lisbon"
+                ],
+                "answer": [
+                    "Madeira"
+                ]
+            },
+            {
+                "question": "Maria Sharapova ne apna pehla Grand Slam title kitni age me jeeta tha?",
+                "options": [
+                    "17 saal",
+                    "18 saal",
+                    "15 saal",
+                    "20 saal"
+                ],
+                "answer": [
+                    "17 saal"
+                ]
+            },
+            {
+                "question": "Inme se kaunsa khel Olympic sport tha?",
+                "options": [
+                    "Hopscotch (Amarelinha)",
+                    "Tug of war (Cabo de guerra)",
+                    "Hide and seek (Jogo das escondidas)",
+                    "What is it? (O que é, o que é)"
+                ],
+                "answer": [
+                    "Tug of war (Cabo de guerra)"
+                ]
+            },
+            {
+                "question": "Ancient Olympics ka prize kya tha?",
+                "options": [
+                    "Ek trophy",
+                    "Ek barrel wine ka",
+                    "Olive wreath (Zaitoon ki mala)",
+                    "Ek rose with thorns"
+                ],
+                "answer": [
+                    "Olive wreath (Zaitoon ki mala)"
+                ]
+            },
+            {
+                "question": "Messi ki profession kya hai?",
+                "options": [
+                    "Actor",
+                    "Doctor",
+                    "Football player",
+                    "Politician"
+                ],
+                "answer": [
+                    "Football player"
+                ]
+            },
+            {
+                "question": "Jab fight 10 seconds count ke baad finish hoti hai to use kya kehte hain?",
+                "options": [
+                    "Knockdown",
+                    "Knockout (Nocaute)",
+                    "Submission",
+                    "Chokehold"
+                ],
+                "answer": [
+                    "Knockout (Nocaute)"
+                ]
+            },
+            {
+                "question": "Kaunsa football club ka stadium uske fans ne banwaya tha?",
+                "options": [
+                    "Corinthians",
+                    "Flamengo",
+                    "Vasco da Gama",
+                    "Cruzeiro"
+                ],
+                "answer": [
+                    "Vasco da Gama"
+                ]
+            },
+            {
+                "question": "Kaun si female footballer 6 baar world best player bani?",
+                "options": [
+                    "Formiga",
+                    "Marta",
+                    "Hope Solo",
+                    "Megan Rapinoe"
+                ],
+                "answer": [
+                    "Marta"
+                ]
+            },
+            {
+                "question": "Brazil ke state championships 2020 me kyun suspend hue?",
+                "options": [
+                    "Referee fraud",
+                    "Match fixing",
+                    "Player strike",
+                    "Coronavirus"
+                ],
+                "answer": [
+                    "Coronavirus"
+                ]
+            },
+            {
+                "question": "Kaunse team ne Neymar aur Pelé ko develop kiya?",
+                "options": [
+                    "Palmeiras",
+                    "Santos",
+                    "Joinville",
+                    "XV de Jaú"
+                ],
+                "answer": [
+                    "Santos"
+                ]
+            },
+            {
+                "question": "Football ki sabse badi goal difference kis continent me hui thi?",
+                "options": [
+                    "Africa",
+                    "Europe",
+                    "America",
+                    "Oceania"
+                ],
+                "answer": [
+                    "Africa"
+                ]
+            },
+            {
+                "question": "Tennis balls ka color kis wajah se badla?",
+                "options": [
+                    "Radio",
+                    "Television",
+                    "Money",
+                    "Climate"
+                ],
+                "answer": [
+                    "Television"
+                ]
+            },
+            {
+                "question": "'Tackles' term kis sport me use hota hai?",
+                "options": [
+                    "Rugby",
+                    "Tennis",
+                    "Football",
+                    "Golf"
+                ],
+                "answer": [
+                    "Rugby"
+                ]
+            },
+            {
+                "question": "2002 World Cup kaha hua tha?",
+                "options": [
+                    "North Korea & Japan",
+                    "Japan",
+                    "South Korea & Japan",
+                    "North Korea"
+                ],
+                "answer": [
+                    "South Korea & Japan"
+                ]
+            },
+            {
+                "question": "Chess khelne ke liye kitne players chahiye?",
+                "options": [
+                    "6",
+                    "4",
+                    "2",
+                    "8"
+                ],
+                "answer": [
+                    "2"
+                ]
+            },
+            {
+                "question": "Inme se kaunsa sport individual khel hai?",
+                "options": [
+                    "Golf",
+                    "Rugby",
+                    "Basketball",
+                    "Baseball"
+                ],
+                "answer": [
+                    "Golf"
+                ]
+            },
+            {
+                "question": "Inme se kaunsa combat sport hai?",
+                "options": [
+                    "Jiu-jitsu",
+                    "Golf",
+                    "Swimming",
+                    "Football"
+                ],
+                "answer": [
+                    "Jiu-jitsu"
+                ]
+            },
+            {
+                "question": "Kaunsi sport field ya court par nahi khela jata?",
+                "options": [
+                    "Volleyball",
+                    "Futsal",
+                    "Diving (Salto ornamental)",
+                    "Baseball"
+                ],
+                "answer": [
+                    "Diving (Salto ornamental)"
+                ]
+            },
+            {
+                "question": "Kaunsi game mein ek foot se koodte hain phir dono feet se?",
+                "options": [
+                    "Jump rope (Corda)",
+                    "Ball",
+                    "Shuttlecock (Peteca)",
+                    "Hopscotch (Amarelinha)"
+                ],
+                "answer": [
+                    "Hopscotch (Amarelinha)"
+                ]
+            },
+            {
+                "question": "Kaunsi sport players ko sabse zyada protection chahiye?",
+                "options": [
+                    "Handball",
+                    "American football",
+                    "Basketball",
+                    "Judo"
+                ],
+                "answer": [
+                    "American football"
+                ]
+            },
+            {
+                "question": "Saint Patrick's Day ka symbol kya hai?",
+                "options": [
+                    "Crown",
+                    "Rose",
+                    "Bird",
+                    "Shamrock (Trevo)"
+                ],
+                "answer": [
+                    "Shamrock (Trevo)"
+                ]
+            },
+            {
+                "question": "Palácio de Invervo dekhne ke liye kahaan jana padega?",
+                "options": [
+                    "Moscow",
+                    "Saint Petersburg",
+                    "Vladivostok",
+                    "Sochi"
+                ],
+                "answer": [
+                    "Saint Petersburg"
+                ]
+            },
+            {
+                "question": "Mallorca, Menorca aur Ibiza islands kis desh ki hain?",
+                "options": [
+                    "Spain",
+                    "Greece",
+                    "United Kingdom",
+                    "Portugal"
+                ],
+                "answer": [
+                    "Spain"
+                ]
+            },
+            {
+                "question": "Inme se kaunsa country sabse bada hai area ke hisaab se?",
+                "options": [
+                    "Mexico",
+                    "Panama",
+                    "Uruguay",
+                    "Canada"
+                ],
+                "answer": [
+                    "Canada"
+                ]
+            },
+            {
+                "question": "Postal code 90210 kis US city ka hai?",
+                "options": [
+                    "Hamptons",
+                    "Beverly Hills",
+                    "San Francisco",
+                    "Manhattan"
+                ],
+                "answer": [
+                    "Beverly Hills"
+                ]
+            },
+            {
+                "question": "Inme se kaun Peru ke border mein nahi hai?",
+                "options": [
+                    "Ecuador",
+                    "Bolivia",
+                    "Paraguay",
+                    "Colombia"
+                ],
+                "answer": [
+                    "Paraguay"
+                ]
+            },
+            {
+                "question": "Iceland ki capital city kya hai?",
+                "options": [
+                    "Riga",
+                    "Reykjavik",
+                    "Dublin",
+                    "Helsinki"
+                ],
+                "answer": [
+                    "Reykjavik"
+                ]
+            },
+            {
+                "question": "Sabse zyada countries kis continent me hain?",
+                "options": [
+                    "Asia",
+                    "Africa",
+                    "America",
+                    "Europe"
+                ],
+                "answer": [
+                    "Africa"
+                ]
+            },
+            {
+                "question": "Eiffel Tower banne me kitna time laga tha?",
+                "options": [
+                    "1 saal 2 mahine",
+                    "2 saal",
+                    "2 saal 2 mahine 5 din",
+                    "1 saal 6 mahine"
+                ],
+                "answer": [
+                    "2 saal 2 mahine 5 din"
+                ]
+            },
+            {
+                "question": "Spain aur Morocco ke beech ka strait ka naam kya hai?",
+                "options": [
+                    "Bosphorus",
+                    "Gibraltar",
+                    "Hormuz",
+                    "Tangier"
+                ],
+                "answer": [
+                    "Gibraltar"
+                ]
+            },
+            {
+                "question": "Sabse thanda samundar konsa hai?",
+                "options": [
+                    "White Sea",
+                    "Red Sea",
+                    "Baltic Sea",
+                    "Arabian Sea"
+                ],
+                "answer": [
+                    "White Sea"
+                ]
+            },
+            {
+                "question": "Sabse lambi national anthem kis desh ki hai?",
+                "options": [
+                    "Spain",
+                    "Ireland",
+                    "Sweden",
+                    "Greece"
+                ],
+                "answer": [
+                    "Greece"
+                ]
+            },
+            {
+                "question": "Mauna Kea volcano kahaan located hai?",
+                "options": [
+                    "Hawaii",
+                    "Japan",
+                    "Thailand",
+                    "Indonesia"
+                ],
+                "answer": [
+                    "Hawaii"
+                ]
+            },
+            {
+                "question": "Australia ki capital city kaunsa hai?",
+                "options": [
+                    "Sydney",
+                    "Melbourne",
+                    "Canberra",
+                    "Brisbane"
+                ],
+                "answer": [
+                    "Canberra"
+                ]
+            },
+            {
+                "question": "Titanic kis ocean me dooba tha?",
+                "options": [
+                    "Atlantic",
+                    "Pacific",
+                    "Indian",
+                    "Arctic"
+                ],
+                "answer": [
+                    "Atlantic"
+                ]
+            },
+            {
+                "question": "Duniya ki sabse unchi mountain kaun si hai?",
+                "options": [
+                    "Aconcagua",
+                    "Mount Elbrus",
+                    "Mount Everest",
+                    "Kilimanjaro"
+                ],
+                "answer": [
+                    "Mount Everest"
+                ]
+            },
+            {
+                "question": "Sabse zyada plastic kachra kis ocean me hai?",
+                "options": [
+                    "Pacific",
+                    "Indian",
+                    "Atlantic",
+                    "Arctic"
+                ],
+                "answer": [
+                    "Pacific"
+                ]
+            },
+            {
+                "question": "John F. Kennedy airport kis city me hai?",
+                "options": [
+                    "Columbus",
+                    "New York",
+                    "Miami",
+                    "Dallas"
+                ],
+                "answer": [
+                    "New York"
+                ]
+            },
+            {
+                "question": "Inme se kis desh me sabse zyada pyramids hain?",
+                "options": [
+                    "Russia",
+                    "Egypt",
+                    "Sudan",
+                    "Mexico"
+                ],
+                "answer": [
+                    "Sudan"
+                ]
+            },
+            {
+                "question": "Oktoberfest asli experience ke liye kahaan jana padega?",
+                "options": [
+                    "Munich",
+                    "Berlin",
+                    "Cologne",
+                    "Dresden"
+                ],
+                "answer": [
+                    "Munich"
+                ]
+            },
+            {
+                "question": "Brazil ka traditional dish kaunsa hai?",
+                "options": [
+                    "Churrasco",
+                    "Rice and beans",
+                    "Feijoada",
+                    "Beiju"
+                ],
+                "answer": [
+                    "Feijoada"
+                ]
+            },
+            {
+                "question": "Canastra cheese kaha banta hai?",
+                "options": [
+                    "Mato Grosso",
+                    "Minas Gerais",
+                    "Bahia",
+                    "Rio Grande do Sul"
+                ],
+                "answer": [
+                    "Minas Gerais"
+                ]
+            },
+            {
+                "question": "Ushuaia kis desh ki hai?",
+                "options": [
+                    "Australia",
+                    "Chile",
+                    "Argentina",
+                    "South Africa"
+                ],
+                "answer": [
+                    "Argentina"
+                ]
+            },
+            {
+                "question": "In European countries me se kaun euro currency use nahi karta?",
+                "options": [
+                    "Italy",
+                    "Portugal",
+                    "Denmark",
+                    "France"
+                ],
+                "answer": [
+                    "Denmark"
+                ]
+            },
+            {
+                "question": "Budapest kis river ke kinare hai?",
+                "options": [
+                    "Rhine",
+                    "Seine",
+                    "Nile",
+                    "Danube"
+                ],
+                "answer": [
+                    "Danube"
+                ]
+            },
+            {
+                "question": "Aapko kis jagah nahi jana chahiye agar aap polar bears dekhna chahte ho?",
+                "options": [
+                    "Russia",
+                    "Alaska",
+                    "Greenland",
+                    "Antarctica"
+                ],
+                "answer": [
+                    "Antarctica"
+                ]
+            },
+            {
+                "question": "Mozambique ki official language kya hai?",
+                "options": [
+                    "Portuguese",
+                    "French",
+                    "English",
+                    "Swahili"
+                ],
+                "answer": [
+                    "Portuguese"
+                ]
+            },
+            {
+                "question": "Kaunsa canal Caribbean Sea ko Pacific Ocean se jodta hai?",
+                "options": [
+                    "English Channel",
+                    "Panama Canal",
+                    "Suez Canal",
+                    "Acapulco Canal"
+                ],
+                "answer": [
+                    "Panama Canal"
+                ]
+            },
+            {
+                "question": "Pipa beach kahan hai?",
+                "options": [
+                    "Rio Grande do Norte",
+                    "São Paulo",
+                    "Ceará",
+                    "Rio de Janeiro"
+                ],
+                "answer": [
+                    "Rio Grande do Norte"
+                ]
+            },
+            {
+                "question": "Brazil ka sabse bada state konsa hai area me?",
+                "options": [
+                    "Pará",
+                    "Amazonas",
+                    "Mato Grosso",
+                    "Minas Gerais"
+                ],
+                "answer": [
+                    "Amazonas"
+                ]
+            },
+            {
+                "question": "Brazil me kitne time zones hain?",
+                "options": [
+                    "2",
+                    "3",
+                    "4",
+                    "5"
+                ],
+                "answer": [
+                    "4"
+                ]
+            },
+            {
+                "question": "Japan ke bahar sabse zyada Japanese log kahan rehte hain?",
+                "options": [
+                    "China",
+                    "Malaysia",
+                    "Argentina",
+                    "Brazil"
+                ],
+                "answer": [
+                    "Brazil"
+                ]
+            },
+            {
+                "question": "In me se kaunsa samundar Europe me hai?",
+                "options": [
+                    "Caribbean Sea",
+                    "South Sea",
+                    "Dead Sea",
+                    "Baltic Sea"
+                ],
+                "answer": [
+                    "Baltic Sea"
+                ]
+            },
+            {
+                "question": "Asia ka sabse bada river Yangtze ka approximate length kya hai?",
+                "options": [
+                    "500 km",
+                    "6,300 km",
+                    "2,000 km",
+                    "25,000 km"
+                ],
+                "answer": [
+                    "6,300 km"
+                ]
+            },
+            {
+                "question": "Argentina aur Chile ke beech ka natural border kya hai?",
+                "options": [
+                    "Andes Mountains",
+                    "Atacama Desert",
+                    "Aconcagua",
+                    "Paraná River"
+                ],
+                "answer": [
+                    "Andes Mountains"
+                ]
+            },
+            {
+                "question": "Mariana Trench kis ocean me hai?",
+                "options": [
+                    "Arctic",
+                    "Pacific",
+                    "Indian",
+                    "Atlantic"
+                ],
+                "answer": [
+                    "Pacific"
+                ]
+            },
+            {
+                "question": "Paella Spain ke kis part se aayi hai?",
+                "options": [
+                    "Sevilla",
+                    "Valencia",
+                    "Murcia",
+                    "Catalonia"
+                ],
+                "answer": [
+                    "Valencia"
+                ]
+            },
+            {
+                "question": "California ka wo part jahan bahut saari tech companies hain, kya kehlata hai?",
+                "options": [
+                    "Bel-air",
+                    "Sunset Valley",
+                    "Hidden Hills",
+                    "Silicon Valley"
+                ],
+                "answer": [
+                    "Silicon Valley"
+                ]
+            },
+            {
+                "question": "Argentina ki sabse wide avenue ka naam kya hai?",
+                "options": [
+                    "Eje Monumental",
+                    "Anchorena",
+                    "Rivadavia",
+                    "9 de Julio"
+                ],
+                "answer": [
+                    "9 de Julio"
+                ]
+            },
+            {
+                "question": "Singapore me kaunsi activity illegal hai?",
+                "options": [
+                    "Chewing gum bechna",
+                    "Meat khana",
+                    "Jump karna",
+                    "Dog rakhna"
+                ],
+                "answer": [
+                    "Chewing gum bechna"
+                ]
+            },
+            {
+                "question": "Kaunsa samundar Europe aur Africa ko alag karta hai?",
+                "options": [
+                    "Aegean",
+                    "Red Sea",
+                    "Mediterranean",
+                    "Indian Ocean"
+                ],
+                "answer": [
+                    "Mediterranean"
+                ]
+            },
+            {
+                "question": "World ka tallest waterfall kis desh me hai?",
+                "options": [
+                    "USA",
+                    "Mongolia",
+                    "Bolivia",
+                    "Venezuela"
+                ],
+                "answer": [
+                    "Venezuela"
+                ]
+            },
+            {
+                "question": "Juiz de Fora city kahan hai?",
+                "options": [
+                    "Rio de Janeiro",
+                    "Minas Gerais",
+                    "Paraná",
+                    "Paraíba"
+                ],
+                "answer": [
+                    "Minas Gerais"
+                ]
+            },
+            {
+                "question": "João Pessoa kahan hai?",
+                "options": [
+                    "Rio Grande do Sul",
+                    "Rio de Janeiro",
+                    "Acre",
+                    "Paraíba"
+                ],
+                "answer": [
+                    "Paraíba"
+                ]
+            },
+            {
+                "question": "Croatia ki capital kya hai?",
+                "options": [
+                    "Sofia",
+                    "Oslo",
+                    "Zagreb",
+                    "Valencia"
+                ],
+                "answer": [
+                    "Zagreb"
+                ]
+            },
+            {
+                "question": "Angkor Wat temple kis desh me hai?",
+                "options": [
+                    "Thailand",
+                    "China",
+                    "India",
+                    "Cambodia"
+                ],
+                "answer": [
+                    "Cambodia"
+                ]
+            },
+            {
+                "question": "Serbia ki capital kya hai?",
+                "options": [
+                    "Bucharest",
+                    "Minsk",
+                    "Belgrade",
+                    "Vienna"
+                ],
+                "answer": [
+                    "Belgrade"
+                ]
+            },
+            {
+                "question": "Latin America ka sabse bada metro network kis city me hai?",
+                "options": [
+                    "Lima",
+                    "Caracas",
+                    "Mexico City",
+                    "Rio de Janeiro"
+                ],
+                "answer": [
+                    "Mexico City"
+                ]
+            },
+            {
+                "question": "Romeo aur Juliet ki balcony dekhne ke liye aap kis city jana chahoge?",
+                "options": [
+                    "Bologna",
+                    "Milan",
+                    "Florence",
+                    "Verona"
+                ],
+                "answer": [
+                    "Verona"
+                ]
+            },
+            {
+                "question": "Shinjuku Gyoen National Garden kahan hai?",
+                "options": [
+                    "South Korea",
+                    "Philippines",
+                    "China",
+                    "Japan"
+                ],
+                "answer": [
+                    "Japan"
+                ]
+            },
+            {
+                "question": "Asia me Petronas Towers kis city me hain?",
+                "options": [
+                    "Kuala Lumpur",
+                    "Seoul",
+                    "New Delhi",
+                    "Beijing"
+                ],
+                "answer": [
+                    "Kuala Lumpur"
+                ]
+            },
+            {
+                "question": "Nepal kis deshon ke border share karta hai?",
+                "options": [
+                    "India aur Pakistan",
+                    "Japan aur Thailand",
+                    "India aur China",
+                    "China aur Mongolia"
+                ],
+                "answer": [
+                    "India aur China"
+                ]
+            },
+            {
+                "question": "New Zealand ke Niue Island ke dollar ke kuch editions me kya chhapa hota hai?",
+                "options": [
+                    "Cows",
+                    "Ex-presidents",
+                    "Burgers",
+                    "Cartoons"
+                ],
+                "answer": [
+                    "Cartoons"
+                ]
+            },
+            {
+                "question": "Log jo coins Trevi Fountain me daalte hain, wo kahan jate hain?",
+                "options": [
+                    "Museums",
+                    "Sewers",
+                    "Charity",
+                    "To maintain the fountain"
+                ],
+                "answer": [
+                    "Charity"
+                ]
+            },
+            {
+                "question": "In borders me se sabse bada border konsa hai?",
+                "options": [
+                    "Argentina - Chile",
+                    "USA - Mexico",
+                    "USA - Canada",
+                    "Argentina - Brazil"
+                ],
+                "answer": [
+                    "USA - Canada"
+                ]
+            },
+            {
+                "question": "Cappadocia desert kahan hai?",
+                "options": [
+                    "Canada",
+                    "Morocco",
+                    "Brazil",
+                    "Turkey"
+                ],
+                "answer": [
+                    "Turkey"
+                ]
+            },
+            {
+                "question": "Suriname ki capital kya hai?",
+                "options": [
+                    "George Town",
+                    "Paramaribo",
+                    "Boa Vista",
+                    "Macapá"
+                ],
+                "answer": [
+                    "Paramaribo"
+                ]
+            },
+            {
+                "question": "Prague city kis country me hai?",
+                "options": [
+                    "Czech Republic",
+                    "Austria",
+                    "Switzerland",
+                    "Germany"
+                ],
+                "answer": [
+                    "Czech Republic"
+                ]
+            },
+            {
+                "question": "UN kab bana tha?",
+                "options": [
+                    "1939",
+                    "1940",
+                    "1945",
+                    "1951"
+                ],
+                "answer": [
+                    "1945"
+                ]
+            },
+            {
+                "question": "Italian fascism ka leader kaun tha?",
+                "options": [
+                    "Benito Mussolini",
+                    "Augusto Pinochet",
+                    "Joseph Stalin",
+                    "Francisco Franco"
+                ],
+                "answer": [
+                    "Benito Mussolini"
+                ]
+            },
+            {
+                "question": "Celts me druids kaun the?",
+                "options": [
+                    "Blacksmiths",
+                    "Warriors",
+                    "Priests",
+                    "Knights"
+                ],
+                "answer": [
+                    "Priests"
+                ]
+            },
+            {
+                "question": "In old libraries me se kaunsi abhi bhi exist karti hai?",
+                "options": [
+                    "Constantinople Library",
+                    "Al-Qarawiyyin Library",
+                    "Pergamum Library",
+                    "Alexandria Library"
+                ],
+                "answer": [
+                    "Al-Qarawiyyin Library"
+                ]
+            },
+            {
+                "question": "Portuguese court Brazil kab aayi thi?",
+                "options": [
+                    "They were on vacation",
+                    "They were looking for gold",
+                    "They had nothing to do",
+                    "They were escaping Napoleon"
+                ],
+                "answer": [
+                    "They were escaping Napoleon"
+                ]
+            },
+            {
+                "question": "Brazil me slavery kab abolished hua tha?",
+                "options": [
+                    "1888",
+                    "1675",
+                    "1922",
+                    "1810"
+                ],
+                "answer": [
+                    "1888"
+                ]
+            },
+            {
+                "question": "Duniya ki sabse purani currency jo abhi bhi chalti hai kaunsi hai?",
+                "options": [
+                    "Norwegian krone",
+                    "Chilean peso",
+                    "British pound",
+                    "US dollar"
+                ],
+                "answer": [
+                    "British pound"
+                ]
+            },
+            {
+                "question": "Sabse pehle kya aaya?",
+                "options": [
+                    "University of Oxford",
+                    "Aztec Empire",
+                    "Inca Empire",
+                    "Harvard University"
+                ],
+                "answer": [
+                    "University of Oxford"
+                ]
+            },
+            {
+                "question": "Kaunsi civilization videshiyon ko 'barbaros' kehti thi?",
+                "options": [
+                    "Romans",
+                    "Mayas",
+                    "Greeks",
+                    "Persians"
+                ],
+                "answer": [
+                    "Greeks"
+                ]
+            },
+            {
+                "question": "In me se kaun si talwar traditional hai jo samurai warriors use karte the?",
+                "options": [
+                    "Kanshou",
+                    "Shuriken",
+                    "Tantô",
+                    "Katana"
+                ],
+                "answer": [
+                    "Katana"
+                ]
+            },
+            {
+                "question": "Crusades kis historical period me hue the?",
+                "options": [
+                    "Middle Ages",
+                    "Modern Age",
+                    "Antiquity",
+                    "Contemporary Age"
+                ],
+                "answer": [
+                    "Middle Ages"
+                ]
+            },
+            {
+                "question": "Halloween festival kis culture se originate hua mana jata hai?",
+                "options": [
+                    "Maya",
+                    "Maori",
+                    "Celtic",
+                    "Viking"
+                ],
+                "answer": [
+                    "Celtic"
+                ]
+            },
+            {
+                "question": "Battle of Waterloo me French army ka leader kaun tha?",
+                "options": [
+                    "Alexander the Great",
+                    "Erwin Rommel",
+                    "William Wallace",
+                    "Napoleon Bonaparte"
+                ],
+                "answer": [
+                    "Napoleon Bonaparte"
+                ]
+            },
+            {
+                "question": "Hiroshima par girayi gayi atomic bomb me se ek ka naam kya tha?",
+                "options": [
+                    "Little Boy",
+                    "Fat Boy",
+                    "Slim Boy",
+                    "Big Boy"
+                ],
+                "answer": [
+                    "Little Boy"
+                ]
+            },
+            {
+                "question": "In cities me se kaun si sabse purani hai?",
+                "options": [
+                    "Quito, Ecuador",
+                    "Caral, Peru",
+                    "Montevideo, Uruguay",
+                    "Medellin, Colombia"
+                ],
+                "answer": [
+                    "Caral, Peru"
+                ]
+            },
+            {
+                "question": "Egyptians sulfur ka kya use karte the?",
+                "options": [
+                    "Khaane ke liye",
+                    "Makeup ke liye",
+                    "Temples ko clean karne ke liye",
+                    "Spirits bulane ke liye"
+                ],
+                "answer": [
+                    "Temples ko clean karne ke liye"
+                ]
+            },
+            {
+                "question": "Medieval period me kaun si epidemic real thi?",
+                "options": [
+                    "Dance Epidemic",
+                    "Lizard Flu",
+                    "Pink Flu",
+                    "Singing Epidemic"
+                ],
+                "answer": [
+                    "Dance Epidemic"
+                ]
+            },
+            {
+                "question": "Karl Marx kahaan paida hua tha?",
+                "options": [
+                    "England",
+                    "France",
+                    "Austria",
+                    "Kingdom of Prussia"
+                ],
+                "answer": [
+                    "Kingdom of Prussia"
+                ]
+            },
+            {
+                "question": "International Criminal Court ka founding statute kya kehlata hai?",
+                "options": [
+                    "Hague Statute",
+                    "Human Rights Statute",
+                    "United Nations Statute",
+                    "Rome Statute"
+                ],
+                "answer": [
+                    "Rome Statute"
+                ]
+            },
+            {
+                "question": "Christopher Columbus ki kaunsi caravel Spain wapas nahi aayi?",
+                "options": [
+                    "Pinta",
+                    "Santa Maria",
+                    "Nina",
+                    "Sab wapas aaye"
+                ],
+                "answer": [
+                    "Santa Maria"
+                ]
+            },
+            {
+                "question": "World War II ke dauran Oscars ki statuettes kis material se bani thi?",
+                "options": [
+                    "Plaster",
+                    "Metal",
+                    "Plastic",
+                    "Steel"
+                ],
+                "answer": [
+                    "Plaster"
+                ]
+            },
+            {
+                "question": "In countries me se kaun Soviet Union ka hissa nahi tha?",
+                "options": [
+                    "Kazakhstan",
+                    "Turkmenistan",
+                    "Afghanistan",
+                    "Tajikistan"
+                ],
+                "answer": [
+                    "Afghanistan"
+                ]
+            },
+            {
+                "question": "Spartans apna emblem kahan paint karte the?",
+                "options": [
+                    "Spears par",
+                    "Swords par",
+                    "Armour par",
+                    "Shields par"
+                ],
+                "answer": [
+                    "Shields par"
+                ]
+            },
+            {
+                "question": "Latin America ka pehla desh jo same-sex marriage legalize kiya?",
+                "options": [
+                    "Argentina",
+                    "Chile",
+                    "Uruguay",
+                    "Brazil"
+                ],
+                "answer": [
+                    "Argentina"
+                ]
+            },
+            {
+                "question": "Soviet Union ki pehli female dog jo earth orbit kiya uska naam kya tha?",
+                "options": [
+                    "Lassie",
+                    "Daria",
+                    "Laika",
+                    "Mushka"
+                ],
+                "answer": [
+                    "Laika"
+                ]
+            },
+            {
+                "question": "Brazil ki pehli capital kya thi?",
+                "options": [
+                    "Salvador",
+                    "Rio de Janeiro",
+                    "Brasília",
+                    "São Paulo"
+                ],
+                "answer": [
+                    "Salvador"
+                ]
+            },
+            {
+                "question": "History ki sabse chhoti war kitni der tak chali thi?",
+                "options": [
+                    "45 minutes se kam",
+                    "2 ghante se zyada",
+                    "1 din",
+                    "3 din"
+                ],
+                "answer": [
+                    "45 minutes se kam"
+                ]
+            },
+            {
+                "question": "Inca Empire ki capital Cusco ka shape kaisa tha?",
+                "options": [
+                    "Tomato",
+                    "Boot",
+                    "Circular",
+                    "Jaguar"
+                ],
+                "answer": [
+                    "Jaguar"
+                ]
+            },
+            {
+                "question": "Carlota Joaquina Brazil aayi to uska sir shave kyun tha?",
+                "options": [
+                    "Fashion thi",
+                    "Uska hairdresser ne dhokha diya",
+                    "Uske sir me joon the",
+                    "Woh achha lagta tha"
+                ],
+                "answer": [
+                    "Uske sir me joon the"
+                ]
+            },
+            {
+                "question": "Brazil ke kaunse president ko 'Pooron ka baap' kaha jata tha?",
+                "options": [
+                    "Fernando Collor",
+                    "Getúlio Vargas",
+                    "João Goulart",
+                    "Ernesto Geisel"
+                ],
+                "answer": [
+                    "Getúlio Vargas"
+                ]
+            },
+            {
+                "question": "Triple Alliance ke end me kis desh ne sabse zyada territory khoi?",
+                "options": [
+                    "Argentina",
+                    "Paraguay",
+                    "Chile",
+                    "Bolivia"
+                ],
+                "answer": [
+                    "Paraguay"
+                ]
+            },
+            {
+                "question": "Grito do Ipiranga kab hua tha?",
+                "options": [
+                    "1789",
+                    "1914",
+                    "1833",
+                    "1822"
+                ],
+                "answer": [
+                    "1822"
+                ]
+            },
+            {
+                "question": "Brazil ke 2022 ke presidential election me kitni electronic voting machines use hui thi?",
+                "options": [
+                    "577,000 machines",
+                    "124,000 machines",
+                    "1,021,365 machines",
+                    "311,012 machines"
+                ],
+                "answer": [
+                    "577,000 machines"
+                ]
+            },
+            {
+                "question": "2011 me Australia me sabse bada pineapple kitna wajan ka tha?",
+                "options": [
+                    "8.28 Kg",
+                    "3.85 Kg",
+                    "18.45 Kg",
+                    "24.12 Kg"
+                ],
+                "answer": [
+                    "8.28 Kg"
+                ]
+            },
+            {
+                "question": "Pantanal ka area 195,000 km² hai. Isme se kitna area Brazil ka hai?",
+                "options": [
+                    "151,000 km²",
+                    "69,000 km²",
+                    "38,210 km²",
+                    "Brazil me Pantanal nahi hai"
+                ],
+                "answer": [
+                    "151,000 km²"
+                ]
+            },
+            {
+                "question": "Michael Phelps Olympics me sabse zyada gold medals jeetne wale swimmer hain. Kitne gold medals hain unke paas?",
+                "options": [
+                    "23 medals",
+                    "11 medals",
+                    "41 medals",
+                    "Woh sabse zyada medals jeetne wale swimmer nahi hain"
+                ],
+                "answer": [
+                    "23 medals"
+                ]
+            },
+            {
+                "question": "Research ke mutabik, kitne percent Americans ke fridge me ketchup hota hai?",
+                "options": [
+                    "13%",
+                    "97%",
+                    "51%",
+                    "69%"
+                ],
+                "answer": [
+                    "97%"
+                ]
+            },
+            {
+                "question": "Khoon ko dil se nikal ke body ke around circulate kar ke wapas dil tak aane me kitna time lagta hai?",
+                "options": [
+                    "45 seconds",
+                    "3 minutes",
+                    "5 minutes",
+                    "1 minute 30 seconds"
+                ],
+                "answer": [
+                    "45 seconds"
+                ]
+            },
+            {
+                "question": "'The Godfather' 1972 movie ki duration kitni hai minutes me?",
+                "options": [
+                    "190 minutes",
+                    "160 minutes",
+                    "120 minutes",
+                    "175 minutes"
+                ],
+                "answer": [
+                    "175 minutes"
+                ]
+            },
+            {
+                "question": "Adult gorilla ka wajan lagbhag 200 kg hota hai. Naya janma hua gorilla kitna wajan rakhta hai?",
+                "options": [
+                    "5 kg",
+                    "3 kg",
+                    "2.5 kg",
+                    "1.6 kg"
+                ],
+                "answer": [
+                    "1.6 kg"
+                ]
+            },
+            {
+                "question": "Studies ke mutabik, ek dog kitne shabd aur signals samajh sakta hai?",
+                "options": [
+                    "165",
+                    "100",
+                    "250",
+                    "200"
+                ],
+                "answer": [
+                    "165"
+                ]
+            },
+            {
+                "question": "Cape Town, South Africa se start karke Magadan, Russia tak sabse lambi walking distance kitni hai?",
+                "options": [
+                    "23,068 km",
+                    "20,300 km",
+                    "24,000 km",
+                    "21,500 km"
+                ],
+                "answer": [
+                    "23,068 km"
+                ]
+            },
+            {
+                "question": "Oscar ki statuette ka wajan kitna hota hai?",
+                "options": [
+                    "5 kg",
+                    "2.75 kg",
+                    "3.85 kg",
+                    "4.5 kg"
+                ],
+                "answer": [
+                    "3.85 kg"
+                ]
+            },
+            {
+                "question": "Belgium ki population kitni hai?",
+                "options": [
+                    "10 million",
+                    "11 million",
+                    "Approximately 11,753,427",
+                    "12 million"
+                ],
+                "answer": [
+                    "Approximately 11,753,427"
+                ]
+            },
+            {
+                "question": "Russia ka Lake Baikal duniya ka sabse gahra lake hai. Uski gehrai kitni hai?",
+                "options": [
+                    "1,500 meters",
+                    "1,700 meters",
+                    "1,642 meters",
+                    "2,000 meters"
+                ],
+                "answer": [
+                    "1,642 meters"
+                ]
+            },
+            {
+                "question": "White House, USA me electric supply kab aayi thi?",
+                "options": [
+                    "1891",
+                    "1900",
+                    "1889",
+                    "1898"
+                ],
+                "answer": [
+                    "1891"
+                ]
+            },
+            {
+                "question": "Brazil ka coastline kitna lamba hai?",
+                "options": [
+                    "7,491 km",
+                    "8,500 km",
+                    "9,200 km",
+                    "7,367 km"
+                ],
+                "answer": [
+                    "7,491 km"
+                ]
+            },
+            {
+                "question": "Selarón ke colorful steps Rio de Janeiro me kitne steps ke hain?",
+                "options": [
+                    "200",
+                    "215",
+                    "250",
+                    "125"
+                ],
+                "answer": [
+                    "215"
+                ]
+            },
+            {
+                "question": "Pehla computer game Spacewar kab release hua tha?",
+                "options": [
+                    "1962",
+                    "1970",
+                    "1955",
+                    "1965"
+                ],
+                "answer": [
+                    "1962"
+                ]
+            },
+            {
+                "question": "Solar system me kitne planets hain?",
+                "options": [
+                    "7",
+                    "8",
+                    "9",
+                    "10"
+                ],
+                "answer": [
+                    "8"
+                ]
+            },
+            {
+                "question": "Tokyo metropolitan area me kitne million log rehte hain?",
+                "options": [
+                    "30 million",
+                    "37 million",
+                    "25 million",
+                    "40 million"
+                ],
+                "answer": [
+                    "37 million"
+                ]
+            },
+            {
+                "question": "Ek cow din me kitna pani peeti hai?",
+                "options": [
+                    "50 to 100 liters",
+                    "30 to 50 liters",
+                    "100 to 150 liters",
+                    "20 to 30 liters"
+                ],
+                "answer": [
+                    "50 to 100 liters"
+                ]
+            },
+            {
+                "question": "Polaroid camera pehli baar kis saal launch hui thi?",
+                "options": [
+                    "1948",
+                    "1952",
+                    "1935",
+                    "1960"
+                ],
+                "answer": [
+                    "1948"
+                ]
+            },
+            {
+                "question": "Sabse badi wave jo Alaska me 1958 me tsunami bani, uski height kitni thi?",
+                "options": [
+                    "524 meters",
+                    "300 meters",
+                    "450 meters",
+                    "600 meters"
+                ],
+                "answer": [
+                    "524 meters"
+                ]
+            },
+            {
+                "question": "Golden Gate bridge San Francisco, California ki length kitni hai?",
+                "options": [
+                    "2,737 meters",
+                    "2,000 meters",
+                    "3,200 meters",
+                    "1,800 meters"
+                ],
+                "answer": [
+                    "2,737 meters"
+                ]
+            }]
+    };
+
+    let questions = [];
+    let currentQuestion = 0;
+
+    // Fisher-Yates Shuffle para embaralhar
+    function shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array;
+    }
+
+    // Carrega as perguntas e embaralha
+    function loadQuestions() {
+        if (!data || !data.questions || data.questions.length === 0) {
+            document.getElementById("questionShowDoBebao").textContent = "Koi questions available nahi hain.";
+            return;
+        }
+        questions = shuffleArray(data.questions.slice());
+        currentQuestion = 0;
+        nextQuestion();
+    }
+
+    // Exibe a próxima pergunta
+    function nextQuestion() {
+        if (questions.length === 0) {
+            document.getElementById("questionShowDoBebao").textContent = "Questions load ho rahe hain...";
+            return;
+        }
+
+        if (currentQuestion < questions.length) {
+            const current = questions[currentQuestion];
+            document.getElementById("questionShowDoBebao").textContent = current.question;
+            document.getElementById("result").textContent = "";
+
+            const optionsList = document.getElementById("optionsList");
+            optionsList.innerHTML = "";
+
+            current.options.forEach(option => {
+                const li = document.createElement("li");
+                li.textContent = option;
+                li.style.cursor = "pointer";
+
+                // Opção pe click karne pe check karega ki answer sahi hai ya nahi
+                li.onclick = () => {
+                    if (current.answer.includes(option)) {
+                        document.getElementById("result").textContent = "Sahi jawab!";
+                    } else {
+                        document.getElementById("result").textContent = "Galat jawab!";
+                    }
+                };
+
+                optionsList.appendChild(li);
+            });
+
+            currentQuestion++;
+        } else {
+            document.getElementById("questionShowDoBebao").textContent = "Game khatam! Mazaa aaya? Phir se khelna hai?";
+            document.getElementById("optionsList").innerHTML = "";
+            document.getElementById("result").textContent = "";
+            currentQuestion = 0;
+            questions = shuffleArray(data.questions.slice());
+        }
+    }
+
+    // Pop-up regras
+    function openPopup() {
+        document.getElementById("popup").style.display = "block";
+    }
+
+    function closePopup() {
+        document.getElementById("popup").style.display = "none";
+    }
+
+    // Pop-up resposta
+    function showAnswerPopup() {
+        const answerElement = document.getElementById("answerText");
+
+        if (currentQuestion > 0 && currentQuestion <= questions.length) {
+            const answerData = questions[currentQuestion - 1].answer;
+
+            if (Array.isArray(answerData)) {
+                const listHTML = answerData.map(item => `<li>${item}</li>`).join("");
+                answerElement.innerHTML = `<ul>${listHTML}</ul>`;
+            } else {
+                answerElement.textContent = answerData;
+            }
+        } else {
+            answerElement.textContent = "Pehle question select karo!";
+        }
+
+        document.getElementById("answerPopup").style.display = "block";
+    }
+
+    // Fechar pop-up resposta
+    function closeAnswerPopup() {
+        document.getElementById("answerPopup").style.display = "none";
+    }
+
+    // Fechar pop-ups ao clicar fora deles
+    window.onclick = function (event) {
+        let popup = document.getElementById("popup");
+        let answerPopup = document.getElementById("answerPopup");
+
+        if (event.target === popup) {
+            popup.style.display = "none";
+        }
+
+        if (event.target === answerPopup) {
+            answerPopup.style.display = "none";
+        }
+    };
+
+    // Inicializa as perguntas ao carregar a página
+    loadQuestions();
+
+</script>
+
+</body>
+
+</html>

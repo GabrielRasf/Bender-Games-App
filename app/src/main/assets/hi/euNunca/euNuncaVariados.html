@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="hi">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="../../stylesCards.css" />
+    <title>Bebedeira Games</title>
+</head>
+
+<body>
+
+<div class="game-container">
+    <!-- Menu -->
+    <nav class="menu">
+        <a href="../menuHi.html" class="menu-title" style="position: relative;">
+            <div class="voltar-container" onclick="window.location.href='../menuPtBr.html'">
+                &#8678; <!-- Ye hai ← -->
+            </div>
+            <img class="logo-bebedeira" src="../images/logo.png" alt="Bebedeira ka Logo" />
+        </a>
+    </nav>
+
+    <!-- Game Content -->
+    <h1>
+        <a href="euNuncaMenu.html">Maine Kabhi Nahin</a>
+    </h1>
+    <h3>Mishrit</h3>
+    <div>
+        <a href="#" onclick="openPopup()">
+            <img class="img-regras" src="../images/regras.png" alt="Rules" />
+        </a>
+        <h4>Rules</h4>
+    </div>
+
+    <div class="card-frase">
+        <p id="questionVariados"></p>
+    </div>
+
+    <div class="button-container">
+        <button onclick="nextQuestion()">Agli Sawal</button>
+    </div>
+
+    <div id="result">
+    </div>
+</div>
+
+<!-- Pop-up -->
+<div id="popup" class="popup">
+    <div class="popup-content">
+        <div class="popup-header">
+            <h2>Game Ke Rules</h2>
+            <span class="close" onclick="closePopup()">&times;</span>
+            <h5>Main Kabhi Nahi <br> Mishrit</h5>
+        </div>
+        <ul>
+            <li>Sawal zor se padho</li>
+            <li>Jinhone wo kiya hai, wo drink lein</li>
+            <li>Agar kisi ne nahi kiya, to jisne poocha wo drink le</li>
+            <li>Maza karo! 🍻</li>
+        </ul>
+    </div>
+</div>
+
+<script>
+
+    // Dados do jogo EMBUTIDOS no HTML
+    const embeddedData = {
+        "questions": [
+            "Main kabhi bhi diet Monday se shuru karne ka promise nahi kiya aur breakfast miss kar diya.",
+            "Main kabhi classroom se nikal ke chhupa ke fart kiya aur behave kiya jaise kuch hua hi nahi.",
+            "Main kabhi bus stop se pehle hi utar gaya tha taaki darpok choron se bach jaun.",
+            "Main kabhi crypto kharida aur paisa kaafi lose kar diya.",
+            "Main kabhi good night nahi bola aur phir apne aap ko bewakoof mehsoos kiya.",
+            "Main kabhi viral banne ki koshish ki idiot videos mein aur result dekh ke pachtaya.",
+            "Main kabhi fridge check kiya aur kuch nahi leke wapas aaya.",
+            "Main kabhi kaam kharab kiya aur phir bhi praise ka wait kiya.",
+            "Main kabhi emergency help liya aur phir useless cheezon pe paisa kharch kiya.",
+            "Main kabhi Ritalin liya taaki focus kar saku, par aur zyada distracted ho gaya.",
+            "Main kabhi kisi famous aadmi se mila aur nervously ek blurry photo li.",
+            "Main kabhi instrument seekhne ki koshish ki aur pehla note bajate hi chhod diya.",
+            "Main kabhi poori ghar ki lights jalayi sirf safety ke liye.",
+            "Main kabhi extra change le ke chhupa liya aur pretend kiya pata hi nahi.",
+            "Main kabhi embarrassed hua jab cashier ne bataya mera card mein balance nahi tha.",
+            "Main kabhi dark humor meme galat aadmi ko bheja.",
+            "Main kabhi market gaya aur sabse important cheez bhool gaya.",
+            "Main kabhi fake profile banaya strangers se ladne ke liye social media pe.",
+            "Main kabhi swimming pool mein chhupke pee kiya aur chupke se nikal gaya.",
+            "Main kabhi bada note diya payment mein aur khud ko rich samjha.",
+            "Main kabhi kisi ko daraane ki koshish ki aur khud dara gaya.",
+            "Main kabhi kisi ke phone pe messages padha bina permission ke.",
+            "Main kabhi useless cheez Shopee se kharidi.",
+            "Main kabhi joke maara jo fail hua aur awkward face banaya.",
+            "Main kabhi cigarette zyada piya aur socha rockstar hoon.",
+            "Main kabhi unnecessarily political debate mein aggressive hua sirf jeetne ke liye.",
+            "Main kabhi pretend kiya samajh raha hoon baat sirf involve hone ke liye.",
+            "Main kabhi janwaron se baat ki jaise wo samajh sakte hain.",
+            "Main kabhi kisi ke ghar mein ulti ki aur poorly clean karne ki koshish ki.",
+            "Main kabhi school mein afwah failayi aur innocent banta raha.",
+            "Main kabhi loan liya bank se aur har paise ka pachtaya.",
+            "Main kabhi Sunday ko piya aur Monday subah regret kiya.",
+            "Main kabhi saal repeat kiya aur blame sab par dala khud par nahi.",
+            "Main kabhi student hone ka discount manga graduation ke baad bhi.",
+            "Main kabhi church mein kuch ajeeb dekha aur hansne se roka.",
+            "Main kabhi drunk hoke road sign chura liya.",
+            "Main kabhi concert gaya aur gaana sunte hue chillaya.",
+            "Main kabhi crime witness hua.",
+            "Main kabhi galat bathroom mein gaya aur logo ke expressions dekhe.",
+            "Main kabhi ghode pe baitha aur western movie imagine ki.",
+            "Main kabhi galat group mein message bheja aur explain karna pada.",
+            "Main kabhi date pe bahut paisa kharch kiya aur fail hua impress karne mein.",
+            "Main kabhi protest gaya aur photo social media pe post kiya sirf likes ke liye.",
+            "Main kabhi gussa hoke cheez tod di.",
+            "Main kabhi apna debit card block karwana pada zyada kharch karne se.",
+            "Main kabhi Beer Pong khela aur apne aap ko sharpshooter samjha.",
+            "Main kabhi online symptoms search kiye aur apne aap ko bimar samjha.",
+            "Main kabhi kisi ke peeche backbiting kar raha tha aur wo saamne tha.",
+            "Main kabhi wine glass ghumaya taaki classy lagun.",
+            "Main kabhi kisi ko backbite kar raha tha aur wo right peeche khada tha.",
+            "Main kabhi aisa sapna dekha jo itna real laga ki poora din sochta raha.",
+            "Main kabhi expensive restaurant gaya sirf social media post karne ke liye.",
+            "Main kabhi hangover ke liye medicine li aur miracle samjha.",
+            "Main kabhi door ghar se utha aur yaad nahi ki kaise aaya.",
+            "Main kabhi online kuch bahut mehenga kharida aur baad mein realize kiya.",
+            "Main kabhi phone utha ke doosri identity mein baat ki.",
+            "Main kabhi headphones nikale aur realize kiya main loudly ga raha tha.",
+            "Main kabhi socha self-employed banunga boss se ladke.",
+            "Main kabhi serious moment mein hasi se control nahi kar paya.",
+            "Main kabhi apne reflection ko chillaya soch ke koi aur tha.",
+            "Main kabhi sports betting mein paisa haraya aur promise kiya dubara nahi lagana.",
+            "Main kabhi sarcastic comment kiya jo seriously liya gaya.",
+            "Main kabhi medical points lene gaya aur drama kiya jaise duniya khatam ho.",
+            "Main kabhi itna pee gaya ki ab drink dekhna bhi nahi chahta.",
+            "Main kabhi incognito mode mein browse kiya taaki history na rahe.",
+            "Main kabhi TV pe aaya aur apne aap ko important samjha.",
+            "Main kabhi driving test fail hua aur instructor ko blame kiya.",
+            "Main kabhi charity mein paisa diya sirf accha dikhnay ke liye.",
+            "Main kabhi tip dene se mana kiya aur fir khud ko cheap samjha.",
+            "Main kabhi social media pe kuch post kiya aur sharam se delete kiya.",
+            "Main kabhi payment ke baad millionaire feel kiya kuch minute ke liye.",
+            "Main kabhi socha desh chhod du jab news dekha aur laga ab kuch nahi hoga.",
+            "Main kabhi phone chalate hue kisi se baat karne se bachne ke liye pretend kiya.",
+            "Main kabhi restaurant order galat kiya aur neighbour ke plate se jealous hua.",
+            "Main kabhi lights off kar ke bhaaga socha kuch mujhe pakdega andhere mein.",
+            "Main kabhi meeting mein mic on chhod diya aur galat bola.",
+            "Main kabhi friends se interest charge kiya jaise banker hoon.",
+            "Main kabhi apni door lock ki yaad nahi rakh saka par sure tha ki locked hai.",
+            "Main kabhi online scam mein fasa aur bola 'learning experience' tha.",
+            "Main kabhi apne aap ko party ka star samjha sirf kisi ne dekha.",
+            "Main kabhi kisi ka naam yaad karne ki koshish ki par bhool gaya.",
+            "Main kabhi movie end mein gaya aur story samajh nahi paya.",
+            "Main kabhi kisi ko bribe diya jo chahiye tha.",
+            "Main kabhi kisi celebrity ke trend mein aake bina zarurat ke kharida.",
+            "Main kabhi message se breakup kiya.",
+            "Main kabhi doston ke saath poker khela aur regret kiya.",
+            "Main kabhi office party mein zyada piya aur gadbad ki.",
+            "Main kabhi fake illness bola par actually hangover tha.",
+            "Main kabhi photos li spontaneous dikhne ke liye par fail hua.",
+            "Main kabhi UNO cheat kiya aur doston ko gussa kiya.",
+            "Main kabhi drunk driving ki aur lucky raha safe pahunchne mein.",
+            "Main kabhi ChatGPT se job ke liye apply kiya aur smart feel kiya.",
+            "Main kabhi karaoke gaya aur acha gaaya socha.",
+            "Main kabhi bhaaga bus pakadne ke liye.",
+            "Main kabhi mirror mein apne aap ko celebrity samjha.",
+            "Main kabhi stairs dekh ke phone dekha aur girne wala tha.",
+            "Main kabhi cheez dhundhi jo haath mein thi.",
+            "Main kabhi full elevator mein fart kiya aur pretend kiya meri baat nahi thi.",
+            "Main kabhi signature fake kiya jo perfect tha.",
+            "Main kabhi apni driving license kho diya socha drunk better driver hoon.",
+            "Main kabhi blood donate kiya aur faint hone wala tha strong dikhne ke liye.",
+            "Main kabhi naked tairi nahi ki.",
+            "Main kabhi blind date pe nahi gaya.",
+            "Main kabhi apne ex ko social media pe dhunda nahi.",
+            "Mujhe kabhi hangover nahi hua.",
+            "Main kabhi apne best friend ko kiss nahi kiya.",
+            "Main kabhi kisi ko ghost nahi kiya (vacu chhodna).",
+            "Mujhe kabhi speed ticket nahi mili.",
+            "Main kabhi kisi ko DM bheja tha with second intentions.",
+            "Main kabhi bina paise diye khana nahi khaya (calote nahi maara).",
+            "Main kabhi fake identity use nahi ki.",
+            "Main kabhi kisi teacher pe crush nahi kiya.",
+            "Main kabhi sach mein pyaar mein nahi pada.",
+            "Main kabhi public mein kisi ke saath nahi raha.",
+            "Main kabhi physical fight mein nahi pada.",
+            "Maine kabhi alcohol nahi piya.",
+            "Main kabhi 'truth or dare' mein kiss nahi kiya (bottle ghoomne wala game).",
+            "Main kabhi kisi ka phone check nahi kiya.",
+            "Main kabhi chhupke cinema mein ghusa nahi.",
+            "Main kabhi apne friend ke ex ko kiss nahi kiya.",
+            "Main kabhi 'I love you' bina feeling ke nahi bola.",
+            "Mujhe kabhi chicken ya player nahi kaha gaya.",
+            "Main kabhi cigarette nahi pi.",
+            "Main kabhi lap dance nahi kiya.",
+            "Main kabhi kisi se lap dance nahi liya.",
+            "Main kabhi cheating nahi ki kisi exam mein.",
+            "Main kabhi dating app use nahi kiya.",
+            "Main kabhi 24 ghante mein ek se zyada logon ko kiss nahi kiya.",
+            "Main kabhi kisi ko cheat nahi kiya.",
+            "Main kabhi cheat nahi hua kisi ne.",
+            "Main kabhi galat aadmi ko naughty message nahi bheja.",
+            "Mera bank account kabhi negative balance mein nahi gaya.",
+            "Main kabhi strip poker nahi khela.",
+            "Main kabhi jail nahi gaya.",
+            "Main kabhi school se suspend nahi hua.",
+            "Main kabhi chori nahi ki.",
+            "Mujhe kabhi hickey nahi mila.",
+            "Main kabhi fire nahi hua job se.",
+            "Main kabhi cinema mein kisi ke saath nahi raha.",
+            "Main kabhi older partner ke saath date nahi kiya.",
+            "Main kabhi younger partner ke saath date nahi kiya.",
+            "Main kabhi kanoon nahi toda.",
+            "Main kabhi nudist beach pe nahi gaya.",
+            "Main kabhi date pe no-show nahi kiya.",
+            "Main kabhi relationship bina feeling ke nahi rakha.",
+            "Main kabhi fake phone number nahi diya.",
+            "Main kabhi kisi ko jhoot nahi bola iss room mein.",
+            "Main kabhi breakup message se nahi kiya.",
+            "Main kabhi apne partner ke best friend pe crush nahi kiya.",
+            "Main kabhi shoplifting nahi ki.",
+            "Maine kabhi bhoot nahi dekha.",
+            "Main kabhi secret reveal nahi kiya jo nahi karna chahiye tha.",
+            "Main kabhi friends-with-benefits relationship mein nahi tha.",
+            "Main kabhi janboojh ke fight nahi karwayi do logo ke beech.",
+            "Main kabhi ek time pe multiple logon ko date nahi kiya.",
+            "Main kabhi dusron ka paisa waste nahi kiya.",
+            "Main kabhi relationship 1 mahina se kam ka nahi rakha.",
+            "Main kabhi relationship 1 saal se zyada ka rakha.",
+            "Main kabhi surprise piercing nahi karwayi.",
+            "Main kabhi ex ko message karne ke liye excuse nahi banaya.",
+            "Main kabhi love at first sight feel nahi kiya.",
+            "Main kabhi nayi kisi ko turant kiss nahi kiya.",
+            "Main kabhi apni feelings chupayi iss room ke logo se.",
+            "Main kabhi kisi ko secretly love kiya bina bataye.",
+            "Main kabhi open relationship mein nahi tha.",
+            "Main kabhi ex ke saath wapas jaane ka sapna nahi dekha.",
+            "Main kabhi friend ke lie jhoot bolke alibi nahi bana.",
+            "Main kabhi seriously socha shaadi karne ka.",
+            "Main kabhi online relationship mein nahi tha.",
+            "Main kabhi flirting sirf apni fayda ke liye nahi ki.",
+            "Main kabhi kisi ki password guess karne ki koshish nahi ki.",
+            "Main kabhi jhoot pakda nahi gaya.",
+            "Main kabhi online catfish nahi kiya.",
+            "Main kabhi public mein nanga daud nahi laga.",
+            "Main kabhi boss pe crush nahi kiya.",
+            "Main kabhi ménage à trois mein nahi tha.",
+            "Main kabhi friend ke parent pe crush nahi kiya.",
+            "Main kabhi outdoor sex nahi kiya.",
+            "Main kabhi apne best friend ko jhoot nahi bola.",
+            "Main kabhi one night stand nahi kiya.",
+            "Main kabhi apne ex ke saath wapas nahi raha.",
+            "Main kabhi partner ke saamne fart nahi kiya.",
+            "Main kabhi shower mein pee nahi kiya.",
+            "Main kabhi swimming pool mein pee nahi kiya.",
+            "Main kabhi poora ice cream tub nahi khaya.",
+            "Main kabhi board game mein cheat nahi kiya.",
+            "Main kabhi card game mein cheat nahi kiya.",
+            "Main kabhi horror movie dekh ke chillaya nahi.",
+            "Main kabhi itna hasta ki drink spit out nahi kiya.",
+            "Main kabhi principal ke office nahi gaya.",
+            "Main kabhi toilet block nahi kiya.",
+            "Main kabhi kisi ke ghar toilet paper nahi phenka.",
+            "Main kabhi gande kapde pehne nahi.",
+            "Main kabhi roller coaster ke baad ulti nahi ki.",
+            "Main kabhi ek hi din mein pura TV series nahi dekha.",
+            "Main kabhi galti se 'I love you' nahi bola.",
+            "Main kabhi apne parents ko sex scene nahi dekha.",
+            "Main kabhi is game mein jhoot nahi bola.",
+            "Main kabhi apne aap ko Google pe nahi dhunda.",
+            "Main kabhi apne partner ke liye cute nickname nahi banaya.",
+            "Main kabhi partner se cute nickname nahi mila.",
+            "Main kabhi unexpected person pe erotic dream nahi dekha.",
+            "Main kabhi social media pe zyada share karne ka accuse nahi hua.",
+            "Main kabhi fake account banaya social media pe.",
+            "Main kabhi petrol khatam nahi ki car chalate hue.",
+            "Main kabhi uninvited party mein nahi gaya.",
+            "Main kabhi annoying partner sirf looks ke liye date kiya.",
+            "Main kabhi first date pe jhoot nahi bola.",
+            "Main kabhi kisi ka toothbrush use nahi kiya.",
+            "Main kabhi phone pe pretend nahi kiya ki baat kar raha hoon to avoid kisi ko.",
+            "Main kabhi ajeeb smell pasand nahi ki.",
+            "Main kabhi embarrassing reason se TV pe nahi aaya.",
+            "Main kabhi dino tak nahaya nahi.",
+            "Main kabhi underwear ulta nahi pehna to bachne ke liye washing se.",
+            "Main kabhi social media pe jhoot nahi bola ki kya kar raha hoon.",
+            "Main kabhi loud snorer nahi bola gaya.",
+            "Main kabhi free khane ke liye date pe gaya.",
+            "Main kabhi itna hasta ki thoda pee kiya nahi.",
+            "Main kabhi Instagram pe purani photo galti se like nahi ki.",
+            "Main kabhi vacation pe new personality leke wapas nahi aaya.",
+            "Main kabhi public mein strangers ki baatein secretly nahi suni.",
+            "Main kabhi galat din event pe nahi gaya.",
+            "Main kabhi flight miss nahi ki.",
+            "Main kabhi date pe khud pe khana gira nahi diya.",
+            "Main kabhi public speaking mein embarrassed nahi hua.",
+            "Main kabhi awkward fashion phase se nahi guzra.",
+            "Main kabhi movie dekhte dekhte soya nahi.",
+            "Main kabhi family event gatecrash nahi kiya.",
+            "Main kabhi friend ke sibling pe crush nahi kiya.",
+            "Main kabhi poora ice cream tub nahi khaya.",
+            "Main kabhi bina underwear ke nahi raha.",
+            "Main kabhi apna sir shave nahi kiya.",
+            "Main kabhi tattoo nahi banwaya.",
+            "Main kabhi hadsa mein nahi pada.",
+            "Main kabhi bachelor party mein nahi gaya.",
+            "Main kabhi family game night mein stress nahi liya.",
+            "Main kabhi celebrity nahi mila.",
+            "Main kabhi surprise party nahi mila.",
+            "Main kabhi akela travel nahi kiya.",
+            "Main kabhi canned cream seedha dabbe se nahi khaya.",
+            "Main kabhi reality show ka audition nahi diya.",
+            "Main kabhi parents ko jhoot bola ki friend ke ghar soya par kahin aur gaya.",
+            "Main kabhi psychic ke paas nahi gaya.",
+            "Main kabhi akela nahi raha.",
+            "Main kabhi karaoke nahi gaya.",
+            "Main kabhi hospital mein raat nahi bitayi.",
+            "Main kabhi post delete kiya kam likes ki wajah se.",
+            "Main kabhi raat bhar jagta nahi raha.",
+            "Main kabhi cruise trip nahi ki.",
+            "Main kabhi bet nahi hara.",
+            "Main kabhi car accident nahi kiya.",
+            "Main kabhi bike ride nahi ki.",
+            "Main kabhi school se absent hone ke liye jhoot nahi bola.",
+            "Main kabhi video game pura nahi khela.",
+            "Main kabhi school mein roya nahi.",
+            "Main kabhi family ke saath sex life pe baat nahi ki.",
+            "Main kabhi Mexico nahi gaya.",
+            "Main kabhi caviar nahi khaya.",
+            "Main kabhi Netflix password use kiya kisi aur ka.",
+            "Main kabhi school mein soya nahi.",
+            "Main kabhi apne baal rang nahi kiye.",
+            "Main kabhi ek din mein pura kitab nahi pada.",
+            "Main kabhi asli crocodile nahi dekha.",
+            "Main kabhi gift dobara nahi diya jo mujhe mila tha.",
+            "Main kabhi sleepwalking nahi kiya.",
+            "Main kabhi snowboard nahi kiya.",
+            "Main kabhi 48 ghante se zyada jagta raha.",
+            "Main kabhi breakup aise nahi kiya jisme mujhe regret hua.",
+            "Main kabhi behosh nahi hua.",
+            "Main kabhi public mein partner se jhagra nahi kiya.",
+            "Main kabhi jhoot failaya janta tha sach nahi tha.",
+            "Main kabhi school mein roya nahi.",
+            "Main kabhi haunted jagah gaya jaha mujhe pata tha wo haunted hai.",
+            "Main kabhi apne baal khud nahi kaate.",
+            "Main kabhi doston se milne se mana nahi kiya jhoot bol ke.",
+            "Main kabhi secret language apne doston ke sath nahi banayi.",
+            "Main kabhi apne friend ke first date pe chhup ke follow nahi kiya.",
+            "Main kabhi apne friend ke liye date plan nahi kiya.",
+            "Main kabhi poori raat movies dekh ke nahi bitayi kisi friend ke sath.",
+            "Main kabhi friendship bracelet nahi banayi kisi friend ke liye.",
+            "Main kabhi kisi friend ko apni favourite series dekhne ke liye force nahi kiya.",
+            "Main kabhi kisi ko sweet good morning message nahi bheja.",
+            "Main kabhi kisi ka dil toda nahi.",
+            "Main kabhi kisi ko massage nahi diya.",
+            "Main kabhi kisi ko pyar karna band nahi kiya.",
+            "Main kabhi love letter nahi mila.",
+            "Main kabhi pick-up line use nahi ki.",
+            "Main kabhi sirf looks ke liye date nahi kiya.",
+            "Main kabhi kisi ko message ignore karke vapsi nahi ki.",
+            "Main kabhi kisi baat ka pachtawa nahi kiya.",
+            "Main kabhi famous hona nahi chaha.",
+            "Main kabhi kisi ajeeb ko help nahi kiya.",
+            "Main kabhi relationship mein bore nahi hua.",
+            "Main kabhi promise toda nahi.",
+            "Main kabhi fictional character se pyaar nahi kiya.",
+            "Main kabhi nervous nahi hua iss room mein kisi ke samne.",
+            "Main kabhi parachute jump karne ka mann nahi kiya.",
+            "Main kabhi iss room mein kisi pe crush nahi kiya.",
+            "Main kabhi 'Never have I ever' game mein kisi ko date pe invite nahi kiya.",
+            "Main kabhi apne crush ko 'Never have I ever' mein nahi bulaya.",
+            "Main kabhi apne crush ke saamne bold initiative nahi liya.",
+            "Main kabhi margarine wala ad dekh ke roya nahi.",
+            "Main kabhi flight mode use kiya call se bachne ke liye.",
+            "Main kabhi bus mein soya pretend kiya taaki seat na do.",
+            "Main kabhi bina zarurat kuch sale mein kharida.",
+            "Main kabhi excuse banaya kisi commitment se bachne ke liye.",
+            "Main kabhi ek din mein pura series nahi dekha aur deny kiya.",
+            "Main kabhi social media pe indirect message nahi diya kisi ko samjhane ke liye.",
+            "Main kabhi galti se kisi ko chat ka screenshot bheja.",
+            "Main kabhi shower mein gaaya jaise concert mein.",
+            "Main kabhi ghar se 'I'm coming' bola jab ghar pe tha.",
+            "Main kabhi job interview mein jhoot bola apni qualification badhane ke liye.",
+            "Main kabhi apne crush ko stalk kiya 2012 ki photos tak.",
+            "Main kabhi neighbour ka Wi-Fi chhupke use kiya.",
+            "Main kabhi fake commitment banaya date se bachne ke liye.",
+            "Main kabhi socha sab kuch chhod ke jungle mein shift ho jaun kyunki bill zyada aaya.",
+            "Main kabhi bathroom ke darwaze pe knock karke bhaag gaya.",
+            "Main kabhi fake commitment banaya kisi se bachne ke liye.",
+            "Main kabhi apna phone pocket mein dala aur panic kiya ki kho gaya.",
+            "Main kabhi phone pe busy hone ka pretend kiya kisi se bachne ke liye.",
+            "Main kabhi call ignore kiya aur baad mein bola 'nahi dekha'."
+        ]
+    }
+
+    let questions = [];
+    let currentQuestion = 0;
+
+    // Função para embaralhar o array usando Fisher-Yates Shuffle
+    function shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array;
+    }
+
+    // Função para carregar perguntas embarcadas e embaralhar
+    function loadQuestions() {
+        questions = shuffleArray([...embeddedData.questions]); // cria cópia e embaralha
+        currentQuestion = 0; // Reinicia o índice para começar do zero
+        nextQuestion(); // Exibe a primeira pergunta
+    }
+
+    // Função para mostrar a próxima pergunta
+    function nextQuestion() {
+        if (questions.length === 0) {
+            document.getElementById("questionVariados").textContent = "Nenhuma pergunta disponível.";
+            document.getElementById("result").textContent = "";
+            return;
+        }
+
+        if (currentQuestion < questions.length) {
+            document.getElementById("questionVariados").textContent = questions[currentQuestion];
+            document.getElementById("result").textContent = "";
+            currentQuestion++;
+        } else {
+            document.getElementById("questionVariados").textContent = "Fim do Jogo! Espero que estejam se divertindo! Quer jogar novamente?";
+            document.getElementById("result").textContent = "";
+            // Reinicia para jogar de novo
+            loadQuestions();
+        }
+    }
+
+    // Funções do pop-up
+    function openPopup() {
+        document.getElementById("popup").style.display = "block";
+    }
+
+    function closePopup() {
+        document.getElementById("popup").style.display = "none";
+    }
+
+    window.onclick = function (event) {
+        let popup = document.getElementById("popup");
+        if (event.target === popup) {
+            popup.style.display = "none";
+        }
+    };
+
+    // Carrega perguntas assim que a página estiver pronta
+    window.onload = function () {
+        loadQuestions();
+    };
+</script>
+</body>
+
+</html>
