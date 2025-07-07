@@ -1,13 +1,11 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="index.css">
     <title>Bebedeira Games</title>
 </head>
-
 <body>
 <div class="main-container">
     <div class="logo-container">
@@ -16,41 +14,74 @@
         </a>
     </div>
 
-<!--
-        <h3>Choose your language</h3>
-        <h3>Elige tu idioma</h3>
-        <h3>Choisis ta langue</h3>
-        <h3>Apni bhasha chuno</h3>
-        <h3>Escolha seu idioma</h3>
-   </div>
--->
     <div class="button-center">
-        <button class="button-language" onclick="setLanguage('pt')">🇧🇷 Português</button>
-        <button class="button-language" onclick="setLanguage('en')">🇬🇧 English</button>
-        <button class="button-language" onclick="setLanguage('es')">🇪🇸 Español</button>
-        <button class="button-language" onclick="setLanguage('fr')">🇫🇷 Français</button>
-        <button class="button-language" onclick="setLanguage('hi')">🇮🇳 Hindi</button>
+        <button class="button-language" onclick="openPopup('pt')">🇧🇷 Português</button>
+        <button class="button-language" onclick="openPopup('en')">🇬🇧 English</button>
+        <button class="button-language" onclick="openPopup('es')">🇪🇸 Español</button>
+        <button class="button-language" onclick="openPopup('fr')">🇫🇷 Français</button>
+        <button class="button-language" onclick="openPopup('hi')">🇮🇳 Hindi</button>
     </div>
+</div>
 
+<!-- Popup -->
+<div id="languagePopup" class="popup">
+    <div class="popup-content">
+        <div class="warning-icon">⚠️</div>
+        <p id="popupText"></p>
+        <div class="popup-buttons">
+            <button id="btnConfirm" onclick="confirmLanguage()">Sim</button>
+            <button id="btnCancel" onclick="closePopup()">Cancelar</button>
+        </div>
+    </div>
 </div>
 
 <script>
+    let selectedLang = "";
 
-    function setLanguage(lang) {
-        if (lang === 'pt') {
+    function openPopup(lang) {
+        selectedLang = lang;
+        document.getElementById("languagePopup").classList.add("active");
+        document.body.classList.add("popup-active");
+
+        const langTexts = {
+            pt: 'Este é um jogo para maiores de <span class="destaque-idade">18 ou 21 anos</span>, conforme a legislação de seu país.<br><br>Este é um jogo para diversão! Respeite seus limites e os dos outros jogadores.',
+            en: 'This is a game for people over <span class="destaque-idade">18 or 21 years old</span>, according to your country\'s laws.<br><br>This is a game for fun! Respect your limits and those of other players.',
+            es: 'Este es un juego para mayores de <span class="destaque-idade">18 o 21 años</span>, según la legislación de tu país.<br><br>¡Este es un juego para divertirse! Respeta tus límites y los de los demás jugadores.',
+            fr: 'Ce jeu est destiné aux personnes de plus de <span class="destaque-idade">18 ou 21 ans</span>, selon la législation de votre pays.<br><br>C\'est un jeu pour s\'amuser ! Respectez vos limites et celles des autres joueurs.',
+            hi: 'Yeh game sirf un logon ke liye hai jo <span class="destaque-idade">18 ya 21 saal</span> se upar hain, jaise ki aapke desh ka kanoon kehta hai.<br><br>Yeh sirf masti ke liye hai! Apni aur doosre players ki limits ka dhyaan rakho.'
+        };
+
+        const buttonTexts = {
+            pt: { yes: "Sim", cancel: "Cancelar" },
+            en: { yes: "Yes", cancel: "Cancel" },
+            es: { yes: "Sí", cancel: "Cancelar" },
+            fr: { yes: "Oui", cancel: "Annuler" },
+            hi: { yes: "Haan", cancel: "Radd karo" }
+        };
+
+        document.getElementById("popupText").innerHTML = langTexts[lang] || "Deseja continuar neste idioma?";
+        document.getElementById("btnConfirm").innerText = buttonTexts[lang]?.yes || "Sim";
+        document.getElementById("btnCancel").innerText = buttonTexts[lang]?.cancel || "Cancelar";
+    }
+
+    function closePopup() {
+        document.getElementById("languagePopup").classList.remove("active");
+        document.body.classList.remove("popup-active");
+    }
+
+    function confirmLanguage() {
+        if (selectedLang === 'pt') {
             window.location.href = './ptBr/menuPtBr.html';
-        } else if (lang === 'en') {
+        } else if (selectedLang === 'en') {
             window.location.href = './en/menuEn.html';
-        } else if (lang === 'es') {
+        } else if (selectedLang === 'es') {
             window.location.href = './es/menuEs.html';
-        } else if (lang === 'fr') {
+        } else if (selectedLang === 'fr') {
             window.location.href = './fr/menuFr.html';
-        } else if (lang === 'hi') {
+        } else if (selectedLang === 'hi') {
             window.location.href = './hi/menuHi.html';
         }
     }
 </script>
-
 </body>
-
 </html>

@@ -1,76 +1,244 @@
-/* Reset e estilos base */
+/* ================================
+   VARIÁVEIS DE CORES NO ROOT
+================================= */
+:root {
+  /* Fundo */
+  --cor-fundo-body: #091626;           /* Azul escuro */
+
+  /* Texto */
+  --cor-texto: #F2F2F3;                 /* bege claro para contraste suave */
+  --cor-destaque-idade: red;            /* vermelho */
+
+  /* Botões */
+  --cor-botao-bg: #B4895B;              /* bege escuro */
+  --cor-botao-bg-hover: #7b26c1;        /* roxo um pouco mais escuro (hover não usado, só pra referência) */
+
+  /* Bordas e sombras */
+  --cor-borda: rgba(255, 255, 255, 0.2);   /*  */
+}
+
+/* ================================
+   RESET E BASE
+================================= */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    text-decoration: none;
-    color: white;
-    -webkit-tap-highlight-color: transparent;
-    list-style: none;
-    border: none;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  text-decoration: none;
+  color: var(--cor-texto);
+  -webkit-tap-highlight-color: transparent;
+  list-style: none;
+  border: none;
 }
 
-/* Estilização geral */
 body {
-    font-family: Arial, sans-serif;
-    background-color: #010b13;
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  font-family: Arial, sans-serif;
+  background-color: var(--cor-fundo-body);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  transition: filter 0.3s ease;
+  color: var(--cor-texto);
 }
 
-/* Container principal */
+/* ================================
+   CONTÊINER PRINCIPAL
+================================= */
 .main-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-    width: 100%;
-    max-width: 450px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  width: 100%;
+  max-width: 450px;
 }
 
-
-/* Logo */
+/* ================================
+   LOGO
+================================= */
 .logo-container {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
 }
 
 .logo-bebedeira {
-    max-width: 270px;
-    height: auto;
+  max-width: 270px;
+  height: auto;
 }
 
-/* Títulos */
-.title-container {
-    text-align: center;
-    margin-bottom: 20px;
-    width: 100%;
-}
-
-h3 {
-    color: #facc15;
-    margin-bottom: 10px;
-}
-
-/* Botões de linguagem */
+/* ================================
+   BOTÕES DE IDIOMA
+================================= */
 .button-language {
-    width: 300px;
-    max-width: 450px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 50px;
-    color: #F1F1F1;
-    background: linear-gradient(145deg, #0F3460, #1A1A2E);
-    font-size: 1.1rem;
-    font-weight: bold;
-    border-radius: 10px;
-    padding: 5px;
-    margin: 0 0 10px 0;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    overflow: hidden;
+  width: 300px;
+  max-width: 450px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50px;
+  color: var(--cor-texto);
+  background-color: var(--cor-botao-bg);
+  font-size: 1.1rem;
+  font-weight: bold;
+  border-radius: 10px;
+  padding: 5px;
+  margin: 0 0 10px 0;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  cursor: pointer;
+}
+
+#btnConfirm {
+      background: linear-gradient(135deg, #FD00FF, #03FEFF);
+}
+#btnCancel {
+  background: linear-gradient(135deg, #03FEFF, #8C2AE2);
+}
+
+.button-language:nth-child(1) {
+  background: linear-gradient(135deg, #FFFE03, #FD00FF);
+}
+
+.button-language:nth-child(2) {
+  background: linear-gradient(135deg, #FD00FF, #03FEFF);
+}
+
+.button-language:nth-child(3) {
+  background: linear-gradient(135deg, #03FEFF, #8C2AE2);
+}
+
+.button-language:nth-child(4) {
+  background: linear-gradient(135deg, #8C2AE2, #FFFE03);
+}
+
+.button-language:nth-child(5) {
+  background: linear-gradient(135deg, #FD00FF, #8C2AE2);
+}
+
+/* ================================
+   POPUP DE CONFIRMAÇÃO DE IDIOMA
+================================= */
+.popup {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1000;
+  opacity: 0;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  transform: scale(0.9);
+  filter: none; /* impede do popup ser afetado pelo blur */
+}
+
+.popup.active {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 1;
+  transform: scale(1);
+}
+
+body.popup-active::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(2px);
+  z-index: 999;
+  pointer-events: none;
+}
+
+.popup-content {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(10px);
+  padding: 2rem;
+  border-radius: 15px;
+  text-align: center;
+  max-width: 320px;
+  width: 90%;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+  border: 1px solid var(--cor-borda);
+  transform: translateY(20px);
+  transition: transform 0.3s ease;
+  animation: popupAppear 0.4s ease forwards;
+  color: var(--cor-texto);
+}
+
+.popup.active .popup-content {
+  transform: translateY(0);
+}
+
+@keyframes popupAppear {
+  0% {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.popup-content p {
+  font-size: 1.1rem;
+  margin-bottom: 1.5rem;
+}
+
+.popup-buttons {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.popup-buttons button {
+  flex: 1;
+  padding: 0.7rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  background: #0F3460;
+  color: var(--cor-texto);
+  transition: none; /* removido */
+}
+
+.warning-icon {
+  font-size: 1.5rem;
+  color: var(--cor-destaque);
+  text-align: center;
+  width: 100%;
+  margin-bottom: 1rem;
+  animation: pulse 1.6s infinite;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 0.8;
+  }
+}
+
+.destaque-idade {
+  color: var(--cor-destaque-idade);
+  font-weight: bold;
 }

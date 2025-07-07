@@ -10,12 +10,16 @@
 </head>
 
 <body>
-<div class="main-container">
-    <div class="logo-container">
-        <a href="../menuEn.html">
-            <img class="logo-bebedeira" src="../images/logo.png" alt="Bender Games Logo" />
+<div class="game-container">
+    <!-- Menu -->
+    <nav class="menu">
+        <a href="../menuEn.html" class="menu-title" style="position: relative;">
+            <div class="voltar-container" onclick="window.location.href='../menuPtBr.html'">
+                &#8678; <!-- Isso é ← -->
+            </div>
+            <img class="logo-bebedeira" src="../images/logo.png" alt="Logo Bebedeira" />
         </a>
-    </div>
+    </nav>
 
     <div class="title-container">
         <h1>Qual jogo escolher?</h1>
@@ -82,10 +86,12 @@
     </div>
 </div>
 
+
 <!-- Pop-up Never Have I Ever -->
-<div id="popup-eununca" class="overlay" onclick="closePopup('popup-eununca')">
+<div id="popup-eununca" class="overlay" onclick="closePopup('popup-eununca')" role="dialog" aria-labelledby="popup-eununca-title">
     <div class="popup" onclick="event.stopPropagation()">
-        <h3>Never Have I Ever</h3>
+        <button class="close-btn" onclick="closePopup('popup-eununca')">✕</button>
+        <h3 id="popup-eununca-title">Never Have I Ever</h3>
         <ul>
             <li>Each player must say "Never have I ever..." followed by something they've never done (or something
                 they have done, if they want to drink).</li>
@@ -222,7 +228,7 @@
 <!-- Pop-up Unanswerable Questions -->
 <div id="popup-perguntassemresposta" class="overlay" onclick="closePopup('popup-perguntassemresposta')">
     <div class="popup" onclick="event.stopPropagation()">
-        <h3>Unanswerable Questions</h3>
+        <h3>Unanswered Questions</h3>
         <ul>
             <li>Examples: "Why is the sky blue?", "If time is money, is the bank a clock?".</li>
             <li>The goal is to raise funny or philosophical questions that no one can answer for sure.</li>
@@ -318,13 +324,14 @@
 
 
 <script>
-    // Função para abrir o popup
-    function openPopup(popupId) {
-        // Fecha todos os popups abertos
+    function closeAllPopups() {
         const allPopups = document.querySelectorAll('.overlay');
         allPopups.forEach(popup => popup.style.display = 'none');
+        document.body.style.overflow = 'auto';
+    }
 
-        // Exibe o popup correspondente
+    function openPopup(popupId) {
+        closeAllPopups();
         const popup = document.getElementById(popupId);
         if (popup) {
             popup.style.display = 'flex';
@@ -332,7 +339,6 @@
         }
     }
 
-    // Função para fechar o popup
     function closePopup(popupId) {
         const popup = document.getElementById(popupId);
         if (popup) {
@@ -341,19 +347,13 @@
         }
     }
 
-    // Fecha o popup ao pressionar ESC
     document.addEventListener('keydown', function (event) {
         if (event.key === 'Escape') {
-            const allPopups = document.querySelectorAll('.overlay');
-            allPopups.forEach(popup => {
-                if (popup.style.display === 'flex') {
-                    popup.style.display = 'none';
-                    document.body.style.overflow = 'auto';
-                }
-            });
+            closeAllPopups();
         }
     });
 </script>
+
 </body>
 
 </html>
