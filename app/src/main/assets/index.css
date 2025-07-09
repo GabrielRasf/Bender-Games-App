@@ -131,7 +131,7 @@ body {
 
 .button-language:nth-child(2) {
   background: linear-gradient(135deg, #FD00FF, #03FEFF);
-    transform: rotate(1deg);
+    transform: rotate(3deg);
 
 }
 
@@ -205,10 +205,6 @@ body.popup-active::before {
   transition: transform 0.3s ease;
   animation: popupAppear 0.4s ease forwards;
   color: var(--cor-texto);
-}
-
-.popup.active .popup-content {
-  transform: translateY(0);
 }
 
 @keyframes popupAppear {
