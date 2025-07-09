@@ -12,11 +12,14 @@
 
 <body>
 <div class="main-container">
-    <div class="logo-container">
-        <a href="../menuFr.html">
-            <img class="logo-bebedeira" src="../images/logo.png" alt="Logo Bebedeira" />
+    <nav class="menu">
+        <a href="../menuFr.html" class="menu-title" style="position: relative;">
+            <div class="voltar-container" onclick="window.location.href='../menuFr.html'">
+                &#8678; <!-- Isso é ← -->
+            </div>
+            <img class="logo-bebedeira" src="../../images/logo.png" alt="Logo Bebedeira" />
         </a>
-    </div>
+    </nav>
 
     <div class="title-container">
         <h1>Quel jeu choisir ?</h1>
@@ -38,7 +41,7 @@
         <a href="#" onclick="openPopup('popup-segredos')" class="game-box">
             <p>Secrets</p>
         </a>
-        <a href="#" onclick="openPopup('popup-amigodebosta')" class="game-box">
+        <a href="#" onclick="openPopup('popup-pioresAmigos')" class="game-box">
             <p>Pires Amis</p>
         </a>
         <a href="#" onclick="openPopup('popup-mimicas')" class="game-box">
@@ -140,15 +143,14 @@
     </div>
 </div>
 
-<!-- Pop-up Ami de merde -->
-<div id="popup-amigodebosta" class="overlay" onclick="closePopup('popup-amigodebosta')">
+<!-- Pop-up Piores Amigos -->
+<div id="popup-pioresAmigos" class="overlay" onclick="closePopup('popup-pioresAmigos')">
     <div class="popup" onclick="event.stopPropagation()">
-        <h3>Ami de merde</h3>
+        <h3>Pires Amis</h3>
         <ul>
-            <li>Qui est "l'ami le plus nul" du groupe ? Pointer du doigt les autres en les accusant d’attitudes
-                nulles n’a jamais été aussi drôle !</li>
-            <li>Ce jeu va révéler beaucoup de choses amusantes sur vos amis.</li>
-            <li>Important ! Ne le prenez pas mal, ce n'est qu'un jeu.</li>
+            <li>Qui est le "Pire Ami" du groupe ? Pointez du doigt et accusez vos potes de comportements pourris, c’est trop drôle !</li>
+            <li>Ce jeu va révéler plein de trucs hilarants sur vos amis.</li>
+            <li>Important ! Ne le prenez pas à cœur, ce n’est qu’un jeu.</li>
         </ul>
     </div>
 </div>

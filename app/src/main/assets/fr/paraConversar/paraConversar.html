@@ -15,7 +15,7 @@
     <!-- Menu -->
     <nav class="menu">
         <a href="../menuFr.html" class="menu-title" style="position: relative;">
-            <div class="voltar-container" onclick="window.location.href='../menuPtBr.html'">
+            <div class="voltar-container" onclick="window.location.href='../menuFr.html'">
                 &#8678; <!-- Isso é ← -->
             </div>
             <img class="logo-bebedeira" src="../images/logo.png" alt="Logo Bebedeira" />
@@ -418,12 +418,12 @@
         ]
     };
 
-    // Variables du jeu
+    // Variáveis do jogo
     let questions = [];
-    let questionActuelle = 0;
+    let currentQuestion = 0;
 
-    // Fonction pour mélanger un tableau (Fisher-Yates Shuffle)
-    function melangerTableau(array) {
+    // Função para embaralhar um array (Fisher-Yates Shuffle)
+    function shuffleArray(array) {
         for (let i = array.length - 1; i > 0; i--) {
             const j = Math.floor(Math.random() * (i + 1));
             [array[i], array[j]] = [array[j], array[i]];
@@ -431,42 +431,42 @@
         return array;
     }
 
-    // Fonction pour charger les questions
-    function chargerQuestions() {
-        questions = melangerTableau([...gameData.questions]);
-        questionSuivante();
+    // Função para carregar as perguntas
+    function loadQuestions() {
+        questions = shuffleArray([...gameData.questions]);
+        nextQuestion();
     }
 
-    // Fonction pour afficher la question suivante
-    function questionSuivante() {
+    // Função para exibir a próxima pergunta
+    function nextQuestion() {
         if (questions.length === 0) {
-            document.getElementById("questionParaConversar").textContent = "Chargement des questions...";
-            chargerQuestions();
+            document.getElementById("questionParaConversar").textContent = "Carregando perguntas...";
+            loadQuestions();
             return;
         }
 
-        if (questionActuelle < questions.length) {
-            document.getElementById("questionParaConversar").textContent = questions[questionActuelle];
+        if (currentQuestion < questions.length) {
+            document.getElementById("questionParaConversar").textContent = questions[currentQuestion];
             document.getElementById("result").textContent = "";
-            questionActuelle++;
+            currentQuestion++;
         } else {
-            document.getElementById("questionParaConversar").textContent = "Fin du jeu ! J'espère que vous vous êtes amusés ! Voulez-vous rejouer ?";
+            document.getElementById("questionParaConversar").textContent = "Fim do Jogo! Espero que estejam se divertindo! Quer jogar novamente?";
             document.getElementById("result").textContent = "";
-            questionActuelle = 0;
-            questions = melangerTableau([...gameData.questions]);
+            currentQuestion = 0;
+            questions = shuffleArray([...gameData.questions]);
         }
     }
 
-    // Fonctions pour la popup
-    function ouvrirPopup() {
+    // Pop-up functions
+    function openPopup() {
         document.getElementById("popup").style.display = "block";
     }
 
-    function fermerPopup() {
+    function closePopup() {
         document.getElementById("popup").style.display = "none";
     }
 
-    // Fermer la popup en cliquant en dehors
+    // Fechar o pop-up ao clicar fora dele
     window.onclick = function (event) {
         let popup = document.getElementById("popup");
         if (event.target === popup) {
@@ -474,8 +474,8 @@
         }
     };
 
-    // Charger les questions au démarrage
-    window.onload = chargerQuestions;
+    // Carrega as perguntas ao iniciar
+    window.onload = loadQuestions;
 </script>
 </body>
 

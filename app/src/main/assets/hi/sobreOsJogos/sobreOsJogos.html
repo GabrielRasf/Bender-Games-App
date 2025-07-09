@@ -12,11 +12,15 @@
 
 <body>
 <div class="main-container">
-    <div class="logo-container">
-        <a href="../menuHi.html">
+    <!-- Menu -->
+    <nav class="menu">
+        <a href="../menuHi.html" class="menu-title" style="position: relative;">
+            <div class="voltar-container" onclick="window.location.href='../menuHi.html'">
+                &#8678; <!-- Isso é ← -->
+            </div>
             <img class="logo-bebedeira" src="../images/logo.png" alt="Bebedeira Logo" />
         </a>
-    </div>
+    </nav>
 
     <div class="title-container">
         <h1>Kaunsa game choose karein?</h1>
@@ -38,7 +42,7 @@
         <a href="#" onclick="openPopup('popup-segredos')" class="game-box">
             <p>Raaz</p>
         </a>
-        <a href="#" onclick="openPopup('popup-amigodebosta')" class="game-box">
+        <a href="#" onclick="openPopup('popup-pioresAmigos')" class="game-box">
             <p>Sabse Bure Dost	</p><!--Piores amigos-->
         </a>
         <a href="#" onclick="openPopup('popup-mimicas')" class="game-box">
@@ -134,16 +138,17 @@
 </div>
 
 <!-- Pop-up Amigo de Bosta -->
-<div id="popup-amigodebosta" class="overlay" onclick="closePopup('popup-amigodebosta')">
+<div id="popup-pioresAmigos" class="overlay" onclick="closePopup('popup-pioresAmigos')">
     <div class="popup" onclick="event.stopPropagation()">
-        <h3>Worst Friend</h3>
+        <h3>Worst Dost</h3>
         <ul>
-            <li>Group mein sabse "worst friend" kaun hai? Doston ko accuse karte hue mazedaar moments.</li>
-            <li>Ye game bahut saare mazedaar secrets aur baatein reveal karega.</li>
-            <li>Dhyaan rahe, dil par mat lena, ye sirf game hai.</li>
+            <li>Group ka "Worst Dost" kaun hai? Ungli uthao aur doston ko unki bakwaas harkaton ke liye accuse karo — full comedy!</li>
+            <li>Ye game reveal karega doston ke funny secrets aur embarrassing moments.</li>
+            <li>Important hai! Dil pe mat lena yaar, bas ek game hai.</li>
         </ul>
     </div>
 </div>
+
 
 <!-- Pop-up Mímicas -->
 <div id="popup-mimicas" class="overlay" onclick="closePopup('popup-mimicas')">
@@ -313,10 +318,11 @@
 <script>
     // Função para abrir o popup
     function openPopup(popupId) {
-
+        // Fecha todos os popups abertos
         const allPopups = document.querySelectorAll('.overlay');
         allPopups.forEach(popup => popup.style.display = 'none');
 
+        // Exibe o popup correspondente
         const popup = document.getElementById(popupId);
         if (popup) {
             popup.style.display = 'flex';
@@ -326,8 +332,25 @@
 
     // Função para fechar o popup
     function closePopup(popupId) {
-        const popup = document.getElementById(p
+        const popup = document.getElementById(popupId);
+        if (popup) {
+            popup.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+    }
 
+    // Fecha o popup ao pressionar ESC
+    document.addEventListener('keydown', function (event) {
+        if (event.key === 'Escape') {
+            const allPopups = document.querySelectorAll('.overlay');
+            allPopups.forEach(popup => {
+                if (popup.style.display === 'flex') {
+                    popup.style.display = 'none';
+                    document.body.style.overflow = 'auto';
+                }
+            });
+        }
+    });
 </script>
 </body>
 </html>

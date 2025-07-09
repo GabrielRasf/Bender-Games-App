@@ -15,7 +15,7 @@
     <!-- Menu -->
     <nav class="menu">
         <a href="../menuHi.html" class="menu-title" style="position: relative;">
-            <div class="voltar-container" onclick="window.location.href='../menuPtBr.html'">
+            <div class="voltar-container" onclick="window.location.href='../menuHi.html'">
                 &#8678;
             </div>
             <img class="logo-bebedeira" src="../images/logo.png" alt="Bebedeira Logo" />
@@ -69,7 +69,7 @@
         <div class="popup-content">
             <span class="close" onclick="closeAnswerPopup()">&times;</span>
             <h3>Answer</h3>
-            <p id="answer">Pehle koi question pe click karo!</p>
+            <p id="answerText">Pehle koi question pe click karo!</p>
         </div>
     </div>
 </div>
@@ -1194,7 +1194,7 @@
     function showAnswerPopup() {
         if (currentQuestionIndex >= 0 && questions[currentQuestionIndex]) {
             const answer = questions[currentQuestionIndex].answer;
-            document.getElementById("answer").textContent = answer;
+            document.getElementById("answerText").textContent = answer;
             document.getElementById("answerPopup").style.display = "block";
         }
     }
@@ -1256,7 +1256,7 @@
         currentQuestionIndex = Math.floor(Math.random() * questions.length);
         const question = questions[currentQuestionIndex];
         document.getElementById("questionCharadas").textContent = question.question;
-        document.getElementById("answer").textContent = "Click on a question first!";
+        document.getElementById("answerText").textContent = "Click on a question first!";
         stopTimer();
         updateDisplay();
     }

@@ -14,7 +14,7 @@
     <!-- Menu -->
     <nav class="menu">
         <a href="../menuFr.html" class="menu-title" style="position: relative;">
-            <div class="voltar-container" onclick="window.location.href='../menuPtBr.html'">
+            <div class="voltar-container" onclick="window.location.href='../menuFr.html'">
                 &#8678; <!-- Cela signifie ← -->
             </div>
             <img class="logo-bebedeira" src="../images/logo.png" alt="Logo Bebedeira" />
@@ -56,6 +56,7 @@
         <div class="center-container">
             <img class="pergunta-e-resposta" src="../images/pergunta-e-resposta.png" alt="Voir la réponse"
                  onclick="showAnswerPopup()">
+            <h4>Résponse</h4>
         </div>
     </div>
 
@@ -71,7 +72,7 @@
         <div class="popup-content">
             <span class="close" onclick="closeAnswerPopup()">&times;</span>
             <h3>Réponse</h3>
-            <p id="answer">Cliquez d'abord sur une question !</p>
+            <p id="answerText">Cliquez d'abord sur une question !</p>
         </div>
     </div>
 </div>
@@ -2483,7 +2484,7 @@
 
     function showAnswerPopup() {
         if (currentQuestionIndex >= 0 && questions[currentQuestionIndex]) {
-            document.getElementById("answer").textContent = questions[currentQuestionIndex].answer;
+            document.getElementById("answerText").textContent = questions[currentQuestionIndex].answer;
             document.getElementById("answerPopup").style.display = "block";
         }
     }

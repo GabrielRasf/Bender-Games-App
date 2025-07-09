@@ -3,7 +3,7 @@
 ================================= */
 :root {
   /* Fundo */
-  --cor-fundo-body: #091626;           /* Azul escuro */
+  --cor-fundo-body: #121c3d;           /* Roxo escuro */
 
   /* Texto */
   --cor-texto: #F2F2F3;                 /* bege claro para contraste suave */
@@ -33,7 +33,7 @@
 
 body {
   font-family: Arial, sans-serif;
-  background-color: var(--cor-fundo-body);
+    background-color: #121c3d;
   min-height: 100vh;
   display: flex;
   justify-content: center;
@@ -69,8 +69,9 @@ body {
 }
 
 .logo-bebedeira {
-  max-width: 270px;
-  height: auto;
+  width: 270px;
+  margin: 15px auto;
+  display: block;
 }
 
 /* ================================
@@ -89,37 +90,67 @@ body {
   font-weight: bold;
   border-radius: 10px;
   padding: 5px;
-  margin: 0 0 10px 0;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  margin: 0 0 15px 0;
+  box-shadow:
+      0 6px 12px rgba(0, 0, 0, 0.3), /* sombra principal */
+      inset 0 1px 0 rgba(255, 255, 255, 0.2), /* brilho interno em cima */
+      inset 0 -2px 4px rgba(0, 0, 0, 0.2); /* sombra interna embaixo */
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+  transition: transform 0.2s ease;
+
   overflow: hidden;
   cursor: pointer;
 }
 
 #btnConfirm {
-      background: linear-gradient(135deg, #FD00FF, #03FEFF);
+  background: linear-gradient(135deg, #FD00FF, #03FEFF);
+    box-shadow:
+        0 6px 12px rgba(0, 0, 0, 0.3), /* sombra principal */
+        inset 0 1px 0 rgba(255, 255, 255, 0.2), /* brilho interno em cima */
+        inset 0 -2px 4px rgba(0, 0, 0, 0.2); /* sombra interna embaixo */
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+    transition: transform 0.2s ease;
 }
 #btnCancel {
   background: linear-gradient(135deg, #03FEFF, #8C2AE2);
+    box-shadow:
+        0 6px 12px rgba(0, 0, 0, 0.3), /* sombra principal */
+        inset 0 1px 0 rgba(255, 255, 255, 0.2), /* brilho interno em cima */
+        inset 0 -2px 4px rgba(0, 0, 0, 0.2); /* sombra interna embaixo */
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+    transition: transform 0.2s ease;
 }
 
 .button-language:nth-child(1) {
   background: linear-gradient(135deg, #FFFE03, #FD00FF);
+  transform: rotate(-2deg);
 }
 
 .button-language:nth-child(2) {
   background: linear-gradient(135deg, #FD00FF, #03FEFF);
+    transform: rotate(1deg);
+
 }
 
 .button-language:nth-child(3) {
   background: linear-gradient(135deg, #03FEFF, #8C2AE2);
+    transform: rotate(-1deg);
+
 }
 
 .button-language:nth-child(4) {
   background: linear-gradient(135deg, #8C2AE2, #FFFE03);
+    transform: rotate(2deg);
+
 }
 
 .button-language:nth-child(5) {
   background: linear-gradient(135deg, #FD00FF, #8C2AE2);
+    transform: rotate(-2deg);
+
 }
 
 /* ================================

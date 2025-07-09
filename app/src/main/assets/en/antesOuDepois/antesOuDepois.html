@@ -14,7 +14,7 @@
     <!-- Menu -->
     <nav class="menu">
         <a href="../menuEn.html" class="menu-title" style="position: relative;">
-            <div class="voltar-container" onclick="window.location.href='../menuPtBr.html'">
+            <div class="voltar-container" onclick="window.location.href='../menuEn.html'">
                 &#8678; <!-- Isso é ← -->
             </div>
             <img class="logo-bebedeira" src="../images/logo.png" alt="Logo Bebedeira" />
@@ -1390,72 +1390,73 @@
         }
     ]
     const btnAntes = document.querySelector('.btn-antes');
-    const btnDepois = document.querySelector('.btn-depois');
+const btnDepois = document.querySelector('.btn-depois');
 
-    let fatoBase, fatoComparado;
-    let respostaCorreta;
+let fatoBase, fatoComparado;
+let respostaCorreta;
 
-    function gerarPergunta() {
-        if (fatos.length < 2) return;
+function gerarPergunta() {
+    if (fatos.length < 2) return;
 
-        let tentativa = 0;
-        do {
-            fatoBase = fatos[Math.floor(Math.random() * fatos.length)];
-            fatoComparado = fatos[Math.floor(Math.random() * fatos.length)];
-            tentativa++;
-        } while ((fatoBase.evento === fatoComparado.evento || fatoBase.ano === fatoComparado.ano) && tentativa < 10);
+    let tentativa = 0;
+    do {
+        fatoBase = fatos[Math.floor(Math.random() * fatos.length)];
+        fatoComparado = fatos[Math.floor(Math.random() * fatos.length)];
+        tentativa++;
+    } while ((fatoBase.evento === fatoComparado.evento || fatoBase.ano === fatoComparado.ano) && tentativa < 10);
 
-        document.getElementById("questionAntesOuDepois").innerHTML =
-            `"${fatoComparado.evento}" aconteceu ANTES ou DEPOIS de "${fatoBase.evento}"?`;
+    document.getElementById("questionAntesOuDepois").innerHTML =
+        `"${fatoComparado.evento}" happened BEFORE or AFTER "${fatoBase.evento}"?`;
 
-        respostaCorreta = (fatoComparado.ano < fatoBase.ano) ? "antes" : "depois";
+    respostaCorreta = (fatoComparado.ano < fatoBase.ano) ? "antes" : "depois";
 
-        document.getElementById("result").innerHTML = "";
+    document.getElementById("result").innerHTML = "";
 
-        // Habilita os botões para a nova pergunta
-        btnAntes.disabled = false;
-        btnDepois.disabled = false;
+    // Enable buttons for the new question
+    btnAntes.disabled = false;
+    btnDepois.disabled = false;
+}
+
+function antes() {
+    verificarResposta("antes");
+}
+
+function depois() {
+    verificarResposta("depois");
+}
+
+function verificarResposta(respostaUsuario) {
+    const result = document.getElementById("result");
+    if (respostaUsuario === respostaCorreta) {
+        result.innerHTML = "✅ Correct! Well done!";
+    } else {
+        result.innerHTML = "❌ Wrong! Take a shot 🍻";
     }
 
-    function antes() {
-        verificarResposta("antes");
+    // Disable buttons to avoid multiple clicks until the next question
+    btnAntes.disabled = true;
+    btnDepois.disabled = true;
+
+    setTimeout(gerarPergunta, 3000);
+}
+
+// Popup open/close
+function openPopup() {
+    document.getElementById("popup").style.display = "block";
+}
+
+function closePopup() {
+    document.getElementById("popup").style.display = "none";
+}
+
+// Close popup by clicking outside of it
+window.onclick = function (event) {
+    const popup = document.getElementById("popup");
+    if (event.target === popup) {
+        popup.style.display = "none";
     }
+};
 
-    function depois() {
-        verificarResposta("depois");
-    }
-
-    function verificarResposta(respostaUsuario) {
-        const result = document.getElementById("result");
-        if (respostaUsuario === respostaCorreta) {
-            result.innerHTML = "✅ Acertou! Parabéns!";
-        } else {
-            result.innerHTML = "❌ Errou! Beba uma dose 🍻";
-        }
-
-        // Desabilita os botões para evitar múltiplos cliques até a próxima pergunta
-        btnAntes.disabled = true;
-        btnDepois.disabled = true;
-
-        setTimeout(gerarPergunta, 3000);
-    }
-
-    // Abertura e fechamento do popup
-    function openPopup() {
-        document.getElementById("popup").style.display = "block";
-    }
-
-    function closePopup() {
-        document.getElementById("popup").style.display = "none";
-    }
-
-    // Fechar popup clicando fora dele
-    window.onclick = function (event) {
-        const popup = document.getElementById("popup");
-        if (event.target === popup) {
-            popup.style.display = "none";
-        }
-    };
 
     // Inicia o jogo ao carregar a página
     window.onload = gerarPergunta;

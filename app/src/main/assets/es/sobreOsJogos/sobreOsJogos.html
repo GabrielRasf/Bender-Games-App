@@ -12,11 +12,14 @@
 
 <body>
 <div class="main-container">
-    <div class="logo-container">
-        <a href="../menuEs.html">
-            <img class="logo-bebedeira" src="../images/logo.png" alt="Bender Games Logo" />
+    <nav class="menu">
+        <a href="../menuEs.html" class="menu-title" style="position: relative;">
+            <div class="voltar-container" onclick="window.location.href='../menuPtBr.html'">
+                &#8678; <!-- Isso é ← -->
+            </div>
+            <img class="logo-bebedeira" src="../../images/logo.png" alt="Logo Bebedeira" />
         </a>
-    </div>
+    </nav>
 
     <div class="title-container">
         <h1>¿Qué juego elegir?</h1>
@@ -38,7 +41,7 @@
         <a href="#" onclick="openPopup('popup-segredos')" class="game-box">
             <p>Secretos</p>
         </a>
-        <a href="#" onclick="openPopup('popup-amigodebosta')" class="game-box">
+        <a href="#" onclick="openPopup('popup-pioresAmigos')" class="game-box">
             <p>Peores Amigos</p>
         </a>
         <a href="#" onclick="openPopup('popup-mimicas')" class="game-box">
@@ -139,16 +142,17 @@
 </div>
 
 <!-- Pop-up Peor Amigo -->
-<div id="popup-amigodebosta" class="overlay" onclick="closePopup('popup-amigodebosta')">
+<div id="popup-pioresAmigos" class="overlay" onclick="closePopup('popup-pioresAmigos')">
     <div class="popup" onclick="event.stopPropagation()">
-        <h3>Peor Amigo</h3>
+        <h3>Peores Amigos</h3>
         <ul>
-            <li>¿Quién es el "peor amigo" del grupo? ¡Acusar a los demás nunca fue tan divertido!</li>
-            <li>Este juego revela cosas muy divertidas sobre tus amigos.</li>
-            <li>¡Importante! No lo tomes personal, es solo un juego.</li>
+            <li>¿Quién es el "Peor Amigo" del grupo? ¡Señala y acusa a tus amigos por sus actitudes basura, es muy divertido!</li>
+            <li>Este juego va a revelar secretos graciosos sobre tus amigos.</li>
+            <li>¡Importante! No te lo tomes a pecho, es solo un juego.</li>
         </ul>
     </div>
 </div>
+
 
 <!-- Pop-up Mímicas para Adultos -->
 <div id="popup-mimicas" class="overlay" onclick="closePopup('popup-mimicas')">

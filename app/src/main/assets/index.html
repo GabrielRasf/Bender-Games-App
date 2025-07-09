@@ -10,7 +10,7 @@
 <div class="main-container">
     <div class="logo-container">
         <a href="#">
-            <img class="logo-bebedeira" src="ptBr/images/logo.png" alt="Logo Bebedeira" />
+            <img class="logo-bebedeira" src="images/logo.png" alt="Logo Bebedeira" />
         </a>
     </div>
 
@@ -44,11 +44,31 @@
         document.body.classList.add("popup-active");
 
         const langTexts = {
-            pt: 'Este é um jogo para maiores de <span class="destaque-idade">18 ou 21 anos</span>, conforme a legislação de seu país.<br><br>Este é um jogo para diversão! Respeite seus limites e os dos outros jogadores.',
-            en: 'This is a game for people over <span class="destaque-idade">18 or 21 years old</span>, according to your country\'s laws.<br><br>This is a game for fun! Respect your limits and those of other players.',
-            es: 'Este es un juego para mayores de <span class="destaque-idade">18 o 21 años</span>, según la legislación de tu país.<br><br>¡Este es un juego para divertirse! Respeta tus límites y los de los demás jugadores.',
-            fr: 'Ce jeu est destiné aux personnes de plus de <span class="destaque-idade">18 ou 21 ans</span>, selon la législation de votre pays.<br><br>C\'est un jeu pour s\'amuser ! Respectez vos limites et celles des autres joueurs.',
-            hi: 'Yeh game sirf un logon ke liye hai jo <span class="destaque-idade">18 ya 21 saal</span> se upar hain, jaise ki aapke desh ka kanoon kehta hai.<br><br>Yeh sirf masti ke liye hai! Apni aur doosre players ki limits ka dhyaan rakho.'
+            pt: `Este é um jogo para maiores de <span class="destaque-idade">18 ou 21 anos</span>, conforme a legislação de seu país.
+                <br><br>
+                Este é um jogo para diversão! Respeite seus limites e os dos outros jogadores.
+                <br><br>
+                <strong>Está de acordo e deseja continuar?</strong>`,
+            en: `This is a game for people over <span class="destaque-idade">18 or 21 years old</span>, according to your country\'s laws.
+                <br><br>
+                This is a game for fun! Respect your limits and those of other players.
+                <br><br>
+                <strong>Do you agree and wish to continue?</strong>`,
+            es: `Este es un juego para mayores de <span class="destaque-idade">18 o 21 años</span>, según la legislación de tu país.
+                <br><br>
+                ¡Este es un juego para divertirse! Respeta tus límites y los de los demás jugadores.
+                <br><br>
+                <strong>¿Estás de acuerdo y deseas continuar?</strong>`,
+            fr: `Ce jeu est destiné aux personnes de plus de <span class="destaque-idade">18 ou 21 ans</span>, selon la législation de votre pays.
+                <br><br>
+                C'est un jeu pour s\'amuser ! Respectez vos limites et celles des autres joueurs.
+                <br><br>
+                <strong>Êtes-vous d\'accord et souhaitez-vous continuer ?</strong>`,
+            hi: `Yeh game sirf un logon ke liye hai jo <span class="destaque-idade">18 ya 21 saal</span> se upar hain, jaise ki aapke desh ka kanoon kehta hai.
+                <br><br>
+                Yeh sirf masti ke liye hai! Apni aur doosre players ki limits ka dhyaan rakho.
+                <br><br>
+                <strong>Kya aap sehmat hain aur aage badhna chahte hain?</strong>`
         };
 
         const buttonTexts = {

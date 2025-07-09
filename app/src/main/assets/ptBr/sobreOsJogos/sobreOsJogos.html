@@ -12,11 +12,14 @@
 
 <body>
 <div class="main-container">
-    <div class="logo-container">
-        <a href="../menuPtBr.html">
-            <img class="logo-bebedeira" src="../images/logo.png" alt="Logo Bebedeira" />
+    <nav class="menu">
+        <a href="../menuPtBr.html" class="menu-title" style="position: relative;">
+            <div class="voltar-container" onclick="window.location.href='../menuPtBr.html'">
+                &#8678; <!-- Isso é ← -->
+            </div>
+            <img class="logo-bebedeira" src="../../images/logo.png" alt="Logo Bebedeira" />
         </a>
-    </div>
+    </nav>
 
     <div class="title-container">
         <h1>Qual jogo escolher?</h1>
@@ -38,7 +41,7 @@
         <a href="#" onclick="openPopup('popup-segredos')" class="game-box">
             <p>Segredos</p>
         </a>
-        <a href="#" onclick="openPopup('popup-amigodebosta')" class="game-box">
+        <a href="#" onclick="openPopup('popup-pioresAmigos')" class="game-box">
             <p>Piores Amigos</p>
         </a>
         <a href="#" onclick="openPopup('popup-mimicas')" class="game-box">
@@ -103,10 +106,11 @@
         <h3>Topzeira</h3>
         <ul>
             <li>Uma pessoa lê uma proposta inicial, como "Alergias alimentares mais comuns no mundo".</li>
-            <li>Cada jogador, em sentido horário, dá uma resposta. Se alguém duvidar de uma resposta, pode dizer
+            <li>Cada jogador, em sentido horário, dá uma resposta. Se alguém duvidar de uma resposta dita por qualquer participante, pode dizer
                 "Não é topzeira".</li>
-            <li>Quando isso acontecer, ambos olham a resposta na "estrela". Se for topzeira, quem duvidou bebe; se
-                não for, quem deu a resposta errada bebe.</li>
+            <li>Quando isso acontecer, ambos olham a resposta na "Resposta".</li>
+            <li>Se estiver na lista de Respostas, quem duvidou bebe; se não estiver, quem deu a resposta errada bebe.</li>
+
         </ul>
     </div>
 </div>
@@ -117,8 +121,8 @@
         <h3>Riu, Bebeu</h3>
         <ul>
             <li>Um jogador deve realizar uma ação proposta pela carta.</li>
-            <li>O objetivo é fazer alguém rir em 30 segundos.</li>
-            <li>Se a pessoa rir, ela bebe! Se você não conseguir fazer ninguém rir, é você quem bebe.</li>
+            <li>O objetivo é fazer o alvo rir em 30 segundos.</li>
+            <li>Se a pessoa rir, ela bebe! Se você não conseguir fazer o alvo rir, é você quem bebe.</li>
             <li>Prepare-se para piadas, caretas e muita diversão!</li>
         </ul>
     </div>
@@ -138,12 +142,12 @@
     </div>
 </div>
 
-<!-- Pop-up Amigo de Bosta -->
-<div id="popup-amigodebosta" class="overlay" onclick="closePopup('popup-amigodebosta')">
+<!-- Pop-up Piores Amigos -->
+<div id="popup-pioresAmigos" class="overlay" onclick="closePopup('popup-pioresAmigos')">
     <div class="popup" onclick="event.stopPropagation()">
-        <h3>Amigo de Bosta</h3>
+        <h3>Piores Amigos</h3>
         <ul>
-            <li>Quem é o "amigo mais bosta" do grupo? Apontar o dedo para os outros acusando-os de atitudes bostas
+            <li>Quem é o "Pior Amigo" do grupo? Apontar o dedo para os outros acusando-os de atitudes bostas
                 nunca foi tão engraçado!</li>
             <li>Este jogo vai revelar muitas coisas divertidas sobre seus amigos.</li>
             <li>Importante! Não leve para o coraçãozinho, é só um jogo.</li>
