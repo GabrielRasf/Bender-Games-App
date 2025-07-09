@@ -63,18 +63,22 @@
 <!-- Script JS embutido -->
 <script>
     // Gerador de número randômico com efeito de roleta
-    function sortearNumero() {
-        const resultado = document.getElementById("resultado-randomizador");
-        let contador = 0;
-        let intervalo = setInterval(() => {
-            const numeroAleatorio = Math.floor(Math.random() * 6) + 1;
-            resultado.innerHTML = `<strong>${numeroAleatorio}</strong>`;
-            contador++;
-            if (contador >= 20) {
-                clearInterval(intervalo);
-            }
-        }, 100);
+function sortearNumero() {
+    const resultado = document.getElementById("resultado-randomizador");
+    let totalIteracoes = 20;
+    let delay = 100;
+
+    function rodada(i) {
+        const numeroAleatorio = Math.floor(Math.random() * 6) + 1;
+        resultado.innerHTML = `<strong>${numeroAleatorio}</strong>`;
+
+        if (i < totalIteracoes) {
+            setTimeout(() => rodada(i + 1), delay);
+            delay *= 1.1; // desacelera progressivamente
+        }
     }
+    rodada(0);
+}
 
     // Abertura e fechamento do popup
     function openPopup() {
