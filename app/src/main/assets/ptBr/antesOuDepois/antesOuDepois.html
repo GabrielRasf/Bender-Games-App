@@ -2203,50 +2203,47 @@
     let respostaCorreta;
 
     function gerarPergunta() {
-        if (fatos.length < 2) return;
+    if (fatos.length < 2) return;
 
-        let tentativa = 0;
-        do {
-            fatoBase = fatos[Math.floor(Math.random() * fatos.length)];
-            fatoComparado = fatos[Math.floor(Math.random() * fatos.length)];
-            tentativa++;
-        } while ((fatoBase.evento === fatoComparado.evento || fatoBase.ano === fatoComparado.ano) && tentativa < 10);
+    let tentativa = 0;
+    do {
+        fatoBase = fatos[Math.floor(Math.random() * fatos.length)];
+        fatoComparado = fatos[Math.floor(Math.random() * fatos.length)];
+        tentativa++;
+    } while ((fatoBase.evento === fatoComparado.evento || fatoBase.ano === fatoComparado.ano) && tentativa < 10);
 
-        document.getElementById("questionAntesOuDepois").innerHTML =
-            `"${fatoComparado.evento}" aconteceu ANTES ou DEPOIS de "${fatoBase.evento}"?`;
+    document.getElementById("questionAntesOuDepois").innerHTML =
+        `"${fatoComparado.evento}" aconteceu ANTES ou DEPOIS de "${fatoBase.evento}"?`;
 
-        respostaCorreta = (fatoComparado.ano < fatoBase.ano) ? "antes" : "depois";
+    respostaCorreta = (fatoComparado.ano < fatoBase.ano) ? "antes" : "depois";
 
-        document.getElementById("result").innerHTML = "";
+    document.getElementById("result").innerHTML = "";
 
-        // Habilita os botões para a nova pergunta
-        btnAntes.disabled = false;
-        btnDepois.disabled = false;
+    btnAntes.disabled = false;
+    btnDepois.disabled = false;
+}
+
+function antes() {
+    verificarResposta("antes");
+}
+
+function depois() {
+    verificarResposta("depois");
+}
+
+function verificarResposta(respostaUsuario) {
+    const result = document.getElementById("result");
+    if (respostaUsuario === respostaCorreta) {
+        result.innerHTML = "✅ Correct! Well done!";
+    } else {
+        result.innerHTML = "❌ Wrong! Take a shot 🍻";
     }
 
-    function antes() {
-        verificarResposta("antes");
-    }
+    btnAntes.disabled = true;
+    btnDepois.disabled = true;
 
-    function depois() {
-        verificarResposta("depois");
-    }
-
-    function verificarResposta(respostaUsuario) {
-        const result = document.getElementById("result");
-        if (respostaUsuario === respostaCorreta) {
-            result.innerHTML = "✅ Correct! Well done!";
-        } else {
-            result.innerHTML = "❌ Wrong! Take a shot 🍻";
-        }
-    }
-
-        // Desabilita os botões para evitar múltiplos cliques até a próxima pergunta
-        btnAntes.disabled = true;
-        btnDepois.disabled = true;
-
-        setTimeout(gerarPergunta, 3000);
-    }
+    setTimeout(gerarPergunta, 3000);
+}
 
     // Abertura e fechamento do popup
     function openPopup() {
