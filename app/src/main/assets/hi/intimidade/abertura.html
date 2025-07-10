@@ -11,14 +11,25 @@
 <body>
 <div class="game-container">
     <!-- Menu -->
-    <nav class="menu">
-        <a href="../menuHi.html" class="menu-title" style="position: relative;">
-            <div class="voltar-container" onclick="window.location.href='../menuHi.html'">
-                &#8678; <!-- Isso é ← -->
-            </div>
-            <img class="logo-bebedeira" src="../images/logo.png" alt="Bebedeira Logo" />
+<nav class="menu">
+    <div class="menu-left">
+        <a href="../menuHi.html" class="voltar-wrapper">
+            <img src="../../images/left-arrow.png" alt="Back">
+            <h2 class="sair">Back</h2>
         </a>
-    </nav>
+    </div>
+
+    <div class="menu-center">
+        <a href="../menuHi.html">
+            <img class="logo-bebedeira" src="../../images/logo-sem-margem.png" alt="Logo Bebedeira" />
+
+
+
+        </a>
+    </div>
+
+    <div class="menu-spacer"></div>
+</nav>
 
     <!-- Conteúdo do jogo -->
     <h1>
@@ -28,7 +39,7 @@
     <div>
         <a href="#" onclick="openPopup()">
             <img class="img-regras" src="../images/regras.png" alt="Rules" />
-         <h4 onclick="showAnswerPopup()">Rules</h4>
+            <h4 onclick="showAnswerPopup()">Rules</h4>
         </a>
     </div>
 
@@ -96,6 +107,36 @@
             "Hamara sabse funny moment tumhare liye kaunsa tha?",
             "Agar humein duniya ke kisi kone mein bhaagna padta, toh tumhe kya lagta main kahan jana chahta/chahti?",
             "Meri kaunsi habit tumhe sabse zyada cute lagti hai?",
+            "Bachpan ki tumhari favorite memory kya hai?",
+            "Tumhe kis type ke movies dekhna sabse zyada pasand hai?",
+            "Tumhara perfect din kaisa dikhega, start se end tak?",
+            "Kya tum har cheez plan karte ho ya impulse par kaam karte ho?",
+            "Agar tum duniya ke kisi bhi jagah reh sakte, to kaha rehte?",
+            "Ek relationship mein tum kis cheez ko sabse zyada value dete ho?",
+            "Tum apna pyaar kaise dikhana pasand karte ho?",
+            "Tumhe kis cheez se loved feel hota hai?",
+            "Pichle relationships se tumne kya seekha?",
+            "Jab relationship mein disagreement hota hai to tum kaise handle karte ho?",
+            "Tumhare life ke sabse bade sapne kya hain?",
+            "Aisi koi cheez jo tum hamesha karna chahte the par abhi tak nahi ki?",
+            "Kis personal achievement par tumhe sabse zyada garv hai?",
+            "Apne career ke future se kya ummeed hai?",
+            "Kya tum future mein shaadi ya bacche chahte ho?",
+            "Tumhe problems par turant baat karna pasand hai ya baad mein?",
+            "Dusron mein sabse irritating cheez kya lagti hai?",
+            "Jab tum gussa hote ho to usually kaise react karte ho?",
+            "Tumhe zyada silence pasand hai ya constant company?",
+            "Couple ke roop mein achha jeene ke liye kya zaroori hai?",
+            "Weekend ideally kaise spend karna pasand karte ho?",
+            "Kaunsi food tum kabhi bore nahi hote khate khate?",
+            "Kya tum night person ho ya morning person?",
+            "Parties, travel ya ghar par rehna — tumhe kya zyada pasand hai?",
+            "Kaunse hobbies ya activities tum mere saath share karna chahoge?",
+            "Tumhare life ka sabse tough moment kaunsa tha?",
+            "Future ke baare mein sabse zyada kis cheez se dar lagta hai?",
+            "Tum duniya mein kaunsa legacy chhodna chahte ho?",
+            "Kaunsi value hai jo tum kabhi compromise nahi karoge?",
+            "Aaj tum kis cheez ke liye sabse zyada grateful ho?",
             "Agar tum mujhe ek word mein describe karte, toh wo kya hota?",
             "Tumhare hisaab se maine tumhe kab sabse badi surprise di?",
             "Tumhe kya lagta hai mujhmein kya cheez mujhe insecure banati hai?",
@@ -113,7 +154,28 @@
             "Tum kab realize kiya ki tum mujhse pyar karte ho?",
             "Kaunsi song tumhe lagta hai jo hamari story perfectly define karti hai?",
             "Tumhara kaunsa touch mujhe sabse zyada calm karta hai?",
-
+            "Kya tumhe lagta hai ki main famous banna chahta/chahti hoon?",
+            "Tumhe kya lagta hai, mere phone ka wallpaper mere baare mein kya batata hai?",
+            "Kya tumhe lagta hai maine kabhi kuch illegal kiya hai? Agar haan, to kya?",
+            "Ek value batao jo tumhe lagta hai mere liye bohot important hai.",
+            "Kya tumhe lagta hai ki main jaldi pyaar mein pad jaata/jaati hoon?",
+            "Kya tumhe lagta hai ki main kisi aur country mein shift ho sakta/sakti hoon? Agar haan, to kaunsi?",
+            "Kaunsi profession tumhe lagti hai mere jaisi?",
+            "Kya tumhe lagta hai mera dil kabhi toota hai?",
+            "Apne phone ka camera on karo aur jo tumhare saath game khel raha/rahi hai uski ek candid photo lo. Ek hafte baad ye yaadein dekho.",
+            "Socho ki tumhare paas ek dusre ke Instagram ka password hai. Tum uski bio kaise likhoge? Ek paper par likho.",
+            "Aaj main jo kapde pehna/pehni hoon, usse tumhe kya lagta hai main kya dikhana chahta/chahti hoon?",
+            "Ek flaw batao jo tumhe lagta hai mere mein hai.",
+            "Tumhe kya lagta hai main kisi mein sabse pehle kya notice karta/karti hoon?",
+            "Ek cheez jo mere life mein tum essential samajhte ho?",
+            "Tumhe lagta hai main school mein kis type ka student tha/thhi?",
+            "Kaunsi band tumhe lagta hai meri favorite hogi?",
+            "Tumhe kya lagta hai main kisi mein kya sexy maanta/manti hoon?",
+            "Kaunsi tattoo tumhe lagti hai main banwaunga/banwaungi? Pen se mere upar draw karo.",
+            "Tumhari mere baare mein pehli impression kya thi?",
+            "Tumhe kya lagta hai main uthte hi sabse pehle kya karta/karti hoon?",
+            "Agar main lottery jeet jaun to tumhe lagta hai main kya karunga/karungi?",
+            "1 se 10 tak, tumhe lagta hai mera ghar (ya room) kitna messy hai? Explain karo.",
             "Agar main tumhare saath koi ek din dobara jee sakta/sakti, toh wo kaunsa hota?",
             "Meri kaunsi aadat tumhe bilkul irresistible lagti hai?",
             "Agar main tumhari yaadon mein hota/hoti, toh tumhe kya lagta main kya karta/karti?",
@@ -181,28 +243,7 @@
             "Agar main tumhe kisi past moment mein le ja sakta/sakti, toh wo kaunsa hota aur kyun?",
             "Um personagem de televisão que eu poderia ser.",
             "Eu pareço intimidar as pessoas?",
-            "Você acha que eu gostaria de ser famoso?",
-            "O que você acha que meu plano de fundo de celular diz sobre mim?",
-            "Você acha que eu já fiz algo ilegal? Se sim, o que você acha que foi?",
-            "Fale um valor que você acredita ser muito importante para mim.",
-            "Você acha que eu me apaixono rápido?",
-            "Você acha que eu mudaria para outro país? Se sim, qual?",
-            "Qual profissão parece comigo?",
-            "Você acha que eu já tive meu coração partido?",
-            "Ative a câmera do seu celular e tire uma foto espontânea da pessoa que está jogando com você. Guardem essas memórias para verem em uma semana.",
-            "Imagine que vocês tem a senha um do outro no Instagram, como você escreveria a Bio dessa pessoa? Escreva num papel.",
-            "O que você acha que eu quero comunicar com a roupa que estou usando hoje?",
-            "Um defeito que eu pareço ter.",
-            "Qual a primeira coisa que você acha que eu reparo em alguém.",
-            "O que você diria ser essencial na minha vida?",
-            "Qual tipo de aluno você acha que fui na escola?",
-            "Qual banda você acha que eu mais gosto?",
-            "O que você acha que eu considero sexy numa pessoa?",
-            "Que tatuagem você acredita que eu faria? Desenhe com uma caneta em mim.",
-            "Qual a primeira impressão que você teve sobre mim?",
-            "Qual a primeira coisa que você acha que faço ao acordar?",
-            "O que você acha que eu faria se eu ganhasse na loteria?",
-            "De 1 a 10, o quanto você acha que minha casa (quarto) é bagunçado? Explique.",
+
             "Kaunsa TV character tumhe lagta hai main ho sakta/sakti hoon?",
             "Kya tumhe lagta hai main logon ko daraata/daraati hoon?",
             "Tumhe kya lagta hai, kya main famous banna chahta/chahti hoon?",

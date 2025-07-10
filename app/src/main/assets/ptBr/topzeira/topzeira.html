@@ -6,19 +6,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="../../stylesCards.css">
     <title>Bebedeira Games</title>
+</head>
 
 <body>
 
 <div class="game-container">
     <!-- Menu -->
     <nav class="menu">
-        <a href="../menuPtBr.html" class="menu-title" style="position: relative;">
-            <div class="voltar-container" onclick="window.location.href='../menuPtBr.html'">
-                &#8678; <!-- Isso é ← -->
-            </div>
-            <img class="logo-bebedeira" src="../../images/logo.png" alt="Logo Bebedeira" />
-        </a>
+        <div class="menu-left">
+            <a href="../menuPtBr.html" class="voltar-wrapper">
+                <img src="../../images/left-arrow.png" alt="Voltar">
+                <h2 class="sair">Voltar</h2>
+            </a>
+        </div>
+
+        <div class="menu-center">
+            <a href="../menuPtBr.html">
+            <img class="logo-bebedeira" src="../../images/logo-sem-margem.png" alt="Logo Bebedeira" />
+            </a>
+        </div>
+
+        <div class="menu-spacer"></div>
     </nav>
+
 
     <!-- Conteúdo do jogo -->
     <div>
@@ -36,15 +46,16 @@
                 <h2>Regras do Jogo</h2>
                 <span class="close" onclick="closePopup()">&times;</span>
             </div>
-            <ul>
+            <ul> <!-- Traduzir pros outros idiomas -->
                 <li>Neste jogo cada jogador terá de dar uma resposta que esteja entre os Top 10 daquele assunto.
                 </li>
                 <li>E como isto vai acontecer?</li>
                 <li>Uma pessoa lê o tema da carta</li>
-                <li>E, em sentido horário, cada um vai respondendo o que ele acha que é top 10 daquele assunto</li>
+                <li>E, em sentido horário, cada um vai respondendo o que ela acha que é top 10 daquele assunto</li>
                 <li>Você tem a opção de pular ou responder</li>
                 <li>Se pular, não joga mais nesta rodada</li>
-                <li>Se responder e alguém duvidar, teremos duas opções para resolver o embate</li>
+                <li>Se responder e alguém duvidar, cliquem na resposta e vejam a lista.</li>
+                <li> Teremos duas opções para resolver o embate: </li>
                 <li>Se quem duvidou da resposta estava certo, a pessoa que respondeu errado bebe uma dose e esse Top
                     se encerra</li>
                 <li>Se quem duvidou estava errado, ele mesmo bebe uma dose e esse Top se encerra</li>

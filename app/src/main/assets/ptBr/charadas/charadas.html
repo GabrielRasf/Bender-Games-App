@@ -14,12 +14,21 @@
 <div class="game-container">
     <!-- Menu -->
     <nav class="menu">
-        <a href="../menuPtBr.html" class="menu-title" style="position: relative;">
-            <div class="voltar-container" onclick="window.location.href='../menuPtBr.html'">
-                &#8678;
-            </div>
-            <img class="logo-bebedeira" src="../../images/logo.png" alt="Logo Bebedeira" />
-        </a>
+        <div class="menu-left">
+            <a href="../menuPtBr.html" class="voltar-wrapper">
+                <img src="../../images/left-arrow.png" alt="Voltar">
+                <h2 class="sair">Voltar</h2>
+            </a>
+        </div>
+
+        <div class="menu-center">
+            <a href="../menuPtBr.html">
+            <img class="logo-bebedeira" src="../../images/logo-sem-margem.png" alt="Logo Bebedeira" />
+
+            </a>
+        </div>
+
+        <div class="menu-spacer"></div>
     </nav>
 
     <!-- Conteúdo do jogo -->
@@ -27,7 +36,7 @@
         <h1>Charadas</h1>
         <a href="#" onclick="openPopup()">
             <img class="img-regras" src="../../images/regras.png" alt="Regras" />
-        <h4 onclick="openPopup()">Regras</h4>
+            <h4 onclick="openPopup()">Regras</h4>
         </a>
     </div>
 
@@ -92,11 +101,11 @@
     const questionsData = {
         "questions": [
             {
-                "question": "Que quanto mais seca, mais molhada fica?",
+                "question": "O que, quanto mais seca, mais molhada fica?",
                 "answer": "A toalha."
             },
             {
-                "question": "Que tem quatro pernas de dia e seis pernas à noite?",
+                "question": "O que tem quatro pernas de dia e seis pernas à noite?",
                 "answer": "A cama."
             },
             {
@@ -108,11 +117,11 @@
                 "answer": "Abremole."
             },
             {
-                "question": "Que dá o poder de atravessar paredes?",
+                "question": "O que dá o poder de atravessar paredes?",
                 "answer": "As portas."
             },
             {
-                "question": "Que tem cinco dedos, mas não tem unhas?",
+                "question": "O que tem cinco dedos, mas não tem unhas?",
                 "answer": "A luva."
             },
             {
@@ -144,7 +153,7 @@
                 "answer": "Acelga."
             },
             {
-                "question": "Que todo mês tem, menos abril?",
+                "question": "O que todo mês tem, menos abril?",
                 "answer": "A letra O."
             },
             {
@@ -180,7 +189,7 @@
                 "answer": "O pato fica viúvo."
             },
             {
-                "question": "Que tem centenas de rodas, mas não sai do lugar?",
+                "question": "O que tem centenas de rodas, mas não sai do lugar?",
                 "answer": "O estacionamento."
             },
             {
@@ -196,11 +205,11 @@
                 "answer": "Começou a passar mal."
             },
             {
-                "question": "Meu, mas meus amigos usam mais que eu?",
+                "question": "O que é meu, mas meus amigos usam mais que eu?",
                 "answer": "O nome."
             },
             {
-                "question": "Que você pode pegar, mas nunca jogar?",
+                "question": "O que você pode pegar, mas nunca jogar?",
                 "answer": "Um resfriado."
             },
             {
@@ -248,19 +257,19 @@
                 "answer": "Porque não tinha como passar por baixo."
             },
             {
-                "question": "Que quanto mais sujo fica, mais branco se torna?",
+                "question": "O que, quanto mais sujo fica, mais branco se torna?",
                 "answer": "O quadro negro."
             },
             {
-                "question": "Que é surdo e mudo, mas conta tudo?",
+                "question": "O que é surdo e mudo, mas conta tudo?",
                 "answer": "O livro."
             },
             {
-                "question": "Quem é que sempre precisa de uma mãozinha para trabalhar?",
+                "question": "Quem sempre precisa de uma mãozinha para trabalhar?",
                 "answer": "A manicure."
             },
             {
-                "question": "Que no início muda e no fim dança?",
+                "question": "O que no início muda e no fim dança?",
                 "answer": "A mudança."
             },
             {
@@ -276,15 +285,15 @@
                 "answer": "Porque é fácil de se pegar."
             },
             {
-                "question": "Pequeno em Lisboa e grande no Brasil?",
+                "question": "O que é pequeno em Lisboa e grande no Brasil?",
                 "answer": "A letra B."
             },
             {
-                "question": "Qual é a parte do corpo que mais coça?",
+                "question": "Qual é a parte do corpo que mais se coça?",
                 "answer": "A unha."
             },
             {
-                "question": "Que você ganha duas vezes, mas se perder e quiser pela terceira vez, terá que comprar?",
+                "question": "O que você ganha duas vezes, mas se perder e quiser pela terceira vez, terá que comprar?",
                 "answer": "Os dentes."
             },
             {
@@ -292,11 +301,11 @@
                 "answer": "Te encontro ao meio-dia."
             },
             {
-                "question": "Aberto guarda tudo e fechado não guarda nada?",
+                "question": "O que, aberto, guarda tudo e, fechado, não guarda nada?",
                 "answer": "O guarda-chuva."
             },
             {
-                "question": "Fica no canto do olho?",
+                "question": "O que fica no canto do olho?",
                 "answer": "A letra O."
             },
             {
@@ -332,7 +341,7 @@
                 "answer": "A Mônica. O Cebolinha fala elado."
             },
             {
-                "question": "Redondo, tem um buraco no meio, apenas duas letras e começa com C?",
+                "question": "O que é redondo, tem um buraco no meio, apenas duas letras e começa com C?",
                 "answer": "O CD."
             },
             {
@@ -348,7 +357,7 @@
                 "answer": "Na bicicleta, você senta para correr. Na privada, corre para sentar."
             },
             {
-                "question": "Um ponto vermelho em cima da árvore?",
+                "question": "O que é um ponto vermelho em cima da árvore?",
                 "answer": "Um morangotango."
             },
             {
@@ -372,7 +381,7 @@
                 "answer": "Ontem, hoje e amanhã."
             },
             {
-                "question": "Acontece uma vez por minuto, duas vezes por momento e nunca em duzentos anos?",
+                "question": "O que acontece uma vez por minuto, duas vezes por momento e nunca em duzentos anos?",
                 "answer": "A letra M."
             },
             {
@@ -392,15 +401,15 @@
                 "answer": "O Monte Everest, ele só não tinha sido descoberto ainda."
             },
             {
-                "question": "Meio de transporte que pode ter duas ou quatro rodas?",
+                "question": "Qual é o meio de transporte que pode ter duas ou quatro rodas?",
                 "answer": "A bicicleta, com e sem rodinhas."
             },
             {
-                "question": "No cabelo, no dente e na planta está escondida?",
+                "question": "O que no cabelo, no dente e na planta está escondida?",
                 "answer": "A raiz."
             },
             {
-                "question": "No alto está, no alto mora, todos o ouvem e ninguém adora?",
+                "question": "O que no alto está, no alto mora, todos o ouvem e ninguém adora?",
                 "answer": "O sino."
             },
             {
@@ -408,287 +417,287 @@
                 "answer": "A toupeira."
             },
             {
-                "question": "Pode machucar sem se mover, pode dar razão ou tirá-la?",
+                "question": "O que pode machucar sem se mover, pode dar razão ou tirá-la?",
                 "answer": "A palavra."
             },
             {
-                "question": "Quanto mais lavo, mais suja estou?",
+                "question": "O que, quanto mais lavo, mais suja estou?",
                 "answer": "A água."
             },
             {
-                "question": "São colegas que passam o dia se batendo e não fazem mal uns aos outros?",
+                "question": "O que são colegas que passam o dia se batendo e não fazem mal uns aos outros?",
                 "answer": "Os dentes."
             },
             {
-                "question": "Anda deitado e dorme de pé?",
+                "question": "O que anda deitado e dorme de pé?",
                 "answer": "O pé."
             },
             {
-                "question": "É água e não vem do mar, do céu não caiu e todo mundo já lambeu?",
+                "question": "O que é água e não vem do mar, do céu não caiu e todo mundo já lambeu?",
                 "answer": "A lágrima."
             },
             {
-                "question": "O local do nosso corpo humano que tem cordas?",
+                "question": "Qual o local do nosso corpo humano que tem cordas?",
                 "answer": "A garganta."
             },
             {
-                "question": "Não é cama nem leãozinho e desaparece em qualquer cantinho?",
+                "question": "O que não é cama nem leãozinho e desaparece em qualquer cantinho?",
                 "answer": "Camaleão."
             },
             {
-                "question": "O meio de transporte que tem duas curvas nas costas?",
+                "question": "Qual é o meio de transporte que tem duas curvas nas costas?",
                 "answer": "Camelo."
             },
             {
-                "question": "Faz muitos movimentos mesmo estando sentado?",
+                "question": "O que faz muitos movimentos mesmo estando sentado?",
                 "answer": "O jogador de xadrez."
             },
             {
-                "question": "Está entre a terra e o céu, se você se aproximar se afastará?",
+                "question": "O que está entre a terra e o céu; se você se aproximar, se afastará?",
                 "answer": "O horizonte."
             },
             {
-                "question": "O bicho que atravessa o rio com um boi na boca?",
+                "question": "Qual bicho atravessa o rio com um boi na boca?",
                 "answer": "O carrapato."
             },
             {
-                "question": "É atraente, mas não é gente?",
+                "question": "O que é atraente, mas não é gente?",
                 "answer": "O ímã."
             },
             {
-                "question": "Sobe e desce o dia inteiro e não se cansa?",
+                "question": "O que sobe e desce o dia inteiro e não se cansa?",
                 "answer": "O elevador."
             },
             {
-                "question": "Fala e não tem boca. Canta e não tem voz?",
+                "question": "O que fala e não tem boca; canta e não tem voz?",
                 "answer": "Rádio."
             },
             {
-                "question": "Por mais que seja cortado, está sempre do mesmo tamanho?",
+                "question": "O que, por mais que seja cortado, está sempre do mesmo tamanho?",
                 "answer": "O baralho."
             },
             {
-                "question": "Tem cabeça dura e adora levar pancada?",
+                "question": "O que tem cabeça dura e adora levar pancada?",
                 "answer": "O prego."
             },
             {
-                "question": "São dois leques que se movem o dia todo, sem parar. Mas quando você vai dormir eles ficam quietos?",
+                "question": "O que são dois leques que se movem o dia todo, sem parar, mas quando você vai dormir, eles ficam quietos?",
                 "answer": "Os cílios."
             },
             {
-                "question": "Ouro parece, prata não é, quem não adivinha um tolo é?",
+                "question": "Ouro parece, prata não é, e quem não adivinha um tolo é?",
                 "answer": "A banana."
             },
             {
-                "question": "Fui à feira e comprei uma bela, cheguei em casa e comecei a chorar com ela?",
+                "question": "Fui à feira e comprei uma bela; cheguei em casa e comecei a chorar com ela?",
                 "answer": "A cebola."
             },
             {
-                "question": "Está no chão, mas nunca está por baixo?",
+                "question": "O que está no chão, mas nunca está por baixo?",
                 "answer": "O til."
             },
             {
-                "question": "Tem nome de dança tropical, dá sabor à comida tradicional?",
+                "question": "O que tem nome de dança tropical, dá sabor à comida tradicional?",
                 "answer": "Salsa."
             },
             {
-                "question": "É um buraco, mas pode servir como casa. Rima com lanterna, é uma?",
+                "question": "O que é um buraco, mas pode servir como casa? Rima com lanterna, é uma...?",
                 "answer": "Caverna."
             },
             {
-                "question": "É uma pedra e muita gente adora. Flutua se na água joga?",
+                "question": "O que é uma pedra e muita gente adora? Flutua se na água joga?",
                 "answer": "Pedra de gelo."
             },
             {
-                "question": "Segue você a vida toda, mas some no escuro?",
+                "question": "O que segue você a vida toda, mas some no escuro?",
                 "answer": "A sombra."
             },
             {
-                "question": "Só tem 6 letras, mas leva 36 assentos?",
+                "question": "O que só tem 6 letras, mas leva 36 assentos?",
                 "answer": "O ônibus."
             },
             {
-                "question": "Está bem na sua frente, mas você não pode ver?",
+                "question": "O que está bem na sua frente, mas você não pode ver?",
                 "answer": "O futuro."
             },
             {
-                "question": "Voa sem asas, assobia sem boca?",
+                "question": "O que voa sem asas, assobia sem boca?",
                 "answer": "O vento."
             },
             {
-                "question": "A vogal que fica de pernas para o ar?",
+                "question": "Qual é a vogal que fica de pernas para o ar?",
                 "answer": "A vogal U."
             },
             {
-                "question": "Sete irmãos muito unidos, os primeiros são feirantes e o sétimo é preguiçoso?",
+                "question": "O que são sete irmãos muito unidos: os primeiros são feirantes e o sétimo é preguiçoso?",
                 "answer": "Dias da semana."
             },
             {
-                "question": "Tem pé, mas não anda. Tem o que comer, mas não come. Tem água, mas não bebe?",
+                "question": "O que tem pé, mas não anda; tem o que comer, mas não come; tem água, mas não bebe?",
                 "answer": "O coqueiro."
             },
             {
-                "question": "Quando trabalha deixa todo mundo de boca aberta?",
+                "question": "Quem quando trabalha deixa todo mundo de boca aberta?",
                 "answer": "O dentista."
             },
             {
-                "question": "Não está dentro da casa, nem fora. Mas a casa não estaria completa sem ela?",
+                "question": "O que não está dentro da casa nem fora, mas a casa não estaria completa sem ela?",
                 "answer": "A janela."
             },
             {
-                "question": "Tem centro, mas não tem começo nem fim?",
+                "question": "O que tem centro, mas não tem começo nem fim?",
                 "answer": "O círculo."
             },
             {
-                "question": "Falta numa casa para formar um casal?",
+                "question": "O que falta numa casa para formar um casal?",
                 "answer": "A letra L."
             },
             {
-                "question": "O homem que tem de fazer mais de três barbas por dia?",
+                "question": "Quem é o homem que tem de fazer mais de três barbas por dia?",
                 "answer": "O barbeiro."
             },
             {
-                "question": "O cavalo que mais gosta de tomar banho?",
+                "question": "Qual o cavalo que mais gosta de tomar banho?",
                 "answer": "O cavalo-marinho."
             },
             {
-                "question": "Tem cidades, tem ruas, lojas e casas. Todo mundo usa, mas ninguém vive lá?",
+                "question": "O que tem cidades, ruas, lojas e casas; todo mundo usa, mas ninguém vive lá?",
                 "answer": "O mapa."
             },
             {
-                "question": "Com a cabeça fica mais baixo e sem a cabeça fica mais alto?",
+                "question": "O que com a cabeça fica mais baixo e sem a cabeça fica mais alto?",
                 "answer": "Travesseiro."
             },
             {
-                "question": "Não tem olhos, mas pisca. Não tem boca, mas comanda?",
+                "question": "O que não tem olhos, mas pisca; não tem boca, mas comanda?",
                 "answer": "Semáforo."
             },
             {
-                "question": "Se mudar a primeira letra, vira outro animal. Que, por sinal, é seu caçador principal?",
+                "question": "Se mudar a primeira letra, vira outro animal que, por sinal, é seu caçador principal?",
                 "answer": "Rato."
             },
             {
-                "question": "Tem rabo de porco, orelha de porco, mas não é porco. Com feijão e couve é difícil comer pouco?",
+                "question": "O que tem rabo de porco, orelha de porco, mas não é porco? Com feijão e couve é difícil comer pouco?",
                 "answer": "Feijoada."
             },
             {
-                "question": "Não tem cabelo nem cabeça, mas quando envelhece fica careca?",
+                "question": "O que não tem cabelo nem cabeça, mas quando envelhece fica careca?",
                 "answer": "Pneu."
             },
             {
-                "question": "Tem rabo, mas não é animal. Não tem asas, mas pode voar. Se subir alto, outro pode cortar?",
+                "question": "O que tem rabo, mas não é animal; não tem asas, mas pode voar? Se subir alto, outro pode cortar?",
                 "answer": "A pipa."
             },
             {
-                "question": "Dá muitas voltas e não sai do lugar.",
+                "question": "O que dá muitas voltas e não sai do lugar?",
                 "answer": "O relógio."
             },
             {
-                "question": "Não se come, mas é bom para se comer.",
+                "question": "O que não se come, mas é bom para se comer?",
                 "answer": "O talher."
             },
             {
-                "question": "O boi consegue atravessar, mas o mosquito fica preso.",
+                "question": "O que o boi consegue atravessar, mas o mosquito fica preso?",
                 "answer": "A teia de aranha."
             },
             {
-                "question": "Detestamos na praia e adoramos na panela?",
+                "question": "O que detestamos na praia e adoramos na panela?",
                 "answer": "Caldo."
             },
             {
-                "question": "Nunca volta, embora nunca tenha ido.",
+                "question": "O que nunca volta, embora nunca tenha ido?",
                 "answer": "O passado."
             },
             {
-                "question": "O cirurgião e o matemático têm em comum.",
+                "question": "O que o cirurgião e o matemático têm em comum?",
                 "answer": "Ambos vivem fazendo operações."
             },
             {
-                "question": "Anda com os pés na cabeça.",
+                "question": "O que anda com os pés na cabeça?",
                 "answer": "O piolho."
             },
             {
-                "question": "Vários pontinhos amarelos na parede.",
+                "question": "O que são vários pontinhos amarelos na parede?",
                 "answer": "Fandangos alpinistas."
             },
             {
-                "question": "Tem no meio do ovo.",
+                "question": "O que tem no meio do ovo?",
                 "answer": "A letra \"V\"."
             },
             {
-                "question": "Fica no início da rua, no fim do mar e no meio da cara.",
+                "question": "O que fica no início da rua, no fim do mar e no meio da cara?",
                 "answer": "A letra R."
             },
             {
-                "question": "Pode passar diante do sol sem fazer sombra.",
+                "question": "O que pode passar diante do sol sem fazer sombra?",
                 "answer": "O vento."
             },
             {
-                "question": "Dá um pulo e se veste de noiva?",
+                "question": "O que dá um pulo e se veste de noiva?",
                 "answer": "A pipoca."
             },
             {
-                "question": "Quanto maior menos se vê.",
+                "question": "Quanto maior, menos se vê?",
                 "answer": "A escuridão."
             },
             {
-                "question": "Um fósforo disse a uma vela de aniversário.",
+                "question": "O que um fósforo disse a uma vela de aniversário?",
                 "answer": "É sempre por você que eu perco a cabeça."
             },
             {
-                "question": "Voa sem ter asas e chora sem ter olhos.",
+                "question": "O que voa sem ter asas e chora sem ter olhos?",
                 "answer": "A nuvem."
             },
             {
-                "question": "Sobe quando a chuva desce.",
+                "question": "O que sobe quando a chuva desce?",
                 "answer": "O guarda-chuva."
             },
             {
-                "question": "O animal mais antigo do mundo.",
+                "question": "Qual é o animal mais antigo do mundo?",
                 "answer": "A zebra. Ela ainda é a preto e branco."
             },
             {
-                "question": "O lugar mais certo do Brasil.",
+                "question": "Qual é o lugar mais certo do Brasil?",
                 "answer": "O Sertão."
             },
             {
-                "question": "Sobe, mas nunca desce.",
+                "question": "O que sobe, mas nunca desce?",
                 "answer": "A idade."
             },
             {
-                "question": "Uma letra A que vive saltando.",
+                "question": "O que é uma letra A que vive saltando?",
                 "answer": "É um Assaltante."
             },
             {
-                "question": "Tem que ser lambido para enfiar no buraco mais facilmente?",
+                "question": "O que tem que ser lambido para enfiar no buraco mais facilmente?",
                 "answer": "Linha de costura."
             },
             {
-                "question": "É leve como uma pluma, mas nem o mais forte homem pode segurar por muito tempo?",
+                "question": "O que é leve como uma pluma, mas nem o mais forte homem pode segurar por muito tempo?",
                 "answer": "A respiração."
             },
             {
-                "question": "A fechadura disse para a chave.",
+                "question": "O que a fechadura disse para a chave?",
                 "answer": "Vamos dar uma voltinha."
             },
             {
-                "question": "Deus tem, mas a rainha, não. O duque tem no começo, e o rei Midas tem no meio.",
+                "question": "O que Deus tem, mas a rainha não? O duque tem no começo e o rei Midas tem no meio?",
                 "answer": "A letra D."
             },
             {
-                "question": "O rei da horta.",
+                "question": "Qual é o rei da horta?",
                 "answer": "O rei-polho."
             },
             {
-                "question": "Sem sair do seu cantinho, é capaz de viajar ao redor do mundo?",
+                "question": "O que, sem sair do seu cantinho, é capaz de viajar ao redor do mundo?",
                 "answer": "O selo."
             },
             {
-                "question": "Quanto mais seca mais molhada fica.",
+                "question": "O que, quanto mais seca, mais molhada fica?",
                 "answer": "A toalha."
             },
             {
-                "question": "Nasce verde, vive preto e morre vermelho?",
+                "question": "O que nasce verde, vive preto e morre vermelho?",
                 "answer": "O café."
             },
             {
@@ -696,95 +705,95 @@
                 "answer": "Buraco."
             },
             {
-                "question": "Fica cheio durante o dia e vazio durante a noite?",
+                "question": "O que fica cheio durante o dia e vazio durante a noite?",
                 "answer": "Sapato."
             },
             {
-                "question": "Que quanto mais cresce, mais baixo fica?",
+                "question": "O que, quanto mais cresce, mais baixo fica?",
                 "answer": "O rabo do cavalo."
             },
             {
-                "question": "Atravessa o rio, mas nunca se molha?",
+                "question": "O que atravessa o rio, mas nunca se molha?",
                 "answer": "Ponte."
             },
             {
-                "question": "Põe-se na mesa, parte-se, reparte-se, mas não se come?",
+                "question": "O que se põe na mesa, parte-se, reparte-se, mas não se come?",
                 "answer": "O baralho."
             },
             {
-                "question": "Quando a gente fica em pé, ele fica deitado, e quando a gente deita, ele fica em pé?",
+                "question": "O que, quando a gente fica em pé, ele fica deitado, e quando a gente deita, ele fica em pé?",
                 "answer": "Os pés."
             },
             {
-                "question": "Tem mais de dez cabeças e não sabe pensar?",
+                "question": "O que tem mais de dez cabeças e não sabe pensar?",
                 "answer": "Uma caixa de fósforos."
             },
             {
-                "question": "Enche uma casa, mas não enche uma mão?",
+                "question": "O que enche uma casa, mas não enche uma mão?",
                 "answer": "Botão."
             },
             {
-                "question": "É grande antes de ser pequena e sempre que queima, chora?",
+                "question": "O que é grande antes de ser pequena e sempre que queima, chora?",
                 "answer": "Vela."
             },
             {
-                "question": "Tem dente e cabeça, mas não é animal e nem gente?",
+                "question": "O que tem dente e cabeça, mas não é animal e nem gente?",
                 "answer": "Alho."
             },
             {
-                "question": "Todo nariz tem na ponta.",
+                "question": "O que todo nariz tem na ponta?",
                 "answer": "A letra Z."
             },
             {
-                "question": "Cai em pé e corre deitado?",
+                "question": "O que cai em pé e corre deitado?",
                 "answer": "Chuva."
             },
             {
-                "question": "Quanto mais rugas têm mais novo é?",
+                "question": "Quanto mais rugas tem, mais novo é?",
                 "answer": "Pneu."
             },
             {
-                "question": "Tem quatro pernas de dia e seis à noite?",
+                "question": "O que tem quatro pernas de dia e seis à noite?",
                 "answer": "Cama."
             },
             {
-                "question": "Tem pomar e no seu paletó?",
+                "question": "O que tem pomar e no seu paletó?",
                 "answer": "Manga."
             },
             {
-                "question": "Não tem pé e corre, tem leito e não dorme, quando para morre?",
+                "question": "O que não tem pé e corre; tem leito e não dorme; quando para, morre?",
                 "answer": "Rio."
             },
             {
-                "question": "Num instante se quebra quando se diz o nome dele?",
+                "question": "O que num instante se quebra quando se diz o nome dele?",
                 "answer": "O silêncio."
             },
             {
-                "question": "Anda com a barriga para trás.",
+                "question": "O que anda com a barriga para trás?",
                 "answer": "A nossa perna."
             },
             {
-                "question": "Tem no meio do coração?",
+                "question": "O que tem no meio do coração?",
                 "answer": "A letra “A”."
             },
             {
-                "question": "Todos os meses têm, menos abril?",
+                "question": "O que todos os meses têm, menos abril?",
                 "answer": "A letra “O”."
             },
             {
-                "question": "Tem cauda, mas não é cão; não tem asas, mas sabe voar. Se a largam, não sobe, e sai ao vento a brincar.",
+                "question": "O que tem cauda, mas não é cão; não tem asas, mas sabe voar? Se a largam, não sobe e sai ao vento a brincar?",
                 "answer": "Pipa."
             },
             {
-                "question": "Tem 5 dedos, mas não tem unha.",
+                "question": "O que tem 5 dedos, mas não tem unha?",
                 "answer": "Luva."
             },
             {
-                "question": "É feito para andar e não anda?",
+                "question": "O que é feito para andar e não anda?",
                 "answer": "A rua."
             },
             {
-                "question": "Qual o lugar em que todos podem sentar menos você?",
+                "question": "Qual o lugar em que todos podem sentar, menos você?",
                 "answer": "O seu colo."
             },
             {
@@ -796,7 +805,7 @@
                 "answer": "Passa a bola."
             },
             {
-                "question": "Em uma igreja haviam 4 velas. Entraram dois ladrões e cada um levou uma vela. Quantas ficaram?",
+                "question": "Em uma igreja havia 4 velas. Entraram dois ladrões e cada um levou uma vela. Quantas ficaram?",
                 "answer": "6 velas. O texto diz que os ladrões LEVARAM uma vela cada, e não ROUBARAM."
             },
             {
@@ -868,7 +877,7 @@
                 "answer": "A preguiça."
             },
             {
-                "question": "Qual é estado que gosta de cavar buracos?",
+                "question": "Qual é o estado que gosta de cavar buracos?",
                 "answer": "Ama-pá."
             },
             {
@@ -979,8 +988,8 @@
                 "question": "Por que o MC não quer cerveja?",
                 "answer": "Porque ele Ke-vinho (MC Kevinho)."
             }
-            ]
-}
+        ]
+    }
 
 
     const questions = questionsData.questions;

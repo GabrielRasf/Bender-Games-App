@@ -13,12 +13,22 @@
 <div class="game-container">
     <!-- Menu -->
     <nav class="menu">
-        <a href="../menuEn.html" class="menu-title" style="position: relative;">
-            <div class="voltar-container" onclick="window.location.href='../menuEn.html'">
-                &#8678; <!-- Isso é ← -->
-            </div>
-            <img class="logo-bebedeira" src="../images/logo.png" alt="Logo Bebedeira" />
-        </a>
+        <div class="menu-left">
+            <a href="../menuEn.html" class="voltar-wrapper">
+                <img src="../../images/left-arrow.png" alt="Back">
+                <h2 class="sair">Back</h2>
+            </a>
+        </div>
+
+
+        <div class="menu-center">
+            <a href="../menuEn.html">
+            <img class="logo-bebedeira" src="../../images/logo-sem-margem.png" alt="Logo Bebedeira" />
+
+            </a>
+        </div>
+
+        <div class="menu-spacer"></div>
     </nav>
 
     <!-- Game Content -->
@@ -38,16 +48,18 @@
                 <span class="close" onclick="closePopup()">&times;</span>
             </div>
             <ul>
-                <li>In this game, each player must give an answer that is within the Top 10 of that subject.</li>
-                <li>And how does this happen?</li>
-                <li>One person reads the topic on the card.</li>
-                <li>Then, clockwise, each player answers what they think is in the top 10 of that subject.</li>
-                <li>You have the option to pass or answer.</li>
-                <li>If you pass, you don't play anymore this round.</li>
-                <li>If you answer and someone doubts it, there will be two options to resolve the challenge.</li>
-                <li>If the doubter was right, the person who answered wrong takes a shot and this Top ends.</li>
-                <li>If the doubter was wrong, they themselves take a shot and this Top ends.</li>
+                <li>In this game, each player must give an answer that is among the Top 10 of the given topic.</li>
+                <li>How does it work?</li>
+                <li>One person reads the topic on the card</li>
+                <li>Then, clockwise, each player says what they think is in the Top 10 of that topic</li>
+                <li>You can either skip or give an answer</li>
+                <li>If you skip, you’re out of that round</li>
+                <li>If you answer and someone doubts you, click the answer and check the list</li>
+                <li>There are two ways to settle the challenge:</li>
+                <li>If the one who doubted was right, the player who gave the wrong answer takes a shot and the round ends</li>
+                <li>If the one who doubted was wrong, they take the shot and the round ends</li>
                 <li>Have fun! 🍻</li>
+
             </ul>
         </div>
     </div>

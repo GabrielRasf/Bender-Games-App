@@ -1,25 +1,21 @@
-/* ================================
-   VARIÁVEIS DE CORES NO ROOT
-================================= */
 :root {
+  font-size: 16px;
+
   /* Fundo */
-  --cor-fundo-body: #121c3d;           /* Roxo escuro */
+  --cor-fundo-body: #121c3d;
 
   /* Texto */
-  --cor-texto: #F2F2F3;                 /* bege claro para contraste suave */
-  --cor-destaque-idade: red;            /* vermelho */
+  --cor-texto: #F2F2F3;
+  --cor-destaque-idade: red;
 
   /* Botões */
-  --cor-botao-bg: #B4895B;              /* bege escuro */
-  --cor-botao-bg-hover: #7b26c1;        /* roxo um pouco mais escuro (hover não usado, só pra referência) */
+  --cor-botao-bg: #B4895B;
+  --cor-botao-bg-hover: #7b26c1;
 
   /* Bordas e sombras */
-  --cor-borda: rgba(255, 255, 255, 0.2);   /*  */
+  --cor-borda: rgba(255, 255, 255, 0.2);
 }
 
-/* ================================
-   RESET E BASE
-================================= */
 * {
   margin: 0;
   padding: 0;
@@ -33,7 +29,7 @@
 
 body {
   font-family: Arial, sans-serif;
-    background-color: #121c3d;
+  background-color: #121c3d;
   min-height: 100vh;
   display: flex;
   justify-content: center;
@@ -46,82 +42,76 @@ body {
   color: var(--cor-texto);
 }
 
-/* ================================
-   CONTÊINER PRINCIPAL
-================================= */
 .main-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 20px 20px 0 20px;
+  padding: 1.25rem 1.25rem 0 1.25rem;
   width: 100%;
-  max-width: 450px;
+  max-width: 28.125rem; /* 450px */
 }
 
-/* ================================
-   LOGO
-================================= */
 .logo-container {
   display: flex;
   justify-content: center;
-  margin-bottom: 20px;
+  margin-bottom: 1.25rem; /* 20px */
 }
 
 .logo-bebedeira {
-  width: 270px;
-  margin: 15px auto;
+  width: 11rem; /* 176px */
+  max-width: 100%;
+  height: auto;
+  transition: transform 0.2s ease;
+  margin-top: 1rem;
   display: block;
 }
 
-/* ================================
-   BOTÕES DE IDIOMA
-================================= */
 .button-language {
-  width: 300px;
-  max-width: 450px;
+  width: 18.75rem; /* 300px */
+  max-width: 28.125rem; /* 450px */
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 50px;
+  height: 3.125rem; /* 50px */
   color: var(--cor-texto);
   background-color: var(--cor-botao-bg);
   font-size: 1.1rem;
   font-weight: bold;
-  border-radius: 10px;
-  padding: 5px;
-  margin: 0 0 15px 0;
+  border-radius: 0.625rem; /* 10px */
+  padding: 0.3125rem; /* 5px */
+  margin: 0 0 0.9375rem 0; /* 15px */
   box-shadow:
-      0 6px 12px rgba(0, 0, 0, 0.3), /* sombra principal */
-      inset 0 1px 0 rgba(255, 255, 255, 0.2), /* brilho interno em cima */
-      inset 0 -2px 4px rgba(0, 0, 0, 0.2); /* sombra interna embaixo */
-  border-top: 1px solid rgba(255, 255, 255, 0.2);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+    0 0.375rem 0.75rem rgba(0, 0, 0, 0.3),
+    inset 0 0.0625rem 0 rgba(255, 255, 255, 0.2),
+    inset 0 -0.125rem 0.25rem rgba(0, 0, 0, 0.2);
+  border-top: 0.0625rem solid rgba(255, 255, 255, 0.2);
+  border-bottom: 0.0625rem solid rgba(0, 0, 0, 0.3);
   transition: transform 0.2s ease;
-
   overflow: hidden;
   cursor: pointer;
 }
 
 #btnConfirm {
   background: linear-gradient(135deg, #FD00FF, #03FEFF);
-    box-shadow:
-        0 6px 12px rgba(0, 0, 0, 0.3), /* sombra principal */
-        inset 0 1px 0 rgba(255, 255, 255, 0.2), /* brilho interno em cima */
-        inset 0 -2px 4px rgba(0, 0, 0, 0.2); /* sombra interna embaixo */
-    border-top: 1px solid rgba(255, 255, 255, 0.2);
-    border-bottom: 1px solid rgba(0, 0, 0, 0.3);
-    transition: transform 0.2s ease;
+  box-shadow:
+    0 0.375rem 0.75rem rgba(0, 0, 0, 0.3),
+    inset 0 0.0625rem 0 rgba(255, 255, 255, 0.2),
+    inset 0 -0.125rem 0.25rem rgba(0, 0, 0, 0.2);
+  border-top: 0.0625rem solid rgba(255, 255, 255, 0.2);
+  border-bottom: 0.0625rem solid rgba(0, 0, 0, 0.3);
+  transition: transform 0.2s ease;
 }
+
 #btnCancel {
   background: linear-gradient(135deg, #03FEFF, #8C2AE2);
-    box-shadow:
-        0 6px 12px rgba(0, 0, 0, 0.3), /* sombra principal */
-        inset 0 1px 0 rgba(255, 255, 255, 0.2), /* brilho interno em cima */
-        inset 0 -2px 4px rgba(0, 0, 0, 0.2); /* sombra interna embaixo */
-    border-top: 1px solid rgba(255, 255, 255, 0.2);
-    border-bottom: 1px solid rgba(0, 0, 0, 0.3);
-    transition: transform 0.2s ease;
+  box-shadow:
+    0 0.375rem 0.75rem rgba(0, 0, 0, 0.3),
+    inset 0 0.0625rem 0 rgba(255, 255, 255, 0.2),
+    inset 0 -0.125rem 0.25rem rgba(0, 0, 0, 0.2);
+  border-top: 0.0625rem solid rgba(255, 255, 255, 0.2);
+  border-bottom: 0.0625rem solid rgba(0, 0, 0, 0.3);
+  transition: transform 0.2s ease;
 }
 
 .button-language:nth-child(1) {
@@ -131,31 +121,24 @@ body {
 
 .button-language:nth-child(2) {
   background: linear-gradient(135deg, #FD00FF, #03FEFF);
-    transform: rotate(3deg);
-
+  transform: rotate(3deg);
 }
 
 .button-language:nth-child(3) {
   background: linear-gradient(135deg, #03FEFF, #8C2AE2);
-    transform: rotate(-1deg);
-
+  transform: rotate(-1deg);
 }
 
 .button-language:nth-child(4) {
   background: linear-gradient(135deg, #8C2AE2, #FFFE03);
-    transform: rotate(2deg);
-
+  transform: rotate(2deg);
 }
 
 .button-language:nth-child(5) {
   background: linear-gradient(135deg, #FD00FF, #8C2AE2);
-    transform: rotate(-2deg);
-
+  transform: rotate(-2deg);
 }
 
-/* ================================
-   POPUP DE CONFIRMAÇÃO DE IDIOMA
-================================= */
 .popup {
   display: none;
   position: fixed;
@@ -167,7 +150,7 @@ body {
   opacity: 0;
   transition: opacity 0.3s ease, transform 0.3s ease;
   transform: scale(0.9);
-  filter: none; /* impede do popup ser afetado pelo blur */
+  filter: none;
 }
 
 .popup.active {
@@ -185,23 +168,23 @@ body.popup-active::before {
   left: 0;
   width: 100%;
   height: 100%;
-  backdrop-filter: blur(2px);
+  backdrop-filter: blur(0.125rem); /* 2px */
   z-index: 999;
   pointer-events: none;
 }
 
 .popup-content {
   background: rgba(0, 0, 0, 0.6);
-  backdrop-filter: blur(15px);
-  -webkit-backdrop-filter: blur(30px);
+  backdrop-filter: blur(0.9375rem); /* 15px */
+  -webkit-backdrop-filter: blur(1.875rem); /* 30px */
   padding: 2rem;
-  border-radius: 15px;
+  border-radius: 0.9375rem; /* 15px */
   text-align: center;
-  max-width: 320px;
+  max-width: 20rem; /* 320px */
   width: 90%;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
-  border: 1px solid var(--cor-borda);
-  transform: translateY(20px);
+  box-shadow: 0 0.625rem 1.5625rem rgba(0, 0, 0, 0.5); /* 10px 25px */
+  border: 0.0625rem solid var(--cor-borda); /* 1px */
+  transform: translateY(1.25rem); /* 20px */
   transition: transform 0.3s ease;
   animation: popupAppear 0.4s ease forwards;
   color: var(--cor-texto);
@@ -235,13 +218,13 @@ body.popup-active::before {
 .popup-buttons button {
   flex: 1;
   padding: 0.7rem;
-  border-radius: 8px;
+  border-radius: 0.5rem; /* 8px */
   font-size: 1rem;
   font-weight: bold;
   cursor: pointer;
   background: #0F3460;
   color: var(--cor-texto);
-  transition: none; /* removido */
+  transition: none;
 }
 
 .warning-icon {
@@ -254,8 +237,7 @@ body.popup-active::before {
 }
 
 @keyframes pulse {
-  0%,
-  100% {
+  0%, 100% {
     transform: scale(1);
     opacity: 1;
   }

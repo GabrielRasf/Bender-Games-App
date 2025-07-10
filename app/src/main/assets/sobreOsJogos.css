@@ -2,6 +2,7 @@
 /*        VARIÁVEIS DE CORES       */
 /* ================================ */
 :root {
+  font-size: 16px;
   --cor-fundo-body: #121c3d;           /* Roxo escuro */
   --cor-texto: #F2F2F3;
   --cor-titulo: #ffd700;
@@ -21,7 +22,6 @@
   color: inherit;
 }
 
-
 /* ================================ */
 /*        ESTILIZAÇÃO GERAL        */
 /* ================================ */
@@ -38,11 +38,11 @@ body {
 /* Container principal */
 .main-container {
     width: 100%;
-    max-width: 800px;
+    max-width: 50rem; /* 800px */
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 20px;
+    padding: 1.25rem; /* 20px */
     flex: 1;
 }
 
@@ -52,39 +52,34 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 15px auto;
-
+    margin: 0.9375rem auto; /* 15px */
 }
 
 .logo-bebedeira {
-  width: 270px;
-  margin: 15px auto;
-  box-shadow:
-        0 6px 12px rgba(0, 0, 0, 0.3),
-        inset 0 1px 0 rgba(255, 255, 255, 0.2),
-        inset 0 -2px 4px rgba(0, 0, 0, 0.2);
-    border-top: 1px solid rgba(255, 255, 255, 0.2);
-    border-bottom: 1px solid rgba(0, 0, 0, 0.3);
-    transition: transform 0.2s ease;
+  width: 11rem; /* 176px */
+  max-width: 100%;
+  height: auto;
+  transition: transform 0.2s ease;
+  margin-top: 1rem;
+  display: block;
 }
-
 
 /* Títulos e textos */
 .title-container {
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 1.25rem; /* 20px */
     width: 100%;
 }
 
 h1 {
     color: #facc15;
-    margin-bottom: 10px;
+    margin-bottom: 0.625rem; /* 10px */
 }
 
 p.qual-jogo-escolher {
     color: white;
     font-size: 1.2rem;
-    margin-bottom: 5px;
+    margin-bottom: 0.3125rem; /* 5px */
 }
 
 /* Área dos jogos */
@@ -93,24 +88,24 @@ p.qual-jogo-escolher {
     flex-direction: column;
     align-items: center;
     width: 100%;
-    padding: 0 12px;
+    padding: 0 0.75rem; /* 12px */
 }
 
 /* Estilização dos blocos de sobre os jogos */
 .game-box {
-  width: 300px;
-  max-width: 450px;
+  width: 18.75rem; /* 300px */
+  max-width: 28.125rem; /* 450px */
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 50px;
+  height: 3.125rem; /* 50px */
   color: white;
   font-size: 1.1rem;
   font-weight: bold;
-  border-radius: 10px;
-  padding: 5px;
-  margin-bottom: 15px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border-radius: 0.625rem; /* 10px */
+  padding: 0.3125rem; /* 5px */
+  margin-bottom: 0.9375rem; /* 15px */
+  box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.2); /* 4px 8px */
   overflow: hidden;
   transition: transform 0.2s ease;
 }
@@ -119,6 +114,7 @@ p.qual-jogo-escolher {
     transform: scale(1.02);
 }
 
+/* Cores de fundo para os blocos */
 .game-box:nth-child(1),
 .game-box:nth-child(3),
 .game-box:nth-child(5),
@@ -126,7 +122,7 @@ p.qual-jogo-escolher {
 .game-box:nth-child(9),
 .game-box:nth-child(11),
 .game-box:nth-child(18) {
-  background: linear-gradient(135deg, #8C2AE2, #03FEFF); /* Roxo → Azul Neon */
+  background: linear-gradient(135deg, #8C2AE2, #03FEFF);
 }
 
 .game-box:nth-child(4),
@@ -134,7 +130,7 @@ p.qual-jogo-escolher {
 .game-box:nth-child(12),
 .game-box:nth-child(14),
 .game-box:nth-child(16) {
-  background: linear-gradient(135deg, #FFE600, #8C2AE2); /* Amarelo Neon → Roxo */
+  background: linear-gradient(135deg, #FFE600, #8C2AE2);
 }
 
 .game-box:nth-child(2),
@@ -143,7 +139,7 @@ p.qual-jogo-escolher {
 .game-box:nth-child(13),
 .game-box:nth-child(15),
 .game-box:nth-child(17) {
-  background: linear-gradient(135deg, #FD00FF, #8C2AE2); /* Rosa → Roxo */
+  background: linear-gradient(135deg, #FD00FF, #8C2AE2);
 }
 
 /* Inserindo rotações */
@@ -183,47 +179,47 @@ p.qual-jogo-escolher {
 
 .popup {
     background-color: #010b13bd;
-    border-radius: 12px;
-    border: 1px solid #04223b;
-    padding: 20px;
-    max-width: 300px;
+    border-radius: 0.75rem; /* 12px */
+    border: 0.0625rem solid #04223b; /* 1px */
+    padding: 1.25rem; /* 20px */
+    max-width: 18.75rem; /* 300px */
     width: 90%;
     margin: 15% auto;
     text-align: center;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    box-shadow: 0rem 0.25rem 0.5rem rgba(0, 0, 0, 0.2); /* 4px 8px */
 }
 
 .popup h3 {
     color: #facc15;
-    margin-bottom: 15px;
+    margin-bottom: 0.9375rem; /* 15px */
 }
 
 .popup ul {
     list-style-type: none;
-    margin-bottom: 15px;
+    margin-bottom: 0.9375rem; /* 15px */
     padding-left: 0;
 }
 
 .popup li {
     color: white;
     font-size: 0.9rem;
-    margin-bottom: 8px;
+    margin-bottom: 0.5rem; /* 8px */
     text-align: left;
 }
 
 .close-btn {
-    margin-top: 10px;
-    padding: 8px 15px;
+    margin-top: 0.625rem; /* 10px */
+    padding: 0.5rem 0.9375rem; /* 8px 15px */
     border: none;
     background: linear-gradient(135deg, #1e40af, #7e22ce);
     color: white;
     cursor: pointer;
-    border-radius: 5px;
+    border-radius: 0.3125rem; /* 5px */
     font-weight: bold;
 }
 
 .div-antes-ou-depois {
-    margin-bottom: 20px;
+    margin-bottom: 1.25rem; /* 20px */
 }
 
 .menu-title {
@@ -235,15 +231,58 @@ p.qual-jogo-escolher {
 
 .voltar-container {
     position: absolute;
-    left: 18px;
-    top: 0px;
+    left: 1.125rem; /* 18px */
+    top: 0.9375rem; /* 15px */
     cursor: pointer;
-    font-size: 63px;
+    font-size: 3.9375rem; /* 63px */
     font-weight: 700;
-    animation: pulsarSeta 2.4s infinite ease-in-out,
-               mudarCorSeta 14s infinite linear;
+    animation: pulsarSeta 2.4s infinite ease-in-out, mudarCorSeta 14s infinite linear;
     transition: transform 0.4s ease;
     user-select: none;
+}
+
+.menu {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0;
+}
+
+.menu-left,
+.menu-spacer {
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+
+.menu-center {
+  flex: 2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.sair {
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+.voltar-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.voltar-wrapper img {
+  width: 2rem; /* ou ajuste conforme o tamanho desejado */
+}
+
+.voltar-wrapper .sair {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 1rem;
+  color: var(--cor-titulo);
 }
 
 /* =========================== */
