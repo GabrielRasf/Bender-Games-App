@@ -25,10 +25,10 @@
     <div>
         <h1>Le Show du Bourré</h1>
 
-        <a href="#" onclick="openPopup()">
+                <a href="#" onclick="openPopup()">
             <img class="img-regras" src="../images/regras.png" alt="Règles" />
         </a>
-        <h4>Règles</h4>
+        <h4  onclick="openPopup()">Règles</h4>
     </div>
 
     <!-- Pop-up Règles -->
@@ -60,7 +60,8 @@
         <div class="center-container">
             <img class="pergunta-e-resposta" src="../images/pergunta-e-resposta.png" onclick="showAnswerPopup()"
                  style="cursor: pointer;" alt="Afficher la réponse" />
-            <h4>Réponse</h4>
+             <h4 onclick="showAnswerPopup()">Réponse</h4>
+
         </div>
     </div>
 
@@ -71,12 +72,13 @@
 </div>
 
 <!-- Pop-up de la Réponse -->
-<div id="answerPopup" class="popup" style="display:none;">
+<div id="answerPopup" class="popup">
     <div class="popup-content">
-        <span class="close" onclick="closeAnswerPopup()">&times;</span>
-        <h3>Réponse</h3>
-        <h5>Le Show du Bourré</h5>
-        <p id="answerText">Cliquez d'abord sur une question !</p>
+        <div class="popup-header">
+            <h2>Réponse</h2>
+            <span class="close" onclick="closeAnswerPopup()">&times;</span>
+        </div>
+        <p id="answerText">Clique em uma pergunta primeiro!</p>
     </div>
 </div>
 

@@ -23,11 +23,11 @@
 
     <!-- Game Content -->
     <div>
-        <h1>Fakt ya Jhooth</h1>
+        <h1>Fakt ya Galat</h1>
         <a href="#" onclick="openPopup()">
             <img class="img-regras" src="../images/regras.png" alt="Rules" />
+         <h4 onclick="showAnswerPopup()">Rules</h4>
         </a>
-        <h4>Rules</h4>
     </div>
 
     <!-- Pop-up -->
@@ -40,7 +40,7 @@
             <ul>
                 <li>Ek player ek sentence padhta hai</li>
                 <li>Uske right wala player decide karta hai ki ye "Fakt" hai ya "Jhooth"</li>
-                <li>Phir neeche diye gaye "Fakt" ya "Jhooth" button pe click karo</li>
+                <li>Phir neeche diye gaye "Fakt" ya "Galat" button pe click karo</li>
                 <li>Agar sahi bola toh badhai ho! 🎉</li>
                 <li>Agar galat bola toh ek shot peena padega 🍻</li>
                 <li>Jo player abhi jawab diya, wo apna phone uthake agle player ko sentence padhega</li>
@@ -55,10 +55,8 @@
     </div>
     <div class="button-container-fato-falso">
         <button id="btnFato" class="btn-fato">Fakt</button>
-        <button id="btnFalso" class="btn-falso">Jhooth</button>
+        <button id="btnFalso" class="btn-falso">Galat</button>
     </div>
-
-    <div id="result"></div>
 
     <!-- Botão de próxima pergunta -->
     <div class="button-container">
@@ -66,6 +64,8 @@
             Agla sawaal
         </button>
     </div>
+
+    <div id="result"></div>
 
 </div>
 
@@ -565,201 +565,201 @@
             {
                 "frase": "Penguins hamesha thandi jagah pe rehte hain.",
                 "correta": "Galat",
-                "correta": "Kuch penguin species temperate climates me bhi rehte hain, jaise New Zealand."
+                "explicacao": "Kuch penguin species temperate climates me bhi rehte hain, jaise New Zealand."
             },
             {
                 "frase": "Acid rain turant sab kuch destroy kar deta hai.",
                 "correta": "Galat",
-                "correta": "Acid rain dheere dheere damage karta hai, turant nahi."
+                "explicacao": "Acid rain dheere dheere damage karta hai, turant nahi."
             },
             {
                 "frase": "Deforestation hi climate change ka sirf kaaran hai.",
                 "correta": "Galat",
-                "correta": "Climate change ke aur bhi kai karan hain jaise greenhouse gas emissions."
+                "explicacao": "Climate change ke aur bhi kai karan hain jaise greenhouse gas emissions."
             },
             {
                 "frase": "Antivirus sab cyber threats se bachata hai.",
                 "correta": "Galat",
-                "correta": "Antivirus important hai par har threat detect nahi kar pata."
+                "explicacao": "Antivirus important hai par har threat detect nahi kar pata."
             },
             {
                 "frase": "Jyada megapixels ka matlab better camera hai.",
                 "correta": "Galat",
-                "correta": "Camera quality sensors aur lenses pe depend karti hai, sirf megapixels pe nahi."
+                "explicacao": "Camera quality sensors aur lenses pe depend karti hai, sirf megapixels pe nahi."
             },
             {
                 "frase": "Solar energy mehngi aur inefficient hai.",
                 "correta": "Galat",
-                "correta": "Solar panels ke cost kam hue hain aur efficiency badhi hai."
+                "explicacao": "Solar panels ke cost kam hue hain aur efficiency badhi hai."
             },
             {
                 "frase": "Mobile battery tab tak chalti hai jab 100% charge ho.",
                 "correta": "Galat",
-                "correta": "Lithium batteries ko full charge se thoda neeche rakhna behtar hota hai."
+                "explicacao": "Lithium batteries ko full charge se thoda neeche rakhna behtar hota hai."
             },
             {
                 "frase": "Aap specific body part se fat lose kar sakte hain.",
                 "correta": "Galat",
-                "correta": "Fat loss overall hota hai, spot reduction nahi hoti."
+                "explicacao": "Fat loss overall hota hai, spot reduction nahi hoti."
             },
             {
                 "frase": "Intense exercise se aap motay hote hain.",
                 "correta": "Galat",
-                "correta": "Exercise calories burn karta hai aur body improve karta hai."
+                "explicacao": "Exercise calories burn karta hai aur body improve karta hai."
             },
             {
                 "frase": "Muscle gain ke liye supplements zaruri hain.",
                 "correta": "Galat",
-                "correta": "Balanced diet muscle gain ke liye kaafi hai, supplements optional hain."
+                "explicacao": "Balanced diet muscle gain ke liye kaafi hai, supplements optional hain."
             },
             {
                 "frase": "Sweating fat burn karta hai.",
                 "correta": "Galat",
-                "correta": "Sweat heat regulation ke liye hota hai, fat loss calorie deficit se."
+                "explicacao": "Sweat heat regulation ke liye hota hai, fat loss calorie deficit se."
             },
             {
                 "frase": "Fat khane se motapa badhta hai.",
                 "correta": "Galat",
-                "correta": "Healthy fats body ke liye zaruri hain aur weight control me madad karte hain."
+                "explicacao": "Healthy fats body ke liye zaruri hain aur weight control me madad karte hain."
             },
             {
                 "frase": "Scientists shareer ke baare me sab kuch jante hain.",
                 "correta": "Galat",
-                "correta": "Bahut saare mysteries abhi bhi human body aur mind ke baare me hain."
+                "explicacao": "Bahut saare mysteries abhi bhi human body aur mind ke baare me hain."
             },
             {
                 "frase": "Aapko kisi gaayab insan ki report dene ke liye 24 ghante wait karna chahiye.",
-                "correta": "Falso",
+                "correta": "Galat",
                 "explicacao": "Kisi kanoon mein koi time limit nahi hai report dene ki. Jitni jaldi report karoge, utna acha hai."
             },
             {
                 "frase": "Aap kuch ghanton ke baad sharab peeke gaadi nahi chala sakte.",
-                "correta": "Falso",
+                "correta": "Galat",
                 "explicacao": "Sharab ka effect body pe alag hota hai, aur sirf time hi blood se alcohol nikalta hai."
             },
             {
                 "frase": "Agar aap apna dimaag use nahi karoge to wo shrink ho jayega.",
-                "correta": "Falso",
+                "correta": "Galat",
                 "explicacao": "Dimaag ko active rakhne ke liye stimulation chahiye, lekin thodi der ke liye inactivity se wo shrink nahi hota."
             },
             {
                 "frase": "Aap apne dimaag ka sirf 10% hi use karte ho.",
-                "correta": "Falso",
+                "correta": "Galat",
                 "explicacao": "Hum almost brain ke sab parts ko use karte hain, alag alag kaam ke liye, sone ke time bhi."
             },
             {
                 "frase": "Yaadein dimaag se completely delete ho sakti hain.",
-                "correta": "Falso",
+                "correta": "Galat",
                 "explicacao": "Yaadein delete nahi hoti, par badal sakti hain ya bhool sakte hain. Dimaag fake yaadein bhi bana sakta hai."
             },
             {
                 "frase": "Mard aur aurat ke dimaag bilkul alag hote hain.",
-                "correta": "Falso",
+                "correta": "Galat",
                 "explicacao": "Thodi bahut differences hain, par wo abilities decide nahi karte."
             },
             {
                 "frase": "Intelligence genetics se hi decide hoti hai.",
-                "correta": "Falso",
+                "correta": "Galat",
                 "explicacao": "Intelligence genetics aur environment dono se banti hai. Education aur life experiences important hote hain."
             },
             {
                 "frase": "Multitasking productivity badhata hai.",
-                "correta": "Falso",
+                "correta": "Galat",
                 "explicacao": "Multitasking productivity kam karta hai, kyunki brain ko tasks ke beech switch karna padta hai, jo energy aur time leta hai."
             },
             {
                 "frase": "Conscious mind hi body ke actions control karta hai.",
-                "correta": "Falso",
+                "correta": "Galat",
                 "explicacao": "Humari kai actions automatic aur subconscious processes se control hoti hain."
             },
             {
                 "frase": "Opposites attract karte hain.",
-                "correta": "Falso",
+                "correta": "Galat",
                 "explicacao": "Studies dikhati hain ki similarities relationship mein zyada important hoti hain."
             },
             {
                 "frase": "Left brain logical aur right brain creative hota hai.",
-                "correta": "Falso",
+                "correta": "Galat",
                 "explicacao": "Dono brain hemispheres reasoning aur creativity mein involved hain."
             },
             {
                 "frase": "Mard direction poochna nahi jante.",
-                "correta": "Falso",
+                "correta": "Galat",
                 "explicacao": "Studies batati hain ki dono genders barabar madad maangte hain, bas tareeke alag hote hain."
             },
             {
                 "frase": "Aap 100% khush rehna seekh sakte ho.",
-                "correta": "Falso",
+                "correta": "Galat",
                 "explicacao": "Khushi complex cheez hai, bahut internal aur external factors pe depend karti hai, aur hamesha nahi milti."
             },
             {
                 "frase": "Bees hamesha sting karti hain aur mar jati hain.",
-                "correta": "Falso",
+                "correta": "Galat",
                 "explicacao": "Sirf worker bees sting karti hain aur fir mar jati hain kyunki stinger fasa rehta hai, queen aur drones kai baar sting kar sakte hain."
             },
             {
                 "frase": "Penguins hamesha thand mein rehte hain.",
-                "correta": "Falso",
+                "correta": "Galat",
                 "explicacao": "Kuch penguin species temperate climate mein rehti hain, jaise New Zealand aur Australia wale."
             },
             {
                 "frase": "Acid rain turant sab kuch destroy kar deta hai.",
-                "correta": "Falso",
+                "correta": "Galat",
                 "explicacao": "Acid rain dheere dheere damage karta hai, immediate aur catastrophic damage nahi karta."
             },
             {
                 "frase": "Deforestation hi climate change ka sirf reason hai.",
-                "correta": "Falso",
+                "correta": "Galat",
                 "explicacao": "Deforestation important factor hai, par climate change fuel burning aur greenhouse gases se bhi hota hai."
             },
             {
                 "frase": "Antivirus sab cyber threats se protect karta hai.",
-                "correta": "Falso",
+                "correta": "Galat",
                 "explicacao": "Antivirus important layer hai, par sab advanced threats detect nahi kar pata."
             },
             {
                 "frase": "Jitne zyada megapixels, utni behtareen camera quality.",
-                "correta": "Falso",
+                "correta": "Galat",
                 "explicacao": "Image quality sensor size aur lens pe depend karti hai, megapixels sirf ek factor hain."
             },
             {
                 "frase": "Solar energy mehngi aur inefficient hoti hai.",
-                "correta": "Falso",
+                "correta": "Galat",
                 "explicacao": "Solar panel ke costs gir gaye hain, aur technology efficient aur affordable ho gayi hai."
             },
             {
                 "frase": "Phone ki battery 100% charge karne se zyada chalti hai.",
-                "correta": "Falso",
+                "correta": "Galat",
                 "explicacao": "Lithium batteries achhi tab chalti hain jab baar baar 100% ya 0% pe charge na kiya jaye."
             },
             {
                 "frase": "Aap spot pe fat lose kar sakte ho.",
-                "correta": "Falso",
+                "correta": "Galat",
                 "explicacao": "Fat spot pe lose nahi hota, pura body fat loss hota hai."
             },
             {
                 "frase": "Intense exercise se aap mota ho jate ho.",
-                "correta": "Falso",
+                "correta": "Galat",
                 "explicacao": "Exercise calories burn karta hai aur body composition better karta hai, balanced diet ke saath."
             },
             {
                 "frase": "Muscle gain ke liye supplements zaroori hain.",
-                "correta": "Falso",
+                "correta": "Galat",
                 "explicacao": "Balanced diet hi muscle gain ka key hai, supplements helpful ho sakte hain par zaroori nahi."
             },
             {
                 "frase": "Fat burn karne ke liye pasina bahana zaroori hai.",
-                "correta": "Falso",
+                "correta": "Galat",
                 "explicacao": "Pasina heat ka response hai, fat burn se direct relation nahi hai."
             },
             {
                 "frase": "Fat khane se mota hota hai.",
-                "correta": "Falso",
+                "correta": "Galat",
                 "explicacao": "Healthy fats jaise avocado aur olive oil zaroori hain, weight loss mein bhi madad kar sakte hain."
             },
             {
                 "frase": "Scientists human body ke baare mein sab jaante hain.",
-                "correta": "Falso",
+                "correta": "Galat",
                 "explicacao": "Bade discoveries ke bawajood, human body aur mind ke bahut secrets abhi bhi hain."
             }
         ]
@@ -804,7 +804,7 @@
       btnFalso.disabled = true;
 
       if (resposta === question.correta) {
-        resultDiv.innerHTML = `<p style="color: green;">✅ Correct! ${question.explicacao}</p>`;
+        resultDiv.innerHTML = `<p style="color: green;">✅ Fakt! ${question.explicacao}</p>`;
       } else {
         resultDiv.innerHTML = `<p style="color: red;">❌ Galat! ${question.explicacao}</p>`;
       }
@@ -818,8 +818,8 @@
     }
 
     // Eventos dos botões
-    btnFato.addEventListener('click', () => checkAnswer('Fato'));
-    btnFalso.addEventListener('click', () => checkAnswer('Falso'));
+    btnFato.addEventListener('click', () => checkAnswer('Fakt'));
+    btnFalso.addEventListener('click', () => checkAnswer('Galat'));
 
     // Pop-up de regras
     function openPopup() {

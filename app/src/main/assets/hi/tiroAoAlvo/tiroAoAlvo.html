@@ -27,7 +27,7 @@
         <a href="#" onclick="openPopup()">
             <img class="img-regras" src="../images/regras.png" alt="Rules" />
         </a>
-        <h4>Game Rules</h4>
+        <h4 onclick="openPopup()">Game Rules</h4>
     </div>
 
     <!-- Rules Pop-up -->
@@ -55,7 +55,7 @@
         <div class="center-container">
             <img class="pergunta-e-resposta" src="../images/pergunta-e-resposta.png" alt="See Answer"
                  onclick="showAnswerPopup()">
-            <h4>Answer</h4>
+             <h4 onclick="showAnswerPopup()">Answer</h4>
         </div>
     </div>
 
@@ -67,11 +67,14 @@
     <div id="result"></div>
 
     <!-- Answer Pop-up -->
+    <!-- Answer Pop-up -->
     <div id="answerPopup" class="popup">
         <div class="popup-content">
-            <span class="close" onclick="closeAnswerPopup()">&times;</span>
-            <h3>Jawab</h3>
-            <p id="answer">Pehle koi sawal select karo!</p>
+            <div class="popup-header">
+                <h2>Answer</h2>
+                <span class="close" onclick="closeAnswerPopup()">&times;</span>
+            </div>
+            <p id="answerText">Pehle koi question select karo!</p>
         </div>
     </div>
 </div>
@@ -2445,108 +2448,85 @@
     ];
 
     let currentQuestionIndex = -1;
+        let timeLeft = 15;
+        let timerInterval = null;
+        let isRunning = false;
 
-    function shuffle(array) {
-        for (let i = array.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [array[i], array[j]] = [array[j], array[i]];
+        // Embaralhar perguntas
+        function shuffle(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
         }
-    }
 
-    document.addEventListener('DOMContentLoaded', function () {
-        closeAllPopups();
-        shuffle(questions);
-        nextQuestion();
-    });
-
-    document.addEventListener('DOMContentLoaded', function () {
-        closeAllPopups();
-        nextQuestion();
-    });
-
-    function closeAllPopups() {
-        document.getElementById("popup").style.display = "none";
-        document.getElementById("answerPopup").style.display = "none";
-    }
-
-    function openPopup() {
-        document.getElementById("popup").style.display = "block";
-    }
-
-    function closePopup() {
-        document.getElementById("popup").style.display = "none";
-    }
-
-    function showAnswerPopup() {
-        if (currentQuestionIndex >= 0 && questions[currentQuestionIndex]) {
-            document.getElementById("answer").textContent = questions[currentQuestionIndex].answer;
-            document.getElementById("answerPopup").style.display = "block";
+        function updateDisplay() {
+            const timerButton = document.getElementById('timer');
+            timerButton.textContent = isRunning ? timeLeft : '⏳';
         }
-    }
 
-    function closeAnswerPopup() {
-        document.getElementById("answerPopup").style.display = "none";
-    }
-
-    function nextQuestion() {
-        currentQuestionIndex = (currentQuestionIndex + 1) % questions.length;
-        document.getElementById("questionTiroAoAlvo").textContent = questions[currentQuestionIndex].question;
-    }
-
-    // Cronômetro
-
-    let timerInterval = null;
-    let timeLeft = 60;
-    let isRunning = false;
-
-    function updateDisplay() {
-        const timerButton = document.getElementById('timer');
-        if (isRunning) {
-            timerButton.textContent = timeLeft;
-        } else {
-            timerButton.innerHTML = '⏳';
+        function handleTimerClick() {
+            if (isRunning) {
+                stopTimer();
+            } else {
+                isRunning = true;
+                updateDisplay();
+                timerInterval = setInterval(() => {
+                    timeLeft--;
+                    updateDisplay();
+                    if (timeLeft <= 0) {
+                        stopTimer();
+                    }
+                }, 1000);
+            }
         }
-    }
 
-    function stopTimer() {
-        clearInterval(timerInterval);
-        timerInterval = null;
-        isRunning = false;
-        timeLeft = 60;
-    }
-
-    function handleTimerClick() {
-        if (isRunning) {
+        function stopTimer() {
             clearInterval(timerInterval);
             timerInterval = null;
             isRunning = false;
-            timeLeft = 60;
-            updateDisplay(); // volta à ampulheta
-        } else {
-            isRunning = true;
-            updateDisplay(); // mostra tempo inicial
-            timerInterval = setInterval(() => {
-                timeLeft--;
-                updateDisplay();
-
-                if (timeLeft <= 0) {
-                    clearInterval(timerInterval);
-                    timerInterval = null;
-                    isRunning = false;
-                    timeLeft = 60;
-                    updateDisplay(); // volta à ampulheta
-                }
-            }, 1000);
+            timeLeft = 15;
+            updateDisplay();
         }
-    }
 
-    // Inicialização única ao carregar
-    window.addEventListener('DOMContentLoaded', function () {
-        shuffle(questions);
-        nextQuestion();
-        closeAllPopups();
-        updateDisplay(); // mostra ampulheta
-    });
+        function nextQuestion() {
+            stopTimer(); // Parar cronômetro e resetar
+            currentQuestionIndex = (currentQuestionIndex + 1) % questions.length;
+            document.getElementById("questionTiroAoAlvo").textContent = questions[currentQuestionIndex].question;
+            document.getElementById("answerText").textContent = "Clique em uma pergunta primeiro!";
+        }
+
+        function showAnswerPopup() {
+            if (currentQuestionIndex >= 0 && questions[currentQuestionIndex]) {
+                document.getElementById("answerText").textContent = questions[currentQuestionIndex].answer;
+                document.getElementById("answerPopup").style.display = "block";
+            }
+        }
+
+        function closeAnswerPopup() {
+            document.getElementById("answerPopup").style.display = "none";
+        }
+
+        function openPopup() {
+            document.getElementById("popup").style.display = "block";
+        }
+
+        function closePopup() {
+            document.getElementById("popup").style.display = "none";
+        }
+
+        function closeAllPopups() {
+            document.getElementById("popup").style.display = "none";
+            document.getElementById("answerPopup").style.display = "none";
+        }
+
+        // Inicialização única
+        window.addEventListener('DOMContentLoaded', function () {
+            closeAllPopups();
+            shuffle(questions);
+            nextQuestion();
+            updateDisplay();
+        });
 
 </script>
 </body>

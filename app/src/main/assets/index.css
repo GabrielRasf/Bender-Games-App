@@ -191,9 +191,9 @@ body.popup-active::before {
 }
 
 .popup-content {
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(0, 0, 0, 0.6);
   backdrop-filter: blur(15px);
-  -webkit-backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(30px);
   padding: 2rem;
   border-radius: 15px;
   text-align: center;

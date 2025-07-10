@@ -24,8 +24,8 @@
         <h1>Hansa Toh Peena</h1>
         <a href="#" onclick="openPopup()">
             <img class="img-regras" src="../images/regras.png" alt="Rules" />
+         <h4 onclick="showAnswerPopup()">Rules</h4>
         </a>
-        <h4>Rules</h4>
     </div>
 
     <div class="card-frase">
@@ -151,11 +151,13 @@
     let timerInterval = null;
     let isRunning = false;
 
+    // Função para carregar as perguntas
     function loadQuestions() {
         questions = shuffleArray([...gameData.questions]);
         nextQuestion();
     }
 
+    // Função para embaralhar um array (Fisher-Yates Shuffle)
     function shuffleArray(array) {
         for (let i = array.length - 1; i > 0; i--) {
             const j = Math.floor(Math.random() * (i + 1));
@@ -164,9 +166,10 @@
         return array;
     }
 
+    // Função para exibir a próxima pergunta
     function nextQuestion() {
         if (questions.length === 0) {
-            document.getElementById("questionRiuBebeu").textContent = "Questions load ho rahe hain...";
+            document.getElementById("questionRiuBebeu").textContent = "Carregando perguntas...";
             loadQuestions();
             return;
         }
@@ -176,13 +179,15 @@
             document.getElementById("result").textContent = "";
             currentQuestion++;
         } else {
-            document.getElementById("questionRiuBebeu").textContent = "Game Khatam! Mazaa aaya? Dobara khelein?";
+            document.getElementById("questionRiuBebeu").textContent = "Fim do Jogo! Espero que estejam se divertindo! Quer jogar novamente?";
             document.getElementById("result").textContent = "";
             currentQuestion = 0;
             questions = shuffleArray([...gameData.questions]);
         }
+        resetTimer();
     }
 
+    // Pop-up functions
     function openPopup() {
         document.getElementById("popup").style.display = "block";
     }
@@ -191,6 +196,7 @@
         document.getElementById("popup").style.display = "none";
     }
 
+    // Fechar o pop-up ao clicar fora dele
     window.onclick = function (event) {
         let popup = document.getElementById("popup");
         if (event.target === popup) {
@@ -198,23 +204,30 @@
         }
     };
 
+    // Cronômetro
     function updateDisplay() {
         const timerButton = document.getElementById('timer');
         if (isRunning) {
             timerButton.textContent = timeLeft;
         } else {
-            timerButton.innerHTML = '⏳';
+            timerButton.textContent = '⏳'; // Ampulheta
         }
+    }
+
+    function resetTimer() {
+        clearInterval(timerInterval);
+        timerInterval = null;
+        timeLeft = 30;
+        isRunning = false;
+        updateDisplay();
     }
 
     function handleTimerClick() {
         if (isRunning) {
-            clearInterval(timerInterval);
-            timerInterval = null;
-            timeLeft = 30;
-            isRunning = false;
-            updateDisplay();
+            // Parar o timer e mostrar ampulheta
+            resetTimer();
         } else {
+            // Iniciar timer
             isRunning = true;
             updateDisplay();
             timerInterval = setInterval(() => {
@@ -225,17 +238,18 @@
                     clearInterval(timerInterval);
                     timerInterval = null;
                     isRunning = false;
-                    timeLeft = 30;
                     updateDisplay();
+                    nextQuestion(); // Avança para a próxima pergunta automaticamente
                 }
             }, 1000);
         }
     }
 
+    // Carrega as perguntas e a ampulheta ao iniciar
     window.onload = function () {
         loadQuestions();
         updateDisplay();
-    }
+    };
 </script>
 
 </body>

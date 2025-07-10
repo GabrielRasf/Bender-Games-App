@@ -28,7 +28,7 @@
         <a href="#" onclick="openPopup()">
             <img class="img-regras" src="../../images/regras.png" alt="Regras" />
         </a>
-        <h4>Rules</h4>
+         <h4 onclick="openPopup()">Rules</h4>
     </div>
 
     <div class="card-frase">
@@ -120,6 +120,8 @@
         ]
     };
 
+
+
     let questions = [];
     let currentQuestion = 0;
     let timeLeft = 30;
@@ -143,8 +145,10 @@
 
     // Função para exibir a próxima pergunta
     function nextQuestion() {
+        stopTimer(); // Reinicia o cronômetro e mostra ⏳
+
         if (questions.length === 0) {
-            document.getElementById("questionRiuBebeu").textContent = "Loading questions...";
+            document.getElementById("questionRiuBebeu").textContent = "Carregando perguntas...";
             loadQuestions();
             return;
         }
@@ -154,7 +158,7 @@
             document.getElementById("result").textContent = "";
             currentQuestion++;
         } else {
-            document.getElementById("questionRiuBebeu").textContent = "Game Over! Hope you’re having fun! Want to play again?";
+            document.getElementById("questionRiuBebeu").textContent = "Fim do jogo! Quer jogar de novo?";
             document.getElementById("result").textContent = "";
             currentQuestion = 0;
             questions = shuffleArray([...gameData.questions]);
@@ -178,46 +182,42 @@
         }
     };
 
-    // Cronômetro
-    function updateDisplay() {
-        const timerButton = document.getElementById('timer');
-        if (isRunning) {
-            timerButton.textContent = timeLeft;
-        } else {
-            timerButton.innerHTML = '⏳';
-        }
-    }
-
+// Cronômetro
     function handleTimerClick() {
         if (isRunning) {
-            clearInterval(timerInterval);
-            timerInterval = null;
-            timeLeft = 30;
-            isRunning = false;
-            updateDisplay(); // Revela a ampulheta
+            stopTimer();
         } else {
             isRunning = true;
             updateDisplay();
             timerInterval = setInterval(() => {
                 timeLeft--;
                 updateDisplay();
-
                 if (timeLeft <= 0) {
-                    clearInterval(timerInterval);
-                    timerInterval = null;
-                    isRunning = false;
-                    timeLeft = 30;
-                    updateDisplay();
+                    stopTimer();
                 }
             }, 1000);
         }
     }
 
-    // Carrega as perguntas e a ampulheta ao iniciar
-    window.onload = function () {
-        loadQuestions();
-        updateDisplay()
+    function updateDisplay() {
+    const timerButton = document.getElementById('timer');
+    timerButton.textContent = isRunning ? timeLeft : '⏳';
+}
+
+    function stopTimer() {
+        clearInterval(timerInterval);
+        timerInterval = null;
+        isRunning = false;
+        timeLeft = 60;
+        updateDisplay(); // Atualiza para mostrar ⏳
     }
+
+    window.addEventListener('load', function () {
+        loadQuestions();
+        nextQuestion();
+        updateDisplay();
+    });
+
 </script>
 
 </body>

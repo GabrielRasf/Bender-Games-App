@@ -28,7 +28,7 @@
         <a href="#" onclick="openPopup()">
             <img class="img-regras" src="../images/regras.png" alt="Regras" />
         </a>
-        <h4>Rules</h4>
+         <h4 onclick="openPopup()">Rules</h4>
     </div>
     <!-- Rules Pop-up -->
     <div id="popup" class="popup">
@@ -60,7 +60,7 @@
         <div class="center-container">
             <img class="pergunta-e-resposta" src="../images/pergunta-e-resposta.png" onclick="showAnswerPopup()"
                  style="cursor: pointer;" alt="Mostrar resposta" />
-            <h4>Answer</h4>
+             <h4 onclick="showAnswerPopup()">Answer</h4>
         </div>
     </div>
 
@@ -71,12 +71,13 @@
 </div>
 
 <!-- Pop-up da Resposta -->
-<div id="answerPopup" class="popup" style="display:none;">
+<div id="answerPopup" class="popup">
     <div class="popup-content">
-        <span class="close" onclick="closeAnswerPopup()">&times;</span>
-        <h3>Answer</h3>
-        <h5>Drunk Show</h5>
-        <p id="answerText">Click on a question first!</p>
+        <div class="popup-header">
+            <h2>Answer</h2>
+            <span class="close" onclick="closeAnswerPopup()">&times;</span>
+        </div>
+        <p id="answerText">Click a question first!</p>
     </div>
 </div>
 
@@ -4530,23 +4531,25 @@
 
     // Pop-up resposta
     function showAnswerPopup() {
-        const answerElement = document.getElementById("answerText");
+    console.log("Abrindo popup de resposta");
 
-        if (currentQuestion > 0 && currentQuestion <= questions.length) {
-            const answerData = questions[currentQuestion - 1].answer;
+    const answerElement = document.getElementById("answerText");
 
-            if (Array.isArray(answerData)) {
-                const listHTML = answerData.map(item => `<li>${item}</li>`).join("");
-                answerElement.innerHTML = `<ul>${listHTML}</ul>`;
-            } else {
-                answerElement.textContent = answerData;
-            }
+    if (currentQuestion > 0 && currentQuestion <= questions.length) {
+        const answerData = questions[currentQuestion - 1].answer;
+
+        if (Array.isArray(answerData)) {
+            const listHTML = answerData.map(item => `<li>${item}</li>`).join("");
+            answerElement.innerHTML = `<ul>${listHTML}</ul>`;
         } else {
-            answerElement.textContent = "Clique em uma pergunta primeiro!";
+            answerElement.textContent = answerData;
         }
-
-        document.getElementById("answerPopup").style.display = "block";
+    } else {
+        answerElement.textContent = "Click on a question first!";
     }
+
+    document.getElementById("answerPopup").style.display = "block";
+}
 
     // Fechar pop-up resposta
     function closeAnswerPopup() {

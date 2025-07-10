@@ -12,8 +12,8 @@ android {
         applicationId = "com.app.bebedeiragames"
         minSdk = 23
         targetSdk = 35
-        versionCode = 13
-        versionName = "1.1.3"
+        versionCode = 17
+        versionName = "1.1.7"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }

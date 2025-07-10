@@ -15,7 +15,7 @@
     <nav class="menu">
         <a href="../menuPtBr.html" class="menu-title" style="position: relative;">
             <div class="voltar-container" onclick="window.location.href='../menuPtBr.html'">
-                &#8678; <!-- Isso é ← -->
+                &#8678;
             </div>
             <img class="logo-bebedeira" src="../../images/logo.png" alt="Logo Bebedeira" />
         </a>
@@ -24,11 +24,10 @@
     <!-- Conteúdo do jogo -->
     <div>
         <h1>Tiro ao Alvo</h1>
-
         <a href="#" onclick="openPopup()">
             <img class="img-regras" src="../../images/regras.png" alt="Regras" />
+            <h4>Regras</h4>
         </a>
-        <h4>Regras</h4>
     </div>
 
     <!-- Pop-up de Regras -->
@@ -54,9 +53,8 @@
     <div class="card-frase">
         <p id="questionTiroAoAlvo"></p>
         <div class="center-container">
-            <img class="pergunta-e-resposta" src="../../images/pergunta-e-resposta.png" onclick="showAnswerPopup()"
-                 alt="Pergunta e resposta">
-            <h4>Resposta</h4>
+            <img class="pergunta-e-resposta" src="../../images/pergunta-e-resposta.png" onclick="showAnswerPopup()" alt="Pergunta e resposta">
+            <h4 onclick="showAnswerPopup()">Resposta</h4>
         </div>
     </div>
 
@@ -70,15 +68,17 @@
     <!-- Pop-up da Resposta -->
     <div id="answerPopup" class="popup">
         <div class="popup-content">
-            <span class="close" onclick="closeAnswerPopup()">&times;</span>
-            <h2>Resposta</h2>
-            <p id="answer">Clique em uma pergunta primeiro!</p>
+            <div class="popup-header">
+                <h2>Resposta</h2>
+                <span class="close" onclick="closeAnswerPopup()">&times;</span>
+            </div>
+            <p id="answerText">Clique em uma pergunta primeiro!</p>
         </div>
     </div>
 </div>
 
 <!-- Cronômetro -->
-<button id="timer" onclick="handleTimerClick()">15</button>
+<button id="timer" onclick="handleTimerClick()">⏳</button>
 
 <script>
     const questions = [
@@ -2449,7 +2449,11 @@
     ];
 
     let currentQuestionIndex = -1;
+    let timeLeft = 15;
+    let timerInterval = null;
+    let isRunning = false;
 
+    // Embaralhar perguntas
     function shuffle(array) {
         for (let i = array.length - 1; i > 0; i--) {
             const j = Math.floor(Math.random() * (i + 1));
@@ -2457,19 +2461,50 @@
         }
     }
 
-    document.addEventListener('DOMContentLoaded', function () {
-        closeAllPopups();
-        shuffle(questions);
-        nextQuestion();
-    });
+    function updateDisplay() {
+        const timerButton = document.getElementById('timer');
+        timerButton.textContent = isRunning ? timeLeft : '⏳';
+    }
 
-    document.addEventListener('DOMContentLoaded', function () {
-        closeAllPopups();
-        nextQuestion();
-    });
+    function handleTimerClick() {
+        if (isRunning) {
+            stopTimer();
+        } else {
+            isRunning = true;
+            updateDisplay();
+            timerInterval = setInterval(() => {
+                timeLeft--;
+                updateDisplay();
+                if (timeLeft <= 0) {
+                    stopTimer();
+                }
+            }, 1000);
+        }
+    }
 
-    function closeAllPopups() {
-        document.getElementById("popup").style.display = "none";
+    function stopTimer() {
+        clearInterval(timerInterval);
+        timerInterval = null;
+        isRunning = false;
+        timeLeft = 15;
+        updateDisplay();
+    }
+
+    function nextQuestion() {
+        stopTimer(); // Parar cronômetro e resetar
+        currentQuestionIndex = (currentQuestionIndex + 1) % questions.length;
+        document.getElementById("questionTiroAoAlvo").textContent = questions[currentQuestionIndex].question;
+        document.getElementById("answerText").textContent = "Clique em uma pergunta primeiro!";
+    }
+
+    function showAnswerPopup() {
+        if (currentQuestionIndex >= 0 && questions[currentQuestionIndex]) {
+            document.getElementById("answerText").textContent = questions[currentQuestionIndex].answer;
+            document.getElementById("answerPopup").style.display = "block";
+        }
+    }
+
+    function closeAnswerPopup() {
         document.getElementById("answerPopup").style.display = "none";
     }
 
@@ -2481,77 +2516,19 @@
         document.getElementById("popup").style.display = "none";
     }
 
-    function showAnswerPopup() {
-        if (currentQuestionIndex >= 0 && questions[currentQuestionIndex]) {
-            document.getElementById("answer").textContent = questions[currentQuestionIndex].answer;
-            document.getElementById("answerPopup").style.display = "block";
-        }
-    }
-
-    function closeAnswerPopup() {
+    function closeAllPopups() {
+        document.getElementById("popup").style.display = "none";
         document.getElementById("answerPopup").style.display = "none";
     }
 
-    function nextQuestion() {
-        currentQuestionIndex = (currentQuestionIndex + 1) % questions.length;
-        document.getElementById("questionTiroAoAlvo").textContent = questions[currentQuestionIndex].question;
-    }
-
-    // Cronômetro
-
-    let timerInterval = null;
-    let timeLeft = 60;
-    let isRunning = false;
-
-    function updateDisplay() {
-        const timerButton = document.getElementById('timer');
-        if (isRunning) {
-            timerButton.textContent = timeLeft;
-        } else {
-            timerButton.innerHTML = '⏳';
-        }
-    }
-
-    function stopTimer() {
-        clearInterval(timerInterval);
-        timerInterval = null;
-        isRunning = false;
-        timeLeft = 60;
-    }
-
-    function handleTimerClick() {
-        if (isRunning) {
-            clearInterval(timerInterval);
-            timerInterval = null;
-            isRunning = false;
-            timeLeft = 60;
-            updateDisplay(); // volta à ampulheta
-        } else {
-            isRunning = true;
-            updateDisplay(); // mostra tempo inicial
-            timerInterval = setInterval(() => {
-                timeLeft--;
-                updateDisplay();
-
-                if (timeLeft <= 0) {
-                    clearInterval(timerInterval);
-                    timerInterval = null;
-                    isRunning = false;
-                    timeLeft = 60;
-                    updateDisplay(); // volta à ampulheta
-                }
-            }, 1000);
-        }
-    }
-
-    // Inicialização única ao carregar
+    // Inicialização única
     window.addEventListener('DOMContentLoaded', function () {
+        closeAllPopups();
         shuffle(questions);
         nextQuestion();
-        closeAllPopups();
-        updateDisplay(); // mostra ampulheta
+        updateDisplay();
     });
-
 </script>
+
 </body>
 </html>

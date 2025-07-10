@@ -23,11 +23,11 @@
 
     <!-- Contenu du jeu -->
     <div>
-        <h1>Vrai ou Faux</h1>
-        <a href="#" onclick="openPopup()">
+        <h1>Fait ou Faux</h1>
+                <a href="#" onclick="openPopup()">
             <img class="img-regras" src="../images/regras.png" alt="Règles" />
         </a>
-        <h4>Règles</h4>
+        <h4  onclick="openPopup()">Règles</h4>
     </div>
 
     <!-- Pop-up -->
@@ -40,7 +40,7 @@
             <ul>
                 <li>Un joueur lit une frase</li>
                 <li>Le joueur à sa droite répond si c'est « vrai » ou « faux »</li>
-                <li>Puis cliquez sur le bouton « Vrai » ou « Faux »</li>
+                <li>Puis cliquez sur le bouton « Fait » ou « Faux »</li>
                 <li>Si le joueur a raison, félicitations</li>
                 <li>Sinon, il doit boire un verre</li>
                 <li>Maintenant, le joueur qui vient de répondre lit pour le joueur suivant à sa droite</li>
@@ -54,11 +54,9 @@
         <p id="questionFatoOuFalso">Chargement des questions...</p>
     </div>
     <div class="button-container-fato-falso">
-        <button id="btnFato" class="btn-fato">Vrai</button>
+        <button id="btnFato" class="btn-fato">Fait</button>
         <button id="btnFalso" class="btn-falso">Faux</button>
     </div>
-
-    <div id="result"></div>
 
     <!-- Botão de próxima pergunta -->
     <div class="button-container">
@@ -66,6 +64,8 @@
             Question suivante
         </button>
     </div>
+
+    <div id="result"></div>
 
 </div>
 

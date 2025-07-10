@@ -25,8 +25,8 @@
         <h1>Fato ou Falso</h1>
         <a href="#" onclick="openPopup()">
             <img class="img-regras" src="../../images/regras.png" alt="Regras" />
+            <h4>Regras</h4>
         </a>
-        <h4>Regras</h4>
     </div>
 
     <!-- Pop-up de regras -->
@@ -60,15 +60,15 @@
         <button id="btnFalso" class="btn-falso">Falso</button>
     </div>
 
-    <!-- Resultado -->
-    <div id="result"></div>
-
     <!-- Botão de próxima pergunta -->
     <div class="button-container">
         <button id="btnProxima" class="btn-proxima-pergunta" onclick="showNextQuestion()" style="display: none;">
             Próxima Pergunta
         </button>
     </div>
+
+    <!-- Resultado -->
+    <div id="result"></div>
 
 </div>
 
@@ -900,9 +900,9 @@
       btnFalso.disabled = true;
 
       if (resposta === question.correta) {
-        resultDiv.innerHTML = `<p style="color: green;">✅ Correto! ${question.explicacao}</p>`;
+        resultDiv.innerHTML = `<p style="color: green;">✅ Correto! Muito bem! ${question.explicacao}</p>`;
       } else {
-        resultDiv.innerHTML = `<p style="color: red;">❌ Errado! ${question.explicacao}</p>`;
+        resultDiv.innerHTML = `<p style="color: red;">❌ Errado! Beba uma dose! 🍻${question.explicacao}</p>`;
       }
 
       btnProxima.style.display = 'block';

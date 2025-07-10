@@ -25,10 +25,10 @@
     <!-- Contenu du jeu -->
     <div>
         <h1>Mime pour Adultes</h1>
-        <a href="#" onclick="openPopup()">
+                <a href="#" onclick="openPopup()">
             <img class="img-regras" src="../images/regras.png" alt="Règles" />
         </a>
-        <h4>Règles</h4>
+        <h4  onclick="openPopup()">Règles</h4>
     </div>
 
     <div class="card-frase">
@@ -280,98 +280,94 @@
     };
 
     let questions = [];
-let currentQuestion = 0;
-let timeLeft = 60;
-let timerInterval = null;
-let isRunning = false;
+    let currentQuestion = 0;
+    let timeLeft = 60;
+    let timerInterval = null;
+    let isRunning = false;
 
-function loadQuestions() {
-    questions = shuffleArray([...gameData.questions]);
-    nextQuestion();
-}
-
-function shuffleArray(array) {
-    for (let i = array.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [array[i], array[j]] = [array[j], array[i]];
-    }
-    return array;
-}
-
-function nextQuestion() {
-    if (questions.length === 0) {
-        document.getElementById("questionMimicasParaAdultos").textContent = "Chargement des questions...";
-        loadQuestions();
-        return;
-    }
-
-    if (currentQuestion < questions.length) {
-        document.getElementById("questionMimicasParaAdultos").textContent = questions[currentQuestion];
-        document.getElementById("result").textContent = "";
-        currentQuestion++;
-    } else {
-        document.getElementById("questionMimicasParaAdultos").textContent = "Fin du jeu ! J’espère que vous vous amusez ! Voulez-vous rejouer ?";
-        document.getElementById("result").textContent = "";
-        currentQuestion = 0;
+    function loadQuestions() {
         questions = shuffleArray([...gameData.questions]);
+        currentQuestion = 0;
     }
-}
 
-function openPopup() {
-    document.getElementById("popup").style.display = "block";
-}
-
-function closePopup() {
-    document.getElementById("popup").style.display = "none";
-}
-
-window.onclick = function (event) {
-    let popup = document.getElementById("popup");
-    if (event.target === popup) {
-        popup.style.display = "none";
+    function shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array;
     }
-};
 
-function updateDisplay() {
-    const timerButton = document.getElementById('timer');
-    if (isRunning) {
-        timerButton.textContent = timeLeft;
-    } else {
-        timerButton.innerHTML = '⏳';
+    function nextQuestion() {
+        stopTimer(); // Reinicia o cronômetro e mostra ⏳
+
+        if (questions.length === 0) {
+            document.getElementById("questionMimicasParaAdultos").textContent = "Carregando perguntas...";
+            loadQuestions();
+            return;
+        }
+
+        if (currentQuestion < questions.length) {
+            document.getElementById("questionMimicasParaAdultos").textContent = questions[currentQuestion];
+            document.getElementById("result").textContent = "";
+            currentQuestion++;
+        } else {
+            document.getElementById("questionMimicasParaAdultos").textContent = "Fim do jogo! Quer jogar de novo?";
+            document.getElementById("result").textContent = "";
+            currentQuestion = 0;
+            questions = shuffleArray([...gameData.questions]);
+        }
     }
-}
 
-function handleTimerClick() {
-    if (isRunning) {
+    function openPopup() {
+        document.getElementById("popup").style.display = "block";
+    }
+
+    function closePopup() {
+        document.getElementById("popup").style.display = "none";
+    }
+
+    window.onclick = function (event) {
+        let popup = document.getElementById("popup");
+        if (event.target === popup) {
+            popup.style.display = "none";
+        }
+    };
+
+    function updateDisplay() {
+        const timerButton = document.getElementById('timer');
+        timerButton.textContent = isRunning ? timeLeft : '⏳';
+    }
+
+    function handleTimerClick() {
+        if (isRunning) {
+            stopTimer();
+        } else {
+            isRunning = true;
+            updateDisplay();
+            timerInterval = setInterval(() => {
+                timeLeft--;
+                updateDisplay();
+                if (timeLeft <= 0) {
+                    stopTimer();
+                }
+            }, 1000);
+        }
+    }
+
+    function stopTimer() {
         clearInterval(timerInterval);
         timerInterval = null;
-        timeLeft = 60;
         isRunning = false;
-        updateDisplay(); // Reveals the hourglass
-    } else {
-        isRunning = true;
-        updateDisplay();
-        timerInterval = setInterval(() => {
-            timeLeft--;
-            updateDisplay();
-
-            if (timeLeft <= 0) {
-                clearInterval(timerInterval);
-                timerInterval = null;
-                isRunning = false;
-                timeLeft = 60;
-                updateDisplay();
-            }
-        }, 1000);
+        timeLeft = 60;
+        updateDisplay(); // Atualiza para mostrar ⏳
     }
-}
 
-// Carrega as perguntas e o cronômetro ao iniciar
-window.onload = function () {
-    loadQuestions();
-    updateDisplay();
-}
-
+    window.addEventListener('load', function () {
+        loadQuestions();
+        nextQuestion();
+        updateDisplay();
+    });
 
 </script>
 

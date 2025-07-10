@@ -21,11 +21,10 @@
 
     <div>
         <h1>Topzeira </h1>
-
         <a href="#" onclick="openPopup()">
             <img class="img-regras" src="../images/regras.png" alt="Règles" />
         </a>
-        <h4>Règles</h4>
+        <h4  onclick="openPopup()">Règles</h4>
     </div>
 
     <div id="popup" class="popup">
@@ -57,7 +56,8 @@
         <div class="center-container">
             <img class="pergunta-e-resposta" src="../images/pergunta-e-resposta.png" onclick="showAnswerPopup()"
                  alt="Question et réponse">
-            <h4>Réponse</h4>
+             <h4 onclick="showAnswerPopup()">Réponse</h4>
+
         </div>
     </div>
 
@@ -69,13 +69,16 @@
 
     <div id="answerPopup" class="popup">
         <div class="popup-content">
-            <span class="close" onclick="closeAnswerPopup()">&times;</span>
-            <h3>Réponse</h3>
-            <h5>Topzeira</h5>
-            <p id="answerText">Cliquez d'abord sur une question !</p>
+            <div class="popup-header">
+                <h2>Réponse</h2>
+                <span class="close" onclick="closeAnswerPopup()">&times;</span>
+            </div>
+            <p id="answerText">Clique em uma pergunta primeiro!</p>
         </div>
     </div>
 </div>
+
+
 
 <script>
 

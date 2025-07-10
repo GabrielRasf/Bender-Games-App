@@ -29,7 +29,7 @@
         <a href="#" onclick="openPopup()">
             <img class="img-regras" src="../images/regras.png" alt="Regras" />
         </a>
-        <h4>Rules</h4>
+         <h4 onclick="openPopup()">Rules</h4>
     </div>
     <div class="card-frase">
         <p id="questionMimicasParaAdultos"></p>
@@ -286,7 +286,7 @@
 
     function loadQuestions() {
         questions = shuffleArray([...gameData.questions]);
-        nextQuestion();
+        currentQuestion = 0;
     }
 
     function shuffleArray(array) {
@@ -298,8 +298,10 @@
     }
 
     function nextQuestion() {
+        stopTimer(); // Reinicia o cronômetro e mostra ⏳
+
         if (questions.length === 0) {
-            document.getElementById("questionMimicasParaAdultos").textContent = "Loading questions...";
+            document.getElementById("questionMimicasParaAdultos").textContent = "Carregando perguntas...";
             loadQuestions();
             return;
         }
@@ -309,7 +311,7 @@
             document.getElementById("result").textContent = "";
             currentQuestion++;
         } else {
-            document.getElementById("questionMimicasParaAdultos").textContent = "End of the game! Hope you’re having fun! Want to play again?";
+            document.getElementById("questionMimicasParaAdultos").textContent = "Fim do jogo! Quer jogar de novo?";
             document.getElementById("result").textContent = "";
             currentQuestion = 0;
             questions = shuffleArray([...gameData.questions]);
@@ -333,51 +335,39 @@
 
     function updateDisplay() {
         const timerButton = document.getElementById('timer');
-        timerButton.textContent = timeLeft;
-    }
-
-    // Cronômetro
-    function updateDisplay() {
-        const timerButton = document.getElementById('timer');
-        if (isRunning) {
-            timerButton.textContent = timeLeft;
-        } else {
-            timerButton.innerHTML = '⏳';
-        }
+        timerButton.textContent = isRunning ? timeLeft : '⏳';
     }
 
     function handleTimerClick() {
         if (isRunning) {
-            clearInterval(timerInterval);
-            timerInterval = null;
-            timeLeft = 60;
-            isRunning = false;
-            updateDisplay(); // Revela a ampulheta
+            stopTimer();
         } else {
             isRunning = true;
             updateDisplay();
             timerInterval = setInterval(() => {
                 timeLeft--;
                 updateDisplay();
-
                 if (timeLeft <= 0) {
-                    clearInterval(timerInterval);
-                    timerInterval = null;
-                    isRunning = false;
-                    timeLeft = 60;
-                    updateDisplay();
+                    stopTimer();
                 }
             }, 1000);
         }
     }
 
-    // Carrega as perguntas e a ampulheta ao iniciar
-    window.onload = function () {
-        loadQuestions();
-        updateDisplay()
+    function stopTimer() {
+        clearInterval(timerInterval);
+        timerInterval = null;
+        isRunning = false;
+        timeLeft = 60;
+        updateDisplay(); // Atualiza para mostrar ⏳
     }
+
+    window.addEventListener('load', function () {
+        loadQuestions();
+        nextQuestion();
+        updateDisplay();
+    });
 </script>
 
 </body>
-
 </html>

@@ -28,7 +28,7 @@
         <a href="#" onclick="openPopup()">
             <img class="img-regras" src="../images/regras.png" alt="Reglas" />
         </a>
-        <h4>Reglas</h4>
+        <h4 onclick="openPopup()">Reglas</h4>
     </div>
 
     <!-- Pop-up Reglas -->
@@ -60,7 +60,7 @@
         <div class="center-container">
             <img class="pergunta-e-resposta" src="../images/pergunta-e-resposta.png" onclick="showAnswerPopup()"
                  style="cursor: pointer;" alt="Mostrar respuesta" />
-            <h4>Respuesta</h4>
+            <h4 onclick="showAnswerPopup()">Respuesta</h4>
         </div>
     </div>
 
@@ -71,14 +71,16 @@
 </div>
 
 <!-- Pop-up de la Respuesta -->
-<div id="answerPopup" class="popup" style="display:none;">
+<div id="answerPopup" class="popup">
     <div class="popup-content">
-        <span class="close" onclick="closeAnswerPopup()">&times;</span>
-        <h3>Respuesta</h3>
-        <h5>Show del Bebón</h5>
-        <p id="answerText">¡Haz clic primero en una pregunta!</p>
+        <div class="popup-header">
+            <h2>Respuesta</h2>
+            <span class="close" onclick="closeAnswerPopup()">&times;</span>
+        </div>
+        <p id="answerText">Click a question first!</p>
     </div>
 </div>
+
 
 
 

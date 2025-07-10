@@ -28,7 +28,7 @@
         <a href="#" onclick="openPopup()">
             <img class="img-regras" src="../images/regras.png" alt="Reglas" />
         </a>
-        <h4>Reglas</h4>
+        <h4 onclick="openPopup()">Reglas</h4>
     </div>
 
     <!-- Pop-up -->
@@ -60,14 +60,14 @@
         <button id="btnFalso" class="btn-falso">Falso</button>
     </div>
 
-    <div id="result"></div>
-
     <!-- Botão de próxima pergunta -->
     <div class="button-container">
         <button id="btnProxima" class="btn-proxima-pergunta" onclick="showNextQuestion()" style="display: none;">
             Next Question
         </button>
     </div>
+
+    <div id="result"></div>
 
 </div>
 
@@ -256,10 +256,6 @@
                 "correta": "Hecho",
                 "explicacao": "La NASA y la Universidad de Wisconsin cultivaron patatas en entornos espaciales como experimento de agricultura fuera de la Tierra."
             },
-
-
-
-
             {
                 "frase": "Los humanos comparten alrededor del 50% de su ADN con las moscas de la fruta.",
                 "correta": "Hecho",
@@ -708,7 +704,7 @@
             },
             {
                 "frase": "El hígado puede procesar alrededor de una dosis de alcohol por hora.",
-                "correta": "Cierto",
+                "correta": "Hecho",
                 "explicacao": "En promedio, el hígado metaboliza alrededor de 10-15 ml de alcohol puro por hora."
             },
             {
@@ -718,12 +714,12 @@
             },
             {
                 "frase": "La cerveza era considerada un alimento en la Edad Media.",
-                "correta": "Cierto",
+                "correta": "Hecho",
                 "explicacao": "En la Edad Media, la cerveza era una fuente importante de nutrientes y calorías."
             },
             {
                 "frase": "El vino tinto es más saludable que el blanco.",
-                "correta": "Cierto",
+                "correta": "Hecho",
                 "explicacao": "El vino tinto contiene más antioxidantes, como el resveratrol, que pueden aportar beneficios a la salud."
             },
             {
@@ -733,12 +729,12 @@
             },
             {
                 "frase": "El vodka fue inventado en Polonia.",
-                "correta": "Cierto",
+                "correta": "Hecho",
                 "explicacao": "El vodka tiene orígenes tanto en Polonia como en Rusia, pero los primeros registros son de Polonia en el siglo VIII."
             },
             {
                 "frase": "El champán solo puede producirse en Francia.",
-                "correta": "Cierto",
+                "correta": "Hecho",
                 "explicacao": "Por ley, solo los vinos espumosos producidos en la región de Champagne, Francia, pueden llamarse champán."
             },
             {
@@ -803,7 +799,7 @@
     }
 
     // Eventos dos botões
-    btnFato.addEventListener('click', () => checkAnswer('Fato'));
+    btnFato.addEventListener('click', () => checkAnswer('Hecho'));
     btnFalso.addEventListener('click', () => checkAnswer('Falso'));
 
     // Pop-up de regras

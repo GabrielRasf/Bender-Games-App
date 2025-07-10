@@ -27,8 +27,8 @@
         <h1>Antes ou Depois</h1>
         <a href="#" onclick="openPopup()">
             <img class="img-regras" src="../../images/regras.png" alt="Regras" />
+            <h4 onclick="openPopup()">Regras</h4>
         </a>
-        <h4>Regras</h4>
     </div>
 
     <!-- Pop-up -->
@@ -2234,9 +2234,9 @@ function depois() {
 function verificarResposta(respostaUsuario) {
     const result = document.getElementById("result");
     if (respostaUsuario === respostaCorreta) {
-        result.innerHTML = "✅ Correct! Well done!";
+        result.innerHTML = "✅ Correto! Muito bem!";
     } else {
-        result.innerHTML = "❌ Wrong! Take a shot 🍻";
+        result.innerHTML = "❌ Errado! Beba uma dose! 🍻";
     }
 
     btnAntes.disabled = true;

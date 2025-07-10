@@ -28,7 +28,7 @@
         <a href="#" onclick="openPopup()">
             <img class="img-regras" src="../images/regras.png" alt="Regras" />
         </a>
-        <h4>Rules</h4>
+         <h4 onclick="openPopup()">Rules</h4>
     </div>
 
     <!-- Pop-up -->
@@ -61,14 +61,14 @@
         <button id="btnFalso" class="btn-falso">False</button>
     </div>
 
-    <div id="result"></div>
-
     <!-- Botão de próxima pergunta -->
     <div class="button-container">
         <button id="btnProxima" class="btn-proxima-pergunta" onclick="showNextQuestion()" style="display: none;">
             Next Question
         </button>
     </div>
+
+    <div id="result"></div>
 
 </div>
 
@@ -501,42 +501,42 @@
 
             {
                 "frase": "Some kangaroos cannot walk backwards.",
-                "correta": "True",
+                "correta": "Fact",
                 "explicacao": "Kangaroos have a unique anatomy that prevents them from walking backwards due to the shape of their legs and tail."
             },
             {
                 "frase": "There are more possible versions of chess than atoms in the observable universe.",
-                "correta": "True",
+                "correta": "Fact",
                 "explicacao": "The number of possible chess games vastly exceeds the number of atoms in the universe."
             },
             {
                 "frase": "Babies have about 300 bones at birth, but many fuse to 206 in adulthood.",
-                "correta": "True",
+                "correta": "Fact",
                 "explicacao": "At birth, babies have more bones due to the presence of cartilage that fuses as they grow."
             },
             {
                 "frase": "Google processes more than 8 billion searches per day.",
-                "correta": "True",
+                "correta": "Fact",
                 "explicacao": "Google handles billions of searches every day, making it one of the most used search engines in the world."
             },
             {
                 "frase": "Light can bend when passing through intense gravitational fields — this is what Einstein predicted with the Theory of Relativity.",
-                "correta": "True",
+                "correta": "Fact",
                 "explicacao": "Einstein's Theory of Relativity predicts that light is bent by intense gravitational fields, as demonstrated by astronomical observations."
             },
             {
                 "frase": "Some spiders play dead to fool predators.",
-                "correta": "True",
+                "correta": "Fact",
                 "explicacao": "Some spiders use the behavior of playing dead as a tactic to escape predators."
             },
             {
                 "frase": "The loudest sound recorded on Earth was the eruption of the Krakatoa volcano in 1883.",
-                "correta": "True",
+                "correta": "Fact",
                 "explicacao": "The Krakatoa eruption produced the loudest sound ever recorded, with sound waves traveling around the planet."
             },
             {
                 "frase": "The first photographic camera was invented in 1816.",
-                "correta": "True",
+                "correta": "Fact",
                 "explicacao": "The first photographic camera was invented by Joseph Nicéphore Niépce in 1816, revolutionizing image capture."
             },
 
@@ -824,7 +824,7 @@
             },
             {
                 "frase": "The liver can process about one standard drink per hour.",
-                "correta": "True",
+                "correta": "Fact",
                 "explicacao": "On average, the liver metabolizes about 10-15ml of pure alcohol per hour."
             },
             {
@@ -834,12 +834,12 @@
             },
             {
                 "frase": "Beer was considered a food in the Middle Ages.",
-                "correta": "True",
+                "correta": "Fact",
                 "explicacao": "In the Middle Ages, beer was an important source of nutrients and calories."
             },
             {
                 "frase": "Red wine is healthier than white wine.",
-                "correta": "True",
+                "correta": "Fact",
                 "explicacao": "Red wine contains more antioxidants, like resveratrol, which can bring health benefits."
             },
             {
@@ -849,12 +849,12 @@
             },
             {
                 "frase": "Vodka was invented in Poland.",
-                "correta": "True",
+                "correta": "Fact",
                 "explicacao": "Vodka has origins in both Poland and Russia, but the earliest records are from Poland in the 8th century."
             },
             {
                 "frase": "Champagne can only be produced in France.",
-                "correta": "True",
+                "correta": "Fact",
                 "explicacao": "By law, only sparkling wines produced in the Champagne region of France can be called champagne."
             },
             {
@@ -918,8 +918,8 @@
     }
 
     // Eventos dos botões
-    btnFato.addEventListener('click', () => checkAnswer('Fato'));
-    btnFalso.addEventListener('click', () => checkAnswer('Falso'));
+    btnFato.addEventListener('click', () => checkAnswer('Fact'));
+    btnFalso.addEventListener('click', () => checkAnswer('False'));
 
     // Pop-up de regras
     function openPopup() {

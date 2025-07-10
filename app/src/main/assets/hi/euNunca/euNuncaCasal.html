@@ -25,12 +25,11 @@
     <h1>
         <a href="euNuncaMenu.html">Maine Kabhi Nahin</a>
     </h1>
-    <h3>Couple</h3>
     <div>
         <a href="#" onclick="openPopup()">
             <img class="img-regras" src="../images/regras.png" alt="Rules" />
+            <h4 onclick="showAnswerPopup()">Rules</h4>
         </a>
-        <h4>Rules</h4>
     </div>
 
     <div class="card-frase">
@@ -42,28 +41,24 @@
     </div>
 
     <div id="result"></div>
-</div>
 
 <!-- Popup -->
-<div id="popup" class="popup">
-    <div class="popup-content">
-        <div class="popup-header">
-            <h2>Game Rules</h2>
-            <span class="close" onclick="closePopup()">&times;</span>
-            <h5>Main Kabhi Nahi <br> Couple</h5>
+    <div id="popup" class="popup">
+        <div class="popup-content">
+            <div class="popup-header">
+                <h2>Khel ke Niyam</h2>
+                <span class="close" onclick="closePopup()">&times;</span>
+            </div>
+            <ul>
+                <li>Sawal loud mein padhna</li>
+                <li>Jo bhi kiya ho, wo peeega</li>
+                <li>Agar kisi ne nahi kiya, to sawal puchne wala peeega</li>
+                <li>Enjoy karo! 🍻</li>
+            </ul>
         </div>
-        <ul>
-            <li>Sawal loud mein padhna</li>
-            <li>Jo bhi kiya ho, wo peeega</li>
-            <li>Agar kisi ne nahi kiya, to sawal puchne wala peeega</li>
-            <li>Enjoy karo! 🍻</li>
-        </ul>
     </div>
 </div>
-<script>
-
-
-
+    <script>
 
 
     // Dados do jogo EMBUTIDOS no HTML
