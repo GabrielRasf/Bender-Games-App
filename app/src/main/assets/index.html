@@ -35,6 +35,8 @@
     </div>
 </div>
 
+
+
 <script>
     let selectedLang = "";
 
@@ -109,6 +111,34 @@
             window.location.href = './hi/menuHi.html';
         }
     }
+
+    document.addEventListener('DOMContentLoaded', () => {
+  const pageWrapper = document.getElementById('page-wrapper');
+
+  // Detecta todos os links internos para aplicar o efeito
+  const links = document.querySelectorAll('a.link');
+
+  links.forEach(link => {
+    link.addEventListener('click', function(e) {
+      e.preventDefault(); // previne navegação imediata
+
+      const href = this.getAttribute('href');
+
+      // Aplica fade-out
+      pageWrapper.classList.add('fade-out');
+
+      // Após a transição (0.5s), muda a página
+      setTimeout(() => {
+        window.location.href = href;
+      }, 500); // tempo do fade-out
+    });
+  });
+
+  // Ao carregar a página, aplica fade-in (inicialmente opacidade 0 para efeito visual)
+  pageWrapper.classList.remove('fade-out');
+  pageWrapper.classList.add('fade-in');
+});
+
 </script>
 </body>
 </html>

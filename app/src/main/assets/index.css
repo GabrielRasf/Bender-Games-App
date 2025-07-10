@@ -40,7 +40,10 @@ body {
   padding: 0;
   transition: filter 0.3s ease;
   color: var(--cor-texto);
+
 }
+
+/* === Transições de página === */
 
 .main-container {
   display: flex;

@@ -24,6 +24,7 @@ VARIÁVEIS DE CORES NO ROOT
   color: var(--cor-texto);
   -webkit-tap-highlight-color: transparent;
   border: none;
+
 }
 
 body {
@@ -39,6 +40,7 @@ body {
   font-size: 1.2rem;
   line-height: 1.4;
   text-align: center;
+
 }
 
 p {
@@ -108,6 +110,8 @@ p {
   font-size: 1rem;
   color: var(--cor-titulo);
 }
+
+
 
 /* =========================== */
 /* TIPOGRAFIA */
