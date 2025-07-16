@@ -14,25 +14,25 @@
 
 <div class="game-container">
     <!-- Menu -->
-<nav class="menu">
-    <div class="menu-left">
-        <a href="../menuFr.html" class="voltar-wrapper">
-            <img src="../../images/left-arrow.png" alt="Retour">
-            <h2 class="sair">Retour</h2>
-        </a>
-    </div>
+    <nav class="menu">
+        <div class="menu-left">
+            <a href="../menuFr.html" class="voltar-wrapper">
+                <img src="../../images/left-arrow.png" alt="Retour">
+                <h2 class="voltar">Retour</h2>
+            </a>
+        </div>
 
-    <div class="menu-center">
-        <a href="../menuFr.html">
-            <img class="logo-bebedeira" src="../../images/logo-sem-margem.png" alt="Logo Bebedeira" />
+        <div class="menu-center">
+            <a href="../menuFr.html">
+                <img class="logo-bebedeira" src="../../images/logo-sem-margem.png" alt="Logo Bebedeira" />
 
 
 
-        </a>
-    </div>
+            </a>
+        </div>
 
-    <div class="menu-spacer"></div>
-</nav>
+        <div class="menu-spacer"></div>
+    </nav>
 
     <h1 class="h1-menu espacamento-h1-intimidade">Intimité</h1>
     <!-- Opções de jogo -->
@@ -58,13 +58,20 @@
         <ul>
             <li>Ce jeu comporte 3 étapes !</li>
             <li>Dans la première étape, la personne qui répond essaiera de deviner la réponse de l'autre.</li>
-            <li>Dans la deuxième étape, les deux répondront aux questions, chacun leur tour, avec beaucoup d'attention.</li>
-            <li>La troisième étape consiste en de petits défis à réaliser une fois par semaine. Ils peuvent être combinés avec l'étape 2.</li>
-            <li>Ce jeu peut être joué en buvant une boisson légère et romantique, comme un verre de vin ou un cocktail !</li>
+            <li>Dans la deuxième étape, les deux répondront aux questions, chacun leur tour, avec beaucoup
+                d'attention.</li>
+            <li>La troisième étape consiste en de petits défis à réaliser une fois par semaine. Ils peuvent être
+                combinés avec l'étape 2.</li>
+            <li>Ce jeu peut être joué en buvant une boisson légère et romantique, comme un verre de vin ou un
+                cocktail !</li>
             <li>Amusez-vous bien ! 🍻</li>
         </ul>
     </div>
 </div>
+
+
+
+
 
 
 <script>
@@ -85,6 +92,51 @@
             closePopup();
         }
     };
+
+
+    document.querySelectorAll(
+        `button,
+.button-language,
+#btnConfirm,
+#btnCancel,
+.game-box,
+.btn-fato,
+.btn-vdd,
+.btn-falso,
+.btn-conseq,
+.btn-proxima-pergunta,
+.button-randomizador,
+.voltar-wrapper,
+.pergunta-e-resposta,
+.popup .close,
+.img-regras,
+.popup-content`
+    ).forEach(function (el) {
+        el.addEventListener('click', function (event) {
+            const target = event.currentTarget;
+            const href = target.getAttribute("href");
+
+            // Aplica a animação
+            target.classList.remove('animar-clique-afundar');
+            void target.offsetWidth;
+            target.classList.add('animar-clique-afundar');
+
+            // Se for um link <a>, evita a navegação imediata
+            if (href) {
+                event.preventDefault(); // impede o redirecionamento instantâneo
+
+                setTimeout(() => {
+                    window.location.href = href;
+                }, 600); // tempo da animação antes de redirecionar
+            }
+
+            // Se não for link, apenas remove a classe depois do tempo
+            setTimeout(() => {
+                target.classList.remove('animar-clique-afundar');
+            }, 700);
+        });
+    });
+
 </script>
 
 </body>

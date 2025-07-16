@@ -12,33 +12,33 @@
 
 <div class="game-container">
     <!-- Menu -->
-<nav class="menu">
-    <div class="menu-left">
-        <a href="../menuFr.html" class="voltar-wrapper">
-            <img src="../../images/left-arrow.png" alt="Retour">
-            <h2 class="sair">Retour</h2>
-        </a>
-    </div>
+    <nav class="menu">
+        <div class="menu-left">
+            <a href="../menuFr.html" class="voltar-wrapper">
+                <img src="../../images/left-arrow.png" alt="Retour">
+                <h2 class="voltar">Retour</h2>
+            </a>
+        </div>
 
-    <div class="menu-center">
-        <a href="../menuFr.html">
-            <img class="logo-bebedeira" src="../../images/logo-sem-margem.png" alt="Logo Bebedeira" />
+        <div class="menu-center">
+            <a href="../menuFr.html">
+                <img class="logo-bebedeira" src="../../images/logo-sem-margem.png" alt="Logo Bebedeira" />
 
 
 
-        </a>
-    </div>
+            </a>
+        </div>
 
-    <div class="menu-spacer"></div>
-</nav>
+        <div class="menu-spacer"></div>
+    </nav>
 
     <!-- Contenu du jeu -->
     <div>
         <h1>Questions Sans Réponses</h1>
-                <a href="#" onclick="openPopup()">
+        <a href="#" onclick="openPopup()">
             <img class="img-regras" src="../images/regras.png" alt="Règles" />
         </a>
-        <h4  onclick="openPopup()">Règles</h4>
+        <h4 onclick="openPopup()">Règles</h4>
     </div>
 
     <div id="popup" class="popup">
@@ -63,6 +63,10 @@
     </div>
     <div id="result"></div>
 </div>
+
+
+
+
 
 
 <script>
@@ -405,7 +409,7 @@
                 "text2": "la discipline ?"
             },
             {
-                "text": "À la fin de la journée, être égoïste peut être considéré comme quelque chose de positif/nécessaire",
+                "text": "À la fin de la journée, être égoïste peut être considéré comme quelque chose de positif/nécesvoltare",
                 "or": "OU",
                 "text2": "c'est une caractéristique indiscutablement négative ?"
             },
@@ -937,7 +941,7 @@
             {
                 "text": "Passer sur les autres pour réussir est mal",
                 "or": "OU",
-                "text2": "nécessaire ?"
+                "text2": "nécesvoltare ?"
             },
             {
                 "text": "Les artistes doivent céder aux pressions des tendances pour pouvoir s'insérer sur le marché",
@@ -1290,7 +1294,7 @@
                 "text2": "qu'il arrive simplement ?"
             },
             {
-                "text": "Vous préférez être nécessaire",
+                "text": "Vous préférez être nécesvoltare",
                 "or": "OU",
                 "text2": "être désiré ?"
             },
@@ -2458,6 +2462,51 @@
             popup.style.display = "none";
         }
     };
+
+
+    document.querySelectorAll(
+        `button,
+.button-language,
+#btnConfirm,
+#btnCancel,
+.game-box,
+.btn-fato,
+.btn-vdd,
+.btn-falso,
+.btn-conseq,
+.btn-proxima-pergunta,
+.button-randomizador,
+.voltar-wrapper,
+.pergunta-e-resposta,
+.popup .close,
+.img-regras,
+.popup-content`
+    ).forEach(function (el) {
+        el.addEventListener('click', function (event) {
+            const target = event.currentTarget;
+            const href = target.getAttribute("href");
+
+            // Aplica a animação
+            target.classList.remove('animar-clique-afundar');
+            void target.offsetWidth;
+            target.classList.add('animar-clique-afundar');
+
+            // Se for um link <a>, evita a navegação imediata
+            if (href) {
+                event.preventDefault(); // impede o redirecionamento instantâneo
+
+                setTimeout(() => {
+                    window.location.href = href;
+                }, 600); // tempo da animação antes de redirecionar
+            }
+
+            // Se não for link, apenas remove a classe depois do tempo
+            setTimeout(() => {
+                target.classList.remove('animar-clique-afundar');
+            }, 700);
+        });
+    });
+
 
     window.onload = loadQuestions;
 

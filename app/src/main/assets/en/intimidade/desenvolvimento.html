@@ -16,14 +16,14 @@
         <div class="menu-left">
             <a href="../menuEn.html" class="voltar-wrapper">
                 <img src="../../images/left-arrow.png" alt="Back">
-                <h2 class="sair">Back</h2>
+                <h2 class="voltar">Back</h2>
             </a>
         </div>
 
 
         <div class="menu-center">
             <a href="../menuEn.html">
-            <img class="logo-bebedeira" src="../../images/logo-sem-margem.png" alt="Logo Bebedeira" />
+                <img class="logo-bebedeira" src="../../images/logo-sem-margem.png" alt="Logo Bebedeira" />
 
             </a>
         </div>
@@ -40,7 +40,7 @@
         <a href="#" onclick="openPopup()">
             <img class="img-regras" src="../images/regras.png" alt="Regras" />
         </a>
-         <h4 onclick="openPopup()">Rules</h4>
+        <h4 onclick="openPopup()">Rules</h4>
     </div>
 
     <!-- Rules popup -->
@@ -79,6 +79,10 @@
 </div>
 
 
+
+
+
+
 <script>
     const questionData = {
         questions: [
@@ -105,60 +109,103 @@
         ]
     };
 
-    let questions = [];
-    let currentQuestion = 0;
+    let questions = data.questions;
+let currentIndex = 0;
 
-    function loadQuestions() {
-        questions = shuffleArray(questionData.questions);
-        nextQuestion();
+// Variáveis que receberão os elementos DOM
+let questionElement, optionsList, resultDiv;
+
+function loadQuestion(index) {
+    if (index < 0 || index >= questions.length) {
+        questionElement.textContent = "Você chegou ao fim das perguntas!";
+        optionsList.innerHTML = "";
+        return;
     }
+    questionElement.textContent = questions[index];
+    optionsList.innerHTML = "";
+    resultDiv.textContent = "";
+}
 
-    function shuffleArray(array) {
-        for (let i = array.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [array[i], array[j]] = [array[j], array[i]];
-        }
-        return array;
+function nextQuestion() {
+    currentIndex++;
+    if (currentIndex >= questions.length) {
+        alert("Você chegou ao fim das perguntas. Voltando ao início.");
+        currentIndex = 0;
     }
+    loadQuestion(currentIndex);
+}
 
-    function nextQuestion() {
-        if (questions.length === 0) {
-            document.getElementById("questionMergulho").textContent = "Loading questions...";
-            return;
-        }
+function openPopup() {
+    document.getElementById('popup').style.display = 'block';
+}
 
-        if (currentQuestion < questions.length) {
-            document.getElementById("questionMergulho").textContent = questions[currentQuestion];
-            document.getElementById("result").textContent = "";
-            currentQuestion++;
-        } else {
-            document.getElementById("questionMergulho").textContent = "End of the game! Hope you're having fun! Want to play again?";
-            document.getElementById("result").textContent = "";
-            currentQuestion = 0;
-            questions = shuffleArray(questions);
-        }
+function closePopup() {
+    document.getElementById('popup').style.display = 'none';
+}
+
+// Fecha o popup clicando fora da área de conteúdo
+window.onclick = function(event) {
+    const popup = document.getElementById('popup');
+    if (event.target === popup) {
+        closePopup();
     }
+};
 
-    function openPopup() {
-        document.getElementById("popup").style.display = "block";
-    }
+window.onload = function() {
+    // Captura os elementos do DOM só depois de carregar
+    questionElement = document.getElementById('questionDesenvolvimento');
+    optionsList = document.getElementById('optionsList');
+    resultDiv = document.getElementById('result');
 
-    function closePopup() {
-        document.getElementById("popup").style.display = "none";
-    }
+    // Carrega a primeira pergunta
+    loadQuestion(currentIndex);
+};
 
-    function closeAnswerPopup() {
-        document.getElementById("answerPopup").style.display = "none";
-    }
+    document.querySelectorAll(
+        `button,
+.button-language,
+#btnConfirm,
+#btnCancel,
+.game-box,
+.btn-fato,
+.btn-vdd,
+.btn-falso,
+.btn-conseq,
+.btn-proxima-pergunta,
+.button-randomizador,
+.voltar-wrapper,
+.pergunta-e-resposta,
+.popup .close,
+.img-regras,
+.popup-content`
+    ).forEach(function (el) {
+        el.addEventListener('click', function (event) {
+            const target = event.currentTarget;
+            const href = target.getAttribute("href");
 
-    window.onclick = function (event) {
-        const popup = document.getElementById("popup");
-        if (event.target === popup) {
-            popup.style.display = "none";
-        }
-    };
+            // Aplica a animação
+            target.classList.remove('animar-clique-afundar');
+            void target.offsetWidth;
+            target.classList.add('animar-clique-afundar');
 
-    loadQuestions();
+            // Se for um link <a>, evita a navegação imediata
+            if (href) {
+                event.preventDefault(); // impede o redirecionamento instantâneo
+
+                setTimeout(() => {
+                    window.location.href = href;
+                }, 600); // tempo da animação antes de redirecionar
+            }
+
+            // Se não for link, apenas remove a classe depois do tempo
+            setTimeout(() => {
+                target.classList.remove('animar-clique-afundar');
+            }, 700);
+        });
+    });
+
+    // Inicializa o carregamento das perguntas quando a página carrega
+    window.onload = loadQuestions;
 </script>
 </body>
 

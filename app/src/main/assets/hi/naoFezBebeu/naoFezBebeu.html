@@ -12,32 +12,32 @@
 
 <div class="game-container">
     <!-- Menu -->
-<nav class="menu">
-    <div class="menu-left">
-        <a href="../menuHi.html" class="voltar-wrapper">
-            <img src="../../images/left-arrow.png" alt="Back">
-            <h2 class="sair">Back</h2>
-        </a>
-    </div>
+    <nav class="menu">
+        <div class="menu-left">
+            <a href="../menuHi.html" class="voltar-wrapper">
+                <img src="../../images/left-arrow.png" alt="Back">
+                <h2 class="voltar">Back</h2>
+            </a>
+        </div>
 
-    <div class="menu-center">
-        <a href="../menuHi.html">
-            <img class="logo-bebedeira" src="../../images/logo-sem-margem.png" alt="Logo Bebedeira" />
+        <div class="menu-center">
+            <a href="../menuHi.html">
+                <img class="logo-bebedeira" src="../../images/logo-sem-margem.png" alt="Logo Bebedeira" />
 
 
 
-        </a>
-    </div>
+            </a>
+        </div>
 
-    <div class="menu-spacer"></div>
-</nav>
+        <div class="menu-spacer"></div>
+    </nav>
 
     <!-- Game Content -->
     <div>
         <h1>Nahi Kiya? Peeliya!</h1>
         <a href="#" onclick="openPopup()">
             <img class="img-regras" src="../images/regras.png" alt="Rules" />
-         <h4 onclick="showAnswerPopup()">Rules</h4>
+            <h4 onclick="showAnswerPopup()">Rules</h4>
         </a>
     </div>
 
@@ -50,7 +50,8 @@
             </div>
             <ul>
                 <li>Ek player apna phone uthao aur loud me card padh ke sabko sunao.</li>
-                <li>Agar player challenge successfully kar leta hai, to usko point milega. Agar nahi kiya to peena padega.</li>
+                <li>Agar player challenge successfully kar leta hai, to usko point milega. Agar nahi kiya to peena
+                    padega.</li>
                 <li>Jiske sabse zyada points ho ya jo sober rahe, wahi jeetega.</li>
                 <li>Har successfully complete kiya challenge ke liye 1 point milega.</li>
                 <li>Kuch ABSURD challenges ke liye 2 points milenge.</li>
@@ -67,6 +68,10 @@
     </div>
     <div id="result"></div>
 </div>
+
+
+
+
 
 
 <script>
@@ -294,11 +299,13 @@
     let questions = [];
     let currentQuestion = 0;
 
+    // Função para carregar as perguntas
     function loadQuestions() {
         questions = shuffleArray([...gameData.questions]);
         nextQuestion();
     }
 
+    // Fisher-Yates Shuffle
     function shuffleArray(array) {
         for (let i = array.length - 1; i > 0; i--) {
             const j = Math.floor(Math.random() * (i + 1));
@@ -307,24 +314,31 @@
         return array;
     }
 
+    // Função para exibir a próxima pergunta
     function nextQuestion() {
-        if (questions.length === 0) {
-            document.getElementById("questionNaoFezBebeu").textContent = "Loading questions...";
-            return;
-        }
-
-        if (currentQuestion < questions.length) {
-            document.getElementById("questionNaoFezBebeu").textContent = questions[currentQuestion];
-            document.getElementById("result").textContent = "";
-            currentQuestion++;
-        } else {
-            document.getElementById("questionNaoFezBebeu").textContent = "Game over! Hope you had fun! Wanna play again?";
-            document.getElementById("result").textContent = "";
-            currentQuestion = 0;
-            questions = shuffleArray(questions);
-        }
+    if (questions.length === 0) {
+        document.getElementById("questionNaoFezBebeu").textContent = "Carregando perguntas...";
+        return;
     }
 
+    if (currentQuestion < questions.length) {
+        document.getElementById("questionNaoFezBebeu").textContent = questions[currentQuestion];
+        document.getElementById("result").textContent = "";
+        currentQuestion++;
+    } else {
+        document.getElementById("questionNaoFezBebeu").textContent = "Fim do Jogo! Espero que estejam se divertindo! Quer jogar novamente?";
+        document.getElementById("result").textContent = "";
+        // NÃO reinicia aqui, só mostra a mensagem
+    }
+}
+
+function restartGame() {
+    currentQuestion = 0;
+    questions = shuffleArray([...gameData.questions]); // cópia embaralhada nova
+    nextQuestion();
+}
+
+    // Pop-up functions
     function openPopup() {
         document.getElementById("popup").style.display = "block";
     }
@@ -333,6 +347,7 @@
         document.getElementById("popup").style.display = "none";
     }
 
+    // Fechar o pop-up ao clicar fora dele
     window.onclick = function (event) {
         let popup = document.getElementById("popup");
         if (event.target === popup) {
@@ -340,6 +355,50 @@
         }
     };
 
+    document.querySelectorAll(
+        `button,
+.button-language,
+#btnConfirm,
+#btnCancel,
+.game-box,
+.btn-fato,
+.btn-vdd,
+.btn-falso,
+.btn-conseq,
+.btn-proxima-pergunta,
+.button-randomizador,
+.voltar-wrapper,
+.pergunta-e-resposta,
+.popup .close,
+.img-regras,
+.popup-content`
+    ).forEach(function (el) {
+        el.addEventListener('click', function (event) {
+            const target = event.currentTarget;
+            const href = target.getAttribute("href");
+
+            // Aplica a animação
+            target.classList.remove('animar-clique-afundar');
+            void target.offsetWidth;
+            target.classList.add('animar-clique-afundar');
+
+            // Se for um link <a>, evita a navegação imediata
+            if (href) {
+                event.preventDefault(); // impede o redirecionamento instantâneo
+
+                setTimeout(() => {
+                    window.location.href = href;
+                }, 600); // tempo da animação antes de redirecionar
+            }
+
+            // Se não for link, apenas remove a classe depois do tempo
+            setTimeout(() => {
+                target.classList.remove('animar-clique-afundar');
+            }, 700);
+        });
+    });
+
+    // Carrega as perguntas quando a página é aberta
     window.onload = loadQuestions;
 </script>
 </body>

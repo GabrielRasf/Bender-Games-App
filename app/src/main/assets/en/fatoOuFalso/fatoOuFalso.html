@@ -16,14 +16,14 @@
         <div class="menu-left">
             <a href="../menuEn.html" class="voltar-wrapper">
                 <img src="../../images/left-arrow.png" alt="Back">
-                <h2 class="sair">Back</h2>
+                <h2 class="voltar">Back</h2>
             </a>
         </div>
 
 
         <div class="menu-center">
             <a href="../menuEn.html">
-            <img class="logo-bebedeira" src="../../images/logo-sem-margem.png" alt="Logo Bebedeira" />
+                <img class="logo-bebedeira" src="../../images/logo-sem-margem.png" alt="Logo Bebedeira" />
 
             </a>
         </div>
@@ -38,7 +38,7 @@
         <a href="#" onclick="openPopup()">
             <img class="img-regras" src="../images/regras.png" alt="Regras" />
         </a>
-         <h4 onclick="openPopup()">Rules</h4>
+        <h4 onclick="openPopup()">Rules</h4>
     </div>
 
     <!-- Pop-up -->
@@ -65,6 +65,8 @@
 
     <div class="card-frase">
         <p id="questionFatoOuFalso">Loading questions...</p>
+        <!-- Resposta -->
+        <div id="result"></div>
     </div>
     <div class="button-container-fato-falso">
         <button id="btnFato" class="btn-fato">Fact</button>
@@ -77,12 +79,7 @@
             Next Question
         </button>
     </div>
-
-    <div id="result"></div>
-
 </div>
-
-
 
 <script>
     // Dados do jogo embutidos
@@ -876,79 +873,137 @@
         ]
     };
 
-    // Variáveis do jogo
-     let questions = [];
-    let currentQuestionIndex = 0;
+    let questions = [];
+let currentQuestionIndex = 0;
 
-    const questionText = document.getElementById('questionFatoOuFalso');
-    const resultDiv = document.getElementById('result');
-    const btnFato = document.getElementById('btnFato');
-    const btnFalso = document.getElementById('btnFalso');
-    const btnProxima = document.getElementById('btnProxima');
+const questionText = document.getElementById('questionFatoOuFalso');
+const resultDiv = document.getElementById('result');
+const btnFato = document.getElementById('btnFato');
+const btnFalso = document.getElementById('btnFalso');
+const btnProxima = document.getElementById('btnProxima');
 
-    // Embaralhamento aleatório
-    function shuffleArray(array) {
-      for (let i = array.length - 1; i > 0; i--) {
+// Embaralha um array
+function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
         [array[i], array[j]] = [array[j], array[i]];
-      }
-      return array;
     }
+    return array;
+}
 
-    function loadQuestions() {
-      questions = shuffleArray([...gameData.questions]);
-      showQuestion();
+// Carrega as perguntas embaralhadas uma única vez
+function loadQuestions() {
+    questions = shuffleArray([...gameData.questions]);
+    currentQuestionIndex = 0;
+    showQuestion();
+}
+
+// Mostra a pergunta atual
+function showQuestion() {
+    if (currentQuestionIndex < questions.length) {
+        const question = questions[currentQuestionIndex];
+        questionText.textContent = question.frase;
+        resultDiv.innerHTML = '';
+        btnFato.disabled = false;
+        btnFalso.disabled = false;
+        btnProxima.style.display = 'none';
+    } else {
+        questionText.textContent = "✅ Fim da rodada! Todas as perguntas foram exibidas.";
+        resultDiv.innerHTML = '';
+        btnFato.style.display = 'none';
+        btnFalso.style.display = 'none';
+        btnProxima.style.display = 'none';
     }
+}
 
-    function showQuestion() {
-      const question = questions[currentQuestionIndex];
-      questionText.textContent = question.frase;
-      resultDiv.innerHTML = '';
-      btnFato.disabled = false;
-      btnFalso.disabled = false;
-      btnProxima.style.display = 'none';
-    }
+// Verifica a resposta
+function checkAnswer(resposta) {
+    const question = questions[currentQuestionIndex];
 
-    function checkAnswer(resposta) {
-      const question = questions[currentQuestionIndex];
-      btnFato.disabled = true;
-      btnFalso.disabled = true;
+    btnFato.disabled = true;
+    btnFalso.disabled = true;
 
-      if (resposta === question.correta) {
-        resultDiv.innerHTML = `<p style="color: green;">✅ Correct! ${question.explicacao}</p>`;
-      } else {
-        resultDiv.innerHTML = `<p style="color: red;">❌ Wrong! ${question.explicacao}</p>`;
-      }
+        if (resposta === question.correta) {
+            resultDiv.innerHTML = `<p style="color: green;">✅ Correct! Congratulations.  ${question.explicacao}</p>`;
+        } else {
+            resultDiv.innerHTML = `<p style="color: red;">❌ Wrong! Take a shot! 🍻 ${question.explicacao}</p>`;
+        }
 
-      btnProxima.style.display = 'block';
-    }
+    btnProxima.style.display = 'block';
+}
 
-    function showNextQuestion() {
-      currentQuestionIndex = (currentQuestionIndex + 1) % questions.length;
-      showQuestion();
-    }
+// Avança para a próxima pergunta
+function showNextQuestion() {
+    currentQuestionIndex++;
+    showQuestion();
+}
 
-    // Eventos dos botões
-    btnFato.addEventListener('click', () => checkAnswer('Fact'));
-    btnFalso.addEventListener('click', () => checkAnswer('False'));
+// Eventos
+btnFato.addEventListener('click', () => checkAnswer('Fact'));
+btnFalso.addEventListener('click', () => checkAnswer('False'));
+btnProxima.addEventListener('click', showNextQuestion);
 
     // Pop-up de regras
     function openPopup() {
-      document.getElementById("popup").style.display = "block";
+        document.getElementById("popup").style.display = "block";
     }
 
     function closePopup() {
-      document.getElementById("popup").style.display = "none";
+        document.getElementById("popup").style.display = "none";
     }
 
     window.onclick = function (event) {
-      const popup = document.getElementById("popup");
-      if (event.target === popup) {
-        popup.style.display = "none";
-      }
+        const popup = document.getElementById("popup");
+        if (event.target === popup) {
+            popup.style.display = "none";
+        }
     };
 
+    document.querySelectorAll(
+        `button,
+.button-language,
+#btnConfirm,
+#btnCancel,
+.game-box,
+.btn-fato,
+.btn-vdd,
+.btn-falso,
+.btn-conseq,
+.btn-proxima-pergunta,
+.button-randomizador,
+.voltar-wrapper,
+.pergunta-e-resposta,
+.popup .close,
+.img-regras,
+.popup-content`
+    ).forEach(function (el) {
+        el.addEventListener('click', function (event) {
+            const target = event.currentTarget;
+            const href = target.getAttribute("href");
+
+            // Aplica a animação
+            target.classList.remove('animar-clique-afundar');
+            void target.offsetWidth;
+            target.classList.add('animar-clique-afundar');
+
+            // Se for um link <a>, evita a navegação imediata
+            if (href) {
+                event.preventDefault(); // impede o redirecionamento instantâneo
+
+                setTimeout(() => {
+                    window.location.href = href;
+                }, 600); // tempo da animação antes de redirecionar
+            }
+
+            // Se não for link, apenas remove a classe depois do tempo
+            setTimeout(() => {
+                target.classList.remove('animar-clique-afundar');
+            }, 700);
+        });
+    });
+
     window.onload = loadQuestions;
+
 </script>
 </body>
 

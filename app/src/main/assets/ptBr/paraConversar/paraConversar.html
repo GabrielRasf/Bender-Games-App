@@ -17,13 +17,13 @@
         <div class="menu-left">
             <a href="../menuPtBr.html" class="voltar-wrapper">
                 <img src="../../images/left-arrow.png" alt="Voltar">
-                <h2 class="sair">Voltar</h2>
+                <h2 class="voltar">Voltar</h2>
             </a>
         </div>
 
         <div class="menu-center">
             <a href="../menuPtBr.html">
-            <img class="logo-bebedeira" src="../../images/logo-sem-margem.png" alt="Logo Bebedeira" />
+                <img class="logo-bebedeira" src="../../images/logo-sem-margem.png" alt="Logo Bebedeira" />
 
             </a>
         </div>
@@ -44,7 +44,7 @@
         <p id="questionParaConversar">Carregando perguntas...</p>
     </div>
     <div class="button-container">
-        <button onclick="nextQuestion()">Próxima pergunta</button>
+        <button onclick="currentQuestion >= questions.length ? restartGame() : nextQuestion()">Próxima pergunta</button>
     </div>
     <div id="result"></div>
 </div>
@@ -69,6 +69,10 @@
         </ul>
     </div>
 </div>
+
+
+
+
 
 
 <script>
@@ -272,7 +276,7 @@
             "Qual o lado positivo de estar em um relacionamento e qual é o lado positivo de ser solteiro(a)?",
             "Havia algo em que você era excepcionalmente bom quando era mais jovem?",
             "Na sua opnião, qual é a principal característica que torna as pessoas bem-sucedidas?",
-            "Há algum problema em sair de um restaurante sem pagar se você pediu a conta diversas vezes e está esperando há 20 minutos?",
+            "Há algum problema em voltar de um restaurante sem pagar se você pediu a conta diversas vezes e está esperando há 20 minutos?",
             "Existe diversão e aventura suficiente em sua vida?",
             "Os pais devem ter o direito de dar ao filho o nome que quiserem, não importa o quão bizarro ou impróprio seja?",
             "Qual item da sua lista de tarefas de longo prazo nunca chega?",
@@ -377,6 +381,7 @@
             "Qual é a refeição mais deliciosa que você já comeu?",
             "Sua opnião sobre as pessoas muda quando você percebe que elas tem tatuagens?",
             "De qual parente falecido você mais sente saudades?",
+            "De qual parente falecido você mais sente saudades?",
             "Você acha que as pessoas consegue mudar de verdade?",
             "Qual invenção teve maior impacto na cultura e civilização humana?",
             "Se você pudesse mudar sua idade, você escolheria ser mais jovem, mais velho ou permanecer o mesmo?",
@@ -446,7 +451,7 @@
     }
 
     // Função para exibir a próxima pergunta
-    function nextQuestion() {
+        function nextQuestion() {
         if (questions.length === 0) {
             document.getElementById("questionParaConversar").textContent = "Carregando perguntas...";
             loadQuestions();
@@ -458,11 +463,17 @@
             document.getElementById("result").textContent = "";
             currentQuestion++;
         } else {
+            // Exibe mensagem final e NÃO avança a pergunta nem reinicia automaticamente
             document.getElementById("questionParaConversar").textContent = "Fim do Jogo! Espero que estejam se divertindo! Quer jogar novamente?";
             document.getElementById("result").textContent = "";
-            currentQuestion = 0;
-            questions = shuffleArray([...gameData.questions]);
+            // Aqui não reinicia automaticamente, espera o jogador clicar para reiniciar
         }
+    }
+
+    function reiniciarJogo() {
+        currentQuestion = 0;
+        questions = shuffleArray([...gameData.questions]);
+        nextQuestion();
     }
 
     // Pop-up functions
@@ -481,6 +492,49 @@
             popup.style.display = "none";
         }
     };
+
+    document.querySelectorAll(
+        `button,
+.button-language,
+#btnConfirm,
+#btnCancel,
+.game-box,
+.btn-fato,
+.btn-vdd,
+.btn-falso,
+.btn-conseq,
+.btn-proxima-pergunta,
+.button-randomizador,
+.voltar-wrapper,
+.pergunta-e-resposta,
+.popup .close,
+.img-regras,
+.popup-content`
+    ).forEach(function (el) {
+        el.addEventListener('click', function (event) {
+            const target = event.currentTarget;
+            const href = target.getAttribute("href");
+
+            // Aplica a animação
+            target.classList.remove('animar-clique-afundar');
+            void target.offsetWidth;
+            target.classList.add('animar-clique-afundar');
+
+            // Se for um link <a>, evita a navegação imediata
+            if (href) {
+                event.preventDefault(); // impede o redirecionamento instantâneo
+
+                setTimeout(() => {
+                    window.location.href = href;
+                }, 600); // tempo da animação antes de redirecionar
+            }
+
+            // Se não for link, apenas remove a classe depois do tempo
+            setTimeout(() => {
+                target.classList.remove('animar-clique-afundar');
+            }, 700);
+        });
+    });
 
     // Carrega as perguntas ao iniciar
     window.onload = loadQuestions;

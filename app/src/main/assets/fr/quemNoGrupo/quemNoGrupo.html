@@ -14,33 +14,33 @@
 
 <div class="game-container">
     <!-- Menu -->
-<nav class="menu">
-    <div class="menu-left">
-        <a href="../menuFr.html" class="voltar-wrapper">
-            <img src="../../images/left-arrow.png" alt="Retour">
-            <h2 class="sair">Retour</h2>
-        </a>
-    </div>
+    <nav class="menu">
+        <div class="menu-left">
+            <a href="../menuFr.html" class="voltar-wrapper">
+                <img src="../../images/left-arrow.png" alt="Retour">
+                <h2 class="voltar">Retour</h2>
+            </a>
+        </div>
 
-    <div class="menu-center">
-        <a href="../menuFr.html">
-            <img class="logo-bebedeira" src="../../images/logo-sem-margem.png" alt="Logo Bebedeira" />
+        <div class="menu-center">
+            <a href="../menuFr.html">
+                <img class="logo-bebedeira" src="../../images/logo-sem-margem.png" alt="Logo Bebedeira" />
 
 
 
-        </a>
-    </div>
+            </a>
+        </div>
 
-    <div class="menu-spacer"></div>
-</nav>
+        <div class="menu-spacer"></div>
+    </nav>
 
     <!-- Contenu du jeu -->
     <div>
         <h1>Qui dans le groupe</h1>
-                <a href="#" onclick="openPopup()">
+        <a href="#" onclick="openPopup()">
             <img class="img-regras" src="../images/regras.png" alt="Règles" />
         </a>
-        <h4  onclick="openPopup()">Règles</h4>
+        <h4 onclick="openPopup()">Règles</h4>
     </div>
 
     <!-- Pop-up -->
@@ -70,6 +70,10 @@
     </div>
     <div id="result"></div>
 </div>
+
+
+
+
 
 
 <script>
@@ -399,7 +403,7 @@
             "Qui dans le groupe posterait des stories en pleurant puis les supprimerait ?",
             "Qui dans le groupe parle le plus souvent tout seul sans s'en rendre compte ?",
             "Qui dans le groupe porterait la même tenue que son crush sans s'entendre ?",
-            "Qui dans le groupe ferait un long texte d'anniversaire juste pour impressionner ?",
+            "Qui dans le groupe ferait un long texte d'annivervoltare juste pour impressionner ?",
             "Qui dans le groupe renverrait probablement un message au mauvais destinataire ?",
             "Qui dans le groupe accepterait de vivre un mois sans Internet ?",
             "Qui dans le groupe aurait le courage de se marier à Las Vegas ?",
@@ -421,7 +425,7 @@
             "Qui dans le groupe a déjà essayé de stalker et a aimé par accident ?",
             "Qui dans le groupe posterait le plus des phrases motivantes en faisant semblant d'aller bien ?",
             "Qui dans le groupe serait le plus compétitif dans un jeu de société ?",
-            "Qui dans le groupe oublierait probablement l'anniversaire de quelqu'un de proche ?",
+            "Qui dans le groupe oublierait probablement l'annivervoltare de quelqu'un de proche ?",
             "Qui dans le groupe chanterait faux mais avec confiance ?",
             "Qui dans le groupe a déjà pleuré en regardant une vidéo de chien ?",
             "Qui dans le groupe accepterait de filmer une vidéo gênante sur TikTok ?",
@@ -603,6 +607,51 @@
             popup.style.display = "none";
         }
     }
+
+
+    document.querySelectorAll(
+        `button,
+.button-language,
+#btnConfirm,
+#btnCancel,
+.game-box,
+.btn-fato,
+.btn-vdd,
+.btn-falso,
+.btn-conseq,
+.btn-proxima-pergunta,
+.button-randomizador,
+.voltar-wrapper,
+.pergunta-e-resposta,
+.popup .close,
+.img-regras,
+.popup-content`
+    ).forEach(function (el) {
+        el.addEventListener('click', function (event) {
+            const target = event.currentTarget;
+            const href = target.getAttribute("href");
+
+            // Aplica a animação
+            target.classList.remove('animar-clique-afundar');
+            void target.offsetWidth;
+            target.classList.add('animar-clique-afundar');
+
+            // Se for um link <a>, evita a navegação imediata
+            if (href) {
+                event.preventDefault(); // impede o redirecionamento instantâneo
+
+                setTimeout(() => {
+                    window.location.href = href;
+                }, 600); // tempo da animação antes de redirecionar
+            }
+
+            // Se não for link, apenas remove a classe depois do tempo
+            setTimeout(() => {
+                target.classList.remove('animar-clique-afundar');
+            }, 700);
+        });
+    });
+
 
     window.onload = loadQuestions;
 

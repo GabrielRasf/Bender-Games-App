@@ -10,21 +10,18 @@
 </head>
 
 <body>
-<div class="game-container">
-    <!-- Menu -->
+<div class="main-container">
     <nav class="menu">
         <div class="menu-left">
-            <a href="../menuEn.html" class="voltar-wrapper">
-                <img src="../../images/left-arrow.png" alt="Back">
-                <h2 class="sair">Back</h2>
+            <a href="../menuEn.html" class="voltar-wrapper" onclick="clicou-voltar">
+                <img src="../../images/left-arrow.png" alt="Voltar">
+                <h2 class="voltar">Voltar</h2>
             </a>
         </div>
 
-
         <div class="menu-center">
             <a href="../menuEn.html">
-            <img class="logo-bebedeira" src="../../images/logo-sem-margem.png" alt="Logo Bebedeira" />
-
+                <img class="logo-bebedeira" src="../../images/logo-sem-margem.png" alt="Logo Bebedeira" />
             </a>
         </div>
 
@@ -39,61 +36,26 @@
     </div>
 
     <div class="game-box-content">
-        <a href="#" onclick="openPopup('popup-eununca')" class="game-box">
-            <p>Never Have I Ever</p>
-        </a>
-        <a href="#" onclick="openPopup('popup-topzeira')" class="game-box">
-            <p>Topzeira</p>
-        </a>
-        <a href="#" onclick="openPopup('popup-riubebeu')" class="game-box">
-            <p>Laughed, Drank</p>
-        </a>
-        <a href="#" onclick="openPopup('popup-segredos')" class="game-box">
-            <p>Secrets</p>
-        </a>
-        <a href="#" onclick="openPopup('popup-pioresAmigos')" class="game-box">
-            <p>Worst Friend</p>
-        </a>
-        <a href="#" onclick="openPopup('popup-mimicas')" class="game-box">
-            <p>Adult Charades</p>
-        </a>
-        <a href="#" onclick="openPopup('popup-verdadeconsequencia')" class="game-box">
-            <p>Truth or Dare</p>
-        </a>
-        <a href="#" onclick="openPopup('popup-quemnogrupo')" class="game-box">
-            <p>Who in the Group</p>
-        </a>
-        <a href="#" onclick="openPopup('popup-paraconversar')" class="game-box">
-            <p>To Talk About</p>
-        </a>
-        <a href="#" onclick="openPopup('popup-charadas')" class="game-box">
-            <p>Riddles</p>
-        </a>
-        <a href="#" onclick="openPopup('popup-perguntassemresposta')" class="game-box">
-            <p>Unanswerad Questions</p>
-        </a>
-        <a href="#" onclick="openPopup('popup-naofez')" class="game-box">
-            <p>Didn't Do It? Drink</p>
-        </a>
-        <a href="#" onclick="openPopup('popup-intimidade')" class="game-box">
-            <p>Intimacy</p>
-        </a>
-        <a href="#" onclick="openPopup('popup-showDoBebao')" class="game-box">
-            <p>Drunk Show</p>
-        </a>
-        <a href="#" onclick="openPopup('popup-tiroAoAlvo')" class="game-box">
-            <p>Target Shooting</p>
-        </a>
-        <a href="#" onclick="openPopup('popup-fatoOuFalso')" class="game-box">
-            <p>True or False</p>
-        </a>
-        <a href="#" onclick="openPopup('popup-azarOuSorte')" class="game-box">
-            <p>Bad Luck or Good Luck</p>
-        </a>
-        <a href="#" onclick="openPopup('popup-antesOuDepois')" class="game-box div-antes-ou-depois">
-            <p>Before or After</p>
-        </a>
+        <a href="#" data-popup="popup-eununca" class="game-box"><p>Never Have I Ever</p></a>
+        <a href="#" data-popup="popup-topzeira" class="game-box"><p>Topzeira</p></a>
+        <a href="#" data-popup="popup-riubebeu" class="game-box"><p>Laughed, Drank</p></a>
+        <a href="#" data-popup="popup-segredos" class="game-box"><p>Secrets</p></a>
+        <a href="#" data-popup="popup-pioresAmigos" class="game-box"><p>Worst Friend</p></a>
+        <a href="#" data-popup="popup-mimicas" class="game-box"><p>Adult Charades</p></a>
+        <a href="#" data-popup="popup-verdadeconsequencia" class="game-box"><p>Truth or Dare</p></a>
+        <a href="#" data-popup="popup-quemnogrupo" class="game-box"><p>Who in the Group</p></a>
+        <a href="#" data-popup="popup-paraconversar" class="game-box"><p>To Talk About</p></a>
+        <a href="#" data-popup="popup-charadas" class="game-box"><p>Riddles</p></a>
+        <a href="#" data-popup="popup-perguntassemresposta" class="game-box"><p>Unanswered Questions</p></a>
+        <a href="#" data-popup="popup-naofez" class="game-box"><p>Didn't Do It? Drink</p></a>
+        <a href="#" data-popup="popup-intimidade" class="game-box"><p>Intimacy</p></a>
+        <a href="#" data-popup="popup-showDoBebao" class="game-box"><p>Drunk Show</p></a>
+        <a href="#" data-popup="popup-tiroAoAlvo" class="game-box"><p>Target Shooting</p></a>
+        <a href="#" data-popup="popup-fatoOuFalso" class="game-box"><p>True or False</p></a>
+        <a href="#" data-popup="popup-azarOuSorte" class="game-box"><p>Bad Luck or Good Luck</p></a>
+        <a href="#" data-popup="popup-antesOuDepois" class="game-box div-antes-ou-depois"><p>Before or After</p></a>
     </div>
+
 </div>
 
 
@@ -331,9 +293,6 @@
     </div>
 </div>
 
-
-
-
 <script>
     function closeAllPopups() {
         const allPopups = document.querySelectorAll('.overlay');
@@ -358,11 +317,65 @@
         }
     }
 
-    document.addEventListener('keydown', function (event) {
-        if (event.key === 'Escape') {
-            closeAllPopups();
-        }
+    document.querySelectorAll('.game-box').forEach(function (el) {
+    el.addEventListener('click', function (event) {
+        event.preventDefault();
+        const popupId = el.getAttribute('data-popup');
+
+        // Aplica animação
+        el.classList.remove('animar-clique-afundar');
+        void el.offsetWidth; // força reflow para reiniciar a animação
+        el.classList.add('animar-clique-afundar');
+
+        // Abre o popup após a animação
+        setTimeout(() => {
+            if (popupId) openPopup(popupId);
+            el.classList.remove('animar-clique-afundar');
+        }, 400);
     });
+});
+
+        document.querySelectorAll(
+    `button,
+    .button-language,
+    #btnConfirm,
+    #btnCancel,
+    .game-box,
+    .btn-fato,
+    .btn-vdd,
+    .btn-falso,
+    .btn-conseq,
+    .btn-proxima-pergunta,
+    .button-randomizador,
+    .voltar-wrapper,
+    .pergunta-e-resposta,
+    .popup .close`
+).forEach(function (el) {
+    el.addEventListener('click', function (event) {
+        const target = event.currentTarget;
+        const href = target.getAttribute("href");
+
+        // Aplica a animação
+        target.classList.remove('animar-clique-afundar');
+        void target.offsetWidth;
+        target.classList.add('animar-clique-afundar');
+
+        // Se for um link <a>, evita a navegação imediata
+        if (href) {
+            event.preventDefault(); // impede o redirecionamento instantâneo
+
+            setTimeout(() => {
+                window.location.href = href;
+            }, 600); // tempo da animação antes de redirecionar
+        }
+
+        // Se não for link, apenas remove a classe depois do tempo
+        setTimeout(() => {
+            target.classList.remove('animar-clique-afundar');
+        }, 1000);
+    });
+});
+
 </script>
 
 </body>

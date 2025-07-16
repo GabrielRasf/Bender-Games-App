@@ -13,25 +13,25 @@
 <body>
 <div class="game-container">
     <!-- Menu -->
-<nav class="menu">
-    <div class="menu-left">
-        <a href="../menuFr.html" class="voltar-wrapper">
-            <img src="../../images/left-arrow.png" alt="Retour">
-            <h2 class="sair">Retour</h2>
-        </a>
-    </div>
+    <nav class="menu">
+        <div class="menu-left">
+            <a href="../menuFr.html" class="voltar-wrapper">
+                <img src="../../images/left-arrow.png" alt="Retour">
+                <h2 class="voltar">Retour</h2>
+            </a>
+        </div>
 
-    <div class="menu-center">
-        <a href="../menuFr.html">
-            <img class="logo-bebedeira" src="../../images/logo-sem-margem.png" alt="Logo Bebedeira" />
+        <div class="menu-center">
+            <a href="../menuFr.html">
+                <img class="logo-bebedeira" src="../../images/logo-sem-margem.png" alt="Logo Bebedeira" />
 
 
 
-        </a>
-    </div>
+            </a>
+        </div>
 
-    <div class="menu-spacer"></div>
-</nav>
+        <div class="menu-spacer"></div>
+    </nav>
 
     <!-- Conteúdo do jogo -->
     <h1>
@@ -39,10 +39,10 @@
     </h1>
     <h3>Ouverture</h3>
     <div>
-                <a href="#" onclick="openPopup()">
+        <a href="#" onclick="openPopup()">
             <img class="img-regras" src="../images/regras.png" alt="Règles" />
         </a>
-        <h4  onclick="openPopup()">Règles</h4>
+        <h4 onclick="openPopup()">Règles</h4>
     </div>
 
     <!-- Pop-up de regras -->
@@ -78,6 +78,10 @@
     <div id="result"></div>
 </div>
 
+
+
+
+
 <script>
     const data = {
         "questions": [
@@ -108,35 +112,35 @@
             "Si nous devions fuir quelque part dans le monde, où penses-tu que je choisirais ?",
             "Quelle habitude mienne trouves-tu la plus mignonne ?",
             "Quel est ton souvenir d’enfance préféré ?",
-    "Quel genre de films préfères-tu regarder ?",
-    "À quoi ressemblerait ta journée parfaite du début à la fin ?",
-    "Tu préfères tout planifier ou agir sur un coup de tête ?",
-    "Si tu pouvais vivre n'importe où dans le monde, où ce serait ?",
-    "Qu’est-ce que tu valorises le plus dans une relation ?",
-    "Comment aimes-tu montrer ton amour ?",
-    "Qu’est-ce qui te fait te sentir aimé(e) ?",
-    "Qu’as-tu appris de tes relations passées ?",
-    "Comment gères-tu les désaccords dans une relation ?",
-    "Quels sont tes plus grands rêves dans la vie ?",
-    "Y a-t-il quelque chose que tu as toujours voulu faire mais que tu n’as pas encore osé ?",
-    "De quelle réussite personnelle es-tu le plus fier/fière ?",
-    "Que souhaites-tu pour ton avenir professionnel ?",
-    "Te vois-tu marié(e) ou avoir des enfants un jour ?",
-    "Tu préfères parler des problèmes tout de suite ou attendre ?",
-    "Qu’est-ce qui t’énerve le plus chez les autres ?",
-    "Comment réagis-tu généralement quand tu es en colère ?",
-    "Tu préfères le silence ou être toujours entouré(e) ?",
-    "Qu’est-ce qui est essentiel pour bien vivre à deux ?",
-    "Comment aimes-tu passer ton week-end idéal ?",
-    "Quel plat pourrais-tu manger sans jamais te lasser ?",
-    "Es-tu plutôt une personne du matin ou du soir ?",
-    "Tu préfères faire la fête, voyager ou rester chez toi ?",
-    "Quels passe-temps ou activités aimerais-tu partager avec moi ?",
-    "Quel a été le moment le plus difficile de ta vie ?",
-    "Qu’est-ce qui t’effraie le plus dans l’avenir ?",
-    "Quel genre d’héritage aimerais-tu laisser dans le monde ?",
-    "Quelle valeur ne pourrais-tu jamais abandonner ?",
-    "Pour quoi ressens-tu le plus de gratitude aujourd’hui ?",
+            "Quel genre de films préfères-tu regarder ?",
+            "À quoi ressemblerait ta journée parfaite du début à la fin ?",
+            "Tu préfères tout planifier ou agir sur un coup de tête ?",
+            "Si tu pouvais vivre n'importe où dans le monde, où ce serait ?",
+            "Qu’est-ce que tu valorises le plus dans une relation ?",
+            "Comment aimes-tu montrer ton amour ?",
+            "Qu’est-ce qui te fait te sentir aimé(e) ?",
+            "Qu’as-tu appris de tes relations passées ?",
+            "Comment gères-tu les désaccords dans une relation ?",
+            "Quels sont tes plus grands rêves dans la vie ?",
+            "Y a-t-il quelque chose que tu as toujours voulu faire mais que tu n’as pas encore osé ?",
+            "De quelle réussite personnelle es-tu le plus fier/fière ?",
+            "Que souhaites-tu pour ton avenir professionnel ?",
+            "Te vois-tu marié(e) ou avoir des enfants un jour ?",
+            "Tu préfères parler des problèmes tout de suite ou attendre ?",
+            "Qu’est-ce qui t’énerve le plus chez les autres ?",
+            "Comment réagis-tu généralement quand tu es en colère ?",
+            "Tu préfères le silence ou être toujours entouré(e) ?",
+            "Qu’est-ce qui est essentiel pour bien vivre à deux ?",
+            "Comment aimes-tu passer ton week-end idéal ?",
+            "Quel plat pourrais-tu manger sans jamais te lasser ?",
+            "Es-tu plutôt une personne du matin ou du soir ?",
+            "Tu préfères faire la fête, voyager ou rester chez toi ?",
+            "Quels passe-temps ou activités aimerais-tu partager avec moi ?",
+            "Quel a été le moment le plus difficile de ta vie ?",
+            "Qu’est-ce qui t’effraie le plus dans l’avenir ?",
+            "Quel genre d’héritage aimerais-tu laisser dans le monde ?",
+            "Quelle valeur ne pourrais-tu jamais abandonner ?",
+            "Pour quoi ressens-tu le plus de gratitude aujourd’hui ?",
             "Si je devais te décrire en un mot, lequel serait-ce ?",
             "Quelle a été la plus grande surprise que tu penses que je t'ai faite ?",
             "Qu'est-ce que tu penses me rend le plus insécure ?",
@@ -301,6 +305,51 @@
             closePopup();
         }
     };
+
+
+    document.querySelectorAll(
+        `button,
+.button-language,
+#btnConfirm,
+#btnCancel,
+.game-box,
+.btn-fato,
+.btn-vdd,
+.btn-falso,
+.btn-conseq,
+.btn-proxima-pergunta,
+.button-randomizador,
+.voltar-wrapper,
+.pergunta-e-resposta,
+.popup .close,
+.img-regras,
+.popup-content`
+    ).forEach(function (el) {
+        el.addEventListener('click', function (event) {
+            const target = event.currentTarget;
+            const href = target.getAttribute("href");
+
+            // Aplica a animação
+            target.classList.remove('animar-clique-afundar');
+            void target.offsetWidth;
+            target.classList.add('animar-clique-afundar');
+
+            // Se for um link <a>, evita a navegação imediata
+            if (href) {
+                event.preventDefault(); // impede o redirecionamento instantâneo
+
+                setTimeout(() => {
+                    window.location.href = href;
+                }, 600); // tempo da animação antes de redirecionar
+            }
+
+            // Se não for link, apenas remove a classe depois do tempo
+            setTimeout(() => {
+                target.classList.remove('animar-clique-afundar');
+            }, 700);
+        });
+    });
+
 
     // Inicia carregamento
     loadQuestions();

@@ -12,25 +12,25 @@
 
 <div class="game-container">
     <!-- Menu -->
-<nav class="menu">
-    <div class="menu-left">
-        <a href="../menuFr.html" class="voltar-wrapper">
-            <img src="../../images/left-arrow.png" alt="Retour">
-            <h2 class="sair">Retour</h2>
-        </a>
-    </div>
+    <nav class="menu">
+        <div class="menu-left">
+            <a href="../menuFr.html" class="voltar-wrapper">
+                <img src="../../images/left-arrow.png" alt="Retour">
+                <h2 class="voltar">Retour</h2>
+            </a>
+        </div>
 
-    <div class="menu-center">
-        <a href="../menuFr.html">
-            <img class="logo-bebedeira" src="../../images/logo-sem-margem.png" alt="Logo Bebedeira" />
+        <div class="menu-center">
+            <a href="../menuFr.html">
+                <img class="logo-bebedeira" src="../../images/logo-sem-margem.png" alt="Logo Bebedeira" />
 
 
 
-        </a>
-    </div>
+            </a>
+        </div>
 
-    <div class="menu-spacer"></div>
-</nav>
+        <div class="menu-spacer"></div>
+    </nav>
 
     <!-- Conteúdo do jogo -->
     <h1>
@@ -38,10 +38,10 @@
     </h1>
     <h3>Couple</h3>
     <div>
-                <a href="#" onclick="openPopup()">
+        <a href="#" onclick="openPopup()">
             <img class="img-regras" src="../images/regras.png" alt="Règles" />
         </a>
-        <h4  onclick="openPopup()">Règles</h4>
+        <h4 onclick="openPopup()">Règles</h4>
     </div>
 
     <div class="card-frase">
@@ -71,6 +71,10 @@
         </ul>
     </div>
 </div>
+
+
+
+
 
 
 <script>
@@ -231,7 +235,7 @@
             "Je ne suis jamais été le plan B de quelqu'un.",
             "Je ne me suis jamais senti(e) le/la troisième dans une relation.",
             "Je n'ai jamais été dans une relation où je me sentais ignoré(e).",
-            "Je ne me suis jamais fait larguer un jour férié ou mon anniversaire.",
+            "Je ne me suis jamais fait larguer un jour férié ou mon annivervoltare.",
             "Je n'ai jamais eu un rendez-vous où l'animal de compagnie du/de la partenaire me détestait.",
             "Je n'ai jamais été dans une relation de plus de 5 ans.",
             "Je ne me suis jamais offert(e) de payer la note lors d'un rendez-vous.",
@@ -302,7 +306,7 @@
             "Je n'ai jamais ri au point de faire pipi dans mon pantalon.",
             "Je n'ai jamais essayé de perdre à un jeu de vérité ou défi.",
             "Je n'ai jamais fait du topless ou nagé nue.",
-            "Je n'ai jamais oublié l'anniversaire d'un/une partenaire.",
+            "Je n'ai jamais oublié l'annivervoltare d'un/une partenaire.",
             "Je n'ai jamais été dans une relation ouverte.",
             "Je ne suis jamais allé(e) à un rendez-vous arrangé.",
             "Je ne suis jamais sorti(e) avec un collègue de travail.",
@@ -327,7 +331,7 @@
             "Je ne me suis jamais fait prendre une amende pour excès de vitesse.",
             "Je n'ai jamais eu peur de rencontrer les parents d'un/une partenaire.",
             "Je n'ai jamais eu un coup de cœur pour le/la partenaire d'un(e) ami(e).",
-            "Je n'ai jamais oublié notre anniversaire.",
+            "Je n'ai jamais oublié notre annivervoltare.",
             "Je n'ai jamais embrassé quelqu'un du même sexe.",
             "Je n'ai jamais menti sur le nombre de partenaires que j'ai eus.",
             "Je ne suis jamais fait faire du saut à l'élastique ou du parachutisme.",
@@ -367,23 +371,23 @@
 
     // Função para exibir a próxima pergunta (mantida igual)
     function nextQuestion() {
-    if (questions.length === 0) {
-        document.getElementById("questionCasal").textContent = "Carregando perguntas...";
-        loadQuestions();
-        return;
-    }
+        if (questions.length === 0) {
+            document.getElementById("questionCasal").textContent = "Carregando perguntas...";
+            loadQuestions();
+            return;
+        }
 
-    if (currentQuestion < questions.length) {
-        document.getElementById("questionCasal").textContent = questions[currentQuestion];
-        document.getElementById("result").textContent = "";
-        currentQuestion++;
-    } else {
-        document.getElementById("questionCasal").textContent = "Fim du jeu ! J'espère que vous vous amusez ! Voulez-vous rejouer ?";
-        document.getElementById("result").textContent = "";
-        currentQuestion = 0;
-        questions = shuffleArray([...embeddedData.questions]); // Reinicia as perguntas embaralhadas
+        if (currentQuestion < questions.length) {
+            document.getElementById("questionCasal").textContent = questions[currentQuestion];
+            document.getElementById("result").textContent = "";
+            currentQuestion++;
+        } else {
+            document.getElementById("questionCasal").textContent = "Fim du jeu ! J'espère que vous vous amusez ! Voulez-vous rejouer ?";
+            document.getElementById("result").textContent = "";
+            currentQuestion = 0;
+            questions = shuffleArray([...embeddedData.questions]); // Reinicia as perguntas embaralhadas
+        }
     }
-}
 
     // Pop-up functions
     function openPopup() {
@@ -400,6 +404,51 @@
             popup.style.display = "none";
         }
     };
+
+
+    document.querySelectorAll(
+        `button,
+.button-language,
+#btnConfirm,
+#btnCancel,
+.game-box,
+.btn-fato,
+.btn-vdd,
+.btn-falso,
+.btn-conseq,
+.btn-proxima-pergunta,
+.button-randomizador,
+.voltar-wrapper,
+.pergunta-e-resposta,
+.popup .close,
+.img-regras,
+.popup-content`
+    ).forEach(function (el) {
+        el.addEventListener('click', function (event) {
+            const target = event.currentTarget;
+            const href = target.getAttribute("href");
+
+            // Aplica a animação
+            target.classList.remove('animar-clique-afundar');
+            void target.offsetWidth;
+            target.classList.add('animar-clique-afundar');
+
+            // Se for um link <a>, evita a navegação imediata
+            if (href) {
+                event.preventDefault(); // impede o redirecionamento instantâneo
+
+                setTimeout(() => {
+                    window.location.href = href;
+                }, 600); // tempo da animação antes de redirecionar
+            }
+
+            // Se não for link, apenas remove a classe depois do tempo
+            setTimeout(() => {
+                target.classList.remove('animar-clique-afundar');
+            }, 700);
+        });
+    });
+
 
     // Carrega as perguntas ao iniciar (modificado para usar dados embutidos)
     loadQuestions();

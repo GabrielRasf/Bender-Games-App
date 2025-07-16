@@ -16,13 +16,13 @@
         <div class="menu-left">
             <a href="../menuPtBr.html" class="voltar-wrapper">
                 <img src="../../images/left-arrow.png" alt="Voltar">
-                <h2 class="sair">Voltar</h2>
+                <h2 class="voltar">Voltar</h2>
             </a>
         </div>
 
         <div class="menu-center">
             <a href="../menuPtBr.html">
-            <img class="logo-bebedeira" src="../../images/logo-sem-margem.png" alt="Logo Bebedeira" />
+                <img class="logo-bebedeira" src="../../images/logo-sem-margem.png" alt="Logo Bebedeira" />
 
             </a>
         </div>
@@ -74,6 +74,10 @@
 </div>
 
 
+
+
+
+
 <script>
     // Perguntas como JSON embutido no código
     const data = {
@@ -96,35 +100,35 @@
             "Atualmente, qual você acha que é meu maior sonho?",
             "Qual animal você acha que eu mais me identifico?",
             "Qual é a sua lembrança favorita da infância?",
-          "Que tipo de filme você mais gosta de assistir?",
-          "Qual seria o seu dia perfeito do começo ao fim?",
-          "Você prefere planejar tudo ou agir por impulso?",
-          "Se pudesse morar em qualquer lugar do mundo, onde seria?",
-          "O que você valoriza mais em um relacionamento?",
-          "Como você gosta de demonstrar amor?",
-          "O que te faz se sentir amado(a)?",
-          "O que você aprendeu com seus relacionamentos passados?",
-          "Como você lida com desentendimentos no relacionamento?",
-          "Quais são seus maiores sonhos de vida?",
-          "Existe algo que você sempre quis fazer, mas ainda não teve coragem?",
-          "Qual conquista pessoal te deixou mais orgulhoso(a)?",
-          "O que você espera do seu futuro profissional?",
-          "Você se vê casado(a) ou tendo filhos algum dia?",
-          "Você prefere conversar sobre problemas na hora ou deixar para depois?",
-          "O que mais te irrita em outras pessoas?",
-          "Como você costuma reagir quando está com raiva?",
-          "Gosta mais de silêncio ou de companhia constante?",
-          "O que você considera essencial para uma boa convivência a dois?",
-          "Como você gosta de passar o fim de semana ideal?",
-          "Qual comida você nunca enjoa de comer?",
-          "Você é mais da noite ou do dia?",
-          "Gosta mais de festas, viagens ou de ficar em casa?",
-          "Quais hobbies ou atividades você gostaria de compartilhar comigo?",
-          "Qual foi o momento mais difícil da sua vida?",
-          "O que mais te assusta no futuro?",
-          "Que tipo de legado você gostaria de deixar no mundo?",
-          "Qual valor você nunca abriria mão?",
-          "O que mais te faz sentir gratidão hoje?",
+            "Que tipo de filme você mais gosta de assistir?",
+            "Qual seria o seu dia perfeito do começo ao fim?",
+            "Você prefere planejar tudo ou agir por impulso?",
+            "Se pudesse morar em qualquer lugar do mundo, onde seria?",
+            "O que você valoriza mais em um relacionamento?",
+            "Como você gosta de demonstrar amor?",
+            "O que te faz se sentir amado(a)?",
+            "O que você aprendeu com seus relacionamentos passados?",
+            "Como você lida com desentendimentos no relacionamento?",
+            "Quais são seus maiores sonhos de vida?",
+            "Existe algo que você sempre quis fazer, mas ainda não teve coragem?",
+            "Qual conquista pessoal te deixou mais orgulhoso(a)?",
+            "O que você espera do seu futuro profissional?",
+            "Você se vê casado(a) ou tendo filhos algum dia?",
+            "Você prefere conversar sobre problemas na hora ou deixar para depois?",
+            "O que mais te irrita em outras pessoas?",
+            "Como você costuma reagir quando está com raiva?",
+            "Gosta mais de silêncio ou de companhia constante?",
+            "O que você considera essencial para uma boa convivência a dois?",
+            "Como você gosta de passar o fim de semana ideal?",
+            "Qual comida você nunca enjoa de comer?",
+            "Você é mais da noite ou do dia?",
+            "Gosta mais de festas, viagens ou de ficar em casa?",
+            "Quais hobbies ou atividades você gostaria de compartilhar comigo?",
+            "Qual foi o momento mais difícil da sua vida?",
+            "O que mais te assusta no futuro?",
+            "Que tipo de legado você gostaria de deixar no mundo?",
+            "Qual valor você nunca abriria mão?",
+            "O que mais te faz sentir gratidão hoje?",
             "Se eu só pudesse dizer uma palavra pelo resto da vida, qual você acha que seria?",
             "Qual parte do meu corpo você acha que eu mais gosto?",
             "O que você acha que eu mais valorizo em um relacionamento?",
@@ -298,6 +302,49 @@
             closePopup();
         }
     };
+
+    document.querySelectorAll(
+        `button,
+.button-language,
+#btnConfirm,
+#btnCancel,
+.game-box,
+.btn-fato,
+.btn-vdd,
+.btn-falso,
+.btn-conseq,
+.btn-proxima-pergunta,
+.button-randomizador,
+.voltar-wrapper,
+.pergunta-e-resposta,
+.popup .close,
+.img-regras,
+.popup-content`
+    ).forEach(function (el) {
+        el.addEventListener('click', function (event) {
+            const target = event.currentTarget;
+            const href = target.getAttribute("href");
+
+            // Aplica a animação
+            target.classList.remove('animar-clique-afundar');
+            void target.offsetWidth;
+            target.classList.add('animar-clique-afundar');
+
+            // Se for um link <a>, evita a navegação imediata
+            if (href) {
+                event.preventDefault(); // impede o redirecionamento instantâneo
+
+                setTimeout(() => {
+                    window.location.href = href;
+                }, 600); // tempo da animação antes de redirecionar
+            }
+
+            // Se não for link, apenas remove a classe depois do tempo
+            setTimeout(() => {
+                target.classList.remove('animar-clique-afundar');
+            }, 700);
+        });
+    });
 
     // Inicia carregamento
     loadQuestions();

@@ -16,25 +16,24 @@
         <div class="menu-left">
             <a href="../menuPtBr.html" class="voltar-wrapper" onclick="clicou-voltar">
                 <img src="../../images/left-arrow.png" alt="Voltar">
-                <h2 class="sair">Voltar</h2>
+                <h2 class="voltar">Voltar</h2>
             </a>
         </div>
 
         <div class="menu-center">
             <a href="../menuPtBr.html">
-            <img class="logo-bebedeira" src="../../images/logo-sem-margem.png" alt="Logo Bebedeira" />
+                <img class="logo-bebedeira" src="../../images/logo-sem-margem.png" alt="Logo Bebedeira" />
             </a>
         </div>
 
         <div class="menu-spacer"></div>
     </nav>
 
-
     <!-- Conteúdo do jogo -->
     <div>
         <h1>Topzeira </h1>
         <a href="#" onclick="openPopup()">
-            <img class="img-regras" src="../../images/regras.png" alt="Regras" />
+            <img class="img-regras animar-clique-afundar" src="../../images/regras.png" alt="Regras" />
             <h4>Regras</h4>
         </a>
     </div>
@@ -67,8 +66,8 @@
     <div class="card-frase">
         <p id="questionTopzeira"></p>
         <div class="center-container">
-            <img class="pergunta-e-resposta" src="../../images/pergunta-e-resposta.png" onclick="showAnswerPopup()"
-                 alt="Pergunta e resposta">
+            <img class="pergunta-e-resposta animar-clique-afundar" src="../../images/pergunta-e-resposta.png"
+                 onclick="showAnswerPopup()" alt="Pergunta e resposta">
             <h4 onclick="showAnswerPopup()">Resposta</h4>
         </div>
     </div>
@@ -1265,7 +1264,7 @@
         showCurrentQuestion();
     }
 
-    // Fisher-Yates Shuffle melhorado
+    // Fisher-Yates Shuffle
     function shuffleArray(array) {
         const newArray = [...array];
         for (let i = newArray.length - 1; i > 0; i--) {
@@ -1297,13 +1296,17 @@
     // Função para exibir a próxima pergunta
     function nextQuestion() {
         currentQuestionIndex++;
-        if (currentQuestionIndex >= shuffledQuestions.length) {
-            // Se chegou ao final, reinicia
-            currentQuestionIndex = 0;
-            shuffledQuestions = shuffleArray([...questions]); // Reembaralha as perguntas
+
+        if (currentQuestionIndex < shuffledQuestions.length) {
+            showCurrentQuestion();
+        } else {
+            // Se chegou ao final, exibe mensagem e aguarda nova rodada
+            document.getElementById("questionTopzeira").textContent = "Fim do Jogo! Espero que estejam se divertindo! Quer jogar novamente?";
+            document.getElementById("result").textContent = "";
+            currentQuestionIndex = 0; // Para reiniciar no botão ou evento externo
         }
-        showCurrentQuestion();
     }
+
 
     // Pop-up functions
     function openPopup() {
@@ -1353,6 +1356,49 @@
 
         document.getElementById("answerPopup").style.display = "block";
     }
+
+    document.querySelectorAll(
+        `button,
+.button-language,
+#btnConfirm,
+#btnCancel,
+.game-box,
+.btn-fato,
+.btn-vdd,
+.btn-falso,
+.btn-conseq,
+.btn-proxima-pergunta,
+.button-randomizador,
+.voltar-wrapper,
+.pergunta-e-resposta,
+.popup .close,
+.img-regras,
+.popup-content`
+    ).forEach(function (el) {
+        el.addEventListener('click', function (event) {
+            const target = event.currentTarget;
+            const href = target.getAttribute("href");
+
+            // Aplica a animação
+            target.classList.remove('animar-clique-afundar');
+            void target.offsetWidth;
+            target.classList.add('animar-clique-afundar');
+
+            // Se for um link <a>, evita a navegação imediata
+            if (href) {
+                event.preventDefault(); // impede o redirecionamento instantâneo
+
+                setTimeout(() => {
+                    window.location.href = href;
+                }, 600); // tempo da animação antes de redirecionar
+            }
+
+            // Se não for link, apenas remove a classe depois do tempo
+            setTimeout(() => {
+                target.classList.remove('animar-clique-afundar');
+            }, 700);
+        });
+    });
 
     // Carrega as perguntas ao iniciar
     loadQuestions();

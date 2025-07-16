@@ -18,13 +18,13 @@
         <div class="menu-left">
             <a href="../menuPtBr.html" class="voltar-wrapper">
                 <img src="../../images/left-arrow.png" alt="Voltar">
-                <h2 class="sair">Voltar</h2>
+                <h2 class="voltar">Voltar</h2>
             </a>
         </div>
 
         <div class="menu-center">
             <a href="../menuPtBr.html">
-            <img class="logo-bebedeira" src="../../images/logo-sem-margem.png" alt="Logo Bebedeira" />
+                <img class="logo-bebedeira" src="../../images/logo-sem-margem.png" alt="Logo Bebedeira" />
 
             </a>
         </div>
@@ -73,6 +73,10 @@
 <button id="timer" onclick="handleTimerClick()">30</button>
 
 
+
+
+
+
 <script>
     const gameData = {
         "questions": [
@@ -85,35 +89,35 @@
             "Fale sensualmente no ouvido do alvo 'Tem algo no mundo que adora ser lambido pra entrar no buraco. O que é?' Resposta: 'A linha da agulha'",
             "Você é o Mister Cócegas. Ataque o alvo.",
             "Você é um macaco de circo. Faça acrobacias e tente fazer o alvo rir com suas caretas.",
-  "Fale com seu alvo como se ele fosse seu bebê recém-nascido e você fosse uma mãe super protetora.",
-  "Você está em um programa de culinária e o prato é feito com partes do corpo do alvo. Descreva o preparo.",
-  "Imite um cachorro carente pedindo carinho ao seu dono (o alvo).",
-  "Faça um discurso político absurdo tentando convencer todos a votarem em você.",
-  "Finja que o alvo é sua alma gêmea e você está reencontrando ele após 20 anos.",
-  "Você é um padre fazendo uma confissão extremamente embaraçosa para o alvo.",
-  "Descreva o corpo do alvo como se estivesse narrando um documentário da National Geographic.",
-  "Finja que está em um programa de namoro e escolha o alvo como seu pretendente. Conquiste-o.",
-  "Dance como se estivesse possuído por um espírito estranho, tentando exorcizá-lo com a dança.",
-  "Você é um gato manhoso. Suba no colo do alvo e tente chamar atenção como um felino faria.",
-  "Invente uma nova religião e tente converter o alvo com fé, promessas e rituais malucos.",
-  "Faça um cover dramático de uma música brega usando voz de ópera e gestos exagerados.",
-  "Imite um médico excêntrico fazendo um diagnóstico completamente absurdo do alvo.",
-  "Você está em um reality show de sobrevivência. Descreva como o alvo salvou sua vida com um item bizarro.",
-  "Faça sons de beijos e tente seduzir o alvo como se fosse um personagem de novela mexicana.",
-  "Seja um DJ famoso e finja que o alvo está na pista de dança mais bombada do mundo.",
-  "Você é um médium incorporando o espírito do ex do seu alvo. Diga o que 'ele ou ela' sente.",
-  "Imite um cavalo apaixonado tentando conquistar o alvo relinchando e fazendo charme.",
-  "Faça uma aula de yoga sensual com o alvo como seu único aluno.",
-  "Interprete um detetive interrogando o alvo sobre um crime muito bizarro que ele 'cometeu'.",
-  "Você é um robô que acabou de ganhar sentimentos e se apaixonou pelo alvo.",
-  "Dê dicas de sedução como se fosse um guru do amor dos anos 80.",
-  "Faça um rap improvisado contando a história do seu romance com o alvo.",
-  "Você é uma velhinha fofoqueira. Conte para os outros tudo o que você 'sabe' sobre o alvo.",
-  "Finja que está sendo atacado por pombos invisíveis e peça ajuda desesperada ao alvo.",
-  "Você está em um comercial de perfume e o cheiro é baseado no suor do alvo. Venda bem!",
-  "Interprete um coach motivacional completamente surtado e grite frases para o alvo se sentir 'vencedor'.",
-  "Faça um pedido de casamento super cafona para o alvo com muita emoção falsa.",
-  "Finja que é um alienígena conhecendo um humano pela primeira vez (o alvo) e tente descrevê-lo.",
+            "Fale com seu alvo como se ele fosse seu bebê recém-nascido e você fosse uma mãe super protetora.",
+            "Você está em um programa de culinária e o prato é feito com partes do corpo do alvo. Descreva o preparo.",
+            "Imite um cachorro carente pedindo carinho ao seu dono (o alvo).",
+            "Faça um discurso político absurdo tentando convencer todos a votarem em você.",
+            "Finja que o alvo é sua alma gêmea e você está reencontrando ele após 20 anos.",
+            "Você é um padre fazendo uma confissão extremamente embaraçosa para o alvo.",
+            "Descreva o corpo do alvo como se estivesse narrando um documentário da National Geographic.",
+            "Finja que está em um programa de namoro e escolha o alvo como seu pretendente. Conquiste-o.",
+            "Dance como se estivesse possuído por um espírito estranho, tentando exorcizá-lo com a dança.",
+            "Você é um gato manhoso. Suba no colo do alvo e tente chamar atenção como um felino faria.",
+            "Invente uma nova religião e tente converter o alvo com fé, promessas e rituais malucos.",
+            "Faça um cover dramático de uma música brega usando voz de ópera e gestos exagerados.",
+            "Imite um médico excêntrico fazendo um diagnóstico completamente absurdo do alvo.",
+            "Você está em um reality show de sobrevivência. Descreva como o alvo salvou sua vida com um item bizarro.",
+            "Faça sons de beijos e tente seduzir o alvo como se fosse um personagem de novela mexicana.",
+            "Seja um DJ famoso e finja que o alvo está na pista de dança mais bombada do mundo.",
+            "Você é um médium incorporando o espírito do ex do seu alvo. Diga o que 'ele ou ela' sente.",
+            "Imite um cavalo apaixonado tentando conquistar o alvo relinchando e fazendo charme.",
+            "Faça uma aula de yoga sensual com o alvo como seu único aluno.",
+            "Interprete um detetive interrogando o alvo sobre um crime muito bizarro que ele 'cometeu'.",
+            "Você é um robô que acabou de ganhar sentimentos e se apaixonou pelo alvo.",
+            "Dê dicas de sedução como se fosse um guru do amor dos anos 80.",
+            "Faça um rap improvisado contando a história do seu romance com o alvo.",
+            "Você é uma velhinha fofoqueira. Conte para os outros tudo o que você 'sabe' sobre o alvo.",
+            "Finja que está sendo atacado por pombos invisíveis e peça ajuda desesperada ao alvo.",
+            "Você está em um comercial de perfume e o cheiro é baseado no suor do alvo. Venda bem!",
+            "Interprete um coach motivacional completamente surtado e grite frases para o alvo se sentir 'vencedor'.",
+            "Faça um pedido de casamento super cafona para o alvo com muita emoção falsa.",
+            "Finja que é um alienígena conhecendo um humano pela primeira vez (o alvo) e tente descrevê-lo.",
             "Faça a melhor imitação de orgasmo do Shrek e da Fiona para seu alvo.",
             "Gire em círculos e fique gritando 'Eu sou uma máquina de lavar'",
             "Imite os sons de uma transa no ouvido do seu alvo",
@@ -253,7 +257,7 @@
         }
     };
 
-// Cronômetro
+    // Cronômetro
     function handleTimerClick() {
         if (isRunning) {
             stopTimer();
@@ -271,9 +275,9 @@
     }
 
     function updateDisplay() {
-    const timerButton = document.getElementById('timer');
-    timerButton.textContent = isRunning ? timeLeft : '⏳';
-}
+        const timerButton = document.getElementById('timer');
+        timerButton.textContent = isRunning ? timeLeft : '⏳';
+    }
 
     function stopTimer() {
         clearInterval(timerInterval);
@@ -282,6 +286,49 @@
         timeLeft = 60;
         updateDisplay(); // Atualiza para mostrar ⏳
     }
+
+    document.querySelectorAll(
+        `button,
+.button-language,
+#btnConfirm,
+#btnCancel,
+.game-box,
+.btn-fato,
+.btn-vdd,
+.btn-falso,
+.btn-conseq,
+.btn-proxima-pergunta,
+.button-randomizador,
+.voltar-wrapper,
+.pergunta-e-resposta,
+.popup .close,
+.img-regras,
+.popup-content`
+    ).forEach(function (el) {
+        el.addEventListener('click', function (event) {
+            const target = event.currentTarget;
+            const href = target.getAttribute("href");
+
+            // Aplica a animação
+            target.classList.remove('animar-clique-afundar');
+            void target.offsetWidth;
+            target.classList.add('animar-clique-afundar');
+
+            // Se for um link <a>, evita a navegação imediata
+            if (href) {
+                event.preventDefault(); // impede o redirecionamento instantâneo
+
+                setTimeout(() => {
+                    window.location.href = href;
+                }, 600); // tempo da animação antes de redirecionar
+            }
+
+            // Se não for link, apenas remove a classe depois do tempo
+            setTimeout(() => {
+                target.classList.remove('animar-clique-afundar');
+            }, 700);
+        });
+    });
 
     window.addEventListener('load', function () {
         loadQuestions();

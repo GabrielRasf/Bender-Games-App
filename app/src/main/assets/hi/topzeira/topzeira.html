@@ -12,32 +12,32 @@
 
 <div class="game-container">
     <!-- Menu -->
-<nav class="menu">
-    <div class="menu-left">
-        <a href="../menuHi.html" class="voltar-wrapper">
-            <img src="../../images/left-arrow.png" alt="Back">
-            <h2 class="sair">Back</h2>
-        </a>
-    </div>
+    <nav class="menu">
+        <div class="menu-left">
+            <a href="../menuHi.html" class="voltar-wrapper">
+                <img src="../../images/left-arrow.png" alt="Back">
+                <h2 class="voltar">Back</h2>
+            </a>
+        </div>
 
-    <div class="menu-center">
-        <a href="../menuHi.html">
-            <img class="logo-bebedeira" src="../../images/logo-sem-margem.png" alt="Logo Bebedeira" />
+        <div class="menu-center">
+            <a href="../menuHi.html">
+                <img class="logo-bebedeira" src="../../images/logo-sem-margem.png" alt="Logo Bebedeira" />
 
 
 
-        </a>
-    </div>
+            </a>
+        </div>
 
-    <div class="menu-spacer"></div>
-</nav>
+        <div class="menu-spacer"></div>
+    </nav>
 
     <!-- Game content -->
     <div>
         <h1>Topzeira</h1>
         <a href="#" onclick="openPopup()">
             <img class="img-regras" src="../images/regras.png" alt="Rules" />
-         <h4 onclick="showAnswerPopup()">Rules</h4>
+            <h4 onclick="showAnswerPopup()">Rules</h4>
         </a>
     </div>
 
@@ -55,9 +55,11 @@
                 <li>Phir clockwise direction mein har koi bolega jo usse lagta hai Top 10 mein ho sakta hai</li>
                 <li>Aap pass kar sakte ho ya answer de sakte ho</li>
                 <li>Agar aap pass karte ho, to aap iss round mein nahi kheloge</li>
-                <li>Agar aap answer dete ho aur koi shak karta hai, to answer par click karo aur list check karo</li>
+                <li>Agar aap answer dete ho aur koi shak karta hai, to answer par click karo aur list check karo
+                </li>
                 <li>Do tareeke hain decision lene ke:</li>
-                <li>Agar doubt karne wala sahi nikla, to galat answer dene wale ko ek shot peena padega aur round khatam</li>
+                <li>Agar doubt karne wala sahi nikla, to galat answer dene wale ko ek shot peena padega aur round
+                    khatam</li>
                 <li>Agar doubt galat tha, to shak karne wale ko ek shot peena padega aur round khatam</li>
                 <li>Masti karo! 🍻</li>
             </ul>
@@ -90,6 +92,10 @@
         </div>
     </div>
 </div>
+
+
+
+
 
 
 <script>
@@ -1351,6 +1357,49 @@
 
         document.getElementById("answerPopup").style.display = "block";
     }
+
+    document.querySelectorAll(
+        `button,
+.button-language,
+#btnConfirm,
+#btnCancel,
+.game-box,
+.btn-fato,
+.btn-vdd,
+.btn-falso,
+.btn-conseq,
+.btn-proxima-pergunta,
+.button-randomizador,
+.voltar-wrapper,
+.pergunta-e-resposta,
+.popup .close,
+.img-regras,
+.popup-content`
+    ).forEach(function (el) {
+        el.addEventListener('click', function (event) {
+            const target = event.currentTarget;
+            const href = target.getAttribute("href");
+
+            // Aplica a animação
+            target.classList.remove('animar-clique-afundar');
+            void target.offsetWidth;
+            target.classList.add('animar-clique-afundar');
+
+            // Se for um link <a>, evita a navegação imediata
+            if (href) {
+                event.preventDefault(); // impede o redirecionamento instantâneo
+
+                setTimeout(() => {
+                    window.location.href = href;
+                }, 600); // tempo da animação antes de redirecionar
+            }
+
+            // Se não for link, apenas remove a classe depois do tempo
+            setTimeout(() => {
+                target.classList.remove('animar-clique-afundar');
+            }, 700);
+        });
+    });
 
     // Questions load karo jab page open ho
     loadQuestions();

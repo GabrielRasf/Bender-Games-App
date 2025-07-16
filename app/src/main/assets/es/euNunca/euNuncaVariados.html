@@ -12,25 +12,25 @@
 
 <div class="game-container">
     <!-- Menú -->
-<nav class="menu">
-    <div class="menu-left">
-        <a href="../menuEs.html" class="voltar-wrapper">
-            <img src="../../images/left-arrow.png" alt="Volver">
-            <h2 class="sair">Volver</h2>
-        </a>
-    </div>
+    <nav class="menu">
+        <div class="menu-left">
+            <a href="../menuEs.html" class="voltar-wrapper">
+                <img src="../../images/left-arrow.png" alt="Volver">
+                <h2 class="voltar">Volver</h2>
+            </a>
+        </div>
 
-    <div class="menu-center">
-        <a href="../menuEs.html">
-            <img class="logo-bebedeira" src="../../images/logo-sem-margem.png" alt="Logo Bebedeira" />
+        <div class="menu-center">
+            <a href="../menuEs.html">
+                <img class="logo-bebedeira" src="../../images/logo-sem-margem.png" alt="Logo Bebedeira" />
 
 
 
-        </a>
-    </div>
+            </a>
+        </div>
 
-    <div class="menu-spacer"></div>
-</nav>
+        <div class="menu-spacer"></div>
+    </nav>
 
     <!-- Contenido del juego -->
     <h1>
@@ -71,6 +71,10 @@
         </ul>
     </div>
 </div>
+
+
+
+
 
 
 
@@ -407,7 +411,7 @@
             "Eu nunca chorei na escola.",
             "Eu nunca estive em um lugar que tinha certeza que era assombrado.",
             "Eu nunca cortei meu próprio cabelo.",
-            "Eu nunca menti para não sair com amigos.",
+            "Eu nunca menti para não voltar com amigos.",
             "Eu nunca inventei uma língua secreta com meus amigos.",
             "Eu nunca segui meu amigo(a) escondido(a) no primeiro encontro dele(a).",
             "Eu nunca marquei um encontro para um(a) amigo(a).",
@@ -431,7 +435,7 @@
             "Eu nunca fiquei nervoso(a) na frente de alguém nesta sala.",
             "Eu nunca tive vontade de pular de paraquedas.",
             "Eu nunca tive um crush em alguém nesta sala.",
-            "Eu nunca chamei alguém para sair usando uma pergunta de 'eu nunca'.",
+            "Eu nunca chamei alguém para voltar usando uma pergunta de 'eu nunca'.",
             "Eu nunca convidei meu crush para jogar 'eu nunca'.",
             "Eu nunca fiquei nervoso(a) demais para tomar a iniciativa com um crush.",
             "Eu nunca chorei vendo um comercial de margarina.",
@@ -447,10 +451,10 @@
             "Eu nunca menti na entrevista de emprego só pra parecer mais qualificado.",
             "Eu nunca stalkeei o crush até chegar nas fotos de 2012.",
             "Eu nunca usei o Wi-Fi do vizinho sem ele saber.",
-            "Eu nunca inventei um compromisso só pra sair de um encontro ruim.",
+            "Eu nunca inventei um compromisso só pra voltar de um encontro ruim.",
             "Eu nunca pensei em largar tudo e morar no mato por causa de um boleto.",
             "Eu nunca bati na porta do banheiro e saí correndo.",
-            "Eu nunca inventei que tinha compromisso só pra não sair com alguém.",
+            "Eu nunca inventei que tinha compromisso só pra não voltar com alguém.",
             "Eu nunca coloquei o celular no bolso e depois entrei em pânico achando que perdi.",
             "Eu nunca fingi estar ocupado no celular pra não interagir com alguém.",
             "Eu nunca ignorei uma ligação e depois mandei mensagem dizendo 'não vi'.",
@@ -561,7 +565,46 @@
             "Nunca ignoré una llamada y luego mandé un mensaje diciendo 'no vi'."
         ]
     }
+    document.querySelectorAll(
+        `button,
+    .button-language,
+    #btnConfirm,
+    #btnCancel,
+    .game-box,
+    .btn-fato,
+    .btn-vdd,
+    .btn-falso,
+    .btn-conseq,
+    .btn-proxima-pergunta,
+    .button-randomizador,
+    .voltar-wrapper,
+    .pergunta-e-resposta,
+    .popup .close`
+    ).forEach(function (el) {
+        el.addEventListener('click', function (event) {
+            const target = event.currentTarget;
+            const href = target.getAttribute("href");
 
+            // Aplica a animação
+            target.classList.remove('animar-clique-afundar');
+            void target.offsetWidth;
+            target.classList.add('animar-clique-afundar');
+
+            // Se for um link <a>, evita a navegação imediata
+            if (href) {
+                event.preventDefault(); // impede o redirecionamento instantâneo
+
+                setTimeout(() => {
+                    window.location.href = href;
+                }, 600); // tempo da animação antes de redirecionar
+            }
+
+            // Se não for link, apenas remove a classe depois do tempo
+            setTimeout(() => {
+                target.classList.remove('animar-clique-afundar');
+            }, 700);
+        });
+    });
     // Carrega as perguntas ao iniciar (modificado para usar dados embutidos)
     loadQuestions();
 </script>

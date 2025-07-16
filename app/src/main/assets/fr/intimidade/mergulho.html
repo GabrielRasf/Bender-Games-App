@@ -12,25 +12,25 @@
 <body>
 <div class="game-container">
     <!-- Menu -->
-<nav class="menu">
-    <div class="menu-left">
-        <a href="../menuFr.html" class="voltar-wrapper">
-            <img src="../../images/left-arrow.png" alt="Retour">
-            <h2 class="sair">Retour</h2>
-        </a>
-    </div>
+    <nav class="menu">
+        <div class="menu-left">
+            <a href="../menuFr.html" class="voltar-wrapper">
+                <img src="../../images/left-arrow.png" alt="Retour">
+                <h2 class="voltar">Retour</h2>
+            </a>
+        </div>
 
-    <div class="menu-center">
-        <a href="../menuFr.html">
-            <img class="logo-bebedeira" src="../../images/logo-sem-margem.png" alt="Logo Bebedeira" />
+        <div class="menu-center">
+            <a href="../menuFr.html">
+                <img class="logo-bebedeira" src="../../images/logo-sem-margem.png" alt="Logo Bebedeira" />
 
 
 
-        </a>
-    </div>
+            </a>
+        </div>
 
-    <div class="menu-spacer"></div>
-</nav>
+        <div class="menu-spacer"></div>
+    </nav>
 
     <!-- Contenu du jeu -->
     <h1>
@@ -38,10 +38,10 @@
     </h1>
     <h3>Immersion</h3>
     <div>
-                <a href="#" onclick="openPopup()">
+        <a href="#" onclick="openPopup()">
             <img class="img-regras" src="../images/regras.png" alt="Règles" />
         </a>
-        <h4  onclick="openPopup()">Règles</h4>
+        <h4 onclick="openPopup()">Règles</h4>
     </div>
 
     <!-- Pop-up des règles -->
@@ -80,6 +80,10 @@
 </div>
 
 
+
+
+
+
 <script>
     // JSON embarqué directement
     const questionData = {
@@ -107,16 +111,16 @@
         ]
     };
 
-    let questions = [];
+        let questions = [];
     let currentQuestion = 0;
 
-    // Mélanger et charger les questions
+    // Shuffle and load questions
     function loadQuestions() {
         questions = shuffleArray(questionData.questions);
         nextQuestion();
     }
 
-    // Mélange un tableau
+    // Shuffle array helper
     function shuffleArray(array) {
         for (let i = array.length - 1; i > 0; i--) {
             const j = Math.floor(Math.random() * (i + 1));
@@ -125,10 +129,10 @@
         return array;
     }
 
-    // Affiche la question suivante
+    // Show next question
     function nextQuestion() {
         if (questions.length === 0) {
-            document.getElementById("questionMergulho").textContent = "Chargement des questions...";
+            document.getElementById("questionMergulho").textContent = "Loading questions...";
             return;
         }
 
@@ -137,14 +141,14 @@
             document.getElementById("result").textContent = "";
             currentQuestion++;
         } else {
-            document.getElementById("questionMergulho").textContent = "Fin du jeu ! J'espère que vous vous amusez ! Voulez-vous rejouer ?";
+            document.getElementById("questionMergulho").textContent = "Game over! Hope you enjoyed! Play again?";
             document.getElementById("result").textContent = "";
             currentQuestion = 0;
             questions = shuffleArray(questions);
         }
     }
 
-    // Fonctions pour le pop-up
+    // Popup functions
     function openPopup() {
         document.getElementById("popup").style.display = "block";
     }
@@ -163,8 +167,50 @@
             popup.style.display = "none";
         }
     };
+    document.querySelectorAll(
+        `button,
+.button-language,
+#btnConfirm,
+#btnCancel,
+.game-box,
+.btn-fato,
+.btn-vdd,
+.btn-falso,
+.btn-conseq,
+.btn-proxima-pergunta,
+.button-randomizador,
+.voltar-wrapper,
+.pergunta-e-resposta,
+.popup .close,
+.img-regras,
+.popup-content`
+    ).forEach(function (el) {
+        el.addEventListener('click', function (event) {
+            const target = event.currentTarget;
+            const href = target.getAttribute("href");
 
-    // Démarre le jeu au chargement
+            // Aplica a animação
+            target.classList.remove('animar-clique-afundar');
+            void target.offsetWidth;
+            target.classList.add('animar-clique-afundar');
+
+            // Se for um link <a>, evita a navegação imediata
+            if (href) {
+                event.preventDefault(); // impede o redirecionamento instantâneo
+
+                setTimeout(() => {
+                    window.location.href = href;
+                }, 600); // tempo da animação antes de redirecionar
+            }
+
+            // Se não for link, apenas remove a classe depois do tempo
+            setTimeout(() => {
+                target.classList.remove('animar-clique-afundar');
+            }, 700);
+        });
+    });
+
+    // Start game on load
     loadQuestions();
 </script>
 </body>

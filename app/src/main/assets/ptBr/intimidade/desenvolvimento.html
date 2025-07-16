@@ -15,13 +15,13 @@
         <div class="menu-left">
             <a href="../menuPtBr.html" class="voltar-wrapper">
                 <img src="../../images/left-arrow.png" alt="Voltar">
-                <h2 class="sair">Voltar</h2>
+                <h2 class="voltar">Voltar</h2>
             </a>
         </div>
 
         <div class="menu-center">
             <a href="../menuPtBr.html">
-            <img class="logo-bebedeira" src="../../images/logo-sem-margem.png" alt="Logo Bebedeira" />
+                <img class="logo-bebedeira" src="../../images/logo-sem-margem.png" alt="Logo Bebedeira" />
 
             </a>
         </div>
@@ -68,6 +68,10 @@
     </div>
     <div id="result"></div>
 </div>
+
+
+
+
 
 
 <script>
@@ -186,7 +190,7 @@
             "Para você, o que faz a vida valer a pena ser vivida?",
             "Qual o nome da sua mãe e o que você mais gosta dela?",
             "Qual a coisa mais importante que você acha que fez por você mesmo?",
-            "O que vo~e mais gostava de fazer quando era criança? É possível adaptar isso para você fazer hoje em dia também?",
+            "O que você mais gostava de fazer quando era criança? É possível adaptar isso para você fazer hoje em dia também?",
             "Qual o seu lugar favorito no mundo?",
             "Se você soubesse que tem só mais um ano de vida, mudaria algo na sua forma de viver? O que o impede de fazer isto hoje?",
             "O que tira a sua paz?",
@@ -216,76 +220,100 @@
         ]
     };
 
-    const questions = data.questions;  // array de perguntas
+let questions = data.questions;
+let currentIndex = 0;
 
-    let currentIndex = 0;
+// Variáveis que receberão os elementos DOM
+let questionElement, optionsList, resultDiv;
 
-    // Elementos do DOM
-    const questionElement = document.getElementById('questionDesenvolvimento');
-    const optionsList = document.getElementById('optionsList');
-    const resultDiv = document.getElementById('result');
-
-    function loadQuestion(index) {
-        if (index < 0 || index >= questions.length) {
-            questionElement.textContent = "Você chegou ao fim das perguntas!";
-            optionsList.innerHTML = "";
-            return;
-        }
-        questionElement.textContent = questions[index];
-        optionsList.innerHTML = ""; // Por enquanto, não há opções
-        resultDiv.textContent = ""; // limpa resultado
+function loadQuestion(index) {
+    if (index < 0 || index >= questions.length) {
+        questionElement.textContent = "Você chegou ao fim das perguntas!";
+        optionsList.innerHTML = "";
+        return;
     }
+    questionElement.textContent = questions[index];
+    optionsList.innerHTML = "";
+    resultDiv.textContent = "";
+}
 
-    function nextQuestion() {
-        currentIndex++;
-        if (currentIndex >= questions.length) {
-            currentIndex = 0; // ou você pode parar no fim
-            alert("Você chegou ao fim das perguntas. Voltando ao início.");
-        }
-        loadQuestion(currentIndex);
+function nextQuestion() {
+    currentIndex++;
+    if (currentIndex >= questions.length) {
+        alert("Você chegou ao fim das perguntas. Voltando ao início.");
+        currentIndex = 0;
     }
+    loadQuestion(currentIndex);
+}
 
-    // Funções para abrir e fechar o popup das regras
-    function openPopup() {
-        document.getElementById('popup').style.display = 'block';
+function openPopup() {
+    document.getElementById('popup').style.display = 'block';
+}
+
+function closePopup() {
+    document.getElementById('popup').style.display = 'none';
+}
+
+// Fecha o popup clicando fora da área de conteúdo
+window.onclick = function(event) {
+    const popup = document.getElementById('popup');
+    if (event.target === popup) {
+        closePopup();
     }
+};
 
-    function closePopup() {
-        document.getElementById('popup').style.display = 'none';
-    }
+window.onload = function() {
+    // Captura os elementos do DOM só depois de carregar
+    questionElement = document.getElementById('questionDesenvolvimento');
+    optionsList = document.getElementById('optionsList');
+    resultDiv = document.getElementById('result');
 
-    // Funções para abrir e fechar o popup da resposta
-    function openAnswerPopup(answerText) {
-        document.getElementById('answerText').textContent = answerText;
-        document.getElementById('answerPopup').style.display = 'block';
-    }
+    // Carrega a primeira pergunta
+    loadQuestion(currentIndex);
+};
 
-    function closeAnswerPopup() {
-        document.getElementById('answerPopup').style.display = 'none';
-    }
+    document.querySelectorAll(
+        `button,
+.button-language,
+#btnConfirm,
+#btnCancel,
+.game-box,
+.btn-fato,
+.btn-vdd,
+.btn-falso,
+.btn-conseq,
+.btn-proxima-pergunta,
+.button-randomizador,
+.voltar-wrapper,
+.pergunta-e-resposta,
+.popup .close,
+.img-regras,
+.popup-content`
+    ).forEach(function (el) {
+        el.addEventListener('click', function (event) {
+            const target = event.currentTarget;
+            const href = target.getAttribute("href");
 
-    // Carregar a primeira pergunta assim que a página carregar
-    window.onload = function () {
-        loadQuestion(currentIndex);
-    };
+            // Aplica a animação
+            target.classList.remove('animar-clique-afundar');
+            void target.offsetWidth;
+            target.classList.add('animar-clique-afundar');
 
+            // Se for um link <a>, evita a navegação imediata
+            if (href) {
+                event.preventDefault(); // impede o redirecionamento instantâneo
 
-    // Pop-up regras
-    function openPopup() {
-        document.getElementById("popup").style.display = "block";
-    }
+                setTimeout(() => {
+                    window.location.href = href;
+                }, 600); // tempo da animação antes de redirecionar
+            }
 
-    function closePopup() {
-        document.getElementById("popup").style.display = "none";
-    }
-
-    // Fechar o pop-up ao clicar fora dele
-    window.onclick = function (event) {
-        let popup = document.getElementById("popup");
-        if (event.target === popup) {
-            popup.style.display = "none";
-        }
-    };
+            // Se não for link, apenas remove a classe depois do tempo
+            setTimeout(() => {
+                target.classList.remove('animar-clique-afundar');
+            }, 700);
+        });
+    });
 
     // Inicializa o carregamento das perguntas quando a página carrega
     window.onload = loadQuestions;

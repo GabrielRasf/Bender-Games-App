@@ -11,25 +11,25 @@
 <body>
 <div class="game-container">
     <!-- Menu -->
-<nav class="menu">
-    <div class="menu-left">
-        <a href="../menuHi.html" class="voltar-wrapper">
-            <img src="../../images/left-arrow.png" alt="Back">
-            <h2 class="sair">Back</h2>
-        </a>
-    </div>
+    <nav class="menu">
+        <div class="menu-left">
+            <a href="../menuHi.html" class="voltar-wrapper">
+                <img src="../../images/left-arrow.png" alt="Back">
+                <h2 class="voltar">Back</h2>
+            </a>
+        </div>
 
-    <div class="menu-center">
-        <a href="../menuHi.html">
-            <img class="logo-bebedeira" src="../../images/logo-sem-margem.png" alt="Logo Bebedeira" />
+        <div class="menu-center">
+            <a href="../menuHi.html">
+                <img class="logo-bebedeira" src="../../images/logo-sem-margem.png" alt="Logo Bebedeira" />
 
 
 
-        </a>
-    </div>
+            </a>
+        </div>
 
-    <div class="menu-spacer"></div>
-</nav>
+        <div class="menu-spacer"></div>
+    </nav>
 
     <!-- Game Content -->
     <h1>
@@ -39,7 +39,7 @@
     <div>
         <a href="#" onclick="openPopup()">
             <img class="img-regras" src="../images/regras.png" alt="Rules" />
-         <h4 onclick="showAnswerPopup()">Rules</h4>
+            <h4 onclick="showAnswerPopup()">Rules</h4>
         </a>
     </div>
 
@@ -78,6 +78,10 @@
         <p id="answerText">Pehle kisi question par click karo!</p>
     </div>
 </div>
+
+
+
+
 
 <script>
 
@@ -225,66 +229,103 @@
         ]
     };
 
-    const questions = data.questions;  // array de perguntas
+    let questions = data.questions;
+let currentIndex = 0;
 
-    let currentIndex = 0;
+// Variáveis que receberão os elementos DOM
+let questionElement, optionsList, resultDiv;
 
-    // Elementos do DOM
-    const questionElement = document.getElementById('questionDesenvolvimento');
-    const optionsList = document.getElementById('optionsList');
-    const resultDiv = document.getElementById('result');
-
-    function loadQuestion(index) {
-        if (index < 0 || index >= questions.length) {
-            questionElement.textContent = "Aapne saari questions complete kar liya hai!"; // You have completed all questions!
-            optionsList.innerHTML = "";
-            return;
-        }
-        questionElement.textContent = questions[index];
-        optionsList.innerHTML = ""; // Abhi koi options nahi hain
-        resultDiv.textContent = ""; // Result clear kar do
+function loadQuestion(index) {
+    if (index < 0 || index >= questions.length) {
+        questionElement.textContent = "Você chegou ao fim das perguntas!";
+        optionsList.innerHTML = "";
+        return;
     }
+    questionElement.textContent = questions[index];
+    optionsList.innerHTML = "";
+    resultDiv.textContent = "";
+}
 
-    function nextQuestion() {
-        currentIndex++;
-        if (currentIndex >= questions.length) {
-            currentIndex = 0;
-            alert("Aapne saari questions kar li! Phir se shuru karte hain."); // You finished all questions! Let's start again.
-        }
-        loadQuestion(currentIndex);
+function nextQuestion() {
+    currentIndex++;
+    if (currentIndex >= questions.length) {
+        alert("Você chegou ao fim das perguntas. Voltando ao início.");
+        currentIndex = 0;
     }
+    loadQuestion(currentIndex);
+}
 
-    // Pop-up rules
-    function openPopup() {
-        document.getElementById('popup').style.display = 'block';
+function openPopup() {
+    document.getElementById('popup').style.display = 'block';
+}
+
+function closePopup() {
+    document.getElementById('popup').style.display = 'none';
+}
+
+// Fecha o popup clicando fora da área de conteúdo
+window.onclick = function(event) {
+    const popup = document.getElementById('popup');
+    if (event.target === popup) {
+        closePopup();
     }
+};
 
-    function closePopup() {
-        document.getElementById('popup').style.display = 'none';
-    }
+window.onload = function() {
+    // Captura os elementos do DOM só depois de carregar
+    questionElement = document.getElementById('questionDesenvolvimento');
+    optionsList = document.getElementById('optionsList');
+    resultDiv = document.getElementById('result');
 
-    // Answer popup
-    function openAnswerPopup(answerText) {
-        document.getElementById('answerText').textContent = answerText;
-        document.getElementById('answerPopup').style.display = 'block';
-    }
+    // Carrega a primeira pergunta
+    loadQuestion(currentIndex);
+};
 
-    function closeAnswerPopup() {
-        document.getElementById('answerPopup').style.display = 'none';
-    }
+    document.querySelectorAll(
+        `button,
+.button-language,
+#btnConfirm,
+#btnCancel,
+.game-box,
+.btn-fato,
+.btn-vdd,
+.btn-falso,
+.btn-conseq,
+.btn-proxima-pergunta,
+.button-randomizador,
+.voltar-wrapper,
+.pergunta-e-resposta,
+.popup .close,
+.img-regras,
+.popup-content`
+    ).forEach(function (el) {
+        el.addEventListener('click', function (event) {
+            const target = event.currentTarget;
+            const href = target.getAttribute("href");
 
-    // Close popup on outside click
-    window.onclick = function (event) {
-        let popup = document.getElementById('popup');
-        if (event.target === popup) {
-            closePopup();
-        }
-    };
+            // Aplica a animação
+            target.classList.remove('animar-clique-afundar');
+            void target.offsetWidth;
+            target.classList.add('animar-clique-afundar');
 
-    // Load first question on page load
-    window.onload = function () {
-        loadQuestion(currentIndex);
-    };
+            // Se for um link <a>, evita a navegação imediata
+            if (href) {
+                event.preventDefault(); // impede o redirecionamento instantâneo
+
+                setTimeout(() => {
+                    window.location.href = href;
+                }, 600); // tempo da animação antes de redirecionar
+            }
+
+            // Se não for link, apenas remove a classe depois do tempo
+            setTimeout(() => {
+                target.classList.remove('animar-clique-afundar');
+            }, 700);
+        });
+    });
+
+    // Inicializa o carregamento das perguntas quando a página carrega
+    window.onload = loadQuestions;
 </script>
 </body>
 

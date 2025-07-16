@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="index.css">
     <title>Bebedeira Games</title>
 </head>
+
 <body>
 <div class="main-container">
     <div class="logo-container">
@@ -35,8 +37,6 @@
     </div>
 </div>
 
-
-
 <script>
     let selectedLang = "";
 
@@ -47,38 +47,38 @@
 
         const langTexts = {
             pt: `<strong>
-                Este é um jogo para maiores de <span class="destaque-idade">18 ou 21 anos</span>, conforme a legislação de seu país.
-                <br><br>
-                Este é um jogo para diversão! Respeite seus limites e os dos outros jogadores.
-                <br><br>
-                Está de acordo e deseja continuar?
-                </strong>`,
+    Este é um jogo para maiores de <span class="destaque-idade">18 ou 21 anos</span>, conforme a legislação de seu país.
+    <br><br>
+    Este é um jogo para diversão! Respeite seus limites e os dos outros jogadores.
+    <br><br>
+    Está de acordo e deseja continuar?
+    </strong>`,
             en: `<strong>
-                This is a game for people over <span class="destaque-idade">18 or 21 years old</span>, according to your country\'s laws.
-                <br><br>
-                This is a game for fun! Respect your limits and those of other players.
-                <br><br>
-                Do you agree and wish to continue?
-                </strong>`,
+    This is a game for people over <span class="destaque-idade">18 or 21 years old</span>, according to your country\'s laws.
+    <br><br>
+    This is a game for fun! Respect your limits and those of other players.
+    <br><br>
+    Do you agree and wish to continue?
+    </strong>`,
             es: `<strong>
-                Este es un juego para mayores de <span class="destaque-idade">18 o 21 años</span>, según la legislación de tu país.
-                <br><br>
-                ¡Este es un juego para divertirse! Respeta tus límites y los de los demás jugadores.
-                <br><br>
-                ¿Estás de acuerdo y deseas continuar?</strong>`,
+    Este es un juego para mayores de <span class="destaque-idade">18 o 21 años</span>, según la legislación de tu país.
+    <br><br>
+    ¡Este es un juego para divertirse! Respeta tus límites y los de los demás jugadores.
+    <br><br>
+    ¿Estás de acuerdo y deseas continuar?</strong>`,
             fr: `<strong>
-                Ce jeu est destiné aux personnes de plus de <span class="destaque-idade">18 ou 21 ans</span>, selon la législation de votre pays.
-                <br><br>
-                C'est un jeu pour s\'amuser ! Respectez vos limites et celles des autres joueurs.
-                <br><br>
-                Êtes-vous d\'accord et souhaitez-vous continuer ?</strong>`,
+    Ce jeu est destiné aux personnes de plus de <span class="destaque-idade">18 ou 21 ans</span>, selon la législation de votre pays.
+    <br><br>
+    C'est un jeu pour s\'amuser ! Respectez vos limites et celles des autres joueurs.
+    <br><br>
+    Êtes-vous d\'accord et souhaitez-vous continuer ?</strong>`,
             hi: `<strong>
-                Yeh game sirf un logon ke liye hai jo <span class="destaque-idade">18 ya 21 saal</span> se upar hain, jaise ki aapke desh ka kanoon kehta hai.
-                <br><br>
-                Yeh sirf masti ke liye hai! Apni aur doosre players ki limits ka dhyaan rakho.
-                <br><br>
-                Kya aap sehmat hain aur aage badhna chahte hain?</strong>`
-            };
+    Yeh game sirf un logon ke liye hai jo <span class="destaque-idade">18 ya 21 saal</span> se upar hain, jaise ki aapke desh ka kanoon kehta hai.
+    <br><br>
+    Yeh sirf masti ke liye hai! Apni aur doosre players ki limits ka dhyaan rakho.
+    <br><br>
+    Kya aap sehmat hain aur aage badhna chahte hain?</strong>`
+        };
 
         const buttonTexts = {
             pt: { yes: "Sim", cancel: "Cancelar" },
@@ -99,46 +99,68 @@
     }
 
     function confirmLanguage() {
-        if (selectedLang === 'pt') {
-            window.location.href = './ptBr/menuPtBr.html';
-        } else if (selectedLang === 'en') {
-            window.location.href = './en/menuEn.html';
-        } else if (selectedLang === 'es') {
-            window.location.href = './es/menuEs.html';
-        } else if (selectedLang === 'fr') {
-            window.location.href = './fr/menuFr.html';
-        } else if (selectedLang === 'hi') {
-            window.location.href = './hi/menuHi.html';
-        }
+        const confirmButton = document.getElementById("btnConfirm");
+        confirmButton.classList.add("animar-clique-afundar");
+
+        setTimeout(() => {
+            if (selectedLang === 'pt') {
+                window.location.href = './ptBr/menuPtBr.html';
+            } else if (selectedLang === 'en') {
+                window.location.href = './en/menuEn.html';
+            } else if (selectedLang === 'es') {
+                window.location.href = './es/menuEs.html';
+            } else if (selectedLang === 'fr') {
+                window.location.href = './fr/menuFr.html';
+            } else if (selectedLang === 'hi') {
+                window.location.href = './hi/menuHi.html';
+            }
+        }, 1000); // dá tempo da animação ser percebida
     }
 
-    document.addEventListener('DOMContentLoaded', () => {
-  const pageWrapper = document.getElementById('page-wrapper');
+    document.querySelectorAll(
+        `button,
+.button-language,
+#btnConfirm,
+#btnCancel,
+.game-box,
+.btn-fato,
+.btn-vdd,
+.btn-falso,
+.btn-conseq,
+.btn-proxima-pergunta,
+.button-randomizador,
+.voltar-wrapper,
+.pergunta-e-resposta,
+.popup .close,
+.img-regras,
+.popup-content`
+    ).forEach(function (el) {
+        el.addEventListener('click', function (event) {
+            const target = event.currentTarget;
+            const href = target.getAttribute("href");
 
-  // Detecta todos os links internos para aplicar o efeito
-  const links = document.querySelectorAll('a.link');
+            // Aplica a animação
+            target.classList.remove('animar-clique-afundar');
+            void target.offsetWidth;
+            target.classList.add('animar-clique-afundar');
 
-  links.forEach(link => {
-    link.addEventListener('click', function(e) {
-      e.preventDefault(); // previne navegação imediata
+            // Se for um link <a>, evita a navegação imediata
+            if (href) {
+                event.preventDefault(); // impede o redirecionamento instantâneo
 
-      const href = this.getAttribute('href');
+                setTimeout(() => {
+                    window.location.href = href;
+                }, 600); // tempo da animação antes de redirecionar
+            }
 
-      // Aplica fade-out
-      pageWrapper.classList.add('fade-out');
-
-      // Após a transição (0.5s), muda a página
-      setTimeout(() => {
-        window.location.href = href;
-      }, 500); // tempo do fade-out
+            // Se não for link, apenas remove a classe depois do tempo
+            setTimeout(() => {
+                target.classList.remove('animar-clique-afundar');
+            }, 700);
+        });
     });
-  });
-
-  // Ao carregar a página, aplica fade-in (inicialmente opacidade 0 para efeito visual)
-  pageWrapper.classList.remove('fade-out');
-  pageWrapper.classList.add('fade-in');
-});
 
 </script>
 </body>
+
 </html>

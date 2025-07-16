@@ -16,13 +16,13 @@
         <div class="menu-left">
             <a href="../menuPtBr.html" class="voltar-wrapper">
                 <img src="../../images/left-arrow.png" alt="Voltar">
-                <h2 class="sair">Voltar</h2>
+                <h2 class="voltar">Voltar</h2>
             </a>
         </div>
 
         <div class="menu-center">
             <a href="../menuPtBr.html">
-            <img class="logo-bebedeira" src="../../images/logo-sem-margem.png" alt="Logo Bebedeira" />
+                <img class="logo-bebedeira" src="../../images/logo-sem-margem.png" alt="Logo Bebedeira" />
 
             </a>
         </div>
@@ -69,7 +69,6 @@
         </ul>
     </div>
 </div>
-
 
 <script>
 
@@ -260,7 +259,7 @@
             "Eu nunca comprei um presente para um parceiro(a) e acabei ficando com ele(a).",
             "Eu nunca beijei alguém sem saber o nome da pessoa.",
             "Eu nunca tive uma queda por um(a) professor(a) ou chefe.",
-            "Eu nunca usei meu charme para sair de uma multa por excesso de velocidade.",
+            "Eu nunca usei meu charme para voltar de uma multa por excesso de velocidade.",
             "Eu nunca fucei no e-mail ou nas mensagens de texto de um parceiro(a).",
             "Eu nunca menti sobre não estar a fim de algo.",
             "Eu nunca usei uma cantada cafona.",
@@ -400,6 +399,49 @@
             "Eu nunca cantei no karaokê."
         ]
     }
+    document.querySelectorAll(
+        `button,
+.button-language,
+#btnConfirm,
+#btnCancel,
+.game-box,
+.btn-fato,
+.btn-vdd,
+.btn-falso,
+.btn-conseq,
+.btn-proxima-pergunta,
+.button-randomizador,
+.voltar-wrapper,
+.pergunta-e-resposta,
+.popup .close,
+.img-regras,
+.popup-content`
+    ).forEach(function (el) {
+        el.addEventListener('click', function (event) {
+            const target = event.currentTarget;
+            const href = target.getAttribute("href");
+
+            // Aplica a animação
+            target.classList.remove('animar-clique-afundar');
+            void target.offsetWidth;
+            target.classList.add('animar-clique-afundar');
+
+            // Se for um link <a>, evita a navegação imediata
+            if (href) {
+                event.preventDefault(); // impede o redirecionamento instantâneo
+
+                setTimeout(() => {
+                    window.location.href = href;
+                }, 600); // tempo da animação antes de redirecionar
+            }
+
+            // Se não for link, apenas remove a classe depois do tempo
+            setTimeout(() => {
+                target.classList.remove('animar-clique-afundar');
+            }, 700);
+        });
+    });
+
     // Carrega as perguntas ao iniciar (modificado para usar dados embutidos)
     loadQuestions();
 </script>

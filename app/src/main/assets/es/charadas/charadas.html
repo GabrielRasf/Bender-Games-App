@@ -17,13 +17,13 @@
         <div class="menu-left">
             <a href="../menuEs.html" class="voltar-wrapper">
                 <img src="../../images/left-arrow.png" alt="Volver">
-                <h2 class="sair">Volver</h2>
+                <h2 class="voltar">Volver</h2>
             </a>
         </div>
 
         <div class="menu-center">
             <a href="../menuEs.html">
-            <img class="logo-bebedeira" src="../../images/logo-sem-margem.png" alt="Logo Bebedeira" />
+                <img class="logo-bebedeira" src="../../images/logo-sem-margem.png" alt="Logo Bebedeira" />
 
             </a>
         </div>
@@ -87,6 +87,10 @@
 
 <!-- Cronômetro -->
 <button id="timer" onclick="handleTimerClick()">⏳</button>
+
+
+
+
 
 
 <script>
@@ -605,94 +609,155 @@
     }
 
     const questions = questionsData.questions;
-    let currentQuestionIndex = -1;
-    let timerInterval = null;
-    let timeLeft = 60;
-    let isRunning = false;
+let shuffledQuestions = [];          // Perguntas embaralhadas
+let currentQuestionIndex = 0;        // Índice atual da pergunta
+let timerInterval = null;
+let timeLeft = 60;
+let isRunning = false;
 
-    function showAnswerPopup() {
-        if (currentQuestionIndex >= 0 && questions[currentQuestionIndex]) {
-            const answer = questions[currentQuestionIndex].answer;
-            document.getElementById("answerText").textContent = answer;
-            document.getElementById("answerPopup").style.display = "block";
-        }
-    }
+// Funções de Pop-up
+function openPopup() {
+    document.getElementById("popup").style.display = "block";
+}
+function closePopup() {
+    document.getElementById("popup").style.display = "none";
+}
+function closeAnswerPopup() {
+    document.getElementById("answerPopup").style.display = "none";
+}
+function closeAllPopups() {
+    document.getElementById("popup").style.display = "none";
+    document.getElementById("answerPopup").style.display = "none";
+}
 
-    function closeAllPopups() {
-        document.getElementById("popup").style.display = "none";
-        document.getElementById("answerPopup").style.display = "none";
-    }
-
-    function closePopup() {
-        document.getElementById("popup").style.display = "none";
-    }
-
-    function openPopup() {
-        document.getElementById("popup").style.display = "block";
-    }
-
-    function closeAnswerPopup() {
-        document.getElementById("answerPopup").style.display = "none";
-    }
-
-    function updateDisplay() {
-        const timerButton = document.getElementById('timer');
-        timerButton.textContent = isRunning ? timeLeft : '⏳';
-    }
-
-    function handleTimerClick() {
-        if (isRunning) {
-            clearInterval(timerInterval);
-            timerInterval = null;
-            isRunning = false;
-            timeLeft = 60;
-            updateDisplay();
-        } else {
-            isRunning = true;
-            updateDisplay();
-            timerInterval = setInterval(() => {
-                timeLeft--;
-                updateDisplay();
-                if (timeLeft <= 0) {
-                    clearInterval(timerInterval);
-                    timerInterval = null;
-                    isRunning = false;
-                    timeLeft = 60;
-                    updateDisplay();
-                }
-            }, 1000);
-        }
-    }
-
-    function stopTimer() {
+// Timer
+function updateDisplay() {
+    const timerButton = document.getElementById('timer');
+    timerButton.textContent = isRunning ? timeLeft : '⏳';
+}
+function handleTimerClick() {
+    if (isRunning) {
         clearInterval(timerInterval);
         timerInterval = null;
         isRunning = false;
         timeLeft = 60;
+        updateDisplay();
+    } else {
+        isRunning = true;
+        updateDisplay();
+        timerInterval = setInterval(() => {
+            timeLeft--;
+            updateDisplay();
+            if (timeLeft <= 0) {
+                clearInterval(timerInterval);
+                timerInterval = null;
+                isRunning = false;
+                timeLeft = 60;
+                updateDisplay();
+            }
+        }, 1000);
+    }
+}
+function stopTimer() {
+    clearInterval(timerInterval);
+    timerInterval = null;
+    isRunning = false;
+    timeLeft = 60;
+}
+
+// Função para embaralhar perguntas
+function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+}
+
+// Mostrar próxima pergunta SEM REPETIÇÕES
+function nextQuestion() {
+    if (currentQuestionIndex >= shuffledQuestions.length) {
+        // Reinicia o jogo com nova rodada embaralhada
+        shuffledQuestions = shuffleArray([...questions]);
+        currentQuestionIndex = 0;
     }
 
-    function nextQuestion() {
-        currentQuestionIndex = Math.floor(Math.random() * questions.length);
-        const question = questions[currentQuestionIndex];
-        document.getElementById("questionCharadas").textContent = question.question;
-        document.getElementById("answerText").textContent = "Click on a question first!";
-        stopTimer();
-        updateDisplay();
+    const question = shuffledQuestions[currentQuestionIndex];
+    document.getElementById("questionCharadas").textContent = question.question;
+    document.getElementById("answerText").textContent = "Clique primeiro em uma pergunta!";
+    stopTimer();
+    updateDisplay();
+    currentQuestionIndex++;
+}
+
+// Mostrar resposta
+function showAnswerPopup() {
+    if (currentQuestionIndex > 0 && shuffledQuestions[currentQuestionIndex - 1]) {
+        const answer = shuffledQuestions[currentQuestionIndex - 1].answer;
+        document.getElementById("answerText").textContent = answer;
+        document.getElementById("answerPopup").style.display = "block";
     }
+}
 
-    window.addEventListener('load', function () {
-        closeAllPopups();
-        nextQuestion();
-        updateDisplay();
-    });
+// Ao carregar a página
+window.addEventListener('load', function () {
+    closeAllPopups();
+    shuffledQuestions = shuffleArray([...questions]);
+    currentQuestionIndex = 0;
+    nextQuestion();
+    updateDisplay();
+});
 
-    // Fecha os popups ao clicar fora deles
-    window.onclick = function (event) {
-        if (event.target.classList.contains("popup")) {
-            closePopup();
-            closeAnswerPopup();
+// Fechar popups ao clicar fora
+window.onclick = function (event) {
+    if (event.target.classList.contains("popup")) {
+        closePopup();
+        closeAnswerPopup();
+    }
+};
+
+// Clique com animação
+document.querySelectorAll(
+    `button,
+    .button-language,
+    #btnConfirm,
+    #btnCancel,
+    .game-box,
+    .btn-fato,
+    .btn-vdd,
+    .btn-falso,
+    .btn-conseq,
+    .btn-proxima-pergunta,
+    .button-randomizador,
+    .voltar-wrapper,
+    .pergunta-e-resposta,
+    .popup .close,
+    .img-regras,
+    .popup-content`
+).forEach(function (el) {
+    el.addEventListener('click', function (event) {
+        const target = event.currentTarget;
+        const href = target.getAttribute("href");
+
+        // Animação
+        target.classList.remove('animar-clique-afundar');
+        void target.offsetWidth;
+        target.classList.add('animar-clique-afundar');
+
+        // Se for <a>, espera a animação antes de ir
+        if (href) {
+            event.preventDefault();
+            setTimeout(() => {
+                window.location.href = href;
+            }, 600);
         }
-    };
+
+        // Remove animação depois do tempo
+        setTimeout(() => {
+            target.classList.remove('animar-clique-afundar');
+        }, 700);
+    });
+});
 </script>
 </body>
 

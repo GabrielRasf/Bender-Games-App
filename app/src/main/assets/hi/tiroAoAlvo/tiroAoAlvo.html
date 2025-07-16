@@ -12,25 +12,25 @@
 <body>
 <div class="game-container">
     <!-- Menu -->
-<nav class="menu">
-    <div class="menu-left">
-        <a href="../menuHi.html" class="voltar-wrapper">
-            <img src="../../images/left-arrow.png" alt="Back">
-            <h2 class="sair">Back</h2>
-        </a>
-    </div>
+    <nav class="menu">
+        <div class="menu-left">
+            <a href="../menuHi.html" class="voltar-wrapper">
+                <img src="../../images/left-arrow.png" alt="Back">
+                <h2 class="voltar">Back</h2>
+            </a>
+        </div>
 
-    <div class="menu-center">
-        <a href="../menuHi.html">
-            <img class="logo-bebedeira" src="../../images/logo-sem-margem.png" alt="Logo Bebedeira" />
+        <div class="menu-center">
+            <a href="../menuHi.html">
+                <img class="logo-bebedeira" src="../../images/logo-sem-margem.png" alt="Logo Bebedeira" />
 
 
 
-        </a>
-    </div>
+            </a>
+        </div>
 
-    <div class="menu-spacer"></div>
-</nav>
+        <div class="menu-spacer"></div>
+    </nav>
 
     <!-- Game Content -->
     <div>
@@ -66,7 +66,7 @@
         <div class="center-container">
             <img class="pergunta-e-resposta" src="../images/pergunta-e-resposta.png" alt="See Answer"
                  onclick="showAnswerPopup()">
-             <h4 onclick="showAnswerPopup()">Answer</h4>
+            <h4 onclick="showAnswerPopup()">Answer</h4>
         </div>
     </div>
 
@@ -92,6 +92,10 @@
 
 <!-- Timer -->
 <button id="timer" onclick="handleTimerClick()">15</button>
+
+
+
+
 
 
 <script>
@@ -2460,85 +2464,128 @@
     ];
 
     let currentQuestionIndex = -1;
-        let timeLeft = 15;
-        let timerInterval = null;
-        let isRunning = false;
+    let timeLeft = 15;
+    let timerInterval = null;
+    let isRunning = false;
 
-        // Embaralhar perguntas
-        function shuffle(array) {
-            for (let i = array.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [array[i], array[j]] = [array[j], array[i]];
-            }
+    // Embaralhar perguntas
+    function shuffle(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
         }
+    }
 
-        function updateDisplay() {
-            const timerButton = document.getElementById('timer');
-            timerButton.textContent = isRunning ? timeLeft : '⏳';
-        }
+    function updateDisplay() {
+        const timerButton = document.getElementById('timer');
+        timerButton.textContent = isRunning ? timeLeft : '⏳';
+    }
 
-        function handleTimerClick() {
-            if (isRunning) {
-                stopTimer();
-            } else {
-                isRunning = true;
+    function handleTimerClick() {
+        if (isRunning) {
+            stopTimer();
+        } else {
+            isRunning = true;
+            updateDisplay();
+            timerInterval = setInterval(() => {
+                timeLeft--;
                 updateDisplay();
-                timerInterval = setInterval(() => {
-                    timeLeft--;
-                    updateDisplay();
-                    if (timeLeft <= 0) {
-                        stopTimer();
-                    }
-                }, 1000);
+                if (timeLeft <= 0) {
+                    stopTimer();
+                }
+            }, 1000);
+        }
+    }
+
+    function stopTimer() {
+        clearInterval(timerInterval);
+        timerInterval = null;
+        isRunning = false;
+        timeLeft = 15;
+        updateDisplay();
+    }
+
+    function nextQuestion() {
+        stopTimer(); // Parar cronômetro e resetar
+        currentQuestionIndex = (currentQuestionIndex + 1) % questions.length;
+        document.getElementById("questionTiroAoAlvo").textContent = questions[currentQuestionIndex].question;
+        document.getElementById("answerText").textContent = "Clique em uma pergunta primeiro!";
+    }
+
+    function showAnswerPopup() {
+        if (currentQuestionIndex >= 0 && questions[currentQuestionIndex]) {
+            document.getElementById("answerText").textContent = questions[currentQuestionIndex].answer;
+            document.getElementById("answerPopup").style.display = "block";
+        }
+    }
+
+    function closeAnswerPopup() {
+        document.getElementById("answerPopup").style.display = "none";
+    }
+
+    function openPopup() {
+        document.getElementById("popup").style.display = "block";
+    }
+
+    function closePopup() {
+        document.getElementById("popup").style.display = "none";
+    }
+
+    function closeAllPopups() {
+        document.getElementById("popup").style.display = "none";
+        document.getElementById("answerPopup").style.display = "none";
+    }
+
+    document.querySelectorAll(
+        `button,
+.button-language,
+#btnConfirm,
+#btnCancel,
+.game-box,
+.btn-fato,
+.btn-vdd,
+.btn-falso,
+.btn-conseq,
+.btn-proxima-pergunta,
+.button-randomizador,
+.voltar-wrapper,
+.pergunta-e-resposta,
+.popup .close,
+.img-regras,
+.popup-content`
+    ).forEach(function (el) {
+        el.addEventListener('click', function (event) {
+            const target = event.currentTarget;
+            const href = target.getAttribute("href");
+
+            // Aplica a animação
+            target.classList.remove('animar-clique-afundar');
+            void target.offsetWidth;
+            target.classList.add('animar-clique-afundar');
+
+            // Se for um link <a>, evita a navegação imediata
+            if (href) {
+                event.preventDefault(); // impede o redirecionamento instantâneo
+
+                setTimeout(() => {
+                    window.location.href = href;
+                }, 600); // tempo da animação antes de redirecionar
             }
-        }
 
-        function stopTimer() {
-            clearInterval(timerInterval);
-            timerInterval = null;
-            isRunning = false;
-            timeLeft = 15;
-            updateDisplay();
-        }
-
-        function nextQuestion() {
-            stopTimer(); // Parar cronômetro e resetar
-            currentQuestionIndex = (currentQuestionIndex + 1) % questions.length;
-            document.getElementById("questionTiroAoAlvo").textContent = questions[currentQuestionIndex].question;
-            document.getElementById("answerText").textContent = "Clique em uma pergunta primeiro!";
-        }
-
-        function showAnswerPopup() {
-            if (currentQuestionIndex >= 0 && questions[currentQuestionIndex]) {
-                document.getElementById("answerText").textContent = questions[currentQuestionIndex].answer;
-                document.getElementById("answerPopup").style.display = "block";
-            }
-        }
-
-        function closeAnswerPopup() {
-            document.getElementById("answerPopup").style.display = "none";
-        }
-
-        function openPopup() {
-            document.getElementById("popup").style.display = "block";
-        }
-
-        function closePopup() {
-            document.getElementById("popup").style.display = "none";
-        }
-
-        function closeAllPopups() {
-            document.getElementById("popup").style.display = "none";
-            document.getElementById("answerPopup").style.display = "none";
-        }
-
-        // Inicialização única
-        window.addEventListener('DOMContentLoaded', function () {
-            closeAllPopups();
-            shuffle(questions);
-            nextQuestion();
-            updateDisplay();
+            // Se não for link, apenas remove a classe depois do tempo
+            setTimeout(() => {
+                target.classList.remove('animar-clique-afundar');
+            }, 700);
         });
+    });
+
+    // Inicialização única
+    window.addEventListener('DOMContentLoaded', function () {
+        closeAllPopups();
+        shuffle(questions);
+        nextQuestion();
+        updateDisplay();
+    });
 
 </script>
 </body>

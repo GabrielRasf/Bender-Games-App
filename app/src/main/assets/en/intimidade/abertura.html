@@ -17,14 +17,14 @@
         <div class="menu-left">
             <a href="../menuEn.html" class="voltar-wrapper">
                 <img src="../../images/left-arrow.png" alt="Back">
-                <h2 class="sair">Back</h2>
+                <h2 class="voltar">Back</h2>
             </a>
         </div>
 
 
         <div class="menu-center">
             <a href="../menuEn.html">
-            <img class="logo-bebedeira" src="../../images/logo-sem-margem.png" alt="Logo Bebedeira" />
+                <img class="logo-bebedeira" src="../../images/logo-sem-margem.png" alt="Logo Bebedeira" />
 
             </a>
         </div>
@@ -41,7 +41,7 @@
         <a href="#" onclick="openPopup()">
             <img class="img-regras" src="../images/regras.png" alt="Regras" />
         </a>
-         <h4 onclick="openPopup()">Rules</h4>
+        <h4 onclick="openPopup()">Rules</h4>
     </div>
 
     <!-- Rules popup -->
@@ -78,6 +78,10 @@
 </div>
 
 
+
+
+
+
 <script>
     // Questions as JSON embedded in the code
     const data = {
@@ -97,35 +101,35 @@
             "If I were a public figure, who do you think I would choose to be?",
             "What do you do that drives me crazy?",
             "What is your favorite childhood memory?",
-    "What kind of movies do you enjoy the most?",
-    "What would your perfect day look like from start to finish?",
-    "Do you prefer to plan everything or act on impulse?",
-    "If you could live anywhere in the world, where would it be?",
-    "What do you value most in a relationship?",
-    "How do you like to show love?",
-    "What makes you feel loved?",
-    "What have you learned from past relationships?",
-    "How do you deal with disagreements in a relationship?",
-    "What are your biggest dreams in life?",
-    "Is there something you've always wanted to do but haven’t yet?",
-    "What personal achievement makes you the proudest?",
-    "What are your hopes for your professional future?",
-    "Do you see yourself married or having kids someday?",
-    "Do you prefer to talk about problems right away or wait?",
-    "What annoys you the most in other people?",
-    "How do you usually react when you're angry?",
-    "Do you prefer silence or constant company?",
-    "What do you consider essential for good living together as a couple?",
-    "How do you like to spend your ideal weekend?",
-    "What food could you eat and never get tired of?",
-    "Are you more of a night or a day person?",
-    "Do you prefer parties, traveling, or staying at home?",
-    "What hobbies or activities would you like to share with me?",
-    "What was the hardest moment of your life?",
-    "What scares you the most about the future?",
-    "What kind of legacy would you like to leave in the world?",
-    "What value would you never give up?",
-    "What are you most grateful for today?",
+            "What kind of movies do you enjoy the most?",
+            "What would your perfect day look like from start to finish?",
+            "Do you prefer to plan everything or act on impulse?",
+            "If you could live anywhere in the world, where would it be?",
+            "What do you value most in a relationship?",
+            "How do you like to show love?",
+            "What makes you feel loved?",
+            "What have you learned from past relationships?",
+            "How do you deal with disagreements in a relationship?",
+            "What are your biggest dreams in life?",
+            "Is there something you've always wanted to do but haven’t yet?",
+            "What personal achievement makes you the proudest?",
+            "What are your hopes for your professional future?",
+            "Do you see yourself married or having kids someday?",
+            "Do you prefer to talk about problems right away or wait?",
+            "What annoys you the most in other people?",
+            "How do you usually react when you're angry?",
+            "Do you prefer silence or constant company?",
+            "What do you consider essential for good living together as a couple?",
+            "How do you like to spend your ideal weekend?",
+            "What food could you eat and never get tired of?",
+            "Are you more of a night or a day person?",
+            "Do you prefer parties, traveling, or staying at home?",
+            "What hobbies or activities would you like to share with me?",
+            "What was the hardest moment of your life?",
+            "What scares you the most about the future?",
+            "What kind of legacy would you like to leave in the world?",
+            "What value would you never give up?",
+            "What are you most grateful for today?",
             "What would be a perfect day for me?",
             "Currently, what do you think is my biggest dream?",
             "Which animal do you think I identify with most?",
@@ -302,6 +306,49 @@
             closePopup();
         }
     };
+
+    document.querySelectorAll(
+        `button,
+.button-language,
+#btnConfirm,
+#btnCancel,
+.game-box,
+.btn-fato,
+.btn-vdd,
+.btn-falso,
+.btn-conseq,
+.btn-proxima-pergunta,
+.button-randomizador,
+.voltar-wrapper,
+.pergunta-e-resposta,
+.popup .close,
+.img-regras,
+.popup-content`
+    ).forEach(function (el) {
+        el.addEventListener('click', function (event) {
+            const target = event.currentTarget;
+            const href = target.getAttribute("href");
+
+            // Aplica a animação
+            target.classList.remove('animar-clique-afundar');
+            void target.offsetWidth;
+            target.classList.add('animar-clique-afundar');
+
+            // Se for um link <a>, evita a navegação imediata
+            if (href) {
+                event.preventDefault(); // impede o redirecionamento instantâneo
+
+                setTimeout(() => {
+                    window.location.href = href;
+                }, 600); // tempo da animação antes de redirecionar
+            }
+
+            // Se não for link, apenas remove a classe depois do tempo
+            setTimeout(() => {
+                target.classList.remove('animar-clique-afundar');
+            }, 700);
+        });
+    });
 
     // Start loading
     loadQuestions();

@@ -14,15 +14,15 @@
     <!-- Menu -->
     <nav class="menu">
         <div class="menu-left">
-        <a href="../menuFr.html" class="voltar-wrapper">
-            <img src="../../images/left-arrow.png" alt="Retour">
-            <h2 class="sair">Retour</h2>
-        </a>
+            <a href="../menuFr.html" class="voltar-wrapper">
+                <img src="../../images/left-arrow.png" alt="Retour">
+                <h2 class="voltar">Retour</h2>
+            </a>
         </div>
 
         <div class="menu-center">
             <a href="../menuFr.html">
-            <img class="logo-bebedeira" src="../../images/logo-sem-margem.png" alt="Logo Bebedeira" />
+                <img class="logo-bebedeira" src="../../images/logo-sem-margem.png" alt="Logo Bebedeira" />
 
             </a>
         </div>
@@ -36,10 +36,10 @@
     </h1>
     <h3>Famille</h3>
     <div>
-                <a href="#" onclick="openPopup()">
+        <a href="#" onclick="openPopup()">
             <img class="img-regras" src="../images/regras.png" alt="Règles" />
         </a>
-        <h4  onclick="openPopup()">Règles</h4>
+        <h4 onclick="openPopup()">Règles</h4>
     </div>
 
     <div class="card-frase">
@@ -68,6 +68,10 @@
         </ul>
     </div>
 </div>
+
+
+
+
 
 
 <script>
@@ -107,7 +111,7 @@
             "J'ai jamais eu un crush sur un personnage de dessin animé.",
             "Je n'ai jamais essayé d'imiter la voix d'un personnage célèbre.",
             "Je n'ai jamais fait une grimace devant le miroir et éclaté de rire.",
-            "J'ai jamais oublié un anniversaire important.",
+            "J'ai jamais oublié un annivervoltare important.",
             "Je n'ai jamais eu un fou rire au mauvais moment.",
             "Je me suis jamais ennuyé lors d'une sortie en famille.",
             "Je n'ai jamais été grondé pour avoir répondu de manière drôle.",
@@ -218,7 +222,7 @@
             "Je n'ai jamais donné un nom à une plante d'intérieur.",
             "Je ne me suis jamais endormi pendant un film au cinéma.",
             "Je n'ai jamais retenu un rire dans une situation sérieuse.",
-            "Je n'ai jamais mangé de gâteau avant de chanter joyeux anniversaire.",
+            "Je n'ai jamais mangé de gâteau avant de chanter joyeux annivervoltare.",
             "Je ne me suis jamais fait peur avec mon propre reflet.",
             "Je ne suis jamais tombé et fait semblant de danser.",
             "Je n'ai jamais chanté faux une chanson célèbre.",
@@ -301,6 +305,51 @@
             popup.style.display = "none";
         }
     };
+
+
+    document.querySelectorAll(
+        `button,
+.button-language,
+#btnConfirm,
+#btnCancel,
+.game-box,
+.btn-fato,
+.btn-vdd,
+.btn-falso,
+.btn-conseq,
+.btn-proxima-pergunta,
+.button-randomizador,
+.voltar-wrapper,
+.pergunta-e-resposta,
+.popup .close,
+.img-regras,
+.popup-content`
+    ).forEach(function (el) {
+        el.addEventListener('click', function (event) {
+            const target = event.currentTarget;
+            const href = target.getAttribute("href");
+
+            // Aplica a animação
+            target.classList.remove('animar-clique-afundar');
+            void target.offsetWidth;
+            target.classList.add('animar-clique-afundar');
+
+            // Se for um link <a>, evita a navegação imediata
+            if (href) {
+                event.preventDefault(); // impede o redirecionamento instantâneo
+
+                setTimeout(() => {
+                    window.location.href = href;
+                }, 600); // tempo da animação antes de redirecionar
+            }
+
+            // Se não for link, apenas remove a classe depois do tempo
+            setTimeout(() => {
+                target.classList.remove('animar-clique-afundar');
+            }, 700);
+        });
+    });
+
 
     // Carrega as perguntas ao iniciar (modificado para usar dados embutidos)
     loadQuestions();

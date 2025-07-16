@@ -16,13 +16,13 @@
         <div class="menu-left">
             <a href="../menuPtBr.html" class="voltar-wrapper">
                 <img src="../../images/left-arrow.png" alt="Voltar">
-                <h2 class="sair">Voltar</h2>
+                <h2 class="voltar">Voltar</h2>
             </a>
         </div>
 
         <div class="menu-center">
             <a href="../menuPtBr.html">
-            <img class="logo-bebedeira" src="../../images/logo-sem-margem.png" alt="Logo Bebedeira" />
+                <img class="logo-bebedeira" src="../../images/logo-sem-margem.png" alt="Logo Bebedeira" />
             </a>
         </div>
 
@@ -66,6 +66,9 @@
 
     <div id="result"></div>
 </div> <!-- Fecha div.game-container -->
+
+
+
 
 
 <script>
@@ -2212,47 +2215,47 @@
     let respostaCorreta;
 
     function gerarPergunta() {
-    if (fatos.length < 2) return;
+        if (fatos.length < 2) return;
 
-    let tentativa = 0;
-    do {
-        fatoBase = fatos[Math.floor(Math.random() * fatos.length)];
-        fatoComparado = fatos[Math.floor(Math.random() * fatos.length)];
-        tentativa++;
-    } while ((fatoBase.evento === fatoComparado.evento || fatoBase.ano === fatoComparado.ano) && tentativa < 10);
+        let tentativa = 0;
+        do {
+            fatoBase = fatos[Math.floor(Math.random() * fatos.length)];
+            fatoComparado = fatos[Math.floor(Math.random() * fatos.length)];
+            tentativa++;
+        } while ((fatoBase.evento === fatoComparado.evento || fatoBase.ano === fatoComparado.ano) && tentativa < 10);
 
-    document.getElementById("questionAntesOuDepois").innerHTML =
-        `"${fatoComparado.evento}" aconteceu ANTES ou DEPOIS de "${fatoBase.evento}"?`;
+        document.getElementById("questionAntesOuDepois").innerHTML =
+            `"${fatoComparado.evento}" aconteceu ANTES ou DEPOIS de "${fatoBase.evento}"?`;
 
-    respostaCorreta = (fatoComparado.ano < fatoBase.ano) ? "antes" : "depois";
+        respostaCorreta = (fatoComparado.ano < fatoBase.ano) ? "antes" : "depois";
 
-    document.getElementById("result").innerHTML = "";
+        document.getElementById("result").innerHTML = "";
 
-    btnAntes.disabled = false;
-    btnDepois.disabled = false;
-}
-
-function antes() {
-    verificarResposta("antes");
-}
-
-function depois() {
-    verificarResposta("depois");
-}
-
-function verificarResposta(respostaUsuario) {
-    const result = document.getElementById("result");
-    if (respostaUsuario === respostaCorreta) {
-        result.innerHTML = "✅ Correto! Muito bem!";
-    } else {
-        result.innerHTML = "❌ Errado! Beba uma dose! 🍻";
+        btnAntes.disabled = false;
+        btnDepois.disabled = false;
     }
 
-    btnAntes.disabled = true;
-    btnDepois.disabled = true;
+    function antes() {
+        verificarResposta("antes");
+    }
 
-    setTimeout(gerarPergunta, 3000);
-}
+    function depois() {
+        verificarResposta("depois");
+    }
+
+    function verificarResposta(respostaUsuario) {
+        const result = document.getElementById("result");
+        if (respostaUsuario === respostaCorreta) {
+            result.innerHTML = "✅ Correto! Muito bem!";
+        } else {
+            result.innerHTML = "❌ Errado! Beba uma dose! 🍻";
+        }
+
+        btnAntes.disabled = true;
+        btnDepois.disabled = true;
+
+        setTimeout(gerarPergunta, 3000);
+    }
 
     // Abertura e fechamento do popup
     function openPopup() {
@@ -2270,6 +2273,49 @@ function verificarResposta(respostaUsuario) {
             popup.style.display = "none";
         }
     };
+
+    document.querySelectorAll(
+        `button,
+.button-language,
+#btnConfirm,
+#btnCancel,
+.game-box,
+.btn-fato,
+.btn-vdd,
+.btn-falso,
+.btn-conseq,
+.btn-proxima-pergunta,
+.button-randomizador,
+.voltar-wrapper,
+.pergunta-e-resposta,
+.popup .close,
+.img-regras,
+.popup-content`
+    ).forEach(function (el) {
+        el.addEventListener('click', function (event) {
+            const target = event.currentTarget;
+            const href = target.getAttribute("href");
+
+            // Aplica a animação
+            target.classList.remove('animar-clique-afundar');
+            void target.offsetWidth;
+            target.classList.add('animar-clique-afundar');
+
+            // Se for um link <a>, evita a navegação imediata
+            if (href) {
+                event.preventDefault(); // impede o redirecionamento instantâneo
+
+                setTimeout(() => {
+                    window.location.href = href;
+                }, 600); // tempo da animação antes de redirecionar
+            }
+
+            // Se não for link, apenas remove a classe depois do tempo
+            setTimeout(() => {
+                target.classList.remove('animar-clique-afundar');
+            }, 700);
+        });
+    });
 
     // Inicia o jogo ao carregar a página
     window.onload = gerarPergunta;

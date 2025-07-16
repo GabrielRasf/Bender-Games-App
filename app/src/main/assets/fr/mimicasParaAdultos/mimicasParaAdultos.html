@@ -13,33 +13,33 @@
 
 <div class="game-container">
     <!-- Menu -->
-<nav class="menu">
-    <div class="menu-left">
-        <a href="../menuFr.html" class="voltar-wrapper">
-            <img src="../../images/left-arrow.png" alt="Retour">
-            <h2 class="sair">Retour</h2>
-        </a>
-    </div>
+    <nav class="menu">
+        <div class="menu-left">
+            <a href="../menuFr.html" class="voltar-wrapper">
+                <img src="../../images/left-arrow.png" alt="Retour">
+                <h2 class="voltar">Retour</h2>
+            </a>
+        </div>
 
-    <div class="menu-center">
-        <a href="../menuFr.html">
-            <img class="logo-bebedeira" src="../../images/logo-sem-margem.png" alt="Logo Bebedeira" />
+        <div class="menu-center">
+            <a href="../menuFr.html">
+                <img class="logo-bebedeira" src="../../images/logo-sem-margem.png" alt="Logo Bebedeira" />
 
 
 
-        </a>
-    </div>
+            </a>
+        </div>
 
-    <div class="menu-spacer"></div>
-</nav>
+        <div class="menu-spacer"></div>
+    </nav>
 
     <!-- Contenu du jeu -->
     <div>
         <h1>Mime pour Adultes</h1>
-                <a href="#" onclick="openPopup()">
+        <a href="#" onclick="openPopup()">
             <img class="img-regras" src="../images/regras.png" alt="Règles" />
         </a>
-        <h4  onclick="openPopup()">Règles</h4>
+        <h4 onclick="openPopup()">Règles</h4>
     </div>
 
     <div class="card-frase">
@@ -82,213 +82,217 @@
 <button id="timer" onclick="handleTimerClick()">⏳</button>
 
 
+
+
+
+
 <script>
     const gameData = {
-    "questions": [
-    "Toilettes chimiques",
-    "Crêpes",
-    "Soudeur",
-    "Spray au poivre",
-    "Lapin boiteux",
-    "Ventilateur de plafond",
-    "Ping-pong",
-    "Flocon de neige",
-    "Bouche à bouche",
-    "Camion de carnaval",
-    "Gynécologue",
-    "Macarena",
-    "Bateau à moteur",
-    "Mauvais trou",
-    "Comérage",
-    "Peigner",
-    "Honte",
-    "Orgasme",
-    "Camion-citerne",
-    "Arroser les plantes",
-    "Accouchement naturel",
-    "Changer une couche",
-    "Promenade à cheval",
-    "Usurier",
-    "Limace",
-    "Chiropracteur",
-    "Mouiller le biscuit",
-    "Manger une baguette",
-    "Exorcisme",
-    "Sniffer de la cocaïne",
-    "Fouet",
-    "Plug anal",
-    "Char de combat",
-    "Futevôlei",
-    "Cigarette électronique",
-    "Photo de pénis",
-    "Pierre, papier, ciseaux",
-    "Pelé",
-    "Inhalateur d'asthme",
-    "Joelma",
-    "Sexe anal",
-    "Tambour",
-    "Clitoris",
-    "Natation synchronisée",
-    "Contraceptif",
-    "Neymar",
-    "Micro pénis",
-    "Lancer du poids",
-    "Christ Rédempteur",
-    "Roue de pagode",
-    "Bouquet de mariée",
-    "Manchot",
-    "Alok",
-    "Poulpe",
-    "Barbecue",
-    "Glacière",
-    "Brûler la paille",
-    "Sexe au téléphone",
-    "Ballet",
-    "Dauphin",
-    "Pêche avec paiement à la prise",
-    "Licorne",
-    "Tarzan",
-    "Sexe dans la voiture",
-    "Anneau pénien",
-    "Gangnam Style (danse)",
-    "Mono-sourcil",
-    "69",
-    "Tireur d'élite",
-    "Vibromasseur",
-    "Escrime",
-    "Sucette qui colore la langue",
-    "Minions",
-    "Jeu de la bouteille",
-    "Hélicoptère",
-    "Bouilloire",
-    "Machine à laver",
-    "Barons de la pisadinha",
-    "Gâteau de mariage",
-    "Vergetures",
-    "Luciole",
-    "Maïs au beurre",
-    "Payer une facture",
-    "Friteuse à air",
-    "Promener le chien",
-    "Péter",
-    "Brise-roche",
-    "Pulvérisation agricole",
-    "Michael Jackson",
-    "Quad",
-    "Harry Potter",
-    "Faire du café",
-    "Seau de glace",
-    "Falaise",
-    "Cheminée",
-    "Vautour",
-    "Pédicure",
-    "Karaoké",
-    "Fellation",
-    "Fétichisme des pieds",
-    "Fête de révélation du sexe",
-    "Beatbox",
-    "Liposuccion",
-    "Louro José",
-    "À quatre pattes",
-    "Sucer le doigt de pied",
-    "Bâton",
-    "Sachet de thé",
-    "Point G",
-    "Chariot élévateur",
-    "Saut en parachute",
-    "Impôt sur le revenu",
-    "Danse du ver de terre",
-    "Klaxon de camion",
-    "Curling (sport)",
-    "Big Brother Brésil",
-    "Abdominaux dessinés",
-    "Cookies",
-    "Test d'alcoolémie",
-    "Viagra",
-    "Tour Eiffel",
-    "Chauve",
-    "Triangle amoureux",
-    "Rideau de douche",
-    "Faire des sushis",
-    "Arc-en-ciel",
-    "Patinage sur glace",
-    "Baleine",
-    "Café au lit",
-    "Jeune marié",
-    "Bodybuilder",
-    "Tiktokeur",
-    "Caméra au ralenti",
-    "Zèbre",
-    "Corbeau",
-    "Diarrhée",
-    "Décoiffer le clown",
-    "Mauvaise haleine",
-    "Piercing au mamelon",
-    "Noyer le canard",
-    "Poupée gonflable",
-    "Clé anglaise",
-    "Enceinte acoustique",
-    "Concierge",
-    "Épilation intime",
-    "Slip en cuir",
-    "Graine",
-    "Chien caramel",
-    "Marijuana",
-    "Tondre la pelouse",
-    "Examen des seins",
-    "Conduite en état d'ivresse",
-    "Titanic",
-    "Grue",
-    "Bière noire",
-    "Père Noël",
-    "Préservatif",
-    "Toilettes féminines",
-    "Vendeur ambulant",
-    "Gel lubrifiant",
-    "Colle chaude",
-    "Paix de l'esprit",
-    "Chirurgien plastique",
-    "Trampoline",
-    "Yoga",
-    "Police fédérale",
-    "Gâteau à la carotte",
-    "Serpent",
-    "Mona Lisa",
-    "Sculpture de glace",
-    "Beach tennis",
-    "Botox",
-    "Hernie discale",
-    "Karate",
-    "Plat du jour",
-    "Baiser grec",
-    "Cours de poterie",
-    "Tremblement de terre",
-    "Travesti",
-    "Course à obstacles",
-    "Homard",
-    "Allaiter",
-    "Prêtre du ballon",
-    "Bolsonaro",
-    "Internet",
-    "Iron Maiden",
-    "Traîneau",
-    "Aveugle chauve",
-    "Sexe sous la douche",
-    "Amant",
-    "Sirène",
-    "Cacahuète",
-    "Bain dans la baignoire",
-    "Strip-teaseuse",
-    "Aumône au feu rouge",
-    "Rhinocéros",
-    "Ouvre-bouteille",
-    "Combat de coqs",
-    "Chenille",
-    "Décoiffer le clown",
-    "Jouer avec la chatte",
-    "S'asseoir avec envie",
-    "Pirocoptère"
-    ]
+        "questions": [
+            "Toilettes chimiques",
+            "Crêpes",
+            "Soudeur",
+            "Spray au poivre",
+            "Lapin boiteux",
+            "Ventilateur de plafond",
+            "Ping-pong",
+            "Flocon de neige",
+            "Bouche à bouche",
+            "Camion de carnaval",
+            "Gynécologue",
+            "Macarena",
+            "Bateau à moteur",
+            "Mauvais trou",
+            "Comérage",
+            "Peigner",
+            "Honte",
+            "Orgasme",
+            "Camion-citerne",
+            "Arroser les plantes",
+            "Accouchement naturel",
+            "Changer une couche",
+            "Promenade à cheval",
+            "Usurier",
+            "Limace",
+            "Chiropracteur",
+            "Mouiller le biscuit",
+            "Manger une baguette",
+            "Exorcisme",
+            "Sniffer de la cocaïne",
+            "Fouet",
+            "Plug anal",
+            "Char de combat",
+            "Futevôlei",
+            "Cigarette électronique",
+            "Photo de pénis",
+            "Pierre, papier, ciseaux",
+            "Pelé",
+            "Inhalateur d'asthme",
+            "Joelma",
+            "Sexe anal",
+            "Tambour",
+            "Clitoris",
+            "Natation synchronisée",
+            "Contraceptif",
+            "Neymar",
+            "Micro pénis",
+            "Lancer du poids",
+            "Christ Rédempteur",
+            "Roue de pagode",
+            "Bouquet de mariée",
+            "Manchot",
+            "Alok",
+            "Poulpe",
+            "Barbecue",
+            "Glacière",
+            "Brûler la paille",
+            "Sexe au téléphone",
+            "Ballet",
+            "Dauphin",
+            "Pêche avec paiement à la prise",
+            "Licorne",
+            "Tarzan",
+            "Sexe dans la voiture",
+            "Anneau pénien",
+            "Gangnam Style (danse)",
+            "Mono-sourcil",
+            "69",
+            "Tireur d'élite",
+            "Vibromasseur",
+            "Escrime",
+            "Sucette qui colore la langue",
+            "Minions",
+            "Jeu de la bouteille",
+            "Hélicoptère",
+            "Bouilloire",
+            "Machine à laver",
+            "Barons de la pisadinha",
+            "Gâteau de mariage",
+            "Vergetures",
+            "Luciole",
+            "Maïs au beurre",
+            "Payer une facture",
+            "Friteuse à air",
+            "Promener le chien",
+            "Péter",
+            "Brise-roche",
+            "Pulvérisation agricole",
+            "Michael Jackson",
+            "Quad",
+            "Harry Potter",
+            "Faire du café",
+            "Seau de glace",
+            "Falaise",
+            "Cheminée",
+            "Vautour",
+            "Pédicure",
+            "Karaoké",
+            "Fellation",
+            "Fétichisme des pieds",
+            "Fête de révélation du sexe",
+            "Beatbox",
+            "Liposuccion",
+            "Louro José",
+            "À quatre pattes",
+            "Sucer le doigt de pied",
+            "Bâton",
+            "Sachet de thé",
+            "Point G",
+            "Chariot élévateur",
+            "Saut en parachute",
+            "Impôt sur le revenu",
+            "Danse du ver de terre",
+            "Klaxon de camion",
+            "Curling (sport)",
+            "Big Brother Brésil",
+            "Abdominaux dessinés",
+            "Cookies",
+            "Test d'alcoolémie",
+            "Viagra",
+            "Tour Eiffel",
+            "Chauve",
+            "Triangle amoureux",
+            "Rideau de douche",
+            "Faire des sushis",
+            "Arc-en-ciel",
+            "Patinage sur glace",
+            "Baleine",
+            "Café au lit",
+            "Jeune marié",
+            "Bodybuilder",
+            "Tiktokeur",
+            "Caméra au ralenti",
+            "Zèbre",
+            "Corbeau",
+            "Diarrhée",
+            "Décoiffer le clown",
+            "Mauvaise haleine",
+            "Piercing au mamelon",
+            "Noyer le canard",
+            "Poupée gonflable",
+            "Clé anglaise",
+            "Enceinte acoustique",
+            "Concierge",
+            "Épilation intime",
+            "Slip en cuir",
+            "Graine",
+            "Chien caramel",
+            "Marijuana",
+            "Tondre la pelouse",
+            "Examen des seins",
+            "Conduite en état d'ivresse",
+            "Titanic",
+            "Grue",
+            "Bière noire",
+            "Père Noël",
+            "Préservatif",
+            "Toilettes féminines",
+            "Vendeur ambulant",
+            "Gel lubrifiant",
+            "Colle chaude",
+            "Paix de l'esprit",
+            "Chirurgien plastique",
+            "Trampoline",
+            "Yoga",
+            "Police fédérale",
+            "Gâteau à la carotte",
+            "Serpent",
+            "Mona Lisa",
+            "Sculpture de glace",
+            "Beach tennis",
+            "Botox",
+            "Hernie discale",
+            "Karate",
+            "Plat du jour",
+            "Baiser grec",
+            "Cours de poterie",
+            "Tremblement de terre",
+            "Travesti",
+            "Course à obstacles",
+            "Homard",
+            "Allaiter",
+            "Prêtre du ballon",
+            "Bolsonaro",
+            "Internet",
+            "Iron Maiden",
+            "Traîneau",
+            "Aveugle chauve",
+            "Sexe sous la douche",
+            "Amant",
+            "Sirène",
+            "Cacahuète",
+            "Bain dans la baignoire",
+            "Strip-teaseuse",
+            "Aumône au feu rouge",
+            "Rhinocéros",
+            "Ouvre-bouteille",
+            "Combat de coqs",
+            "Chenille",
+            "Décoiffer le clown",
+            "Jouer avec la chatte",
+            "S'asseoir avec envie",
+            "Pirocoptère"
+        ]
     };
 
     let questions = [];
@@ -374,6 +378,51 @@
         timeLeft = 60;
         updateDisplay(); // Atualiza para mostrar ⏳
     }
+
+
+    document.querySelectorAll(
+        `button,
+.button-language,
+#btnConfirm,
+#btnCancel,
+.game-box,
+.btn-fato,
+.btn-vdd,
+.btn-falso,
+.btn-conseq,
+.btn-proxima-pergunta,
+.button-randomizador,
+.voltar-wrapper,
+.pergunta-e-resposta,
+.popup .close,
+.img-regras,
+.popup-content`
+    ).forEach(function (el) {
+        el.addEventListener('click', function (event) {
+            const target = event.currentTarget;
+            const href = target.getAttribute("href");
+
+            // Aplica a animação
+            target.classList.remove('animar-clique-afundar');
+            void target.offsetWidth;
+            target.classList.add('animar-clique-afundar');
+
+            // Se for um link <a>, evita a navegação imediata
+            if (href) {
+                event.preventDefault(); // impede o redirecionamento instantâneo
+
+                setTimeout(() => {
+                    window.location.href = href;
+                }, 600); // tempo da animação antes de redirecionar
+            }
+
+            // Se não for link, apenas remove a classe depois do tempo
+            setTimeout(() => {
+                target.classList.remove('animar-clique-afundar');
+            }, 700);
+        });
+    });
+
 
     window.addEventListener('load', function () {
         loadQuestions();

@@ -16,13 +16,13 @@
         <div class="menu-left">
             <a href="../menuPtBr.html" class="voltar-wrapper">
                 <img src="../../images/left-arrow.png" alt="Voltar">
-                <h2 class="sair">Voltar</h2>
+                <h2 class="voltar">Voltar</h2>
             </a>
         </div>
 
         <div class="menu-center">
             <a href="../menuPtBr.html">
-            <img class="logo-bebedeira" src="../../images/logo-sem-margem.png" alt="Logo Bebedeira" />
+                <img class="logo-bebedeira" src="../../images/logo-sem-margem.png" alt="Logo Bebedeira" />
 
             </a>
         </div>
@@ -68,7 +68,6 @@
         </ul>
     </div>
 </div>
-
 
 <script>
 
@@ -197,7 +196,7 @@
             "Eu nunca brinquei de esconde-esconde e fiquei tempo demais escondido.",
             "Eu nunca fiz um pedido e depois me arrependi.",
             "Eu nunca esqueci onde estacionei o carro.",
-            "Eu nunca usei uma desculpa estranha para sair de um compromisso.",
+            "Eu nunca usei uma desculpa estranha para voltar de um compromisso.",
             "Eu nunca passei um trote para alguém da família.",
             "Eu nunca exagerei na comida e me arrependi depois.",
             "Eu nunca tentei contar uma piada e esqueci o final.",
@@ -228,7 +227,7 @@
             "Eu nunca falei 'bom dia' à noite.",
             "Eu nunca respondi uma pergunta sem entender direito.",
             "Eu nunca fiquei com sono no meio de uma conversa.",
-            "Eu nunca inventei uma desculpa para sair de um grupo.",
+            "Eu nunca inventei uma desculpa para voltar de um grupo.",
             "Eu nunca usei a mesma roupa por preguiça de escolher outra.",
             "Eu nunca tirei foto de comida antes de comer.",
             "Eu nunca coloquei açúcar no lugar do sal.",
@@ -303,6 +302,49 @@
             "Eu nunca dei tchau para alguém e quase fui para o lado errado depois."
         ]
     }
+
+    document.querySelectorAll(
+        `button,
+.button-language,
+#btnConfirm,
+#btnCancel,
+.game-box,
+.btn-fato,
+.btn-vdd,
+.btn-falso,
+.btn-conseq,
+.btn-proxima-pergunta,
+.button-randomizador,
+.voltar-wrapper,
+.pergunta-e-resposta,
+.popup .close,
+.img-regras,
+.popup-content`
+    ).forEach(function (el) {
+        el.addEventListener('click', function (event) {
+            const target = event.currentTarget;
+            const href = target.getAttribute("href");
+
+            // Aplica a animação
+            target.classList.remove('animar-clique-afundar');
+            void target.offsetWidth;
+            target.classList.add('animar-clique-afundar');
+
+            // Se for um link <a>, evita a navegação imediata
+            if (href) {
+                event.preventDefault(); // impede o redirecionamento instantâneo
+
+                setTimeout(() => {
+                    window.location.href = href;
+                }, 600); // tempo da animação antes de redirecionar
+            }
+
+            // Se não for link, apenas remove a classe depois do tempo
+            setTimeout(() => {
+                target.classList.remove('animar-clique-afundar');
+            }, 700);
+        });
+    });
 
     // Carrega as perguntas ao iniciar (modificado para usar dados embutidos)
     loadQuestions();

@@ -14,25 +14,25 @@
 
 <div class="game-container">
     <!-- Menú -->
-<nav class="menu">
-    <div class="menu-left">
-        <a href="../menuEs.html" class="voltar-wrapper">
-            <img src="../../images/left-arrow.png" alt="Volver">
-            <h2 class="sair">Volver</h2>
-        </a>
-    </div>
+    <nav class="menu">
+        <div class="menu-left">
+            <a href="../menuEs.html" class="voltar-wrapper">
+                <img src="../../images/left-arrow.png" alt="Volver">
+                <h2 class="voltar">Volver</h2>
+            </a>
+        </div>
 
-    <div class="menu-center">
-        <a href="../menuEs.html">
-            <img class="logo-bebedeira" src="../../images/logo-sem-margem.png" alt="Logo Bebedeira" />
+        <div class="menu-center">
+            <a href="../menuEs.html">
+                <img class="logo-bebedeira" src="../../images/logo-sem-margem.png" alt="Logo Bebedeira" />
 
 
 
-        </a>
-    </div>
+            </a>
+        </div>
 
-    <div class="menu-spacer"></div>
-</nav>
+        <div class="menu-spacer"></div>
+    </nav>
 
     <!-- Contenido del juego -->
     <div>
@@ -76,6 +76,10 @@
 <button id="timer" onclick="handleTimerClick()">⏳</button>
 
 
+
+
+
+
 <script>
     const gameData = {
         "questions": [
@@ -111,35 +115,35 @@
             "Estás aprendiendo mandarín, muestra a tu objetivo las palabras que ya has aprendido",
             "Imita una mariposa saliendo del capullo",
             "Eres un mono de circo. Haz acrobacias e intenta hacer reír al objetivo con tus muecas.",
-    "Háblale a tu objetivo como si fuera tu bebé recién nacido y tú fueras una madre sobreprotectora.",
-    "Estás en un programa de cocina y el plato está hecho con partes del cuerpo del objetivo. Describe la preparación.",
-    "Imita a un perro necesitado pidiendo cariño a su dueño (el objetivo).",
-    "Da un discurso político absurdo intentando convencer a todos de que voten por ti.",
-    "Finge que el objetivo es tu alma gemela y te estás reencontrando con él/ella después de 20 años.",
-    "Eres un sacerdote haciendo una confesión extremadamente vergonzosa al objetivo.",
-    "Describe el cuerpo del objetivo como si estuvieras narrando un documental de National Geographic.",
-    "Finge que estás en un programa de citas y elige al objetivo como tu pretendiente. Conquístalo/la.",
-    "Baila como si estuvieras poseído por un espíritu extraño, intentando exorcizarlo con la danza.",
-    "Eres un gato mañoso. Súbete al regazo del objetivo e intenta llamar la atención como lo haría un felino.",
-    "Inventa una nueva religión e intenta convertir al objetivo con fe, promesas y rituales locos.",
-    "Haz un cover dramático de una canción cursi usando voz de ópera y gestos exagerados.",
-    "Imita a un médico excéntrico haciendo un diagnóstico completamente absurdo del objetivo.",
-    "Estás en un reality show de supervivencia. Describe cómo el objetivo salvó tu vida con un objeto bizarro.",
-    "Haz sonidos de besos e intenta seducir al objetivo como si fueras un personaje de telenovela mexicana.",
-    "Sé un DJ famoso y finge que el objetivo está en la pista de baile más concurrida del mundo.",
-    "Eres un médium incorporando el espíritu del ex de tu objetivo. Di lo que 'él o ella' siente.",
-    "Imita a un caballo enamorado intentando conquistar al objetivo relinchando y coqueteando.",
-    "Da una clase de yoga sensual con el objetivo como tu único alumno.",
-    "Interpreta a un detective interrogando al objetivo sobre un crimen muy extraño que 'cometió'.",
-    "Eres un robot que acaba de adquirir sentimientos y se enamoró del objetivo.",
-    "Da consejos de seducción como si fueras un gurú del amor de los años 80.",
-    "Haz un rap improvisado contando la historia de tu romance con el objetivo.",
-    "Eres una viejita chismosa. Cuéntales a los demás todo lo que 'sabes' sobre el objetivo.",
-    "Finge que estás siendo atacado por palomas invisibles y pide ayuda desesperada al objetivo.",
-    "Estás en un comercial de perfume y el olor se basa en el sudor del objetivo. ¡Véndelo bien!",
-    "Interpreta a un coach motivacional completamente desquiciado y grita frases para que el objetivo se sienta 'ganador'.",
-    "Haz una propuesta de matrimonio súper cursi al objetivo con mucha emoción falsa.",
-    "Finge que eres un extraterrestre conociendo a un humano por primera vez (el objetivo) e intenta describirlo.",
+            "Háblale a tu objetivo como si fuera tu bebé recién nacido y tú fueras una madre sobreprotectora.",
+            "Estás en un programa de cocina y el plato está hecho con partes del cuerpo del objetivo. Describe la preparación.",
+            "Imita a un perro necesitado pidiendo cariño a su dueño (el objetivo).",
+            "Da un discurso político absurdo intentando convencer a todos de que voten por ti.",
+            "Finge que el objetivo es tu alma gemela y te estás reencontrando con él/ella después de 20 años.",
+            "Eres un sacerdote haciendo una confesión extremadamente vergonzosa al objetivo.",
+            "Describe el cuerpo del objetivo como si estuvieras narrando un documental de National Geographic.",
+            "Finge que estás en un programa de citas y elige al objetivo como tu pretendiente. Conquístalo/la.",
+            "Baila como si estuvieras poseído por un espíritu extraño, intentando exorcizarlo con la danza.",
+            "Eres un gato mañoso. Súbete al regazo del objetivo e intenta llamar la atención como lo haría un felino.",
+            "Inventa una nueva religión e intenta convertir al objetivo con fe, promesas y rituales locos.",
+            "Haz un cover dramático de una canción cursi usando voz de ópera y gestos exagerados.",
+            "Imita a un médico excéntrico haciendo un diagnóstico completamente absurdo del objetivo.",
+            "Estás en un reality show de supervivencia. Describe cómo el objetivo salvó tu vida con un objeto bizarro.",
+            "Haz sonidos de besos e intenta seducir al objetivo como si fueras un personaje de telenovela mexicana.",
+            "Sé un DJ famoso y finge que el objetivo está en la pista de baile más concurrida del mundo.",
+            "Eres un médium incorporando el espíritu del ex de tu objetivo. Di lo que 'él o ella' siente.",
+            "Imita a un caballo enamorado intentando conquistar al objetivo relinchando y coqueteando.",
+            "Da una clase de yoga sensual con el objetivo como tu único alumno.",
+            "Interpreta a un detective interrogando al objetivo sobre un crimen muy extraño que 'cometió'.",
+            "Eres un robot que acaba de adquirir sentimientos y se enamoró del objetivo.",
+            "Da consejos de seducción como si fueras un gurú del amor de los años 80.",
+            "Haz un rap improvisado contando la historia de tu romance con el objetivo.",
+            "Eres una viejita chismosa. Cuéntales a los demás todo lo que 'sabes' sobre el objetivo.",
+            "Finge que estás siendo atacado por palomas invisibles y pide ayuda desesperada al objetivo.",
+            "Estás en un comercial de perfume y el olor se basa en el sudor del objetivo. ¡Véndelo bien!",
+            "Interpreta a un coach motivacional completamente desquiciado y grita frases para que el objetivo se sienta 'ganador'.",
+            "Haz una propuesta de matrimonio súper cursi al objetivo con mucha emoción falsa.",
+            "Finge que eres un extraterrestre conociendo a un humano por primera vez (el objetivo) e intenta describirlo.",
             "El mapa del tesoro perdido muestra que el tesoro está en los pantalones del objetivo. Imita un pirata y encuéntralo",
             "Mira a los ojos del objetivo y di: 'Fui a cocinar un huevo y el huevo estaba un poco pesado... tenía un pollito dentro. Imagina tu cocina con un pollito dentro'",
             "Imita un delfín batiendo sus aletas y frótate contra tu objetivo",
@@ -225,7 +229,7 @@
         }
     };
 
-// Cronômetro
+    // Cronômetro
     function handleTimerClick() {
         if (isRunning) {
             stopTimer();
@@ -243,9 +247,9 @@
     }
 
     function updateDisplay() {
-    const timerButton = document.getElementById('timer');
-    timerButton.textContent = isRunning ? timeLeft : '⏳';
-}
+        const timerButton = document.getElementById('timer');
+        timerButton.textContent = isRunning ? timeLeft : '⏳';
+    }
 
     function stopTimer() {
         clearInterval(timerInterval);
@@ -254,6 +258,47 @@
         timeLeft = 60;
         updateDisplay(); // Atualiza para mostrar ⏳
     }
+
+    document.querySelectorAll(
+        `button,
+    .button-language,
+    #btnConfirm,
+    #btnCancel,
+    .game-box,
+    .btn-fato,
+    .btn-vdd,
+    .btn-falso,
+    .btn-conseq,
+    .btn-proxima-pergunta,
+    .button-randomizador,
+    .voltar-wrapper,
+    .pergunta-e-resposta,
+    .popup .close`
+    ).forEach(function (el) {
+        el.addEventListener('click', function (event) {
+            const target = event.currentTarget;
+            const href = target.getAttribute("href");
+
+            // Aplica a animação
+            target.classList.remove('animar-clique-afundar');
+            void target.offsetWidth;
+            target.classList.add('animar-clique-afundar');
+
+            // Se for um link <a>, evita a navegação imediata
+            if (href) {
+                event.preventDefault(); // impede o redirecionamento instantâneo
+
+                setTimeout(() => {
+                    window.location.href = href;
+                }, 600); // tempo da animação antes de redirecionar
+            }
+
+            // Se não for link, apenas remove a classe depois do tempo
+            setTimeout(() => {
+                target.classList.remove('animar-clique-afundar');
+            }, 700);
+        });
+    });
 
     window.addEventListener('load', function () {
         loadQuestions();

@@ -16,13 +16,13 @@
         <div class="menu-left">
             <a href="../menuPtBr.html" class="voltar-wrapper">
                 <img src="../../images/left-arrow.png" alt="Voltar">
-                <h2 class="sair">Voltar</h2>
+                <h2 class="voltar">Voltar</h2>
             </a>
         </div>
 
         <div class="menu-center">
             <a href="../menuPtBr.html">
-            <img class="logo-bebedeira" src="../../images/logo-sem-margem.png" alt="Logo Bebedeira" />
+                <img class="logo-bebedeira" src="../../images/logo-sem-margem.png" alt="Logo Bebedeira" />
 
             </a>
         </div>
@@ -61,6 +61,10 @@
     </div>
     <div id="result"></div>
 </div>
+
+
+
+
 
 
 <script>
@@ -1165,7 +1169,7 @@
             {
                 "text": "Ficar amigo do seu crush famoso",
                 "or": "OU",
-                "text2": "Sair em um encontro com ele(a)"
+                "text2": "voltar em um encontro com ele(a)"
             },
             {
                 "text": "Nunca mais precisar se deslocar até o trabalho",
@@ -1255,7 +1259,7 @@
             {
                 "text": "Gastar seu dinheiro viajando o mundo com poucos bens pessoais",
                 "or": "OU",
-                "text2": "Ter uma casa incrível mas nunca sair da sua cidade natal"
+                "text2": "Ter uma casa incrível mas nunca voltar da sua cidade natal"
             },
             {
                 "text": "Sempre tirar férias em praias",
@@ -1378,7 +1382,7 @@
                 "text2": "Ser um retratista incrível"
             },
             {
-                "text": "Nunca mais sair de férias",
+                "text": "Nunca mais voltar de férias",
                 "or": "OU",
                 "text2": "Nunca conhecer o amor da sua vida"
             },
@@ -1585,7 +1589,7 @@
             {
                 "text": "Preferiria fazer xixi toda vez que risse",
                 "or": "OU",
-                "text2": "sair muito catarro toda vez que risse?"
+                "text2": "voltar muito catarro toda vez que risse?"
             },
             {
                 "text": "Preferiria fazer um pouco de xixi toda vez que falasse",
@@ -1928,12 +1932,12 @@
                 "text2": "sentir constantemente que está caindo de um penhasco?"
             },
             {
-                "text": "Sair invisível nas fotos",
+                "text": "voltar invisível nas fotos",
                 "or": "OU",
                 "text2": "não poder falar com seus amigos durante as sociais?"
             },
             {
-                "text": "Sair com alguém que mora perto e que não é grande coisa coisa mas toma banho e escova os dentes",
+                "text": "voltar com alguém que mora perto e que não é grande coisa coisa mas toma banho e escova os dentes",
                 "or": "OU",
                 "text2": "ter que pegar dois ônibus e um metrô para ver o amor da sua vida?"
             },
@@ -2228,7 +2232,7 @@
                 "text2": "ter de contar para seu filho que você já fez uma cena pornô com a namorada dele?"
             },
             {
-                "text": "Ter um parceiro(a) que tenha o nome do(a) ex tatuado e nuna vai remover",
+                "text": "Ter um parceiro(a) que tenha o nome do(a) ex tatuado e nunca vai remover",
                 "or": "OU",
                 "text2": "ter um parceiro(a) que insiste diariamente para você tatuar o nome dele(a)?"
             },
@@ -2308,9 +2312,9 @@
                 "text2": "caminhar rastejando?"
             },
             {
-                "text": "Ser obrigado a sair do seu país e nunca mais voltar",
+                "text": "Ser obrigado a voltar do seu país e nunca mais voltar",
                 "or": "OU",
-                "text2": "nunca mais poder sair do seu país?"
+                "text2": "nunca mais poder voltar do seu país?"
             },
             {
                 "text": "",
@@ -2344,7 +2348,7 @@
     }
 
     // Função para exibir a próxima pergunta
-    function nextQuestion() {
+        function nextQuestion() {
         if (questions.length === 0) {
             document.getElementById("questionPerguntasSemRespostas").textContent = "Carregando perguntas...";
             return;
@@ -2360,9 +2364,10 @@
             document.getElementById("questionPerguntasSemRespostas").textContent = "Fim do Jogo! Espero que estejam se divertindo! Quer jogar novamente?";
             document.getElementById("result").textContent = "";
             currentQuestion = 0;
-            questions = shuffleArray(questions);
+            questions = shuffleArray([...gameData.questions]);  // Aqui você recria e embaralha a cópia da fonte original!
         }
     }
+
 
     // Pop-up functions
     function openPopup() {
@@ -2380,6 +2385,49 @@
             popup.style.display = "none";
         }
     };
+
+    document.querySelectorAll(
+        `button,
+.button-language,
+#btnConfirm,
+#btnCancel,
+.game-box,
+.btn-fato,
+.btn-vdd,
+.btn-falso,
+.btn-conseq,
+.btn-proxima-pergunta,
+.button-randomizador,
+.voltar-wrapper,
+.pergunta-e-resposta,
+.popup .close,
+.img-regras,
+.popup-content`
+    ).forEach(function (el) {
+        el.addEventListener('click', function (event) {
+            const target = event.currentTarget;
+            const href = target.getAttribute("href");
+
+            // Aplica a animação
+            target.classList.remove('animar-clique-afundar');
+            void target.offsetWidth;
+            target.classList.add('animar-clique-afundar');
+
+            // Se for um link <a>, evita a navegação imediata
+            if (href) {
+                event.preventDefault(); // impede o redirecionamento instantâneo
+
+                setTimeout(() => {
+                    window.location.href = href;
+                }, 600); // tempo da animação antes de redirecionar
+            }
+
+            // Se não for link, apenas remove a classe depois do tempo
+            setTimeout(() => {
+                target.classList.remove('animar-clique-afundar');
+            }, 700);
+        });
+    });
 
     window.onload = loadQuestions;
 

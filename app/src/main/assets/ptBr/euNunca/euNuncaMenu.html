@@ -1,78 +1,124 @@
-    <!DOCTYPE html>
-    <html lang="pt-BR">
+<!DOCTYPE html>
+<html lang="pt-BR">
 
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="stylesheet" type="text/css" href="../../stylesCards.css">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" type="text/css" href="../../stylesCards.css">
 
-        <title>Bebedeira Games</title>
+    <title>Bebedeira Games</title>
 
-    </head>
+</head>
 
-    <body>
+<body>
 
-    <div class="game-container">
-        <!-- Menu -->
-        <nav class="menu">
-            <div class="menu-left">
-                <a href="../menuPtBr.html" class="voltar-wrapper">
-                    <img src="../../images/left-arrow.png" alt="Voltar">
-                    <h2 class="sair">Voltar</h2>
-                </a>
-            </div>
+<div class="game-container">
+    <!-- Menu -->
+    <nav class="menu">
+        <div class="menu-left">
+            <a href="../menuPtBr.html" class="voltar-wrapper">
+                <img src="../../images/left-arrow.png" alt="Voltar">
+                <h2 class="voltar">Voltar</h2>
+            </a>
+        </div>
 
-            <div class="menu-center">
-                <a href="../menuPtBr.html">
+        <div class="menu-center">
+            <a href="../menuPtBr.html">
                 <img class="logo-bebedeira" src="../../images/logo-sem-margem.png" alt="Logo Bebedeira" />
 
-                </a>
-            </div>
-
-            <div class="menu-spacer"></div>
-        </nav>
-
-        <h1>Eu Nunca</h1>
-        <!-- Opções de jogo -->
-        <div class="game-box-content">
-            <a href="euNuncaFamilia.html" class="game-box game-1">
-                <p>Família</p>
-            </a>
-            <a href="euNuncaMalvadeza.html" class="game-box game-2">
-                <p>Malvadeza</p>
-            </a>
-            <a href="euNuncaCasal.html" class="game-box game-3">
-                <p>Casal</p>
-            </a>
-            <a href="euNuncaVariados.html" class="game-box game-4">
-                <p>Variados</p>
             </a>
         </div>
-    </div>
 
-    <!-- Pop-up de Regras -->
-    <div class="popup" id="popup">
-        <div class="popup-content">
-            <h3>Regras do Jogo</h3>
-            <h5>Eu nunca</h5>
+        <div class="menu-spacer"></div>
+    </nav>
 
-            <ul>
-                <li>Cada jogador precisa ter um copo com sua bebida favorita.</li>
-                <li>Um jogador por vez usará o celular para ler as perguntas aleatórias.</li>
-                <li>O jogador que estiver com o celular toca no botão "Próxima Pergunta".</li>
-                <li>Ele lê a pergunta em voz alta para o grupo.</li>
-                <li>Todos que já fizeram o que foi dito na pergunta devem beber um gole da sua bebida.</li>
-                <li>O celular passa para o próximo jogador, e o ciclo se repete.</li>
-                <li>Divirta-se! 🍻</li>
-            </ul>
-        </div>
+    <h1>Eu Nunca</h1>
+    <!-- Opções de jogo -->
+    <div class="game-box-content">
+        <a href="euNuncaFamilia.html" class="game-box game-1">
+            <p>Família</p>
+        </a>
+        <a href="euNuncaMalvadeza.html" class="game-box game-2">
+            <p>Malvadeza</p>
+        </a>
+        <a href="euNuncaCasal.html" class="game-box game-3">
+            <p>Casal</p>
+        </a>
+        <a href="euNuncaVariados.html" class="game-box game-4">
+            <p>Variados</p>
+        </a>
     </div>
+</div>
+
+<!-- Pop-up de Regras -->
+<div class="popup" id="popup">
+    <div class="popup-content">
+        <h3>Regras do Jogo</h3>
+        <h5>Eu nunca</h5>
+
+        <ul>
+            <li>Cada jogador precisa ter um copo com sua bebida favorita.</li>
+            <li>Um jogador por vez usará o celular para ler as perguntas aleatórias.</li>
+            <li>O jogador que estiver com o celular toca no botão "Próxima Pergunta".</li>
+            <li>Ele lê a pergunta em voz alta para o grupo.</li>
+            <li>Todos que já fizeram o que foi dito na pergunta devem beber um gole da sua bebida.</li>
+            <li>O celular passa para o próximo jogador, e o ciclo se repete.</li>
+            <li>Divirta-se! 🍻</li>
+        </ul>
+    </div>
+</div>
+
+
+
+
 
 
 <script>
 
+    document.querySelectorAll(
+        `button,
+.button-language,
+#btnConfirm,
+#btnCancel,
+.game-box,
+.btn-fato,
+.btn-vdd,
+.btn-falso,
+.btn-conseq,
+.btn-proxima-pergunta,
+.button-randomizador,
+.voltar-wrapper,
+.pergunta-e-resposta,
+.popup .close,
+.img-regras,
+.popup-content`
+    ).forEach(function (el) {
+        el.addEventListener('click', function (event) {
+            const target = event.currentTarget;
+            const href = target.getAttribute("href");
 
-    </script>
-    </body>
+            // Aplica a animação
+            target.classList.remove('animar-clique-afundar');
+            void target.offsetWidth;
+            target.classList.add('animar-clique-afundar');
 
-    </html>
+            // Se for um link <a>, evita a navegação imediata
+            if (href) {
+                event.preventDefault(); // impede o redirecionamento instantâneo
+
+                setTimeout(() => {
+                    window.location.href = href;
+                }, 600); // tempo da animação antes de redirecionar
+            }
+
+            // Se não for link, apenas remove a classe depois do tempo
+            setTimeout(() => {
+                target.classList.remove('animar-clique-afundar');
+            }, 700);
+        });
+    });
+
+</script>
+</body>
+
+</html>

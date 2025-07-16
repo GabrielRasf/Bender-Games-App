@@ -16,14 +16,14 @@
         <div class="menu-left">
             <a href="../menuEn.html" class="voltar-wrapper">
                 <img src="../../images/left-arrow.png" alt="Back">
-                <h2 class="sair">Back</h2>
+                <h2 class="voltar">Back</h2>
             </a>
         </div>
 
 
         <div class="menu-center">
             <a href="../menuEn.html">
-            <img class="logo-bebedeira" src="../../images/logo-sem-margem.png" alt="Logo Bebedeira" />
+                <img class="logo-bebedeira" src="../../images/logo-sem-margem.png" alt="Logo Bebedeira" />
 
             </a>
         </div>
@@ -38,7 +38,7 @@
         <a href="#" onclick="openPopup()">
             <img class="img-regras" src="../images/regras.png" alt="Regras" />
         </a>
-         <h4 onclick="openPopup()">Rules</h4>
+        <h4 onclick="openPopup()">Rules</h4>
     </div>
     <!-- Pop-up -->
     <div id="popup" class="popup">
@@ -67,6 +67,10 @@
 
     <div id="result"></div>
 </div>
+
+
+
+
 
 
 <script>
@@ -1401,73 +1405,114 @@
         }
     ]
     const btnAntes = document.querySelector('.btn-antes');
-const btnDepois = document.querySelector('.btn-depois');
+    const btnDepois = document.querySelector('.btn-depois');
 
-let fatoBase, fatoComparado;
-let respostaCorreta;
+    let fatoBase, fatoComparado;
+    let respostaCorreta;
 
-function gerarPergunta() {
-    if (fatos.length < 2) return;
+    function gerarPergunta() {
+        if (fatos.length < 2) return;
 
-    let tentativa = 0;
-    do {
-        fatoBase = fatos[Math.floor(Math.random() * fatos.length)];
-        fatoComparado = fatos[Math.floor(Math.random() * fatos.length)];
-        tentativa++;
-    } while ((fatoBase.evento === fatoComparado.evento || fatoBase.ano === fatoComparado.ano) && tentativa < 10);
+        let tentativa = 0;
+        do {
+            fatoBase = fatos[Math.floor(Math.random() * fatos.length)];
+            fatoComparado = fatos[Math.floor(Math.random() * fatos.length)];
+            tentativa++;
+        } while ((fatoBase.evento === fatoComparado.evento || fatoBase.ano === fatoComparado.ano) && tentativa < 10);
 
-    document.getElementById("questionAntesOuDepois").innerHTML =
-        `"${fatoComparado.evento}" happened BEFORE or AFTER "${fatoBase.evento}"?`;
+        document.getElementById("questionAntesOuDepois").innerHTML =
+            `"${fatoComparado.evento}" happened BEFORE or AFTER "${fatoBase.evento}"?`;
 
-    respostaCorreta = (fatoComparado.ano < fatoBase.ano) ? "antes" : "depois";
+        respostaCorreta = (fatoComparado.ano < fatoBase.ano) ? "antes" : "depois";
 
-    document.getElementById("result").innerHTML = "";
+        document.getElementById("result").innerHTML = "";
 
-    // Enable buttons for the new question
-    btnAntes.disabled = false;
-    btnDepois.disabled = false;
-}
-
-function antes() {
-    verificarResposta("antes");
-}
-
-function depois() {
-    verificarResposta("depois");
-}
-
-function verificarResposta(respostaUsuario) {
-    const result = document.getElementById("result");
-    if (respostaUsuario === respostaCorreta) {
-        result.innerHTML = "✅ Correct! Well done!";
-    } else {
-        result.innerHTML = "❌ Wrong! Take a shot 🍻";
+        // Enable buttons for the new question
+        btnAntes.disabled = false;
+        btnDepois.disabled = false;
     }
 
-    // Disable buttons to avoid multiple clicks until the next question
-    btnAntes.disabled = true;
-    btnDepois.disabled = true;
-
-    setTimeout(gerarPergunta, 3000);
-}
-
-// Popup open/close
-function openPopup() {
-    document.getElementById("popup").style.display = "block";
-}
-
-function closePopup() {
-    document.getElementById("popup").style.display = "none";
-}
-
-// Close popup by clicking outside of it
-window.onclick = function (event) {
-    const popup = document.getElementById("popup");
-    if (event.target === popup) {
-        popup.style.display = "none";
+    function antes() {
+        verificarResposta("antes");
     }
-};
 
+    function depois() {
+        verificarResposta("depois");
+    }
+
+    function verificarResposta(respostaUsuario) {
+        const result = document.getElementById("result");
+        if (respostaUsuario === respostaCorreta) {
+            result.innerHTML = "✅ Correct! Well done!";
+        } else {
+            result.innerHTML = "❌ Wrong! Take a shot 🍻";
+        }
+
+        // Disable buttons to avoid multiple clicks until the next question
+        btnAntes.disabled = true;
+        btnDepois.disabled = true;
+
+        setTimeout(gerarPergunta, 3000);
+    }
+
+    // Popup open/close
+    function openPopup() {
+        document.getElementById("popup").style.display = "block";
+    }
+
+    function closePopup() {
+        document.getElementById("popup").style.display = "none";
+    }
+
+    // Close popup by clicking outside of it
+    window.onclick = function (event) {
+        const popup = document.getElementById("popup");
+        if (event.target === popup) {
+            popup.style.display = "none";
+        }
+    };
+
+
+    document.querySelectorAll(
+        `button,
+        .button-language,
+        #btnConfirm,
+        #btnCancel,
+        .game-box,
+        .btn-fato,
+        .btn-vdd,
+        .btn-falso,
+        .btn-conseq,
+        .btn-proxima-pergunta,
+        .button-randomizador,
+        .voltar-wrapper,
+        .pergunta-e-resposta,
+        .popup .close`
+            ).forEach(function (el) {
+                el.addEventListener('click', function (event) {
+                    const target = event.currentTarget;
+                    const href = target.getAttribute("href");
+
+                    // Aplica a animação
+                    target.classList.remove('animar-clique-afundar');
+                    void target.offsetWidth;
+                    target.classList.add('animar-clique-afundar');
+
+                    // Se for um link <a>, evita a navegação imediata
+                    if (href) {
+                        event.preventDefault(); // impede o redirecionamento instantâneo
+
+                        setTimeout(() => {
+                            window.location.href = href;
+                        }, 600); // tempo da animação antes de redirecionar
+                    }
+
+                    // Se não for link, apenas remove a classe depois do tempo
+                    setTimeout(() => {
+                        target.classList.remove('animar-clique-afundar');
+                    }, 1000);
+                });
+            });
 
     // Inicia o jogo ao carregar a página
     window.onload = gerarPergunta;

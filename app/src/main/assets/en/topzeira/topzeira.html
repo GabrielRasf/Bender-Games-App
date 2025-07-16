@@ -16,15 +16,13 @@
         <div class="menu-left">
             <a href="../menuEn.html" class="voltar-wrapper">
                 <img src="../../images/left-arrow.png" alt="Back">
-                <h2 class="sair">Back</h2>
+                <h2 class="voltar">Back</h2>
             </a>
         </div>
 
-
         <div class="menu-center">
             <a href="../menuEn.html">
-            <img class="logo-bebedeira" src="../../images/logo-sem-margem.png" alt="Logo Bebedeira" />
-
+                <img class="logo-bebedeira" src="../../images/logo-sem-margem.png" alt="Logo Bebedeira" />
             </a>
         </div>
 
@@ -35,9 +33,9 @@
     <div>
         <h1>Topzeira </h1>
         <a href="#" onclick="openPopup()">
-            <img class="img-regras" src="../../images/regras.png" alt="Rules" />
+            <img class="img-regras animar-clique-afundar" src="../../images/regras.png" alt="Regras" />
         </a>
-         <h4 onclick="openPopup()">Rules</h4>
+        <h4 onclick="openPopup()">Rules</h4>
     </div>
 
     <!-- Pop-up -->
@@ -56,42 +54,40 @@
                 <li>If you skip, you’re out of that round</li>
                 <li>If you answer and someone doubts you, click the answer and check the list</li>
                 <li>There are two ways to settle the challenge:</li>
-                <li>If the one who doubted was right, the player who gave the wrong answer takes a shot and the round ends</li>
+                <li>If the one who doubted was right, the player who gave the wrong answer takes a shot and the
+                    round ends</li>
                 <li>If the one who doubted was wrong, they take the shot and the round ends</li>
                 <li>Have fun! 🍻</li>
-
             </ul>
         </div>
     </div>
-</div>
 
-<div class="card-frase">
-    <p id="questionTopzeira"></p>
-    <div class="center-container">
-        <img class="pergunta-e-resposta" src="../images/pergunta-e-resposta.png" onclick="showAnswerPopup()"
-             alt="Answer">
-         <h4 onclick="showAnswerPopup()">Answer</h4>
-    </div>
-</div>
-
-<div class="button-container">
-    <button onclick="nextQuestion()">Next question</button>
-</div>
-
-<div id="result"></div>
-
-<!-- Answer Pop-up -->
-<div id="answerPopup" class="popup">
-    <div class="popup-content">
-        <div class="popup-header">
-            <h2>Answer</h2>
-            <span class="close" onclick="closeAnswerPopup()">&times;</span>
+    <div class="card-frase">
+        <p id="questionTopzeira"></p>
+        <div class="center-container">
+            <img class="pergunta-e-resposta animar-clique-afundar" src="../../images/pergunta-e-resposta.png"
+                 onclick="showAnswerPopup()" alt="Answer">
+            <h4 onclick="showAnswerPopup()">Answer</h4>
         </div>
-        <p id="answerText">Click a question first!</p>
+    </div>
+
+    <div class="button-container">
+        <button onclick="nextQuestion()">Next question</button>
+    </div>
+
+    <div id="result"></div>
+
+    <!-- Answer Pop-up -->
+    <div id="answerPopup" class="popup">
+        <div class="popup-content">
+            <div class="popup-header">
+                <h2>Answer</h2>
+                <span class="close" onclick="closeAnswerPopup()">&times;</span>
+            </div>
+            <p id="answerText">Click a question first!</p>
+        </div>
     </div>
 </div>
-
-
 <script>
     const topzeiraData = {
         "questions": [
@@ -1349,11 +1345,54 @@
                 answerElement.textContent = answerData;
             }
         } else {
-            answerElement.textContent = "Clique em 'Próxima pergunta' primeiro!";
+            answerElement.textContent = "Click 'Next question' first!";
         }
 
         document.getElementById("answerPopup").style.display = "block";
     }
+
+    document.querySelectorAll(
+        `button,
+.button-language,
+#btnConfirm,
+#btnCancel,
+.game-box,
+.btn-fato,
+.btn-vdd,
+.btn-falso,
+.btn-conseq,
+.btn-proxima-pergunta,
+.button-randomizador,
+.voltar-wrapper,
+.pergunta-e-resposta,
+.popup .close,
+.img-regras,
+.popup-content`
+    ).forEach(function (el) {
+        el.addEventListener('click', function (event) {
+            const target = event.currentTarget;
+            const href = target.getAttribute("href");
+
+            // Aplica a animação
+            target.classList.remove('animar-clique-afundar');
+            void target.offsetWidth;
+            target.classList.add('animar-clique-afundar');
+
+            // Se for um link <a>, evita a navegação imediata
+            if (href) {
+                event.preventDefault(); // impede o redirecionamento instantâneo
+
+                setTimeout(() => {
+                    window.location.href = href;
+                }, 600); // tempo da animação antes de redirecionar
+            }
+
+            // Se não for link, apenas remove a classe depois do tempo
+            setTimeout(() => {
+                target.classList.remove('animar-clique-afundar');
+            }, 700);
+        });
+    });
 
     // Carrega as perguntas ao iniciar
     loadQuestions();

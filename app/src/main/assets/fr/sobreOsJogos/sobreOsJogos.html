@@ -5,7 +5,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="../../sobreOsJogos.css">
-
     <title>Bebedeira Games</title>
 
 </head>
@@ -14,16 +13,15 @@
 <div class="main-container">
     <nav class="menu">
         <div class="menu-left">
-        <a href="../menuFr.html" class="voltar-wrapper">
-            <img src="../../images/left-arrow.png" alt="Retour">
-            <h2 class="sair">Retour</h2>
-        </a>
+            <a href="../menuFr.html" class="voltar-wrapper" onclick="clicou-voltar">
+                <img src="../../images/left-arrow.png" alt="Voltar">
+                <h2 class="voltar">Voltar</h2>
+            </a>
         </div>
 
         <div class="menu-center">
             <a href="../menuFr.html">
-            <img class="logo-bebedeira" src="../../images/logo-sem-margem.png" alt="Logo Bebedeira" />
-
+                <img class="logo-bebedeira" src="../../images/logo-sem-margem.png" alt="Logo Bebedeira" />
             </a>
         </div>
 
@@ -38,61 +36,26 @@
     </div>
 
     <div class="game-box-content">
-        <a href="#" onclick="openPopup('popup-eununca')" class="game-box">
-            <p>Je n'ai jamais</p>
-        </a>
-        <a href="#" onclick="openPopup('popup-topzeira')" class="game-box">
-            <p>Topzeira</p>
-        </a>
-        <a href="#" onclick="openPopup('popup-riubebeu')" class="game-box">
-            <p>Tu ris, tu bois</p>
-        </a>
-        <a href="#" onclick="openPopup('popup-segredos')" class="game-box">
-            <p>Secrets</p>
-        </a>
-        <a href="#" onclick="openPopup('popup-pioresAmigos')" class="game-box">
-            <p>Pires Amis</p>
-        </a>
-        <a href="#" onclick="openPopup('popup-mimicas')" class="game-box">
-            <p>Mime pour adultes</p>
-        </a>
-        <a href="#" onclick="openPopup('popup-verdadeconsequencia')" class="game-box">
-            <p>Vérité ou Conséquence</p>
-        </a>
-        <a href="#" onclick="openPopup('popup-quemnogrupo')" class="game-box">
-            <p>Qui dans le groupe</p>
-        </a>
-        <a href="#" onclick="openPopup('popup-paraconversar')" class="game-box">
-            <p>Pour discuter</p>
-        </a>
-        <a href="#" onclick="openPopup('popup-charadas')" class="game-box">
-            <p>Qu'est-ce que c'est ?</p>
-        </a>
-        <a href="#" onclick="openPopup('popup-perguntassemresposta')" class="game-box">
-            <p>Questions sans réponse</p>
-        </a>
-        <a href="#" onclick="openPopup('popup-naofez')" class="game-box">
-            <p>Pas fait ? Buvez</p>
-        </a>
-        <a href="#" onclick="openPopup('popup-intimidade')" class="game-box">
-            <p>Intimité</p>
-        </a>
-        <a href="#" onclick="openPopup('popup-showDoBebao')" class="game-box">
-            <p>Le show de l’ivrogne</p>
-        </a>
-        <a href="#" onclick="openPopup('popup-tiroAoAlvo')" class="game-box">
-            <p>Tir à la cible</p>
-        </a>
-        <a href="#" onclick="openPopup('popup-fatoOuFalso')" class="game-box">
-            <p>Vrai ou Faux</p>
-        </a>
-        <a href="#" onclick="openPopup('popup-azarOuSorte')" class="game-box">
-            <p>Chance ou Malchance</p>
-        </a>
-        <a href="#" onclick="openPopup('popup-antesOuDepois')" class="game-box div-antes-ou-depois">
-            <p>Avant ou Après</p>
-        </a>
+        <a href="#" data-popup="popup-eununca" class="game-box"><p>Je n'ai jamais</p></a>
+        <a href="#" data-popup="popup-topzeira" class="game-box"><p>Topzeira</p></a>
+        <a href="#" data-popup="popup-riubebeu" class="game-box"><p>Tu ris, tu bois</p></a>
+        <a href="#" data-popup="popup-segredos" class="game-box"><p>Secrets</p></a>
+        <a href="#" data-popup="popup-pioresAmigos" class="game-box"><p>Pires Amis</p></a>
+        <a href="#" data-popup="popup-mimicas" class="game-box"><p>Mime pour adultes</p></a>
+        <a href="#" data-popup="popup-verdadeconsequencia" class="game-box"><p>Vérité ou Conséquence</p></a>
+        <a href="#" data-popup="popup-quemnogrupo" class="game-box"><p>Qui dans le groupe</p></a>
+        <a href="#" data-popup="popup-paraconversar" class="game-box"><p>Pour discuter</p></a>
+        <a href="#" data-popup="popup-charadas" class="game-box"><p>Qu'est-ce que c'est ?</p></a>
+        <a href="#" data-popup="popup-perguntassemresposta" class="game-box"><p>Questions sans réponse</p></a>
+        <a href="#" data-popup="popup-naofez" class="game-box"><p>Pas fait? Buvez</p></a>
+        <a href="#" data-popup="popup-intimidade" class="game-box"><p>Intimité</p></a>
+        <a href="#" data-popup="popup-showDoBebao" class="game-box"><p>Le show de l’ivrogne</p></a>
+        <a href="#" data-popup="popup-tiroAoAlvo" class="game-box"><p>Tir à la cible</p></a>
+        <a href="#" data-popup="popup-fatoOuFalso" class="game-box"><p>Vrai ou Faux</p></a>
+        <a href="#" data-popup="popup-azarOuSorte" class="game-box"><p>Chance ou Malchance</p></a>
+        <a href="#" data-popup="popup-antesOuDepois" class="game-box div-antes-ou-depois"><p>Avant ou Après</p></a>
     </div>
+
 </div>
 
 <!-- Pop-up Je n'ai jamais -->
@@ -157,7 +120,8 @@
     <div class="popup" onclick="event.stopPropagation()">
         <h3>Pires Amis</h3>
         <ul>
-            <li>Qui est le "Pire Ami" du groupe ? Pointez du doigt et accusez vos potes de comportements pourris, c’est trop drôle !</li>
+            <li>Qui est le "Pire Ami" du groupe ? Pointez du doigt et accusez vos potes de comportements pourris,
+                c’est trop drôle !</li>
             <li>Ce jeu va révéler plein de trucs hilarants sur vos amis.</li>
             <li>Important ! Ne le prenez pas à cœur, ce n’est qu’un jeu.</li>
         </ul>
@@ -332,8 +296,6 @@
     </div>
 </div>
 
-
-
 <script>
     // Função para abrir o popup
     function openPopup(popupId) {
@@ -358,18 +320,69 @@
         }
     }
 
-    // Fecha o popup ao pressionar ESC
-    document.addEventListener('keydown', function (event) {
-        if (event.key === 'Escape') {
-            const allPopups = document.querySelectorAll('.overlay');
-            allPopups.forEach(popup => {
-                if (popup.style.display === 'flex') {
-                    popup.style.display = 'none';
-                    document.body.style.overflow = 'auto';
-                }
-            });
-        }
+    document.querySelectorAll('.game-box').forEach(function (el) {
+    el.addEventListener('click', function (event) {
+        event.preventDefault();
+        const popupId = el.getAttribute('data-popup');
+
+        // Aplica animação
+        el.classList.remove('animar-clique-afundar');
+        void el.offsetWidth; // força reflow para reiniciar a animação
+        el.classList.add('animar-clique-afundar');
+
+        // Abre o popup após a animação
+        setTimeout(() => {
+            if (popupId) openPopup(popupId);
+            el.classList.remove('animar-clique-afundar');
+        }, 400);
     });
+});
+
+
+    document.querySelectorAll(
+        `button,
+.button-language,
+#btnConfirm,
+#btnCancel,
+.game-box,
+.btn-fato,
+.btn-vdd,
+.btn-falso,
+.btn-conseq,
+.btn-proxima-pergunta,
+.button-randomizador,
+.voltar-wrapper,
+.pergunta-e-resposta,
+.popup .close,
+.img-regras,
+.popup-content`
+    ).forEach(function (el) {
+        el.addEventListener('click', function (event) {
+            const target = event.currentTarget;
+            const href = target.getAttribute("href");
+
+            // Aplica a animação
+            target.classList.remove('animar-clique-afundar');
+            void target.offsetWidth;
+            target.classList.add('animar-clique-afundar');
+
+            // Se for um link <a>, evita a navegação imediata
+            if (href) {
+                event.preventDefault(); // impede o redirecionamento instantâneo
+
+                setTimeout(() => {
+                    window.location.href = href;
+                }, 600); // tempo da animação antes de redirecionar
+            }
+
+            // Se não for link, apenas remove a classe depois do tempo
+            setTimeout(() => {
+                target.classList.remove('animar-clique-afundar');
+            }, 700);
+        });
+    });
+
+
 </script>
 </body>
 
